@@ -29,7 +29,7 @@ GitHub Actions (매시간 :30)
        ├─ 시각 확인: config.yaml 의 timezone 기준 07시대가 아니거나 오늘 파일이 이미 있으면 종료
        ├─ fetch.py      RSS 수집 (최근 24시간, 피드당 30건, 피드별 실패 격리, 대체 피드 자동 시도)
        ├─ dedupe.py     URL 정규화 + 제목 유사도(rapidfuzz ≥ 85)로 같은 사건 묶기, 출처는 모두 보존
-       ├─ rank.py       Gemini(flash-lite)로 지역(한국/NZ)별 1회씩 중요도 1~10 채점 → 섹션별 상위 N건 (한국 5 / NZ 8 / 오클랜드 5)
+       ├─ rank.py       Gemini(flash-lite 계열)로 지역(한국/NZ)별 1회씩 중요도 1~10 채점 → 섹션별 상위 N건 (한국 5 / NZ 8 / 오클랜드 5)
        ├─ summarize.py  Gemini(flash)로 지역별 1회 호출: 한국어 제목, 3줄 요약, 이민자 관점, 태그, 섹션별 한 줄 브리핑
        ├─ extras.py     NZD/KRW 환율(frankfurter), 오클랜드 날씨(Open-Meteo)
        ├─ build.py      스키마 검증 → web/public/data/YYYY-MM-DD.json, latest.json, index.json / 30일 지난 파일 삭제
@@ -144,7 +144,7 @@ AI 요약은 **Google Gemini API 무료 등급**을 씁니다. 다음만 지키�
 
 알아둘 점
 - 무료 등급에서는 보낸 내용(공개 뉴스 기사 제목·발췌)이 Google 서비스 개선에 쓰일 수 있습니다.
-- 모델은 `config.yaml` 의 `llm.gemini` 에서 바꿉니다(기본: 선별 `gemini-2.5-flash-lite`, 요약 `gemini-2.5-flash`). 모델이 단종되면 AI Studio 에서 무료로 쓸 수 있는 모델명으로 바꾸세요. Gemini 3 계열로 바꾸면 `thinking_budget` 줄을 지우세요.
+- 모델은 `config.yaml` 의 `llm.gemini` 에서 바꿉니다. 후보 목록을 앞에서부터 시도하고, 단종돼 404가 나면 다음 후보로 넘어갑니다(기본: `gemini-3.8-flash` 계열 → `gemini-flash-latest`). 모두 실패하면 AI Studio 에서 무료로 쓸 수 있는 모델명으로 바꾸세요.
 - 실행 로그의 `usage provider=gemini requests=4/6 total cost=$0.0000` 줄에서 요청 수를 확인할 수 있습니다.
 
 Claude API 로 바꾸고 싶다면 `llm.provider: "anthropic"` 으로 바꾸고 `ANTHROPIC_API_KEY` 를 등록하면 됩니다. 단, **Claude 구독(Pro/Max)과는 별도로** 사용량만큼 청구되며, 예상 비용은 하루 $0.15~0.25 입니다.

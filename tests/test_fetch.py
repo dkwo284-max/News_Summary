@@ -64,3 +64,18 @@ def test_one_broken_feed_does_not_stop_others(cfg, fixtures_dir):
     assert "hani_society" in failed  # 망가진 XML
     assert articles, "다른 피드의 기사는 수집되어야 함"
     assert all("오래된" not in a.title for a in articles)
+
+
+def test_yonhap_byline_stripped():
+    rss = """<rss><channel><item><title>제목</title><link>https://y.example/1</link>
+<description>(서울=연합뉴스) 한지은 이민영 기자 = 15일 국정감사에서 공방이 오갔다.</description>
+<pubDate>Thu, 15 Oct 2026 20:00:00 GMT</pubDate></item></channel></rss>"""
+    items = parse_feed(rss, FEED, FIXTURE_NOW, 24, 30)
+    assert items[0].description == "15일 국정감사에서 공방이 오갔다."
+
+
+def test_google_news_detected_from_fallback_url():
+    rss = """<rss><channel><item><title>Rents rise again - Stuff</title><link>https://news.google.com/rss/articles/x</link>
+<description>&lt;a href="x"&gt;Rents rise again&lt;/a&gt; Stuff</description><pubDate>Thu, 15 Oct 2026 20:00:00 GMT</pubDate></item></channel></rss>"""
+    items = parse_feed(rss, FEED, FIXTURE_NOW, 24, 30, url="https://news.google.com/rss/search?q=site:stuff.co.nz")
+    assert items[0].title == "Rents rise again" and items[0].source == "Stuff" and items[0].description == ""

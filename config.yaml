@@ -73,9 +73,11 @@ llm:
   rank_batch_size: 200         # 선별 1회 요청에 넣을 최대 후보 수
 
   gemini:
-    rank_model: "gemini-2.5-flash-lite"   # 선별·분류 (무료 한도가 넉넉한 경량 모델)
-    summary_model: "gemini-2.5-flash"     # 한국어 요약
-    thinking_budget: 0           # 2.5 계열 사고(thinking) 끔 → 빠르고 출력 한도 절약. Gemini 3 계열 모델로 바꾸면 이 줄을 지우세요
+    # 모델 후보 목록: 앞에서부터 시도하고, 단종·사용 불가(404)면 다음 후보로 넘어갑니다.
+    # 사용 가능한 무료 모델은 AI Studio(https://aistudio.google.com) 모델 목록에서 확인하세요.
+    rank_model: ["gemini-3.8-flash-lite", "gemini-flash-lite-latest", "gemini-3.8-flash", "gemini-flash-latest"]
+    summary_model: ["gemini-3.8-flash", "gemini-flash-latest"]
+    # thinking_budget: 0         # Gemini 2.5 계열에서만 사용 (사고 끔). Gemini 3 계열에서는 넣지 마세요
     min_interval_seconds: 10     # 요청 간 최소 간격 (분당 한도 보호)
     retry_wait_seconds: 60       # 429(분당 한도 초과) 시 한 번만 재시도하기 전 대기
 
@@ -150,8 +152,17 @@ feeds:
   - { id: mk_society,     name: "매일경제", section: kr_society,  url: "https://www.mk.co.kr/rss/50400012/" }
 
   # ── 뉴질랜드 전국 ──
-  - { id: rnz_national,  name: "RNZ",        section: nz_national, url: "https://www.rnz.co.nz/rss/national.xml" }
-  - { id: rnz_business,  name: "RNZ",        section: nz_national, url: "https://www.rnz.co.nz/rss/business.xml" }
+  # RNZ 는 GitHub Actions 서버에서 403 을 돌려줌(2026-10 확인) → Google News 로 대체
+  - id: rnz_national
+    name: "RNZ"
+    section: nz_national
+    url: "https://www.rnz.co.nz/rss/national.xml"
+    fallbacks: ["https://news.google.com/rss/search?q=site:rnz.co.nz/news/national+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  - id: rnz_business
+    name: "RNZ"
+    section: nz_national
+    url: "https://www.rnz.co.nz/rss/business.xml"
+    fallbacks: ["https://news.google.com/rss/search?q=site:rnz.co.nz/news/business+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"]
   - { id: nzh_nz,        name: "NZ Herald",  section: nz_national, url: "https://www.nzherald.co.nz/arc/outboundfeeds/rss/section/nz/?outputType=xml" }
   - { id: nzh_business,  name: "NZ Herald",  section: nz_national, url: "https://www.nzherald.co.nz/arc/outboundfeeds/rss/section/business/?outputType=xml" }
   - id: stuff_nz
@@ -187,7 +198,8 @@ feeds:
     name: "Google News"
     section: nz_immigration
     google_news: true
-    url: "https://news.google.com/rss/search?q=(immigration+OR+visa+OR+%22residence%22+OR+%22skilled+migrant%22)+New+Zealand+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    # 해외 비자 기사가 섞이지 않도록 "New Zealand" 문구와 INZ 를 함께 요구
+    url: "https://news.google.com/rss/search?q=%22New+Zealand%22+(%22Immigration+New+Zealand%22+OR+INZ+OR+%22residence+visa%22+OR+%22work+visa%22+OR+%22skilled+migrant%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
 
   # ── 오클랜드 ──
   - id: gn_auckland

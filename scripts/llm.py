@@ -43,7 +43,12 @@ class BaseLLM:
         self.usage: dict[str, dict] = defaultdict(lambda: {"calls": 0, "input_tokens": 0, "output_tokens": 0})
 
     def model_for(self, task: str) -> str:
-        return self.pcfg[f"{task}_model"]
+        return self.models_for(task)[0]
+
+    def models_for(self, task: str) -> list[str]:
+        """config 의 *_model 은 문자열 또는 후보 목록(앞에서부터 시도)."""
+        m = self.pcfg[f"{task}_model"]
+        return [m] if isinstance(m, str) else list(m)
 
     def json_call(self, *, task: str, system: str, user: str, schema: dict, max_tokens: int = 16000) -> dict:
         if self.disabled:
@@ -110,6 +115,7 @@ class GeminiLLM(BaseLLM):
         self.sleep = sleep
         self.min_interval = float(self.pcfg.get("min_interval_seconds", 10))
         self._last = 0.0
+        self._working: dict[str, list[str]] = {}
 
     def _post(self, model: str, body: dict) -> httpx.Response:
         wait = self._last + self.min_interval - time.monotonic()
@@ -120,7 +126,6 @@ class GeminiLLM(BaseLLM):
         return self.client.post(GEMINI_URL.format(model=model), headers={"x-goog-api-key": self.key}, json=body)
 
     def _call(self, *, task, system, user, schema, max_tokens) -> dict:
-        model = self.model_for(task)
         body = {
             "systemInstruction": {"parts": [{"text": system}]},
             "contents": [{"role": "user", "parts": [{"text": user}]}],
@@ -132,20 +137,32 @@ class GeminiLLM(BaseLLM):
         }
         if self.pcfg.get("thinking_budget") is not None:
             body["generationConfig"]["thinkingConfig"] = {"thinkingBudget": int(self.pcfg["thinking_budget"])}
-        r = self._post(model, body)
-        if r.status_code == 429:
-            # 분당 한도 초과면 잠시 후 한 번만 재시도. 일일 한도 소진이면 재시도해도 실패 → 상위에서 AI 없이 진행
-            log.warning("gemini 429 (rate limit) — retrying once in %ss", self.pcfg.get("retry_wait_seconds", 60))
-            self.sleep(float(self.pcfg.get("retry_wait_seconds", 60)))
+
+        # 모델 후보를 앞에서부터 시도: 404(단종·신규 사용자 불가)면 다음 후보로. 성공한 모델은 기억해 다음 요청에 바로 사용
+        candidates = self._working.get(task) or self.models_for(task)
+        last_err = None
+        for model in candidates:
             r = self._post(model, body)
-        if r.status_code >= 400:
-            if r.status_code in (401, 403) or "API_KEY_INVALID" in r.text:
-                self.disabled = f"gemini HTTP {r.status_code} (API 키 확인 필요)"
-            raise LLMError(f"gemini HTTP {r.status_code}: {r.text[:300]}")
-        data = r.json()
+            if r.status_code == 429:
+                # 분당 한도 초과면 잠시 후 한 번만 재시도. 일일 한도 소진이면 재시도해도 실패 → 상위에서 AI 없이 진행
+                log.warning("gemini 429 (rate limit) — retrying once in %ss", self.pcfg.get("retry_wait_seconds", 60))
+                self.sleep(float(self.pcfg.get("retry_wait_seconds", 60)))
+                r = self._post(model, body)
+            if r.status_code == 404:
+                last_err = f"gemini HTTP 404 for {model}: {r.text[:200]}"
+                log.warning("gemini model %s unavailable (404) — trying next candidate", model)
+                continue
+            if r.status_code >= 400:
+                if r.status_code in (401, 403) or "API_KEY_INVALID" in r.text:
+                    self.disabled = f"gemini HTTP {r.status_code} (API 키 확인 필요)"
+                raise LLMError(f"gemini HTTP {r.status_code}: {r.text[:300]}")
+            self._working[task] = [model]
+            return self._parse(model, r.json())
+        raise LLMError(last_err or "no gemini model candidates")
+
+    def _parse(self, model: str, data: dict) -> dict:
         um = data.get("usageMetadata", {})
         self._record(model, um.get("promptTokenCount", 0), um.get("candidatesTokenCount", 0) + um.get("thoughtsTokenCount", 0))
-
         if data.get("promptFeedback", {}).get("blockReason"):
             raise LLMError(f"gemini blocked prompt: {data['promptFeedback']['blockReason']}")
         cands = data.get("candidates") or []

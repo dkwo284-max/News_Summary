@@ -15,6 +15,8 @@ import httpx
 from common import Article, log
 
 TAG_RE = re.compile(r"<[^>]+>")
+# "(서울=연합뉴스) 홍길동 기자 = " 같은 기사 머리 바이라인
+BYLINE_RE = re.compile(r"^\s*[(\[][^)\]]{1,20}=[^)\]]{1,15}[)\]]\s*([^=]{0,40}?기자\s*=\s*)?")
 WS_RE = re.compile(r"\s+")
 
 
@@ -47,7 +49,7 @@ def _split_google_title(title: str, entry) -> tuple[str, str | None]:
     return title, publisher
 
 
-def parse_feed(raw: bytes | str, feed: dict, now: datetime, lookback_hours: int, max_items: int) -> list[Article]:
+def parse_feed(raw: bytes | str, feed: dict, now: datetime, lookback_hours: int, max_items: int, url: str = "") -> list[Article]:
     parsed = feedparser.parse(raw)
     if parsed.bozo and not parsed.entries:
         raise ValueError(f"unparseable feed: {parsed.get('bozo_exception')!r}")
@@ -63,11 +65,12 @@ def parse_feed(raw: bytes | str, feed: dict, now: datetime, lookback_hours: int,
         if published is None or published < cutoff or published > now + timedelta(hours=2):
             continue
         source_name = feed["name"]
-        if feed.get("google_news"):
+        google = feed.get("google_news") or "news.google.com" in url
+        if google:
             title, publisher = _split_google_title(title, entry)
             source_name = publisher or source_name
-        desc = clean_text(entry.get("summary") or entry.get("description"), 400)
-        if feed.get("google_news"):
+        desc = BYLINE_RE.sub("", clean_text(entry.get("summary") or entry.get("description"), 400))
+        if google:
             desc = ""  # Google News 요약란은 제목/링크 목록이라 노이즈
         out.append(
             Article(
@@ -101,7 +104,7 @@ def fetch_feed(client: httpx.Client, feed: dict, now: datetime, cfg_fetch: dict)
     for url in [feed["url"], *feed.get("fallbacks", [])]:
         try:
             raw = _download(client, url)
-            items = parse_feed(raw, feed, now, cfg_fetch["lookback_hours"], cfg_fetch["max_items_per_feed"])
+            items = parse_feed(raw, feed, now, cfg_fetch["lookback_hours"], cfg_fetch["max_items_per_feed"], url)
             if items:
                 return items, url, None
             reachable_url = reachable_url or url

@@ -115,7 +115,7 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
         user = "기사 목록 (id | 출처 | 제목 — 설명):\n" + "\n".join(_line(a) for a in chunk)
         scored: dict[str, tuple[int, bool]] = {}
         try:
-            out = llm.json_call(task="rank", system=system, user=user, schema=RANK_SCHEMA, max_tokens=16000)
+            out = llm.json_call(task="rank", system=system, user=user, schema=RANK_SCHEMA, max_tokens=32000)
             for row in out.get("scores", []):
                 if row.get("id") in by_id:
                     scored[row["id"]] = (max(1, min(10, int(row["score"]))), bool(row.get("immigration")) and region == "nz")

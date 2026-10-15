@@ -150,13 +150,13 @@ def test_gemini_request_shape_and_zero_cost(cfg):
               "required": ["x"], "additionalProperties": False}
     assert llm.json_call(task="rank", system="s", user="u", schema=schema) == {"ok": 1}
     req = seen[0]
-    assert "gemini-2.5-flash-lite:generateContent" in str(req.url)
+    assert "gemini-3.8-flash-lite:generateContent" in str(req.url)
     assert "key=" not in str(req.url) and req.headers["x-goog-api-key"] == "test-key"
     body = json.loads(req.content)
     gc = body["generationConfig"]
     assert gc["responseMimeType"] == "application/json"
     assert gc["responseSchema"]["type"] == "OBJECT" and "additionalProperties" not in gc["responseSchema"]
-    assert gc["thinkingConfig"] == {"thinkingBudget": 0}
+    assert "thinkingConfig" not in gc
     rep = llm.report()
     assert rep["total_cost_usd"] == 0 and rep["requests"] == 1 and rep["provider"] == "gemini"
 
@@ -216,6 +216,29 @@ def test_gemini_invalid_key_stops_further_requests(cfg):
         with pytest.raises(LLMError):
             llm.json_call(task="rank", system="s", user="u", schema={})
     assert len(calls) == 1
+
+
+def test_gemini_model_404_falls_back_and_remembers(cfg):
+    urls = []
+
+    def handler(req):
+        urls.append(str(req.url))
+        if "3.8-flash-lite" in str(req.url):
+            return httpx.Response(404, json={"error": {"message": "no longer available"}})
+        return httpx.Response(200, json=_gemini_ok())
+
+    llm = _gemini(cfg, handler)
+    llm.json_call(task="rank", system="s", user="u", schema={})
+    llm.json_call(task="rank", system="s", user="u", schema={})
+    assert ["3.8-flash-lite" in u for u in urls] == [True, False, False]
+    assert "flash-lite-latest" in urls[1] and urls[1] == urls[2]
+    assert llm.requests == 2
+
+
+def test_gemini_all_models_404(cfg):
+    llm = _gemini(cfg, lambda req: httpx.Response(404, json={}))
+    with pytest.raises(LLMError, match="404"):
+        llm.json_call(task="summary", system="s", user="u", schema={})
 
 
 def test_to_gemini_schema_nested():
