@@ -3,8 +3,8 @@
 사용 예
   python scripts/main.py                     # 정해진 시각(현지 07시대)일 때만 실행, 결과를 web/public/data 에 저장
   python scripts/main.py --force             # 시각 조건 무시하고 바로 실행
-  python scripts/main.py --dry-run           # 실제 수집·Claude 요약까지 하되 out/dry-run/ 에만 저장, 알림·정리 없음
-  python scripts/main.py --dry-run --no-llm  # Claude 호출 없이 (키워드 선별 + RSS 설명) 파이프라인만 점검
+  python scripts/main.py --dry-run           # 실제 수집·AI 요약(기본 Gemini 무료 등급)까지 하되 out/dry-run/ 에만 저장, 알림·정리 없음
+  python scripts/main.py --dry-run --no-llm  # AI 호출 없이 (키워드 선별 + RSS 설명) 파이프라인만 점검
   python scripts/main.py --dry-run --no-llm --fixtures tests/fixtures/feeds   # 네트워크 없이 로컬 샘플 피드로 점검
 
 종료 코드: 0 성공/건너뜀, 2 기사 0건, 3 스키마 검증 실패
@@ -47,7 +47,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--config", default=str(ROOT / "config.yaml"))
     ap.add_argument("--force", action="store_true", help="시각 조건·중복 실행 검사 무시")
     ap.add_argument("--dry-run", action="store_true", help="out/dry-run 에만 저장, 알림·정리 안 함")
-    ap.add_argument("--no-llm", action="store_true", help="Claude API 호출 없이 휴리스틱으로 실행")
+    ap.add_argument("--no-llm", action="store_true", help="AI 호출 없이 휴리스틱으로 실행")
     ap.add_argument("--fixtures", type=Path, help="피드를 이 폴더의 <feed_id>.xml 에서 읽음 (오프라인 테스트)")
     ap.add_argument("--no-extras", action="store_true", help="환율·날씨 조회 생략")
     ap.add_argument("--now", help="현재 시각 대체 (ISO 8601, 테스트용)")
@@ -82,14 +82,15 @@ def main(argv: list[str] | None = None) -> int:
     articles = dedupe(articles, cfg["dedupe"]["title_similarity"])
     log.info("after dedupe: %d stories", len(articles))
 
-    # 3) 선별 / 4) 요약
+    # 3) 선별 / 4) 요약 — AI 요청은 보통 4회(지역별 선별 1 + 요약 1)
     llm = None
     if not args.no_llm:
-        if not os.environ.get("ANTHROPIC_API_KEY"):
-            log.error("ANTHROPIC_API_KEY 가 없습니다. (오프라인 점검은 --no-llm)")
+        from llm import LLMError, make_llm
+        try:
+            llm = make_llm(cfg)
+        except LLMError as e:
+            log.error("%s", e)
             return 1
-        from llm import LLM
-        llm = LLM(cfg)
 
     from rank import select
     chosen = select(articles, cfg, llm, now_utc)
@@ -104,7 +105,7 @@ def main(argv: list[str] | None = None) -> int:
         from extras import fetch_extras
         extras = fetch_extras(cfg)
 
-    usage = llm.log_report() if llm else {"models": {}, "total_cost_usd": 0}
+    usage = llm.log_report() if llm else {"provider": None, "requests": 0, "models": {}, "total_cost_usd": 0}
     brief = {
         "date": local_now.date().isoformat(),
         "generated_at": datetime.now(timezone.utc).astimezone(tz(cfg)).isoformat(timespec="seconds"),
@@ -112,7 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         "sections": sections,
         "extras": extras,
         "meta": {
-            "mode": "no-llm" if llm is None else "claude",
+            "mode": "no-llm" if llm is None else llm.provider,
             "failed_feeds": failures,
             "feeds_total": len(feed_stats),
             "stories_after_dedupe": len(articles),

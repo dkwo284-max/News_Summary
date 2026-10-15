@@ -7,12 +7,14 @@ import pytest
 
 from build import BriefValidationError, prune_and_index, validate, write_brief
 from common import Article
-from llm import LLM, LLMError
+import httpx
+
+from llm import ClaudeLLM, GeminiLLM, LLMError, RequestCapReached, make_llm, to_gemini_schema
 from main import main, should_run
 from make_fixtures import FIXTURE_NOW
 from notify import compose
 from rank import heuristic_score, select
-from summarize import clamp_line, summarize_section
+from summarize import clamp_line, summarize_all, summarize_region
 
 T = datetime(2026, 10, 15, 20, tzinfo=timezone.utc)
 
@@ -22,22 +24,34 @@ def art(i, title, section="nz_national", desc=""):
 
 
 class FakeLLM:
-    """rank / summarize 호출을 흉내내는 가짜 LLM (네트워크 없음)."""
+    """rank / summary 호출을 흉내내는 가짜 AI (네트워크 없음)."""
+
+    provider = "fake"
 
     def __init__(self):
         self.calls = []
 
-    def json_call(self, *, model, system, user, schema, effort, max_tokens=16000, fallback=False):
-        self.calls.append({"model": model, "fallback": fallback, "user": user})
-        ids = [line.split(" | ")[0] for line in user.splitlines() if " | " in line]
-        if "scores" in schema["properties"]:
-            return {"scores": [{"id": i, "score": 9 if "visa" in user.split(i, 1)[1].split("\n", 1)[0].lower() else 5,
-                                "immigration": "visa" in user.split(i, 1)[1].split("\n", 1)[0].lower()} for i in ids]}
-        ids = [line[5:] for line in user.splitlines() if line.startswith("[id] ")]
-        return {"briefing": "오늘의 한 줄",
+    def json_call(self, *, task, system, user, schema, max_tokens=16000):
+        self.calls.append({"task": task, "user": user, "system": system})
+        if task == "rank":
+            rows = []
+            for line in user.splitlines():
+                if " | " not in line:
+                    continue
+                i, rest = line.split(" | ", 1)
+                visa = "visa" in rest.lower()
+                rows.append({"id": i, "score": 9 if visa else 5, "immigration": visa})
+            return {"scores": rows}
+        ids, secs = [], set()
+        for line in user.splitlines():
+            if line.startswith("[id] "):
+                ids.append(line[5:])
+            if line.startswith("[섹션] "):
+                secs.update(line[5:].split(", "))
+        nz = "뉴질랜드 이민을 준비하는" in system
+        return {"briefings": [{"section": k, "briefing": f"{k} 한 줄"} for k in secs],
                 "items": [{"id": i, "title_ko": f"번역 제목 {i}", "summary_ko": ["가" * 100, "둘째 줄", "셋째 줄", "넷째 줄"],
-                           "why_it_matters": "이민 준비자에게 의미" if "뉴질랜드" in system or "오클랜드" in system or "이민" in system else "",
-                           "tags": ["비자", "주거"]} for i in ids]}
+                           "why_it_matters": "이민 준비자에게 의미" if nz else "", "tags": ["비자", "주거"]} for i in ids]}
 
 
 # ── 선별 ──
@@ -57,7 +71,8 @@ def test_select_with_llm_builds_immigration_radar(cfg):
     llm = FakeLLM()
     chosen = select(items, cfg, llm, FIXTURE_NOW)
     assert len(chosen["nz_national"]) == 8
-    assert all(c["model"] == "claude-haiku-5-5" for c in llm.calls)
+    assert [c["task"] for c in llm.calls] == ["rank"]  # 지역(nz)별 1회
+
     radar_ids = {a.id for a in chosen["nz_immigration"]}
     assert {"0", "3", "6", "9"} <= radar_ids
     assert all(a.section == "nz_immigration" for a in chosen["nz_immigration"])
@@ -65,32 +80,41 @@ def test_select_with_llm_builds_immigration_radar(cfg):
 
 # ── 요약 ──
 
-def test_summarize_nz_section_postprocess(cfg):
-    a = art(1, "Visa change")
-    a.score = 8
+def test_summarize_region_single_request_and_postprocess(cfg):
+    a, b = art(1, "Visa change"), art(2, "Rent rise", section="nz_auckland")
+    a.score, b.score = 8, 6
+    imm = art(1, "Visa change", section="nz_immigration")  # 같은 기사가 이민 레이더에도 있음
+    imm.score = 8
     llm = FakeLLM()
-    sec = summarize_section("nz_national", [a], cfg, llm)
-    item = sec["items"][0]
-    assert llm.calls[0]["model"] == "claude-sonnet-5-5" and llm.calls[0]["fallback"] is True
-    assert len(item["summary_ko"]) == 3 and all(len(s) <= 80 for s in item["summary_ko"])
+    chosen = {"nz_national": [a], "nz_auckland": [b], "nz_immigration": [imm]}
+    out = summarize_region("nz", ["nz_national", "nz_auckland", "nz_immigration"], chosen, cfg, llm)
+    assert len(llm.calls) == 1 and llm.calls[0]["task"] == "summary"
+    assert llm.calls[0]["user"].count("[id] 1") == 1  # 중복 기사는 한 번만 전송
+    item = out["nz_national"]["items"][0]
+    assert len(item["summary_ko"]) == 3 and all(len(x) <= 80 for x in item["summary_ko"])
     assert item["why_it_matters"] and item["sources"][0]["url"].startswith("https://")
-    assert item["importance"] == 8 and sec["briefing"] == "오늘의 한 줄"
+    assert item["importance"] == 8 and out["nz_national"]["briefing"] == "nz_national 한 줄"
+    assert out["nz_immigration"]["items"][0]["title_ko"] == "번역 제목 1"
 
 
-def test_summarize_kr_section_has_no_why(cfg):
-    a = art(1, "금리 동결", section="kr_economy")
-    a.score = 7
-    item = summarize_section("kr_economy", [a], cfg, FakeLLM())["items"][0]
-    assert "why_it_matters" not in item
+def test_summarize_all_uses_two_requests(cfg):
+    kr = art(1, "금리 동결", section="kr_economy")
+    kr.score = 7
+    llm = FakeLLM()
+    out = summarize_all({"kr_economy": [kr], "nz_national": [art(2, "Visa")]}, cfg, llm)
+    assert len(llm.calls) == 2
+    assert "why_it_matters" not in out["kr_economy"]["items"][0]
+    assert out["kr_society"]["items"] == []
 
 
-def test_summarize_llm_failure_falls_back(cfg):
+def test_summarize_failure_falls_back(cfg):
     class Boom:
         def json_call(self, **kw):
             raise LLMError("down")
     a = art(1, "Visa change", desc="First sentence. Second one.")
-    sec = summarize_section("nz_national", [a], cfg, Boom())
+    sec = summarize_region("nz", ["nz_national"], {"nz_national": [a]}, cfg, Boom())["nz_national"]
     assert sec["items"][0]["summary_ko"] == ["First sentence.", "Second one."]
+    assert sec["items"][0]["why_it_matters"]
     assert "error" in sec
 
 
@@ -100,23 +124,134 @@ def test_clamp_line():
     assert clamp_line("- 짧은 문장") == "짧은 문장"
 
 
-# ── LLM 래퍼 ──
+# ── AI 래퍼: Gemini ──
+
+def _gemini(cfg, handler, sleeps=None):
+    import os
+    os.environ["GEMINI_API_KEY"] = "test-key"
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    return GeminiLLM(cfg, client=client, sleep=(sleeps.append if sleeps is not None else lambda s: None))
+
+
+def _gemini_ok(text='{"ok": 1}', finish="STOP"):
+    return {"candidates": [{"content": {"parts": [{"text": text}]}, "finishReason": finish}],
+            "usageMetadata": {"promptTokenCount": 1000, "candidatesTokenCount": 200, "thoughtsTokenCount": 0}}
+
+
+def test_gemini_request_shape_and_zero_cost(cfg):
+    seen = []
+
+    def handler(req):
+        seen.append(req)
+        return httpx.Response(200, json=_gemini_ok())
+
+    llm = _gemini(cfg, handler)
+    schema = {"type": "object", "properties": {"x": {"type": "array", "items": {"type": "string"}}},
+              "required": ["x"], "additionalProperties": False}
+    assert llm.json_call(task="rank", system="s", user="u", schema=schema) == {"ok": 1}
+    req = seen[0]
+    assert "gemini-2.5-flash-lite:generateContent" in str(req.url)
+    assert "key=" not in str(req.url) and req.headers["x-goog-api-key"] == "test-key"
+    body = json.loads(req.content)
+    gc = body["generationConfig"]
+    assert gc["responseMimeType"] == "application/json"
+    assert gc["responseSchema"]["type"] == "OBJECT" and "additionalProperties" not in gc["responseSchema"]
+    assert gc["thinkingConfig"] == {"thinkingBudget": 0}
+    rep = llm.report()
+    assert rep["total_cost_usd"] == 0 and rep["requests"] == 1 and rep["provider"] == "gemini"
+
+
+def test_gemini_request_cap(cfg):
+    cfg["llm"]["max_requests_per_run"] = 2
+    llm = _gemini(cfg, lambda req: httpx.Response(200, json=_gemini_ok()))
+    llm.json_call(task="rank", system="s", user="u", schema={})
+    llm.json_call(task="summary", system="s", user="u", schema={})
+    with pytest.raises(RequestCapReached):
+        llm.json_call(task="summary", system="s", user="u", schema={})
+
+
+def test_gemini_429_retries_once_then_errors(cfg):
+    calls, sleeps = [], []
+
+    def handler(req):
+        calls.append(1)
+        return httpx.Response(429, json={"error": {"status": "RESOURCE_EXHAUSTED"}})
+
+    llm = _gemini(cfg, handler, sleeps)
+    with pytest.raises(LLMError, match="429"):
+        llm.json_call(task="rank", system="s", user="u", schema={})
+    assert len(calls) == 2 and 60.0 in sleeps
+
+
+def test_gemini_429_then_success(cfg):
+    responses = [httpx.Response(429, json={}), httpx.Response(200, json=_gemini_ok('{"ok": 2}'))]
+    llm = _gemini(cfg, lambda req: responses.pop(0))
+    assert llm.json_call(task="rank", system="s", user="u", schema={}) == {"ok": 2}
+
+
+def test_gemini_bad_finish_and_blocked(cfg):
+    llm = _gemini(cfg, lambda req: httpx.Response(200, json=_gemini_ok("{", finish="MAX_TOKENS")))
+    with pytest.raises(LLMError, match="MAX_TOKENS"):
+        llm.json_call(task="summary", system="s", user="u", schema={})
+    llm = _gemini(cfg, lambda req: httpx.Response(200, json={"promptFeedback": {"blockReason": "SAFETY"}}))
+    with pytest.raises(LLMError, match="SAFETY"):
+        llm.json_call(task="summary", system="s", user="u", schema={})
+
+
+def test_gemini_rank_failure_uses_heuristic(cfg):
+    llm = _gemini(cfg, lambda req: httpx.Response(500, text="boom"))
+    chosen = select([art(1, "Work visa changes for migrants"), art(2, "All Blacks rugby match")], cfg, llm, FIXTURE_NOW)
+    assert [a.id for a in chosen["nz_national"]] == ["1"]
+
+
+def test_gemini_invalid_key_stops_further_requests(cfg):
+    calls = []
+
+    def handler(req):
+        calls.append(1)
+        return httpx.Response(400, json={"error": {"status": "INVALID_ARGUMENT", "details": [{"reason": "API_KEY_INVALID"}]}})
+
+    llm = _gemini(cfg, handler)
+    for _ in range(3):
+        with pytest.raises(LLMError):
+            llm.json_call(task="rank", system="s", user="u", schema={})
+    assert len(calls) == 1
+
+
+def test_to_gemini_schema_nested():
+    out = to_gemini_schema({"type": "object", "additionalProperties": False,
+                            "properties": {"a": {"type": "array", "items": {"type": "object", "additionalProperties": False,
+                                                                            "properties": {"b": {"type": "integer"}}}}}})
+    assert out == {"type": "OBJECT", "properties": {"a": {"type": "ARRAY", "items": {"type": "OBJECT",
+                                                                                      "properties": {"b": {"type": "INTEGER"}}}}}}
+
+
+def test_make_llm_requires_key(cfg, monkeypatch):
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    with pytest.raises(LLMError, match="GEMINI_API_KEY"):
+        make_llm(cfg)
+    monkeypatch.setenv("GEMINI_API_KEY", "k")
+    assert make_llm(cfg).provider == "gemini"
+
+
+# ── AI 래퍼: Claude (선택) ──
 
 def _resp(text, stop="end_turn", model="claude-haiku-5-5"):
     return SimpleNamespace(model=model, stop_reason=stop, usage=SimpleNamespace(input_tokens=1000, output_tokens=200),
                            content=[SimpleNamespace(type="thinking", thinking=""), SimpleNamespace(type="text", text=text)])
 
 
-def test_llm_wrapper_usage_and_fallback_kwargs(cfg):
+def test_claude_wrapper_usage_and_fallback_kwargs(cfg):
     seen = {}
     client = SimpleNamespace(
         messages=SimpleNamespace(create=lambda **kw: seen.setdefault("plain", kw) and _resp('{"ok": 1}')),
         beta=SimpleNamespace(messages=SimpleNamespace(
             create=lambda **kw: seen.setdefault("beta", kw) and _resp('{"ok": 2}', model="claude-sonnet-5-5"))),
     )
-    llm = LLM(cfg, client=client)
-    assert llm.json_call(model="claude-haiku-5-5", system="s", user="u", schema={}, effort="low") == {"ok": 1}
-    assert llm.json_call(model="claude-sonnet-5-5", system="s", user="u", schema={}, effort="low", fallback=True) == {"ok": 2}
+    llm = ClaudeLLM(cfg, client=client)
+    assert llm.json_call(task="rank", system="s", user="u", schema={}) == {"ok": 1}
+    assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 2}
+    assert seen["plain"]["model"] == "claude-haiku-5-5"
     assert seen["plain"]["output_config"]["format"]["type"] == "json_schema"
     assert "tool_choice" not in seen["plain"]
     assert seen["beta"]["fallbacks"] == "default" and seen["beta"]["betas"] == ["server-side-fallback-2026-07-01"]
@@ -125,10 +260,10 @@ def test_llm_wrapper_usage_and_fallback_kwargs(cfg):
     assert rep["models"]["claude-sonnet-5-5"]["cost_usd"] == pytest.approx(0.004)
 
 
-def test_llm_wrapper_refusal(cfg):
+def test_claude_wrapper_refusal(cfg):
     client = SimpleNamespace(messages=SimpleNamespace(create=lambda **kw: _resp("", stop="refusal")))
     with pytest.raises(LLMError):
-        LLM(cfg, client=client).json_call(model="claude-haiku-5-5", system="s", user="u", schema={}, effort="low")
+        ClaudeLLM(cfg, client=client).json_call(task="rank", system="s", user="u", schema={})
 
 
 # ── 스키마 · 저장 ──

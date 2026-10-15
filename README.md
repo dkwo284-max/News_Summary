@@ -1,6 +1,6 @@
 # Daily Brief — 한국 + 뉴질랜드 이민 준비자를 위한 아침 뉴스 요약
 
-매일 아침 8시 전에 아래 섹션의 주요 뉴스를 Claude가 한국어로 요약해 웹/모바일(PWA)로 보여줍니다.
+매일 아침 8시 전에 아래 섹션의 주요 뉴스를 AI(Google Gemini 무료 등급)가 한국어로 요약해 웹/모바일(PWA)로 보여줍니다.
 
 | 탭 | 내용 |
 |---|---|
@@ -9,7 +9,7 @@
 | 🏙️ 오클랜드 | 오클랜드 지역 뉴스 |
 | 🛂 이민 레이더 | 비자·이민 정책 변경만 모은 섹션 (탭에 건수 배지) |
 
-서버 없이 **GitHub Actions(수집·요약) + GitHub Pages(정적 사이트)**로만 동작합니다. 유료 항목은 Claude API 사용료뿐입니다.
+서버 없이 **GitHub Actions(수집·요약) + GitHub Pages(정적 사이트) + Gemini API 무료 등급**으로만 동작하며, **운영 비용은 0원**입니다. 조건은 [요금 0원 유지하기](#요금-0원-유지하기)를 참고하세요.
 
 <p>
 <img src="docs/screenshots/01-iphone-kr.png" width="240" alt="iPhone 한국 탭">
@@ -29,8 +29,8 @@ GitHub Actions (매시간 :30)
        ├─ 시각 확인: config.yaml 의 timezone 기준 07시대가 아니거나 오늘 파일이 이미 있으면 종료
        ├─ fetch.py      RSS 수집 (최근 24시간, 피드당 30건, 피드별 실패 격리, 대체 피드 자동 시도)
        ├─ dedupe.py     URL 정규화 + 제목 유사도(rapidfuzz ≥ 85)로 같은 사건 묶기, 출처는 모두 보존
-       ├─ rank.py       Claude Haiku 5.5 로 섹션별 중요도 1~10 채점 → 상위 N건 (한국 5 / NZ 8 / 오클랜드 5)
-       ├─ summarize.py  Claude Sonnet 5.5 로 섹션당 1회 호출: 한국어 제목, 3줄 요약, 이민자 관점, 태그, 한 줄 브리핑
+       ├─ rank.py       Gemini(flash-lite)로 지역(한국/NZ)별 1회씩 중요도 1~10 채점 → 섹션별 상위 N건 (한국 5 / NZ 8 / 오클랜드 5)
+       ├─ summarize.py  Gemini(flash)로 지역별 1회 호출: 한국어 제목, 3줄 요약, 이민자 관점, 태그, 섹션별 한 줄 브리핑
        ├─ extras.py     NZD/KRW 환율(frankfurter), 오클랜드 날씨(Open-Meteo)
        ├─ build.py      스키마 검증 → web/public/data/YYYY-MM-DD.json, latest.json, index.json / 30일 지난 파일 삭제
        └─ notify.py     (선택) Telegram / Gmail 알림
@@ -38,9 +38,8 @@ GitHub Actions (매시간 :30)
 ```
 
 - **원문 전문은 저장하지 않습니다.** 상위 기사 본문 일부(최대 1,500자)를 요약 입력으로만 쓰고, 결과 JSON에는 요약과 원문 링크만 남깁니다.
-- JSON 출력은 structured outputs(`output_config.format` + JSON 스키마)로 강제합니다. Sonnet 5.5는 tool_choice 로 도구 호출을 강제하는 방식을 지원하지 않아서 이 방식을 씁니다.
-- Sonnet 요약 요청은 server-side fallback(`fallbacks: "default"`)을 켜 두었습니다. 드물게 안전 분류기가 요청을 거절하면 서버가 다른 모델로 자동 재시도합니다. `config.yaml` 의 `llm.summary_fallback: false` 로 끌 수 있습니다.
-- 피드 하나가 실패하거나, Claude 호출 하나가 실패해도 나머지는 계속 진행합니다. 실패한 피드 목록은 JSON `meta.failed_feeds` 와 화면 하단에 표시됩니다.
+- AI 응답은 JSON 스키마로 강제합니다(Gemini `responseSchema`). 형식이 깨지면 해당 부분만 원문 정보로 대체합니다.
+- 피드 하나가 실패하거나 AI 호출이 실패해도(무료 한도 초과 포함) 나머지는 계속 진행합니다. AI 가 실패한 부분은 키워드 선별 + RSS 원문 설명으로 대신 표시합니다. 실패한 피드 목록은 JSON `meta.failed_feeds` 와 화면 하단에 표시됩니다.
 - 기사가 0건이거나 스키마 검증에 실패하면 워크플로가 실패하고 **GitHub 이슈가 자동 생성**됩니다. 같은 제목의 열린 이슈가 있으면 댓글을 추가합니다.
 
 ## 처음 설정하기
@@ -51,7 +50,8 @@ GitHub Actions (매시간 :30)
 
    | 이름 | 필수 | 설명 |
    |---|---|---|
-   | `ANTHROPIC_API_KEY` | ✅ | https://console.anthropic.com 에서 발급 |
+   | `GEMINI_API_KEY` | ✅ | Google AI Studio 에서 발급. **결제 연결 없이** 만드세요 (아래 참고) |
+   | `ANTHROPIC_API_KEY` | 선택 | `llm.provider: anthropic` 으로 바꿔 Claude API 를 쓸 때만 (유료, 구독과 별도 청구) |
    | `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | 선택 | 텔레그램 알림 (`notify.telegram.enabled: true` 필요) |
    | `SMTP_USER`, `SMTP_PASSWORD`, `EMAIL_TO` | 선택 | Gmail 알림. 비밀번호는 [앱 비밀번호](https://myaccount.google.com/apppasswords) 사용 |
 
@@ -108,8 +108,8 @@ pytest                                         # 파서·중복제거·스키마
 # 네트워크·API 없이 샘플 피드로 전체 파이프라인 확인
 python scripts/main.py --dry-run --no-llm --fixtures tests/fixtures/feeds --now 2026-10-15T22:00:00Z
 
-# 실제 피드 + Claude 요약, 결과는 out/dry-run/ 에만 저장 (알림·정리 안 함)
-export ANTHROPIC_API_KEY=...
+# 실제 피드 + Gemini 요약, 결과는 out/dry-run/ 에만 저장 (알림·정리 안 함). 무료 한도에서 요청 4회 사용
+export GEMINI_API_KEY=...
 python scripts/main.py --dry-run
 
 # 프론트엔드
@@ -122,16 +122,32 @@ cd web && npm install && npm run dev           # http://localhost:5173 (web/publ
 |---|---|
 | `--force` | 시각 조건·중복 실행 검사를 무시 |
 | `--dry-run` | `out/dry-run/` 에만 저장, 알림·오래된 파일 정리 안 함 |
-| `--no-llm` | Claude 호출 없이 키워드 점수 + RSS 설명으로 실행 (요약 품질 없음, 점검용) |
+| `--no-llm` | AI 호출 없이 키워드 점수 + RSS 설명으로 실행 (요약·번역 없음, 점검용) |
 | `--fixtures DIR` | 피드를 `DIR/<feed_id>.xml` 에서 읽음 |
 | `--no-extras` | 환율·날씨 조회 생략 |
 
-## 비용
+## 요금 0원 유지하기
 
-- 모델: 선별 `claude-haiku-5-5` ($0.10 / $0.50 per 1M tokens), 요약 `claude-sonnet-5-5` ($2 / $10).
-- 배치로 묶어 호출합니다. 하루에 Haiku 섹션당 1~2회(후보 60건 단위), Sonnet 섹션당 1회(7회)입니다.
-- 실행이 끝나면 모델별 토큰 수와 예상 비용이 Actions 로그(`usage ...` 줄)와 JSON `meta.usage` 에 기록됩니다. `llm.daily_budget_usd`(기본 $0.30)를 넘으면 경고를 남깁니다.
-- 아직 실제로 실행해 측정하지 않은 추정치입니다. 기사 약 40건 기준 하루 **$0.15~0.25** 정도로 예상합니다. 첫 실행 후 로그로 확인하세요. 비용을 줄이려면 `candidate_limit`, `top_n`, `fetch.body_chars` 를 낮추세요.
+AI 요약은 **Google Gemini API 무료 등급**을 씁니다. 다음만 지키면 요금이 나오지 않습니다.
+
+1. https://aistudio.google.com/apikey 에서 **Create API key** 를 눌러 키를 만듭니다. 새 프로젝트로 만들어도 됩니다.
+2. 그 키가 속한 Google Cloud 프로젝트에 **결제(Billing) 계정이나 카드를 연결하지 마세요.** AI Studio 에서 "Set up billing", "Upgrade" 를 누르지 않으면 됩니다.
+   - 결제가 연결되지 않은 키는 무료 등급으로만 동작합니다. 한도를 넘으면 **요금이 붙는 대신 요청이 거절(429)**됩니다.
+   - 결제를 연결하면 유료 등급으로 바뀌어 사용량만큼 청구됩니다.
+3. 키를 GitHub Secret `GEMINI_API_KEY` 로 등록합니다.
+
+요청 수 제한
+- 하루 1회 실행에 보내는 AI 요청은 보통 **4회**입니다(한국/NZ 선별 각 1회 + 요약 각 1회). `llm.max_requests_per_run`(기본 6)을 넘지 않습니다.
+- 분당 한도를 넘지 않도록 요청 사이에 10초 간격을 둡니다(`min_interval_seconds`).
+- 무료 등급 한도(분당·일일 요청 수)는 모델마다 다르고 Google 이 자주 바꿉니다. AI Studio 의 Rate limit 화면에서 확인하세요. 한도에 걸리면 그날은 AI 없이 원문 정보로 표시되고, 다음 날 자동으로 회복됩니다.
+- 수동 실행(Run workflow)도 한 번에 4회 정도를 씁니다.
+
+알아둘 점
+- 무료 등급에서는 보낸 내용(공개 뉴스 기사 제목·발췌)이 Google 서비스 개선에 쓰일 수 있습니다.
+- 모델은 `config.yaml` 의 `llm.gemini` 에서 바꿉니다(기본: 선별 `gemini-2.5-flash-lite`, 요약 `gemini-2.5-flash`). 모델이 단종되면 AI Studio 에서 무료로 쓸 수 있는 모델명으로 바꾸세요. Gemini 3 계열로 바꾸면 `thinking_budget` 줄을 지우세요.
+- 실행 로그의 `usage provider=gemini requests=4/6 total cost=$0.0000` 줄에서 요청 수를 확인할 수 있습니다.
+
+Claude API 로 바꾸고 싶다면 `llm.provider: "anthropic"` 으로 바꾸고 `ANTHROPIC_API_KEY` 를 등록하면 됩니다. 단, **Claude 구독(Pro/Max)과는 별도로** 사용량만큼 청구되며, 예상 비용은 하루 $0.15~0.25 입니다.
 
 ## 데이터 형식
 
@@ -161,7 +177,7 @@ cd web && npm install && npm run dev           # http://localhost:5173 (web/publ
     // kr_society, kr_economy, kr_entertainment, kr_politics, nz_auckland, nz_immigration
   },
   "extras": { "nzd_krw": 812.3, "auckland_weather": { "max": 18, "min": 11, "desc": "구름 조금", "rain_chance": 20 } },
-  "meta": { "mode": "claude", "failed_feeds": [], "usage": { "total_cost_usd": 0.0 } }
+  "meta": { "mode": "gemini", "failed_feeds": [], "usage": { "provider": "gemini", "requests": 4, "total_cost_usd": 0.0 } }
 }
 ```
 
@@ -182,6 +198,7 @@ web/                Vite + TypeScript PWA (index.html, src/, public/manifest.jso
 |---|---|
 | 사이트가 갱신되지 않음 | Actions → Daily Brief 로그의 `skip:` 줄 (시각 조건 / 이미 생성됨) |
 | 특정 언론사 기사가 안 나옴 | 화면 하단 "수집 실패한 피드", **Check feeds** 워크플로 |
-| `ANTHROPIC_API_KEY 가 없습니다` | Secrets 설정 확인 |
+| `GEMINI_API_KEY 가 없습니다` | Secrets 설정 확인 |
+| 요약 없이 영어 원문/RSS 설명만 나옴 | Actions 로그의 `gemini HTTP ...` 줄: 400 API_KEY_INVALID = 키 오류, 429 = 무료 한도 초과(다음 날 자동 회복) |
 | 데이터 커밋 push 실패 | Settings → Actions → Workflow permissions 가 Read and write 인지 확인 |
 | 홈 화면 앱이 옛 화면을 보여줌 | 앱을 완전히 닫았다가 다시 열기 (서비스 워커가 다음 실행 때 갱신) |

@@ -1,6 +1,7 @@
 """선별: 섹션별 중요도(1~10)를 매기고 상위 N건을 고른다.
 
-LLM 이 있으면 Haiku 로 배치 채점, 없으면(--no-llm) 키워드·출처수 기반 휴리스틱.
+AI(기본 Gemini 무료 등급)가 있으면 지역(kr/nz)별로 묶어 배치 채점 — 보통 지역당 요청 1회.
+없거나(--no-llm) 실패하면 키워드·출처수 기반 휴리스틱.
 """
 from __future__ import annotations
 
@@ -12,7 +13,6 @@ from datetime import datetime, timezone
 from common import Article, log
 from dedupe import dedupe
 
-BATCH = 60
 MIN_SCORE = 3  # 이 점수 미만(스포츠 결과·가십 등)은 자리가 남아도 싣지 않음
 
 RANK_SCHEMA = {
@@ -104,29 +104,27 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
             a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
         return
     system = _system_prompt(cfg, region)
-    by_id = {a.id: a for a in items}
-    for start in range(0, len(items), BATCH):
-        chunk = items[start:start + BATCH]
+    # 같은 기사가 여러 섹션에 있으면 id 가 같다 → 한 번만 보내고 점수는 모두에 적용
+    by_id: dict[str, list[Article]] = defaultdict(list)
+    for a in items:
+        by_id[a.id].append(a)
+    unique = [group[0] for group in by_id.values()]
+    batch = int(cfg["llm"].get("rank_batch_size", 200))
+    for start in range(0, len(unique), batch):
+        chunk = unique[start:start + batch]
         user = "기사 목록 (id | 출처 | 제목 — 설명):\n" + "\n".join(_line(a) for a in chunk)
+        scored: dict[str, tuple[int, bool]] = {}
         try:
-            out = llm.json_call(model=cfg["llm"]["rank_model"], system=system, user=user, schema=RANK_SCHEMA,
-                                effort=cfg["llm"].get("rank_effort", "low"), max_tokens=8000)
+            out = llm.json_call(task="rank", system=system, user=user, schema=RANK_SCHEMA, max_tokens=16000)
+            for row in out.get("scores", []):
+                if row.get("id") in by_id:
+                    scored[row["id"]] = (max(1, min(10, int(row["score"]))), bool(row.get("immigration")) and region == "nz")
         except Exception as e:  # noqa: BLE001 — 선별 실패 시 휴리스틱으로 대체
-            log.warning("rank LLM failed (%s); falling back to heuristic for %d items", e, len(chunk))
-            for a in chunk:
-                a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
-            continue
-        seen = set()
-        for row in out.get("scores", []):
-            a = by_id.get(row["id"])
-            if a is None:
-                continue
-            a.score = max(1, min(10, int(row["score"])))
-            a.is_immigration = bool(row.get("immigration")) and region == "nz"
-            seen.add(a.id)
-        for a in chunk:
-            if a.id not in seen:  # 모델이 빠뜨린 항목
-                a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
+            log.warning("rank AI failed (%s); falling back to heuristic for %d items", e, len(chunk))
+        for rep in chunk:
+            for a in by_id[rep.id]:
+                # 모델이 빠뜨린 항목·실패한 배치는 휴리스틱
+                a.score, a.is_immigration = scored.get(a.id) or heuristic_score(a, cfg, region, now)
 
 
 def _preselect(items: list[Article], limit: int) -> list[Article]:
@@ -147,13 +145,18 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     for a in articles:
         by_section[a.section].append(a)
 
+    # 섹션별 후보를 추린 뒤, 같은 지역(kr/nz) 후보를 한꺼번에 채점해 요청 수를 최소화
+    by_region: dict[str, list[Article]] = defaultdict(list)
+    for key, sec in sections.items():
+        by_section[key] = _preselect(by_section.get(key, []), sec.get("candidate_limit", 80))
+        by_region[sec["region"]].extend(by_section[key])
+    for region, items in by_region.items():
+        score_articles(items, cfg, region, llm, now)
+
     chosen: dict[str, list[Article]] = {}
     for key, sec in sections.items():
-        candidates = _preselect(by_section.get(key, []), sec.get("candidate_limit", 80))
-        score_articles(candidates, cfg, sec["region"], llm, now)
-        by_section[key] = candidates
         if key != "nz_immigration":
-            chosen[key] = _top(candidates, sec["top_n"])
+            chosen[key] = _top(by_section[key], sec["top_n"])
 
     # 이민 레이더: 이민 전용 피드 + 다른 NZ 섹션에서 이민 관련으로 분류된 기사
     flagged = [a for k in ("nz_national", "nz_auckland") for a in by_section.get(k, []) if a.is_immigration]

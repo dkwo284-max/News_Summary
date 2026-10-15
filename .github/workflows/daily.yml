@@ -43,7 +43,8 @@ jobs:
       - name: Generate brief
         id: run
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}          # 기본: Gemini 무료 등급
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}    # config.yaml 에서 provider: anthropic 일 때만 사용
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SMTP_USER: ${{ secrets.SMTP_USER }}

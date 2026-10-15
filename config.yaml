@@ -29,16 +29,16 @@ output:
 
 # ── 섹션 ────────────────────────────────────────────────────
 # region: kr | nz  (nz 섹션은 "이민자 관점(why_it_matters)"을 생성)
-# candidate_limit: Claude 선별 단계에 보낼 최대 후보 수 (비용 상한)
+# candidate_limit: AI 선별 단계에 보낼 최대 후보 수 (지역별 합계가 rank_batch_size 이하면 선별 요청 1회)
 sections:
-  kr_society:       { label: "사회",     region: kr, top_n: 5, candidate_limit: 80 }
-  kr_economy:       { label: "경제",     region: kr, top_n: 5, candidate_limit: 80 }
-  kr_entertainment: { label: "연예",     region: kr, top_n: 5, candidate_limit: 80 }
-  kr_politics:      { label: "정치",     region: kr, top_n: 5, candidate_limit: 80 }
-  nz_national:      { label: "뉴질랜드", region: nz, top_n: 8, candidate_limit: 120 }
-  nz_auckland:      { label: "오클랜드", region: nz, top_n: 5, candidate_limit: 80 }
+  kr_society:       { label: "사회",     region: kr, top_n: 5, candidate_limit: 45 }
+  kr_economy:       { label: "경제",     region: kr, top_n: 5, candidate_limit: 45 }
+  kr_entertainment: { label: "연예",     region: kr, top_n: 5, candidate_limit: 45 }
+  kr_politics:      { label: "정치",     region: kr, top_n: 5, candidate_limit: 45 }
+  nz_national:      { label: "뉴질랜드", region: nz, top_n: 8, candidate_limit: 90 }
+  nz_auckland:      { label: "오클랜드", region: nz, top_n: 5, candidate_limit: 60 }
   # nz_immigration 은 이민 전용 피드 + nz_national/nz_auckland 후보 중 이민 관련으로 분류된 기사로 구성
-  nz_immigration:   { label: "이민 레이더", region: nz, top_n: 6, candidate_limit: 60 }
+  nz_immigration:   { label: "이민 레이더", region: nz, top_n: 6, candidate_limit: 40 }
 
 # ── 뉴질랜드/오클랜드 가중치 (이민 준비자 관점) ───────────────
 # 선별 프롬프트와 API 없이 돌릴 때(--no-llm)의 키워드 점수에 함께 쓰입니다.
@@ -57,19 +57,38 @@ weights:
     - { topic: "스포츠", keywords: [rugby, "All Blacks", cricket, netball, "Black Caps", match, score, "Super Rugby", NRL, Warriors] }
     - { topic: "연예 가십", keywords: [celebrity, Bachelor, reality, gossip, Kardashian] }
 
-# ── Claude API ──────────────────────────────────────────────
+# ── AI 요약 ─────────────────────────────────────────────────
+# provider: gemini (기본, 무료 등급) | anthropic (Claude API, 유료)
+#
+# Gemini 무료 등급으로 요금 0원 유지하기
+#   - Google AI Studio(https://aistudio.google.com/apikey)에서 키를 만들고,
+#     그 키의 Google Cloud 프로젝트에 결제(Billing)를 연결하지 마세요.
+#     결제가 연결되지 않은 키는 무료 등급으로만 동작하고, 한도를 넘으면 요금 대신 429 오류가 납니다.
+#   - 무료 등급 한도(분당/일일 요청 수)는 Google 이 자주 바꿉니다. AI Studio 의 Rate limit 화면에서 확인하세요.
+#   - 하루 1회 실행에 보내는 요청은 보통 4회(선별 2 + 요약 2)이고, max_requests_per_run 을 넘지 않습니다.
+#   - 한도 초과·오류 시 그날은 AI 없이(키워드 선별 + RSS 원문 설명) 표시됩니다.
 llm:
-  rank_model: "claude-haiku-5-5"      # 선별·분류
-  summary_model: "claude-sonnet-5-5"  # 최종 요약
-  rank_effort: "low"
-  summary_effort: "low"
-  # Sonnet 요약 요청이 안전 분류기에 의해 거절되면 서버가 다른 모델로 자동 재시도 (server-side fallback)
-  summary_fallback: true
-  daily_budget_usd: 0.30              # 초과 시 로그에 경고
-  # USD per 1M tokens (input, output) — 비용 로그 계산용
-  pricing:
-    claude-haiku-5-5:  { input: 0.10, output: 0.50 }
-    claude-sonnet-5-5: { input: 2.00, output: 10.00 }
+  provider: "gemini"
+  max_requests_per_run: 6      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호)
+  rank_batch_size: 200         # 선별 1회 요청에 넣을 최대 후보 수
+
+  gemini:
+    rank_model: "gemini-2.5-flash-lite"   # 선별·분류 (무료 한도가 넉넉한 경량 모델)
+    summary_model: "gemini-2.5-flash"     # 한국어 요약
+    thinking_budget: 0           # 2.5 계열 사고(thinking) 끔 → 빠르고 출력 한도 절약. Gemini 3 계열 모델로 바꾸면 이 줄을 지우세요
+    min_interval_seconds: 10     # 요청 간 최소 간격 (분당 한도 보호)
+    retry_wait_seconds: 60       # 429(분당 한도 초과) 시 한 번만 재시도하기 전 대기
+
+  # 유료(Claude API) 로 바꾸려면 provider: "anthropic" + Secret ANTHROPIC_API_KEY. 구독(Pro/Max)과 별도로 청구됩니다.
+  anthropic:
+    rank_model: "claude-haiku-5-5"
+    summary_model: "claude-sonnet-5-5"
+    rank_effort: "low"
+    summary_effort: "low"
+    summary_fallback: true       # 안전 분류기가 거절하면 서버가 다른 모델로 자동 재시도
+    pricing:                     # USD per 1M tokens — 비용 로그 계산용
+      claude-haiku-5-5:  { input: 0.10, output: 0.50 }
+      claude-sonnet-5-5: { input: 2.00, output: 10.00 }
 
 # ── 부가 정보 ───────────────────────────────────────────────
 extras:

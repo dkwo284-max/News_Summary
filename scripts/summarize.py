@@ -1,4 +1,4 @@
-"""요약: 섹션별로 한 번씩 Sonnet 을 호출해 한국어 제목·3줄 요약·이민자 관점·태그·한 줄 브리핑을 만든다.
+"""요약: 지역(kr / nz)별로 AI 를 한 번씩 호출해 한국어 제목·3줄 요약·이민자 관점·태그·섹션별 한 줄 브리핑을 만든다.
 
 원문 본문은 요약 입력으로만 잠깐 쓰고 저장하지 않는다(저작권).
 """
@@ -12,14 +12,22 @@ import httpx
 from common import Article, log
 
 MAX_LINE = 80
-NO_LLM_NOTE = "(오프라인 모드: Claude 요약 없이 RSS 설명을 그대로 표시)"
+NO_LLM_NOTE = "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
 
 TAG_VOCAB = "비자, 이민, 영주권, 고용, 임금, 주거, 렌트, 금리, 물가, 환율, 교육, 의료, 치안, 날씨, 재난, 교통, 경제, 증시, 부동산, 정치, 사회, 사건사고, 연예, 방송, 스포츠, 기술"
 
 SUMMARY_SCHEMA = {
     "type": "object",
     "properties": {
-        "briefing": {"type": "string"},
+        "briefings": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {"section": {"type": "string"}, "briefing": {"type": "string"}},
+                "required": ["section", "briefing"],
+                "additionalProperties": False,
+            },
+        },
         "items": {
             "type": "array",
             "items": {
@@ -36,25 +44,27 @@ SUMMARY_SCHEMA = {
             },
         },
     },
-    "required": ["briefing", "items"],
+    "required": ["briefings", "items"],
     "additionalProperties": False,
 }
 
 
-def _system_prompt(region: str, label: str) -> str:
+def _system_prompt(region: str, sections: dict[str, str]) -> str:
     why = (
         "- why_it_matters: 뉴질랜드 이민을 준비하는 한국인에게 이 기사가 갖는 의미를 한 문장(60자 이내)으로. "
         "직접 관련이 적으면 생활·비용·안전 측면의 함의를 구체적으로. 추측성 단정은 피하세요."
         if region == "nz"
         else "- why_it_matters: 빈 문자열(\"\")로 두세요."
     )
-    return f"""당신은 한국어 아침 뉴스 브리핑 편집자입니다. 섹션: {label}.
+    sec_list = ", ".join(f"{k}({v})" for k, v in sections.items())
+    return f"""당신은 한국어 아침 뉴스 브리핑 편집자입니다. 이번 묶음의 섹션: {sec_list}.
 각 기사에 대해 다음을 작성하세요.
 - title_ko: 자연스러운 한국어 제목 (영어 기사는 번역, 40자 이내, 낚시성 표현 제거)
 - summary_ko: 정확히 3줄. 각 줄은 80자 이내의 완결된 문장. 핵심 사실 → 배경/수치 → 전망/영향 순서.
 {why}
 - tags: 1~3개. 가능하면 다음 중에서: {TAG_VOCAB}
-그리고 섹션 전체를 아우르는 '오늘의 한 줄 브리핑'(briefing)을 60자 이내 한 문장으로 쓰세요.
+그리고 각 섹션마다 그 섹션 기사들을 아우르는 '오늘의 한 줄 브리핑'을 60자 이내 한 문장으로 쓰세요
+(briefings 배열에 section 키와 함께, 기사가 있는 섹션만).
 규칙: 주어진 제목·설명·본문 발췌에 있는 사실만 사용하고, 없는 수치나 인용을 만들지 마세요.
 입력의 모든 id 를 한 번씩 반환하세요."""
 
@@ -134,8 +144,8 @@ def offline_item(a: Article, region: str, cfg: dict) -> dict:
     )
 
 
-def _input_block(a: Article) -> str:
-    parts = [f"[id] {a.id}", f"[출처] {', '.join(s.name for s in a.sources)}", f"[제목] {a.title}"]
+def _input_block(a: Article, keys: list[str]) -> str:
+    parts = [f"[id] {a.id}", f"[섹션] {', '.join(keys)}", f"[출처] {', '.join(s.name for s in a.sources)}", f"[제목] {a.title}"]
     if a.published:
         parts.append(f"[시각] {a.published.isoformat(timespec='minutes')}")
     if a.description:
@@ -145,45 +155,64 @@ def _input_block(a: Article) -> str:
     return "\n".join(parts)
 
 
-def summarize_section(key: str, items: list[Article], cfg: dict, llm) -> dict:
-    sec = cfg["sections"][key]
-    region, label = sec["region"], sec["label"]
-    if not items:
-        return {"label": label, "briefing": "오늘은 이 섹션에 새 소식이 없습니다.", "items": []}
+def _offline_sections(keys: list[str], chosen: dict[str, list[Article]], cfg: dict, briefing: str, error: str | None = None) -> dict:
+    out = {}
+    for k in keys:
+        sec = cfg["sections"][k]
+        items = chosen.get(k, [])
+        out[k] = {"label": sec["label"], "briefing": briefing if items else "오늘은 이 섹션에 새 소식이 없습니다.",
+                  "items": [offline_item(a, sec["region"], cfg) for a in items]}
+        if error and items:
+            out[k]["error"] = error
+    return out
+
+
+def summarize_region(region: str, keys: list[str], chosen: dict[str, list[Article]], cfg: dict, llm) -> dict[str, dict]:
+    """한 지역의 여러 섹션을 AI 요청 1회로 요약한다."""
     if llm is None:
-        return {"label": label, "briefing": NO_LLM_NOTE, "items": [offline_item(a, region, cfg) for a in items]}
+        return _offline_sections(keys, chosen, cfg, NO_LLM_NOTE)
 
-    user = "\n\n---\n\n".join(_input_block(a) for a in items)
+    # 같은 기사가 여러 섹션(예: 뉴질랜드 + 이민 레이더)에 있으면 한 번만 보낸다
+    unique: dict[str, tuple[Article, list[str]]] = {}
+    for k in keys:
+        for a in chosen.get(k, []):
+            unique.setdefault(a.id, (a, []))[1].append(k)
+    if not unique:
+        return _offline_sections(keys, chosen, cfg, "")
+
+    labels = {k: cfg["sections"][k]["label"] for k in keys}
+    user = "\n\n---\n\n".join(_input_block(a, ks) for a, ks in unique.values())
     try:
-        out = llm.json_call(
-            model=cfg["llm"]["summary_model"],
-            system=_system_prompt(region, label),
-            user=user,
-            schema=SUMMARY_SCHEMA,
-            effort=cfg["llm"].get("summary_effort", "low"),
-            max_tokens=16000,
-            fallback=cfg["llm"].get("summary_fallback", True),
-        )
-    except Exception as e:  # noqa: BLE001 — 한 섹션 실패가 전체를 멈추지 않게
-        log.error("summary LLM failed for %s: %s", key, e)
-        return {"label": label, "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
-                "items": [offline_item(a, region, cfg) for a in items], "error": str(e)[:300]}
+        out = llm.json_call(task="summary", system=_system_prompt(region, labels), user=user,
+                            schema=SUMMARY_SCHEMA, max_tokens=32000)
+    except Exception as e:  # noqa: BLE001 — 실패해도 원문 정보로 페이지는 생성
+        log.error("summary AI failed for %s: %s", region, e)
+        return _offline_sections(keys, chosen, cfg, "요약 생성에 실패해 원문 정보를 표시합니다.", str(e)[:300])
 
-    by_id = {row["id"]: row for row in out.get("items", [])}
-    result_items = []
-    for a in items:  # 선별 순서(중요도순) 유지
-        row = by_id.get(a.id)
-        if row is None:
-            log.warning("summary missing for %s/%s", key, a.id)
-            result_items.append(offline_item(a, region, cfg))
-            continue
-        result_items.append(_item_dict(a, title_ko=row["title_ko"], summary=row["summary_ko"],
-                                       why=row.get("why_it_matters", ""), tags=row.get("tags", []), region=region))
-    return {"label": label, "briefing": clamp_line(out.get("briefing", ""), 100), "items": result_items}
+    rows = {row.get("id"): row for row in out.get("items", [])}
+    briefings = {b.get("section"): b.get("briefing", "") for b in out.get("briefings", [])}
+    result = {}
+    for k in keys:
+        sec_region = cfg["sections"][k]["region"]
+        items = []
+        for a in chosen.get(k, []):  # 선별 순서(중요도순) 유지
+            row = rows.get(a.id)
+            if row is None:
+                log.warning("summary missing for %s/%s", k, a.id)
+                items.append(offline_item(a, sec_region, cfg))
+                continue
+            items.append(_item_dict(a, title_ko=row.get("title_ko", ""), summary=row.get("summary_ko", []),
+                                    why=row.get("why_it_matters", ""), tags=row.get("tags", []), region=sec_region))
+        briefing = clamp_line(briefings.get(k, ""), 100) if items else "오늘은 이 섹션에 새 소식이 없습니다."
+        result[k] = {"label": labels[k], "briefing": briefing, "items": items}
+    return result
 
 
 def summarize_all(chosen: dict[str, list[Article]], cfg: dict, llm) -> dict[str, dict]:
-    keys = list(cfg["sections"])
-    with ThreadPoolExecutor(max_workers=4) as pool:
-        results = pool.map(lambda k: summarize_section(k, chosen.get(k, []), cfg, llm), keys)
-    return dict(zip(keys, results))
+    by_region: dict[str, list[str]] = {}
+    for k, sec in cfg["sections"].items():
+        by_region.setdefault(sec["region"], []).append(k)
+    result: dict[str, dict] = {}
+    for region, keys in by_region.items():  # 순차 실행: 무료 등급 분당 한도 보호
+        result.update(summarize_region(region, keys, chosen, cfg, llm))
+    return {k: result[k] for k in cfg["sections"]}
