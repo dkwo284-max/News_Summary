@@ -1,0 +1,204 @@
+# Daily Brief 설정 파일
+# 피드 추가/삭제, 섹션별 건수, 타임존, 가중치 키워드를 여기서 관리합니다.
+
+# ── 실행 시각 ───────────────────────────────────────────────
+# 워크플로는 매시간 :30에 실행되고, 스크립트가 이 타임존의 현지 시각을 보고
+# run_hour 시대(07:00~07:59)부터 catchup_until_hour 전까지, 오늘 브리핑이 아직 없을 때만 진행합니다.
+# 뉴질랜드 이주 후에는 timezone 을 "Pacific/Auckland" 로 바꾸면 서머타임까지 자동 반영됩니다.
+timezone: "Asia/Seoul"
+run_hour: 7
+catchup_until_hour: 11   # GitHub cron 지연 대비: 이 시각 전까지는 늦게라도 생성
+
+# ── 수집 ────────────────────────────────────────────────────
+fetch:
+  lookback_hours: 24
+  max_items_per_feed: 30
+  timeout_seconds: 20
+  user_agent: "Mozilla/5.0 (compatible; DailyBriefBot/1.0; +https://github.com/dkwo284-max/News_Summary)"
+  extract_body: true          # 상위 기사 본문 일부를 요약 입력으로만 사용 (저장하지 않음)
+  body_chars: 1500
+
+dedupe:
+  title_similarity: 85        # rapidfuzz token_set_ratio 임계값
+
+# ── 데이터 보관 ─────────────────────────────────────────────
+output:
+  data_dir: "web/public/data"
+  retention_days: 30
+  app_url: "https://dkwo284-max.github.io/News_Summary/"
+
+# ── 섹션 ────────────────────────────────────────────────────
+# region: kr | nz  (nz 섹션은 "이민자 관점(why_it_matters)"을 생성)
+# candidate_limit: Claude 선별 단계에 보낼 최대 후보 수 (비용 상한)
+sections:
+  kr_society:       { label: "사회",     region: kr, top_n: 5, candidate_limit: 80 }
+  kr_economy:       { label: "경제",     region: kr, top_n: 5, candidate_limit: 80 }
+  kr_entertainment: { label: "연예",     region: kr, top_n: 5, candidate_limit: 80 }
+  kr_politics:      { label: "정치",     region: kr, top_n: 5, candidate_limit: 80 }
+  nz_national:      { label: "뉴질랜드", region: nz, top_n: 8, candidate_limit: 120 }
+  nz_auckland:      { label: "오클랜드", region: nz, top_n: 5, candidate_limit: 80 }
+  # nz_immigration 은 이민 전용 피드 + nz_national/nz_auckland 후보 중 이민 관련으로 분류된 기사로 구성
+  nz_immigration:   { label: "이민 레이더", region: nz, top_n: 6, candidate_limit: 60 }
+
+# ── 뉴질랜드/오클랜드 가중치 (이민 준비자 관점) ───────────────
+# 선별 프롬프트와 API 없이 돌릴 때(--no-llm)의 키워드 점수에 함께 쓰입니다.
+weights:
+  high:
+    - { topic: "이민/비자 정책", keywords: [immigration, visa, "skilled migrant", "green list", "work visa", residence, residency, "accredited employer", AEWV, INZ, migrant, citizenship] }
+    - { topic: "고용·임금·실업", keywords: [jobs, employment, unemployment, wage, wages, salary, "labour market", "minimum wage", layoffs, hiring] }
+    - { topic: "주거·금리", keywords: [rent, rents, housing, "house prices", mortgage, OCR, "interest rate", "Reserve Bank", RBNZ, property, Kāinga Ora] }
+    - { topic: "생활비·물가", keywords: [inflation, CPI, "cost of living", prices, petrol, groceries, power bills] }
+    - { topic: "환율", keywords: [NZD, "kiwi dollar", "exchange rate", currency, KRW, won] }
+    - { topic: "교육", keywords: [school, schools, education, university, NCEA, students, "international students"] }
+    - { topic: "의료", keywords: [health, hospital, "Health NZ", "Te Whatu Ora", GP, "emergency department"] }
+    - { topic: "치안", keywords: [crime, police, burglary, "ram raid", assault, safety] }
+    - { topic: "기상재해", keywords: [flood, flooding, storm, cyclone, earthquake, "state of emergency", MetService, "red warning", "orange warning"] }
+  low:
+    - { topic: "스포츠", keywords: [rugby, "All Blacks", cricket, netball, "Black Caps", match, score, "Super Rugby", NRL, Warriors] }
+    - { topic: "연예 가십", keywords: [celebrity, Bachelor, reality, gossip, Kardashian] }
+
+# ── Claude API ──────────────────────────────────────────────
+llm:
+  rank_model: "claude-haiku-5-5"      # 선별·분류
+  summary_model: "claude-sonnet-5-5"  # 최종 요약
+  rank_effort: "low"
+  summary_effort: "low"
+  # Sonnet 요약 요청이 안전 분류기에 의해 거절되면 서버가 다른 모델로 자동 재시도 (server-side fallback)
+  summary_fallback: true
+  daily_budget_usd: 0.30              # 초과 시 로그에 경고
+  # USD per 1M tokens (input, output) — 비용 로그 계산용
+  pricing:
+    claude-haiku-5-5:  { input: 0.10, output: 0.50 }
+    claude-sonnet-5-5: { input: 2.00, output: 10.00 }
+
+# ── 부가 정보 ───────────────────────────────────────────────
+extras:
+  fx: { base: "NZD", quote: "KRW" }   # frankfurter (키 불필요)
+  weather: { name: "Auckland", latitude: -36.8485, longitude: 174.7633, timezone: "Pacific/Auckland" }  # Open-Meteo
+
+# ── 알림 (선택) ─────────────────────────────────────────────
+# 토큰/비밀번호는 절대 여기 적지 말고 GitHub Secrets 로만 설정하세요.
+notify:
+  telegram: { enabled: false }   # Secrets: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+  email:    { enabled: false }   # Secrets: SMTP_USER, SMTP_PASSWORD(Gmail 앱 비밀번호), EMAIL_TO
+
+# ── 피드 ────────────────────────────────────────────────────
+# id: 고유 이름 / name: 화면에 표시할 출처명 / section: 위 sections 키
+# url: 기본 피드 / fallbacks: 기본 피드가 죽었거나 0건일 때 순서대로 시도할 대체 피드
+# enabled: false 로 끄기 / google_news: true 면 제목 끝 " - 언론사"를 떼고 실제 언론사명을 출처로 사용
+# 피드 상태 점검: python scripts/check_feeds.py  (Actions의 "Check feeds" 워크플로로도 실행 가능)
+feeds:
+  # ── 한국: 연합뉴스 ──
+  - { id: yna_society,       name: "연합뉴스", section: kr_society,       url: "https://www.yna.co.kr/rss/society.xml" }
+  - { id: yna_economy,       name: "연합뉴스", section: kr_economy,       url: "https://www.yna.co.kr/rss/economy.xml" }
+  - { id: yna_entertainment, name: "연합뉴스", section: kr_entertainment, url: "https://www.yna.co.kr/rss/entertainment.xml" }
+  - { id: yna_politics,      name: "연합뉴스", section: kr_politics,      url: "https://www.yna.co.kr/rss/politics.xml" }
+
+  # ── 한국: Google News (보조) ──
+  - id: gn_kr_society
+    name: "Google 뉴스"
+    section: kr_society
+    google_news: true
+    url: "https://news.google.com/rss/headlines/section/topic/NATION?hl=ko&gl=KR&ceid=KR:ko"
+    fallbacks: ["https://news.google.com/rss/search?q=%EC%82%AC%ED%9A%8C+when:1d&hl=ko&gl=KR&ceid=KR:ko"]
+  - id: gn_kr_economy
+    name: "Google 뉴스"
+    section: kr_economy
+    google_news: true
+    url: "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=ko&gl=KR&ceid=KR:ko"
+    fallbacks: ["https://news.google.com/rss/search?q=%EA%B2%BD%EC%A0%9C+when:1d&hl=ko&gl=KR&ceid=KR:ko"]
+  - id: gn_kr_entertainment
+    name: "Google 뉴스"
+    section: kr_entertainment
+    google_news: true
+    url: "https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT?hl=ko&gl=KR&ceid=KR:ko"
+    fallbacks: ["https://news.google.com/rss/search?q=%EC%97%B0%EC%98%88+when:1d&hl=ko&gl=KR&ceid=KR:ko"]
+  - id: gn_kr_politics
+    name: "Google 뉴스"
+    section: kr_politics
+    google_news: true
+    url: "https://news.google.com/rss/search?q=%EC%A0%95%EC%B9%98+when:1d&hl=ko&gl=KR&ceid=KR:ko"
+
+  # ── 한국: 기타 언론사 (필요에 따라 enabled 조정) ──
+  - { id: hani_society,   name: "한겨레",   section: kr_society,  url: "https://www.hani.co.kr/rss/society/" }
+  - { id: hani_economy,   name: "한겨레",   section: kr_economy,  url: "https://www.hani.co.kr/rss/economy/" }
+  - { id: hani_politics,  name: "한겨레",   section: kr_politics, url: "https://www.hani.co.kr/rss/politics/" }
+  - { id: chosun_national, name: "조선일보", section: kr_society,  url: "https://www.chosun.com/arc/outboundfeeds/rss/category/national/?outputType=xml" }
+  - { id: chosun_economy,  name: "조선일보", section: kr_economy,  url: "https://www.chosun.com/arc/outboundfeeds/rss/category/economy/?outputType=xml" }
+  - { id: chosun_politics, name: "조선일보", section: kr_politics, url: "https://www.chosun.com/arc/outboundfeeds/rss/category/politics/?outputType=xml" }
+  - { id: chosun_ent,      name: "조선일보", section: kr_entertainment, url: "https://www.chosun.com/arc/outboundfeeds/rss/category/entertainments/?outputType=xml" }
+  - { id: mk_economy,     name: "매일경제", section: kr_economy,  url: "https://www.mk.co.kr/rss/30100041/" }
+  - { id: mk_society,     name: "매일경제", section: kr_society,  url: "https://www.mk.co.kr/rss/50400012/" }
+
+  # ── 뉴질랜드 전국 ──
+  - { id: rnz_national,  name: "RNZ",        section: nz_national, url: "https://www.rnz.co.nz/rss/national.xml" }
+  - { id: rnz_business,  name: "RNZ",        section: nz_national, url: "https://www.rnz.co.nz/rss/business.xml" }
+  - { id: nzh_nz,        name: "NZ Herald",  section: nz_national, url: "https://www.nzherald.co.nz/arc/outboundfeeds/rss/section/nz/?outputType=xml" }
+  - { id: nzh_business,  name: "NZ Herald",  section: nz_national, url: "https://www.nzherald.co.nz/arc/outboundfeeds/rss/section/business/?outputType=xml" }
+  - id: stuff_nz
+    name: "Stuff"
+    section: nz_national
+    url: "https://www.stuff.co.nz/rss"
+    fallbacks: ["https://news.google.com/rss/search?q=site:stuff.co.nz+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  - id: onenews
+    name: "1News"
+    section: nz_national
+    url: "https://www.1news.co.nz/arc/outboundfeeds/rss/?outputType=xml"
+    fallbacks: ["https://news.google.com/rss/search?q=site:1news.co.nz+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  - id: gn_nz_top
+    name: "Google News"
+    section: nz_national
+    google_news: true
+    url: "https://news.google.com/rss/headlines/section/topic/NATION?hl=en-NZ&gl=NZ&ceid=NZ:en"
+    fallbacks: ["https://news.google.com/rss?hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  - id: gn_nz_business
+    name: "Google News"
+    section: nz_national
+    google_news: true
+    url: "https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-NZ&gl=NZ&ceid=NZ:en"
+
+  # ── 이민 전용 ──
+  - id: inz_news
+    name: "Immigration New Zealand"
+    section: nz_immigration
+    url: "https://www.immigration.govt.nz/about-us/media-centre/news-notifications/rss"
+    fallbacks:
+      - "https://news.google.com/rss/search?q=site:immigration.govt.nz&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_nz_immigration
+    name: "Google News"
+    section: nz_immigration
+    google_news: true
+    url: "https://news.google.com/rss/search?q=(immigration+OR+visa+OR+%22residence%22+OR+%22skilled+migrant%22)+New+Zealand+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+
+  # ── 오클랜드 ──
+  - id: gn_auckland
+    name: "Google News"
+    section: nz_auckland
+    google_news: true
+    url: "https://news.google.com/rss/search?q=Auckland+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: nzh_auckland
+    name: "NZ Herald"
+    section: nz_auckland
+    url: "https://www.nzherald.co.nz/arc/outboundfeeds/rss/section/nz/auckland/?outputType=xml"
+    fallbacks: ["https://news.google.com/rss/search?q=site:nzherald.co.nz+Auckland+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  - id: rnz_auckland
+    name: "RNZ"
+    section: nz_auckland
+    google_news: true
+    url: "https://news.google.com/rss/search?q=site:rnz.co.nz+Auckland+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: stuff_auckland
+    name: "Stuff"
+    section: nz_auckland
+    url: "https://www.stuff.co.nz/auckland/rss"
+    fallbacks: ["https://news.google.com/rss/search?q=site:stuff.co.nz+Auckland+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  - id: our_auckland
+    name: "OurAuckland (Auckland Council)"
+    section: nz_auckland
+    url: "https://ourauckland.aucklandcouncil.govt.nz/rss"
+    fallbacks: ["https://news.google.com/rss/search?q=site:ourauckland.aucklandcouncil.govt.nz&hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  - id: auckland_transport
+    name: "Auckland Transport"
+    section: nz_auckland
+    enabled: false   # 선택: 교통 공지가 필요하면 true
+    google_news: true
+    url: "https://news.google.com/rss/search?q=%22Auckland+Transport%22+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
