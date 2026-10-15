@@ -109,7 +109,7 @@ pytest                                         # 파서·중복제거·스키마
 # 네트워크·API 없이 샘플 피드로 전체 파이프라인 확인
 python scripts/main.py --dry-run --no-llm --fixtures tests/fixtures/feeds --now 2026-10-15T22:00:00Z
 
-# 실제 피드 + Gemini 요약, 결과는 out/dry-run/ 에만 저장 (알림·정리 안 함). 무료 한도에서 요청 4회 사용
+# 실제 피드 + Gemini 요약, 결과는 out/dry-run/ 에만 저장 (알림·정리 안 함). 무료 한도에서 요청 5회 사용
 export GEMINI_API_KEY=...
 python scripts/main.py --dry-run
 
@@ -138,15 +138,15 @@ AI 요약은 **Google Gemini API 무료 등급**을 씁니다. 다음만 지키�
 3. 키를 GitHub Secret `GEMINI_API_KEY` 로 등록합니다.
 
 요청 수 제한
-- 하루 1회 실행에 보내는 AI 요청은 보통 **4회**입니다(한국/NZ 선별 각 1회 + 요약 각 1회). `llm.max_requests_per_run`(기본 6)을 넘지 않습니다.
+- 하루 1회 실행에 보내는 AI 요청은 보통 **5회**입니다(한국/NZ 선별 각 1회 + NZ 이슈 묶기 1회 + 요약 각 1회). `llm.max_requests_per_run`(기본 6)을 넘지 않습니다.
 - 분당 한도를 넘지 않도록 요청 사이에 10초 간격을 둡니다(`min_interval_seconds`).
 - 무료 등급 한도(분당·일일 요청 수)는 모델마다 다르고 Google 이 자주 바꿉니다. AI Studio 의 Rate limit 화면에서 확인하세요. 한도에 걸리면 그날은 AI 없이 원문 정보로 표시되고, 다음 날 자동으로 회복됩니다.
-- 수동 실행(Run workflow)도 한 번에 4회 정도를 씁니다.
+- 수동 실행(Run workflow)도 한 번에 5회 정도를 씁니다.
 
 알아둘 점
 - 무료 등급에서는 보낸 내용(공개 뉴스 기사 제목·발췌)이 Google 서비스 개선에 쓰일 수 있습니다.
 - 모델은 `config.yaml` 의 `llm.gemini` 에서 바꿉니다. 후보 목록을 앞에서부터 시도하고, 단종돼 404가 나면 다음 후보로 넘어갑니다(기본: `gemini-3.8-flash` 계열 → `gemini-flash-latest`). 모두 실패하면 AI Studio 에서 무료로 쓸 수 있는 모델명으로 바꾸세요.
-- 실행 로그의 `usage provider=gemini requests=4/6 total cost=$0.0000` 줄에서 요청 수를 확인할 수 있습니다.
+- 실행 로그의 `usage provider=gemini requests=5/6 total cost=$0.0000` 줄에서 요청 수를 확인할 수 있습니다.
 
 Claude API 로 바꾸고 싶다면 `llm.provider: "anthropic"` 으로 바꾸고 `ANTHROPIC_API_KEY` 를 등록하면 됩니다. 단, **Claude 구독(Pro/Max)과는 별도로** 사용량만큼 청구되며, 예상 비용은 하루 $0.15~0.25 입니다.
 

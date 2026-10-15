@@ -71,7 +71,7 @@ def test_select_with_llm_builds_immigration_radar(cfg):
     llm = FakeLLM()
     chosen = select(items, cfg, llm, FIXTURE_NOW)
     assert len(chosen["nz_national"]) == 8
-    assert [c["task"] for c in llm.calls] == ["rank"]  # 지역(nz)별 1회
+    assert [c["task"] for c in llm.calls] == ["rank", "rank"]  # nz 채점 1회 + 이슈 묶기 1회
 
     radar_ids = {a.id for a in chosen["nz_immigration"]}
     assert {"0", "3", "6", "9"} <= radar_ids
@@ -462,3 +462,45 @@ def test_immigration_radar_merges_same_issue(cfg):
     assert len(radar) == 2
     student = next(a for a in radar if a.id in {"n1", "i1", "i2"})
     assert len(student.sources) >= 1 and {a.id for a in radar} & {"i3"}
+
+
+class GroupLLM(SplitLLM):
+    """2차 이슈 묶기 요청에 그룹을 돌려주는 가짜 AI."""
+
+    def __init__(self, auckland_ids, same_as, nz_groups, radar_groups):
+        super().__init__(auckland_ids, same_as)
+        self.nz_groups, self.radar_groups = nz_groups, radar_groups
+
+    def json_call(self, *, task, system, user, schema, max_tokens=16000):
+        if "nz_groups" in schema["properties"]:
+            self.calls.append({"task": "group", "user": user, "system": system})
+            return {"nz_groups": self.nz_groups, "radar_groups": self.radar_groups}
+        return super().json_call(task=task, system=system, user=user, schema=schema, max_tokens=max_tokens)
+
+
+def test_refine_groups_issue_and_moves_tab(cfg):
+    items = [
+        art("n1", "Starship cancer treatment delayed for toddler"),       # 1차에서 전국으로 분류됨
+        art("a1", "Starship cancer ward three months from full staffing", section="nz_auckland"),
+        art("n2", "Thunderstorms and hail for the weekend"),
+        art("n3", "Cold snap sends Christchurch temperatures plunging"),
+        art("n4", "Slips close State Highway 3 after heavy rain"),
+        art("n5", "Government delays home insurance review"),
+        art("i1", "Student visa refusals spike visa", section="nz_immigration"),
+        art("i2", "NZ rejects 70 percent of Bangladeshi student visa", section="nz_immigration"),
+    ]
+    llm = GroupLLM(
+        auckland_ids={"a1"}, same_as={},
+        nz_groups=[{"ids": ["a1", "n1"], "tab": "auckland"}, {"ids": ["n2", "n3", "n4"], "tab": "national"},
+                   {"ids": ["n5"], "tab": "national"}],
+        radar_groups=[{"ids": ["i1", "i2"]}],
+    )
+    chosen = select(items, cfg, llm, FIXTURE_NOW)
+    nat = {a.id for a in chosen["nz_national"]}
+    akl = {a.id for a in chosen["nz_auckland"]}
+    assert len(akl) == 1 and akl <= {"a1", "n1"} and nat.isdisjoint({"a1", "n1"})
+    assert len(nat & {"n2", "n3", "n4"}) == 1 and "n5" in nat
+    weather = next(a for a in chosen["nz_national"] if a.id in {"n2", "n3", "n4"})
+    assert len(weather.related) == 2
+    assert len(chosen["nz_immigration"]) == 1
+    assert sum(1 for c in llm.calls if c["task"] == "group") == 1

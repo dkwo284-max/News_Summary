@@ -71,7 +71,7 @@ auckland_keywords: [Auckland, "Tāmaki Makaurau", "North Shore", Manukau, "Waite
 #     그 키의 Google Cloud 프로젝트에 결제(Billing)를 연결하지 마세요.
 #     결제가 연결되지 않은 키는 무료 등급으로만 동작하고, 한도를 넘으면 요금 대신 429 오류가 납니다.
 #   - 무료 등급 한도(분당/일일 요청 수)는 Google 이 자주 바꿉니다. AI Studio 의 Rate limit 화면에서 확인하세요.
-#   - 하루 1회 실행에 보내는 요청은 보통 4회(선별 2 + 요약 2)이고, max_requests_per_run 을 넘지 않습니다.
+#   - 하루 1회 실행에 보내는 요청은 보통 5회(선별 2 + NZ 이슈 묶기 1 + 요약 2)이고, max_requests_per_run 을 넘지 않습니다.
 #   - 한도 초과·오류 시 그날은 AI 없이(키워드 선별 + RSS 원문 설명) 표시됩니다.
 llm:
   provider: "gemini"

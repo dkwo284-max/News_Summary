@@ -220,6 +220,96 @@ def split_nz(by_section: dict[str, list[Article]], threshold: int) -> None:
     by_section["nz_national"], by_section["nz_auckland"] = nat, akl
 
 
+GROUP_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "nz_groups": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {"ids": {"type": "array", "items": {"type": "string"}}, "tab": {"type": "string"}},
+                "required": ["ids", "tab"],
+                "additionalProperties": False,
+            },
+        },
+        "radar_groups": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {"ids": {"type": "array", "items": {"type": "string"}}},
+                "required": ["ids"],
+                "additionalProperties": False,
+            },
+        },
+    },
+    "required": ["nz_groups", "radar_groups"],
+    "additionalProperties": False,
+}
+
+GROUP_SYSTEM = """당신은 뉴질랜드 뉴스 편집자입니다. 상위 후보 기사들을 '이슈' 단위로 묶습니다.
+[A] 뉴질랜드·오클랜드 후보:
+- 같은 사건, 같은 이슈의 후속·관련 기사(같은 병원 문제, 같은 기상 악화의 여러 지역 피해, 같은 정책 등)는 한 그룹으로 묶으세요.
+- 각 그룹의 tab: 오클랜드 지역 소식(오클랜드 시의회·교통·지역 사건사고·오클랜드 병원/학교·오클랜드 날씨)이면 "auckland",
+  전국 단위 소식(정부 정책·전국 경제·전국 날씨·전국 통계)이면 오클랜드가 언급돼도 "national".
+- 모든 id 가 정확히 한 그룹에 들어가야 합니다(혼자인 기사는 1개짜리 그룹).
+[B] 이민 레이더 후보: 같은 비자·이민 이슈를 다룬 기사(국내외 보도 포함)를 한 그룹으로 묶으세요. 모든 id 를 정확히 한 번씩."""
+
+
+def _apply_groups(items: list[Article], groups: list[dict], tab_key: str | None) -> list[Article]:
+    """AI 가 묶은 그룹대로 기사를 합친다. 그룹에 없는 기사는 그대로 둔다."""
+    from dedupe import _merge
+
+    by_id = {a.id: a for a in items}
+    used, out = set(), []
+    for g in groups:
+        members = [by_id[i] for i in dict.fromkeys(g.get("ids", [])) if i in by_id and i not in used]
+        if not members:
+            continue
+        members.sort(key=lambda x: (x.score, len(x.sources)), reverse=True)
+        rep = members[0]
+        for other in members[1:]:
+            _merge(rep, other)
+            rep.is_immigration |= other.is_immigration
+            for t in [other.title, *other.related]:
+                if t != rep.title and t not in rep.related:
+                    rep.related.append(t)
+        if tab_key:
+            rep.is_auckland = g.get(tab_key) == "auckland"
+        used.update(m.id for m in members)
+        out.append(rep)
+    out.extend(a for a in items if a.id not in used)
+    return out
+
+
+def refine_nz(by_section: dict[str, list[Article]], radar: list[Article], cfg: dict, llm) -> list[Article]:
+    """상위 후보만 모아 AI 로 이슈 묶기 + 탭 재배정을 한 번 더 한다 (요청 1회). 실패하면 그대로 둔다."""
+    sec = cfg["sections"]
+    window = lambda items, n: sorted(items, key=lambda a: (a.score, len(a.sources)), reverse=True)[: n * 2]
+    nz_items = window(by_section["nz_national"], sec["nz_national"]["top_n"]) + window(by_section["nz_auckland"], sec["nz_auckland"]["top_n"])
+    radar_items = window(radar, sec["nz_immigration"]["top_n"])
+    if not nz_items and not radar_items:
+        return radar
+    user = ("[A]\n" + "\n".join(_line(a) for a in nz_items) + "\n\n[B]\n" + "\n".join(_line(a) for a in radar_items))
+    try:
+        out = llm.json_call(task="rank", system=GROUP_SYSTEM, user=user, schema=GROUP_SCHEMA, max_tokens=16000)
+    except Exception as e:  # noqa: BLE001
+        log.warning("nz grouping AI failed (%s); keeping first-pass split", e)
+        return radar
+    window_ids = {a.id for a in nz_items}
+    rest = [a for k in ("nz_national", "nz_auckland") for a in by_section[k] if a.id not in window_ids]
+    regrouped = _apply_groups(nz_items, out.get("nz_groups", []), "tab")
+    nat, akl = [], []
+    for a in regrouped + rest:
+        a.section = "nz_auckland" if a.is_auckland else "nz_national"
+        (akl if a.is_auckland else nat).append(a)
+    by_section["nz_national"], by_section["nz_auckland"] = nat, akl
+    radar_ids = {a.id for a in radar_items}
+    radar = _apply_groups(radar_items, out.get("radar_groups", []), None) + [a for a in radar if a.id not in radar_ids]
+    log.info("nz grouping: A %d → %d, B %d → %d", len(nz_items), len(regrouped), len(radar_items),
+             len(radar) - (len([a for a in radar if a.id not in radar_ids])))
+    return radar
+
+
 def _top(items: list[Article], n: int) -> list[Article]:
     ranked = sorted(items, key=lambda a: (a.score, len(a.sources)), reverse=True)
     return [a for a in ranked if a.score >= MIN_SCORE][:n]
@@ -249,11 +339,6 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     if "nz_national" in sections and "nz_auckland" in sections:
         split_nz(by_section, threshold)
 
-    chosen: dict[str, list[Article]] = {}
-    for key, sec in sections.items():
-        if key != "nz_immigration":
-            chosen[key] = _top(by_section[key], sec["top_n"])
-
     # 이민 레이더: 이민 전용 피드 + 다른 NZ 섹션에서 이민 관련으로 분류된 기사
     flagged = [a for k in ("nz_national", "nz_auckland") for a in by_section.get(k, []) if a.is_immigration]
     pool = by_section.get("nz_immigration", [])
@@ -263,6 +348,14 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     merged = merge_same_story(
         dedupe([*pool, *[_clone_to(a, "nz_immigration") for a in flagged]], threshold), threshold,
     )
+    # 2차: 상위 후보만 모아 이슈 묶기·탭 재배정 (AI 요청 1회)
+    if llm is not None and "nz_national" in sections and "nz_auckland" in sections:
+        merged = refine_nz(by_section, merged, cfg, llm)
+
+    chosen: dict[str, list[Article]] = {}
+    for key, sec in sections.items():
+        if key != "nz_immigration":
+            chosen[key] = _top(by_section[key], sec["top_n"])
     chosen["nz_immigration"] = _top(merged, sections["nz_immigration"]["top_n"])
     for key, items in chosen.items():
         log.info("selected %-17s %d", key, len(items))

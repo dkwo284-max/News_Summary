@@ -82,7 +82,7 @@ def main(argv: list[str] | None = None) -> int:
     articles = dedupe(articles, cfg["dedupe"]["title_similarity"])
     log.info("after dedupe: %d stories", len(articles))
 
-    # 3) 선별 / 4) 요약 — AI 요청은 보통 4회(지역별 선별 1 + 요약 1)
+    # 3) 선별 / 4) 요약 — AI 요청은 보통 5회(지역별 선별 1 + NZ 이슈 묶기 1 + 지역별 요약 1)
     llm = None
     if not args.no_llm:
         from llm import LLMError, make_llm
