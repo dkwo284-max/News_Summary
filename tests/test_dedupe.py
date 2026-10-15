@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from common import Article
+from common import Article, Source
 from dedupe import dedupe, normalize_title, normalize_url, similar
 
 T = datetime(2026, 10, 15, 20, tzinfo=timezone.utc)
@@ -44,3 +44,9 @@ def test_dedupe_is_per_section():
     items = [art(1, "같은 제목의 기사 입니다", "https://a.com/1", section="nz_national"),
              art(2, "같은 제목의 기사 입니다", "https://a.com/2", section="nz_auckland")]
     assert len(dedupe(items, 85)) == 2
+
+
+def test_sources_unique_by_outlet():
+    a = art(1, "제목 하나 둘 셋", "https://a.com/1", source="조선일보")
+    a.extra_sources = [Source("조선일보", "https://a.com/2"), Source("연합뉴스", "https://b.com/1")]
+    assert [s.name for s in a.sources] == ["조선일보", "연합뉴스"]

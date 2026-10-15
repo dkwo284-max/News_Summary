@@ -170,6 +170,20 @@ def test_gemini_request_cap(cfg):
         llm.json_call(task="summary", system="s", user="u", schema={})
 
 
+def test_gemini_503_moves_to_next_model(cfg):
+    urls, sleeps = [], []
+
+    def handler(req):
+        urls.append(str(req.url))
+        if "gemini-3.8-flash:" in str(req.url):
+            return httpx.Response(503, json={"error": {"status": "UNAVAILABLE"}})
+        return httpx.Response(200, json=_gemini_ok('{"ok": 3}'))
+
+    llm = _gemini(cfg, handler, sleeps)
+    assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 3}
+    assert len(urls) == 3 and "gemini-flash-latest" in urls[2] and 20.0 in sleeps
+
+
 def test_gemini_429_retries_once_then_errors(cfg):
     calls, sleeps = [], []
 
@@ -180,7 +194,8 @@ def test_gemini_429_retries_once_then_errors(cfg):
     llm = _gemini(cfg, handler, sleeps)
     with pytest.raises(LLMError, match="429"):
         llm.json_call(task="rank", system="s", user="u", schema={})
-    assert len(calls) == 2 and 60.0 in sleeps
+    n = len(cfg["llm"]["gemini"]["rank_model"])
+    assert len(calls) == 2 * n and 60.0 in sleeps  # 모델마다 1회 재시도 후 다음 후보
 
 
 def test_gemini_429_then_success(cfg):

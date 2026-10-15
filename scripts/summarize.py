@@ -126,7 +126,7 @@ def _item_dict(a: Article, *, title_ko: str, summary: list[str], why: str, tags:
 
 
 def offline_item(a: Article, region: str, cfg: dict) -> dict:
-    sentences = _split_sentences(a.description) if a.description else []
+    sentences = [x for x in (_split_sentences(a.description) if a.description else []) if len(x) >= 8]
     tags = []
     if region == "nz":
         from rank import _kw_hits

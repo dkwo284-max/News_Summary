@@ -138,19 +138,22 @@ class GeminiLLM(BaseLLM):
         if self.pcfg.get("thinking_budget") is not None:
             body["generationConfig"]["thinkingConfig"] = {"thinkingBudget": int(self.pcfg["thinking_budget"])}
 
-        # 모델 후보를 앞에서부터 시도: 404(단종·신규 사용자 불가)면 다음 후보로. 성공한 모델은 기억해 다음 요청에 바로 사용
-        candidates = self._working.get(task) or self.models_for(task)
+        # 모델 후보를 앞에서부터 시도.
+        #  - 404(단종·신규 사용자 불가): 바로 다음 후보
+        #  - 429(한도)·500/503(일시 과부하): 잠시 후 한 번 재시도, 그래도 안 되면 다음 후보 (모델마다 한도가 따로라 효과 있음)
+        # 성공한 모델은 기억해 다음 요청에 먼저 사용
+        candidates = self._working.get(task, []) + [m for m in self.models_for(task) if m not in self._working.get(task, [])]
         last_err = None
         for model in candidates:
             r = self._post(model, body)
-            if r.status_code == 429:
-                # 분당 한도 초과면 잠시 후 한 번만 재시도. 일일 한도 소진이면 재시도해도 실패 → 상위에서 AI 없이 진행
-                log.warning("gemini 429 (rate limit) — retrying once in %ss", self.pcfg.get("retry_wait_seconds", 60))
-                self.sleep(float(self.pcfg.get("retry_wait_seconds", 60)))
+            if r.status_code in (429, 500, 503):
+                wait = float(self.pcfg.get("retry_wait_seconds", 60) if r.status_code == 429 else self.pcfg.get("overload_wait_seconds", 20))
+                log.warning("gemini %s HTTP %s — retrying once in %ss", model, r.status_code, wait)
+                self.sleep(wait)
                 r = self._post(model, body)
-            if r.status_code == 404:
-                last_err = f"gemini HTTP 404 for {model}: {r.text[:200]}"
-                log.warning("gemini model %s unavailable (404) — trying next candidate", model)
+            if r.status_code in (404, 429, 500, 503):
+                last_err = f"gemini HTTP {r.status_code} for {model}: {r.text[:200]}"
+                log.warning("gemini model %s failed (HTTP %s) — trying next candidate", model, r.status_code)
                 continue
             if r.status_code >= 400:
                 if r.status_code in (401, 403) or "API_KEY_INVALID" in r.text:

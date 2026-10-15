@@ -65,9 +65,11 @@ class Article:
 
     @property
     def sources(self) -> list[Source]:
-        seen, out = set(), []
+        seen, names, out = set(), set(), []
         for s in [Source(self.source, self.url), *self.extra_sources]:
-            if s.url not in seen:
-                seen.add(s.url)
-                out.append(s)
+            if s.url in seen or s.name in names:  # 같은 언론사의 다른 URL 은 첫 번째만 표시
+                continue
+            seen.add(s.url)
+            names.add(s.name)
+            out.append(s)
         return out
