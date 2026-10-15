@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Daily Brief</title>
+    <meta name="description" content="한국·뉴질랜드·오클랜드 아침 뉴스 AI 요약 — 뉴질랜드 이민 준비자를 위한 브리핑" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Daily Brief" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+    />
+    <script>
+      // 첫 페인트 전에 테마/글자 크기 적용 (깜빡임 방지)
+      try {
+        var s = JSON.parse(localStorage.getItem("daily-brief:settings") || "{}");
+        if (s.theme && s.theme !== "system") document.documentElement.setAttribute("data-theme", s.theme);
+        if (s.fontScale) document.documentElement.style.setProperty("--font-scale", s.fontScale);
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
+    <header class="top">
+      <div class="top-row">
+        <div>
+          <h1 class="brand">Daily Brief</h1>
+          <p class="when" id="when">불러오는 중…</p>
+        </div>
+        <button class="icon-btn" id="settings-btn" aria-label="설정" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4L10.7 6a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.3 2.5h4l.3-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6ZM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
+        </button>
+      </div>
+      <div class="extras" id="extras" aria-live="polite"></div>
+      <div class="tools">
+        <label class="sr-only" for="date-select">날짜 선택</label>
+        <select id="date-select" class="date-select"></select>
+        <label class="sr-only" for="search">검색</label>
+        <input id="search" class="search" type="search" placeholder="오늘 브리핑에서 검색" autocomplete="off" />
+      </div>
+    </header>
+    <nav class="tabs" role="tablist" aria-label="지역" id="tabs"></nav>
+    <div class="offline" id="offline" hidden>오프라인 상태입니다 — 마지막으로 저장된 브리핑을 보여드려요.</div>
+    <main id="main" tabindex="-1"></main>
+    <footer class="foot">
+      <p>요약은 AI(Claude)가 생성하며 오류가 있을 수 있습니다. 중요한 내용은 원문 링크로 확인하세요.</p>
+    </footer>
+
+    <dialog id="settings" aria-labelledby="settings-title">
+      <form method="dialog" class="settings">
+        <h2 id="settings-title">설정</h2>
+        <label class="switch-row">
+          <span>
+            <strong>정치 뉴스 보기</strong>
+            <small>켜면 한국 탭에 '정치' 카테고리가 나타납니다.</small>
+          </span>
+          <input type="checkbox" id="opt-politics" role="switch" />
+        </label>
+        <fieldset>
+          <legend>글자 크기</legend>
+          <div class="seg" id="opt-font">
+            <label><input type="radio" name="font" value="0.9" />작게</label>
+            <label><input type="radio" name="font" value="1" />보통</label>
+            <label><input type="radio" name="font" value="1.15" />크게</label>
+            <label><input type="radio" name="font" value="1.3" />아주 크게</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>화면 테마</legend>
+          <div class="seg" id="opt-theme">
+            <label><input type="radio" name="theme" value="system" />시스템</label>
+            <label><input type="radio" name="theme" value="light" />라이트</label>
+            <label><input type="radio" name="theme" value="dark" />다크</label>
+          </div>
+        </fieldset>
+        <p class="install-hint" id="install-hint"></p>
+        <button class="primary" value="close">닫기</button>
+      </form>
+    </dialog>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

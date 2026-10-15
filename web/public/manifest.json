@@ -1,0 +1,19 @@
+{
+  "name": "Daily Brief — 한국·뉴질랜드 아침 뉴스",
+  "short_name": "Daily Brief",
+  "description": "한국·뉴질랜드·오클랜드 주요 뉴스와 이민 소식을 매일 아침 AI가 요약합니다.",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f5f7",
+  "theme_color": "#1d4ed8",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
