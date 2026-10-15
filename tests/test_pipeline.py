@@ -387,3 +387,62 @@ def test_main_offline_end_to_end(fixtures_dir, monkeypatch, tmp_path):
     for sec in brief["sections"].values():
         for item in sec["items"]:
             assert item["sources"] and all(s["url"].startswith("http") for s in item["sources"])
+
+
+# ── 뉴질랜드 / 오클랜드 나누기 ──
+
+class SplitLLM(FakeLLM):
+    """오클랜드 판단과 same_as 를 돌려주는 가짜 AI."""
+
+    def __init__(self, auckland_ids, same_as):
+        super().__init__()
+        self.auckland_ids, self.same_as = auckland_ids, same_as
+
+    def json_call(self, *, task, system, user, schema, max_tokens=16000):
+        out = super().json_call(task=task, system=system, user=user, schema=schema, max_tokens=max_tokens)
+        if task == "rank":
+            for row in out["scores"]:
+                row["auckland"] = row["id"] in self.auckland_ids
+                row["same_as"] = self.same_as.get(row["id"], "")
+        return out
+
+
+def test_split_nz_no_overlap_between_tabs(cfg):
+    items = [
+        art("n1", "Reserve Bank cuts OCR again"),                                   # 전국
+        art("n2", "Mum heartbroken as toddler's cancer treatment delayed"),         # 오클랜드(스타쉽) — 전국 피드
+        art("a1", "Starship Hospital delays cancer treatments over nurse shortage", section="nz_auckland"),
+        art("a2", "Government announces nationwide fuel tax change", section="nz_auckland"),  # 오클랜드 피드지만 전국 소식
+        art("a3", "Piha campground to reopen this summer", section="nz_auckland"),
+    ]
+    llm = SplitLLM(auckland_ids={"n2", "a1", "a3"}, same_as={"n2": "a1"})
+    chosen = select(items, cfg, llm, FIXTURE_NOW)
+    nat = {a.id for a in chosen["nz_national"]}
+    akl = {a.id for a in chosen["nz_auckland"]}
+    assert nat.isdisjoint(akl)
+    assert nat == {"n1", "a2"}
+    assert akl == {"a1", "a3"} or akl == {"n2", "a3"}  # 스타쉽 기사 두 건은 하나로 합쳐짐
+    starship = next(a for a in chosen["nz_auckland"] if a.id in {"a1", "n2"})
+    assert len(starship.sources) == 1 or {s.url for s in starship.sources} >= {"https://ex.com/a1", "https://ex.com/n2"}
+    assert all(a.section == "nz_auckland" for a in chosen["nz_auckland"])
+
+
+def test_split_nz_heuristic_uses_auckland_keywords(cfg):
+    items = [
+        art("n1", "Auckland Transport announces new bus lanes"),
+        art("n2", "Inflation eases to 2.1 percent"),
+        art("a1", "Takapuna beach clean-up draws hundreds", section="nz_auckland"),
+    ]
+    chosen = select(items, cfg, None, FIXTURE_NOW)
+    assert {a.id for a in chosen["nz_auckland"]} == {"n1", "a1"}
+    assert {a.id for a in chosen["nz_national"]} == {"n2"}
+
+
+def test_same_as_merges_kr_stories(cfg):
+    items = [art("k1", "한일 통화스와프 연장 합의", section="kr_economy"),
+             art("k2", "韓日 재무장관 100억달러 스와프 3년 연장", section="kr_economy")]
+    items[1].source = "매일경제"
+    llm = SplitLLM(auckland_ids=set(), same_as={"k2": "k1"})
+    chosen = select(items, cfg, llm, FIXTURE_NOW)
+    assert len(chosen["kr_economy"]) == 1
+    assert {s.name for s in chosen["kr_economy"][0].sources} == {"RNZ", "매일경제"}
