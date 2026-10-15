@@ -1,0 +1,92 @@
+name: Daily Brief
+
+on:
+  schedule:
+    # 매시간 :30 에 깨어나고, scripts/main.py 가 config.yaml 의 timezone 기준
+    # 현지 07시대(지연 시 11시 전까지)이며 오늘 브리핑이 아직 없을 때만 실제로 생성한다.
+    #   Asia/Seoul       → 22:30 UTC 실행분이 07:30 KST 에 생성
+    #   Pacific/Auckland → 서머타임(UTC+13)이면 18:30 UTC, 표준시(UTC+12)면 19:30 UTC 실행분이 생성
+    - cron: "30 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "시각 조건을 무시하고 지금 생성 (오늘 파일이 있으면 덮어씀)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-brief
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      generated: ${{ steps.run.outputs.generated }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Generate brief
+        id: run
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.force && '--force' || '' }}
+        run: python scripts/main.py $FORCE
+
+      - name: Commit data
+        if: steps.run.outputs.generated == 'true'
+        run: |
+          git config user.name "daily-brief-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/data
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -m "brief: ${{ steps.run.outputs.date }}"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
+
+      - name: Open issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Daily Brief 생성 실패"
+          body="실행: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          시각(UTC): $(date -u +%FT%TZ)
+          종료 코드 2 = 기사 0건, 3 = 스키마 검증 실패. 로그에서 'feed failed' 줄로 실패한 피드를 확인하세요."
+          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body"
+          fi
+
+  deploy:
+    needs: brief
+    if: needs.brief.outputs.generated == 'true'
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
