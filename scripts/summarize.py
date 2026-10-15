@@ -61,6 +61,7 @@ def _system_prompt(region: str, sections: dict[str, str]) -> str:
 각 기사에 대해 다음을 작성하세요.
 - title_ko: 자연스러운 한국어 제목 (영어 기사는 번역, 40자 이내, 낚시성 표현 제거)
 - summary_ko: 정확히 3줄. 각 줄은 80자 이내의 완결된 문장. 핵심 사실 → 배경/수치 → 전망/영향 순서.
+  [같은 이슈의 관련 기사]가 있으면 그 흐름까지 아울러 이슈 전체를 요약하세요(제목에 없는 사실은 만들지 말 것).
 {why}
 - tags: 1~3개. 가능하면 다음 중에서: {TAG_VOCAB}
 그리고 각 섹션마다 그 섹션 기사들을 아우르는 '오늘의 한 줄 브리핑'을 60자 이내 한 문장으로 쓰세요
@@ -150,6 +151,8 @@ def _input_block(a: Article, keys: list[str]) -> str:
         parts.append(f"[시각] {a.published.isoformat(timespec='minutes')}")
     if a.description:
         parts.append(f"[설명] {a.description}")
+    if a.related:
+        parts.append("[같은 이슈의 관련 기사] " + " / ".join(a.related[:5]))
     if a.excerpt:
         parts.append(f"[본문 발췌] {a.excerpt}")
     return "\n".join(parts)

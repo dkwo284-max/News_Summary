@@ -446,3 +446,19 @@ def test_same_as_merges_kr_stories(cfg):
     chosen = select(items, cfg, llm, FIXTURE_NOW)
     assert len(chosen["kr_economy"]) == 1
     assert {s.name for s in chosen["kr_economy"][0].sources} == {"RNZ", "매일경제"}
+
+
+def test_immigration_radar_merges_same_issue(cfg):
+    items = [
+        art("n1", "Student visa refusals spike amid fraud crackdown"),
+        art("i1", "NZ rejects 70 percent of Bangladeshi student visas", section="nz_immigration"),
+        art("i2", "New Zealand joins UK in student visa clampdown", section="nz_immigration"),
+        art("i3", "RSE accommodation standards simplified", section="nz_immigration"),
+    ]
+    for a in items:
+        a.title += " visa"
+    llm = SplitLLM(auckland_ids=set(), same_as={"i1": "n1", "i2": "n1"})
+    radar = select(items, cfg, llm, FIXTURE_NOW)["nz_immigration"]
+    assert len(radar) == 2
+    student = next(a for a in radar if a.id in {"n1", "i1", "i2"})
+    assert len(student.sources) >= 1 and {a.id for a in radar} & {"i3"}

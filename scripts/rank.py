@@ -52,7 +52,8 @@ def _nz_criteria(cfg: dict) -> str:
 {high}
 - 가중치 낮음 (1~3점):
 {low}
-- 그 외 일반 뉴스는 사회적 파급력에 따라 4~6점."""
+- 그 외 일반 뉴스는 사회적 파급력에 따라 4~6점.
+- 개인 사연·투병기·미담처럼 사회적 파급이 없는 개인 이야기, 뉴질랜드와 직접 관련 없는 해외 뉴스는 1~3점."""
 
 
 AUCKLAND_RULE = """- auckland: 오클랜드 지역 소식이면 true — 오클랜드 시의회·교통(AT)·지역 개발, 오클랜드 안에서 일어난 사건사고,
@@ -66,7 +67,9 @@ def _system_prompt(cfg: dict, region: str) -> str:
 {criteria}
 - immigration: 비자·이민·영주권·시민권·이민 정책/통계와 직접 관련 있으면 true, 아니면 false.
 {AUCKLAND_RULE if region == "nz" else '- auckland: 항상 false.'}
-- same_as: 목록의 다른 항목과 같은 사건·같은 소식이면(출처·제목 표현이 달라도) 그 항목의 id, 아니면 빈 문자열 "".
+- same_as: 목록의 다른 항목과 같은 사건이거나 같은 이슈의 후속·관련 기사이면(예: 같은 병원 인력난을 다룬 여러 기사,
+  같은 기상 악화의 지역별 피해, 같은 비자 정책을 다룬 국내외 보도, 같은 인물의 사연) 그 묶음에서 가장 대표적인 기사의 id,
+  아니면 빈 문자열 "". 대표 기사 자신은 "".
 목록의 모든 id 에 대해 정확히 한 번씩 점수를 반환하세요."""
 
 
@@ -197,6 +200,8 @@ def merge_same_story(items: list[Article], threshold: int) -> list[Article]:
         for other in members[1:]:
             if other is not rep and other.id != rep.id:
                 _merge(rep, other)
+                if other.title not in rep.related and other.title != rep.title:
+                    rep.related.append(other.title)
             rep.is_immigration |= other.is_immigration
         reps.append(rep)
     return reps
@@ -254,9 +259,9 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     pool = by_section.get("nz_immigration", [])
     for a in pool:
         a.is_immigration = True
-    merged = dedupe(
-        [*pool, *[_clone_to(a, "nz_immigration") for a in flagged]],
-        cfg["dedupe"]["title_similarity"],
+    # 같은 비자 이슈를 다룬 국내외 기사 여러 건은 한 장으로 (AI same_as + 제목 유사도)
+    merged = merge_same_story(
+        dedupe([*pool, *[_clone_to(a, "nz_immigration") for a in flagged]], threshold), threshold,
     )
     chosen["nz_immigration"] = _top(merged, sections["nz_immigration"]["top_n"])
     for key, items in chosen.items():
@@ -265,4 +270,4 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
 
 
 def _clone_to(a: Article, section: str) -> Article:
-    return replace(a, section=section, extra_sources=list(a.extra_sources))
+    return replace(a, section=section, extra_sources=list(a.extra_sources), related=list(a.related))

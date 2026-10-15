@@ -62,6 +62,7 @@ class Article:
     is_immigration: bool = False
     is_auckland: bool = False   # 오클랜드 지역 소식인지 (NZ 기사만)
     same_as: str = ""           # AI 가 같은 사건이라고 판단한 다른 기사 id
+    related: list[str] = field(default_factory=list)  # 하나로 묶인 관련 기사 제목 (요약 입력용)
     # transient: article body excerpt used only as summary input, never written out
     excerpt: str = ""
 
