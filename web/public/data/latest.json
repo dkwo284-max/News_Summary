@@ -1,0 +1,919 @@
+{
+ "date": "2026-10-16",
+ "generated_at": "2026-10-16T05:03:14+09:00",
+ "timezone": "Asia/Seoul",
+ "sections": {
+  "kr_society": {
+   "label": "사회",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "c245a354f230",
+     "title_ko": "[오늘의 날씨] 2026년 10월 16일",
+     "summary_ko": [
+      "[오늘의 날씨] 2026년 10월 16일"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/national_general/2026/10/16/6HIACPFXZZGPLANLVCWHF5IL2I/"
+      },
+      {
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/society/12176932"
+      }
+     ],
+     "original_title": "[오늘의 날씨] 2026년 10월 16일",
+     "published_at": "2026-10-15T15:36+00:00"
+    },
+    {
+     "id": "4418a703324b",
+     "title_ko": "서울경찰청 국감 '수사 잣대' 질타…與는 \"봐주기\"·野는 \"탄압\"(종합)",
+     "summary_ko": [
+      "(서울=연합뉴스) 한지은 이민영 정지수 기자 = 15일 국회 행정안전위원회의 서울경찰청 국정감사에서는 여야가 정치인과 전직 고위공직자 관련 사…"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015180651004"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015180600004"
+      }
+     ],
+     "original_title": "서울경찰청 국감 '수사 잣대' 질타…與는 \"봐주기\"·野는 \"탄압\"(종합)",
+     "published_at": "2026-10-15T14:08+00:00"
+    },
+    {
+     "id": "e54e839fd5a8",
+     "title_ko": "'1억 공천헌금' 강선우, 1심 실형 선고 하루 만에 항소",
+     "summary_ko": [
+      "(서울=연합뉴스) 김빛나 기자 = 시의원 공천을 대가로 1억원을 받은 혐의로 기소된 무소속 강선우 의원이 1심 실형 선고에 불복해 하루 만에…"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015164300004"
+      },
+      {
+       "name": "조선일보",
+       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPcTRyMk5ydlJVdmMyUmZZT2xSRlZnbFZGNVlpX25CejQ1Yk1HZ2laSWRNNDJJNklPNl9EUkMta0VnVXM1NF9fdzhWYmpMNHRBcFF4RzRSOElkdnVvWlFLdVU2REd1ZDFlbUhScnV0dVlTMEZzZkNDV09vTVRySldRR1VRZUJfWDg?oc=5"
+      }
+     ],
+     "original_title": "'1억 공천헌금' 강선우, 1심 실형 선고 하루 만에 항소",
+     "published_at": "2026-10-15T10:12+00:00"
+    },
+    {
+     "id": "62c37fb5282d",
+     "title_ko": "강남권 고교 동창이 모여 벌인 일…‘568억 원짜리 도박판’",
+     "summary_ko": [
+      "강남권 고교 동창이 모여 벌인 일…‘568억 원짜리 도박판’"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "KBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE82U25jb25OTDhZZktiRF94dXJFaDBxQ2FnYk5KZ1dkZXFyNmRmenZvekFxVk1fc1JVaThUVURmT0FQTVVGTFNSSGVTa3dOd2FLUlRYeF9HLVdpOEk?oc=5"
+      }
+     ],
+     "original_title": "강남권 고교 동창이 모여 벌인 일…‘568억 원짜리 도박판’",
+     "published_at": "2026-10-15T19:21+00:00"
+    },
+    {
+     "id": "67a38e0250b7",
+     "title_ko": "오페라 제대로 즐기려면… 보이는 만큼 들린다! ‘Surtitles’",
+     "summary_ko": [
+      "오페라 제대로 즐기려면… 보이는 만큼 들린다! ‘Surtitles’"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/education/2026/10/16/25A5C4LAUBASTLUY7WFLC4OWGU/"
+      }
+     ],
+     "original_title": "오페라 제대로 즐기려면… 보이는 만큼 들린다! ‘Surtitles’",
+     "published_at": "2026-10-15T18:00+00:00"
+    }
+   ],
+   "error": "gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.de"
+  },
+  "kr_economy": {
+   "label": "경제",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "6c68b523ea29",
+     "title_ko": "[주식 매매 상위 종목 및 환율] 2026년 10월 15일자",
+     "summary_ko": [
+      "[주식 매매 상위 종목 및 환율] 2026년 10월 15일자"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/stock-finance/2026/10/16/TEZELWGTWFH6JEWGRAOPYLK4PY/"
+      },
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/stock-finance/2026/10/16/ZH7PYN5SUVD6XGTN6KXAU6BGVA/"
+      }
+     ],
+     "original_title": "[주식 매매 상위 종목 및 환율] 2026년 10월 15일자",
+     "published_at": "2026-10-15T15:35+00:00"
+    },
+    {
+     "id": "cab6c1f4fc5a",
+     "title_ko": "2차 국민성장펀드 목표액 못 채웠다…전체 86.6% 판매",
+     "summary_ko": [
+      "(서울=연합뉴스) 강류나 기자 = 2차 국민참여성장펀드가 큰 관심을 받았던 1차 때와 달리 완판에 실패했다."
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015174800002"
+      },
+      {
+       "name": "연합뉴스TV",
+       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1SM1Q3UTRkaU9CU1ExRVhXT3JWTmtHVVNwbmJXZjJCSGtDYkdWQ3NwZ09EdTNKNmlkTG9GSW5EVVp2SHZsM1NEc3NmTUpOSS1OMC1pclVWeXdTWkJLcjN5NWZfLU4tZWc?oc=5"
+      }
+     ],
+     "original_title": "2차 국민성장펀드 목표액 못 채웠다…전체 86.6% 판매",
+     "published_at": "2026-10-15T12:16+00:00"
+    },
+    {
+     "id": "03674cdd10fe",
+     "title_ko": "[속보] 한일 재무장관, 100억 달러 규모 통화스와프 연장 합의",
+     "summary_ko": [
+      "2029년 11월까지 기존 규모 유지 원화·엔화 맡기고 달러 차입 구조 차기 재무장관회의 한국 개최 추진한국과 일본이 100억달러 규모의 통화…"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/economy/12176914"
+      },
+      {
+       "name": "JTBC",
+       "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE52WHB0MFlzQ0pfUWNuUEVWdG5ZZWF6MjZWRUZyclM4eF9vZkJTalFVTVlHOW5MdEg2ajN0NWVLamZHVTFXd01ZVGhxbTB4aVdYY09zcg?oc=5"
+      }
+     ],
+     "original_title": "[속보] 한일 재무장관, 100억 달러 규모 통화스와프 연장 합의",
+     "published_at": "2026-10-15T08:03+00:00"
+    },
+    {
+     "id": "24adbfc9c012",
+     "title_ko": "쌀쌀해지니 생각난 과메기, 10마리에 채소·해조류까지 2만원대 특가",
+     "summary_ko": [
+      "쌀쌀해지니 생각난 과메기, 10마리에 채소·해조류까지 2만원대 특가"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/startup_story/2026/10/16/5GMRVZJZ6ZGANEXM2EXFCB2P6Q/"
+      }
+     ],
+     "original_title": "쌀쌀해지니 생각난 과메기, 10마리에 채소·해조류까지 2만원대 특가",
+     "published_at": "2026-10-15T20:00+00:00"
+    },
+    {
+     "id": "2c06b205ba8c",
+     "title_ko": "존 터너스 애플 CEO “메모리 위기에 모든 선택지 고려”…중국산 사용 시사",
+     "summary_ko": [
+      "존 터너스 애플 CEO “메모리 위기에 모든 선택지 고려”…중국산 사용 시사"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "KBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1NbXNDRkF4cFpWM0dFX1h6NlVNNE1kTTV5REZZaUw4bjVJVGtZNEJ2NnRjT3RqcmhmYUNqR1pab1lUdE05RGs3T1hjWldFZlBuUEpnVm9CYWhhbkk?oc=5"
+      }
+     ],
+     "original_title": "존 터너스 애플 CEO “메모리 위기에 모든 선택지 고려”…중국산 사용 시사",
+     "published_at": "2026-10-15T19:02+00:00"
+    }
+   ],
+   "error": "gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.de"
+  },
+  "kr_entertainment": {
+   "label": "연예",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "aa0190b1ee22",
+     "title_ko": "부산국제영화제 폐막…경쟁 부문 대상에 이란 영화 '빵과 책'",
+     "summary_ko": [
+      "(부산=연합뉴스) 이영재 기자 = 아시아 최대 영화 축제 제31회 부산국제영화제가 15일 대단원의 막을 내렸다."
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015177300051"
+      },
+      {
+       "name": "YTN",
+       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBkUkNyQkthRjVRMTJkYmMxQmZpUWF0T2REQlFaS0hkdy1OMlBFNnd3NFNDMTc0VmdwZmo4QVc1NHJUdDZHWFA5Z2t2cUYwbl9Bb055SlRCSHNzSzZwUUE?oc=5"
+      }
+     ],
+     "original_title": "부산국제영화제 폐막…경쟁 부문 대상에 이란 영화 '빵과 책'",
+     "published_at": "2026-10-15T15:32+00:00"
+    },
+    {
+     "id": "91bceadb1adb",
+     "title_ko": "넷플릭스 \"자막·더빙은 제2의 제작\"…K-콘텐츠 세계화의 힘(종합)",
+     "summary_ko": [
+      "(서울=연합뉴스) 유현민 기자 = \"우리말로 '오빠'를 영어로 어떻게 옮길 수 있을까?\""
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015031251017"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015031200017"
+      }
+     ],
+     "original_title": "넷플릭스 \"자막·더빙은 제2의 제작\"…K-콘텐츠 세계화의 힘(종합)",
+     "published_at": "2026-10-15T04:53+00:00"
+    },
+    {
+     "id": "2b1912c87e53",
+     "title_ko": "“30kg 감량” 하원미, 다이어트 중 ‘즐겨 먹은 음식’ 2가지",
+     "summary_ko": [
+      "“30kg 감량” 하원미, 다이어트 중 ‘즐겨 먹은 음식’ 2가지"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "헬스조선",
+       "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE4zWDF4VkczZy1UdExFUm9xSGpUUmpwTTdHdjJobnFzYk92X0lSNHhGaDZVa0dwTGRxZTJZbk5aNEVvYkowcF84UHBSOUFDNDBUaWFmZ1BIQVN6LXBuOXUyWFI1VjRFVjJjajZuVU1WSUhNdUU4azU3QkdhNF9Iam8?oc=5"
+      }
+     ],
+     "original_title": "“30kg 감량” 하원미, 다이어트 중 ‘즐겨 먹은 음식’ 2가지",
+     "published_at": "2026-10-15T17:00+00:00"
+    },
+    {
+     "id": "819fe113058f",
+     "title_ko": "아빠 됐는데..곽튜브 주식은 끝없는 추락 -38% 수익률에 \"이제 그만 제발\"",
+     "summary_ko": [
+      "[OSEN=김수형 기자] 여행 유튜버 곽튜브(본명 곽준빈)가 주식 투자 손실에 속상한 마음을 드러냈다.",
+      "곽튜브는 최근 자신의 SNS를 통해 주식 계좌 화면을 공개하며 \"이제 그만 제발 그만\"이라는 글을 남겼다.",
+      "공개된 사진에는 곽튜브가 보유한 주식의 수익 현황이 담겼다."
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/broadcast/2026/10/16/MRQTAYJZMEYWMMJWGYYTEYTFGE/"
+      }
+     ],
+     "original_title": "아빠 됐는데..곽튜브 주식은 끝없는 추락 -38% 수익률에 \"이제 그만 제발\"",
+     "published_at": "2026-10-15T16:19+00:00"
+    },
+    {
+     "id": "af2a806efbe1",
+     "title_ko": "\"헤어질 수도 있어\" .. 아옳이, 새 남자친구와 가족 상견례급 첫 만남 '긴장'",
+     "summary_ko": [
+      "[OSEN=김수형 기자] 유튜버 아옳이가 새 남자친구를 가족에게 소개하며 설렘 가득한 첫 만남을 공개했다.",
+      "15일 아옳이의 유튜브 채널에는 남자친구와 아버지의 첫 만남을 담은 영상이 공개됐다.",
+      "이날 아옳이는 \"아빠가 제 남자친구를 너무 궁금해하셔서 한 번 첫 만남 자리를 가졌다\"며 가족과 남자친구가 함께하는 특별한 시간을 마련했다고…"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/broadcast/2026/10/16/MYYWCOBYHE4DONRYHA4DKM3GGA/"
+      }
+     ],
+     "original_title": "\"헤어질 수도 있어\" .. 아옳이, 새 남자친구와 가족 상견례급 첫 만남 '긴장'",
+     "published_at": "2026-10-15T15:56+00:00"
+    }
+   ],
+   "error": "gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.de"
+  },
+  "kr_politics": {
+   "label": "정치",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "8db7f1700ef4",
+     "title_ko": "[속보] 李대통령, 김지용 중수청장 임명안 재가",
+     "summary_ko": [
+      "("
+     ],
+     "tags": [],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015172900001"
+      },
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/politics_general/2026/10/16/5AZ5QLQYCFCM5NFFYTXRJEIPAE/"
+      },
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/politics_general/2026/10/15/P4OOXKXUJREX3BIXK3TCDG4RUE/"
+      }
+     ],
+     "original_title": "[속보] 李대통령, 김지용 중수청장 임명안 재가",
+     "published_at": "2026-10-15T15:40+00:00"
+    },
+    {
+     "id": "4418a703324b",
+     "title_ko": "서울경찰청 국감 '수사 잣대' 질타…與는 \"봐주기\"·野는 \"탄압\"(종합)",
+     "summary_ko": [
+      "(서울=연합뉴스) 한지은 이민영 정지수 기자 = 15일 국회 행정안전위원회의 서울경찰청 국정감사에서는 여야가 정치인과 전직 고위공직자 관련 사…"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015180651004"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015180600004"
+      }
+     ],
+     "original_title": "서울경찰청 국감 '수사 잣대' 질타…與는 \"봐주기\"·野는 \"탄압\"(종합)",
+     "published_at": "2026-10-15T14:08+00:00"
+    },
+    {
+     "id": "b6d226a2cefc",
+     "title_ko": "\"성남 라인\"·\"정치 공세\"…기노위 '기관장 자소서 제출' 공방",
+     "summary_ko": [
+      "\"성남 라인\"·\"정치 공세\"…기노위 '기관장 자소서 제출' 공방"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE82eFR3STIxbHp6Q0pLb0pVZUtFNTFNSkF3VDE5MGJMdmstZDBnM2lTR0pHVVRrQTVSb2FGeElDN2h6NElQOXBNNnA0dmp5Qkg1RkxwdTFmZzZGUHfSAWBBVV95cUxObENLaWhFZTVCUl9sSmNaTGVXcjYwVDNXazRuZ1F4Wk4zMVhwYWplSnhDZFc2anRRYVhtV0tjeUtCRmFnclQxbVRfZVcwYXhvaG9EY05aMGVqY3RyRXJ5Ri0?oc=5"
+      },
+      {
+       "name": "SBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5HN2JqaGlYTmRSSGRzUzFWMTNHeVZkdUdOdHRYb1RTaG00OC1jUHk2ZzZHU050YWY1dTM2QXo1ZVhNX0ZzWEd5aWdncXllT29tUFFHTUFKRVJ6LU9GTjhVcWNYWklBR1lyUEHSAWZBVV95cUxQY1Y0UmU1M0dnMHJfazdUV003eXFVU1p2UWZ3b1U3MmtmOFlLdU1XNTcwOHdNVlVDbG1vbnZZaHJpU01KQmxhdWtHcTBlSDB5Tm43U3EtRXVSMjJtdk5EVThReFk1UXc?oc=5"
+      }
+     ],
+     "original_title": "\"성남 라인\"·\"정치 공세\"…기노위 '기관장 자소서 제출' 공방",
+     "published_at": "2026-10-15T12:27+00:00"
+    },
+    {
+     "id": "48c087fbde97",
+     "title_ko": "여야, '불법사찰 의혹' 공방…'김현미·김건희' 증인 요구 맞불(종합2보)",
+     "summary_ko": [
+      "(서울=연합뉴스) 노선웅 기자 = 여야는 15일 한국부동산원과 주택도시보증공사(HUG) 등을 대상으로 한 국회 국토교통위원회 국정감사에서 야당…"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015090452001"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015090451001"
+      }
+     ],
+     "original_title": "여야, '불법사찰 의혹' 공방…'김현미·김건희' 증인 요구 맞불(종합2보)",
+     "published_at": "2026-10-15T11:46+00:00"
+    },
+    {
+     "id": "c599b208c5ca",
+     "title_ko": "與문체위, ’BIFF 불참’ 국힘에 “정치 논쟁에 영화 현장 외면“",
+     "summary_ko": [
+      "與문체위, ’BIFF 불참’ 국힘에 “정치 논쟁에 영화 현장 외면“"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "연합뉴스TV",
+       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1uaXYxV21rLWJ3bWxlaWVTUzFEcVkwSTF5RlNSWTgtNnVvcEVEYnctdy1ual9aNi13SHhzWk9YMEtjR2dpaUhYZFJvdWEzcS10TW5xdHdpWFdLdHd4YmFTZDU5c0NxRlE?oc=5"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE90NS13dFhkcTIwbkdtZk9JX3RRY1JlcWpwZlhFNXB2MUxlNkVBa1cxMXduSjNZRzZ6WElqbXpyVVA5X2FBblNGeFd5QVFhX015a193ZU56RkZaUjDSAWBBVV95cUxOSkZvQmJLNXRoQy1yOU1RNUd3ZzRvMnk5MEplT29hRmtQQ0paUW5RSFJjT2dJSk4yN0gxalVheXVPNjFnRVJMWTJsN1BoM3BWTlowM0VVSkRPVUlTV3hwY2U?oc=5"
+      }
+     ],
+     "original_title": "與문체위, ’BIFF 불참’ 국힘에 “정치 논쟁에 영화 현장 외면“",
+     "published_at": "2026-10-15T08:00+00:00"
+    }
+   ],
+   "error": "gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.de"
+  },
+  "nz_national": {
+   "label": "뉴질랜드",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "7dfb0b962d72",
+     "title_ko": "Dive squad called after car plunges into Tauranga water",
+     "summary_ko": [
+      "One person is in hospital and police are working to establish whether anyone el…"
+     ],
+     "tags": [
+      "의료",
+      "치안"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/nz-news/361047169/dive-squad-called-after-car-plunges-tauranga-water"
+      },
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/16/police-dive-squad-called-after-car-enters-water-in-tauranga/"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/police-dive-squad-called-after-car-crashes-into-water-in-tauranga/YQBNCUSARRFZBEV4JND6AHYEG4/"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOSGljSDdSc1pQeE5wV1FFMzFmTTAtMXY4Vy1wSWVzclBTMS0yY1hrVDJTYXI0X0JwMzBEeDVERDZZcDZsU2R1OTB4ZlpTMHVlTVJJREk5QUhDUXItbV9VUjNVbkdjVzZ1RjhPdnhFSXpzS01mdnU5d0k4ZzNqX2J6TExtOUhMN19yMGdDS1RjbnJ2RzNmRlY1SlY1RDNsRnZOc0ctLTFacURRcEloVmhfb2ZNUlNIS0NNWDZUR3RsVmo?oc=5"
+      }
+     ],
+     "original_title": "Dive squad called after car plunges into Tauranga water",
+     "published_at": "2026-10-15T18:21+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "a32a2ed62d6d",
+     "title_ko": "What is behind a recent spike in refused study visa applications?",
+     "summary_ko": [
+      "In the past three months, Immigration New Zealand declined 70% of applications…"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/15/what-is-behind-a-recent-spike-in-refused-study-visa-applications/"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPaWRHSm80SHdCOHREeGkzSEs2X1UtY2JmRl9uU1Q3NG9YakhYS2dIdkNXbnFhNC0wZDBXLUk4M3FnbWk2TWN2eWc5ZXJidDdxUFRNR0VlYVpEdS1mM19NMm1YT3ZVWXl4MTNBRXRXLU5uNWRJVGNVUWxza3M0eE5RS2JONHRqY25faEpXcUJlVUlVNUJ3UEJKX3lKWVhmcmRqM0E?oc=5"
+      }
+     ],
+     "original_title": "What is behind a recent spike in refused study visa applications?",
+     "published_at": "2026-10-15T18:30+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "18e95d259892",
+     "title_ko": "School roof collapse in Pakistan kills at least 35 and injures more than 50",
+     "summary_ko": [
+      "The children killed or injured at Al-Khair school were between 6 and 12 years o…"
+     ],
+     "tags": [
+      "교육",
+      "의료"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/16/school-roof-collapse-in-pakistan-kills-at-least-35-and-injures-more-than-50/"
+      }
+     ],
+     "original_title": "School roof collapse in Pakistan kills at least 35 and injures more than 50",
+     "published_at": "2026-10-15T18:09+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "6b04e4adcc8a",
+     "title_ko": "Students had minutes to get out as black, petrol-smelling water flooded university hall",
+     "summary_ko": [
+      "A student says they were given just minutes to collect their belongings after b…"
+     ],
+     "tags": [
+      "생활비",
+      "교육"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/nz-news/361045468/black-petrol-smelling-water-floods-university-hall-forcing-dozens-out"
+      }
+     ],
+     "original_title": "Students had minutes to get out as black, petrol-smelling water flooded university hall",
+     "published_at": "2026-10-15T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "a06f023e497e",
+     "title_ko": "Black, petrol-smelling water floods university hall, forcing dozens out",
+     "summary_ko": [
+      "Black, petrol-smelling water floods university hall, forcing dozens out"
+     ],
+     "tags": [
+      "생활비",
+      "교육"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPQVgxZ3FKVlBzdlVrQ0MxM1FUb0dYZldiUmdMXzJhWkdtQUttblhEVkZiWlBZaExYeHpqU3R2QUtzbktndVR3ai16SmVwYS1COEcwMjc4M2NyN25UUkNOSi1sOXpOMnFhUHlBVjNZYkstWWc1cFpBWTg4WEZUOWJiSnp3dVByX2RTdkIyTTVyb1JVeEZYZXhoVURoT25DQk9KR1RRNEJiU1FYb0cwbV9QNQ?oc=5"
+      }
+     ],
+     "original_title": "Black, petrol-smelling water floods university hall, forcing dozens out",
+     "published_at": "2026-10-15T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "559912128c04",
+     "title_ko": "Slip, surface flooding as heavy downpours move across NZ",
+     "summary_ko": [
+      "A stretch of State Highway 3 through Mt Messenger has been reduced to one lane."
+     ],
+     "tags": [
+      "기상재해"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/15/slip-surface-flooding-as-heavy-downpours-moves-across-nz/"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNVUUxSUtfSlBaR1h6QVBKTHdKUlVSYXp3Yml2QzJEV2ZMdy1wVTFZa19WUkZGck91WHlfNkVrcGFHVmJyc0hMWkNOUnlTejFGcmJFNWluM0J1QmxwN0x0Nmp5RlBEWkpwcnRTbGFHelU0a2YyVTFuTE5ZYXBxUUYtdXVZMmprckdjLTlHRGRPWDhPZVR4Z1pV?oc=5"
+      }
+     ],
+     "original_title": "Slip, surface flooding as heavy downpours move across NZ",
+     "published_at": "2026-10-15T17:29+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "e7b13313361b",
+     "title_ko": "Couple’s home has fallen nearly $300,000 in value. Should they sell?",
+     "summary_ko": [
+      "A couple who bought at the peak of the housing boom may face negative equity if…"
+     ],
+     "tags": [
+      "주거"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/home-property/361046322/couples-home-has-fallen-nearly-300000-value-should-they-sell"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxONzdKZGNyT0FiRFZCYk9xa0NuX1gwZmJqY3Z2RWFobGdRSWI3czRGMEl3aFJFWlZqVHZxRTZURWZyRzFUZmd0OWkwM2ZKaDZQR1B0Q01Xd0t0Nk5uZ1FyaVFGVTlwbFBnTEp3OGJzNzRpZExzUWw0Y0pOZllEQV9fdDdWMWdBQ2pkSWlYTGJBVXBrU3B3d2pTdmFnU1dsb3o5RkFpaEd4R1laN1Za?oc=5"
+      }
+     ],
+     "original_title": "Couple’s home has fallen nearly $300,000 in value. Should they sell?",
+     "published_at": "2026-10-15T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "4b4c008e66d0",
+     "title_ko": "Media Insider: New Taxpayers’ Union AI ad depicts Chris Hipkins as a thief over capital gains tax; Is RNZ using psychometric tests to find new host?",
+     "summary_ko": [
+      "Is RNZ psychometric testing a potential new weekend host?; Health NZ's $15m ad…"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/business/media-insider/media-insider-new-taxpayers-union-ai-ad-depicts-chris-hipkins-as-a-thief-over-capital-gains-tax-is-rnz-using-psychometric-tests-to-find-new-host/premium/O5ZQYXUGJVGHFEBK3JZISTYOBE/"
+      }
+     ],
+     "original_title": "Media Insider: New Taxpayers’ Union AI ad depicts Chris Hipkins as a thief over capital gains tax; Is RNZ using psychometric tests to find new host?",
+     "published_at": "2026-10-15T19:46+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.de"
+  },
+  "nz_auckland": {
+   "label": "오클랜드",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "28241cf0be7d",
+     "title_ko": "Piha Campground to reopen this summer against council recommendations",
+     "summary_ko": [
+      "The campground is on a flood plain and part of the site flooded in 2018."
+     ],
+     "tags": [
+      "기상재해"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/piha-campground-to-reopen-this-summer-against-council-recommendations/27JRTCYWXJGMJL4WPDV2DOYGWY/"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQcjAtX2MyR2RtS1Zxc2I5a3lXYTJsWl90UjFLdFdfbjJBcW5yRGlVRG5tMnJjOU1QaTFIZi01UFVEeVhXdUZpVEFtc2czbS05WU9aZDUzZjItcE0tM29jUWU2WWJCQ2ViTjdoNFo3djF3bGdSa2N4TTUxbDRqWHNINC1YWjR6NlBDbnRneERPZmtSZlhVZ2g1T1Q1ZGZZWUxNZ25VWWN1UTE?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOekxBTEJqcGhDaDU3ai0xZTV3ZGRMeXhrMkpZclVUdHYzV20ydWN1Tm9nTzFNQW4wWmlLM1lQeG9Wc2hWcVI4VXVmTG5mUFpSOENCTXRzb2JtNU5ONElIODdvV3BnQ0JWSjdnZkJQckNTMWhicElzdVR1aWpnNHl4SElvM1BPaW9xRWNKRnR5YnZaRFVQZ0xybUtoX2ktbzBfSlNpMnNoeDVNUTNvODg5S2ZDOFY?oc=5"
+      }
+     ],
+     "original_title": "Piha Campground to reopen this summer against council recommendations",
+     "published_at": "2026-10-15T19:33+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "a06f023e497e",
+     "title_ko": "Black, petrol-smelling water floods university hall, forcing dozens out - Stuff",
+     "summary_ko": [
+      "Black, petrol-smelling water floods university hall, forcing dozens out Stuff"
+     ],
+     "tags": [
+      "생활비",
+      "교육"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPQVgxZ3FKVlBzdlVrQ0MxM1FUb0dYZldiUmdMXzJhWkdtQUttblhEVkZiWlBZaExYeHpqU3R2QUtzbktndVR3ai16SmVwYS1COEcwMjc4M2NyN25UUkNOSi1sOXpOMnFhUHlBVjNZYkstWWc1cFpBWTg4WEZUOWJiSnp3dVByX2RTdkIyTTVyb1JVeEZYZXhoVURoT25DQk9KR1RRNEJiU1FYb0cwbV9QNQ?oc=5"
+      }
+     ],
+     "original_title": "Black, petrol-smelling water floods university hall, forcing dozens out - Stuff",
+     "published_at": "2026-10-15T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "71fdb7bf3f20",
+     "title_ko": "Auckland's Starship Hospital delays some cancer treatments due to nurse shortage",
+     "summary_ko": [
+      "Auckland's Starship Hospital delays some cancer treatments due to nurse shortage"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNWVlzZDRocFc2aWt3NmJucVFwbGR0T2NaUVhCcTU1Skg1d0tuQ2RGb1JCcFpvWEtOME9YbVhYaW5lV21TYkU4ZGFaSmdfbWM5MVNycnBTWGJaS0Q5NUdtT0pYMkZ6SmJOU0JZbm5wYUtjYTdpREZxdjd1cGxacEdKN3Iyd1E3VDBiU3hXa2tBOXl2bmVDN0V3Skl5V21BX0RzSGVDQ0pxNFl4R29LTEF4cjFzcEozcll2MUI5RmZQUQ?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPZlZWOUxUYlR0QkJ2cFZ6UkMtSzB2M2M2SjN2X1RqNjNXb0hNaWxtN0xIWnIyaWM1UEJqbnI3bnhRMmRxdjMyakc4M1dWbVBkWTRwbDJuSURHSlJHcTFxcXVDb3VLZ19XeHBEbG1lcEZvSVF1bHNPVnFxWkdkUzZJc3dNM0tlS3pGTUpiRF81Z2VpWmNQajRWZGY4SEdrYXpySHh6Sy1naEYzMTNFTHJqLWFxcjFfdw?oc=5"
+      }
+     ],
+     "original_title": "Auckland's Starship Hospital delays some cancer treatments due to nurse shortage",
+     "published_at": "2026-10-15T04:44+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "f8a776b4a144",
+     "title_ko": "Probe after school bus driver leaves kids stranded 20 minutes from usual stop",
+     "summary_ko": [
+      "Probe after school bus driver leaves kids stranded 20 minutes from usual stop"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNQVJwOWZNallJakprRzRnX1B2aVRKZm1xSktDTnRmYnhTUVhiNmNEMjFYcGFVdW01NlA3em9YZkJZUDRSQnloY2wxa0Vqd2NqTjVEX3EwaFdDbUZGay10dW4xUVZicTJzRjF2eFVOVG0xcUJpOVY2UVpRYkIxT3BLc3lDSkNkek9VMU1idDZMMTVYaXY2WkJ2LU12T01PTEZpRzZVdFotQ2FZNXpJZmozd2ZUMjM2WWtOQ3Rpd1B6VDV3alhQbDJ2Rl9wRWc2bnpaMjBaSTZHX2k5LTNBYkRkZHRHNld3Zw?oc=5"
+      }
+     ],
+     "original_title": "Probe after school bus driver leaves kids stranded 20 minutes from usual stop",
+     "published_at": "2026-10-15T18:04+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "61dd4e5100f6",
+     "title_ko": "Mother heartbroken toddler's cancer treatment delayed by Starship Hospital staff shortages",
+     "summary_ko": [
+      "Mother heartbroken toddler's cancer treatment delayed by Starship Hospital staf…"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOU21vM01PNG1Db2NyYjFILUlBMlVBU2diOTNrLXhwRVlsS3JJOXJZTXo1MDhFeXNnNjVqbkp4V2VxT0pQM0EwaXZGLUoxSzVXdVpyY3dlSXZZcVBBbUE1OXd1NnBBdldfYll5Q1RvSWZrZzRXaDhIbDUyX1BvV0xhQWpqVmtRU3VGRVRiR3VhTlFhUmxGcGMySXpmb3d4SE1fZU4wYnBKRnlqUk1KcjRqNUdEYTZOT1FyZ2J1NE5RalRfQTJQWVNHWHpER0s?oc=5"
+      }
+     ],
+     "original_title": "Mother heartbroken toddler's cancer treatment delayed by Starship Hospital staff shortages",
+     "published_at": "2026-10-15T17:25+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.de"
+  },
+  "nz_immigration": {
+   "label": "이민 레이더",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "a32a2ed62d6d",
+     "title_ko": "What is behind a recent spike in refused study visa applications?",
+     "summary_ko": [
+      "In the past three months, Immigration New Zealand declined 70% of applications…"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/15/what-is-behind-a-recent-spike-in-refused-study-visa-applications/"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPaWRHSm80SHdCOHREeGkzSEs2X1UtY2JmRl9uU1Q3NG9YakhYS2dIdkNXbnFhNC0wZDBXLUk4M3FnbWk2TWN2eWc5ZXJidDdxUFRNR0VlYVpEdS1mM19NMm1YT3ZVWXl4MTNBRXRXLU5uNWRJVGNVUWxza3M0eE5RS2JONHRqY25faEpXcUJlVUlVNUJ3UEJKX3lKWVhmcmRqM0E?oc=5"
+      }
+     ],
+     "original_title": "What is behind a recent spike in refused study visa applications?",
+     "published_at": "2026-10-15T18:30+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "aed0afa869d2",
+     "title_ko": "Trump administration steps up visa fraud scrutiny, says American workers must get ‘a fair shot at good-paying jobs’",
+     "summary_ko": [
+      "Trump administration steps up visa fraud scrutiny, says American workers must g…"
+     ],
+     "tags": [
+      "이민",
+      "고용"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "Hindustan Times",
+       "url": "https://news.google.com/rss/articles/CBMikAJBVV95cUxOUkZsOUJpelNqcEJRTmxnN1drcUhIaUY4LUF1T3E3VHZpR3dSRVVzRmYyZHA2QkpoYXdHSkdxRU1tWjUtTGNtUmpHUEI3d0xUUXNpTWNBUXNaeXpvUmN4UXY5Q0lTakUzMjNXb3pEeFV3T0ZNNE52bmF1U2xhUHpZYnBBdGN4LVUtRVYwM1YzYW5BdDZ1ZnZOSm5IeXA5Vkt4eE9tLVFTdkdMSl80NVV6ZXVxY2ZxbnZTWk9WQ1JPVzFFemxXLWZJTlRROURkV2RvTkxxZk4zMGxmNVJ0enZRRHdLc3RqSHF0akp5aEo5ZExjOGs4dmFEQi1ZdW9ZNGZVYjRQd3I0R3JWdXhNM2tRdA?oc=5"
+      }
+     ],
+     "original_title": "Trump administration steps up visa fraud scrutiny, says American workers must get ‘a fair shot at good-paying jobs’",
+     "published_at": "2026-10-15T08:11+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "cb401c69a77a",
+     "title_ko": "New Zealand Announces Visa Requirements for Citizens of 4 Countries to Join the Military",
+     "summary_ko": [
+      "New Zealand Announces Visa Requirements for Citizens of 4 Countries to Join the…"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "Legit.ng",
+       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORUNrMGVYMjhoU2E3aHVfRkdLZzNhZ0ZRNHdGRUhMYlJFc2FXRDlmSk5xamVqNHZvQ2pXNnlfYnhiU3J5b3R5MjVBRDRXQ0FiMnlZU3BuRk13NEFobHdXeEcwc3VaaFhHcXpfTTdBVHhGSTl3NjNVSE9RWkw2TjB5djI0UWRqODRnNmR5bHB6cUpyQXJqMFBHM2JTTm9UNV9Md19yUWQtaWgyR2RMVHpYVQ?oc=5"
+      },
+      {
+       "name": "Yen News",
+       "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxONEJZMV9Oc0JmRlVKYTE2VXVaOS1nR0hYVzZvOVc4V3lBLTJVQVBQZ3NWN2RrR2FsUFlsNV9aeHd2U1A0UUFVOTJmT1FDazlGLVJGQXR5T0ZWbWFVRm9uSG5DLUxYWU5GdFRCeUdwWDlSTTVqRUZJdlhybW94TjJYRFJhN1pzTE5HVVFfckQzejkzamsxaERfNUtvTUoxcWVRQm52dFR1YkUtZS1jb3FtT2dR?oc=5"
+      }
+     ],
+     "original_title": "New Zealand Announces Visa Requirements for Citizens of 4 Countries to Join the Military",
+     "published_at": "2026-10-15T11:51+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "7dfc00c2e616",
+     "title_ko": "Migrant group backs Peters' proposed visa changes",
+     "summary_ko": [
+      "Migrant group backs Peters' proposed visa changes"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNaWl3XzQwTm42OVFOSm5WNHJzWHM1ZlFoUXJlTlRFVndjWXIxbHFkMEJveDZkUkVTM3ZnbFdRRzJ1MU1RRlhnU1prVmRtSkVQTTR1NlRnS1pQcWJXenRuekZKeEdUaTBwOE1ncjJoVEdGRDh0QURwR29tVENoNUd6TWRvQU1aYXlBX1FFVnhIS2lON2tMQkZPT0VzemE0cjAtOWNzSnhpc2RLS0N3QldISFViTnVMbWdRVklZdGdn?oc=5"
+      }
+     ],
+     "original_title": "Migrant group backs Peters' proposed visa changes",
+     "published_at": "2026-10-15T17:37+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "5804c2c29a17",
+     "title_ko": "NZ rejects 70pc of Bangladeshi student visa",
+     "summary_ko": [
+      "NZ rejects 70pc of Bangladeshi student visa"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "The New Nation",
+       "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE12WFVuVEpMamlOMUo0cTZ5UUdvUXVodXJPeHVvZkdLNkFLX3R6bU9qbHNWV0V6Y2F1RTVGankybzVNYTJUTWZXbXEwTV9Dc0U?oc=5"
+      }
+     ],
+     "original_title": "NZ rejects 70pc of Bangladeshi student visa",
+     "published_at": "2026-10-15T18:08+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "978d834119be",
+     "title_ko": "Migrant advocacy group says NZ First has adopted its policy",
+     "summary_ko": [
+      "Migrant advocacy group says NZ First has adopted its policy"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOR1AzYm5ucEsxdzdxYlc0aFh2a0VCWG5yNnRST2trbUREWUZRQXl2Ulp6X05TMS1YRV9RN0ZGR0JJc2xnTlFpWklHQ3FmYVQ0UEI0OXB2XzBldUo0ZlluVGpxdmZNTXozc0xnM1VzVnljOFBTVE1aNEJHVUdPdERVUUFBMUlUczZzcmNFeWxlZmRpQ0dlS21MOG50bV96eGVad25rRnpORXhlR3BQUVNBRWgwWEZMOUto?oc=5"
+      }
+     ],
+     "original_title": "Migrant advocacy group says NZ First has adopted its policy",
+     "published_at": "2026-10-15T16:22+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini HTTP 404: {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash for the latest features and improvements. We recommend you to use the Interactions API (https://ai.google.de"
+  }
+ },
+ "extras": {
+  "nzd_krw": 753.79,
+  "auckland_weather": {
+   "max": 16,
+   "min": 10,
+   "desc": "이슬비",
+   "code": 53,
+   "rain_chance": 100
+  }
+ },
+ "meta": {
+  "mode": "gemini",
+  "failed_feeds": [
+   {
+    "id": "rnz_national",
+    "name": "RNZ",
+    "error": "https://www.rnz.co.nz/rss/national.xml: HTTPStatusError: Client error '403 Forbidden' for url 'https://www.rnz.co.nz/rss/national.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+   },
+   {
+    "id": "rnz_business",
+    "name": "RNZ",
+    "error": "https://www.rnz.co.nz/rss/business.xml: HTTPStatusError: Client error '403 Forbidden' for url 'https://www.rnz.co.nz/rss/business.xml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+   }
+  ],
+  "feeds_total": 32,
+  "stories_after_dedupe": 647,
+  "usage": {
+   "provider": "gemini",
+   "requests": 4,
+   "models": {},
+   "total_cost_usd": 0.0
+  }
+ }
+}
