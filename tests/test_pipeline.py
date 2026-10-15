@@ -453,10 +453,10 @@ def test_same_as_merges_kr_stories(cfg):
 
 def test_immigration_radar_merges_same_issue(cfg):
     items = [
-        art("n1", "Student visa refusals spike amid fraud crackdown"),
-        art("i1", "NZ rejects 70 percent of Bangladeshi student visas", section="nz_immigration"),
-        art("i2", "New Zealand joins UK in student visa clampdown", section="nz_immigration"),
-        art("i3", "RSE accommodation standards simplified", section="nz_immigration"),
+        art("n1", "Work visa refusals spike amid fraud crackdown"),
+        art("i1", "NZ rejects 70 percent of Bangladeshi work visa applicants", section="nz_immigration"),
+        art("i2", "New Zealand joins UK in work visa clampdown", section="nz_immigration"),
+        art("i3", "Green List roles expanded for engineers", section="nz_immigration"),
     ]
     for a in items:
         a.title += " visa"
@@ -489,8 +489,8 @@ def test_refine_groups_issue_and_moves_tab(cfg):
         art("n3", "Cold snap sends Christchurch temperatures plunging"),
         art("n4", "Slips close State Highway 3 after heavy rain"),
         art("n5", "Government delays home insurance review"),
-        art("i1", "Student visa refusals spike visa", section="nz_immigration"),
-        art("i2", "NZ rejects 70 percent of Bangladeshi student visa", section="nz_immigration"),
+        art("i1", "Work visa refusals spike visa", section="nz_immigration"),
+        art("i2", "NZ rejects 70 percent of Bangladeshi work visa", section="nz_immigration"),
     ]
     llm = GroupLLM(
         auckland_ids={"a1"}, same_as={"n3": "n2", "n4": "n2"},  # 날씨 3건은 1차에서도 같은 이슈로 연결
@@ -589,3 +589,28 @@ def test_heuristic_radar_scores(cfg):
     assert heuristic_radar(art(2, "Green List residence pathway expanded"), cfg) >= 8
     assert heuristic_radar(art(3, "International students: student visa refusals rise"), cfg) <= 3
     assert heuristic_radar(art(4, "Inflation eases"), cfg) == 0
+
+
+def test_radar_low_topics_capped_even_if_ai_scores_high(cfg):
+    class HighLLM(SplitLLM):
+        def json_call(self, **kw):
+            out = super().json_call(**kw)
+            if kw["task"] == "rank" and "scores" in out:
+                for r in out["scores"]:
+                    r["radar"], r["score"] = 9, 8
+            return out
+    items = [art("s1", "Student visa refusals spike amid fraud crackdown"),
+             art("f1", "Global mobility forum discusses residence options", section="nz_immigration"),
+             art("w1", "Median wage threshold for work visas to change", section="nz_immigration")]
+    radar = [a.id for a in select(items, cfg, HighLLM(set(), {}), FIXTURE_NOW)["nz_immigration"]]
+    assert "w1" in radar and "s1" not in radar
+    assert "f1" in radar  # 'residence'(관심 키워드)가 함께 있으면 제한하지 않음
+
+
+def test_kr_story_not_repeated_across_categories(cfg):
+    items = [art("k1", "SK 솔리다임, 트럼프 측근 로비스트 영입", section="kr_economy"),
+             art("k1", "SK 솔리다임, 트럼프 측근 로비스트 영입", section="kr_politics"),
+             art("k2", "국정감사 여야 정면충돌", section="kr_politics")]
+    chosen = select(items, cfg, None, FIXTURE_NOW)
+    assert [a.id for a in chosen["kr_economy"]] == ["k1"]
+    assert [a.id for a in chosen["kr_politics"]] == ["k2"]

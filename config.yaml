@@ -136,7 +136,7 @@ profile:
     - "work to residence"
     - citizenship
     - "median wage"
-  radar_low:             # 레이더 점수를 낮출 키워드
+  radar_low:             # 제목에 이 키워드가 있고 radar_high 키워드가 없으면 AI 점수와 상관없이 레이더 관련도를 3 이하로
     - "student visa"
     - "student visas"
     - "international students"
@@ -145,6 +145,11 @@ profile:
     - RSE
     - "seasonal workers"
     - "working holiday"
+    - "Cook Islands"
+    - forum
+    - webinar
+    - conference
+    - seminar
 
 # ── 뉴질랜드 / 오클랜드 탭 나누기 ─────────────────────────────
 # 같은 사건은 한 탭에만 싣습니다. 오클랜드 지역 소식(시의회·교통·지역 사건사고·오클랜드 병원 등)은

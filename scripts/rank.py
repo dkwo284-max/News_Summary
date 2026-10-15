@@ -135,6 +135,15 @@ def heuristic_radar(a: Article, cfg: dict) -> int:
     return 5 if a.is_immigration or a.section == "nz_immigration" else 0
 
 
+def cap_radar(a: Article, cfg: dict, score: int) -> int:
+    """AI 가 관심 밖 주제(신규 학생비자·관광비자·행사 안내 등)를 높게 매겨도, 제목에 radar_low 키워드만 있고
+    radar_high 키워드가 없으면 3점 이하로 제한한다."""
+    prof = cfg.get("profile", {})
+    if _kw_hits(a.title, prof.get("radar_low", [])) and not _kw_hits(a.title, prof.get("radar_high", [])):
+        return min(score, 3)
+    return score
+
+
 def excluded_reason(a: Article, cfg: dict) -> str | None:
     """config 의 exclude 목록(제목 키워드·출처)에 걸리면 이유를 돌려준다."""
     ex = cfg.get("exclude", {})
@@ -208,7 +217,7 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                 same = row.get("same_as") or ""
                 a.same_as = same if same in by_id and same != a.id else ""
                 a.junk = bool(row.get("junk"))
-                a.radar_score = max(0, min(10, int(row.get("radar") or 0))) if region == "nz" else 0
+                a.radar_score = cap_radar(a, cfg, max(0, min(10, int(row.get("radar") or 0)))) if region == "nz" else 0
                 if a.junk:
                     a.score = 0  # MIN_SCORE 미만 → 싣지 않음
 
@@ -464,13 +473,22 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     min_radar = int(cfg.get("profile", {}).get("radar_min_score", 5))
     chosen["nz_immigration"] = _top_radar(merged, sections["nz_immigration"]["top_n"], min_radar)
     in_radar = set().union(*(_ids(a) for a in chosen["nz_immigration"])) if chosen["nz_immigration"] else set()
+    from dedupe import similar
+
+    kr_used: list[Article] = []  # 한국: 같은 기사가 여러 카테고리(예: 경제·정치)에 나오지 않게, 앞 카테고리 우선
     for key, sec in sections.items():
         if key == "nz_immigration":
             continue
         items = by_section[key]
         if key in ("nz_national", "nz_auckland"):
             items = [a for a in items if not (_ids(a) & in_radar)]
+        if sec["region"] == "kr":
+            used_ids = set().union(*(_ids(x) for x in kr_used)) if kr_used else set()
+            items = [a for a in items if not (_ids(a) & used_ids)
+                     and not any(similar(a.title, x.title, threshold) for x in kr_used)]
         chosen[key] = _top(items, sec["top_n"])
+        if sec["region"] == "kr":
+            kr_used.extend(chosen[key])
     chosen = {k: chosen[k] for k in sections}
     for key, items in chosen.items():
         log.info("selected %-17s %d", key, len(items))
