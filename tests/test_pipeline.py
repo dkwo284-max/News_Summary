@@ -614,3 +614,9 @@ def test_kr_story_not_repeated_across_categories(cfg):
     chosen = select(items, cfg, None, FIXTURE_NOW)
     assert [a.id for a in chosen["kr_economy"]] == ["k1"]
     assert [a.id for a in chosen["kr_politics"]] == ["k2"]
+
+
+def test_cap_radar_study_visa_wording(cfg):
+    from rank import cap_radar
+    assert cap_radar(art(1, "What is behind a recent spike in refused study visa applications?"), cfg, 9) == 3
+    assert cap_radar(art(2, "Post-study work visa changes for graduates"), cfg, 9) == 9

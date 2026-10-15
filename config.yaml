@@ -139,6 +139,9 @@ profile:
   radar_low:             # 제목에 이 키워드가 있고 radar_high 키워드가 없으면 AI 점수와 상관없이 레이더 관련도를 3 이하로
     - "student visa"
     - "student visas"
+    - "study visa"
+    - "study visas"
+    - "international student"
     - "international students"
     - "visitor visa"
     - tourist
