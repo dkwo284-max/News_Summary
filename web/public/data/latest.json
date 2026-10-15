@@ -1,25 +1,52 @@
 {
  "date": "2026-10-16",
- "generated_at": "2026-10-16T05:34:09+09:00",
+ "generated_at": "2026-10-16T05:38:53+09:00",
  "timezone": "Asia/Seoul",
  "sections": {
   "kr_society": {
    "label": "사회",
-   "briefing": "안보 논쟁과 범죄 대응, 사법 절차가 잇따라 주목받았습니다.",
+   "briefing": "잇단 흉기 범죄 대책 마련과 함께 공천헌금 재판 및 과거 수사 적절성을 둘러싼 사법적 긴장이 이어졌습니다.",
    "items": [
     {
-     "id": "425faa800bfd",
-     "title_ko": "미국 전작권 새 기준 언급에 국방부 반발",
+     "id": "d5875bf45b3f",
+     "title_ko": "흉기 신고지 경찰력 집중…가정폭력범 전자발찌 추진",
      "summary_ko": [
-      "미국 측이 전작권 전환 여건 변화와 새 기준을 거론하자 국방부가 반발했습니다.",
-      "국방부 대변인은 기준을 계속 바꾸면 전작권 전환이 불가능해진다고 지적했습니다.",
-      "한미 양국은 합의된 조건 충족 여부를 두고 향후 협의를 이어갈 방침입니다."
+      "경찰청이 흉기 소지 신고가 잦은 지역에 경찰력을 집중하고 강력범죄 출소자 동향 확인을 강화하기로 했습니다.",
+      "잇단 강력범죄에 대응해 가정폭력 가해자 전자발찌 부착과 임시조치 위반 시 형사처벌 도입 등 법 개정을 검토합니다.",
+      "범죄 유형별 격리 수단과 제재 수준을 정비해 치안 사각지대를 해소하고 현장 대응력을 높일 계획입니다."
+     ],
+     "tags": [
+      "치안",
+      "사회",
+      "사건사고"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015153251004"
+      },
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/national_general/2026/10/16/AFA45RL3QBEO7CFA2QJTTTF23I/"
+      }
+     ],
+     "original_title": "흉기신고 잦은 곳에 경찰력 집중…가정폭력범 전자발찌 추진(종합)",
+     "published_at": "2026-10-15T15:40+00:00"
+    },
+    {
+     "id": "425faa800bfd",
+     "title_ko": "미국 전작권 전환 새 기준 제시…국방부 \"골대 옮기면 불가\"",
+     "summary_ko": [
+      "미국 군사당국이 안보 여건 변화를 이유로 전작권 전환에 새로운 기준이 생겼다는 시각을 밝혔습니다.",
+      "이에 대해 국방부는 지속적으로 평가 기준을 바꾸면 전작권 전환이 영원히 불가능하다며 강하게 반발했습니다.",
+      "조건 충족 평가 방식을 둘러싼 한미 간 시각차가 공개적으로 표출되며 향후 논의에 난항이 예상됩니다."
      ],
      "tags": [
       "정치",
       "사회"
      ],
-     "importance": 8,
+     "importance": 7,
      "sources": [
       {
        "name": "한겨레",
@@ -31,18 +58,18 @@
     },
     {
      "id": "356745f80031",
-     "title_ko": "인천 복합쇼핑몰 흉기난동 피의자 사전 도피 정황",
+     "title_ko": "인천 복합쇼핑몰 흉기 난동범, 사전 도주 준비 여부 수사",
      "summary_ko": [
-      "인천 복합쇼핑몰에서 10명에게 흉기를 휘두른 50대 남성이 붙잡혔습니다.",
-      "피의자는 범행 직전 휴학계를 내고 금을 판 현금 680만 원을 소지했습니다.",
-      "경찰은 피해자 중 1명이 의식불명인 가운데 사전 도주 계획 여부를 수사 중입니다."
+      "인천 쇼핑몰에서 시민 10명에게 흉기를 휘두른 50대 남성의 배낭에서 흉기들과 현금 680만 원이 발견됐습니다.",
+      "피의자는 범행 직전 대학에 휴학계를 제출했으며 소지한 현금은 금을 팔아 마련했다고 진술했습니다.",
+      "경찰은 피의자의 사전 도피 계획 여부와 함께 프로파일러를 투입해 구체적인 범행 동기를 조사하고 있습니다."
      ],
      "tags": [
       "사건사고",
       "사회",
       "치안"
      ],
-     "importance": 8,
+     "importance": 7,
      "sources": [
       {
        "name": "매일경제",
@@ -54,17 +81,17 @@
     },
     {
      "id": "3ad6be52285b",
-     "title_ko": "검찰미래위, 위례 사건 수사 위법성 미확인에 보완 요구",
+     "title_ko": "검찰미래위 \"위례 비리 수사 위법성 단정 어려워\"…보완 요구",
      "summary_ko": [
-      "검찰인권존중미래위원회가 위례 비리 수사에서 위법성을 단정하기 어렵다고 봤습니다.",
-      "조사단은 수사 과정에 일부 과실이 있었으나 위법 행위는 없었다고 결론지었습니다.",
-      "위원회는 사실관계 규명을 위해 추가 보완 조사를 진행할 것을 요구했습니다."
+      "검찰인권존중미래위원회 진상조사단이 위례 비리 사건 수사 과정에 대해 위법성을 단정하기 어렵다고 결론 내렸습니다.",
+      "조사단은 수사 과정에 일부 과실이 확인됐으나 직접적인 위법 행위로 보기는 어렵다는 판단을 보고서에 담았습니다.",
+      "미래위는 보다 면밀한 사실관계 확인과 객관성 확보를 위해 관련 사안에 대한 보충 조사를 요구했습니다."
      ],
      "tags": [
       "사회",
       "정치"
      ],
-     "importance": 7,
+     "importance": 6,
      "sources": [
       {
        "name": "한겨레",
@@ -84,18 +111,18 @@
     },
     {
      "id": "e54e839fd5a8",
-     "title_ko": "강선우 전 의원, 공천헌금 1심 실형 선고에 즉각 항소",
+     "title_ko": "'1억 공천헌금 혐의' 강선우, 1심 실형 선고 하루 만에 항소",
      "summary_ko": [
-      "공천 대가로 1억 원을 받은 혐의의 강선우 전 의원이 실형 선고 하루 만에 항소했습니다.",
-      "1심 재판부는 징역 2년 6개월과 추징금 1억 원을 선고하고 법정구속했습니다.",
-      "강 전 의원은 돈을 받은 적이 없다며 억울함을 호소하고 항소심을 준비 중입니다."
+      "공천 대가로 1억 원을 받은 혐의로 징역 2년 6개월을 선고받은 무소속 강선우 의원이 하루 만에 항소했습니다.",
+      "1심 재판부는 공천 심사 과정의 조력 혐의를 인정해 실형을 선고하고 보석을 취소한 뒤 재구속했습니다.",
+      "강 의원은 금품을 수수한 적이 없다며 억울함을 호소하고 있어 2심에서 치열한 법정 공방이 이어질 전망입니다."
      ],
      "tags": [
       "사건사고",
-      "사회",
-      "정치"
+      "정치",
+      "사회"
      ],
-     "importance": 7,
+     "importance": 6,
      "sources": [
       {
        "name": "연합뉴스",
@@ -108,72 +135,20 @@
      ],
      "original_title": "'1억 공천헌금' 강선우, 1심 실형 선고 하루 만에 항소",
      "published_at": "2026-10-15T10:12+00:00"
-    },
-    {
-     "id": "8ea2494ab967",
-     "title_ko": "경찰, 가정폭력 가해자 전자발찌 및 접근 경보 추진",
-     "summary_ko": [
-      "경찰이 가정폭력 가해자가 접근하면 자동 경보가 울리는 방안을 추진합니다.",
-      "가해자에 대한 격리와 접근금지 제재를 스토킹 범죄 수준으로 상향할 계획입니다.",
-      "흉기 신고 빈발 지역에 경찰력을 집중하며 피해자 보호 체계를 강화할 전망입니다."
-     ],
-     "tags": [
-      "사회",
-      "치안"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/national/national_general/2026/10/16/AFA45RL3QBEO7CFA2QJTTTF23I/"
-      },
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015153251004"
-      }
-     ],
-     "original_title": "“전자발찌, 가해자가 피해자 접근하면 자동으로 경찰에 경보 울리게 해야”",
-     "published_at": "2026-10-15T15:40+00:00"
     }
    ]
   },
   "kr_economy": {
    "label": "경제",
-   "briefing": "증시 폭락과 인플레 우려 속 한일 통화스와프가 연장됐습니다.",
+   "briefing": "한일 통화스와프가 3년 연장된 가운데, 물가 지표 급등과 반도체 불확실성으로 시장 충격이 확산했습니다.",
    "items": [
     {
-     "id": "222608adc0fa",
-     "title_ko": "코스피 7.5% 폭락 및 동반 서킷브레이커 발동",
-     "summary_ko": [
-      "미국발 충격으로 코스피가 7.5% 폭락하며 증시에 비상이 걸렸습니다.",
-      "코스피와 코스닥 시장 모두 급락세가 이어지며 서킷브레이커가 동반 발동됐습니다.",
-      "반도체 업종을 중심으로 국내 주요 기업들의 주가 불안이 심화되고 있습니다."
-     ],
-     "tags": [
-      "경제",
-      "증시"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/economy/economy_general/2026/10/16/2XWF6K5KPVAJ7CEGP24HVBVYSE/"
-      },
-      {
-       "name": "KBS 뉴스",
-       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1pZ1hJX0oyd0JodDd2SXAwaVdtSGFJT3B5bU1malpXa2xhRnBsRmVRdFRoN1VoY2hnYlR2LWNhcFpvVWIwMWZUOElIVndsTms1bFF0LVY5dkt5cEk?oc=5"
-      }
-     ],
-     "original_title": "코스피 7.5% 폭락… 불안한 ‘반도체 코리아’",
-     "published_at": "2026-10-15T15:43+00:00"
-    },
-    {
      "id": "03674cdd10fe",
-     "title_ko": "한일 재무장관, 100억 달러 통화스와프 3년 연장 합의",
+     "title_ko": "한일, 100억 달러 규모 통화스와프 계약 2029년까지 연장",
      "summary_ko": [
-      "한일 양국이 100억 달러 규모 통화스와프 계약을 2029년 11월까지 연장했습니다.",
-      "원화나 엔화를 맡기고 미 달러화를 차입하는 구조가 그대로 유지됩니다.",
-      "외환보유액이 충분한 상황에서도 양국 금융 협력과 시장 안정을 위해 체결됐습니다."
+      "한국과 일본 재무장관이 만나 100억 달러 규모의 통화스와프 계약을 2029년 11월까지 3년 연장하기로 합의했습니다.",
+      "이번 계약 연장에서도 원화나 엔화를 맡기고 미 달러화를 빌려오는 전액 달러 차입 구조가 그대로 유지됩니다.",
+      "양국은 충분한 외화 유동성에도 불구하고 금융 협력과 시장 안정 안전판 유지를 위해 연장을 결정했습니다."
      ],
      "tags": [
       "경제",
@@ -188,52 +163,49 @@
       {
        "name": "JTBC",
        "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE52WHB0MFlzQ0pfUWNuUEVWdG5ZZWF6MjZWRUZyclM4eF9vZkJTalFVTVlHOW5MdEg2ajN0NWVLamZHVTFXd01ZVGhxbTB4aVdYY09zcg?oc=5"
-      },
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015174800002"
-      },
-      {
-       "name": "연합뉴스TV",
-       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1SM1Q3UTRkaU9CU1ExRVhXT3JWTmtHVVNwbmJXZjJCSGtDYkdWQ3NwZ09EdTNKNmlkTG9GSW5EVVp2SHZsM1NEc3NmTUpOSS1OMC1pclVWeXdTWkJLcjN5NWZfLU4tZWc?oc=5"
       }
      ],
      "original_title": "[속보] 한일 재무장관, 100억 달러 규모 통화스와프 연장 합의",
-     "published_at": "2026-10-15T12:16+00:00"
+     "published_at": "2026-10-15T08:03+00:00"
     },
     {
-     "id": "cb6da1082710",
-     "title_ko": "빅테크 AI 수익성 부진에 반도체 투자 절벽 우려",
+     "id": "222608adc0fa",
+     "title_ko": "코스피 7.5% 폭락…서킷브레이커 발동 속 반도체주 충격",
      "summary_ko": [
-      "빅테크 기업들이 막대한 AI 투자금의 절반도 회수하지 못했다는 지적이 나왔습니다.",
-      "인공지능 수익화 지연으로 기업들의 신규 인프라 투자가 위축될 위험이 커졌습니다.",
-      "AI 투자 절벽이 가시화될 경우 글로벌 반도체 산업이 타격을 입을 전망입니다."
+      "국내 증시가 미국발 악재와 반도체 업황 불안 심리로 급락하며 코스피와 코스닥에 서킷브레이커가 발동됐습니다.",
+      "코스피 지수는 하루 만에 7.5% 폭락해 주요 반도체 대형주를 중심으로 투매 물량이 쏟아졌습니다.",
+      "글로벌 인플레이션 압력과 기술주 투자 심리 위축이 겹치면서 단기적인 시장 변동성이 크게 확대될 우려가 커졌습니다."
      ],
      "tags": [
-      "경제",
-      "기술"
+      "증시",
+      "경제"
      ],
      "importance": 8,
      "sources": [
       {
        "name": "조선일보",
-       "url": "https://www.chosun.com/economy/stock-finance/2026/10/16/B4UTYD2BNRAPNFKY6TOQZB7AZM/"
+       "url": "https://www.chosun.com/economy/economy_general/2026/10/16/2XWF6K5KPVAJ7CEGP24HVBVYSE/"
+      },
+      {
+       "name": "KBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1pZ1hJX0oyd0JodDd2SXAwaVdtSGFJT3B5bU1malpXa2xhRnBsRmVRdFRoN1VoY2hnYlR2LWNhcFpvVWIwMWZUOElIVndsTms1bFF0LVY5dkt5cEk?oc=5"
       }
      ],
-     "original_title": "“빅테크, AI 투자금 반도 못 건져”… ‘투자 절벽’ 오면 반도체 치명상",
-     "published_at": "2026-10-15T15:42+00:00"
+     "original_title": "코스피 7.5% 폭락… 불안한 ‘반도체 코리아’",
+     "published_at": "2026-10-15T15:43+00:00"
     },
     {
      "id": "409287cec191",
-     "title_ko": "미국 9월 생산자물가 1.3% 상승…4년 만에 최고치",
+     "title_ko": "미국 9월 생산자물가 전월비 1.3% 급등…인플레 재발 우려",
      "summary_ko": [
-      "미국의 9월 생산자물가지수가 전월 대비 1.3% 급등했습니다.",
-      "전년 동기 대비로는 6.3% 상승해 4년여 만에 가장 높은 수준을 기록했습니다.",
-      "도매물가 불안이 이어지며 인플레이션 압력과 통화정책 부담이 가중될 우려가 큽니다."
+      "미국의 9월 생산자물가지수가 전월 대비 1.3% 오르고 전년 대비 6.3% 상승해 4년여 만에 최고치를 기록했습니다.",
+      "도매 물가의 가파른 상승세가 확인되면서 진정세를 보이던 물가 안정 경로에 대한 시장의 우려가 커졌습니다.",
+      "예상보다 높은 생산자물가 상승폭으로 인해 글로벌 금융시장의 긴축 경계감과 금리 불확실성이 가중되고 있습니다."
      ],
      "tags": [
+      "물가",
       "경제",
-      "물가"
+      "금리"
      ],
      "importance": 8,
      "sources": [
@@ -246,45 +218,91 @@
      "published_at": "2026-10-15T12:37+00:00"
     },
     {
-     "id": "21e15668dff8",
-     "title_ko": "부동산 시장 과열에 노룩 계약과 생존 매수 확산",
+     "id": "2c06b205ba8c",
+     "title_ko": "애플 터너스 CEO \"메모리 위기에 중국산 부품 탑재 고려\"",
      "summary_ko": [
-      "집을 보지도 않고 계약금을 먼저 송금하는 노룩 계약이 부동산 시장에 등장했습니다.",
-      "10억 원대 주택을 대상으로 가격 상승을 우려한 생존 매수 수요가 몰렸습니다.",
-      "매물 부족과 가격 불안정이 맞물리며 당분간 혼란이 이어질 것이라는 전망입니다."
+      "존 터너스 애플 신임 CEO가 메모리 공급망 위기 타개를 위해 모든 선택지를 열어두고 있다고 밝혔습니다.",
+      "외신과 업계에 따르면 이번 발언은 단가 절감과 수급 안정을 위해 중국산 메모리 채택 가능성을 시사한 것입니다.",
+      "글로벌 공급망 다변화 움직임에 따라 기존 한국 메모리 반도체 공급사들의 입지 변화와 파장이 주목됩니다."
      ],
      "tags": [
       "경제",
-      "부동산"
+      "기술"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "KBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1NbXNDRkF4cFpWM0dFX1h6NlVNNE1kTTV5REZZaUw4bjVJVGtZNEJ2NnRjT3RqcmhmYUNqR1pab1lUdE05RGs3T1hjWldFZlBuUEpnVm9CYWhhbkk?oc=5"
+      }
+     ],
+     "original_title": "존 터너스 애플 CEO “메모리 위기에 모든 선택지 고려”…중국산 사용 시사",
+     "published_at": "2026-10-15T19:02+00:00"
+    },
+    {
+     "id": "cb6da1082710",
+     "title_ko": "\"빅테크 AI 투자 회수 지연…투자 감소 시 반도체 타격\"",
+     "summary_ko": [
+      "빅테크 기업들이 인공지능 분야에 쏟아부은 막대한 투자금 중 상당 부분을 아직 회수하지 못했다는 분석이 나왔습니다.",
+      "AI 수익 모델 부진이 길어질 경우 기업들의 설비 투자 축소나 속도 조절이 현실화될 가능성이 제기됩니다.",
+      "빅테크의 투자 절벽이 본격화할 경우 고대역폭메모리 등 핵심 반도체 수요가 급격히 위축될 위험이 있습니다."
+     ],
+     "tags": [
+      "경제",
+      "기술",
+      "증시"
      ],
      "importance": 7,
      "sources": [
       {
        "name": "조선일보",
-       "url": "https://www.chosun.com/economy/money/2026/10/16/IHZIHUH6A5H3PCQ7AMF4G5UPWU/"
+       "url": "https://www.chosun.com/economy/stock-finance/2026/10/16/B4UTYD2BNRAPNFKY6TOQZB7AZM/"
       }
      ],
-     "original_title": "계약금 일단 쏘는 ‘노룩 계약’에 10억원대 ‘생존 매수’까지.. 혼돈 빠진 부동산 시장",
-     "published_at": "2026-10-15T20:29+00:00"
+     "original_title": "“빅테크, AI 투자금 반도 못 건져”… ‘투자 절벽’ 오면 반도체 치명상",
+     "published_at": "2026-10-15T15:42+00:00"
     }
    ]
   },
   "kr_entertainment": {
    "label": "연예",
-   "briefing": "영화제 폐막과 AI 권리 보호 등 문화계 현안이 이어졌습니다.",
+   "briefing": "부산국제영화제가 성황리에 폐막한 한편, AI 음성 무단 사용 방지 가이드라인 등 콘텐츠계 현안이 대두됐습니다.",
    "items": [
     {
-     "id": "5fabfaa39825",
-     "title_ko": "부산국제영화제 관객 20만 돌파 속 폐막",
+     "id": "0920a7644115",
+     "title_ko": "일본 배우·성우단체, AI 더빙 및 무단 음성 생성 금지 가이드라인",
      "summary_ko": [
-      "제31회 부산국제영화제가 2015년 이후 처음으로 관객 20만 명을 돌파하며 폐막했습니다.",
-      "올해 경쟁 부문 대상인 부산 어워드는 이란 영화 '빵과 책'이 수상했습니다.",
-      "행사는 흥행과 작품성을 모두 입증하며 성공적으로 열흘간의 일정을 마쳤습니다."
+      "일본배우연합이 생성형 AI의 음성 무단 생성을 막고 고유 목소리 권리를 보호하기 위한 지침을 발표했습니다.",
+      "지침은 AI의 인간 성우 더빙 대체를 지양하고 유족 허락 없는 고인 음성 복제 및 단계별 동의 없는 상용화를 금지했습니다.",
+      "초상권과 퍼블리시티권 침해 피해가 잇따르는 가운데 창작자 권리 보호를 위한 법제화 요구도 커질 전망입니다."
+     ],
+     "tags": [
+      "연예",
+      "기술",
+      "고용"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015156500009"
+      }
+     ],
+     "original_title": "日 배우·성우단체 \"AI로 영화더빙·고인 목소리 사용 안돼\"",
+     "published_at": "2026-10-15T08:20+00:00"
+    },
+    {
+     "id": "5fabfaa39825",
+     "title_ko": "제31회 부산국제영화제 폐막…관객 20만 명 돌파·이란 영화 대상",
+     "summary_ko": [
+      "제31회 부산국제영화제가 총 관객 수 20만 명을 돌파하며 2015년 이후 최고 흥행 속에 15일 폐막했습니다.",
+      "올해 경쟁 부문 대상인 '부산 어워드'는 전쟁 없는 세상을 염원한 이란 감독의 영화 '빵과 책'에 돌아갔습니다.",
+      "열흘간의 일정을 성공적으로 마친 부산영화제는 아시아 대표 영화 축제로서의 글로벌 위상을 재확인했습니다."
      ],
      "tags": [
       "연예"
      ],
-     "importance": 6,
+     "importance": 5,
      "sources": [
       {
        "name": "YTN",
@@ -303,40 +321,19 @@
      "published_at": "2026-10-15T15:32+00:00"
     },
     {
-     "id": "0920a7644115",
-     "title_ko": "일본 배우단체, 고인 음성 및 더빙 AI 대체 금지 권고",
-     "summary_ko": [
-      "일본배우연합이 생성형 AI의 음성 무단 사용을 막기 위한 가이드라인을 발표했습니다.",
-      "고인의 목소리 재현과 성우의 더빙 업무를 AI로 대체하는 행위가 원칙적으로 금지됩니다.",
-      "음성 학습부터 판매까지 본인 동의를 의무화해 목소리의 권리를 보호할 방침입니다."
-     ],
-     "tags": [
-      "연예",
-      "기술"
-     ],
-     "importance": 6,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015156500009"
-      }
-     ],
-     "original_title": "日 배우·성우단체 \"AI로 영화더빙·고인 목소리 사용 안돼\"",
-     "published_at": "2026-10-15T08:20+00:00"
-    },
-    {
      "id": "f25d9919cf49",
-     "title_ko": "드라마 '닥터X' 시청률 대박에도 의료계 반발 심의 민원",
+     "title_ko": "SBS 드라마 '닥터X', 시청률 14.9%에도 의료계 반발·민원 직면",
      "summary_ko": [
-      "SBS 드라마 '닥터X'가 시청률 14.9%를 기록하며 높은 인기를 얻고 있습니다.",
-      "의료계가 드라마 내용에 강하게 반발하며 방송 심의 민원을 제기했습니다.",
-      "방송사 측은 별도의 공식 입장을 내놓지 않고 향후 심의 결과를 지켜보고 있습니다."
+      "SBS 인기 드라마 '닥터X'가 최고 시청률 14.9%를 기록하며 흥행 중이나 의료계의 반발에 부딪혔습니다.",
+      "의료계는 현실 왜곡과 직역 폄훼 등을 이유로 방송통신심의위원회에 다수의 민원을 제기한 상태입니다.",
+      "방송사 측이 별도 입장을 내놓지 않은 가운데 향후 심의 결과와 작품 전개 방향에 관심이 쏠립니다."
      ],
      "tags": [
+      "방송",
       "연예",
-      "방송"
+      "의료"
      ],
-     "importance": 6,
+     "importance": 5,
      "sources": [
       {
        "name": "조선일보",
@@ -347,110 +344,62 @@
      "published_at": "2026-10-15T07:57+00:00"
     },
     {
-     "id": "ded626c594a3",
-     "title_ko": "배우 한고은, 5cm 가슴 혹 발견돼 긴급 수술",
+     "id": "3d241e7a4e99",
+     "title_ko": "\"문화 지키고 세계로\"…세계 공영방송사들 미래 발전 전략 모색",
      "summary_ko": [
-      "배우 한고은이 가슴에서 5cm 크기의 혹을 발견해 긴급 수술을 받았습니다.",
-      "수술 전 유언까지 남겼을 정도로 당시 상황이 매우 긴박했다고 밝혔습니다.",
-      "팬들과 대중은 아찔했던 건강 위기를 털어놓은 그녀의 회복을 응원하고 있습니다."
+      "글로벌 미디어 환경 변화에 대응해 세계 주요 공영방송사들이 미래 생존과 발전 방향을 논의했습니다.",
+      "참석 방송사들은 자국 고유 문화를 수호하는 동시에 콘텐츠 경쟁력을 높여 세계로 확장하는 방안을 공유했습니다.",
+      "디지털 대전환기 속에서 공영 미디어의 사회적 책무와 글로벌 영향력 강화를 위한 연대가 확대될 전망입니다."
      ],
      "tags": [
-      "연예"
+      "방송",
+      "사회"
      ],
-     "importance": 5,
+     "importance": 4,
      "sources": [
       {
-       "name": "스포츠경향",
-       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9CMHdkN0IwQUVHNFRYYWQzZS1FQmMwcU5nczh1OVZlYVZQX21ibGNIT0JwaDJNSXFlM2x2VGFpZ0RqSlUyX0pQSE1TOUQwaUo1ZU0yNy1hUGVKeE5CRGfSAWNBVV95cUxQTWVJTHJWZXhPY1FRV3hfV2RGTG9SZC15UjVsOWpDZUltUHZOU25qenFwaFFjeC1uZlhLV0JVWEwzVm5ETVBkeG9iZnhaMnBjbTFmVWJYbG9xMTYzWDNLODVsVHc?oc=5"
+       "name": "KBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9aVmNOT0J0SU9jcmxNcFVCSFNEWHhBaEpfTzRjeS1XUWlmZzdLUGNxWEUwNlhJMngwQTRMT1VnTVp2eGlORkYxQmZNc2h4YWVfN2NjT0N3WkVuVnc?oc=5"
       }
      ],
-     "original_title": "“유언까지 남겼다” 한고은, 5cm 가슴 혹에 급수술 받아 ‘아찔’",
-     "published_at": "2026-10-15T10:59+00:00"
+     "original_title": "“문화를 지키고 세계로”…세계 공영방송 미래 모색",
+     "published_at": "2026-10-15T12:36+00:00"
     },
     {
-     "id": "7dbc30a407f5",
-     "title_ko": "배우 김혜자, 위안부 소재 영화로 9년 만에 스크린 복귀",
+     "id": "eb35e7f6b50d",
+     "title_ko": "'사이버펑크 엣지러너 2' 제작진 \"군상극 중심 새 도전 시도\"",
      "summary_ko": [
-      "배우 김혜자가 위안부를 소재로 한 영화 '여전히 찬란하게'로 복귀했습니다.",
-      "김혜자는 친필 편지를 통해 소녀들의 아픔뿐 아니라 찬란했던 시절을 봐달라고 당부했습니다.",
-      "송일곤 감독의 설득으로 참여한 이번 작품은 극장가에 큰 울림을 전할 전망입니다."
+      "CD 프로젝트 레드와 제작사 트리거가 시사회를 열고 애니메이션 '사이버펑크: 엣지러너 2'를 공개했습니다.",
+      "제작진은 1990년대 셀 애니메이션 감성을 재해석했으며 이번 시즌 핵심 테마는 '가족'이라고 밝혔습니다.",
+      "원작 게임과의 연결고리를 담은 새로운 군상극 서사로 오는 20일 넷플릭스를 통해 전 세계에 공개됩니다."
      ],
      "tags": [
-      "연예"
+      "연예",
+      "방송"
      ],
-     "importance": 5,
+     "importance": 4,
      "sources": [
       {
        "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015169700005"
+       "url": "https://www.yna.co.kr/view/AKR20261015169600017"
       }
      ],
-     "original_title": "'여전히 찬란하게' 김혜자 \"두 소녀, 아픈 역사로만 보지 않길\"",
-     "published_at": "2026-10-15T10:05+00:00"
+     "original_title": "'사이버펑크 엣지러너 2' 제작진 \"전작과 다른 새로운 도전\"",
+     "published_at": "2026-10-15T10:03+00:00"
     }
    ]
   },
   "kr_politics": {
    "label": "정치",
-   "briefing": "전작권 기준 논란과 중수청장 임명, 국감 공방이 맞물렸습니다.",
+   "briefing": "전작권 전환 기준을 둘러싼 한미 이견과 함께 국정감사 공방 및 중수청장 임명 등 주요 정치 일정이 진행됐습니다.",
    "items": [
     {
-     "id": "8db7f1700ef4",
-     "title_ko": "이재명 대통령, 김지용 초대 중수청장 임명안 재가",
-     "summary_ko": [
-      "이재명 대통령이 김지용 초대 중대범죄수사청장 후보자 임명안을 재가했습니다.",
-      "인사청문회를 거쳐 중수청 출범 2주 만에 기관 수장 공백을 해소하게 되었습니다.",
-      "신설 수사기구의 수장이 확정됨에 따라 본격적인 조직 체계 정비에 나설 전망입니다."
-     ],
-     "tags": [
-      "정치"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015172900001"
-      },
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/politics/politics_general/2026/10/16/5AZ5QLQYCFCM5NFFYTXRJEIPAE/"
-      }
-     ],
-     "original_title": "[속보] 李대통령, 김지용 중수청장 임명안 재가",
-     "published_at": "2026-10-15T15:40+00:00"
-    },
-    {
-     "id": "91e6eb032fa3",
-     "title_ko": "주한미군 전작권 새 기준 발언에 국방부 거센 반발",
-     "summary_ko": [
-      "브런슨 주한미군사령관이 전작권 전환에 새로운 기준이 필요하다고 언급했습니다.",
-      "국방부 대변인은 기준을 계속 바꾸면 전작권 전환은 불가능하다고 지적했습니다.",
-      "강신철 국방부 장관은 미국 측 발언에 대한 우려를 이미 전달했다고 밝혔습니다."
-     ],
-     "tags": [
-      "정치"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015081251504"
-      },
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/politics/diplomacy-defense/2026/10/16/24E6GXKWWFCOPBTP3BPRA76M6A/"
-      }
-     ],
-     "original_title": "美 \"전작권전환에 새로운 기준\"…韓 \"골대옮기면 영원히 불가능\"(종합)",
-     "published_at": "2026-10-15T15:43+00:00"
-    },
-    {
      "id": "d5d7eccb57ce",
-     "title_ko": "이재명 대통령, 개헌 음모론 선 긋고 개혁 완수 강조",
+     "title_ko": "이 대통령 \"지향점 불변…연임 등 개헌 음모론 벗어나도 돼\"",
      "summary_ko": [
-      "이재명 대통령은 연임이나 권력구조 개편 등 개헌 음모론에서 벗어나도 된다고 밝혔습니다.",
-      "개헌은 국회 200명 이상 동의가 필요해 뜻대로 할 수 없다고 선을 그었습니다.",
-      "국가기관의 부작용을 줄이며 약속한 실용적 개혁을 흔들림 없이 추진하겠다고 덧붙였습니다."
+      "이재명 대통령이 SNS를 통해 지지 철회 우려를 반박하며 국정 지향점은 결코 변하지 않았다고 밝혔습니다.",
+      "일각에서 제기된 연임용 개헌론이나 내각제 개편설은 사실이 아니며 본인이 선호하는 방향도 아니라고 선을 그었습니다.",
+      "아울러 실용적인 검찰개혁 완수와 함께 국민을 위한 약속된 개혁 과제들을 흔들림 없이 추진하겠다고 강조했습니다."
      ],
      "tags": [
       "정치"
@@ -466,12 +415,12 @@
      "published_at": "2026-10-15T09:41+00:00"
     },
     {
-     "id": "f32c55a1c2f2",
-     "title_ko": "국방부, 청해부대 작전범위 호르무즈 해협 인근 확대 검토",
+     "id": "8db7f1700ef4",
+     "title_ko": "이재명 대통령, 김지용 초대 중대범죄수사청장 임명안 재가",
      "summary_ko": [
-      "국방부가 중동 아덴만에서 임무를 수행 중인 청해부대의 작전범위 확대를 검토합니다.",
-      "호르무즈 해협 인근까지 작전 반경을 넓히고 해상초계기 투입도 함께 고려되고 있습니다.",
-      "중동 정세 불안 속에서 우리 선박의 안전 항행과 방위 지원 능력이 강화될 전망입니다."
+      "이재명 대통령이 15일 김지용 초대 중대범죄수사청장 후보자에 대한 임명안을 최종 재가했습니다.",
+      "전날 국회 인사청문회를 거친 뒤 신속히 임명이 이뤄지면서 중수청은 출범 2주 만에 수장 공백을 메웠습니다.",
+      "신임 청장 임명과 함께 중수청의 주요 조직 정비와 중대범죄 수사 체계 구축 작업이 본격화할 것으로 보입니다."
      ],
      "tags": [
       "정치"
@@ -479,24 +428,24 @@
      "importance": 7,
      "sources": [
       {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/politics/diplomacy-defense/2026/10/16/RQJ4FXAZTZAUJAHUBQ33JB4ZYQ/"
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015172900001"
       },
       {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015182200504"
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/politics_general/2026/10/16/5AZ5QLQYCFCM5NFFYTXRJEIPAE/"
       }
      ],
-     "original_title": "호르무즈 인근까지 청해부대 작전 확대",
-     "published_at": "2026-10-15T15:43+00:00"
+     "original_title": "[속보] 李대통령, 김지용 중수청장 임명안 재가",
+     "published_at": "2026-10-15T15:40+00:00"
     },
     {
      "id": "3f369d44ca39",
-     "title_ko": "국회 11개 상임위 국감…대법관 재제청 및 재판 공방",
+     "title_ko": "국회 11개 상임위 국감…대법관 재제청 갈등·농협 개혁 공방",
      "summary_ko": [
-      "국회는 법사위 등 11개 상임위원회를 열고 반환점을 돈 국정감사를 진행합니다.",
-      "법사위에서는 대법관 후보 재제청 거부 논란과 대통령 관련 재판이 쟁점으로 다뤄집니다.",
-      "과방위 제척안과 농협 지배구조 개혁 등 주요 현안을 두고 여야 공방이 예상됩니다."
+      "국회가 법사위 등 11개 상임위원회에서 국정감사를 열고 사법부 및 부처 현안을 점검합니다.",
+      "법사위에서는 조희대 대법원장의 대법관 후보 재제청 논란과 이재명 대통령 재판 관련 공방이 집중됐습니다.",
+      "과방위의 방송통신 현안 감사와 농해수위의 지배구조 개혁 논의 등 곳곳에서 여야 대치가 이어졌습니다."
      ],
      "tags": [
       "정치"
@@ -510,50 +459,181 @@
      ],
      "original_title": "국회, 법사위 등 11개 국감…대법관 재제청·농협 개혁 등 쟁점",
      "published_at": "2026-10-15T20:00+00:00"
+    },
+    {
+     "id": "9e7f9792d18d",
+     "title_ko": "브런슨 주한미군사령관 \"전작권 조건 변화\"…軍 \"美에 항의\"",
+     "summary_ko": [
+      "제이비어 브런슨 사령관이 안보 여건 변화로 전작권 전환에 지켜야 할 새 기준이 생겼다고 발언했습니다.",
+      "이에 대해 한국 국방부는 기존 합의된 기준을 임의로 상향하는 것에 대해 우려하며 공식 항의 뜻을 전했습니다.",
+      "전작권 FOC 검증 평가를 둘러싼 양국 군사당국 간 이견이 노출되면서 향후 협의가 복잡해질 가능성이 큽니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/diplomacy-defense/2026/10/16/24E6GXKWWFCOPBTP3BPRA76M6A/"
+      }
+     ],
+     "original_title": "브런슨 “전작권 전환 조건 변해” 강신철 “美에 항의 전달”",
+     "published_at": "2026-10-15T15:43+00:00"
+    },
+    {
+     "id": "8ceceea3b7b8",
+     "title_ko": "전작권 전환 문턱 높이는 미국…한미 정상 간 '톱다운' 해법 주목",
+     "summary_ko": [
+      "미국 군 당국이 새로운 안보 환경을 이유로 전작권 전환 기준 상향을 시사해 한미 간 협의가 난항을 겪고 있습니다.",
+      "정부는 당초 올해 FOC 검증 완료를 목표로 했으나 정성적 평가 요소 등을 둘러싼 시각차를 좁히지 못했습니다.",
+      "실무 협의가 평행선을 달리면서 향후 한미안보협의회의와 정상 간 톱다운 방식으로 돌파구를 찾을지 주목됩니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015137951504"
+      }
+     ],
+     "original_title": "전작권 전환 문턱높이는 美…협의 난항에 톱다운 돌파 시도하나(종합)",
+     "published_at": "2026-10-15T10:19+00:00"
     }
    ]
   },
   "nz_national": {
    "label": "뉴질랜드",
-   "briefing": "기습 한파와 폭우 등 궂은 날씨 속에 학생비자 심사 강화와 병원 인력난이 주요 이슈로 떠올랐습니다.",
+   "briefing": "학생비자 단속 강화와 변덕스러운 주말 날씨 등 전국 주요 현안이 이어졌습니다.",
    "items": [
     {
      "id": "a32a2ed62d6d",
-     "title_ko": "뉴질랜드 학생비자 거절률 급증, 허위 서류 단속 강화",
+     "title_ko": "학생비자 거절 급증… 허위 서류 제출 단속 여파",
      "summary_ko": [
-      "뉴질랜드 이민성이 최근 3개월간 유학비자 신청에 대한 심사를 대폭 강화해 기각 건수가 급증했습니다.",
-      "방글라데시 70%, 인도 39% 등 전 세계 유학비자 거절률이 지난 회계연도 13%에서 34%까지 치솟았습니다.",
-      "하청 유학원들의 허위 재정 서류 제출에 따른 단속 여파로 정상적인 지원자들까지 엄격한 심사를 받고 있습니다."
+      "뉴질랜드 이민청이 최근 3개월간 유학생 비자 거절 건수가 급증했다고 밝혔습니다.",
+      "방글라데시 70%, 인도 39% 등 허위 서류 제출 유학원에 대한 단속 결과입니다.",
+      "주요국 규제 강화로 뉴질랜드 신청이 몰린 가운데 비자 심사가 더욱 엄격해졌습니다."
      ],
      "tags": [
       "비자",
       "이민",
       "교육"
      ],
-     "importance": 9,
+     "importance": 10,
      "sources": [
       {
        "name": "1News",
        "url": "https://www.1news.co.nz/2026/10/15/what-is-behind-a-recent-spike-in-refused-study-visa-applications/"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/business/companies/banking-finance/government-defers-responding-to-insurance-affordability-review-as-reserve-bank-says-banks-could-handle-stress-if-premiums-soared/premium/XRMGTWLY3BFZNFUZDRTCBMGDP4/"
+      },
+      {
+       "name": "OneRoof",
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPS2h3N2NUS2hpS2VkRGVSYlR6eUVfZm1DTzN6UXNRTDBvejBPSmx0TTBGb3RpSld0RkJvSlNjeTAtOTZnNVk4NG5nM1BJcmV4ME43SHJ3TkVwMEM5d0FQRDkyOFJxSXNabTR5Y1FQSFJyZ3ZZY2xVT2Vpblc5M1dBMFQtSzR3QXkxRDF6QmJVZkw4U0lrbTF5OVI4T0p1UWw0bF81dlRLTEdZeWpUX1YwNG9QVQ?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNWHdmbHc2VzFlSDhtNlUwNGVOU3ZUbndmdWl0QV9aUXhXWFU2cmlHQjBFZ3p2UE1lNElGV0swQVVUb2J4Y1dZSmI1SmFkT0VGZ1djR01LV0gxYUFzU2VrcXlBNU04Z3RIRG5CQlp5RlNKSUlveWE3cHRrQ2xZcWRhT04xRHVDS3pSWU9Ccmp3UDhxWTZ4d01nZS1hU1hGdGF2XzZjUk90bUdVUQ?oc=5"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/home-property/361046322/couples-home-has-fallen-nearly-300000-value-should-they-sell"
       }
      ],
      "original_title": "What is behind a recent spike in refused study visa applications?",
-     "published_at": "2026-10-15T18:30+00:00",
-     "why_it_matters": "유학 후 이민을 준비하는 경우 서류와 재정 증빙의 투명성을 철저히 확보해야 심사 지연이나 거절을 피할 수 있습니다."
+     "published_at": "2026-10-15T19:47+00:00",
+     "why_it_matters": "비자 심사 기준이 엄격해져 철저하고 정확한 재정 증빙 서류 준비가 중요합니다."
+    },
+    {
+     "id": "44bfc1cda499",
+     "title_ko": "주말 날씨 롤러코스터… 천둥번개 후 일요일 맑음",
+     "summary_ko": [
+      "기상청은 이번 주말 폭우와 천둥번개, 우박 등 변덕스러운 날씨를 예보했습니다.",
+      "지난 12시간 동안 전국에서 580회 이상의 낙뢰와 폭우가 관측되었습니다.",
+      "북섬 동해안 등에 비가 이어지다 일요일부터 맑은 날씨를 회복할 전망입니다."
+     ],
+     "tags": [
+      "날씨",
+      "재난"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/16/thunderstorms-and-sunshine-its-going-to-be-a-weather-rollercoaster/"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/weather-temperatures-tumble-as-cold-snap-grips-new-zealand/ZAGYDMVVYFEPVHQLRGPDW5747I/"
+      }
+     ],
+     "original_title": "Thunderstorms and sunshine: It's going to be a weather rollercoaster",
+     "published_at": "2026-10-15T19:01+00:00",
+     "why_it_matters": "변덕스러운 봄철 기상 악화로 주말 야외 활동과 이동 시 안전에 유의해야 합니다."
+    },
+    {
+     "id": "5274148ef163",
+     "title_ko": "헌틀리 여성 유방암 3차 재발… 생활비 모금 진행",
+     "summary_ko": [
+      "호주에서 치료 후 귀국했던 와이카토 여성이 세 번째 유방암 판정을 받았습니다.",
+      "정밀 검사 결과 척추와 간 등으로 전이된 4기 말기 상태로 확인되었습니다.",
+      "일을 중단하고 투병 중인 그녀를 위해 이전 직장 동료들이 모금에 나섰습니다."
+     ],
+     "tags": [
+      "의료",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/waikato-news/news/huntly-womans-breast-cancer-returns-for-the-third-time-now-terminal/DM7ZPS4NQVCRXPYAQIPJ56D37Y/"
+      }
+     ],
+     "original_title": "Huntly woman’s breast cancer returns for the third time, now terminal",
+     "published_at": "2026-10-15T19:07+00:00",
+     "why_it_matters": "현지 체류 중 중증 질환 발생에 대비한 의료비와 생활비 대책이 중요합니다."
+    },
+    {
+     "id": "0552a619c2a6",
+     "title_ko": "코스트코, 크라이스트처치에 6500만 달러 매장 추진",
+     "summary_ko": [
+      "대형 할인점 코스트코가 남섬 크라이스트처치에 신규 매장 개발을 추진합니다.",
+      "총 6,500만 달러 규모를 투자해 대형 창고형 쇼핑 시설을 구축할 계획입니다.",
+      "신규 매장이 완공되면 지역 주민들의 장바구니 물가 부담이 완화될 전망입니다."
+     ],
+     "tags": [
+      "경제",
+      "물가"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "The Press",
+       "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQTjVsVDRYc0c1TURfeUtWc0ZrSG90NGZCdGVsNkxvQ2s3WmY1ZW5rN0RFc294TElXWXJuUHQxblA4bWZyMV80N2ZvS3lkUl9RNERadUN0OG9EOV9vQnJoYi1EQmdsOEVlb1RSS0JPOV9LVXpJMk8xVFRUMHRfRVdqQTZyRE9xY0l1X0xHbll4Z054Qk5kbjJ5YkczbEdmbHE2cmM5dnNiWWwzaV9QZjZPSS1OZll1X3NVTU91cw?oc=5"
+      }
+     ],
+     "original_title": "Better prices for Canterbury shoppers as Costco plans $65m Christchurch development",
+     "published_at": "2026-10-15T15:00+00:00",
+     "why_it_matters": "남섬 지역 거주 가정의 식료품과 생활비 지출 부담 완화에 기여할 소식입니다."
     },
     {
      "id": "70908f37b7ec",
-     "title_ko": "쿡제도 체류 여성 비자 분쟁, 법적 난제 직면",
+     "title_ko": "쿡 제도에 갇힌 여성 사례… 이민 전문 변호사 '난제'",
      "summary_ko": [
-      "쿡제도에 발이 묶인 한 여성의 체류 자격 문제를 두고 이민 전문 변호사가 해결이 까다로운 사안이라고 지적했습니다.",
-      "해당 사건은 복잡한 이민법 규정과 관할 문제가 얽혀 있어 당국의 명확한 판단이 지연되고 있습니다.",
-      "이번 사례는 특수 지역 체류 및 비자 조건 해석에 관한 이민 당국의 엄격한 접근 방식을 보여줍니다."
+      "쿡 제도에 발이 묶인 한 여성의 체류 및 비자 문제가 현지에서 주목받고 있습니다.",
+      "이민 전문 변호사는 이번 사안이 법적·행정적으로 풀기 까다로운 문제라고 지적했습니다.",
+      "태평양 도서국 체류와 관련한 제도적 복잡성에 관심이 집중되고 있습니다."
      ],
      "tags": [
       "비자",
       "이민"
      ],
-     "importance": 9,
+     "importance": 8,
      "sources": [
       {
        "name": "RNZ",
@@ -562,21 +642,97 @@
      ],
      "original_title": "Case of woman stuck in Cook Islands may be hot to handle, immigration lawyer says",
      "published_at": "2026-10-15T02:58+00:00",
-     "why_it_matters": "뉴질랜드 연계 도서 지역 방문이나 특수 체류 시 비자 유효성과 재입국 요건을 사전 확인해야 체류 불확실성을 막습니다."
+     "why_it_matters": "뉴질랜드 연계 국가 체류 시 발생할 수 있는 비자 변동 위험을 사전에 살펴야 합니다."
     },
     {
-     "id": "877336c5744f",
-     "title_ko": "스타십 어린이병원 인력 부족에 소아암 치료 일주일 지연",
+     "id": "1684a83383bb",
+     "title_ko": "글로벌 투자자들, AI 인프라 부채 부담 경계감",
      "summary_ko": [
-      "스타십 어린이병원의 전문 간호 인력 부족으로 소아암 환아들의 화학요법과 조혈모세포 이식이 최대 7일 지연되었습니다.",
-      "한 소아암 환아의 어머니는 치료가 미뤄지는 동안 아이가 극심한 통증을 겪었으며 의료진 업무 과중이 심각하다고 호소했습니다.",
-      "보건부의 인력 확충 약속에도 불구하고 필수 소아 전문 의료 현장의 인력 공백은 지속되고 있습니다."
+      "글로벌 금융 시장 투자자들이 AI 관련 부채 급증에 대한 경계감을 키우고 있습니다.",
+      "대규모 인프라 구축을 위한 차입금이 늘면서 금융 건전성 우려가 제기되었습니다.",
+      "향후 글로벌 기술주 흐름과 증시 변동성에 중대한 영향을 미칠 전망입니다."
+     ],
+     "tags": [
+      "경제",
+      "증시",
+      "기술"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Interest.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOYXpFemdOT04xN19Pbl8wYmZCdFQ2NEx3al9HMldJbHFTZG1MWkdzUDZ1NHloWi1BWHU5cVJWZXo0bDBhRW9obGVlNDJYNUVyZWViSXFVQ1hVaWFvN01jLXJHRjhUdUlYUVNqcEJPbXRnZ3k3MHdoTldiUDF4ME1ja2RHandsclVMcGI2eFk5R3FHZEVocjF6SG93WVc0eWN4bm5sUDB0UVpUemh5a2VpT0RQSWdhakY4Y0FfMkU2bw?oc=5"
+      }
+     ],
+     "original_title": "Breakfast briefing: Investors brace for AI debt reckoning",
+     "published_at": "2026-10-15T18:33+00:00",
+     "why_it_matters": "글로벌 금융 시장 변동성은 환율과 자산 가치 형성에 직간접적 영향을 줍니다."
+    },
+    {
+     "id": "00028295f1af",
+     "title_ko": "웰링턴 주민 3만 명, 신설 수도세 첫 청구서 미납",
+     "summary_ko": [
+      "웰링턴 지역 주민 약 3만 명이 새로 도입된 수도 요금을 미납한 것으로 나타났습니다.",
+      "계량제 도입에 맞춰 처음 발송된 청구서에 대해 대규모 체납이 발생했습니다.",
+      "수도세 신설에 따른 가계 부담 논란 속에 후속 징수 절차가 진행될 전망입니다."
+     ],
+     "tags": [
+      "물가",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOQVI3TnJ1aWZlYktyU1U3eVp0N0x0UkJldEdZQ1Y4Rm9PbUcxbFFLcXZ4azMxLUNDdm1Xa2ZsRG5mSjE4MEk3RGg5NEc3cjZ0N1Z3SGNtQVFzSHQzdDQ4R2VBUWpmNjVyWUJ4Z1l6RVBPd21xS3BMY2lTTVpSMG1pUXlaOWtpM1k1Zl9Wczh6TzRBbDN3RXhDd2Fyd0hqZkd0UmtfZEZFaDdWUUJjeTgxSDI2T1NLQnc?oc=5"
+      }
+     ],
+     "original_title": "30,000 people in Wellington region fail to pay first Tiaki Wai water bill",
+     "published_at": "2026-10-15T17:37+00:00",
+     "why_it_matters": "지역별 수도 및 공공요금 체계 개편으로 고정 생활비 지출이 늘어날 수 있습니다."
+    },
+    {
+     "id": "eb1e98850c2b",
+     "title_ko": "영국 은행권, 예산안 앞두고 은행세 인상 가능성에 반발",
+     "summary_ko": [
+      "영국 주요 은행들이 정부의 이익 대상 세금 인상 추진 가능성에 반발했습니다.",
+      "정부가 재정 확충을 목적으로 금융 부문 증세를 검토 중이라는 관측이 나왔습니다.",
+      "은행권은 과도한 과세가 경제 전반의 대출 여력을 약화시킬 수 있다고 주장했습니다."
+     ],
+     "tags": [
+      "경제",
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "BBC",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFA2YWRtLTNBNWFtaHpMRnVaOWpXdkREQTJtOHI3ZkRZSE42aWdRb3VEbTFoTS1FMTZrbEFNSTBsSjNieDBOUDltUnh0SHFCMmZxaE9maDBRdUZsUFE?oc=5"
+      }
+     ],
+     "original_title": "Banks say Healey is planning Budget tax raid on their profits",
+     "published_at": "2026-10-15T17:14+00:00",
+     "why_it_matters": "주요국 금융 규제와 조세 정책 동향은 글로벌 금리 환경 파악에 참고가 됩니다."
+    }
+   ]
+  },
+  "nz_auckland": {
+   "label": "오클랜드",
+   "briefing": "어린이병원 의료 공백과 주택 임대차 분쟁 등 오클랜드 지역 이슈가 주목받았습니다.",
+   "items": [
+    {
+     "id": "877336c5744f",
+     "title_ko": "스타십 어린이병원 인력난… 유아 암 치료 일주일 지연",
+     "summary_ko": [
+      "오클랜드 스타십 아동병원에서 전문 간호 인력 부족으로 암 치료가 지연되었습니다.",
+      "소아암 환아의 골수 이식이 인력 부족으로 일주일 이상 연기되며 고통을 겪었습니다.",
+      "암 병동 인력 정상화까지 수개월이 걸릴 것으로 보여 의료 공백 우려가 지속됩니다."
      ],
      "tags": [
       "의료",
       "사회"
      ],
-     "importance": 8,
+     "importance": 9,
      "sources": [
       {
        "name": "1News",
@@ -589,239 +745,22 @@
      ],
      "original_title": "Mum heartbroken son's cancer treatment delayed by Starship shortages",
      "published_at": "2026-10-15T19:39+00:00",
-     "why_it_matters": "뉴질랜드 정착 시 자녀의 중증 질환 치료 등 응급·전문 의료 서비스 대기 기간이 길어질 수 있음을 유의해야 합니다."
-    },
-    {
-     "id": "44bfc1cda499",
-     "title_ko": "주말 뉴질랜드 날씨, 뇌우와 우박 거쳐 일요일 맑음",
-     "summary_ko": [
-      "기상청 멧서비스는 이번 주말 동안 폭우, 뇌우, 우박에서 맑은 날씨로 급변하는 변덕스러운 봄 날씨를 예보했습니다.",
-      "지난 12시간 동안 전국에서 588회의 낙뢰가 관측되었고 웰링턴 일부 지역에는 최대 40mm의 비가 쏟아졌습니다.",
-      "북섬 동해안과 코로만델 등은 토요일까지 뇌우와 우박이 예상되나 일요일부터는 전국적으로 맑아질 전망입니다."
-     ],
-     "tags": [
-      "날씨",
-      "재난"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/16/thunderstorms-and-sunshine-its-going-to-be-a-weather-rollercoaster/"
-      }
-     ],
-     "original_title": "Thunderstorms and sunshine: It's going to be a weather rollercoaster",
-     "published_at": "2026-10-15T19:01+00:00",
-     "why_it_matters": "봄철 급격한 기후 변화와 뇌우는 주말 이동 및 일상생활에 지장을 줄 수 있으므로 기상 정보를 수시로 확인해야 합니다."
-    },
-    {
-     "id": "799b5edfa0b3",
-     "title_ko": "기습 한파에 기온 급락, 크라이스트처치 16도 이상 뚝",
-     "summary_ko": [
-      "강한 한파가 뉴질랜드를 덮치며 크라이스트처치 낮 최고기온이 26.5도에서 10도로 3일 만에 16도 이상 급락했습니다.",
-      "루이스 패스 등 고지대 산간 도로에는 눈이 내릴 것으로 예보되어 운전자들의 주의가 요구되고 있습니다.",
-      "남북섬 내륙 일부 지역의 아침 기온이 2도 안팎까지 떨어져 서리가 내릴 것으로 보여 농작물 관리가 필요합니다."
-     ],
-     "tags": [
-      "날씨",
-      "재난"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/nz/weather-temperatures-tumble-as-cold-snap-grips-new-zealand/ZAGYDMVVYFEPVHQLRGPDW5747I/"
-      }
-     ],
-     "original_title": "Weather: Temperatures tumble as cold snap grips New Zealand",
-     "published_at": "2026-10-15T17:46+00:00",
-     "why_it_matters": "봄철에도 기온이 급강하하고 산간 도로 결빙이 발생하므로 운전 안전과 주거지 난방 대비에 유의해야 합니다."
-    },
-    {
-     "id": "745540873eac",
-     "title_ko": "정부, 주택보험 부담 완화 검토 미뤄…보험료 상승 우려",
-     "summary_ko": [
-      "뉴질랜드 정부가 자연재해 위험 지역의 주택보험료 부담 및 가입 지원 검토 보고서에 대한 대응을 보류했습니다.",
-      "지진과 홍수 위험이 큰 웰링턴과 캔터베리 등지에서는 보험 가입이 점점 까다로워지고 보험료가 급등하는 추세입니다.",
-      "중앙은행은 보험료 급등 충격을 은행권이 감당할 수 있다고 보았으나 차기 정부로 정책 결정이 넘어갈 전망입니다."
-     ],
-     "tags": [
-      "부동산",
-      "경제",
-      "재난"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/business/companies/banking-finance/government-defers-responding-to-insurance-affordability-review-as-reserve-bank-says-banks-could-handle-stress-if-premiums-soared/premium/XRMGTWLY3BFZNFUZDRTCBMGDP4/"
-      }
-     ],
-     "original_title": "Government defers responding to insurance affordability review, as Reserve Bank says banks could handle stress if premiums soared",
-     "published_at": "2026-10-15T17:34+00:00",
-     "why_it_matters": "자연재해 고위험 지역의 주택 매매나 모기지 대출 시 주택보험 가입 제한 및 높은 보험료 부담을 사전 검토해야 합니다."
-    },
-    {
-     "id": "559912128c04",
-     "title_ko": "폭우로 도로 산사태와 침수 발생, 3번 국도 통행 차질",
-     "summary_ko": [
-      "폭우가 쏟아지며 북타라나키 마운트 메신저 부근 3번 국도에 산사태가 발생해 도로가 한 개 차로로 축소되었습니다.",
-      "도로 당국은 낙석 제거 작업을 진행하며 약 30분의 극심한 지연이 예상되니 안전 운전을 당부했습니다.",
-      "남섬 웨스트코스트와 오타고 일대 국도에서도 노면 침수가 잇따라 발생해 교통 불편이 이어지고 있습니다."
-     ],
-     "tags": [
-      "교통",
-      "재난"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/15/slip-surface-flooding-as-heavy-downpours-moves-across-nz/"
-      }
-     ],
-     "original_title": "Slip, surface flooding as heavy downpours move across NZ",
-     "published_at": "2026-10-15T17:29+00:00",
-     "why_it_matters": "주요 간선 도로의 폭우 피해로 이동이 제한될 수 있으므로 지역 간 이동 전 도로 통제 현황을 점검해야 합니다."
-    },
-    {
-     "id": "bb1c25d79afc",
-     "title_ko": "35세 이하 청년층을 위한 뉴질랜드 주택 구매 추천 지역",
-     "summary_ko": [
-      "원루프가 35세 이하 젊은 층이 첫 주택을 마련하기 가장 적합한 뉴질랜드 전국 30개 동네를 선정해 발표했습니다.",
-      "주택 가격 접근성과 고용 중심지 접근성, 생활 편의시설 등을 종합적으로 분석해 평가한 결과입니다.",
-      "금리 및 대출 환경 속에서 청년층이 진입 가능한 현실적인 주거지 대안들이 주목받고 있습니다."
-     ],
-     "tags": [
-      "부동산",
-      "주거"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "OneRoof",
-       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPS2h3N2NUS2hpS2VkRGVSYlR6eUVfZm1DTzN6UXNRTDBvejBPSmx0TTBGb3RpSld0RkJvSlNjeTAtOTZnNVk4NG5nM1BJcmV4ME43SHJ3TkVwMEM5d0FQRDkyOFJxSXNabTR5Y1FQSFJyZ3ZZY2xVT2Vpblc5M1dBMFQtSzR3QXkxRDF6QmJVZkw4U0lrbTF5OVI4T0p1UWw0bF81dlRLTEdZeWpUX1YwNG9QVQ?oc=5"
-      }
-     ],
-     "original_title": "New Zealand’s top 30 suburbs for under-35s: Best places to buy for young Kiwis",
-     "published_at": "2026-10-15T17:10+00:00",
-     "why_it_matters": "뉴질랜드 정착 후 초기 주택 구매를 계획하는 청년 이민자에게 실현 가능한 거주 지역 선택 기준을 제공합니다."
-    }
-   ]
-  },
-  "nz_auckland": {
-   "label": "오클랜드",
-   "briefing": "아동 대상 개 물림 사고 증가와 어린이병원 간호사 부족 등 오클랜드 내 민생 안전 문제가 부각되었습니다.",
-   "items": [
-    {
-     "id": "c294f71a3248",
-     "title_ko": "스타십 병원 소아암 병동, 간호 인력 충원까지 3개월 소요",
-     "summary_ko": [
-      "간호사 부족으로 암 치료가 지연되었던 오클랜드 스타십 어린이병원 암 병동의 인력 충원에 3개월이 더 걸릴 예정입니다.",
-      "전문 간호 인력 공백으로 인해 최근 일부 소아암 환아들의 필수 화학요법 일정이 연기되는 사태가 발생했습니다.",
-      "병원 측은 인력 충원에 속도를 내고 있으나 완전 정상화까지는 당분간 진료 차질이 불가피할 전망입니다."
-     ],
-     "tags": [
-      "의료",
-      "사회"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOX3NuMWFoTzd4NDROOHFZRUd5TmdaUEJpalpRaEcxcmQ3b09mTEt1TTFkWnVyWFctYnpaYWtPSEIyMjI5bFFwZlZvOS1iUGlMaEFCZG9yeGdKTHdxYk5EMWhZT2ZXSGxuS0w5RTBKbV9PZWxVTHZXWG5VYnd1a3FsdFdSZnI4VlFNSl9EaGt3YnJSOS1vQ1VaTExETEdaaDAtZUxPQzZGQXhNWGYxY0lZUmVTMEtaaGhwUlk2WVJrNS1PZnYxck1JbFY3R2dyQQ?oc=5"
-      }
-     ],
-     "original_title": "Starship Hospital's cancer ward three months away from full staff after chemotherapy delays",
-     "published_at": "2026-10-15T05:06+00:00",
-     "why_it_matters": "오클랜드 내 아동 전문 의료진 부족이 당분간 이어져 중증 질환 치료 대기 위험이 지속될 수 있습니다."
-    },
-    {
-     "id": "6517b7f188e2",
-     "title_ko": "총격 부상 오클랜드 경찰관, 20차례 수술 딛고 회복 중",
-     "summary_ko": [
-      "근무 중 총격을 당했던 오클랜드 경찰관이 20차례의 수술을 받으며 긴 회복 과정을 이어가고 있습니다.",
-      "얼굴 등에 여전히 탄환 파편이 남아 있는 상태이며 신체적·정신적 치료를 병행하고 있는 것으로 알려졌습니다.",
-      "현지 경찰 사회는 총기 범죄에 노출된 일선 경찰관들의 치안 위험과 처우 개선 필요성을 다시 제기하고 있습니다."
-     ],
-     "tags": [
-      "치안",
-      "사건사고"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNLW5ITTF2amlDckdTeDhDdVdVX2FaajdJWE1rcVg1a0hkNVBiOGhyam1FNjlxYmhnMjlaQ2pzSF9iUDN1NjhFdVFHS2dHU3BpUnNJaGhEWGpaRzc4VlliaWRBbkNROUdMc25xZV82M3M1QTJEM3ZqU1U2US1tQm1PRzl4Y3pJUXRlR1lodGtSR1lvX3BBSlR3TTIxak1Fbl81dWJ2RXkzMEtmUQ?oc=5"
-      }
-     ],
-     "original_title": "Shot Auckland cop's long recovery: 20 surgeries, pellets still in his face",
-     "published_at": "2026-10-15T16:04+00:00",
-     "why_it_matters": "오클랜드 내 총기 관련 범죄와 경찰 대상 위험이 존재함을 보여주며, 거주 지역 안전 점검의 중요성을 시사합니다."
-    },
-    {
-     "id": "92bda2fa577f",
-     "title_ko": "오클랜드 도시철도 개통 효과, 외식업계 반응은 엇갈려",
-     "summary_ko": [
-      "새로 개통된 오클랜드 도시철도(CRL)가 도심 외식업계 상권에 미치는 영향이 업종과 위치에 따라 엇갈리고 있습니다.",
-      "역세권 일부 식당은 유동 인구 증가로 매출 증대를 누리고 있으나 공사 장기화 여파를 겪은 곳들은 회복이 더딥니다.",
-      "대중교통 인프라 개선이 시내 중심가 상권 활성화로 완전히 안착하기까지는 다소 시간이 걸릴 것으로 보입니다."
-     ],
-     "tags": [
-      "경제",
-      "교통"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPZnNaZDNPMnZTUUh2QThpaHotbnlBd2ZsY3ZDbjNHNGtmTm5vLUpEQW1ac2lFSGM0Wmp2dTJjdXRxU3J5WFRZRWFGSnFpcmxBZXhtbUhyWlNEM3VEMWlQU2RTNkNQNnNEdE01TnJicHlvT2xNcmE4NXRsaUF5VXVnb3kwSzNkdEhxRTlLMjNOWkxLRlk5d1dN?oc=5"
-      }
-     ],
-     "original_title": "How has the new CRL affected Auckland hospo? It's a mixed bag",
-     "published_at": "2026-10-15T16:04+00:00",
-     "why_it_matters": "오클랜드 중심가에서 자영업이나 외식업 창업을 고려하는 이민자에게 대중교통 노선별 상권 변화는 핵심 분석 요소입니다."
-    },
-    {
-     "id": "16cd3465f2fb",
-     "title_ko": "오클랜드 개 물림 사고 6년 만에 감소, 아동 피해는 증가",
-     "summary_ko": [
-      "오클랜드 전역의 개 물림 사고가 6년 만에 처음으로 감소했으나 15세 이하 아동 대상 사고는 오히려 8% 증가했습니다.",
-      "지난 한 해 동안 공격성을 보인 개 290마리가 안락사되었으며, 방치 및 통제 소홀로 견주 수천 명이 벌금을 물었습니다.",
-      "배회견 신고는 25% 줄어드는 등 전반적 수치는 개선되었으나 가정과 야외에서의 어린이 안전 위협은 지속되고 있습니다."
-     ],
-     "tags": [
-      "사건사고",
-      "치안"
-     ],
-     "importance": 6,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/nz/auckland/auckland-dog-attacks-fall-for-first-time-in-six-years-but-incidents-involving-children-rise/NHM7RAJKCBDZJELB57DALXTAXU/"
-      },
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPaGRSSmpnd3FtNHZEaUF4UGdIU0JiWmhpaGJsMFVOT1FTSXZiM002NVFMMHVxUElIV3h5SmplbWZKMjhOTWlXVmF5VmU3V0Q0YVJJX21PeG41NENzY0k3aWRuX2pMcXgxY3VsaEp5OTRSdk8zY2NhcjVaemdla0JlUjN5bTVkVlNaWXlBaXY2VGNIQXh0alhLTWljTVVBOHZjVmZFTDdZLXFzdnZz?oc=5"
-      }
-     ],
-     "original_title": "Auckland dog attacks fall for first time in six years but incidents involving children rise",
-     "published_at": "2026-10-15T16:00+00:00",
-     "why_it_matters": "자녀와 함께 뉴질랜드에 거주할 때 공원이나 주택가 주변 대형견 안전사고 예방에 각별한 주의가 필요합니다."
+     "why_it_matters": "뉴질랜드 공공 의료 인력난으로 필수의료 진료 대기가 길어질 위험이 있습니다."
     },
     {
      "id": "ddbfc68e46eb",
-     "title_ko": "방송인 해미시 매케이, 임대료 분쟁 후 렌트 주택 퇴거",
+     "title_ko": "방송인 해미시 매케이, 임대차 분쟁 끝 미션베이 퇴거",
      "summary_ko": [
-      "유명 방송인 해미시 매케이가 임대차분쟁조정위원회(TT) 분쟁을 겪은 후 미션베이의 렌트 주택에서 퇴거했습니다.",
-      "집주인과의 임대료 체납 갈등이 법적 분쟁으로 비화되면서 가족과 함께 해당 주택을 비우게 되었습니다.",
-      "오클랜드 고급 주택가 렌트 시장에서도 엄격한 임대차 규정과 분쟁 절차가 적용된다는 점을 보여준 사례입니다."
+      "유명 방송인 해미시 매케이가 임대차분쟁조정위원회 판결 후 주택을 퇴거했습니다.",
+      "오클랜드 미션베이 주택의 임대료 체납 문제로 집주인과 법적 분쟁을 겪었습니다.",
+      "조정위원회의 명령이 내려진 후 주택을 비우며 갈등이 일단락되었습니다."
      ],
      "tags": [
+      "주거",
       "렌트",
-      "주거"
+      "부동산"
      ],
-     "importance": 6,
+     "importance": 8,
      "sources": [
       {
        "name": "RNZ",
@@ -830,32 +769,118 @@
       {
        "name": "NZ Herald",
        "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQQmVBVHZtbV9PS0dFOHRJMExCdXFhR2hXWWdzNlZKME1jOEpNaEhGRFhyNkQ1U3UySXFoZDRIZkdQVXVZc2hILXRhOEFfYktsUkdTMjlxUGVtNkFGSlM3eVkzUHdHZEdRODVfaFVLSnA1cHBqVEk2cVl6T1lVdkNESDNrbmxrem5fMDNHc21rOWdHbUk0YkpkOEwtR3B0cURTTS1BRTl6dHFOSDY5SGpILUJqNzNVaTlMck1KRDJXcE5GOC1rT3c?oc=5"
+      },
+      {
+       "name": "Simply Wall Street",
+       "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPS1MydVNpb3MwOEpacDRiUFBWRVVUV09nX0YtSjNtM1V0c3NsdkY1SHpfR3NlSDlDdzhMTzM2MF9fV3pkdmgybEZkOXdhTFRROHdqa0gwWnQwcl9iTjRZYVdJNTVWa2ZabWFDa1YyY2R4T2FabEhqNHFyMklIelAyR3FuVmgzUWRsRlpDWHlnd1pVM3FqZ09FUDJ0WWhnVmdlWHZaOW9uZ211RmpMT0Nsc1kyM0NuZzN0NmE4eTFqbkpIeWxrTEV2Q182djVfSnBQYVp6VzdxR09ZbzZsZWtndnRqSjEwcllleE9mRUctUdIB9AFBVV95cUxQaVZLa1dsOEt4SzVka3h2Tnowdk9pR0NCV1RTR0toNlhFU1BHaFBvZ2N3aS1CRXpqQkVyV0IzU1U0OF9OMnVhdXBXNTF5dnQ4WENsTThXTjRmalQ1ajl1RmVmR25vbk54THlUZ09KQ0VQN09jUjVjbWFuMjU4VEpBYTNaOWl2MGlLaU51Ym5VUHlCQ3MzSWMwazFjenhzN29TdHg5SWRYQWJsYWxlalBDdlU5Wm9KUnNxYkJVbDdTbnRZWUhaaVVXeVBfWjFfUHg0ZXo2LTBqWGZ4NFlweVV3VVlaMzAtVm04Y1VZVTFpcDJpNkJx?oc=5"
+      },
+      {
+       "name": "Yahoo Finance",
+       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPa2pYN0dOS1VhLU13SktpX1JKeEZIX09xaUVaWDNCX0dsLUswdlZjdWk2LXdMRmdtZGhzaHVhZzlzQ2hXcUpfOEh3YlVMaGk0UXpXMGVJdWdjWDJjTzZWcVVDYlNuNmR1NXRXRHE4TGp6LUpBbzVRM3FRSG1HdC05TjNnODBCM2FMelljclVsOXdXN3JhRFVXWUVObFY0ZXJ2b1ZvU1ZkOA?oc=5"
+      },
+      {
+       "name": "Auckland Council",
+       "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQMGQtakNxZXJwU0hyTGtZV2RZdTB1YW1NQlk3UzNkUVZQUEpZWWhITzN6dDFjV0lwV3Jwd1ZaZFl1ZmxKQmUyNVZSb3NVY3dXeWx4Q3VhWlI4cjJZZVRpbFAyTm9WQ081c3lzeHpvN0NNSE9Vc201dUd3ODhPTHJVZ1BLajBDbzVhVlNwYXdTMHVqcVFIQ0o5cjJNT013Q1FxZ1JWTUI4N1Y0NURaNXVYdTVxbS1OeklIWmxRdlVsWEpXeGdTM2NyWVJn?oc=5"
+      },
+      {
+       "name": "Te Ao Māori News",
+       "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxORk11dHI2Q1M4enI5UERPZktlRjVJbW1FZzVNXzg5Ti14R2dEMVVzekpxSWwzQjE2SkJoZkxSVkFGVUxsdkNybjNaUXU3MzRhWUJZZFdpVHgybGwydW5lZGRwenhDUTBBVXFYV2poQllPQzZwaFcwX3JlZTkxc01XV1RwWTlyVHNIN09oNkcxa0lWUTUyMnZMR2E1UGtSbXN1TUl4V1lGX25sS2xBSW9ZaFhfYzV5aURmeExPUlM5QQ?oc=5"
       }
      ],
      "original_title": "Hamish McKay leaves Mission Bay rental after Tenancy Tribunal dispute",
-     "published_at": "2026-10-15T07:11+00:00",
-     "why_it_matters": "뉴질랜드 임대차보호법과 조정위원회 규정은 엄격하므로 임대료 납부와 계약 조항을 철저히 준수해야 합니다."
+     "published_at": "2026-10-15T19:13+00:00",
+     "why_it_matters": "현지 렌트 거주 시 임대차 규정과 분쟁조정위원회의 실제 운영 방식을 참고할 수 있습니다."
+    },
+    {
+     "id": "6cdb2ebd5800",
+     "title_ko": "오클랜드 실비아파크 인근 1번 고속도로서 차량 화재",
+     "summary_ko": [
+      "오클랜드 실비아파크 인근 1번 고속도로 진출로 부근에서 차량 화재가 났습니다.",
+      "긴급 구조대가 즉시 출동해 화재 진압 및 현장 수습 작업을 진행했습니다.",
+      "사고 처리 과정에서 해당 구간 도로가 통제되며 일시적 정체가 발생했습니다."
+     ],
+     "tags": [
+      "교통",
+      "사건사고"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOQy1nSzYweTllVFdiZFh3bEpYVlI2ODdtRFViSHlnc2FUWmRGUmxDZDJrOWhPUS00RFNqckJTb05XaXNiVm5VU0lNOHR1MDFJbHJhLVhEMzRNUXpKT2NWckthQjU2LVNfcDQzYW5ZMGtqUlZoaG4wT1JHY3hTVEdKN2JYREJQUlRSaDczTDZUMW83UExEVzlTQ1E0S0NacFFxc3JV?oc=5"
+      }
+     ],
+     "original_title": "Car catches fire by SH1 offramp near Sylvia Park",
+     "published_at": "2026-10-15T06:54+00:00",
+     "why_it_matters": "오클랜드 주요 도로 이동 시 돌발 화재 및 정체 정보를 미리 확인할 필요가 있습니다."
+    },
+    {
+     "id": "09d2b6892c09",
+     "title_ko": "카멜 칼리지 학생 차량에 달걀 투척… 교장 강력 비판",
+     "summary_ko": [
+      "오클랜드 카멜 칼리지 학생들의 차량에 달걀이 투척되는 사건이 발생했습니다.",
+      "학교장은 학생 안전과 재산을 위협하는 용납할 수 없는 행동이라며 비판했습니다.",
+      "학교 당국은 유사 사건 재발 방지와 학생 보호를 위한 대책에 나섰습니다."
+     ],
+     "tags": [
+      "교육",
+      "치안",
+      "사회"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNeFByeGxEUTUwY3ptZU9KNWhMY3JWVC1acFNqbDFDSWM5ZWd2YzA0UjR4UTlsZkhjNFRJLXRkRTVOb2FDMkZuRF9vZl9yVzZqUk1MOXMzeG1JQlUtQzRjTE1qRTZabWxjYk9GUFVZS0dtSy14R3NscWE1SVRzN3R3a3NqSi05UGNLWjRtWFA1TWo3TXVOU0dEbm85UXJIQ3pNOHB6dUliOWVCU09KUWdYV3hlNzZFNUNhbkVyQl9DVUJvQTJvQ1RXbDIxeTRBVjhu?oc=5"
+      }
+     ],
+     "original_title": "Auckland's Carmel College principal slams 'unacceptable' behaviour after students' cars egged",
+     "published_at": "2026-10-15T05:55+00:00",
+     "why_it_matters": "자녀 통학 환경과 현지 학군 내 청소년 비행 관련 치안 관리에 유의해야 합니다."
+    },
+    {
+     "id": "765aa9692af2",
+     "title_ko": "오클랜드대, 자연재해 대응력 높일 5가지 스마트 해법",
+     "summary_ko": [
+      "오클랜드 대학교 연구진이 자연재해에 효과적으로 대응할 5가지 전략을 제시했습니다.",
+      "데이터 기반 조기 예측과 지역사회 회복탄력성 강화 방안 등이 포함되었습니다.",
+      "기상이변이 잦아진 현지 도시 방재 시스템 개선에 기여할 것으로 기대됩니다."
+     ],
+     "tags": [
+      "재난",
+      "사회"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "University of Auckland",
+       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPWHVkM0JaNDhfYVhCRGZnNmJNV0stcHNOaGh2bXl3X1Zta3hTZGRNeG9CS2kwM0lKME1mSGdmTlNMWnFHMGh5ci1UUVJPa1Q0T1IxQmR4Z3RnaERTbXNMUll4XzBQVnNkN2gwWmtTQUQ0c1MxYXcyN1diUGI5dV9UWDlYdlZ0dHJsZFNEOE9YdWE2QWZiVjZsMQ?oc=5"
+      }
+     ],
+     "original_title": "Five smart ideas to respond better to natural disasters",
+     "published_at": "2026-10-15T05:54+00:00",
+     "why_it_matters": "기상이변이 잦은 뉴질랜드 거주 시 지역 방재 체계와 대비 요령을 숙지할 필요가 있습니다."
     }
    ]
   },
   "nz_immigration": {
    "label": "이민 레이더",
-   "briefing": "허위 서류 단속 여파로 유학비자 거절률이 급증하며 이민 심사 전반의 문턱이 한층 높아지고 있습니다.",
+   "briefing": "학생비자 단속과 국외 출생 자녀 입국 난항 등 비자 심사 요건이 엄격해지고 있습니다.",
    "items": [
     {
      "id": "a32a2ed62d6d",
-     "title_ko": "뉴질랜드 학생비자 거절률 급증, 허위 서류 단속 강화",
+     "title_ko": "학생비자 거절 급증… 허위 서류 제출 단속 여파",
      "summary_ko": [
-      "뉴질랜드 이민성이 최근 3개월간 유학비자 신청에 대한 심사를 대폭 강화해 기각 건수가 급증했습니다.",
-      "방글라데시 70%, 인도 39% 등 전 세계 유학비자 거절률이 지난 회계연도 13%에서 34%까지 치솟았습니다.",
-      "하청 유학원들의 허위 재정 서류 제출에 따른 단속 여파로 정상적인 지원자들까지 엄격한 심사를 받고 있습니다."
+      "뉴질랜드 이민청이 최근 3개월간 유학생 비자 거절 건수가 급증했다고 밝혔습니다.",
+      "방글라데시 70%, 인도 39% 등 허위 서류 제출 유학원에 대한 단속 결과입니다.",
+      "주요국 규제 강화로 뉴질랜드 신청이 몰린 가운데 비자 심사가 더욱 엄격해졌습니다."
      ],
      "tags": [
       "비자",
       "이민",
       "교육"
      ],
-     "importance": 9,
+     "importance": 10,
      "sources": [
       {
        "name": "1News",
@@ -864,71 +889,27 @@
       {
        "name": "The New Nation",
        "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE12WFVuVEpMamlOMUo0cTZ5UUdvUXVodXJPeHVvZkdLNkFLX3R6bU9qbHNWV0V6Y2F1RTVGankybzVNYTJUTWZXbXEwTV9Dc0U?oc=5"
-      }
-     ],
-     "original_title": "What is behind a recent spike in refused study visa applications?",
-     "published_at": "2026-10-15T18:30+00:00",
-     "why_it_matters": "유학 후 이민을 준비하는 경우 서류와 재정 증빙의 투명성을 철저히 확보해야 심사 지연이나 거절을 피할 수 있습니다."
-    },
-    {
-     "id": "40b59cb7d8e6",
-     "title_ko": "뉴질랜드, 서류 위조 단속으로 학생비자 대거 거절",
-     "summary_ko": [
-      "뉴질랜드가 영국에 이어 나이지리아, 인도, 방글라데시 등 일부 국가 유학비자 신청을 대거 거절하고 나섰습니다.",
-      "재정 증빙 및 학업 서류의 대규모 위조 행위가 적발되면서 이민 당국이 심사 기준을 대폭 강화한 데 따른 조치입니다.",
-      "캐나다와 호주의 규제 강화로 뉴질랜드로 몰린 부실 신청에 대한 단속이 전 세계 학생비자 심사에 영향을 주고 있습니다."
-     ],
-     "tags": [
-      "비자",
-      "이민",
-      "교육"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "Legit.ng",
-       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQY0JPaXk2ZHJvaTZnbXBUYk1feXc0NEFtQTVnTVJhcDZZMHdXbXdhZGd2MnRIVm1WV0N2QUZuM01uLVJ6bDY1NE1PWlRicVE0b0xsWnh4LWRxZ1o1ZXN5MGtvcW5MRGktV1RRanNXb3R5OS04c0NvdHhqZ1dpZEhPMk5QcnVZdmtSOUhrMFM3UlF6OTBBSE9kZ1NKUVc3SExjWjlN?oc=5"
       },
       {
        "name": "Business Insider Africa",
        "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPNllMOTNaZFY5Q1VTdHBXNGg4V1dJMWM1ZUZaci1XWmtNYV9kdmU4QlVHaGk1X0pQa1did1FNbk5SeU5IdHlMMVF4bG5wMjQyTzlvdFRCUjNIY1g1NS1wTWFfeXNNdlFJbTJZa0RTYTA2OWgzMmRiVDJSclJRZVRCRm9iSDRWSDJxb2N3ODVuMWJVTVFsaU54MDJEUmxoWU56M25iYnloOWI2Y3AtYlJQSGMzQnNjSE0xZVRLRGtwa3hGaW9IMXdjbmtMY2hUOEYxNndjLVUwOTQ?oc=5"
-      }
-     ],
-     "original_title": "After UK, Another Country Rejects Student Visa Applications Massively From Nigerians, Others",
-     "published_at": "2026-10-15T14:09+00:00",
-     "why_it_matters": "각국 유학생 대상 심사 문턱이 높아짐에 따라 공인된 유학원을 통한 정확한 비자 서류 준비가 더욱 중요해졌습니다."
-    },
-    {
-     "id": "cb401c69a77a",
-     "title_ko": "뉴질랜드군 입대 가능 4개국 시민권자 비자 요건 발표",
-     "summary_ko": [
-      "뉴질랜드 정부가 자국 군대에 지원할 수 있는 4개 협력국 시민권자를 위한 구체적인 비자 요건을 발표했습니다.",
-      "만성적인 군 인력 부족을 해소하기 위해 특정 동맹국 출신 군 복무 희망자에게 비자 경로를 개방한 조치입니다.",
-      "해당 국가 지원자들은 강화된 보안 심사와 자격 검증을 거쳐 뉴질랜드 군 입대 비자를 취득하게 됩니다."
-     ],
-     "tags": [
-      "비자",
-      "이민",
-      "고용"
-     ],
-     "importance": 9,
-     "sources": [
+      },
       {
        "name": "Legit.ng",
-       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORUNrMGVYMjhoU2E3aHVfRkdLZzNhZ0ZRNHdGRUhMYlJFc2FXRDlmSk5xamVqNHZvQ2pXNnlfYnhiU3J5b3R5MjVBRDRXQ0FiMnlZU3BuRk13NEFobHdXeEcwc3VaaFhHcXpfTTdBVHhGSTl3NjNVSE9RWkw2TjB5djI0UWRqODRnNmR5bHB6cUpyQXJqMFBHM2JTTm9UNV9Md19yUWQtaWgyR2RMVHpYVQ?oc=5"
+       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQY0JPaXk2ZHJvaTZnbXBUYk1feXc0NEFtQTVnTVJhcDZZMHdXbXdhZGd2MnRIVm1WV0N2QUZuM01uLVJ6bDY1NE1PWlRicVE0b0xsWnh4LWRxZ1o1ZXN5MGtvcW5MRGktV1RRanNXb3R5OS04c0NvdHhqZ1dpZEhPMk5QcnVZdmtSOUhrMFM3UlF6OTBBSE9kZ1NKUVc3SExjWjlN?oc=5"
       }
      ],
-     "original_title": "New Zealand Announces Visa Requirements for Citizens of 4 Countries to Join the Military",
-     "published_at": "2026-10-15T11:24+00:00",
-     "why_it_matters": "군 인력 개방은 특수 직역 비자 정책의 일환이며 한국 국적자에게는 해당되지 않으나 전체 이민 기조를 엿볼 수 있습니다."
+     "original_title": "What is behind a recent spike in refused study visa applications?",
+     "published_at": "2026-10-15T18:30+00:00",
+     "why_it_matters": "비자 심사 기준이 엄격해져 철저하고 정확한 재정 증빙 서류 준비가 중요합니다."
     },
     {
      "id": "2a4cbb38b0c9",
-     "title_ko": "스리랑카 출생 영주권자 자녀, 다운증후군 진단에 비자 곤경",
+     "title_ko": "영주권자 국외 출생 자녀, 다운증후군 진단에 비자 '난항'",
      "summary_ko": [
-      "뉴질랜드 영주권자 부모가 스리랑카에서 낳은 아기가 다운증후군 진단을 받은 후 비자 발급이 막혀 곤경에 처했습니다.",
-      "뉴질랜드 이민성의 엄격한 건강 요건(의료 비용 부담 심사) 기준에 걸려 아이의 입국 허가가 지연되고 있습니다.",
-      "영주권자 가족이라도 해외 출생 자녀의 기저 질환에 따라 비자 승인이 거부될 수 있어 인도적 대책 요구가 커지고 있습니다."
+      "뉴질랜드 영주권자 부모가 스리랑카에서 낳은 아기가 비자 문제에 직면했습니다.",
+      "출생 후 다운증후군 진단을 받으면서 건강 심사 기준 충족이 어려워졌습니다.",
+      "영주권자 자녀라 하더라도 국외 출생 시 엄격한 심사가 적용되는 현실을 보여줍니다."
      ],
      "tags": [
       "비자",
@@ -944,21 +925,44 @@
      ],
      "original_title": "Baby born in Sri Lanka to New Zealand residents caught in limbo after Down syndrome diagnosis",
      "published_at": "2026-10-15T02:28+00:00",
-     "why_it_matters": "뉴질랜드 영주권 소지자라도 해외 출생 자녀의 건강 상태에 따라 가족 비자 취득이 엄격히 제한될 수 있습니다."
+     "why_it_matters": "영주권자라도 국외 출생 자녀는 엄격한 건강 심사를 통과해야 함을 유의해야 합니다."
     },
     {
-     "id": "70908f37b7ec",
-     "title_ko": "쿡제도 체류 여성 비자 분쟁, 법적 난제 직면",
+     "id": "cb401c69a77a",
+     "title_ko": "뉴질랜드, 4개국 국적자 대상 군 입대 비자 요건 발표",
      "summary_ko": [
-      "쿡제도에 발이 묶인 한 여성의 체류 자격 문제를 두고 이민 전문 변호사가 해결이 까다로운 사안이라고 지적했습니다.",
-      "해당 사건은 복잡한 이민법 규정과 관할 문제가 얽혀 있어 당국의 명확한 판단이 지연되고 있습니다.",
-      "이번 사례는 특수 지역 체류 및 비자 조건 해석에 관한 이민 당국의 엄격한 접근 방식을 보여줍니다."
+      "뉴질랜드 정부가 특정 4개국 시민권자의 군 입대를 허용하는 비자 규정을 발표했습니다.",
+      "지정 국가 출신 지원자에게 군 복무를 통한 입국 및 체류 경로를 제공합니다.",
+      "군 인력 확충과 우방국 간의 안보 교류 강화를 목적으로 한 조치입니다."
      ],
      "tags": [
       "비자",
       "이민"
      ],
-     "importance": 9,
+     "importance": 8,
+     "sources": [
+      {
+       "name": "Legit.ng",
+       "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORUNrMGVYMjhoU2E3aHVfRkdLZzNhZ0ZRNHdGRUhMYlJFc2FXRDlmSk5xamVqNHZvQ2pXNnlfYnhiU3J5b3R5MjVBRDRXQ0FiMnlZU3BuRk13NEFobHdXeEcwc3VaaFhHcXpfTTdBVHhGSTl3NjNVSE9RWkw2TjB5djI0UWRqODRnNmR5bHB6cUpyQXJqMFBHM2JTTm9UNV9Md19yUWQtaWgyR2RMVHpYVQ?oc=5"
+      }
+     ],
+     "original_title": "New Zealand Announces Visa Requirements for Citizens of 4 Countries to Join the Military",
+     "published_at": "2026-10-15T11:24+00:00",
+     "why_it_matters": "특수 직역을 중심으로 다변화되는 뉴질랜드 비자 및 체류 정책 동향입니다."
+    },
+    {
+     "id": "70908f37b7ec",
+     "title_ko": "쿡 제도에 갇힌 여성 사례… 이민 전문 변호사 '난제'",
+     "summary_ko": [
+      "쿡 제도에 발이 묶인 한 여성의 체류 및 비자 문제가 현지에서 주목받고 있습니다.",
+      "이민 전문 변호사는 이번 사안이 법적·행정적으로 풀기 까다로운 문제라고 지적했습니다.",
+      "태평양 도서국 체류와 관련한 제도적 복잡성에 관심이 집중되고 있습니다."
+     ],
+     "tags": [
+      "비자",
+      "이민"
+     ],
+     "importance": 8,
      "sources": [
       {
        "name": "RNZ",
@@ -967,7 +971,7 @@
      ],
      "original_title": "Case of woman stuck in Cook Islands may be hot to handle, immigration lawyer says",
      "published_at": "2026-10-15T02:58+00:00",
-     "why_it_matters": "뉴질랜드 연계 도서 지역 방문이나 특수 체류 시 비자 유효성과 재입국 요건을 사전 확인해야 체류 불확실성을 막습니다."
+     "why_it_matters": "뉴질랜드 연계 국가 체류 시 발생할 수 있는 비자 변동 위험을 사전에 살펴야 합니다."
     }
    ]
   }
@@ -986,27 +990,21 @@
   "mode": "gemini",
   "failed_feeds": [],
   "feeds_total": 32,
-  "stories_after_dedupe": 628,
+  "stories_after_dedupe": 627,
   "usage": {
    "provider": "gemini",
-   "requests": 4,
+   "requests": 5,
    "models": {
     "gemini-flash-lite-latest": {
-     "calls": 2,
-     "input_tokens": 18670,
-     "output_tokens": 18531,
-     "cost_usd": 0.0
-    },
-    "gemini-3.8-flash": {
-     "calls": 1,
-     "input_tokens": 10341,
-     "output_tokens": 3791,
+     "calls": 3,
+     "input_tokens": 20331,
+     "output_tokens": 19396,
      "cost_usd": 0.0
     },
     "gemini-flash-latest": {
-     "calls": 1,
-     "input_tokens": 4353,
-     "output_tokens": 4033,
+     "calls": 2,
+     "input_tokens": 14524,
+     "output_tokens": 11080,
      "cost_usd": 0.0
     }
    },
