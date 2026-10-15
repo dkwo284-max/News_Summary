@@ -1,19 +1,24 @@
 {
  "date": "2026-10-16",
- "generated_at": "2026-10-16T05:06:55+09:00",
+ "generated_at": "2026-10-16T05:11:30+09:00",
  "timezone": "Asia/Seoul",
  "sections": {
   "kr_society": {
    "label": "사회",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "흉기 난동 수사와 어린이보호구역 사고 등 사건·사고 소식이 잇따랐습니다.",
    "items": [
     {
      "id": "425faa800bfd",
-     "title_ko": "전작권 전환 “새 기준” 밝힌 미국…국방부 “골대 옮기면 영원히 불가”",
+     "title_ko": "미국의 전작권 새 기준 시사에 국방부 반발",
      "summary_ko": [
-      "전작권 전환 “새 기준” 밝힌 미국…국방부 “골대 옮기면 영원히 불가”"
+      "미 군사당국이 전작권 전환에 새로운 기준이 필요하다고 언급했습니다.",
+      "이에 대해 국방부 측은 골대를 옮기면 전환이 영원히 불가하다고 반박했습니다.",
+      "전작권 전환 평가 기준을 둘러싼 한미 간 협의 과정에서 이견이 이어질 전망입니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "사회"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -26,11 +31,16 @@
     },
     {
      "id": "356745f80031",
-     "title_ko": "인천 흉기난동 전 휴학계에 현금 680만원…도주 준비했나",
+     "title_ko": "인천 쇼핑몰 흉기 난동 피의자 배낭서 현금 680만 원 발견",
      "summary_ko": [
-      "배낭서 여러 종류 흉기·현금 발견 “금 팔아 마련한 돈” 경찰에 진술 경찰, 범행 후 도주 준비 여부 수사인천의 대형 복합쇼핑몰에서 시민 10…"
+      "인천 복합쇼핑몰 흉기 난동 피의자의 배낭에서 흉기들과 현금 680만여 원이 발견됐습니다.",
+      "기초생활수급자인 피의자는 금을 팔아 돈을 마련했으며 직전 대학 휴학계를 냈습니다.",
+      "경찰은 피의자가 사전에 치밀하게 도주 계획을 세웠는지 여부를 집중 수사하고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "사건사고",
+      "사회"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -42,91 +52,91 @@
      "published_at": "2026-10-15T12:54+00:00"
     },
     {
-     "id": "d5875bf45b3f",
-     "title_ko": "흉기신고 잦은 곳에 경찰력 집중…가정폭력범 전자발찌 추진(종합)",
+     "id": "caf5b6f59db7",
+     "title_ko": "밀양 어린이보호구역서 우회전 차에 치여 초등생 숨져",
      "summary_ko": [
-      "경찰이 가정폭력 가해자에 대한 격리 조치와 접근금지 위반 제재 등을 스토킹 범죄에 준하는 수준으로 상향하는 방..."
+      "경남 밀양의 한 어린이보호구역에서 우회전하던 SUV에 초등학교 2학년생이 치였습니다.",
+      "피해 어린이는 병원으로 이송됐으나 결국 숨졌으며 당시 신호등 없는 횡단보도를 건넜습니다.",
+      "경찰은 사고 차량을 운전한 70대 남성을 어린이보호구역 치사 혐의로 입건했습니다."
      ],
-     "tags": [],
+     "tags": [
+      "사건사고",
+      "교통",
+      "사회"
+     ],
      "importance": 8,
      "sources": [
       {
        "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015153251004"
+       "url": "https://www.yna.co.kr/view/AKR20261015177900052"
       }
      ],
-     "original_title": "흉기신고 잦은 곳에 경찰력 집중…가정폭력범 전자발찌 추진(종합)",
-     "published_at": "2026-10-15T12:53+00:00"
+     "original_title": "밀양 어린이보호구역서 우회전 차량에 초등 2학년 치여 숨져",
+     "published_at": "2026-10-15T12:23+00:00"
     },
     {
-     "id": "41d6197466a2",
-     "title_ko": "특검, 경남선관위 압수수색…투표자 수 허위입력 등 수사(종합)",
+     "id": "fd41758304c2",
+     "title_ko": "경찰에 8차례 신고에도 막지 못한 사망 사건 발생",
      "summary_ko": [
-      "이태한 선거관리위원회 특별검사팀이 경상남도선거관리위원회에 대한 압수수색을 진행했다."
+      "피해자가 경찰에 8번이나 신고했음에도 비극적인 죽음을 막지 못했습니다.",
+      "경찰의 현장 대응 체계와 부실한 보호 조치에 대한 비판이 제기되고 있습니다.",
+      "반복된 신고에도 참변이 이어지자 신변 보호 시스템 전반의 개선 요구가 커지고 있습니다."
      ],
-     "tags": [],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015082051052"
-      }
+     "tags": [
+      "치안",
+      "사건사고",
+      "사회"
      ],
-     "original_title": "특검, 경남선관위 압수수색…투표자 수 허위입력 등 수사(종합)",
-     "published_at": "2026-10-15T12:44+00:00"
-    },
-    {
-     "id": "4418a703324b",
-     "title_ko": "서울경찰청 국감 '수사 잣대' 질타…與는 \"봐주기\"·野는 \"탄압\"(종합)",
-     "summary_ko": [
-      "15일 국회 행정안전위원회의 서울경찰청 국정감사에서는 여야가 정치인과 전직 고위공직자 관련 사건..."
-     ],
-     "tags": [],
      "importance": 7,
      "sources": [
       {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015180651004"
-      },
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015180600004"
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/national_general/2026/10/16/D5QVXXG2EFCRHLKFFXUGG4NAPA/"
       }
      ],
-     "original_title": "서울경찰청 국감 '수사 잣대' 질타…與는 \"봐주기\"·野는 \"탄압\"(종합)",
-     "published_at": "2026-10-15T14:08+00:00"
+     "original_title": "경찰에 8번 신고했는데… 또 막지 못한 죽음",
+     "published_at": "2026-10-15T15:43+00:00"
+    },
+    {
+     "id": "df4bae1190af",
+     "title_ko": "내신 5등급제 도입 후 일반고 자퇴생 급증",
+     "summary_ko": [
+      "내신 5등급제 시행 이후 특목고 자퇴생은 줄어든 반면 일반고 자퇴생은 크게 늘었습니다.",
+      "내신 개편안이 적용되면서 고교 유형에 따라 학생들의 입시 셈법이 엇갈렸습니다.",
+      "제도 변화가 일반고 학생들의 학업 지속과 입시 전략에 지속적인 영향을 줄 전망입니다."
+     ],
+     "tags": [
+      "교육",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/national_general/2026/10/16/KC5MTQABLBERTH4NB4MS4IGYL4/"
+      }
+     ],
+     "original_title": "내신 5등급제 시행되자… 특목고 자퇴생 줄었는데, 일반고는 급증",
+     "published_at": "2026-10-15T15:39+00:00"
     }
-   ],
-   "error": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   },
   "kr_economy": {
    "label": "경제",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "한일 통화스와프 연장과 증시 및 전셋값 불안 등 경제 지표 변동이 이어졌습니다.",
    "items": [
     {
-     "id": "d5d027fe6ba4",
-     "title_ko": "코스피·코스닥 동반 서킷브레이커…미국발 충격에 ‘검은 목요일’",
-     "summary_ko": [
-      "코스피·코스닥 동반 서킷브레이커…미국발 충격에 ‘검은 목요일’"
-     ],
-     "tags": [],
-     "importance": 10,
-     "sources": [
-      {
-       "name": "KBS 뉴스",
-       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1pZ1hJX0oyd0JodDd2SXAwaVdtSGFJT3B5bU1malpXa2xhRnBsRmVRdFRoN1VoY2hnYlR2LWNhcFpvVWIwMWZUOElIVndsTms1bFF0LVY5dkt5cEk?oc=5"
-      }
-     ],
-     "original_title": "코스피·코스닥 동반 서킷브레이커…미국발 충격에 ‘검은 목요일’",
-     "published_at": "2026-10-15T12:01+00:00"
-    },
-    {
      "id": "03674cdd10fe",
-     "title_ko": "[속보] 한일 재무장관, 100억 달러 규모 통화스와프 연장 합의",
+     "title_ko": "한일 100억 달러 규모 통화스와프 2029년까지 연장",
      "summary_ko": [
-      "2029년 11월까지 기존 규모 유지 원화·엔화 맡기고 달러 차입 구조 차기 재무장관회의 한국 개최 추진한국과 일본이 100억달러 규모의 통화…"
+      "한일 재무장관이 100억 달러 규모의 통화스와프 계약을 3년 연장하기로 합의했습니다.",
+      "이에 따라 계약 만기는 2029년 11월까지 연장되며 전액 달러 차입 구조가 유지됩니다.",
+      "양국은 금융 협력 공조를 강화하고 차기 재무장관회의를 한국에서 열기로 뜻을 모았습니다."
      ],
-     "tags": [],
+     "tags": [
+      "경제",
+      "환율"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -143,11 +153,16 @@
     },
     {
      "id": "222608adc0fa",
-     "title_ko": "코스피 7.5% 폭락… 불안한 ‘반도체 코리아’",
+     "title_ko": "코스피 7.5% 폭락에 흔들리는 반도체 업계",
      "summary_ko": [
-      "코스피 7.5% 폭락… 불안한 ‘반도체 코리아’"
+      "코스피 지수가 7.5% 폭락하며 증시에 심각한 충격을 안겼습니다.",
+      "국내 대표 산업인 반도체 중심의 주가 하락세가 두드러지게 나타났습니다.",
+      "반도체 불확실성 확대로 인해 국내 주요 산업과 거시경제 전반의 긴장감이 고조됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "증시",
+      "경제"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -159,53 +174,176 @@
      "published_at": "2026-10-15T15:43+00:00"
     },
     {
-     "id": "409287cec191",
-     "title_ko": "[속보] 美 9월 PPI 1.3% 올라 연 6.3%↑…4년여 만에 최고",
+     "id": "999d92065cf0",
+     "title_ko": "코스피 급락에 시장서 우려의 진단 제기",
      "summary_ko": [
-      "[속보] 美 9월 PPI 1.3% 올라 연 6.3%↑…4년여 만에 최고"
+      "국내 증시가 큰 폭으로 하락하자 시장에서 20년간 드문 수준이라는 진단이 나왔습니다.",
+      "과거 특정 위기 국면에서만 나타났던 수준의 급격한 변동성이 포착되었습니다.",
+      "시장 변동성이 장기화할 수 있다는 우려 속에 투자자들의 불안이 확산되고 있습니다."
      ],
-     "tags": [],
-     "importance": 9,
+     "tags": [
+      "증시",
+      "경제"
+     ],
+     "importance": 8,
      "sources": [
       {
        "name": "한국경제",
-       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE05bG12bVlJckNiaHlsT2w4d3FaeTFpSnItY19xdTlxYWMyanBaaHlQUnExX1ctby1ZV2I1YjVZMWN5RmI3ZzFEdGE5MWpyVVhMUU5pZGRxODhyQQ?oc=5"
+       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9EZmRyNVVVM2dRdFFKTHozbU9kNDRmaVktMEtrbVJoSEFaVkthemE0UWhZWEZoNUpYSThmU05hZUFieUc2X1UwaHM1Uzlxd1JUelk2Tnk5cGl6Zw?oc=5"
       }
      ],
-     "original_title": "[속보] 美 9월 PPI 1.3% 올라 연 6.3%↑…4년여 만에 최고",
-     "published_at": "2026-10-15T12:37+00:00"
+     "original_title": "\"20년간 딱 두 번 있었다\"…코스피 급락에 나온 섬뜩한 진단",
+     "published_at": "2026-10-15T17:26+00:00"
     },
     {
-     "id": "cb6da1082710",
-     "title_ko": "“빅테크, AI 투자금 반도 못 건져”… ‘투자 절벽’ 오면 반도체 치명상",
+     "id": "646d53078ec3",
+     "title_ko": "환율 불안으로 자동차·조선 제조업 실적 비상",
      "summary_ko": [
-      "“빅테크, AI 투자금 반도 못 건져”… ‘투자 절벽’ 오면 반도체 치명상"
+      "환율 변동 폭이 커지면서 자동차와 조선 등 주요 수출 제조업의 실적 우려가 커졌습니다.",
+      "예상치 못한 환율 흐름으로 인해 기업들의 어닝 쇼크 위험이 가시화되고 있습니다.",
+      "원자재 비용과 환차손 등 복합 요인으로 제조업체들의 수익성 관리에 비상이 걸렸습니다."
      ],
-     "tags": [],
+     "tags": [
+      "환율",
+      "경제"
+     ],
      "importance": 8,
      "sources": [
       {
        "name": "조선일보",
-       "url": "https://www.chosun.com/economy/stock-finance/2026/10/16/B4UTYD2BNRAPNFKY6TOQZB7AZM/"
+       "url": "https://www.chosun.com/economy/industry-company/2026/10/16/QTRP77KY6VCLDNBQJBZU5TF24U/"
       }
      ],
-     "original_title": "“빅테크, AI 투자금 반도 못 건져”… ‘투자 절벽’ 오면 반도체 치명상",
-     "published_at": "2026-10-15T15:42+00:00"
+     "original_title": "환율의 습격… 車·조선 등 제조업 ‘어닝 쇼크’ 공포",
+     "published_at": "2026-10-15T15:31+00:00"
+    },
+    {
+     "id": "fcf4c7638c10",
+     "title_ko": "서울 주택 전셋값 9월 기준 10년 만에 최대 폭 상승",
+     "summary_ko": [
+      "서울 주택 전셋값이 9월 기준으로 10년 만에 가장 높은 상승 폭을 기록했습니다.",
+      "전세 공급 부족과 임대차 수요 집중이 맞물리며 가격 상승세가 거세졌습니다.",
+      "가을 이사철 전세 품귀 현상이 심화되면서 세입자들의 주거비 부담이 늘어날 전망입니다."
+     ],
+     "tags": [
+      "부동산",
+      "주거",
+      "경제"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/real_estate/2026/10/16/PRPRPJ46ANFPRHX4OGNS4TQI3A/"
+      }
+     ],
+     "original_title": "서울 주택 전셋값, 9월 기준 10년 만에 최대 상승",
+     "published_at": "2026-10-15T15:31+00:00"
     }
-   ],
-   "error": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   },
   "kr_entertainment": {
    "label": "연예",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "부산국제영화제가 폐막한 가운데 AI 음성 권리 보호 논의가 주목받았습니다.",
    "items": [
     {
-     "id": "0920a7644115",
-     "title_ko": "日 배우·성우단체 \"AI로 영화더빙·고인 목소리 사용 안돼\"",
+     "id": "f95452ce40e1",
+     "title_ko": "박장범 사장 수신료 인상 밀려왔다고 언급",
      "summary_ko": [
-      "일본에서 인공지능(AI)을 활용한 음성 무단 생성 행위 피해가 잇따르는 가운데 배우·성우단체가 '목소리의 권리..."
+      "박장범 KBS 사장이 수신료 인상 논의가 항상 뒷전으로 밀려왔다고 밝혔습니다.",
+      "공영방송의 재정 건전성 확보를 위해 수신료 현실화가 필요함을 내비쳤습니다.",
+      "수신료 분리 징수 이후 공영방송 재원 구조 개편을 둘러싼 논쟁이 이어질 전망입니다."
      ],
-     "tags": [],
+     "tags": [
+      "방송",
+      "연예"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "미디어오늘",
+       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE82VEk1QmVCTDQ0LVZMeXFPMWtvaGRFU1V6SkltLWxqTWtzUVVLVWd2U3diNW1YSnhxcWRRQU9hZWFQYk9JYTVBWEhuZTdudTZ3UDBUVG1yYmVmV2wzRnpmOFFhQWlSZHd3Zy05NU05VnQ?oc=5"
+      }
+     ],
+     "original_title": "박장범 KBS 사장 “수신료 인상은 언제나 뒷전으로 밀려왔다”",
+     "published_at": "2026-10-15T08:44+00:00"
+    },
+    {
+     "id": "5fabfaa39825",
+     "title_ko": "부산국제영화제 관객 20만 명 돌파 11년 만에 달성",
+     "summary_ko": [
+      "제31회 부산국제영화제 총 관객 수가 20만 명을 넘어선 것으로 집계되었습니다.",
+      "이는 2015년 이후 11년 만에 처음으로 20만 관객을 돌파한 기록입니다.",
+      "코로나19 여파를 딛고 아시아 대표 영화 축제로서의 활기를 완전히 되찾았습니다."
+     ],
+     "tags": [
+      "연예"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "YTN",
+       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1GMDBjckhvSHpTRWNKb0VpTmQ5Z0kzczRPZzFGTDg5cEU1THc0N0xDU3o1Qnk1LXp3RHA4TUJBRXAwek5ONkVwSC01QXppdmo2OEdmUEpnYzFNdlJjdlE?oc=5"
+      }
+     ],
+     "original_title": "부산국제영화제, 관객 20만 명 넘어...2015년 이후 처음",
+     "published_at": "2026-10-15T15:32+00:00"
+    },
+    {
+     "id": "7205b050f54d",
+     "title_ko": "부산영화제 폐막 대상에 이란 마지디 감독의 '빵과 책'",
+     "summary_ko": [
+      "제31회 부산국제영화제가 15일 열흘간의 일정을 마치고 폐막식을 열었습니다.",
+      "경쟁 부문 대상은 마지드 마지디 감독의 이란 영화 '빵과 책'이 수상했습니다.",
+      "총 관객 20만 명을 넘긴 이번 영화제 대상 수상작은 아카데미 출품 자격을 얻습니다."
+     ],
+     "tags": [
+      "연예"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015177351051"
+      }
+     ],
+     "original_title": "부산영화제 폐막…대상 수상 이란 감독 \"전쟁 없는 세상 오길\"(종합)",
+     "published_at": "2026-10-15T13:26+00:00"
+    },
+    {
+     "id": "aa0190b1ee22",
+     "title_ko": "제31회 부산영화제 폐막 대상 이란 '빵과 책' 수상",
+     "summary_ko": [
+      "제31회 부산국제영화제가 15일 경쟁 부문 시상을 끝으로 대단원의 막을 내렸습니다.",
+      "부산 어워드 대상에는 이란 마지드 마지디 감독의 '빵과 책'이 만장일치로 선정됐습니다.",
+      "올해 영화제는 11년 만에 관객 수 20만 명을 돌파하며 성황리에 마무리되었습니다."
+     ],
+     "tags": [
+      "연예"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015177300051"
+      }
+     ],
+     "original_title": "부산국제영화제 폐막…경쟁 부문 대상에 이란 영화 '빵과 책'",
+     "published_at": "2026-10-15T12:01+00:00"
+    },
+    {
+     "id": "0920a7644115",
+     "title_ko": "일본 배우연합 AI 고인 목소리 사용 및 더빙 대체 금지 발표",
+     "summary_ko": [
+      "일본 배우연합이 고인의 목소리 이용과 AI 더빙 대체를 금지하는 지침을 공표했습니다.",
+      "음성 무단 생성 피해가 확산하자 학습부터 판매까지 본인 동의를 받도록 규정했습니다.",
+      "배우와 성우의 고용 기회 및 음성 퍼블리시티권을 보호하는 계기가 될 것으로 보입니다."
+     ],
+     "tags": [
+      "기술",
+      "연예",
+      "고용"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -215,97 +353,24 @@
      ],
      "original_title": "日 배우·성우단체 \"AI로 영화더빙·고인 목소리 사용 안돼\"",
      "published_at": "2026-10-15T08:20+00:00"
-    },
-    {
-     "id": "aa0190b1ee22",
-     "title_ko": "부산국제영화제 폐막…경쟁 부문 대상에 이란 영화 '빵과 책'",
-     "summary_ko": [
-      "아시아 최대 영화 축제 제31회 부산국제영화제가 15일 대단원의 막을 내렸다."
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015177300051"
-      },
-      {
-       "name": "YTN",
-       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBkUkNyQkthRjVRMTJkYmMxQmZpUWF0T2REQlFaS0hkdy1OMlBFNnd3NFNDMTc0VmdwZmo4QVc1NHJUdDZHWFA5Z2t2cUYwbl9Bb055SlRCSHNzSzZwUUE?oc=5"
-      }
-     ],
-     "original_title": "부산국제영화제 폐막…경쟁 부문 대상에 이란 영화 '빵과 책'",
-     "published_at": "2026-10-15T15:32+00:00"
-    },
-    {
-     "id": "c4fc3d65687c",
-     "title_ko": "넷플릭스 \"자막·더빙도 제2의 제작\"…K-콘텐츠 세계화의 힘",
-     "summary_ko": [
-      "'피지컬: 100' 멕시코판 첫 주 250만 시청…이탈리아판도 흥행"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015031200017"
-      },
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015031251017"
-      }
-     ],
-     "original_title": "넷플릭스 \"자막·더빙도 제2의 제작\"…K-콘텐츠 세계화의 힘",
-     "published_at": "2026-10-15T04:53+00:00"
-    },
-    {
-     "id": "3d241e7a4e99",
-     "title_ko": "“문화를 지키고 세계로”…세계 공영방송 미래 모색",
-     "summary_ko": [
-      "“문화를 지키고 세계로”…세계 공영방송 미래 모색"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "KBS 뉴스",
-       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9aVmNOT0J0SU9jcmxNcFVCSFNEWHhBaEpfTzRjeS1XUWlmZzdLUGNxWEUwNlhJMngwQTRMT1VnTVp2eGlORkYxQmZNc2h4YWVfN2NjT0N3WkVuVnc?oc=5"
-      }
-     ],
-     "original_title": "“문화를 지키고 세계로”…세계 공영방송 미래 모색",
-     "published_at": "2026-10-15T12:36+00:00"
-    },
-    {
-     "id": "7dbc30a407f5",
-     "title_ko": "'여전히 찬란하게' 김혜자 \"두 소녀, 아픈 역사로만 보지 않길\"",
-     "summary_ko": [
-      "1942년 경상도 산골에 사는 두 소녀 순옥(박서경 분)과 정임(최주은)은 둘도 없는 단짝이다."
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015169700005"
-      }
-     ],
-     "original_title": "'여전히 찬란하게' 김혜자 \"두 소녀, 아픈 역사로만 보지 않길\"",
-     "published_at": "2026-10-15T10:05+00:00"
     }
-   ],
-   "error": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   },
   "kr_politics": {
    "label": "정치",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "초대 중수청장 임명과 전작권 전환 기준을 둘러싼 한미 간 이견이 대두되었습니다.",
    "items": [
     {
      "id": "8db7f1700ef4",
-     "title_ko": "[속보] 李대통령, 김지용 중수청장 임명안 재가",
+     "title_ko": "이재명 대통령 김지용 중수청장 임명안 재가",
      "summary_ko": [
-      "("
+      "이재명 대통령이 김지용 초대 중대범죄수사청장 후보자에 대한 임명안을 재가했습니다.",
+      "국회 행정안전위원회 인사청문회를 거쳐 청문보고서가 채택된 지 하루 만에 이뤄졌습니다.",
+      "중대범죄수사청은 출범 이후 이어졌던 초기 수장 공백 사태를 매듭짓게 되었습니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -315,39 +380,23 @@
       {
        "name": "조선일보",
        "url": "https://www.chosun.com/politics/politics_general/2026/10/16/5AZ5QLQYCFCM5NFFYTXRJEIPAE/"
-      },
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/politics/politics_general/2026/10/15/P4OOXKXUJREX3BIXK3TCDG4RUE/"
       }
      ],
      "original_title": "[속보] 李대통령, 김지용 중수청장 임명안 재가",
      "published_at": "2026-10-15T15:40+00:00"
     },
     {
-     "id": "3f369d44ca39",
-     "title_ko": "국회, 법사위 등 11개 국감…대법관 재제청·농협 개혁 등 쟁점",
-     "summary_ko": [
-      "여야는 16일 반환점을 돈 국정감사에서 조희대 대법원장의 대법관 후보 재제청 거부 논란과 취임 후 중단된 이재..."
-     ],
-     "tags": [],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015163700001"
-      }
-     ],
-     "original_title": "국회, 법사위 등 11개 국감…대법관 재제청·농협 개혁 등 쟁점",
-     "published_at": "2026-10-15T20:00+00:00"
-    },
-    {
      "id": "965d688fd875",
-     "title_ko": "[단독] 카메라 달린 中전기차 200대, 軍 시설 자유 출입",
+     "title_ko": "카메라 장착된 중국산 전기차 군 시설 자유 출입 논란",
      "summary_ko": [
-      "[단독] 카메라 달린 中전기차 200대, 軍 시설 자유 출입"
+      "카메라가 장착된 중국산 전기차 수백 대가 군사 시설을 자유롭게 드나든 것으로 나타났습니다.",
+      "보안 규정 미비로 인해 군사 기밀 및 보안 정보 유출에 대한 우려가 제기되었습니다.",
+      "군 당국은 외부 출입 차량에 대한 보안 관리 규정 점검에 나설 것으로 보입니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "치안"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -359,54 +408,111 @@
      "published_at": "2026-10-15T20:00+00:00"
     },
     {
-     "id": "9e7f9792d18d",
-     "title_ko": "브런슨 “전작권 전환 조건 변해” 강신철 “美에 항의 전달”",
+     "id": "8eb69df6c6be",
+     "title_ko": "이 대통령 김지용 임명으로 중수청 2주 만에 수장 공백 해소",
      "summary_ko": [
-      "브런슨 “전작권 전환 조건 변해” 강신철 “美에 항의 전달”"
+      "이재명 대통령이 김지용 초대 중대범죄수사청장에 대한 임명안을 최종 재가했습니다.",
+      "제청 38일 만이자 출범 2주 만이며 청문보고서에는 적격과 부적격이 병기됐습니다.",
+      "일부 여야의 반발이 있었으나 초대 청장이 임명되며 기관 정비에 속도가 붙을 전망입니다."
      ],
-     "tags": [],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/politics/diplomacy-defense/2026/10/16/24E6GXKWWFCOPBTP3BPRA76M6A/"
-      }
+     "tags": [
+      "정치"
      ],
-     "original_title": "브런슨 “전작권 전환 조건 변해” 강신철 “美에 항의 전달”",
-     "published_at": "2026-10-15T15:43+00:00"
-    },
-    {
-     "id": "9c5772e480b4",
-     "title_ko": "軍, 중동 청해부대 작전범위 확대 검토…해상초계기 투입도 고려",
-     "summary_ko": [
-      "국방부가 소말리아 아덴만 해역 일대에서 임무를 수행 중인 해외 파병부대 청해부대의 작전범위를 호르무즈 해협 인..."
-     ],
-     "tags": [],
      "importance": 8,
      "sources": [
       {
        "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261015182200504"
+       "url": "https://www.yna.co.kr/view/AKR20261015174400001"
       }
      ],
-     "original_title": "軍, 중동 청해부대 작전범위 확대 검토…해상초계기 투입도 고려",
-     "published_at": "2026-10-15T14:36+00:00"
+     "original_title": "李대통령, 김지용 임명…중수청 출범 2주 만에 수장 공백 해소",
+     "published_at": "2026-10-15T10:57+00:00"
+    },
+    {
+     "id": "8ceceea3b7b8",
+     "title_ko": "전작권 전환 검증 난항 속 한미 톱다운 방식 주목",
+     "summary_ko": [
+      "전작권 전환을 위한 미래연합군사령부 FOC 검증 평가를 두고 한미 간 협의가 난항입니다.",
+      "미국 측의 새 기준 언급에 대해 국방부는 평가 기준을 유동적으로 바꿔선 안 된다고 맞섰습니다.",
+      "실무 협의 난항에 따라 향후 국방장관 회담이나 정상회의를 통한 조율이 주목됩니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015137951504"
+      }
+     ],
+     "original_title": "전작권 전환 문턱높이는 美…협의 난항에 톱다운 돌파 시도하나(종합)",
+     "published_at": "2026-10-15T10:19+00:00"
+    },
+    {
+     "id": "91e6eb032fa3",
+     "title_ko": "미군 전작권 새 기준 발언에 국방부 골대 옮기면 불가 반박",
+     "summary_ko": [
+      "주한미군사령관이 안보 여건 변화에 따른 전작권 전환 새 기준을 언급했습니다.",
+      "국방부 대변인은 기준을 계속 바꾸면 전작권 전환은 영원히 불가능하다고 지적했습니다.",
+      "국방장관은 해당 발언에 대한 우려 입장을 미측에 이미 전달했다고 밝혔습니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261015081251504"
+      }
+     ],
+     "original_title": "美 \"전작권전환에 새로운 기준\"…韓 \"골대옮기면 영원히 불가능\"(종합)",
+     "published_at": "2026-10-15T10:00+00:00"
     }
-   ],
-   "error": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   },
   "nz_national": {
    "label": "뉴질랜드",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "의료 인력난에 따른 치료 지연과 봄철 기습 한파 속 학생비자 심사 강화가 이어지고 있습니다.",
    "items": [
     {
-     "id": "877336c5744f",
-     "title_ko": "Mum heartbroken son's cancer treatment delayed by Starship shortages",
+     "id": "a32a2ed62d6d",
+     "title_ko": "뉴질랜드 학생비자 거절 급증, 허위 서류 단속 강화 여파",
      "summary_ko": [
-      "The mother of a toddler whose cancer treatment was delayed says that her son wa…"
+      "뉴질랜드 이민성이 최근 3개월간 방글라데시 70%, 인도 39%의 학생비자 신청을 거절했습니다.",
+      "7월부터 9월까지 전액 자비 학생비자 거절 건수는 6,273건으로 거절률이 34%까지 급등했습니다.",
+      "일부 유학원의 허위 재정 서류 제출에 대한 단속 여파로 비자 심사 전반이 대폭 강화되었습니다."
      ],
-     "tags": [],
+     "tags": [
+      "비자",
+      "이민",
+      "교육"
+     ],
      "importance": 9,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/15/what-is-behind-a-recent-spike-in-refused-study-visa-applications/"
+      }
+     ],
+     "original_title": "What is behind a recent spike in refused study visa applications?",
+     "published_at": "2026-10-15T18:30+00:00",
+     "why_it_matters": "유학 후 이민을 준비할 때 재정 증빙 등 제출 서류의 정확성과 투명성이 더욱 중요해졌습니다."
+    },
+    {
+     "id": "877336c5744f",
+     "title_ko": "스타쉽 아동병원 간호 인력난에 유아 암 치료 최대 일주일 지연",
+     "summary_ko": [
+      "오클랜드 스타쉽 병원의 간호 인력 부족으로 소아암 환자의 항암 치료와 골수 이식이 지연되었습니다.",
+      "신경모세포종을 앓는 2세 유아의 골수 이식이 전문 간호 인력 부족으로 최소 일주일 연기됐습니다.",
+      "보건당국 채용 약속에도 불구하고 병실 현장에서는 인력 부족으로 인한 환아 고통이 가중되고 있습니다."
+     ],
+     "tags": [
+      "의료",
+      "사회"
+     ],
+     "importance": 8,
      "sources": [
       {
        "name": "1News",
@@ -419,120 +525,20 @@
      ],
      "original_title": "Mum heartbroken son's cancer treatment delayed by Starship shortages",
      "published_at": "2026-10-15T19:39+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "a32a2ed62d6d",
-     "title_ko": "What is behind a recent spike in refused study visa applications?",
-     "summary_ko": [
-      "In the past three months, Immigration New Zealand declined 70% of applications…"
-     ],
-     "tags": [
-      "이민"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/15/what-is-behind-a-recent-spike-in-refused-study-visa-applications/"
-      },
-      {
-       "name": "1News",
-       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPaWRHSm80SHdCOHREeGkzSEs2X1UtY2JmRl9uU1Q3NG9YakhYS2dIdkNXbnFhNC0wZDBXLUk4M3FnbWk2TWN2eWc5ZXJidDdxUFRNR0VlYVpEdS1mM19NMm1YT3ZVWXl4MTNBRXRXLU5uNWRJVGNVUWxza3M0eE5RS2JONHRqY25faEpXcUJlVUlVNUJ3UEJKX3lKWVhmcmRqM0E?oc=5"
-      }
-     ],
-     "original_title": "What is behind a recent spike in refused study visa applications?",
-     "published_at": "2026-10-15T18:30+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "bb1c25d79afc",
-     "title_ko": "New Zealand’s top 30 suburbs for under-35s: Best places to buy for young Kiwis",
-     "summary_ko": [
-      "New Zealand’s top 30 suburbs for under-35s: Best places to buy for young Kiwis"
-     ],
-     "tags": [],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "OneRoof",
-       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPS2h3N2NUS2hpS2VkRGVSYlR6eUVfZm1DTzN6UXNRTDBvejBPSmx0TTBGb3RpSld0RkJvSlNjeTAtOTZnNVk4NG5nM1BJcmV4ME43SHJ3TkVwMEM5d0FQRDkyOFJxSXNabTR5Y1FQSFJyZ3ZZY2xVT2Vpblc5M1dBMFQtSzR3QXkxRDF6QmJVZkw4U0lrbTF5OVI4T0p1UWw0bF81dlRLTEdZeWpUX1YwNG9QVQ?oc=5"
-      }
-     ],
-     "original_title": "New Zealand’s top 30 suburbs for under-35s: Best places to buy for young Kiwis",
-     "published_at": "2026-10-15T17:10+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "d31b62db29a2",
-     "title_ko": "Why is the price of petrol rising while oil prices are falling?",
-     "summary_ko": [
-      "Why is the price of petrol rising while oil prices are falling?"
-     ],
-     "tags": [
-      "생활비"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNWHdmbHc2VzFlSDhtNlUwNGVOU3ZUbndmdWl0QV9aUXhXWFU2cmlHQjBFZ3p2UE1lNElGV0swQVVUb2J4Y1dZSmI1SmFkT0VGZ1djR01LV0gxYUFzU2VrcXlBNU04Z3RIRG5CQlp5RlNKSUlveWE3cHRrQ2xZcWRhT04xRHVDS3pSWU9Ccmp3UDhxWTZ4d01nZS1hU1hGdGF2XzZjUk90bUdVUQ?oc=5"
-      }
-     ],
-     "original_title": "Why is the price of petrol rising while oil prices are falling?",
-     "published_at": "2026-10-15T16:22+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "cb1fec6294f5",
-     "title_ko": "'No sense': Outrage over Government order to limit nurse enrolments",
-     "summary_ko": [
-      "'No sense': Outrage over Government order to limit nurse enrolments"
-     ],
-     "tags": [],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "1News",
-       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPTEpPS2lrc0pLQ0F4M1J2b25YUTRIRGZzR2RadlhIWWNXa1N4V2JLX2dLMXNWM0pYM3FDXzVUU2ZHYjh6N2I0emY2ZzFoMkttZ2NwVVJRSmpmQ1ZvUzRwVThGd0ZMcW9mdWVlVmZZdXpOMkpFZ0RfWkwwenZEZGlkN0FrYlUxTXR0YzFLa1lMR004azJxVFBaZTVrVGhQWDF6Vmc?oc=5"
-      }
-     ],
-     "original_title": "'No sense': Outrage over Government order to limit nurse enrolments",
-     "published_at": "2026-10-15T04:30+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "559912128c04",
-     "title_ko": "Slip, surface flooding as heavy downpours move across NZ",
-     "summary_ko": [
-      "A stretch of State Highway 3 through Mt Messenger has been reduced to one lane."
-     ],
-     "tags": [
-      "기상재해"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/15/slip-surface-flooding-as-heavy-downpours-moves-across-nz/"
-      },
-      {
-       "name": "1News",
-       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNVUUxSUtfSlBaR1h6QVBKTHdKUlVSYXp3Yml2QzJEV2ZMdy1wVTFZa19WUkZGck91WHlfNkVrcGFHVmJyc0hMWkNOUnlTejFGcmJFNWluM0J1QmxwN0x0Nmp5RlBEWkpwcnRTbGFHelU0a2YyVTFuTE5ZYXBxUUYtdXVZMmprckdjLTlHRGRPWDhPZVR4Z1pV?oc=5"
-      }
-     ],
-     "original_title": "Slip, surface flooding as heavy downpours move across NZ",
-     "published_at": "2026-10-15T17:29+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "공공 병원의 전문 의료 인력 부족으로 중증 질환 치료 대기가 발생할 수 있음을 유의해야 합니다."
     },
     {
      "id": "0f81280c3591",
-     "title_ko": "Tech sell-off rolls on as hot inflation data stokes rate worries",
+     "title_ko": "미국 인플레이션 충격에 기술주 폭락, 아시아 증시도 급락",
      "summary_ko": [
-      "Seoul’s Kospi fell 7.6% after briefly triggering a trading halt."
+      "미국 9월 소비자물가지수가 3.7%로 예상치를 웃돌며 글로벌 기술주 중심 매도세가 이어졌습니다.",
+      "금리 인상 우려 속에 서울 코스피는 장중 8% 이상 급락했고 도쿄 증시도 약 5% 하락했습니다.",
+      "AI 인프라 과열 우려와 맞물려 투자자들이 위험 자산에서 안전 자산으로 이동하는 양상입니다."
      ],
      "tags": [
-      "생활비"
+      "경제",
+      "증시",
+      "물가"
      ],
      "importance": 8,
      "sources": [
@@ -543,15 +549,44 @@
      ],
      "original_title": "Tech sell-off rolls on as hot inflation data stokes rate worries",
      "published_at": "2026-10-15T19:47+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "글로벌 금리 불확실성과 금융 시장 변동성은 환율 및 해외 자산 이전 계획에 직접 영향을 줍니다."
+    },
+    {
+     "id": "ce246519c51f",
+     "title_ko": "스타쉽 병원 암 치료 지연 사태, 정치 쟁점화 비판 제기",
+     "summary_ko": [
+      "스타쉽 병원에서 간호 인력난으로 4개월간 항암치료 20회와 골수이식 2건이 지연된 사실이 확인됐습니다.",
+      "소아암 완치 판정을 받은 환아의 아버지는 아이들의 치료 문제를 정치적으로 이용하지 말라고 비판했습니다.",
+      "보건 인력 부족 사태가 선거 국면과 맞물리며 공공 의료 체계 개선에 대한 사회적 요구가 커졌습니다."
+     ],
+     "tags": [
+      "의료",
+      "정치",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/auckland/starship-cancer-delays-father-says-using-sick-kids-politically-is-cruel/R5M77QHD3BH2HBONWSG7XTAZQ4/"
+      }
+     ],
+     "original_title": "Starship cancer delays: Father says using sick kids politically is cruel",
+     "published_at": "2026-10-15T19:46+00:00",
+     "why_it_matters": "현지 공공 의료 시스템의 실제 대기 상황과 서비스 역량을 가늠할 수 있는 사안입니다."
     },
     {
      "id": "5274148ef163",
-     "title_ko": "Huntly woman’s breast cancer returns for the third time, now terminal",
+     "title_ko": "헌틀리 여성 유방암 3차 재발 판정, 생활비 모금 진행",
      "summary_ko": [
-      "A former colleague has set up a Givealittle page for treatment and living costs."
+      "헌틀리의 한 요양시설 간병인으로 일하던 여성이 유방암이 4기로 재발해 척추와 간으로 전이됐습니다.",
+      "환자는 결국 일을 그만두었으며 이전 동료가 치료비와 생활비 마련을 위해 모금 페이지를 개설했습니다.",
+      "소득이 끊긴 암 환자의 경제적 자립과 투병 소식이 지역 사회에 안타까움을 전하고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "의료",
+      "사회"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -561,107 +596,117 @@
      ],
      "original_title": "Huntly woman’s breast cancer returns for the third time, now terminal",
      "published_at": "2026-10-15T19:07+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "중증 질환 발생 시 생활비 공백에 대비한 현지 민간 의료보험 가입의 중요성을 보여줍니다."
+    },
+    {
+     "id": "44bfc1cda499",
+     "title_ko": "뉴질랜드 주말 뇌우와 우박 동반, 이후 맑은 날씨 예보",
+     "summary_ko": [
+      "기상청 멧서비스는 주말 동안 뇌우와 우박, 강풍을 동반한 변덕스러운 봄 날씨가 이어진다고 예보했습니다.",
+      "지난 12시간 동안 뉴질랜드 전역에 588회의 낙뢰가 관측되었고 웰링턴에는 최대 40mm의 비가 내렸습니다.",
+      "북섬 동해안과 코로만델 지역에 뇌우 위험이 이어지나 일요일부터 점차 맑은 날씨를 회복할 전망입니다."
+     ],
+     "tags": [
+      "날씨",
+      "재난"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/16/thunderstorms-and-sunshine-its-going-to-be-a-weather-rollercoaster/"
+      }
+     ],
+     "original_title": "Thunderstorms and sunshine: It's going to be a weather rollercoaster",
+     "published_at": "2026-10-15T19:01+00:00",
+     "why_it_matters": "주말 야외 활동 및 장거리 이동 시 돌발적인 기상 악화와 우박 피해에 주의가 필요합니다."
+    },
+    {
+     "id": "804aa004bf5d",
+     "title_ko": "암 23곳 전이에도 희망 잃지 않는 와이카토 여성의 투병기",
+     "summary_ko": [
+      "와이카토 지역에서 신체 23곳으로 암이 전이된 여성이 힘겨운 투병 생활을 이어가고 있습니다.",
+      "심각한 전이 상태에도 불구하고 환자는 긍정적인 태도로 치료와 일상을 포기하지 않고 있습니다.",
+      "지역 사회에서는 어려운 상황 속에서도 투병을 이어가는 환자에게 응원을 보내고 있습니다."
+     ],
+     "tags": [
+      "의료",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQZFUtMmZPYWpWNUd1aEl1ZFlqLXJDSk43NGhIc0h2dzREV0dhU0JpdXRLMWRKcjkzcERQSzh0TFpjZ01MTnYycElRaXBtYUVEQ3I2c2pRR3U1Z2s3QW0yN2dtVDFCWGN0TV9zYlJGbWx6OFZYeC1Lbzlrenl6YTdRamFNMV8xN01jQ2U0dGpXNHpiNnFfQXphMm90ZXFqazNxNE44SkVoYjJpY2hsZU1IQkhNZThaVlJMRUJLeXVaWmdpWnktWGgydFJNVlNJeXdYVkl3bzJQbw?oc=5"
+      }
+     ],
+     "original_title": "Cancer has spread to 23 parts of her body but Waikato woman fights on",
+     "published_at": "2026-10-15T18:46+00:00",
+     "why_it_matters": "중증 질환 치료 환경과 현지 지역사회의 지원 체계를 엿볼 수 있는 사례입니다."
+    },
+    {
+     "id": "799b5edfa0b3",
+     "title_ko": "뉴질랜드 기습 한파 주의보, 크라이스트처치 기온 16도 급락",
+     "summary_ko": [
+      "남극발 한파의 영향으로 크라이스트처치 낮 최고기온이 26.5도에서 10도로 16도 이상 급락했습니다.",
+      "루이스 패스 등 고지대 산간 도로에는 눈이 예보되었으며 남·북섬 내륙 곳곳에 서리가 예상됩니다.",
+      "기상청은 주말 아침 최저기온이 2도 안팎까지 떨어지는 만큼 외출 시 방한에 유의할 것을 당부했습니다."
+     ],
+     "tags": [
+      "날씨",
+      "교통"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/weather-temperatures-tumble-as-cold-snap-grips-new-zealand/ZAGYDMVVYFEPVHQLRGPDW5747I/"
+      }
+     ],
+     "original_title": "Weather: Temperatures tumble as cold snap grips New Zealand",
+     "published_at": "2026-10-15T17:46+00:00",
+     "why_it_matters": "갑작스러운 기온 강하와 도로 결빙에 대비해 주거 난방 및 고갯길 운전 안전 점검이 필요합니다."
     }
-   ],
-   "error": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   },
   "nz_auckland": {
    "label": "오클랜드",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "스타쉽 아동병원 인력난과 피하 캠핑장 재개장을 둘러싼 안전 논란이 주목받고 있습니다.",
    "items": [
     {
-     "id": "71fdb7bf3f20",
-     "title_ko": "Auckland's Starship Hospital delays some cancer treatments due to nurse shortage",
+     "id": "978d834119be",
+     "title_ko": "이민자 지원 단체, 뉴질랜드제일당의 자사 정책 채택 주장",
      "summary_ko": [
-      "Auckland's Starship Hospital delays some cancer treatments due to nurse shortage"
+      "한 이민자 권익 옹호 단체가 뉴질랜드제일당이 자신들이 제안한 이민 정책을 채택했다고 밝혔습니다.",
+      "해당 단체는 기존 이민자 보호와 권리 강화를 위한 정책 요구가 정당 공약에 반영됐다고 주장했습니다.",
+      "총선을 앞두고 주요 정당들의 이민 관련 정책 수립 과정에 이목이 쏠리고 있습니다."
      ],
      "tags": [
-      "의료"
+      "이민",
+      "정치"
      ],
      "importance": 9,
      "sources": [
       {
        "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNWVlzZDRocFc2aWt3NmJucVFwbGR0T2NaUVhCcTU1Skg1d0tuQ2RGb1JCcFpvWEtOME9YbVhYaW5lV21TYkU4ZGFaSmdfbWM5MVNycnBTWGJaS0Q5NUdtT0pYMkZ6SmJOU0JZbm5wYUtjYTdpREZxdjd1cGxacEdKN3Iyd1E3VDBiU3hXa2tBOXl2bmVDN0V3Skl5V21BX0RzSGVDQ0pxNFl4R29LTEF4cjFzcEozcll2MUI5RmZQUQ?oc=5"
-      },
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPZlZWOUxUYlR0QkJ2cFZ6UkMtSzB2M2M2SjN2X1RqNjNXb0hNaWxtN0xIWnIyaWM1UEJqbnI3bnhRMmRxdjMyakc4M1dWbVBkWTRwbDJuSURHSlJHcTFxcXVDb3VLZ19XeHBEbG1lcEZvSVF1bHNPVnFxWkdkUzZJc3dNM0tlS3pGTUpiRF81Z2VpWmNQajRWZGY4SEdrYXpySHh6Sy1naEYzMTNFTHJqLWFxcjFfdw?oc=5"
+       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOR1AzYm5ucEsxdzdxYlc0aFh2a0VCWG5yNnRST2trbUREWUZRQXl2Ulp6X05TMS1YRV9RN0ZGR0JJc2xnTlFpWklHQ3FmYVQ0UEI0OXB2XzBldUo0ZlluVGpxdmZNTXozc0xnM1VzVnljOFBTVE1aNEJHVUdPdERVUUFBMUlUczZzcmNFeWxlZmRpQ0dlS21MOG50bV96eGVad25rRnpORXhlR3BQUVNBRWgwWEZMOUto?oc=5"
       }
      ],
-     "original_title": "Auckland's Starship Hospital delays some cancer treatments due to nurse shortage",
-     "published_at": "2026-10-15T04:44+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "61dd4e5100f6",
-     "title_ko": "Mother heartbroken toddler's cancer treatment delayed by Starship Hospital staff shortages",
-     "summary_ko": [
-      "Mother heartbroken toddler's cancer treatment delayed by Starship Hospital staf…"
-     ],
-     "tags": [
-      "의료"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOU21vM01PNG1Db2NyYjFILUlBMlVBU2diOTNrLXhwRVlsS3JJOXJZTXo1MDhFeXNnNjVqbkp4V2VxT0pQM0EwaXZGLUoxSzVXdVpyY3dlSXZZcVBBbUE1OXd1NnBBdldfYll5Q1RvSWZrZzRXaDhIbDUyX1BvV0xhQWpqVmtRU3VGRVRiR3VhTlFhUmxGcGMySXpmb3d4SE1fZU4wYnBKRnlqUk1KcjRqNUdEYTZOT1FyZ2J1NE5RalRfQTJQWVNHWHpER0s?oc=5"
-      }
-     ],
-     "original_title": "Mother heartbroken toddler's cancer treatment delayed by Starship Hospital staff shortages",
-     "published_at": "2026-10-15T17:25+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "c294f71a3248",
-     "title_ko": "Starship Hospital's cancer ward three months away from full staff after chemotherapy delays",
-     "summary_ko": [
-      "Starship Hospital's cancer ward three months away from full staff after chemoth…"
-     ],
-     "tags": [
-      "의료"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOX3NuMWFoTzd4NDROOHFZRUd5TmdaUEJpalpRaEcxcmQ3b09mTEt1TTFkWnVyWFctYnpaYWtPSEIyMjI5bFFwZlZvOS1iUGlMaEFCZG9yeGdKTHdxYk5EMWhZT2ZXSGxuS0w5RTBKbV9PZWxVTHZXWG5VYnd1a3FsdFdSZnI4VlFNSl9EaGt3YnJSOS1vQ1VaTExETEdaaDAtZUxPQzZGQXhNWGYxY0lZUmVTMEtaaGhwUlk2WVJrNS1PZnYxck1JbFY3R2dyQQ?oc=5"
-      }
-     ],
-     "original_title": "Starship Hospital's cancer ward three months away from full staff after chemotherapy delays",
-     "published_at": "2026-10-15T05:06+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "70908f37b7ec",
-     "title_ko": "Case of woman stuck in Cook Islands may be hot to handle, immigration lawyer says",
-     "summary_ko": [
-      "Case of woman stuck in Cook Islands may be hot to handle, immigration lawyer sa…"
-     ],
-     "tags": [
-      "이민"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNRkt3Sm84eHZCcDBzNFcwMUEydEZzaUxIeXVOTlI0dGNuZ2xFUG56WndjVno0Yk4wcC1MZFZWS3hsdWtUY1ZJZzRSb2Znal9KZ1ZISDE3cFJkNU5DcFBRV0xsN2pYWUFFSzhSVFlKRTMwOE5pY3RpcUdtYkZFbzh4ektCdGV3WC1iaWFiUFpqZUFZREk3bWVSTU0tTlRaVmlnUWI1eG1WR09Qc3N4WmJQdEtlYm10UGdGbHMwM3MyLTFUc2s?oc=5"
-      }
-     ],
-     "original_title": "Case of woman stuck in Cook Islands may be hot to handle, immigration lawyer says",
-     "published_at": "2026-10-15T02:58+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "original_title": "Migrant advocacy group says NZ First has adopted its policy",
+     "published_at": "2026-10-15T16:22+00:00",
+     "why_it_matters": "정치권의 이민 정책 방향 변화는 향후 비자 심사 규정 및 영주권 취득 기준에 영향을 줄 수 있습니다."
     },
     {
      "id": "28241cf0be7d",
-     "title_ko": "Piha Campground to reopen this summer against council recommendations",
+     "title_ko": "오클랜드 피하 캠핑장, 침수 위험 경고에도 이번 여름 재개장",
      "summary_ko": [
-      "The campground is on a flood plain and part of the site flooded in 2018."
+      "오클랜드 피하 캠핑장이 시의회의 홍수 위험 보고서 권고에도 불구하고 이번 여름 재개장합니다.",
+      "해당 부지는 2018년 침수된 범람원 위에 있어 미래 홍수 시 인명 피해 위험이 제기된 바 있습니다.",
+      "용역 보고서는 이전이나 철수를 제시했으나 지역 위원회가 시설 재개장을 강행해 논란이 일고 있습니다."
      ],
      "tags": [
-      "기상재해"
+      "사회",
+      "재난"
      ],
      "importance": 8,
      "sources": [
@@ -680,65 +725,120 @@
      ],
      "original_title": "Piha Campground to reopen this summer against council recommendations",
      "published_at": "2026-10-15T19:33+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 서해안 주요 휴양 시설의 침수 위험 및 안전 관리 실태를 확인해 둘 필요가 있습니다."
+    },
+    {
+     "id": "ce246519c51f",
+     "title_ko": "스타쉽 병원 암 치료 지연 사태, 정치 쟁점화 비판 제기",
+     "summary_ko": [
+      "스타쉽 병원에서 간호 인력난으로 4개월간 항암치료 20회와 골수이식 2건이 지연된 사실이 확인됐습니다.",
+      "소아암 완치 판정을 받은 환아의 아버지는 아이들의 치료 문제를 정치적으로 이용하지 말라고 비판했습니다.",
+      "보건 인력 부족 사태가 선거 국면과 맞물리며 공공 의료 체계 개선에 대한 사회적 요구가 커졌습니다."
+     ],
+     "tags": [
+      "의료",
+      "정치",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/auckland/starship-cancer-delays-father-says-using-sick-kids-politically-is-cruel/R5M77QHD3BH2HBONWSG7XTAZQ4/"
+      }
+     ],
+     "original_title": "Starship cancer delays: Father says using sick kids politically is cruel",
+     "published_at": "2026-10-15T19:46+00:00",
+     "why_it_matters": "현지 공공 의료 시스템의 실제 대기 상황과 서비스 역량을 가늠할 수 있는 사안입니다."
+    },
+    {
+     "id": "ce3676b579c6",
+     "title_ko": "시의회 반대에도 재개장 결정된 피하 도메인 캠핑장",
+     "summary_ko": [
+      "오클랜드 서부 피하 도메인 캠핑장이 시의회 전문가들의 위험 경고에도 여름철 운영을 재개합니다.",
+      "자연재해 및 침수 위험을 다룬 엔지니어링 평가 결과 철수나 재배치가 권고된 상태였습니다.",
+      "지역 사회의 이용 수요와 안전 규제 사이의 상충 속에서 재개장 결정이 내려졌습니다."
+     ],
+     "tags": [
+      "사회",
+      "재난"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQVk9lRWlhZWctbm5QYnpYRExRNnYySjBadDhaVEFWOE5aVExSSTEwLXpISlZGWG1naDBQekxTVU5vOWtxN2ZYZFA2TlIyVkR6TXpmVy1SZmVvMFUxa2NySy1qaDhIUld3NFIyMng1ekVQMmhmR0VVRFMxVUx1b25MTncxNUNyWmdlQmFVTWlTeFlRLVk3V1NlYzM2c042eXdsS1MwakdZU0ota0hfWGc?oc=5"
+      }
+     ],
+     "original_title": "Piha domain to reopen for summer despite council recommendations",
+     "published_at": "2026-10-15T18:37+00:00",
+     "why_it_matters": "여름철 해변 캠핑장 등 자연재해 위험 지역 이용 시 안전 예방 수칙을 사전 확인해야 합니다."
+    },
+    {
+     "id": "61dd4e5100f6",
+     "title_ko": "스타쉽 병원 인력난으로 소아암 환아 치료 지연 속출",
+     "summary_ko": [
+      "오클랜드 스타쉽 어린이병원에서 의료 인력 부족으로 소아암 환아들의 필수 치료가 지연되고 있습니다.",
+      "치료를 제때 받지 못한 유아 환자의 부모들은 현장의 극심한 간호 인력난을 호소했습니다.",
+      "보건 인력 충원이 지연되면서 필수 소아 중증 치료 체계에 대한 우려가 확산되고 있습니다."
+     ],
+     "tags": [
+      "의료",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOU21vM01PNG1Db2NyYjFILUlBMlVBU2diOTNrLXhwRVlsS3JJOXJZTXo1MDhFeXNnNjVqbkp4V2VxT0pQM0EwaXZGLUoxSzVXdVpyY3dlSXZZcVBBbUE1OXd1NnBBdldfYll5Q1RvSWZrZzRXaDhIbDUyX1BvV0xhQWpqVmtRU3VGRVRiR3VhTlFhUmxGcGMySXpmb3d4SE1fZU4wYnBKRnlqUk1KcjRqNUdEYTZOT1FyZ2J1NE5RalRfQTJQWVNHWHpER0s?oc=5"
+      }
+     ],
+     "original_title": "Mother heartbroken toddler's cancer treatment delayed by Starship Hospital staff shortages",
+     "published_at": "2026-10-15T17:25+00:00",
+     "why_it_matters": "오클랜드 중심 전문 아동병원의 의료 공백 문제는 자녀를 둔 이민 가정에 직접적인 불안 요소입니다."
     }
-   ],
-   "error": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   },
   "nz_immigration": {
    "label": "이민 레이더",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "서류 위조 단속으로 학생비자 거절률이 급등하며 비자 심사 기준이 대폭 강화되는 추세입니다.",
    "items": [
     {
-     "id": "5f2d41e91408",
-     "title_ko": "New Zealand Simplifies RSE Accommodation Standards",
-     "summary_ko": [
-      "New Zealand Simplifies RSE Accommodation Standards"
-     ],
-     "tags": [],
-     "importance": 10,
-     "sources": [
-      {
-       "name": "Erickson Immigration Group",
-       "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE9lOWhqeGg2T3FiclRFRnE5M29MRDZOT2JXLXN3X0lLZFU1a1VJbm9oVUxUUmgtS3R6LW1XMF9XMTdjV3BSd3pZOGtmbnZIS1lMTnZKdGpXcUdPLVNkeU9UMmhoMUw1RDd0ZjB3MHhpZU50a2NtNThMMzh3?oc=5"
-      }
-     ],
-     "original_title": "New Zealand Simplifies RSE Accommodation Standards",
-     "published_at": "2026-10-14T20:26+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
      "id": "a32a2ed62d6d",
-     "title_ko": "What is behind a recent spike in refused study visa applications?",
+     "title_ko": "뉴질랜드 학생비자 거절 급증, 허위 서류 단속 강화 여파",
      "summary_ko": [
-      "In the past three months, Immigration New Zealand declined 70% of applications…"
+      "뉴질랜드 이민성이 최근 3개월간 방글라데시 70%, 인도 39%의 학생비자 신청을 거절했습니다.",
+      "7월부터 9월까지 전액 자비 학생비자 거절 건수는 6,273건으로 거절률이 34%까지 급등했습니다.",
+      "일부 유학원의 허위 재정 서류 제출에 대한 단속 여파로 비자 심사 전반이 대폭 강화되었습니다."
      ],
      "tags": [
-      "이민"
+      "비자",
+      "이민",
+      "교육"
      ],
      "importance": 9,
      "sources": [
       {
        "name": "1News",
        "url": "https://www.1news.co.nz/2026/10/15/what-is-behind-a-recent-spike-in-refused-study-visa-applications/"
-      },
-      {
-       "name": "1News",
-       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPaWRHSm80SHdCOHREeGkzSEs2X1UtY2JmRl9uU1Q3NG9YakhYS2dIdkNXbnFhNC0wZDBXLUk4M3FnbWk2TWN2eWc5ZXJidDdxUFRNR0VlYVpEdS1mM19NMm1YT3ZVWXl4MTNBRXRXLU5uNWRJVGNVUWxza3M0eE5RS2JONHRqY25faEpXcUJlVUlVNUJ3UEJKX3lKWVhmcmRqM0E?oc=5"
       }
      ],
      "original_title": "What is behind a recent spike in refused study visa applications?",
      "published_at": "2026-10-15T18:30+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "유학 후 이민을 준비할 때 재정 증빙 등 제출 서류의 정확성과 투명성이 더욱 중요해졌습니다."
     },
     {
      "id": "5804c2c29a17",
-     "title_ko": "NZ rejects 70pc of Bangladeshi student visa",
+     "title_ko": "뉴질랜드 이민성, 방글라데시 학생비자 70% 거절",
      "summary_ko": [
-      "NZ rejects 70pc of Bangladeshi student visa"
+      "뉴질랜드 이민성이 최근 방글라데시 국적자의 학생비자 신청 중 70%를 거절한 것으로 나타났습니다.",
+      "허위 서류 제출과 재정 능력 증빙 미비가 주된 거절 사유로 지목되었습니다.",
+      "특정 국가를 중심으로 비자 심사가 대폭 강화되면서 전체 학생비자 승인율도 하락했습니다."
      ],
      "tags": [
-      "이민"
+      "비자",
+      "이민",
+      "교육"
      ],
      "importance": 9,
      "sources": [
@@ -749,16 +849,44 @@
      ],
      "original_title": "NZ rejects 70pc of Bangladeshi student visa",
      "published_at": "2026-10-15T18:08+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "학업 목적의 입국 심사가 엄격해짐에 따라 입학 및 비자 신청 시 자격 요건 검증이 까다로워졌습니다."
+    },
+    {
+     "id": "40b59cb7d8e6",
+     "title_ko": "영국 이어 뉴질랜드도 일부 국가 학생비자 대거 거절",
+     "summary_ko": [
+      "영국에 이어 뉴질랜드 이민 당국도 나이지리아 등 특정 국가 학생비자 신청을 대거 기각하고 있습니다.",
+      "비자 심사 규정 강화와 재정 보증 서류에 대한 엄격한 조사가 대규모 거절로 이어졌습니다.",
+      "영미권 국가 전반에서 유학생 유입 억제 및 비자 규정 강화 기조가 확산되는 추세입니다."
+     ],
+     "tags": [
+      "비자",
+      "이민",
+      "교육"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "Legit.ng",
+       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQY0JPaXk2ZHJvaTZnbXBUYk1feXc0NEFtQTVnTVJhcDZZMHdXbXdhZGd2MnRIVm1WV0N2QUZuM01uLVJ6bDY1NE1PWlRicVE0b0xsWnh4LWRxZ1o1ZXN5MGtvcW5MRGktV1RRanNXb3R5OS04c0NvdHhqZ1dpZEhPMk5QcnVZdmtSOUhrMFM3UlF6OTBBSE9kZ1NKUVc3SExjWjlN?oc=5"
+      }
+     ],
+     "original_title": "After UK, Another Country Rejects Student Visa Applications Massively From Nigerians, Others",
+     "published_at": "2026-10-15T14:09+00:00",
+     "why_it_matters": "영미권 국가들의 유학 비자 심사 강화 흐름 속에서 뉴질랜드 역시 심사 기준을 높이고 있습니다."
     },
     {
      "id": "cb401c69a77a",
-     "title_ko": "New Zealand Announces Visa Requirements for Citizens of 4 Countries to Join the Military",
+     "title_ko": "뉴질랜드, 4개국 국적자 군 입대 비자 요건 발표",
      "summary_ko": [
-      "New Zealand Announces Visa Requirements for Citizens of 4 Countries to Join the…"
+      "뉴질랜드 정부가 특정 4개국 국적자를 대상으로 방위군 입대를 허용하는 비자 요건을 발표했습니다.",
+      "인력난 해소를 위해 군 복무와 연계된 비자 발급 자격과 심사 기준을 구체화했습니다.",
+      "특수 직역 중심의 외국인 인재 유치와 비자 연계 정책이 새롭게 시도되고 있습니다."
      ],
      "tags": [
-      "이민"
+      "비자",
+      "이민",
+      "고용"
      ],
      "importance": 9,
      "sources": [
@@ -769,15 +897,21 @@
      ],
      "original_title": "New Zealand Announces Visa Requirements for Citizens of 4 Countries to Join the Military",
      "published_at": "2026-10-15T11:24+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "특정 전문 인력이나 직무에 대한 이민 경로 개방 여부를 파악하는 참고 지표가 됩니다."
     },
     {
      "id": "c3157333aa54",
-     "title_ko": "Another country joins the UK in tightening student visas for applicants from Nigeria, India, Bangladesh and China over document and financial fraud",
+     "title_ko": "서류 및 재정 위조 단속, 주요국 유학비자 심사 강화",
      "summary_ko": [
-      "Another country joins the UK in tightening student visas for applicants from Ni…"
+      "뉴질랜드가 유학 비자 신청 시의 서류 위조와 재정 사기를 막기 위해 심사를 대폭 강화했습니다.",
+      "인도, 방글라데시, 나이지리아 등에서 발생한 부정 신청 급증이 주요 원인으로 파악됐습니다.",
+      "정상적인 신청자들까지 심사 지연이나 엄격한 검증을 받는 등 파장이 커지고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "비자",
+      "이민",
+      "교육"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -787,15 +921,21 @@
      ],
      "original_title": "Another country joins the UK in tightening student visas for applicants from Nigeria, India, Bangladesh and China over document and financial fraud",
      "published_at": "2026-10-15T09:04+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "허위 서류 단속 강화로 인해 비자 승인 소요 기간이 늘어나거나 추가 서류 요청이 잦아질 수 있습니다."
     },
     {
      "id": "2a4cbb38b0c9",
-     "title_ko": "Baby born in Sri Lanka to New Zealand residents caught in limbo after Down syndrome diagnosis",
+     "title_ko": "스리랑카 출생 영주권자 자녀, 다운증후군 진단 후 비자 발 묶여",
      "summary_ko": [
-      "Baby born in Sri Lanka to New Zealand residents caught in limbo after Down synd…"
+      "뉴질랜드 영주권자 부모가 스리랑카에서 낳은 아기가 다운증후군 진단 후 비자 승인을 받지 못하고 있습니다.",
+      "뉴질랜드 이민성의 엄격한 건강 요건 심사로 인해 아기의 입국이 불확실한 상태에 놓였습니다.",
+      "영주권자 가족이라도 해외 출생 자녀의 기저 질환에 따른 비자 거절 문제가 대두되고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "비자",
+      "이민",
+      "의료"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -805,10 +945,9 @@
      ],
      "original_title": "Baby born in Sri Lanka to New Zealand residents caught in limbo after Down syndrome diagnosis",
      "published_at": "2026-10-15T02:28+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "뉴질랜드 영주권 및 비자 신청 시 동반 가족의 건강 요건(의료비 부담 기준)이 엄격히 적용됩니다."
     }
-   ],
-   "error": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   }
  },
  "extras": {
@@ -825,15 +964,27 @@
   "mode": "gemini",
   "failed_feeds": [],
   "feeds_total": 32,
-  "stories_after_dedupe": 626,
+  "stories_after_dedupe": 636,
   "usage": {
    "provider": "gemini",
    "requests": 4,
    "models": {
     "gemini-flash-lite-latest": {
      "calls": 2,
-     "input_tokens": 17829,
-     "output_tokens": 12169,
+     "input_tokens": 18503,
+     "output_tokens": 12453,
+     "cost_usd": 0.0
+    },
+    "gemini-3.8-flash": {
+     "calls": 1,
+     "input_tokens": 9858,
+     "output_tokens": 3661,
+     "cost_usd": 0.0
+    },
+    "gemini-flash-latest": {
+     "calls": 1,
+     "input_tokens": 4406,
+     "output_tokens": 3889,
      "cost_usd": 0.0
     }
    },
