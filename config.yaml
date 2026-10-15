@@ -37,7 +37,8 @@ sections:
   kr_politics:      { label: "정치",     region: kr, top_n: 5, candidate_limit: 45 }
   nz_national:      { label: "뉴질랜드", region: nz, top_n: 8, candidate_limit: 90 }
   nz_auckland:      { label: "오클랜드", region: nz, top_n: 5, candidate_limit: 60 }
-  # nz_immigration 은 이민 전용 피드 + nz_national/nz_auckland 후보 중 이민 관련으로 분류된 기사로 구성
+  # nz_immigration(이민 레이더)은 이민 전용 피드 + 뉴질랜드/오클랜드 후보 중 독자 프로필(아래 profile) 관련도가 높은 기사.
+  # 레이더에 실린 기사는 뉴질랜드/오클랜드 탭에서 빠집니다(중복 없음).
   nz_immigration:   { label: "이민 레이더", region: nz, top_n: 6, candidate_limit: 40 }
 
 # ── 뉴질랜드/오클랜드 가중치 (이민 준비자 관점) ───────────────
@@ -56,6 +57,94 @@ weights:
   low:
     - { topic: "스포츠", keywords: [rugby, "All Blacks", cricket, netball, "Black Caps", match, score, "Super Rugby", NRL, Warriors] }
     - { topic: "연예 가십", keywords: [celebrity, Bachelor, reality, gossip, Kardashian] }
+
+# ── 제외할 기사 ─────────────────────────────────────────────
+# 제목에 아래 단어가 있거나 출처가 아래 목록이면 수집 단계에서 아예 뺍니다 (대소문자 무시, 영어는 단어 단위).
+# 키워드로 못 거른 개인 사연·매물·광고성 기사는 AI 가 한 번 더 걸러냅니다(junk 판정).
+exclude:
+  title_keywords:
+    # 개인 사연·모금
+    - Givealittle
+    - GoFundMe
+    - fundraiser
+    - "fundraising page"
+    - heartbreaking story
+    - "투병기"
+    - "사연"
+    - "모금"
+    # 부동산 매물·분양
+    - "for sale"
+    - "on the market"
+    - "open home"
+    - "property of the week"
+    - "dream home"
+    - "mortgage-free"
+    - sqm
+    - "m²"
+    - "bedroom home"
+    - "bedroom house"
+    - "매물"
+    - "분양"
+    - "모델하우스"
+    # 광고·협찬·홍보
+    - sponsored
+    - advertorial
+    - "paid partnership"
+    - "in partnership with"
+    - promo code
+    - giveaway
+    - "Black Friday"
+    - "deal of the day"
+    - "[광고]"
+    - "[AD]"
+    - "협찬"
+    - "할인 이벤트"
+    - "특가"
+    - "PR보도"
+  sources:
+    - OneRoof            # 부동산 매물·홍보 기사 위주
+    - "Simply Wall St"
+    - "Simply Wall Street"
+    - "Yahoo Finance"
+    - "Legit.ng"         # 해외 재가공 기사
+
+# ── 독자 프로필 (이민 레이더 기준 + "이민자 관점" 문구에 반영) ──────────
+profile:
+  summary: >-
+    오클랜드대학교(UoA) 석사 과정을 곧 졸업하는 한국인 유학생(현재 학생비자). 졸업 후 뉴질랜드에서 취업해 영주권까지
+    받는 것이 목표. 관심: 졸업 후 취업비자(Post Study Work Visa), 취업비자(AEWV·Accredited Employer, Green List 직종),
+    영주권(Skilled Migrant Category, Green List Straight to Residence / Work to Residence), 시민권, 이민 규정 변경과
+    처리 기간·수수료, 졸업생 취업시장. 관심 낮음: 신규 유학생 학생비자 발급·유학생 모집, 관광·방문비자, 계절근로(RSE),
+    다른 나라의 이민 정책.
+  radar_min_score: 5     # 레이더 관련도(0~10)가 이 점수 이상인 기사만 이민 레이더에 표시
+  radar_high:            # AI 없이 돌 때 레이더 점수를 높게 줄 키워드
+    - "post study work"
+    - "post-study work"
+    - PSWV
+    - graduate
+    - graduates
+    - AEWV
+    - "accredited employer"
+    - "work visa"
+    - "green list"
+    - "skilled migrant"
+    - SMC
+    - residence
+    - residency
+    - "resident visa"
+    - "straight to residence"
+    - "work to residence"
+    - citizenship
+    - "median wage"
+  radar_low:             # 레이더 점수를 낮출 키워드
+    - "student visa"
+    - "student visas"
+    - "international students"
+    - "visitor visa"
+    - tourist
+    - RSE
+    - "seasonal workers"
+    - "working holiday"
 
 # ── 뉴질랜드 / 오클랜드 탭 나누기 ─────────────────────────────
 # 같은 사건은 한 탭에만 싣습니다. 오클랜드 지역 소식(시의회·교통·지역 사건사고·오클랜드 병원 등)은
@@ -198,15 +287,24 @@ feeds:
   - id: inz_news
     name: "Immigration New Zealand"
     section: nz_immigration
+    lookback_hours: 72
     url: "https://www.immigration.govt.nz/about-us/media-centre/news-notifications/rss"
     fallbacks:
       - "https://news.google.com/rss/search?q=site:immigration.govt.nz&hl=en-NZ&gl=NZ&ceid=NZ:en"
-  - id: gn_nz_immigration
+  - id: gn_nz_work_visa
     name: "Google News"
     section: nz_immigration
     google_news: true
-    # 해외 비자 기사가 섞이지 않도록 "New Zealand" 문구와 INZ 를 함께 요구
-    url: "https://news.google.com/rss/search?q=%22New+Zealand%22+(%22Immigration+New+Zealand%22+OR+INZ+OR+%22residence+visa%22+OR+%22work+visa%22+OR+%22skilled+migrant%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    lookback_hours: 48
+    # 졸업 후 취업비자·AEWV·Green List
+    url: "https://news.google.com/rss/search?q=%22New+Zealand%22+(%22post+study+work%22+OR+%22post-study+work%22+OR+AEWV+OR+%22accredited+employer%22+OR+%22work+visa%22+OR+%22green+list%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_nz_residence
+    name: "Google News"
+    section: nz_immigration
+    google_news: true
+    lookback_hours: 48
+    # 영주권·시민권·이민 규정
+    url: "https://news.google.com/rss/search?q=%22New+Zealand%22+(%22skilled+migrant%22+OR+%22residence+visa%22+OR+%22resident+visa%22+OR+residency+OR+citizenship+OR+%22Immigration+New+Zealand%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
 
   # ── 오클랜드 ──
   - id: gn_auckland

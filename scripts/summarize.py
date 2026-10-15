@@ -49,15 +49,18 @@ SUMMARY_SCHEMA = {
 }
 
 
-def _system_prompt(region: str, sections: dict[str, str]) -> str:
+def _system_prompt(region: str, sections: dict[str, str], profile: str = "") -> str:
+    reader = f"독자: {profile}\n" if profile and region == "nz" else ""
     why = (
-        "- why_it_matters: 뉴질랜드 이민을 준비하는 한국인에게 이 기사가 갖는 의미를 한 문장(60자 이내)으로. "
-        "직접 관련이 적으면 생활·비용·안전 측면의 함의를 구체적으로. 추측성 단정은 피하세요."
+        "- why_it_matters: 이 독자에게 이 기사가 갖는 의미를 한 문장(60자 이내)으로. 비자·취업·영주권 관련이면 "
+        "독자의 다음 단계(졸업 후 비자, 취업비자, 영주권 등)에 어떤 영향인지 구체적으로. 직접 관련이 적으면 "
+        "오클랜드 생활·비용·안전 측면의 함의를. 추측성 단정은 피하세요."
         if region == "nz"
         else "- why_it_matters: 빈 문자열(\"\")로 두세요."
     )
     sec_list = ", ".join(f"{k}({v})" for k, v in sections.items())
     return f"""당신은 한국어 아침 뉴스 브리핑 편집자입니다. 이번 묶음의 섹션: {sec_list}.
+{reader}
 각 기사에 대해 다음을 작성하세요.
 - title_ko: 자연스러운 한국어 제목 (영어 기사는 번역, 40자 이내, 낚시성 표현 제거)
 - summary_ko: 정확히 3줄. 각 줄은 80자 이내의 완결된 문장. 핵심 사실 → 배경/수치 → 전망/영향 순서.
@@ -186,7 +189,7 @@ def summarize_region(region: str, keys: list[str], chosen: dict[str, list[Articl
     labels = {k: cfg["sections"][k]["label"] for k in keys}
     user = "\n\n---\n\n".join(_input_block(a, ks) for a, ks in unique.values())
     try:
-        out = llm.json_call(task="summary", system=_system_prompt(region, labels), user=user,
+        out = llm.json_call(task="summary", system=_system_prompt(region, labels, cfg.get("profile", {}).get("summary", "")), user=user,
                             schema=SUMMARY_SCHEMA, max_tokens=32000)
     except Exception as e:  # noqa: BLE001 — 실패해도 원문 정보로 페이지는 생성
         log.error("summary AI failed for %s: %s", region, e)

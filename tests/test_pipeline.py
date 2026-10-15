@@ -40,7 +40,7 @@ class FakeLLM:
                     continue
                 i, rest = line.split(" | ", 1)
                 visa = "visa" in rest.lower()
-                rows.append({"id": i, "score": 9 if visa else 5, "immigration": visa})
+                rows.append({"id": i, "score": 9 if visa else 5, "immigration": visa, "radar": 8 if visa else 0})
             return {"scores": rows}
         ids, secs = [], set()
         for line in user.splitlines():
@@ -48,7 +48,7 @@ class FakeLLM:
                 ids.append(line[5:])
             if line.startswith("[섹션] "):
                 secs.update(line[5:].split(", "))
-        nz = "뉴질랜드 이민을 준비하는" in system
+        nz = "이 독자에게" in system
         return {"briefings": [{"section": k, "briefing": f"{k} 한 줄"} for k in secs],
                 "items": [{"id": i, "title_ko": f"번역 제목 {i}", "summary_ko": ["가" * 100, "둘째 줄", "셋째 줄", "넷째 줄"],
                            "why_it_matters": "이민 준비자에게 의미" if nz else "", "tags": ["비자", "주거"]} for i in ids]}
@@ -70,8 +70,10 @@ def test_select_with_llm_builds_immigration_radar(cfg):
     items.append(art(99, "INZ notice", section="nz_immigration"))
     llm = FakeLLM()
     chosen = select(items, cfg, llm, FIXTURE_NOW)
-    assert len(chosen["nz_national"]) == 8
     assert [c["task"] for c in llm.calls] == ["rank", "rank"]  # nz 채점 1회 + 이슈 묶기 1회
+    # 레이더에 실린 비자 기사는 뉴질랜드 탭에서 빠지고, 나머지 8건이 뉴질랜드 탭을 채움
+    assert len(chosen["nz_national"]) == 8
+    assert {a.id for a in chosen["nz_national"]}.isdisjoint({a.id for a in chosen["nz_immigration"]})
 
     radar_ids = {a.id for a in chosen["nz_immigration"]}
     assert {"0", "3", "6", "9"} <= radar_ids
@@ -216,7 +218,8 @@ def test_gemini_bad_finish_and_blocked(cfg):
 def test_gemini_rank_failure_uses_heuristic(cfg):
     llm = _gemini(cfg, lambda req: httpx.Response(500, text="boom"))
     chosen = select([art(1, "Work visa changes for migrants"), art(2, "All Blacks rugby match")], cfg, llm, FIXTURE_NOW)
-    assert [a.id for a in chosen["nz_national"]] == ["1"]
+    assert [a.id for a in chosen["nz_immigration"]] == ["1"]  # 휴리스틱: 취업비자 → 레이더
+    assert chosen["nz_national"] == []                         # 럭비는 점수 미달, 비자 기사는 레이더로 이동
 
 
 def test_gemini_invalid_key_stops_further_requests(cfg):
@@ -519,3 +522,70 @@ def test_refine_keeps_unrelated_items_separate(cfg):
     assert "a2" in ids and len(akl) == 2  # 무관한 시의회 기사는 따로, 매케이 기사 2건은 하나로
     mckay = next(a for a in akl if a.id != "a2")
     assert {s.url for s in mckay.sources} == {"https://ex.com/a1", "https://ex.com/a3"} or len(mckay.sources) == 1
+
+
+# ── 제외 · 이민 레이더 (독자 프로필) ──
+
+from rank import excluded_reason, heuristic_radar  # noqa: E402
+
+
+@pytest.mark.parametrize("title,source,excluded", [
+    ("Huntly mum's Givealittle page passes $50k", "NZ Herald", True),
+    ("Remuera 68 sqm townhouse a mini masterpiece", "Stuff", True),
+    ("Three-bedroom home for sale in Ponsonby", "Stuff", True),
+    ("First-home buyers: best suburbs under $700k", "OneRoof", True),          # 출처 제외
+    ("[광고] 여름 특가 항공권", "연합뉴스", True),
+    ("강남 신축 아파트 분양 일정", "매일경제", True),
+    ("Reserve Bank cuts OCR to 2.25%", "RNZ", False),
+    ("Starship Hospital delays cancer treatments over nurse shortage", "RNZ", False),
+    ("Saleswoman jailed for fraud", "RNZ", False),                              # 'sale' 부분 일치는 제외 안 함
+])
+def test_keyword_and_source_exclusion(cfg, title, source, excluded):
+    a = art(1, title)
+    a.source = source
+    assert (excluded_reason(a, cfg) is not None) is excluded
+
+
+def test_ai_junk_flag_drops_article(cfg):
+    class JunkLLM(SplitLLM):
+        def json_call(self, **kw):
+            out = super().json_call(**kw)
+            if kw["task"] == "rank" and "scores" in out:
+                for r in out["scores"]:
+                    r["junk"] = r["id"] == "n2"
+            return out
+    items = [art("n1", "Inflation eases to 2.1 percent"), art("n2", "Inside a stunning Mission Bay renovation")]
+    chosen = select(items, cfg, JunkLLM(set(), {}), FIXTURE_NOW)
+    assert [a.id for a in chosen["nz_national"]] == ["n1"]
+
+
+def test_radar_prefers_profile_topics_and_has_no_overlap(cfg):
+    class RadarLLM(SplitLLM):
+        RADAR = {"r1": 9, "r2": 8, "r3": 2, "r4": 3, "n1": 0}
+
+        def json_call(self, **kw):
+            out = super().json_call(**kw)
+            if kw["task"] == "rank" and "scores" in out:
+                for r in out["scores"]:
+                    r["radar"] = self.RADAR.get(r["id"], 0)
+                    r["score"] = 8
+            return out
+    items = [
+        art("r1", "Post-study work visa holders get longer to find skilled jobs"),       # 전국 피드 → 레이더로
+        art("r2", "Skilled Migrant Category points threshold unchanged", section="nz_immigration"),
+        art("r3", "Student visa refusals spike amid fraud crackdown"),                  # 학생비자: 관심 낮음
+        art("r4", "Tourist visa fees to rise", section="nz_immigration"),
+        art("n1", "Inflation eases to 2.1 percent"),
+    ]
+    chosen = select(items, cfg, RadarLLM(set(), {}), FIXTURE_NOW)
+    radar = [a.id for a in chosen["nz_immigration"]]
+    nat = {a.id for a in chosen["nz_national"]}
+    assert radar == ["r1", "r2"]               # 졸업 후 취업비자·영주권만, 관련도 순
+    assert "r1" not in nat and nat >= {"n1", "r3"}  # 레이더 기사는 뉴질랜드 탭에서 빠지고, 학생비자 기사는 뉴질랜드 탭에 남음
+
+
+def test_heuristic_radar_scores(cfg):
+    assert heuristic_radar(art(1, "Changes to post-study work visa rules"), cfg) >= 8
+    assert heuristic_radar(art(2, "Green List residence pathway expanded"), cfg) >= 8
+    assert heuristic_radar(art(3, "International students: student visa refusals rise"), cfg) <= 3
+    assert heuristic_radar(art(4, "Inflation eases"), cfg) == 0

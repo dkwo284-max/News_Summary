@@ -58,6 +58,10 @@ def _merge(into: Article, other: Article) -> None:
         into.description = other.description
     if other.published and (into.published is None or other.published > into.published):
         into.published = other.published
+    if other.id != into.id:
+        into.merged_ids.extend(i for i in [other.id, *other.merged_ids] if i not in into.merged_ids and i != into.id)
+    into.radar_score = max(into.radar_score, other.radar_score)
+    into.is_immigration |= other.is_immigration
 
 
 def _rank_key(a: Article) -> tuple:

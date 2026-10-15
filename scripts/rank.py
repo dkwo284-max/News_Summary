@@ -28,8 +28,10 @@ RANK_SCHEMA = {
                     "immigration": {"type": "boolean"},
                     "auckland": {"type": "boolean"},
                     "same_as": {"type": "string"},
+                    "junk": {"type": "boolean"},
+                    "radar": {"type": "integer"},
                 },
-                "required": ["id", "score", "immigration", "auckland", "same_as"],
+                "required": ["id", "score", "immigration", "auckland", "same_as", "junk", "radar"],
                 "additionalProperties": False,
             },
         }
@@ -61,12 +63,26 @@ AUCKLAND_RULE = """- auckland: 오클랜드 지역 소식이면 true — 오클�
   오클랜드가 언급돼도 false. 다른 지역(웰링턴, 크라이스트처치 등) 소식도 false."""
 
 
+JUNK_RULE = """- junk: 다음이면 true (해당 기사는 싣지 않음) — 개인 사연·미담·투병기·모금 호소, 부동산 매물·분양·집 구경 소개,
+  광고·협찬·할인/이벤트 홍보, 상품 추천·쇼핑 정보. 사회 문제(병원 인력난, 주거비 등)를 다룬 보도는 개인 사례가 나와도 false."""
+
+
+def _radar_rule(cfg: dict) -> str:
+    profile = cfg.get("profile", {}).get("summary", "")
+    return f"""- radar: 아래 독자에게 '이민 레이더'로 알려줄 가치(0~10 정수). 이민·비자와 무관하면 0.
+  독자: {profile}
+  기준: 독자의 다음 단계(졸업 후 취업비자, 취업비자, 영주권, 시민권)에 직접 영향을 주는 정책 변경·처리 지연·수수료·
+  규정 해석은 8~10, 관련 통계·고용시장은 5~7, 신규 학생비자·관광비자·계절근로·타국 이민정책은 0~3."""
+
+
 def _system_prompt(cfg: dict, region: str) -> str:
     criteria = KR_CRITERIA if region == "kr" else _nz_criteria(cfg)
     return f"""당신은 뉴스 편집자입니다. 주어진 기사 목록의 각 항목에 1~10 정수 중요도를 매깁니다.
 {criteria}
 - immigration: 비자·이민·영주권·시민권·이민 정책/통계와 직접 관련 있으면 true, 아니면 false.
 {AUCKLAND_RULE if region == "nz" else '- auckland: 항상 false.'}
+{JUNK_RULE}
+{_radar_rule(cfg) if region == "nz" else '- radar: 항상 0.'}
 - same_as: 목록의 다른 항목과 같은 사건이거나 같은 이슈의 후속·관련 기사이면(예: 같은 병원 인력난을 다룬 여러 기사,
   같은 기상 악화의 지역별 피해, 같은 비자 정책을 다룬 국내외 보도, 같은 인물의 사연) 그 묶음에서 가장 대표적인 기사의 id,
   아니면 빈 문자열 "". 대표 기사 자신은 "".
@@ -106,6 +122,44 @@ def heuristic_score(a: Article, cfg: dict, region: str, now: datetime) -> tuple[
     return max(1, min(10, round(score))), immigration
 
 
+def heuristic_radar(a: Article, cfg: dict) -> int:
+    """AI 없이: 독자 프로필 키워드로 이민 레이더 관련도(0~10)."""
+    prof = cfg.get("profile", {})
+    text = f"{a.title} {a.description}"
+    high = _kw_hits(text, prof.get("radar_high", []))
+    low = _kw_hits(text, prof.get("radar_low", []))
+    if high:
+        return min(10, 7 + high) - (2 if low else 0)
+    if low:
+        return 2
+    return 5 if a.is_immigration or a.section == "nz_immigration" else 0
+
+
+def excluded_reason(a: Article, cfg: dict) -> str | None:
+    """config 의 exclude 목록(제목 키워드·출처)에 걸리면 이유를 돌려준다."""
+    ex = cfg.get("exclude", {})
+    if a.source in set(ex.get("sources", [])):
+        return f"source:{a.source}"
+    title = a.title.lower()
+    for k in ex.get("title_keywords", []):
+        kl = k.lower()
+        if re.fullmatch(r"[a-z0-9 \-']+", kl):  # 영어는 단어 단위
+            if re.search(r"(?<![a-z0-9])" + re.escape(kl) + r"(?![a-z0-9])", title):
+                return f"keyword:{k}"
+        elif kl in title:
+            return f"keyword:{k}"
+    return None
+
+
+def apply_exclusions(articles: list[Article], cfg: dict) -> list[Article]:
+    kept, dropped = [], []
+    for a in articles:
+        (dropped if excluded_reason(a, cfg) else kept).append(a)
+    if dropped:
+        log.info("excluded %d article(s) by keyword/source (e.g. %s)", len(dropped), "; ".join(d.title[:40] for d in dropped[:3]))
+    return kept
+
+
 def heuristic_auckland(a: Article, cfg: dict) -> bool:
     """AI 없이: 오클랜드 피드에서 왔거나 제목에 오클랜드 지명이 있으면 오클랜드 소식."""
     return a.section == "nz_auckland" or bool(_kw_hits(a.title, cfg.get("auckland_keywords", ["Auckland"])))
@@ -120,6 +174,7 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
         for a in items:
             a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
             a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
+            a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
         return
     system = _system_prompt(cfg, region)
     # 같은 기사가 여러 섹션에 있으면 id 가 같다 → 한 번만 보내고 점수는 모두에 적용
@@ -145,12 +200,17 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                 if row is None:  # 모델이 빠뜨린 항목·실패한 배치는 휴리스틱
                     a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
                     a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
+                    a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
                     continue
                 a.score = max(1, min(10, int(row["score"])))
                 a.is_immigration = bool(row.get("immigration")) and region == "nz"
                 a.is_auckland = bool(row.get("auckland")) and region == "nz"
                 same = row.get("same_as") or ""
                 a.same_as = same if same in by_id and same != a.id else ""
+                a.junk = bool(row.get("junk"))
+                a.radar_score = max(0, min(10, int(row.get("radar") or 0))) if region == "nz" else 0
+                if a.junk:
+                    a.score = 0  # MIN_SCORE 미만 → 싣지 않음
 
 
 def _preselect(items: list[Article], limit: int) -> list[Article]:
@@ -317,7 +377,7 @@ def refine_nz(by_section: dict[str, list[Article]], radar: list[Article], cfg: d
     sec = cfg["sections"]
     window = lambda items, n: sorted(items, key=lambda a: (a.score, len(a.sources)), reverse=True)[: n * 2]
     nz_items = window(by_section["nz_national"], sec["nz_national"]["top_n"]) + window(by_section["nz_auckland"], sec["nz_auckland"]["top_n"])
-    radar_items = window(radar, sec["nz_immigration"]["top_n"])
+    radar_items = sorted(radar, key=lambda a: (a.radar_score, a.score), reverse=True)[: sec["nz_immigration"]["top_n"] * 2]
     if not nz_items and not radar_items:
         return radar
     user = ("[A]\n" + "\n".join(_line(a) for a in nz_items) + "\n\n[B]\n" + "\n".join(_line(a) for a in radar_items))
@@ -347,9 +407,20 @@ def _top(items: list[Article], n: int) -> list[Article]:
     return [a for a in ranked if a.score >= MIN_SCORE][:n]
 
 
+def _top_radar(items: list[Article], n: int, min_radar: int) -> list[Article]:
+    """이민 레이더: 독자 프로필 관련도 우선, 같으면 중요도."""
+    ranked = sorted(items, key=lambda a: (a.radar_score, a.score, len(a.sources)), reverse=True)
+    return [a for a in ranked if a.radar_score >= min_radar and a.score >= MIN_SCORE and not a.junk][:n]
+
+
+def _ids(a: Article) -> set[str]:
+    return {a.id, *a.merged_ids}
+
+
 def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = None) -> dict[str, list[Article]]:
     now = now or datetime.now(timezone.utc)
     sections = cfg["sections"]
+    articles = apply_exclusions(articles, cfg)  # 개인 사연·매물·광고성 기사 (키워드·출처)
     by_section: dict[str, list[Article]] = defaultdict(list)
     for a in articles:
         by_section[a.section].append(a)
@@ -384,15 +455,28 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     if llm is not None and "nz_national" in sections and "nz_auckland" in sections:
         merged = refine_nz(by_section, merged, cfg, llm)
 
+    junk = sum(1 for items in by_section.values() for a in items if a.junk)
+    if junk:
+        log.info("AI flagged %d personal-story/listing/ad article(s) as junk", junk)
+
     chosen: dict[str, list[Article]] = {}
+    # 이민 레이더를 먼저 고르고, 레이더에 실린 기사는 뉴질랜드/오클랜드 탭에서 뺀다 (탭 간 중복 없음)
+    min_radar = int(cfg.get("profile", {}).get("radar_min_score", 5))
+    chosen["nz_immigration"] = _top_radar(merged, sections["nz_immigration"]["top_n"], min_radar)
+    in_radar = set().union(*(_ids(a) for a in chosen["nz_immigration"])) if chosen["nz_immigration"] else set()
     for key, sec in sections.items():
-        if key != "nz_immigration":
-            chosen[key] = _top(by_section[key], sec["top_n"])
-    chosen["nz_immigration"] = _top(merged, sections["nz_immigration"]["top_n"])
+        if key == "nz_immigration":
+            continue
+        items = by_section[key]
+        if key in ("nz_national", "nz_auckland"):
+            items = [a for a in items if not (_ids(a) & in_radar)]
+        chosen[key] = _top(items, sec["top_n"])
+    chosen = {k: chosen[k] for k in sections}
     for key, items in chosen.items():
         log.info("selected %-17s %d", key, len(items))
     return chosen
 
 
 def _clone_to(a: Article, section: str) -> Article:
-    return replace(a, section=section, extra_sources=list(a.extra_sources), related=list(a.related))
+    return replace(a, section=section, extra_sources=list(a.extra_sources), related=list(a.related),
+                   merged_ids=list(a.merged_ids))

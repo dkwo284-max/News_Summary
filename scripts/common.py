@@ -63,6 +63,9 @@ class Article:
     is_auckland: bool = False   # 오클랜드 지역 소식인지 (NZ 기사만)
     same_as: str = ""           # AI 가 같은 사건이라고 판단한 다른 기사 id
     related: list[str] = field(default_factory=list)  # 하나로 묶인 관련 기사 제목 (요약 입력용)
+    merged_ids: list[str] = field(default_factory=list)  # 이 카드로 합쳐진 다른 기사 id (탭 간 중복 제거용)
+    radar_score: int = 0        # 이민 레이더 관련도 0~10 (독자 프로필 기준, NZ 기사만)
+    junk: bool = False          # 개인 사연·매물·광고성 기사 (AI 판단) → 제외
     # transient: article body excerpt used only as summary input, never written out
     excerpt: str = ""
 
