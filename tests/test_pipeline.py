@@ -490,7 +490,7 @@ def test_refine_groups_issue_and_moves_tab(cfg):
         art("i2", "NZ rejects 70 percent of Bangladeshi student visa", section="nz_immigration"),
     ]
     llm = GroupLLM(
-        auckland_ids={"a1"}, same_as={},
+        auckland_ids={"a1"}, same_as={"n3": "n2", "n4": "n2"},  # 날씨 3건은 1차에서도 같은 이슈로 연결
         nz_groups=[{"ids": ["a1", "n1"], "tab": "auckland"}, {"ids": ["n2", "n3", "n4"], "tab": "national"},
                    {"ids": ["n5"], "tab": "national"}],
         radar_groups=[{"ids": ["i1", "i2"]}],
@@ -504,3 +504,18 @@ def test_refine_groups_issue_and_moves_tab(cfg):
     assert len(weather.related) == 2
     assert len(chosen["nz_immigration"]) == 1
     assert sum(1 for c in llm.calls if c["task"] == "group") == 1
+
+
+def test_refine_keeps_unrelated_items_separate(cfg):
+    items = [
+        art("a1", "Hamish McKay evicted from Mission Bay rental after dispute", section="nz_auckland"),
+        art("a2", "Auckland Council approves new library budget", section="nz_auckland"),
+        art("a3", "Hamish McKay tenancy dispute: tribunal orders eviction", section="nz_auckland"),
+    ]
+    llm = GroupLLM(auckland_ids={"a1", "a2", "a3"}, same_as={},
+                   nz_groups=[{"ids": ["a1", "a2", "a3"], "tab": "auckland"}], radar_groups=[])
+    akl = select(items, cfg, llm, FIXTURE_NOW)["nz_auckland"]
+    ids = {a.id for a in akl}
+    assert "a2" in ids and len(akl) == 2  # 무관한 시의회 기사는 따로, 매케이 기사 2건은 하나로
+    mckay = next(a for a in akl if a.id != "a2")
+    assert {s.url for s in mckay.sources} == {"https://ex.com/a1", "https://ex.com/a3"} or len(mckay.sources) == 1

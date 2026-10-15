@@ -182,7 +182,8 @@ def merge_same_story(items: list[Article], threshold: int) -> list[Article]:
 
     for a in items:
         for b in by_aid.get(a.same_as, []):
-            union(a, b)
+            if _keys(a.title) & _keys(b.title):  # 제목에 공통 핵심어가 하나도 없으면 AI 판단이라도 합치지 않음
+                union(a, b)
         for b in by_aid[a.id]:  # 같은 URL 이 두 섹션에 있던 경우
             union(a, b)
     for i, a in enumerate(items):
@@ -255,8 +256,27 @@ GROUP_SYSTEM = """당신은 뉴질랜드 뉴스 편집자입니다. 상위 후�
 [B] 이민 레이더 후보: 같은 비자·이민 이슈를 다룬 기사(국내외 보도 포함)를 한 그룹으로 묶으세요. 모든 id 를 정확히 한 번씩."""
 
 
-def _apply_groups(items: list[Article], groups: list[dict], tab_key: str | None) -> list[Article]:
-    """AI 가 묶은 그룹대로 기사를 합친다. 그룹에 없는 기사는 그대로 둔다."""
+STOPWORDS = set("""the a an of in on for to and or after as at by with from new zealand zealand's nz auckland auckland's says say said
+over into about more its his her their is are be will has have had up out amid first than this that what why how who
+not no but was were been being can could would should may might after before off down just now still also year years
+day days week weeks today mum dad man woman people""".split())
+
+
+def _keys(title: str) -> set[str]:
+    """제목의 핵심 단어. 영어: 4글자 이상·불용어 제외·앞 5글자로 어형 통일(delays/delayed → delay).
+    한국어: 2글자 이상 어절의 앞 2글자(조사 차이 무시)."""
+    t = title.lower()
+    en = {w[:5] for w in re.findall(r"[a-z]{4,}", t) if w not in STOPWORDS}
+    ko = {w[:2] for w in re.findall(r"[가-힣]{2,}", t)}
+    return en | ko
+
+
+def _apply_groups(items: list[Article], groups: list[dict], tab_key: str | None, min_shared: int = 2) -> list[Article]:
+    """AI 가 묶은 그룹대로 기사를 합친다. 그룹에 없는 기사는 그대로 둔다.
+
+    AI 가 무관한 기사를 묶는 경우가 있어서, 이미 받아들인 기사들과 제목 핵심 단어를 min_shared 개 이상
+    공유하거나 1차 채점에서 same_as 로 연결된 기사만 합친다. 나머지는 따로 둔다(잘못 합치는 것보다 중복이 낫다).
+    """
     from dedupe import _merge
 
     by_id = {a.id: a for a in items}
@@ -266,6 +286,17 @@ def _apply_groups(items: list[Article], groups: list[dict], tab_key: str | None)
         if not members:
             continue
         members.sort(key=lambda x: (x.score, len(x.sources)), reverse=True)
+        accepted = [members[0]]
+        keys = _keys(members[0].title)
+        for m in members[1:]:
+            linked = any(m.same_as == x.id or x.same_as == m.id for x in accepted)
+            if linked or len(_keys(m.title) & keys) >= min_shared:
+                accepted.append(m)
+                keys |= _keys(m.title)
+        rejected = [m for m in members if m not in accepted]
+        if rejected:
+            log.info("grouping: kept %d unrelated item(s) separate from '%s'", len(rejected), members[0].title[:60])
+        members = accepted
         rep = members[0]
         for other in members[1:]:
             _merge(rep, other)
@@ -304,7 +335,8 @@ def refine_nz(by_section: dict[str, list[Article]], radar: list[Article], cfg: d
         (akl if a.is_auckland else nat).append(a)
     by_section["nz_national"], by_section["nz_auckland"] = nat, akl
     radar_ids = {a.id for a in radar_items}
-    radar = _apply_groups(radar_items, out.get("radar_groups", []), None) + [a for a in radar if a.id not in radar_ids]
+    # 레이더는 모두 이민 기사라 핵심 단어 1개(예: 학생비자) 공유로 충분
+    radar = _apply_groups(radar_items, out.get("radar_groups", []), None, min_shared=1) + [a for a in radar if a.id not in radar_ids]
     log.info("nz grouping: A %d → %d, B %d → %d", len(nz_items), len(regrouped), len(radar_items),
              len(radar) - (len([a for a in radar if a.id not in radar_ids])))
     return radar
