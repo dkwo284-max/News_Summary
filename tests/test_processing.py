@@ -49,3 +49,17 @@ def test_fetch_with_fallback_url_ai_and_stale(cfg):
     assert by["smc"]["p90"] == "7개월" and by["smc"]["url"] == "https://a.example/smc" and by["smc"]["status"] == "ok"
     assert by["wtr"]["p90"] == "4개월" and by["wtr"]["status"] == "ok"
     assert by["cit"]["status"] == "stale" and by["cit"]["as_of"] == "2026-10-01"
+
+
+def test_parse_inz_visa_page_format():
+    text = "Apply online - Length of stay Up to 3 years - Cost From NZD $1670 - Processing time 80% within 4 weeks - Residence option"
+    r = parse_processing(text)
+    assert r["p90"] == "4주" and r["pct"] == 80 and r["p50"] == ""
+
+
+def test_parse_with_match_on_multi_visa_page():
+    text = ("Student Visa 80% within 6 weeks. Skilled Migrant Category Resident Visa 80% within 9 months. "
+            "Work to Residence Visa 80% within 5 months.")
+    assert parse_processing(text, "Skilled Migrant Category")["p90"] == "9개월"
+    assert parse_processing(text, "Work to Residence")["p90"] == "5개월"
+    assert parse_processing(text, "Parent Category") is None

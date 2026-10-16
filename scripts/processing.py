@@ -22,8 +22,8 @@ from common import ROOT, load_config, log
 UNIT_KO = {"day": "일", "week": "주", "month": "개월", "year": "년"}
 
 PCT_RE = re.compile(
-    r"(\d{1,3})\s?%\s+of\s+(?:all\s+)?(?:visa\s+)?(?:applications?|decisions?)\s+(?:are\s+|were\s+|have\s+been\s+)?"
-    r"(?:processed|decided|completed|finalised|finalized)\s+(?:with)?in\s+(\d+(?:\.\d+)?)\s+(day|week|month|year)s?",
+    r"(\d{1,3})\s?%\s+(?:of\s+(?:all\s+)?(?:visa\s+)?(?:applications?|decisions?)\s+(?:are\s+|were\s+|have\s+been\s+)?"
+    r"(?:processed|decided|completed|finalised|finalized)\s+)?(?:with)?in\s+(\d+(?:\.\d+)?)\s+(day|week|month|year)s?",
     re.I,
 )
 # 비율 표기가 없을 때만: '처리 기간' 문맥이 바로 앞에 있는 기간만 인정 (비자 유효기간 등 오탐 방지)
@@ -62,9 +62,16 @@ def _fmt(value: str, unit: str) -> str:
     return f"{v}{UNIT_KO[unit.lower()]}"
 
 
-def parse_processing(text: str) -> dict | None:
-    """페이지 본문에서 처리 기간을 찾는다. {'p50','p90','sentence'} 또는 None."""
+def parse_processing(text: str, match: str | None = None) -> dict | None:
+    """페이지 본문에서 처리 기간을 찾는다. {'p50','p90','pct','sentence'} 또는 None.
+    INZ 비자 페이지 형식: "Processing time 80% within 4 weeks".
+    match 를 주면(여러 비자가 나오는 안내 페이지) 그 비자 이름 바로 뒤 구간만 본다."""
     flat = re.sub(r"\s+", " ", text)
+    if match:
+        i = flat.lower().find(match.lower())
+        if i < 0:
+            return None
+        flat = flat[i:i + 400]
     found: dict[int, str] = {}
     sentence = ""
     for m in PCT_RE.finditer(flat):
@@ -72,13 +79,13 @@ def parse_processing(text: str) -> dict | None:
         found.setdefault(pct, _fmt(m.group(2), m.group(3)))
         sentence = sentence or m.group(0)
     if found:
-        p90 = found.get(90) or found[max(found)]
-        p50 = found.get(50) or (found[min(found)] if min(found) != max(found) else "")
-        return {"p50": p50, "p90": p90, "sentence": sentence[:160]}
+        top = max(found)
+        p50 = found.get(50) or (found[min(found)] if min(found) != top else "")
+        return {"p50": p50, "p90": found[top], "pct": top, "sentence": sentence[:160]}
     m = RANGE_RE.search(flat)
     if m:
         lo, hi, unit = m.group(1), m.group(2), m.group(3)
-        return {"p50": _fmt(lo, unit) if hi else "", "p90": _fmt(hi or lo, unit), "sentence": m.group(0)[:160]}
+        return {"p50": _fmt(lo, unit) if hi else "", "p90": _fmt(hi or lo, unit), "pct": None, "sentence": m.group(0)[:160]}
     return None
 
 
@@ -114,7 +121,7 @@ def fetch_processing_times(cfg: dict, llm=None, previous: dict | None = None, cl
     items, unparsed = [], []
     try:
         for e in entries:
-            item = {"key": e["key"], "name": e["name"], "group": e.get("group", ""), "p50": "", "p90": "",
+            item = {"key": e["key"], "name": e["name"], "group": e.get("group", ""), "p50": "", "p90": "", "pct": None,
                     "note": "", "url": e["urls"][0], "as_of": today, "status": "missing"}
             text_for_ai = ""
             for url in e["urls"]:
@@ -124,9 +131,10 @@ def fetch_processing_times(cfg: dict, llm=None, previous: dict | None = None, cl
                     log.info("processing %s: %s → %s", e["key"], url, type(ex).__name__)
                     continue
                 item["url"] = url
-                parsed = parse_processing(text)
+                # 비자 전용 페이지는 첫 처리 기간 문장, 여러 비자가 나오는 안내 페이지는 비자 이름 뒤 구간
+                parsed = parse_processing(text) if url == e["urls"][0] or not e.get("match") else parse_processing(text, e["match"])
                 if parsed:
-                    item.update(p50=parsed["p50"], p90=parsed["p90"], note=parsed["sentence"], status="ok")
+                    item.update(p50=parsed["p50"], p90=parsed["p90"], pct=parsed["pct"], note=parsed["sentence"], status="ok")
                     break
                 text_for_ai = text_for_ai or _snippet(text)
             if item["status"] != "ok" and text_for_ai:
@@ -156,7 +164,7 @@ def fetch_processing_times(cfg: dict, llm=None, previous: dict | None = None, cl
     for it in items:
         if it["status"] != "ok" and prev_items.get(it["key"], {}).get("p90"):
             old = prev_items[it["key"]]
-            it.update(p50=old.get("p50", ""), p90=old["p90"], note=old.get("note", ""), url=old.get("url", it["url"]),
+            it.update(p50=old.get("p50", ""), p90=old["p90"], pct=old.get("pct"), note=old.get("note", ""), url=old.get("url", it["url"]),
                       as_of=old.get("as_of", ""), status="stale")
     ok = sum(1 for it in items if it["status"] == "ok")
     log.info("processing times: %d/%d updated today (%d stale)", ok, len(items), sum(1 for it in items if it["status"] == "stale"))
@@ -184,7 +192,7 @@ def debug_pages(cfg: dict) -> list[dict]:
                     text = _page_text(client, url) if r.status_code < 400 else ""
                     flat = re.sub(r"\s+", " ", text)
                     row["snippets"] = [flat[max(0, m.start() - 200): m.start() + 300]
-                                       for m in re.finditer(r"process|take|week|month", flat, re.I)][:6]
+                                       for m in re.finditer(r"processing time|% within|skilled migrant|work to residence|citizenship|months", flat, re.I)][:12]
                     row["links"] = sorted(set(re.findall(r'href="([^"]*(?:processing|timeframe|how-long)[^"]*)"', r.text, re.I)))[:20]
                 except Exception as ex:  # noqa: BLE001
                     row["error"] = f"{type(ex).__name__}: {ex}"[:200]

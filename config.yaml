@@ -221,9 +221,11 @@ processing_times:
   - key: smc
     group: "영주권"
     name: "숙련 이민 영주권 (SMC)"
+    match: "Skilled Migrant Category"     # 여러 비자가 나오는 INZ 처리 기간 안내 페이지에서 이 이름 뒤 구간을 읽음
     urls:
       - "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/"
       - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/skilled-migrant-category-resident-visa"
+      - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/"
   - key: gl_str
     group: "영주권"
     name: "Green List 즉시 영주권 (Straight to Residence)"
@@ -233,15 +235,19 @@ processing_times:
   - key: wtr
     group: "영주권"
     name: "취업 후 영주권 (Work to Residence)"
+    match: "Work to Residence"     # 여러 비자가 나오는 INZ 처리 기간 안내 페이지에서 이 이름 뒤 구간을 읽음
     urls:
       - "https://www.immigration.govt.nz/visas/work-to-residence-visa/"
       - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/work-to-residence-visa"
+      - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/"
   - key: citizenship
     group: "시민권"
     name: "시민권 (Grant of Citizenship)"
     urls:
-      - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/how-long-it-takes-to-get-citizenship/"
-      - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/apply-for-nz-citizenship/"
+      - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/apply-for-nz-citizenship/how-long-it-takes/"
+      - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/"
+      - "https://www.dia.govt.nz/Citizenship"
+      - "https://www.dia.govt.nz/Citizenship-Processing-times"
 
 # ── 알림 (선택) ─────────────────────────────────────────────
 # 토큰/비밀번호는 절대 여기 적지 말고 GitHub Secrets 로만 설정하세요.
