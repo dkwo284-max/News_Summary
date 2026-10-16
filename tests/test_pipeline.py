@@ -620,3 +620,17 @@ def test_cap_radar_study_visa_wording(cfg):
     from rank import cap_radar
     assert cap_radar(art(1, "What is behind a recent spike in refused study visa applications?"), cfg, 9) == 3
     assert cap_radar(art(2, "Post-study work visa changes for graduates"), cfg, 9) == 9
+
+
+def test_gemini_timeout_moves_to_next_model(cfg):
+    urls = []
+
+    def handler(req):
+        urls.append(str(req.url))
+        if "gemini-3.8-flash:" in str(req.url):
+            raise httpx.ReadTimeout("The read operation timed out", request=req)
+        return httpx.Response(200, json=_gemini_ok('{"ok": 4}'))
+
+    llm = _gemini(cfg, handler)
+    assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 4}
+    assert sum("gemini-3.8-flash:" in u for u in urls) == 2 and "gemini-flash-latest" in urls[-1]

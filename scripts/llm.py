@@ -111,7 +111,8 @@ class GeminiLLM(BaseLLM):
     def __init__(self, cfg: dict, client: httpx.Client | None = None, sleep=time.sleep):
         super().__init__(cfg)
         self.key = os.environ.get(self.key_env, "")
-        self.client = client or httpx.Client(timeout=180)
+        # 긴 요약 응답은 수 분 걸릴 수 있어 읽기 시간 제한을 넉넉히 (연결은 30초)
+        self.client = client or httpx.Client(timeout=httpx.Timeout(float(self.pcfg.get("timeout_seconds", 300)), connect=30))
         self.sleep = sleep
         self.min_interval = float(self.pcfg.get("min_interval_seconds", 10))
         self._last = 0.0
@@ -123,7 +124,12 @@ class GeminiLLM(BaseLLM):
             self.sleep(wait)
         self._last = time.monotonic()
         # 키는 URL 이 아닌 헤더로 보낸다 (오류 메시지·로그에 키가 찍히지 않게)
-        return self.client.post(GEMINI_URL.format(model=model), headers={"x-goog-api-key": self.key}, json=body)
+        try:
+            return self.client.post(GEMINI_URL.format(model=model), headers={"x-goog-api-key": self.key}, json=body)
+        except httpx.TimeoutException:
+            # 응답이 너무 오래 걸리면 과부하(503)처럼 취급 → 같은 모델 1회 재시도 후 다음 모델 후보로
+            log.warning("gemini %s timed out", model)
+            return httpx.Response(503, text="client timeout")
 
     def _call(self, *, task, system, user, schema, max_tokens) -> dict:
         body = {
