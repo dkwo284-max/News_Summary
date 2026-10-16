@@ -310,17 +310,25 @@ function renderMain(): void {
   }
 }
 
+function fmtDateShort(iso: string): string {
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? "" : d.toLocaleDateString("ko-KR", { month: "numeric", day: "numeric" });
+}
+
 // 이민 레이더 전광판: 비자별 처리 기간 (공식 페이지 기준, 매일 아침 갱신)
 function processingBoard(): HTMLElement | null {
   const pt = brief?.extras?.processing_times;
   if (!pt || !pt.items?.length) return null;
   const tile = (it: ProcessingItem) => {
     const has = !!(it.p90 || it.p50);
+    const pct = it.pct ?? 90;
+    const sub = !has ? "공식 페이지에서 확인" : it.p50 && it.p90 ? `절반은 ${it.p50} 이내` : it.sub || "";
     const t = h("li", { class: `tile${has ? "" : " tile-missing"}` },
       h("span", { class: "tile-group" }, it.group),
       h("span", { class: "tile-name" }, it.name),
-      h("span", { class: "tile-value", "aria-label": has ? `90% 처리 ${it.p90 || it.p50}` : "확인 불가" }, has ? it.p90 || it.p50 : "—"),
-      h("span", { class: "tile-sub" }, has ? (it.p50 && it.p90 ? `절반은 ${it.p50} 이내` : "90% 처리 기간") : "공식 페이지에서 확인"),
+      h("span", { class: "tile-pct" }, has ? `${pct}% 처리` : ""),
+      h("span", { class: "tile-value", "aria-label": has ? `${pct}% 처리 ${it.p90 || it.p50}` : "확인 불가" }, has ? it.p90 || it.p50 : "—"),
+      h("span", { class: "tile-sub" }, sub),
     );
     const foot = h("span", { class: "tile-foot" });
     if (it.status === "stale" && it.as_of) foot.append(h("span", { class: "stale" }, `${it.as_of.slice(5).replace("-", "/")} 기준`));
@@ -332,9 +340,9 @@ function processingBoard(): HTMLElement | null {
   return h("section", { class: "board", "aria-labelledby": "board-title" },
     h("div", { class: "board-head" },
       h("h2", { id: "board-title" }, "⏱ 비자 처리 기간 전광판"),
-      h("span", { class: "board-meta" }, "이민국 공식 안내 · 90% 처리 기준")),
+      h("span", { class: "board-meta" }, `INZ·DIA 공식 안내 · ${fmtDateShort(pt.updated_at)} 확인`)),
     h("ul", { class: "tiles" }, ...pt.items.map(tile)),
-    h("p", { class: "board-note" }, "처리 기간은 신청 시점·서류 상태에 따라 달라질 수 있어요. 신청 전 공식 페이지를 꼭 확인하세요."),
+    h("p", { class: "board-note" }, "‘80% 처리’는 신청의 80%가 결정된 기간이에요(INZ 기준, 근무일 계산). 서류 상태에 따라 달라질 수 있으니 신청 전 공식 페이지를 꼭 확인하세요."),
   );
 }
 

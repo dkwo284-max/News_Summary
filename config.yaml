@@ -202,43 +202,53 @@ extras:
   weather: { name: "Auckland", latitude: -36.8485, longitude: 174.7633, timezone: "Pacific/Auckland" }  # Open-Meteo
 
 # ── 이민 레이더 전광판: 비자별 처리 기간 ─────────────────────────
-# 매일 공식 페이지에서 "90% of applications are processed within ..." 문장을 찾아 표시합니다.
+# 매일 INZ·DIA 공식 페이지에서 처리 기간(표 또는 "80% within 4 weeks" 같은 문장)을 찾아 표시합니다.
 # urls 는 앞에서부터 시도합니다(사이트 개편 대비 후보 여러 개). 못 찾으면 AI 가 본문에서 추출하고,
 # 그래도 실패하면 이전 값을 기준일과 함께 보여줍니다.
 processing_times:
+  # INZ 대기 시간 표(…-wait-times)는 '평균(50%)'과 '대부분(80%)' 처리 기간을 함께 보여줘서 먼저 시도합니다.
+  # match 는 표에서 해당 비자 행을 찾는 이름입니다.
   - key: pswv
     group: "졸업 후"
     name: "졸업 후 취업비자 (PSWV)"
+    match: "Post Study Work Visa"
     urls:
+      - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/work-visa-wait-times/"
       - "https://www.immigration.govt.nz/visas/post-study-work-visa/"
-      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/post-study-work-visa"
   - key: aewv
     group: "취업비자"
     name: "고용주 인증 취업비자 (AEWV)"
+    match: "Accredited Employer Work Visa"
     urls:
+      - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/employer-accreditation-job-check-and-aewv-wait-times/"
+      - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/work-visa-wait-times/"
       - "https://www.immigration.govt.nz/visas/accredited-employer-work-visa/"
-      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/accredited-employer-work-visa"
   - key: smc
     group: "영주권"
     name: "숙련 이민 영주권 (SMC)"
-    match: "Skilled Migrant Category"     # 여러 비자가 나오는 INZ 처리 기간 안내 페이지에서 이 이름 뒤 구간을 읽음
+    match: "Skilled Migrant Category Resident Visa"
     urls:
-      - "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/"
-      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/skilled-migrant-category-resident-visa"
       - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/"
+      - "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/"
   - key: gl_str
     group: "영주권"
     name: "Green List 즉시 영주권 (Straight to Residence)"
+    match: "Straight to Residence Visa"
     urls:
+      - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/"
       - "https://www.immigration.govt.nz/visas/straight-to-residence-visa/"
-      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/straight-to-residence-visa"
   - key: wtr
     group: "영주권"
     name: "취업 후 영주권 (Work to Residence)"
-    match: "Work to Residence"     # 여러 비자가 나오는 INZ 처리 기간 안내 페이지에서 이 이름 뒤 구간을 읽음
+    match: "Work to Residence Visa"
     urls:
+      - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/"
       - "https://www.immigration.govt.nz/visas/work-to-residence-visa/"
-      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/work-to-residence-visa"
+  - key: pr
+    group: "영주권"
+    name: "영구 영주권 (Permanent Resident Visa)"
+    match: "Permanent Resident Visa"
+    urls:
       - "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/"
   - key: citizenship
     group: "시민권"

@@ -228,11 +228,13 @@ legend { font-weight: 700; margin-bottom: 6px; }
 }
 .tile-group { font-size: 0.6875rem; color: #9da7b3; font-weight: 700; letter-spacing: 0.02em; }
 .tile-name { font-size: 0.8125rem; font-weight: 600; line-height: 1.35; }
+.tile-pct { font-size: 0.6875rem; color: #9da7b3; margin-top: 4px; }
 .tile-value {
   font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums;
-  font-size: 1.75rem; font-weight: 800; color: #ffb000; text-shadow: 0 0 8px rgb(255 176 0 / 0.35); line-height: 1.2; margin-top: 4px;
+  font-size: 1.75rem; font-weight: 800; color: #ffb000; text-shadow: 0 0 8px rgb(255 176 0 / 0.35); line-height: 1.2;
 }
-.tile-missing .tile-value { color: #6e7681; text-shadow: none; }
+.tile-missing .tile-pct { font-size: 0.6875rem; color: #9da7b3; margin-top: 4px; }
+.tile-value { color: #6e7681; text-shadow: none; }
 .tile-sub { font-size: 0.75rem; color: #c9d1d9; }
 .tile-foot { display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-top: 6px; font-size: 0.75rem; }
 .tile-foot a { color: #79c0ff; text-decoration: none; margin-left: auto; min-height: 24px; display: inline-flex; align-items: center; }

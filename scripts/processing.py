@@ -34,6 +34,11 @@ RANGE_RE = re.compile(
     re.I,
 )
 
+# INZ 대기 시간 표: "| Skilled Migrant Category Resident Visa | 9 weeks | 3.5 months |" (평균=50%, 대부분=80%)
+_DUR = r"(\d+(?:\.\d+)?)\s*(day|week|month|year)s?"
+# DIA 시민권: "within 6 months of submitting their application, 90% of applicants are granted citizenship"
+CIT_RE = re.compile(r"within\s+" + _DUR + r"\s+of\s+submitting[^.%]*?(\d{1,3})\s?%\s+of\s+applicants\s+(?:are\s+granted|receive\s+an\s+outcome)", re.I)
+
 EXTRACT_SCHEMA = {
     "type": "object",
     "properties": {
@@ -71,7 +76,18 @@ def parse_processing(text: str, match: str | None = None) -> dict | None:
         i = flat.lower().find(match.lower())
         if i < 0:
             return None
+        row = re.match(r"[^|]*\|\s*" + _DUR + r"\s*\|\s*" + _DUR, flat[i:i + 200], re.I)
+        if row:  # INZ 대기 시간 표
+            return {"p50": _fmt(row.group(1), row.group(2)), "p90": _fmt(row.group(3), row.group(4)), "pct": 80,
+                    "sub": "", "sentence": row.group(0)[:160]}
         flat = flat[i:i + 400]
+    cit = list(CIT_RE.finditer(flat))
+    if cit:  # 시민권: '승인' 기간을 대표값으로, '결과 통보' 기간은 보조 문구로
+        granted = next((m for m in cit if "granted" in m.group(0).lower()), cit[-1])
+        outcome = next((m for m in cit if "outcome" in m.group(0).lower()), None)
+        sub = f"{outcome.group(3)}%가 {_fmt(outcome.group(1), outcome.group(2))} 안에 결과 통보" if outcome else ""
+        return {"p50": "", "p90": _fmt(granted.group(1), granted.group(2)), "pct": int(granted.group(3)),
+                "sub": sub, "sentence": granted.group(0)[:160]}
     found: dict[int, str] = {}
     sentence = ""
     for m in PCT_RE.finditer(flat):
@@ -81,11 +97,11 @@ def parse_processing(text: str, match: str | None = None) -> dict | None:
     if found:
         top = max(found)
         p50 = found.get(50) or (found[min(found)] if min(found) != top else "")
-        return {"p50": p50, "p90": found[top], "pct": top, "sentence": sentence[:160]}
+        return {"p50": p50, "p90": found[top], "pct": top, "sub": "", "sentence": sentence[:160]}
     m = RANGE_RE.search(flat)
     if m:
         lo, hi, unit = m.group(1), m.group(2), m.group(3)
-        return {"p50": _fmt(lo, unit) if hi else "", "p90": _fmt(hi or lo, unit), "pct": None, "sentence": m.group(0)[:160]}
+        return {"p50": _fmt(lo, unit) if hi else "", "p90": _fmt(hi or lo, unit), "pct": None, "sub": "", "sentence": m.group(0)[:160]}
     return None
 
 
@@ -122,7 +138,7 @@ def fetch_processing_times(cfg: dict, llm=None, previous: dict | None = None, cl
     try:
         for e in entries:
             item = {"key": e["key"], "name": e["name"], "group": e.get("group", ""), "p50": "", "p90": "", "pct": None,
-                    "note": "", "url": e["urls"][0], "as_of": today, "status": "missing"}
+                    "sub": "", "note": "", "url": e["urls"][0], "as_of": today, "status": "missing"}
             text_for_ai = ""
             for url in e["urls"]:
                 try:
@@ -131,10 +147,12 @@ def fetch_processing_times(cfg: dict, llm=None, previous: dict | None = None, cl
                     log.info("processing %s: %s → %s", e["key"], url, type(ex).__name__)
                     continue
                 item["url"] = url
-                # 비자 전용 페이지는 첫 처리 기간 문장, 여러 비자가 나오는 안내 페이지는 비자 이름 뒤 구간
-                parsed = parse_processing(text) if url == e["urls"][0] or not e.get("match") else parse_processing(text, e["match"])
+                # 여러 비자가 나오는 INZ 대기 시간 표(wait-times)는 비자 이름 뒤 구간, 비자 전용 페이지는 첫 처리 기간 문장
+                overview = "wait-times" in url and e.get("match")
+                parsed = parse_processing(text, e["match"]) if overview else parse_processing(text)
                 if parsed:
-                    item.update(p50=parsed["p50"], p90=parsed["p90"], pct=parsed["pct"], note=parsed["sentence"], status="ok")
+                    item.update(p50=parsed["p50"], p90=parsed["p90"], pct=parsed["pct"], sub=parsed.get("sub", ""),
+                                note=parsed["sentence"], status="ok")
                     break
                 text_for_ai = text_for_ai or _snippet(text)
             if item["status"] != "ok" and text_for_ai:
@@ -164,7 +182,7 @@ def fetch_processing_times(cfg: dict, llm=None, previous: dict | None = None, cl
     for it in items:
         if it["status"] != "ok" and prev_items.get(it["key"], {}).get("p90"):
             old = prev_items[it["key"]]
-            it.update(p50=old.get("p50", ""), p90=old["p90"], pct=old.get("pct"), note=old.get("note", ""), url=old.get("url", it["url"]),
+            it.update(p50=old.get("p50", ""), p90=old["p90"], pct=old.get("pct"), sub=old.get("sub", ""), note=old.get("note", ""), url=old.get("url", it["url"]),
                       as_of=old.get("as_of", ""), status="stale")
     ok = sum(1 for it in items if it["status"] == "ok")
     log.info("processing times: %d/%d updated today (%d stale)", ok, len(items), sum(1 for it in items if it["status"] == "stale"))

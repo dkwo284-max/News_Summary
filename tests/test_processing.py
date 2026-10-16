@@ -63,3 +63,18 @@ def test_parse_with_match_on_multi_visa_page():
     assert parse_processing(text, "Skilled Migrant Category")["p90"] == "9개월"
     assert parse_processing(text, "Work to Residence")["p90"] == "5개월"
     assert parse_processing(text, "Parent Category") is None
+
+
+def test_parse_inz_wait_times_table():
+    text = ("| Parent Resident Visa | 7 months | 11 months | | Skilled Migrant Category Resident Visa | 9 weeks | 3.5 months | "
+            "| Work to Residence Visa | 8 weeks | 3 months | | Permanent Resident Visa | 1.5 weeks | 2 weeks |")
+    r = parse_processing(text, "Skilled Migrant Category Resident Visa")
+    assert (r["p50"], r["p90"], r["pct"]) == ("9주", "3.5개월", 80)
+    assert parse_processing(text, "Permanent Resident Visa")["p50"] == "1.5주"
+
+
+def test_parse_dia_citizenship():
+    text = ("In general: - within 4 months of submitting their application, 90% of applicants receive an outcome - "
+            "within 6 months of submitting their application, 90% of applicants are granted citizenship.")
+    r = parse_processing(text)
+    assert r["p90"] == "6개월" and r["pct"] == 90 and r["sub"] == "90%가 4개월 안에 결과 통보"

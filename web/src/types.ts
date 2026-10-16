@@ -53,6 +53,8 @@ export interface ProcessingItem {
   group: string;
   p50: string;
   p90: string;
+  pct: number | null;
+  sub: string;
   note: string;
   url: string;
   as_of: string;
