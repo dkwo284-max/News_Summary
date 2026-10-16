@@ -7,7 +7,7 @@
 # 뉴질랜드 이주 후에는 timezone 을 "Pacific/Auckland" 로 바꾸면 서머타임까지 자동 반영됩니다.
 timezone: "Asia/Seoul"
 run_hour: 7
-catchup_until_hour: 11   # GitHub cron 지연 대비: 이 시각 전까지는 늦게라도 생성
+catchup_until_hour: 13   # GitHub 예약 실행 누락 대비: 이 시각 전까지는 늦게라도 생성
 
 # ── 수집 ────────────────────────────────────────────────────
 fetch:
