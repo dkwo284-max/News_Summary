@@ -172,7 +172,7 @@ auckland_keywords: [Auckland, "Tāmaki Makaurau", "North Shore", Manukau, "Waite
 #   - 한도 초과·오류 시 그날은 AI 없이(키워드 선별 + RSS 원문 설명) 표시됩니다.
 llm:
   provider: "gemini"
-  max_requests_per_run: 6      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호)
+  max_requests_per_run: 7      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 5회 + 처리기간 추출이 필요할 때 1회
   rank_batch_size: 200         # 선별 1회 요청에 넣을 최대 후보 수
 
   gemini:
@@ -200,6 +200,48 @@ llm:
 extras:
   fx: { base: "NZD", quote: "KRW" }   # frankfurter (키 불필요)
   weather: { name: "Auckland", latitude: -36.8485, longitude: 174.7633, timezone: "Pacific/Auckland" }  # Open-Meteo
+
+# ── 이민 레이더 전광판: 비자별 처리 기간 ─────────────────────────
+# 매일 공식 페이지에서 "90% of applications are processed within ..." 문장을 찾아 표시합니다.
+# urls 는 앞에서부터 시도합니다(사이트 개편 대비 후보 여러 개). 못 찾으면 AI 가 본문에서 추출하고,
+# 그래도 실패하면 이전 값을 기준일과 함께 보여줍니다.
+processing_times:
+  - key: pswv
+    group: "졸업 후"
+    name: "졸업 후 취업비자 (PSWV)"
+    urls:
+      - "https://www.immigration.govt.nz/visas/post-study-work-visa/"
+      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/post-study-work-visa"
+  - key: aewv
+    group: "취업비자"
+    name: "고용주 인증 취업비자 (AEWV)"
+    urls:
+      - "https://www.immigration.govt.nz/visas/accredited-employer-work-visa/"
+      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/accredited-employer-work-visa"
+  - key: smc
+    group: "영주권"
+    name: "숙련 이민 영주권 (SMC)"
+    urls:
+      - "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/"
+      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/skilled-migrant-category-resident-visa"
+  - key: gl_str
+    group: "영주권"
+    name: "Green List 즉시 영주권 (Straight to Residence)"
+    urls:
+      - "https://www.immigration.govt.nz/visas/straight-to-residence-visa/"
+      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/straight-to-residence-visa"
+  - key: wtr
+    group: "영주권"
+    name: "취업 후 영주권 (Work to Residence)"
+    urls:
+      - "https://www.immigration.govt.nz/visas/work-to-residence-visa/"
+      - "https://www.immigration.govt.nz/new-zealand-visas/visas/visa/work-to-residence-visa"
+  - key: citizenship
+    group: "시민권"
+    name: "시민권 (Grant of Citizenship)"
+    urls:
+      - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/how-long-it-takes-to-get-citizenship/"
+      - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/apply-for-nz-citizenship/"
 
 # ── 알림 (선택) ─────────────────────────────────────────────
 # 토큰/비밀번호는 절대 여기 적지 말고 GitHub Secrets 로만 설정하세요.

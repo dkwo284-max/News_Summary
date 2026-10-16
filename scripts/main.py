@@ -103,7 +103,13 @@ def main(argv: list[str] | None = None) -> int:
     extras = {"nzd_krw": None, "auckland_weather": None}
     if not args.no_extras and args.fixtures is None:
         from extras import fetch_extras
+        from processing import fetch_processing_times, load_previous
         extras = fetch_extras(cfg)
+        # 이민 레이더 전광판: 비자별 처리 기간 (정규식으로 못 찾으면 AI 요청 1회)
+        try:
+            extras["processing_times"] = fetch_processing_times(cfg, llm, load_previous(data_dir))
+        except Exception as e:  # noqa: BLE001 — 전광판 실패가 브리핑 생성을 막지 않게
+            log.warning("processing times failed: %s", e)
 
     usage = llm.log_report() if llm else {"provider": None, "requests": 0, "models": {}, "total_cost_usd": 0}
     brief = {
