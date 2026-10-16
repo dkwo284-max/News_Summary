@@ -13,6 +13,10 @@ on:
         description: "시각 조건을 무시하고 지금 생성 (오늘 파일이 있으면 덮어씀)"
         type: boolean
         default: true
+      processing_only:
+        description: "뉴스·AI 없이 비자 처리 기간 전광판만 갱신"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -51,7 +55,8 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.force && '--force' || '' }}
-        run: python scripts/main.py $FORCE
+          ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.processing_only && '--update-processing' || '' }}
+        run: python scripts/main.py $FORCE $ONLY
 
       - name: Commit data
         if: steps.run.outputs.generated == 'true'

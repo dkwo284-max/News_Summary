@@ -42,6 +42,26 @@ def should_run(cfg: dict, local_now: datetime, data_dir: Path) -> tuple[bool, st
     return True, "ok"
 
 
+def update_processing_only(cfg: dict, data_dir: Path) -> int:
+    """최신 브리핑 파일의 extras.processing_times 만 다시 받아 덮어쓴다 (AI 요청 없음)."""
+    from processing import fetch_processing_times
+
+    latest = data_dir / "latest.json"
+    if not latest.exists():
+        log.error("no latest.json to update")
+        return 1
+    brief = json.loads(latest.read_text(encoding="utf-8"))
+    previous = brief.get("extras", {}).get("processing_times")
+    brief.setdefault("extras", {})["processing_times"] = fetch_processing_times(cfg, None, previous)
+    body = json.dumps(brief, ensure_ascii=False, indent=1)
+    latest.write_text(body, encoding="utf-8")
+    (data_dir / f"{brief['date']}.json").write_text(body, encoding="utf-8")
+    set_output("generated", "true")
+    set_output("date", f"{brief['date']} (processing times)")
+    log.info("updated processing times in %s", brief["date"])
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--config", default=str(ROOT / "config.yaml"))
@@ -51,6 +71,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--fixtures", type=Path, help="피드를 이 폴더의 <feed_id>.xml 에서 읽음 (오프라인 테스트)")
     ap.add_argument("--no-extras", action="store_true", help="환율·날씨 조회 생략")
     ap.add_argument("--now", help="현재 시각 대체 (ISO 8601, 테스트용)")
+    ap.add_argument("--update-processing", action="store_true",
+                    help="AI·뉴스 수집 없이 최신 브리핑의 비자 처리 기간 전광판만 갱신")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args(argv)
 
@@ -65,6 +87,9 @@ def main(argv: list[str] | None = None) -> int:
     data_dir = ROOT / cfg["output"]["data_dir"]
     out_dir = ROOT / "out" / "dry-run" if args.dry_run else data_dir
     set_output("generated", "false")
+
+    if args.update_processing:
+        return update_processing_only(cfg, data_dir)
 
     if not (args.force or args.dry_run):
         ok, why = should_run(cfg, local_now, data_dir)
