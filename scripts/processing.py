@@ -192,7 +192,7 @@ def debug_pages(cfg: dict) -> list[dict]:
                     text = _page_text(client, url) if r.status_code < 400 else ""
                     flat = re.sub(r"\s+", " ", text)
                     row["snippets"] = [flat[max(0, m.start() - 200): m.start() + 300]
-                                       for m in re.finditer(r"processing time|% within|skilled migrant|work to residence|citizenship|months", flat, re.I)][:12]
+                                       for m in re.finditer(r"processing time|% within|skilled migrant|work to residence|straight to residence|grant|months|weeks", flat, re.I)][:16]
                     row["links"] = sorted(set(re.findall(r'href="([^"#]*(?:wait|processing|timeframe|how-long|time)[^"#]*)"', r.text, re.I)))[:40]
                 except Exception as ex:  # noqa: BLE001
                     row["error"] = f"{type(ex).__name__}: {ex}"[:200]
