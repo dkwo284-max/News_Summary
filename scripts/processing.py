@@ -193,7 +193,7 @@ def debug_pages(cfg: dict) -> list[dict]:
                     flat = re.sub(r"\s+", " ", text)
                     row["snippets"] = [flat[max(0, m.start() - 200): m.start() + 300]
                                        for m in re.finditer(r"processing time|% within|skilled migrant|work to residence|citizenship|months", flat, re.I)][:12]
-                    row["links"] = sorted(set(re.findall(r'href="([^"]*(?:processing|timeframe|how-long)[^"]*)"', r.text, re.I)))[:20]
+                    row["links"] = sorted(set(re.findall(r'href="([^"#]*(?:wait|processing|timeframe|how-long|time)[^"#]*)"', r.text, re.I)))[:40]
                 except Exception as ex:  # noqa: BLE001
                     row["error"] = f"{type(ex).__name__}: {ex}"[:200]
                 out.append(row)

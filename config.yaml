@@ -246,8 +246,7 @@ processing_times:
     urls:
       - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/apply-for-nz-citizenship/how-long-it-takes/"
       - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/"
-      - "https://www.dia.govt.nz/Citizenship"
-      - "https://www.dia.govt.nz/Citizenship-Processing-times"
+      - "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/how-to-apply-for-nz-citizenship/"
 
 # ── 알림 (선택) ─────────────────────────────────────────────
 # 토큰/비밀번호는 절대 여기 적지 말고 GitHub Secrets 로만 설정하세요.
