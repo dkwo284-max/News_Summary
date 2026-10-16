@@ -38,10 +38,23 @@ export interface Brief {
   extras: {
     nzd_krw: number | null;
     auckland_weather: { max: number; min: number; desc: string; rain_chance?: number } | null;
+    processing_times?: { updated_at: string; items: ProcessingItem[] };
   };
   meta?: { mode?: string; failed_feeds?: { id: string; name?: string; error: string }[] };
 }
 
 export interface ArchiveIndex {
   dates: string[];
+}
+
+export interface ProcessingItem {
+  key: string;
+  name: string;
+  group: string;
+  p50: string;
+  p90: string;
+  note: string;
+  url: string;
+  as_of: string;
+  status: "ok" | "stale" | "missing";
 }

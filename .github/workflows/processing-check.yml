@@ -19,15 +19,17 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - name: Fetch processing times (no AI)
-        run: python scripts/processing.py > processing-check.json
+        run: |
+          python scripts/processing.py > processing-check.json
+          python scripts/processing.py --debug > processing-debug.json
       - name: Publish result to processing-check branch
         run: |
           git config user.name "daily-brief-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          mv processing-check.json /tmp/processing-check.json
+          mv processing-check.json processing-debug.json /tmp/
           git checkout --orphan processing-check
           git rm -rq --cached . && find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp /tmp/processing-check.json .
-          git add processing-check.json
+          cp /tmp/processing-check.json /tmp/processing-debug.json .
+          git add processing-check.json processing-debug.json
           git commit -qm "processing check $(date -u +%FT%TZ)"
           git push -f origin processing-check

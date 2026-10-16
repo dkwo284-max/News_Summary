@@ -1,6 +1,7 @@
 import "./style.css";
 import { applySettings, loadSettings, saveSettings, type Settings } from "./settings";
-import type { ArchiveIndex, Brief, Item, SectionKey } from "./types";
+import { fetchLive, loadLive, type LiveData } from "./live";
+import type { ArchiveIndex, Brief, Item, ProcessingItem, SectionKey } from "./types";
 
 // ── 탭/카테고리 정의 ───────────────────────────────────────
 interface TabDef {
@@ -29,6 +30,9 @@ const settings: Settings = loadSettings();
 let brief: Brief | null = null;
 let krChip: SectionKey | "all" = "all";
 let query = "";
+let viewingLatest = true;
+let live: LiveData | null = loadLive();
+let liveError = "";
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const main = $<HTMLElement>("main");
@@ -98,6 +102,7 @@ async function loadBrief(date?: string): Promise<void> {
   main.setAttribute("aria-busy", "true");
   try {
     brief = await getJSON<Brief>(date ? `./data/${date}.json` : "./data/latest.json");
+    viewingLatest = !date;
   } catch {
     brief = null;
   }
@@ -115,13 +120,41 @@ function renderHeader(): void {
     return;
   }
   when.textContent = `${fmtDateLabel(brief.date)} · ${fmtTime(brief.generated_at, brief.timezone)} 생성`;
-  const fx = brief.extras?.nzd_krw;
+  // 최신 브리핑을 볼 때는 새로고침한 실시간 값이 있으면 그것을, 아니면 브리핑 생성 시점 값을 보여준다
+  const useLive = viewingLatest && live != null;
+  const fx = useLive && live!.fx != null ? live!.fx : brief.extras?.nzd_krw;
   if (fx) extras.append(h("span", { class: "pill" }, "💱 1 NZD = ", h("strong", {}, `${fx.toLocaleString("ko-KR")}원`)));
+  const lw = useLive ? live!.weather : null;
   const w = brief.extras?.auckland_weather;
-  if (w) {
+  if (lw) {
+    const rain = lw.rain != null ? ` · 강수 ${lw.rain}%` : "";
+    extras.append(h("span", { class: "pill" }, "🌤 오클랜드 지금 ", h("strong", {}, `${lw.now}°`), ` (${lw.min}°~${lw.max}°) ${lw.desc}${rain}`));
+  } else if (w) {
     const rain = w.rain_chance != null ? ` · 강수 ${w.rain_chance}%` : "";
     extras.append(h("span", { class: "pill" }, "🌤 오클랜드 ", h("strong", {}, `${w.min}°~${w.max}°`), ` ${w.desc}${rain}`));
   }
+  if (viewingLatest) {
+    const btn = h("button", { class: "refresh", type: "button", "aria-label": "환율·날씨 새로고침", title: "환율·날씨 새로고침" }, "↻");
+    btn.addEventListener("click", () => void refreshLive(btn));
+    const stamp = liveError
+      ? liveError
+      : useLive
+        ? `${new Date(live!.at).toLocaleTimeString("ko-KR", { hour: "numeric", minute: "2-digit" })} 기준`
+        : "브리핑 생성 시점 기준";
+    extras.append(h("span", { class: "live-row" }, btn, h("span", { class: "stamp", role: "status" }, stamp)));
+  }
+}
+
+async function refreshLive(btn: HTMLButtonElement): Promise<void> {
+  btn.disabled = true;
+  btn.classList.add("spinning");
+  try {
+    live = await fetchLive();
+    liveError = "";
+  } catch {
+    liveError = navigator.onLine ? "새로고침 실패 — 잠시 후 다시" : "오프라인 — 새로고침 불가";
+  }
+  renderHeader();
 }
 
 function renderTabs(): void {
@@ -260,6 +293,10 @@ function renderMain(): void {
       if (block) main.append(block);
     }
   } else {
+    if (tab.id === "imm") {
+      const board = processingBoard();
+      if (board) main.append(board);
+    }
     for (const k of visibleSections(tab)) {
       const block = sectionBlock(k, false);
       if (block) main.append(block);
@@ -271,6 +308,34 @@ function renderMain(): void {
       h("summary", {}, `수집 실패한 피드 ${failed.length}개`),
       h("ul", {}, ...failed.map((f) => h("li", {}, f.name ? `${f.name} (${f.id})` : f.id)))));
   }
+}
+
+// 이민 레이더 전광판: 비자별 처리 기간 (공식 페이지 기준, 매일 아침 갱신)
+function processingBoard(): HTMLElement | null {
+  const pt = brief?.extras?.processing_times;
+  if (!pt || !pt.items?.length) return null;
+  const tile = (it: ProcessingItem) => {
+    const has = !!(it.p90 || it.p50);
+    const t = h("li", { class: `tile${has ? "" : " tile-missing"}` },
+      h("span", { class: "tile-group" }, it.group),
+      h("span", { class: "tile-name" }, it.name),
+      h("span", { class: "tile-value", "aria-label": has ? `90% 처리 ${it.p90 || it.p50}` : "확인 불가" }, has ? it.p90 || it.p50 : "—"),
+      h("span", { class: "tile-sub" }, has ? (it.p50 && it.p90 ? `절반은 ${it.p50} 이내` : "90% 처리 기간") : "공식 페이지에서 확인"),
+    );
+    const foot = h("span", { class: "tile-foot" });
+    if (it.status === "stale" && it.as_of) foot.append(h("span", { class: "stale" }, `${it.as_of.slice(5).replace("-", "/")} 기준`));
+    foot.append(h("a", { href: safeUrl(it.url), target: "_blank", rel: "noopener noreferrer" }, "출처 ↗"));
+    t.append(foot);
+    if (it.note) t.title = it.note;
+    return t;
+  };
+  return h("section", { class: "board", "aria-labelledby": "board-title" },
+    h("div", { class: "board-head" },
+      h("h2", { id: "board-title" }, "⏱ 비자 처리 기간 전광판"),
+      h("span", { class: "board-meta" }, "이민국 공식 안내 · 90% 처리 기준")),
+    h("ul", { class: "tiles" }, ...pt.items.map(tile)),
+    h("p", { class: "board-note" }, "처리 기간은 신청 시점·서류 상태에 따라 달라질 수 있어요. 신청 전 공식 페이지를 꼭 확인하세요."),
+  );
 }
 
 function renderAll(): void {

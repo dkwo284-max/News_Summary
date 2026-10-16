@@ -170,11 +170,36 @@ def load_previous(data_dir: Path) -> dict | None:
         return None
 
 
+def debug_pages(cfg: dict) -> list[dict]:
+    """점검용: 각 후보 URL 의 응답 코드·최종 주소·'process' 주변 문장."""
+    out = []
+    with httpx.Client(timeout=cfg["fetch"]["timeout_seconds"], follow_redirects=True,
+                      headers={"User-Agent": cfg["fetch"]["user_agent"]}) as client:
+        for e in cfg.get("processing_times", []):
+            for url in e["urls"]:
+                row = {"key": e["key"], "url": url}
+                try:
+                    r = client.get(url)
+                    row.update(status=r.status_code, final=str(r.url), length=len(r.text))
+                    text = _page_text(client, url) if r.status_code < 400 else ""
+                    flat = re.sub(r"\s+", " ", text)
+                    row["snippets"] = [flat[max(0, m.start() - 200): m.start() + 300]
+                                       for m in re.finditer(r"process|take|week|month", flat, re.I)][:6]
+                    row["links"] = sorted(set(re.findall(r'href="([^"]*(?:processing|timeframe|how-long)[^"]*)"', r.text, re.I)))[:20]
+                except Exception as ex:  # noqa: BLE001
+                    row["error"] = f"{type(ex).__name__}: {ex}"[:200]
+                out.append(row)
+    return out
+
+
 if __name__ == "__main__":
     import logging
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)-7s %(message)s")
     cfg = load_config()
+    if "--debug" in sys.argv:
+        print(json.dumps(debug_pages(cfg), ensure_ascii=False, indent=1))
+        sys.exit(0)
     res = fetch_processing_times(cfg, previous=load_previous(ROOT / cfg["output"]["data_dir"]))
     print(json.dumps(res, ensure_ascii=False, indent=1))
     sys.exit(0)
