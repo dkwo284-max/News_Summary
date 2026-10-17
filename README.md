@@ -96,6 +96,20 @@ GitHub Actions (뉴질랜드 시간 07:05 / 07:20 / 07:35)
   - 시민권: DIA *Application timeframes* ("within 6 months … 90% of applicants are granted citizenship")
   - 페이지 형식이 바뀌어 읽지 못하면 AI 가 본문에서 한 번 더 추출하고, 그래도 안 되면 이전 값을 "MM/DD 기준" 표시와 함께 보여줍니다. 항목·주소는 `config.yaml` 의 `processing_times` 에서 바꿉니다. **Actions → Check processing times** 로 지금 바로 점검할 수 있어요(결과는 `processing-check` 브랜치).
 
+## 매일 07:00 정확히 실행하기 (cron-job.org)
+
+GitHub 예약 실행(schedule)은 부하가 크면 누락될 수 있어서, 외부 무료 예약 서비스가 매일 07:00(NZ)에 실행 요청을 보내게 합니다. GitHub 예약은 보조로 그대로 둡니다. 이미 그날 브리핑이 있으면 실행은 몇 초 만에 끝나므로 둘 다 돌아도 문제없어요.
+
+1. **GitHub 토큰**: Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token
+   - Repository access: *Only select repositories* → `News_Summary`
+   - Repository permissions → **Actions: Read and write** (나머지는 그대로)
+2. **cron-job.org** → Create cronjob
+   - URL: `https://api.github.com/repos/dkwo284-max/News_Summary/actions/workflows/daily.yml/dispatches`
+   - 실행 시각: 매일 07:00, 타임존 `Pacific/Auckland`
+   - Advanced → Request method `POST`, 헤더 `Accept: application/vnd.github+json`, `Authorization: Bearer <토큰>`, `X-GitHub-Api-Version: 2022-11-28`, `Content-Type: application/json`
+   - Request body: `{"ref":"main","inputs":{"force":"false","processing_only":"false"}}`
+   - Test run 결과가 **204** 면 성공 (Actions 탭에 Daily Brief 실행이 생김)
+
 ## 피드 추가·삭제
 
 `config.yaml` 의 `feeds:` 목록을 고칩니다.
