@@ -318,7 +318,10 @@ feeds:
     name: "RNZ"
     section: nz_national
     url: "https://www.rnz.co.nz/rss/national.xml"
-    fallbacks: ["https://news.google.com/rss/search?q=site:rnz.co.nz/news/national+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"]
+    # 섹션 경로 검색(site:rnz.co.nz/news/national)은 결과가 0건인 날이 있어(2026-10-19 확인) RNZ 전체 검색을 추가
+    fallbacks:
+      - "https://news.google.com/rss/search?q=site:rnz.co.nz/news/national+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+      - "https://news.google.com/rss/search?q=site:rnz.co.nz+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: rnz_business
     name: "RNZ"
     section: nz_national
