@@ -1,380 +1,370 @@
 {
- "date": "2026-10-18",
- "generated_at": "2026-10-18T07:58:26+13:00",
+ "date": "2026-10-19",
+ "generated_at": "2026-10-19T12:41:36+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
    "label": "사회",
-   "briefing": "화재 순직 소방관 조문과 치안 보조 기기 실효성 논란이 주목받았습니다.",
+   "briefing": "반도체 중심 경제 성장 전망과 직장 내 괴롭힘 남용 및 각종 사건·사고 소식이 이어졌습니다.",
    "items": [
     {
-     "id": "231bbd4749e7",
-     "title_ko": "이 대통령, 부천 화재 순직 소방관 조문",
+     "id": "03d506a4be61",
+     "title_ko": "문 전 대통령, 강제 북송 2심 재판부에 탄원서 제출",
      "summary_ko": [
-      "이재명 대통령이 부천 공장 화재로 순직한 고 김진석 소방위의 빈소를 찾아 조문했습니다.",
-      "이 대통령은 옥조근정훈장을 추서하고 유가족을 위로하며 국가적 지원을 약속했습니다.",
-      "정부는 1계급 특진과 함께 국립현충원 안장 등 순직자 예우 절차를 진행할 계획입니다."
+      "문재인 전 대통령이 강제 북송 사건의 항소심 재판부에 탄원서를 제출했습니다.",
+      "해당 사건 피고인들에 대해 2심에서 무죄 판결을 선고해 달라는 취지의 내용이 담겼습니다.",
+      "전직 대통령의 공식 탄원서가 향후 사법부 판단에 미칠 영향에 관심이 모입니다."
      ],
      "tags": [
       "사회",
-      "사건사고"
+      "사건사고",
+      "정치"
      ],
      "importance": 8,
      "sources": [
       {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261017045451001"
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/court_law/2026/10/19/NY6PUAJU5VCO7C5SPFL4RWPR7A/"
       }
      ],
-     "original_title": "李대통령 \"희생 영원히 기억할 것\"…부천 화재 순직 소방관 조문(종합)",
-     "published_at": "2026-10-17T11:15+00:00"
+     "original_title": "[단독] “강제 북송 2심 무죄 선고를” 文, 재판부에 탄원서 보내",
+     "published_at": "2026-10-18T20:00+00:00"
     },
     {
-     "id": "4229e0a97e08",
-     "title_ko": "이 대통령, 故 김진석 소방위 조문 및 훈장 추서",
+     "id": "495938b1dad4",
+     "title_ko": "한국 잠재성장률 반등 전망 속 대만식 반도체 쏠림 우려",
      "summary_ko": [
-      "이재명 대통령이 부천 화재 현장에서 순직한 고 김진석 소방위의 빈소를 방문했습니다.",
-      "현장에서 고인의 헌신을 기리며 옥조근정훈장을 추서하고 유가족에게 깊은 애도를 표했습니다.",
-      "정부는 순직 소방공무원에 대한 1계급 특진과 현충원 안장 등 최고 예우를 다할 방침입니다."
+      "IMF는 한국의 잠재성장률이 올해 2.14%, 내년 2.20%로 반등할 것으로 내다봤습니다.",
+      "인공지능 수요 확대로 인한 반도체 호황이 성장을 견인하며 대만과 유사한 구조를 보이고 있습니다.",
+      "반도체 편중이 내수 진작과 전반적 생산성 향상으로 확산돼야 한다는 지적이 나옵니다."
      ],
      "tags": [
-      "사회",
-      "사건사고"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "연합뉴스TV",
-       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE40a21RdHllS2htN1VaZ1h6ampiOW9nV2JSYUg2QURlTGJKUjZKMkMtMjQ2UVczSmw3RVNDV3VpS1U0eVpWLTdSVHh5MlN3WF9SSWZXXzV4Nzg5Z3lDUkt3MkdDSTRycTg?oc=5"
-      }
-     ],
-     "original_title": "이 대통령, 故 김진석 소방위 조문…옥조근정훈장 추서",
-     "published_at": "2026-10-17T10:31+00:00"
-    },
-    {
-     "id": "25c284fd35bb",
-     "title_ko": "부천 공장 화재 순직 소방관 조문 및 특진 추서",
-     "summary_ko": [
-      "부천 공장 화재 진압 중 순직한 고 김진석 소방위 빈소에 대통령 조문이 이뤄졌습니다.",
-      "이번 화재로 소방관 1명이 숨지고 중상자 1명을 포함해 총 8명의 인명피해가 발생했습니다.",
-      "정부는 고인에게 옥조근정훈장 추서 및 1계급 특진과 현충원 안장을 지원하기로 했습니다."
-     ],
-     "tags": [
-      "사회",
-      "사건사고"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261017045400001"
-      }
-     ],
-     "original_title": "李대통령, 부천 화재 순직 소방관 조문…영정 앞 훈장 추서도",
-     "published_at": "2026-10-17T10:29+00:00"
-    },
-    {
-     "id": "6f1f0aa0d9a4",
-     "title_ko": "신변보호용 스마트워치 실효성 논란",
-     "summary_ko": [
-      "경찰의 신변보호용 스마트워치를 지급받고도 살해당한 피해자가 17명에 달했습니다.",
-      "위급 상황 시 신고 버튼을 누르기 전에 피습되는 사례가 잇따르며 한계가 드러났습니다.",
-      "피해자 보호 시스템의 실효성을 높이기 위한 제도 개선 요구가 커지고 있습니다."
-     ],
-     "tags": [
-      "사회",
-      "치안"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "문화일보",
-       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE95bHE1d0FfVURtRkZFRDhNUDRDSGRWVnV5RUcxX01seTRZMzZFZVE4LTVIQ2NjRlNNOXVfVGtfQnJXR0lQNGRVS29wUHkzbVNk?oc=5"
-      }
-     ],
-     "original_title": "“버튼 누르기도 전에 당했다”…스마트워치 차고도 살해당한 17명...‘스마트워치 무용론’ 고개",
-     "published_at": "2026-10-17T12:05+00:00"
-    },
-    {
-     "id": "a048a1c68cda",
-     "title_ko": "김병주, 주한미군 사령관에 발언 사과 요구",
-     "summary_ko": [
-      "김병주 의원이 주한미군 사령관의 발언을 두고 주권 침해라며 사과를 공식 요구했습니다.",
-      "김 의원은 해당 발언이 선을 넘었으며 국가 주권을 침해하는 부적절한 언행이라고 비판했습니다.",
-      "이번 사과 요구로 한미 안보 관계와 관련 발언에 대한 정치권 공방이 이어질 전망입니다."
-     ],
-     "tags": [
-      "정치",
+      "경제",
       "사회"
      ],
      "importance": 7,
      "sources": [
       {
-       "name": "MBC 뉴스",
-       "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9jd2JSSFBCbWZOZ2hpOEpVN1kzY0J4UXdVY0FOMlNaeDVGd0hUeEg0RDljZlpWV2dxTVE4TXgzQ1JjZXpLeFZQaWRGYkxXUHRTYjhfVV9mRmpYRENSMVVROUhKTUlibHUyRkptS1ZpOEdxTVhVdUQ4UtIBeEFVX3lxTE1fZVBXLVZEZFU1NHBHVHd3eFpORzRNdl9kOUhOQWlscXZLRlNmbkdPRno2VDYwUUdoZ0RTNHpBSGJVa2FBYkFpT045NWtFdGw1VUlSOG03ZzJKNUVGOHAtSGtMTFdxMlBxUnhkTThGOWMwRVVyNV9XaA?oc=5"
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261018059000546"
       }
      ],
-     "original_title": "김병주, 주한미군 사령관에 사과 요구‥\"주권 침해 발언, 선 넘어\"",
-     "published_at": "2026-10-17T10:26+00:00"
+     "original_title": "[글로컬] '성장률 반등' 한국 경제, 대만 닮아간다는데",
+     "published_at": "2026-10-18T22:07+00:00"
+    },
+    {
+     "id": "bb1c92995e54",
+     "title_ko": "AI 성착취물 제작한 경찰관, 근무 중 세 차례 표창 수여 논란",
+     "summary_ko": [
+      "과거 몰카 범죄 이력이 있던 인물이 경찰관으로 임용된 뒤 인공지능 성착취물을 제작했습니다.",
+      "해당 경찰관은 범행 기간 동안 내부에서 세 차례나 표창을 수여받은 것으로 드러났습니다.",
+      "경찰 채용 검증 시스템과 공직자 기강 관리에 대한 비판이 커지고 있습니다."
+     ],
+     "tags": [
+      "사회",
+      "사건사고"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/incident/2026/10/19/U5Q2H55VCNCUZBAKZFHEYULGYQ/"
+      }
+     ],
+     "original_title": "[단독] 경찰관 된 ‘몰카범’... AI 성착취물 만들면서 세 차례 표창 받아",
+     "published_at": "2026-10-18T22:00+00:00"
+    },
+    {
+     "id": "2cb03bbf2258",
+     "title_ko": "모호한 기준에 직장 내 괴롭힘 허위·반복 신고 급증",
+     "summary_ko": [
+      "직장 내 괴롭힘 신고가 급증했으나 실제 처분으로 이어지는 비율은 줄고 있습니다.",
+      "인사 불만 해소나 유급휴가 획득, 생성형 AI를 이용한 허위 신고 등 제도 악용 사례가 늘었습니다.",
+      "기업의 노무 부담과 조직 갈등이 심화되자 경사노위가 제도 개선 논의에 착수했습니다."
+     ],
+     "tags": [
+      "고용",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/economy/12179138"
+      }
+     ],
+     "original_title": "“직내괴 7번 신고하더니, 결국 휴가 받아냈다”…정부도 대책마련 고심",
+     "published_at": "2026-10-18T20:56+00:00"
+    },
+    {
+     "id": "941fd872153e",
+     "title_ko": "여주 도자기 보관창고 화재, 10시간 만에 초진 완료",
+     "summary_ko": [
+      "경기 여주시 흥천면의 생활도자기 보관 창고에서 화재가 발생해 1개 동이 전소됐습니다.",
+      "소방당국은 대응 1단계를 발령해 진화에 나섰으며 가연물이 많아 약 10시간 만에 불길을 잡았습니다.",
+      "화재 당시 창고 내부 인원이 없어 인명피해는 발생하지 않았으며 원인 조사가 진행 중입니다."
+     ],
+     "tags": [
+      "재난",
+      "사건사고",
+      "사회"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261019000251061"
+      }
+     ],
+     "original_title": "여주 도자기 보관창고 화재 10시간 만에 큰 불길 잡혀(종합)",
+     "published_at": "2026-10-18T23:27+00:00"
     }
    ]
   },
   "kr_economy": {
    "label": "경제",
-   "briefing": "주담대 금리 상승과 유가 동향 등 금융 및 에너지 현안이 이어졌습니다.",
+   "briefing": "대미 무역흑자 급증과 증시 변동성 및 원자재 품질 문제 등 통상·금융 리스크가 부각됐습니다.",
    "items": [
     {
-     "id": "7a09854bd7a8",
-     "title_ko": "주식 급락 속 변동형 주담대 금리 인상",
+     "id": "7b1f1768bacc",
+     "title_ko": "대미 무역흑자 1000억 달러 임박, 통상 압박 우려 고조",
      "summary_ko": [
-      "주요 은행의 변동형 주택담보대출 금리가 신규 코픽스 상승 영향으로 일제히 올랐습니다.",
-      "9월 신규취급액 코픽스가 3.43%로 오르며 국민·우리은행의 금리가 0.25%포인트 인상됐습니다.",
-      "주가 변동성 확대로 금융자산이 줄어든 가운데 대출이자 부담이 겹치며 우려가 커졌습니다."
+      "올해 우리나라의 대미 무역수지 흑자가 사상 처음으로 1000억 달러를 돌파할 전망입니다.",
+      "반도체 수출 호조에 힘입어 3분기 누적 흑자만 847억 달러로 역대 최대치를 경신했습니다.",
+      "막대한 흑자 규모로 인해 트럼프 행정부의 관세 인상 등 통상 압박이 심화될 우려가 제기됩니다."
      ],
      "tags": [
-      "경제",
-      "금리",
-      "증시"
+      "경제"
      ],
      "importance": 8,
      "sources": [
       {
        "name": "매일경제",
-       "url": "https://www.mk.co.kr/news/economy/12178547"
-      }
-     ],
-     "original_title": "“주식 팔아 빚 갚으려 했는데”…급락 후 반등에도 대출이자 ‘이중고’",
-     "published_at": "2026-10-17T08:19+00:00"
-    },
-    {
-     "id": "68c7ab289716",
-     "title_ko": "북한, AI 도입 초고속 정밀유도 어뢰 시험발사",
-     "summary_ko": [
-      "북한이 신형 초고속 정밀유도 어뢰무기체계의 실탄 수중시험발사를 진행했습니다.",
-      "조선중앙통신은 신형 어뢰의 탐색 및 유도 기능에 인공지능 기술이 적용됐다고 전했습니다.",
-      "신형 수중 무기 시험으로 군사적 긴장감이 한층 고조될 것으로 전망됩니다."
-     ],
-     "tags": [
-      "사회",
-      "기술"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/economy/economy_general/2026/10/17/MQ2WCMJQMFRTSNZWHEYTGNRZMM/"
-      }
-     ],
-     "original_title": "北, 신형 초고속 정밀유도 어뢰 시험발사",
-     "published_at": "2026-10-17T02:08+00:00"
-    },
-    {
-     "id": "ff72a7343a1d",
-     "title_ko": "국내 주유소 기름값 22주 연속 하락세",
-     "summary_ko": [
-      "전국 주유소 휘발유와 경유 판매 가격이 전주 대비 소폭 내리며 22주 연속 하락했습니다.",
-      "10월 둘째 주 휘발유 평균가는 L당 1,856.6원, 경유는 1,842.8원을 기록했습니다.",
-      "정부는 국제유가 변동 대응을 위해 석유 최고가격을 이전 회차와 동일하게 동결했습니다."
-     ],
-     "tags": [
-      "경제",
-      "물가"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261016155700003"
+       "url": "https://www.mk.co.kr/news/economy/12178999"
       },
       {
-       "name": "MBC 뉴스",
-       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE96QXo5R3dEV0wtNXRpaUxRM19rMmlOa3pPZjFMY3d2dEh2ZGNMZnBaTlNjNU9RSjdXMVE3eFJzVnFHS1lfaktrTUU0cHJDdXBSZ3B1ZU45bjFxdHA4NUxwR3JuSEQydC1xbU9xaWZ5YnhDamhv0gF0QVVfeXFMUEJjd1J2MXdzQmV1c2JtYWF3VHRDOWMzU21TbTZhSDh2ODM5STRvVWd0VDJBaGlRNEp6bVllbDlpa3lTQ2JXUWNVc3FUUXhXTl81R1BrNmU3bFlaYkIzdUp3TGM1RFJNSWFSaEdWNkNEZ2FZd0I?oc=5"
+       "name": "매일경제 마켓",
+       "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5KbkR6YTNHZ2diMHZuWWF5a0laczd4aDRXenVuWndEZkhTakVvOXFnUGs4M05LcTBrak5tVVZLVVdUbmZxOG9SY3pCb2R3VHpHS1E?oc=5"
       }
      ],
-     "original_title": "국내 기름값 22주 연속 하락…휘발유·경유 1천800원대 지속",
-     "published_at": "2026-10-17T07:42+00:00"
+     "original_title": "대미 무역흑자 1천억弗 눈앞 … 트럼프 통상압박 우려 커져",
+     "published_at": "2026-10-18T08:21+00:00"
     },
     {
-     "id": "28c1caa1f5b1",
-     "title_ko": "중국 CXMT, 분기 매출 급증 전망",
+     "id": "6581d1ac22a5",
+     "title_ko": "코스피 단기 과매도 진입, AI 불확실성에 5150선 하락 가능성",
      "summary_ko": [
-      "중국 메모리 반도체 기업 CXMT의 분기 매출이 전년 대비 급격히 증가할 것으로 예상됐습니다.",
-      "중국 기업들의 공격적인 설비 투자와 생산 확대로 전년 대비 수 배 수준의 성장이 점쳐집니다.",
-      "삼성전자와 SK하이닉스 등 국내 메모리 선도 기업을 향한 추격 속도가 빨라지고 있습니다."
+      "증권가에서는 코스피가 과매도 구간에 진입했으나 바닥으로 보기는 이르다고 분석했습니다.",
+      "인공지능 설비투자의 실제 수익성 전환 여부에 대한 불확실성이 지속되고 있습니다.",
+      "지수가 5150선까지 추가 하락할 가능성을 열어두고 분할매수로 접근해야 한다는 조언입니다."
      ],
      "tags": [
-      "경제",
-      "기술"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "문화일보",
-       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1QTVc1RHV1dTN0MlI5cFdVSHBtVmltb0J6bFdlbXNJQ19HU3ZZdGxiYzE0dlZIdmplWjBOMFJDdi1ZMWtia2lrMkw4dXF4dDhR?oc=5"
-      },
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/economy/tech_it/2026/10/17/RNSWQ3XDV5ESTLXEXJ6YSB26VE/"
-      }
-     ],
-     "original_title": "[속보]‘삼전·닉스 추격’ CXMT, 분기 매출 600%↑ 기대",
-     "published_at": "2026-10-17T08:04+00:00"
-    },
-    {
-     "id": "346c1d993cdc",
-     "title_ko": "증시 불안에 은행 예금으로 '역 머니무브'",
-     "summary_ko": [
-      "증시 변동성이 커지자 자금이 안전자산인 정기예금과 종합투자계좌로 이동하고 있습니다.",
-      "주가 급락에 따른 원금 손실 불안감이 커지며 고위험 투자 회피 현상이 뚜렷해졌습니다.",
-      "단기 차익을 노리던 자금이 안정적 금리를 제공하는 금융상품으로 집중되는 추세입니다."
-     ],
-     "tags": [
-      "경제",
       "증시",
-      "금리"
+      "경제"
      ],
      "importance": 7,
      "sources": [
       {
-       "name": "농민신문",
-       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5LTDNtTklkS0dGSTVMZVFpLXF4NGM4UUROaUdIVTFERFhZaTY0U1RYYVVfOG5XWWhSYzBxRDRUS0haYW9JYUdZR09VUGFCZFhZVjdLVFVRTnpWZw?oc=5"
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/stock-finance/2026/10/19/GZQWKMDGGQ4TINBVGM4TCMDEHE/"
       }
      ],
-     "original_title": "“지키자 내 돈”…코스피 불안에 예금·IMA로 ‘역 머니무브’",
-     "published_at": "2026-10-17T10:46+00:00"
+     "original_title": "“코스피 5150까지 열어둬야…과매도지만 바닥 아니다”",
+     "published_at": "2026-10-18T23:26+00:00"
+    },
+    {
+     "id": "b8a3a40b65d2",
+     "title_ko": "외국인 투자자 26조 원 순매도, 헤지펀드 이탈 속 증시 불안",
+     "summary_ko": [
+      "외국인 투자자들이 국내 증시에서 26조 원 규모의 매도세를 기록했습니다.",
+      "글로벌 헤지펀드들이 자금을 회수하면서 지난 여름의 시장 충격이 재현되고 있습니다.",
+      "외국인 수급 악화가 이어짐에 따라 국내 금융시장의 변동성 관리가 중요해졌습니다."
+     ],
+     "tags": [
+      "증시",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/stock-finance/2026/10/19/WFJBVYVW5VGPTMPO7LLDUK4P2U/"
+      }
+     ],
+     "original_title": "‘7월의 악몽’ 재점화… 헤지펀드 발 빼자 外人 26조 ‘셀 코리아’",
+     "published_at": "2026-10-18T23:25+00:00"
+    },
+    {
+     "id": "30cf6275d879",
+     "title_ko": "해외 검사표 신뢰해 수입한 석탄, 70%가 열량 미달",
+     "summary_ko": [
+      "해외 검사 성적서를 토대로 수입된 발전용 석탄 대다수가 기준에 미달한 것으로 나타났습니다.",
+      "검사 결과 수입 석탄의 약 70%가 계약상 명시된 발열량에 미치지 못했습니다.",
+      "원자재 수입 검증 체계의 부실이 발전 효율 저하 및 전력 공기업 비용 부담으로 이어질 수 있습니다."
+     ],
+     "tags": [
+      "경제",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/industry-company/2026/10/19/JMNKAX33QJHKHEFLC647WIPX6I/"
+      }
+     ],
+     "original_title": "[단독] 해외 검사표 믿고 사왔는데… 수입 석탄 70%는 ‘열량 미달’",
+     "published_at": "2026-10-18T22:00+00:00"
+    },
+    {
+     "id": "1cc5964ab62a",
+     "title_ko": "코스피 급락에 3000억 원 강제 청산, 국민연금 평가손실 확대",
+     "summary_ko": [
+      "국내 증시 급락으로 인해 3000억 원 규모의 주식 강제 청산이 발생했습니다.",
+      "지수 하락세가 심화되면서 주요 기관인 국민연금의 평가액도 182조 원 증발했습니다.",
+      "금융시장 전반의 불안감이 커지며 개인과 기관 투자자 모두의 손실 관리가 비상입니다."
+     ],
+     "tags": [
+      "증시",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "KBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBKcFVyUGlvVU5QckltdGpYQUxyVVkzVHNjZlBDVHVEaWRjNjRiUTB2d2JTZFBQQngwVTBIcDJwOU9xZU9lbTJiNXMtQjhpZXhQeFhFRWc0N3p1TlU?oc=5"
+      }
+     ],
+     "original_title": "코스피 급락에 ‘3천억 원’ 강제 청산…국민연금은 182조 증발 [잇슈 머니]",
+     "published_at": "2026-10-18T21:53+00:00"
     }
    ]
   },
   "kr_entertainment": {
    "label": "연예",
-   "briefing": "KBS 사장 최종 후보 압축과 연예계 주요 동향이 전해졌습니다.",
+   "briefing": "기상 악화로 인한 행사 취소부터 다큐 홍보 논란, 공연 현장 구설 등 다양한 이슈가 전해졌습니다.",
    "items": [
     {
-     "id": "ac34ab0e2656",
-     "title_ko": "KBS 차기 사장 후보 3인 압축 및 최종 면접",
+     "id": "ae4676276c64",
+     "title_ko": "GMF 폭우로 야외 공연 일부 취소 및 2일차 티켓 전액 환불",
      "summary_ko": [
-      "KBS 사장후보추천위원회가 차기 사장 후보를 김영삼, 엄경철, 이태현 3인으로 압축했습니다.",
-      "시민 205명이 참여한 숙의토론과 평가를 거쳐 최종 면접 대상자가 선정되었습니다.",
-      "KBS 이사회는 오는 20일 면접을 거쳐 대통령에게 임명 제청할 최종 후보 1인을 결정합니다."
+      "음악 축제 그랜드 민트 페스티벌이 지속된 폭우로 2일차 야외 공연을 일부 취소했습니다.",
+      "주최사는 무대 파손과 안전 문제를 고려해 2일차 티켓을 전액 환불하기로 결정했습니다.",
+      "실내 공연장인 KSPO돔 무대는 정상 진행됐으나 관객들의 관람 일정 차질은 불가피했습니다."
      ],
      "tags": [
-      "방송",
-      "연예"
+      "연예",
+      "날씨"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261018043100005"
+      }
+     ],
+     "original_title": "GMF, 폭우로 2일차 티켓 전액 환불…일부 야외 공연 취소",
+     "published_at": "2026-10-18T08:10+00:00"
+    },
+    {
+     "id": "74be17296a92",
+     "title_ko": "일론 머스크 비판 다큐멘터리, X 이어 틱톡서도 광고 정지 논란",
+     "summary_ko": [
+      "일론 머스크를 비판적으로 다룬 다큐 영화 '머스크'의 틱톡 유료 광고 계정이 정지됐습니다.",
+      "배급사는 주말 상영 확대를 앞두고 차질을 빚었으며 틱톡 측은 단순 시스템 오류였다고 해명했습니다.",
+      "앞서 X·메타·유튜브에서도 거부 사태가 발생했던 만큼 플랫폼들의 검열 논란이 이어지고 있습니다."
+     ],
+     "tags": [
+      "연예",
+      "기술"
      ],
      "importance": 5,
      "sources": [
       {
        "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261017045700005"
+       "url": "https://www.yna.co.kr/view/AKR20261019004500075"
       }
      ],
-     "original_title": "KBS 사장 후보 김영삼·엄경철·이태현 압축…20일 최종 면접",
-     "published_at": "2026-10-17T10:53+00:00"
+     "original_title": "머스크 비판 다큐 홍보 막나?…X 이어 틱톡도 계정 정지 논란",
+     "published_at": "2026-10-18T21:03+00:00"
     },
     {
-     "id": "c6e52f59abd2",
-     "title_ko": "넷플릭스 10년, 콘텐츠 다양성 과제 부각",
+     "id": "ebbe776a2519",
+     "title_ko": "BTS, 전 세계 그룹 최초 스포티파이 연간 스트리밍 100억 회 달성",
      "summary_ko": [
-      "글로벌 OTT 플랫폼 넷플릭스가 서비스 10년을 맞으며 콘텐츠 전략을 점검받고 있습니다.",
-      "대형 흥행작 외에도 플랫폼 생태계 유지를 위한 지속 가능한 중소형 콘텐츠가 필요합니다.",
-      "단기 화제성보다는 장기적 관점의 라인업 구축과 투자 전략 변화가 요구되는 시점입니다."
+      "방탄소년단이 글로벌 음원 플랫폼 스포티파이에서 연간 스트리밍 100억 회를 돌파했습니다.",
+      "이는 전 세계 음악 그룹 가운데 최초로 달성한 기록으로 독보적인 음원 파워를 입증했습니다.",
+      "글로벌 음악 시장에서 K팝의 위상을 재확인하며 지속적인 영향력을 과시하고 있습니다."
      ],
      "tags": [
-      "방송",
       "연예"
      ],
      "importance": 5,
      "sources": [
       {
-       "name": "미디어오늘",
-       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBad2d4Rk5kMElBc3JBTGtnamI5TWM1Wm42TzN2dkZMMDJGQlBZTUY3bGh6TnphWVZ2bmdMaFNvVldvbnozRkkzLTJjVm1nMExDNXlUdFl1aEdmZjNuOWVBblNRZmp2YWtfZXBRZTR4LVU?oc=5"
+       "name": "경향신문",
+       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE51OGdFSlQ2MlFkYU5EdzhiMXotWE8xU2E3d2ZLSUVsc1czSW5HS1dDbWRDOTU5c0Vkb0dadC1jcVlpV0RKRFF2MFJUdUw4a05WSkZEUk84aHd4QdIBX0FVX3lxTFBXNHM0UlBmSFMwbndRRmhIQVg4M2xzRk1TekZBSVFObjVWMkt4RlVTY3FRYVF6dVdTb3dkellHdE5Cbl9uQ0VmRm92X002N1lxaGRqdmJJamtNc2t0OUQ4?oc=5"
       }
      ],
-     "original_title": "넷플릭스 10년, ‘오징어 게임’ 같은 홈런만 필요한 건 아니다",
-     "published_at": "2026-10-17T07:40+00:00"
+     "original_title": "BTS, ‘그룹 최초’ 스포티파이 연간 스트리밍 100억회",
+     "published_at": "2026-10-18T11:28+00:00"
     },
     {
-     "id": "30e15e626c3f",
-     "title_ko": "배우 한지민 협박범, 연인 최정훈 스토커로 확인",
+     "id": "67ebafe26c94",
+     "title_ko": "김민석 민주당 대표, 축제 공연 중 무대 인사로 '갑질' 논란",
      "summary_ko": [
-      "배우 한지민을 협박한 인물이 연인인 가수 최정훈을 스토킹하던 인물로 드러났습니다.",
-      "경찰 조사 결과 피의자는 최정훈의 주변인을 괴롭히는 과정에서 한지민까지 협박했습니다.",
-      "수사 당국은 가해자에 대한 추가 혐의와 신병 처리 여부를 검토하고 있습니다."
+      "더불어민주당 김민석 대표가 지역 축제 축하 공연 도중 무대 인사를 진행해 논란이 일었습니다.",
+      "가수 박혜원이 곡을 준비하던 중 소개 멘트와 함께 인사가 이뤄져 공연 흐름이 끊겼습니다.",
+      "정치인의 부적절한 공연 개입이라는 지적과 함께 비판 여론이 확산되고 있습니다."
      ],
      "tags": [
       "연예",
-      "사건사고"
+      "정치"
      ],
      "importance": 4,
      "sources": [
       {
-       "name": "문화일보",
-       "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5FZlc5Y3hoSE93SVNRa1dENVV5eHZjY3JucVZSLURKd0dNOERGbVNFNE5zV0dLbUVsUUM1WWNuNTZOVV9WUndYcUJXYUFOMFZW?oc=5"
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/enter_general/2026/10/19/MEZGIN3CGZRGIZLGGZSGMMRUMI/"
       }
      ],
-     "original_title": "한지민 협박범, ‘한지민 연인’ 최정훈 스토커였다",
-     "published_at": "2026-10-17T14:19+00:00"
+     "original_title": "김민석, 박혜원 공연 중단시키고 무대인사…갑질 논란[SC이슈]",
+     "published_at": "2026-10-18T23:28+00:00"
     },
     {
-     "id": "fc86f87bb178",
-     "title_ko": "영화 실화 각색과 명예훼손의 법적 기준",
+     "id": "337725dbffe7",
+     "title_ko": "영화 '암살자(들)', 20일 연속 1위로 324만 관객 돌파",
      "summary_ko": [
-      "실화를 다룬 영화 제작 과정에서 사실 묘사와 명예훼손 사이의 경계가 주목받고 있습니다.",
-      "실존 인물을 다룬 콘텐츠는 표현의 자유와 인격권 침해 여부가 지속적으로 충돌해 왔습니다.",
-      "사법부 판례에 기초한 창작 표현 허용 범위와 법적 책임 기준에 관심이 쏠립니다."
-     ],
-     "tags": [
-      "연예",
-      "사회"
-     ],
-     "importance": 4,
-     "sources": [
-      {
-       "name": "주간조선",
-       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1Qb1ZOOEhES3V3OXFuajFuLW9PX293WE9pWmRXV2RySnJhSnZiaFFxS19oa194NUQxZUdfdVdGMzEtbEp2YXliNGpRdHAtS2ZWQTNBcFVJeE1zeGg4ZkFmYUVSZjRveTJsVGfSAW5BVV95cUxPeWtHMElSMGFCajhIMy03SVR5enpoTURVb2VVdy13c2RpZGZZMW9SdVZzOGM2amtqN3VOMzk4a0pkdS1SS0x5NS1WUm0tclY1eTMzUTJ1N2xhQzNEd09RUzJpQ1FwNE1qN242OTlvdw?oc=5"
-      }
-     ],
-     "original_title": "영화 ‘암살자(들)’ 사례로 본 팩트와 명예훼손의 법적 경계",
-     "published_at": "2026-10-17T07:00+00:00"
-    },
-    {
-     "id": "7d51022731ff",
-     "title_ko": "배우 손나은 모친상",
-     "summary_ko": [
-      "배우 손나은과 프로골프 선수 손새은의 모친 최윤정 씨가 17일 별세했습니다.",
-      "빈소는 서울 청담동성당 장례식장에 마련되었으며 발인은 오는 19일 오전 치러집니다.",
-      "모친상 소식이 전해진 후 문화·스포츠계 동료와 팬들의 애도 메시지가 이어지고 있습니다."
+      "허진호 감독의 신작 영화 '암살자(들)'이 누적 관객 수 324만 명을 넘어섰습니다.",
+      "개봉 이후 20일 연속 1위를 유지하며 4주 연속 박스오피스 정상을 지켰습니다.",
+      "올해 한국영화 흥행 순위 상위권에 안착하며 장기 흥행 흐름을 굳히고 있습니다."
      ],
      "tags": [
       "연예"
      ],
-     "importance": 3,
+     "importance": 4,
      "sources": [
       {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261017038100005"
-      },
-      {
-       "name": "노컷뉴스",
-       "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBXRHRKaVl0Y0o1OHdtc1A0MTNmTzU1RWp6cjdEcXhLQzFPWEI0ZXY2Y1R0Mkd1dHZIYVlYUV9jUnQtTWozT3pVejhJdzBkSnZXOHc?oc=5"
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/movie/2026/10/19/MQYWINJWGI4GIMJRG43WEZLDGM/"
       }
      ],
-     "original_title": "[부고] 손나은(배우)씨 모친상",
-     "published_at": "2026-10-17T07:47+00:00"
+     "original_title": "'암살자(들)', 20일 연속 1위…324만 돌파 '2026 韓영화 TOP4'",
+     "published_at": "2026-10-18T22:55+00:00"
     }
    ]
   },
   "kr_politics": {
    "label": "정치",
-   "briefing": "대법원장 탄핵 공방과 정치인 발언을 둘러싼 여야 대립이 격화했습니다.",
+   "briefing": "대통령 지지율 반등과 국무회의 공개 논쟁, 한미 관계 및 당내 현안 수습이 주요 화두였습니다.",
    "items": [
     {
-     "id": "b88c62414681",
-     "title_ko": "여야, 조희대 대법원장 탄핵안 두고 정면 충돌",
+     "id": "bcd22993224e",
+     "title_ko": "이 대통령 지지율 37.3%로 반등, 정당 지지도는 오차범위 접전",
      "summary_ko": [
-      "더불어민주당과 국민의힘이 조희대 대법원장 탄핵 추진 문제를 두고 강하게 맞섰습니다.",
-      "민주당은 사법 공백과 의혹에 책임을 묻겠다고 했고, 국민의힘은 정권 몰락 신호탄이라 비판했습니다.",
-      "사법부 수장을 둘러싼 탄핵 공방이 장기화하며 정국 경색이 심화될 것으로 보입니다."
+      "이재명 대통령의 국정수행 지지도가 전주 대비 2.1%포인트 오른 37.3%를 기록했습니다.",
+      "강력범죄 대책과 민생 정책 강조가 긍정 요인으로 작용했으나 증시 급락이 상승세를 일부 제한했습니다.",
+      "정당 지지도는 국민의힘 40.9%, 더불어민주당 36.2%로 오차범위 내 양상을 보였습니다."
      ],
      "tags": [
       "정치"
@@ -383,88 +373,19 @@
      "sources": [
       {
        "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261017025400001"
-      },
-      {
-       "name": "BBS불교방송",
-       "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTFAzMGtIUWwzVlZkM3VEN0drU1FtUnhzd21HendQU0pvS2I1YUxpT3REbU9yMGFscDRJXy1jc0N6SWhxQ1k4V0lQemptbVZ5MWNYdnRkSUVLRXRXVGF2eEJ1bGFxVU92MnQxUTk0?oc=5"
+       "url": "https://www.yna.co.kr/view/AKR20261019019100001"
       }
      ],
-     "original_title": "與 \"曺책임 끝까지 묻겠다\"…국힘 \"탄핵, 정권몰락 신호탄될 것\"",
-     "published_at": "2026-10-17T03:33+00:00"
+     "original_title": "李대통령 지지율 37.3%…민주 36.2%·국힘 40.9% '오차內'[리얼미터]",
+     "published_at": "2026-10-18T23:18+00:00"
     },
     {
-     "id": "7b74a78a016e",
-     "title_ko": "추미애 지사, '소방 재정' 발언 유감 표명",
+     "id": "9531c4874e7c",
+     "title_ko": "트럼프 측근 매코믹 의원 \"한미관계 재설정은 파경 아닌 부부상담\"",
      "summary_ko": [
-      "추미애 경기도지사가 부천 공장 화재 순직 소방관 빈소에서 과거 발언을 공식 사과했습니다.",
-      "추 지사는 자신의 이른바 재정 빨대 발언과 관련해 마음을 다해 사과한다고 밝혔습니다.",
-      "하지만 해명 과정의 표현을 두고 야당의 비판이 이어지며 논란은 가라앉지 않고 있습니다."
-     ],
-     "tags": [
-      "정치",
-      "사회"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "YTN",
-       "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1DdGxOdk5hSldBOXZDYVhmS3VDeWZlTTdfcjlaNkFIbkI4UUgwVEc1alNfVnNvZ3R0Ui1LS1l4a2N5M0ZsdGJ2d3dUT0JON3Jabkt2eDRlbWw1RExZTTd4MDV6c0Y0c1FqdFY5Z3JIeEZpZnE3elE?oc=5"
-      }
-     ],
-     "original_title": "\"소방 재정 빨대\" 발언...추미애 \"마음 다해 사과\"",
-     "published_at": "2026-10-17T14:12+00:00"
-    },
-    {
-     "id": "9871532ba270",
-     "title_ko": "국민의힘, 추미애 사과에 '오만한 태도' 비판",
-     "summary_ko": [
-      "국민의힘은 추미애 경기지사의 소방 재정 발언 사과에 대해 오만하다고 비난했습니다.",
-      "야당은 추 지사가 빈소에서 진정성 있는 반성 대신 장황한 변명을 늘어놓았다고 지적했습니다.",
-      "순직 소방관 애도 분위기 속에서 정치인 언행을 둘러싼 여야 공방이 격화되고 있습니다."
-     ],
-     "tags": [
-      "정치"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "주간조선",
-       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5PWEV5QTVxQnBjaFZUamcxY0o2S0wtS09MVk5UT2RqdGFybDgxV0Y3NVRoeWN4WV9iWF85ZDdRRFZzcTlFeTFvaDlUZ0ktMXNwSDBzV1J0Z2xCTjFSUGNKNzhuQksxNWpRNkHSAW5BVV95cUxNSi1wdWNiTmF6VEFOZjZ0bDRkLURVZUstd2x0YzJmNng1aldjdDFoWHg0VTVpOVhPRXNCSEJZQTZoQkh3Mm5HcS12WEloRmliVEZ3Q0FwaFgwMDF1ZjhqYlVnVTlielRpRllnNkFhdw?oc=5"
-      }
-     ],
-     "original_title": "“사과를 바라시니까” 덧붙인 추미애에…국힘 “끝까지 오만했다”",
-     "published_at": "2026-10-17T13:15+00:00"
-    },
-    {
-     "id": "bebd59e99340",
-     "title_ko": "이 대통령, 순직 소방관 유가족 위로",
-     "summary_ko": [
-      "이재명 대통령이 부천 공장 화재로 순직한 소방관 빈소를 찾아 유가족을 위로했습니다.",
-      "이 대통령은 고인의 자녀 나이를 듣고 말을 잇지 못하며 안타까운 심경을 드러냈습니다.",
-      "유가족과 남겨진 자녀에 대해 국가가 끝까지 책임을 다하겠다고 거듭 약속했습니다."
-     ],
-     "tags": [
-      "정치",
-      "사회"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/politics/blue_house/2026/10/17/XO7PDNCYNJHRXG6D4GW3HGSAFE/"
-      }
-     ],
-     "original_title": "“순직 소방관 딸이 일곱살”... 李대통령 말 잇지 못했다",
-     "published_at": "2026-10-17T10:25+00:00"
-    },
-    {
-     "id": "d35f3a91c08a",
-     "title_ko": "야당, 추미애 지사 소방 발언 사과 맹비난",
-     "summary_ko": [
-      "국민의힘은 추미애 경기지사의 부천 빈소 사과 발언에 대해 끝까지 뻔뻔하다고 비판했습니다.",
-      "박성훈 수석대변인은 추 지사가 사과 직후 재정 문제와 공적을 나열하며 변명했다고 지적했습니다.",
-      "국민의힘은 고인의 넋을 기려야 할 자리에서 면피에 급급했다며 제대로 된 사과를 촉구했습니다."
+      "미국 공화당 매코믹 상원의원은 한미 관계가 이혼이 아닌 재설정 및 조정 과정에 있다고 밝혔습니다.",
+      "한국의 대미 투자와 방위비 증액 노력을 평가하며 동맹 간 부담 조정의 필요성을 강조했습니다.",
+      "대중국 견제를 위해 동맹국 간 군사적 역량 일체화와 방산 생산 능력 강화가 필요하다고 주장했습니다."
      ],
      "tags": [
       "정치"
@@ -473,383 +394,421 @@
      "sources": [
       {
        "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261017039800001"
+       "url": "https://www.yna.co.kr/view/AKR20261019003400071"
       }
      ],
-     "original_title": "국힘 \"추미애 '사과 바라니 사과한다' 발언…끝까지 오만·뻔뻔\"",
-     "published_at": "2026-10-17T08:16+00:00"
+     "original_title": "트럼프 측근 美의원 \"한미관계 재설정 중…이혼 아닌 부부상담\"",
+     "published_at": "2026-10-18T20:12+00:00"
+    },
+    {
+     "id": "0468e40fb7c0",
+     "title_ko": "이 대통령, 국무회의 공개 반대론에 \"쓴소리 막힌다는 건 거짓말\"",
+     "summary_ko": [
+      "이재명 대통령은 국무회의 공개로 장관들이 말을 못 한다는 주장은 거짓이라고 반박했습니다.",
+      "영상 사례를 공유하며 공개 석상에서도 활발한 토론과 반대 의견 수용이 이뤄진다고 밝혔습니다.",
+      "비공개 회의도 병행되는 만큼 레드팀 역할을 장려하고 소통 기조를 유지하겠다는 방침입니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261018030051001"
+      }
+     ],
+     "original_title": "李대통령 \"'국무회의 공개라 말 못한다'는 거짓말…이해 안 돼\"(종합)",
+     "published_at": "2026-10-18T12:47+00:00"
+    },
+    {
+     "id": "03bce636aed4",
+     "title_ko": "김민석 \"추미애에 사과 요청, 국무회의 공개 기조는 불가역적\"",
+     "summary_ko": [
+      "더불어민주당 김민석 대표는 추미애 경기지사의 소방 재정 발언 논란에 사과를 요청했다고 밝혔습니다.",
+      "국민 마음이 풀릴 때까지 소방공무원 지원 확대 등 당 차원의 노력을 다하겠다고 약속했습니다.",
+      "이 대통령의 국무회의 공개에 대해서는 국민과의 소통 측면에서 불가역적인 흐름이라고 지지했습니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261019013000001"
+      }
+     ],
+     "original_title": "김민석 \"秋에 사과하라고 요청했다…국민 맘 풀릴 때까지 노력\"",
+     "published_at": "2026-10-18T22:51+00:00"
+    },
+    {
+     "id": "949816f3d6da",
+     "title_ko": "이 대통령, 국무회의 전면 비공개 요구에 공개 원칙 재확인",
+     "summary_ko": [
+      "이재명 대통령이 국무회의 일부 공개 방침에 대한 정치권 일각의 반대 주장을 일축했습니다.",
+      "공개 회의에서도 자유로운 이견 개진이 충분히 가능함을 강조하며 허위 주장에 유감을 표했습니다.",
+      "대통령실은 투명한 국정 운영을 위해 회의 공개와 실질적 토론 문화를 이어갈 계획입니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "매일노동뉴스",
+       "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFAyTDEtUFJjcU5zWTF0cXBEdTdXLXA0VVVrZHZzcVBpUGY5bkdQMnp1Qk5hR3Q2OVMxeVVjcjY0SU9BQ0xXalhscUpXclBBWGE2RVB0SmJqeXlDSk12cmxqZDhDcUVqeE1GUkNoVzl2dzg?oc=5"
+      }
+     ],
+     "original_title": "이 대통령 “공개 국무회의 반대 이해 못해”",
+     "published_at": "2026-10-18T21:30+00:00"
     }
    ]
   },
   "nz_national": {
    "label": "뉴질랜드",
-   "briefing": "총선을 앞둔 양당 공약 대립 속에 주택 경기 침체와 1인 가구 증가 등 사회적 현안이 이어졌습니다.",
+   "briefing": "인플레이션 둔화 전망에도 기준금리 인상 압박이 지속되고 생활비와 전기요금 상승 부담이 커지고 있습니다.",
    "items": [
     {
-     "id": "9f3ed2329c41",
-     "title_ko": "전국 주택값 하락 속 집값 급등한 상위 10개 지역",
+     "id": "ae76b48e1b2e",
+     "title_ko": "9월 연간 물가상승률 3.7%로 둔화 예상되나 기준금리 인상 전망 유지",
      "summary_ko": [
-      "뉴질랜드 전국 주택 가격이 하락세를 보이는 가운데 일부 지역 집값은 급등세를 기록했습니다.",
-      "지역별 부동산 시장의 양극화가 심화되며 가격이 가장 크게 하락한 지역들과 극명한 대비를 이뤘습니다.",
-      "지역별 자산 가치 편차가 커짐에 따라 향후 주택 시장 분석 시 세부 지역 동향 확인이 필수적입니다."
+      "연간 인플레이션이 6월의 4.1%에서 하락할 것으로 예상됩니다.",
+      "금융시장은 10월과 12월 기준금리(OCR) 추가 인상 가능성을 높게 보고 있습니다.",
+      "환율 하락과 유가 상승 압박으로 인해 추가 금리 인상 전망에 무게가 실립니다."
      ],
      "tags": [
-      "부동산",
+      "경제",
+      "물가",
+      "금리"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/business/economy/inflation/inflation-expected-to-ease-to-37-in-september-year-but-cash-rate-still-forecast-to-rise/premium/6742LUVE4RGXXIK2QM7MZHDV2U/"
+      }
+     ],
+     "original_title": "Inflation expected to ease to 3.7% in September year but cash rate still forecast to rise",
+     "published_at": "2026-10-18T22:15+00:00",
+     "why_it_matters": "기준금리 인상과 물가 변화는 졸업 후 취업 시장의 전반적인 경기와 고용 여건에 직접적인 영향을 미칩니다."
+    },
+    {
+     "id": "5d4fb62e2e39",
+     "title_ko": "키위뱅크 직원들, 임금 인상 요구하며 파업 돌입",
+     "summary_ko": [
+      "키위뱅크 직원들이 사측의 임금 제안에 반발하여 파업에 나섰습니다.",
+      "최근 물가 상승 속에서 임금 조건과 처우를 둘러싼 노사 갈등이 고조되고 있습니다.",
+      "이번 파업은 금융권 전반의 임금 협상과 고용 시장 분위기에 영향을 줄 수 있습니다."
+     ],
+     "tags": [
+      "고용",
+      "임금",
+      "경제"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTmNaRFc5YWNOeDJuVWpmVEE0QklJdVZwVmxmZFVsbHByU2hxR1puNUw3ZFlnQnpBaUs0TG5FcjhuTEZDNzBVZVVieWlvODhmRkp3NWN5dF93aGl0ZzBMcFNfM2YxZDU2alBGVVZjTlJnZFdtNUpuamx6QUpsZEF2d2xwZ2ZtSGxrdWc?oc=5"
+      }
+     ],
+     "original_title": "Kiwibank workers strike over pay offer",
+     "published_at": "2026-10-18T22:01+00:00",
+     "why_it_matters": "졸업을 앞둔 유학생이 진출하려는 오클랜드 금융 및 사무직 고용 시장의 임금 협상 분위기를 가늠할 수 있습니다."
+    },
+    {
+     "id": "0248725d9611",
+     "title_ko": "도매 전기요금 하락에도 크리스마스 앞두고 일부 가정 전기요금 인상",
+     "summary_ko": [
+      "일부 키위 가정이 크리스마스 이전에 전기요금 인상 압박에 직면해 있습니다.",
+      "도매 전력 가격은 하락했으나 송전망 이용료(lines charges) 상승이 원인입니다.",
+      "내년 4월 저정액 요금제 폐지를 앞두고 가계 생활비 부담이 가중될 전망입니다."
+     ],
+     "tags": [
+      "물가",
       "주거",
       "경제"
      ],
      "importance": 8,
      "sources": [
       {
-       "name": "Stuff",
-       "url": "https://www.stuff.co.nz/home-property/361047027/top-10-suburbs-where-house-values-soared-while-nation-plummeted"
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/10/19/power-prices-up-for-some-pre-christmas-despite-wholesale-prices-falling/"
       }
      ],
-     "original_title": "The top 10 spots where house values soared, while the nation plummeted",
-     "published_at": "2026-10-17T15:00+00:00",
-     "why_it_matters": "향후 취업 후 정착을 위한 첫 주택 마련 시 지역별 가격 양극화 동향을 파악하는 데 참고가 됩니다."
+     "original_title": "Power prices up for some pre-Christmas, despite wholesale prices falling",
+     "published_at": "2026-10-18T19:58+00:00",
+     "why_it_matters": "오클랜드에서 거주하며 취업을 준비하는 유학생의 생활비와 주거 유지 비용 부담을 직접적으로 높입니다."
     },
     {
-     "id": "ef71cc6571bd",
-     "title_ko": "망가화이 해안서 제트스키 탑승자 4명 구조",
+     "id": "9d00966c78f6",
+     "title_ko": "마운트 딕슨 등반 중 등산객 사망… 전문가들 눈사태 위험 경고",
      "summary_ko": [
-      "노스랜드 망가화이 앞바다에서 조난당한 남성 제트스키 탑승자 4명이 해안경비대에 무사히 구조되었습니다.",
-      "구조 당시 2명은 경미한 저체온증을 겪고 있었으며 선실에서 보온 조치 후 귀가했습니다.",
-      "해경은 탑승자들을 해안으로 이송하고 제트스키를 트레일러에 싣는 작업을 도운 뒤 상황을 마쳤습니다."
+      "주말 동안 마운트 딕슨을 횡단하던 등산객이 눈사태 사고로 숨졌습니다.",
+      "최근 폭설과 좋은 날씨가 겹치며 숨겨진 눈사태 위험이 커진 상태입니다.",
+      "산악 안전 당국은 등반객들에게 철저한 사전 확인과 보수적 선택을 당부했습니다."
      ],
      "tags": [
       "사건사고",
+      "날씨",
       "사회"
      ],
      "importance": 7,
      "sources": [
       {
-       "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/17/four-jetskiers-rescued-off-mangawhai-coast/"
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/mt-dixon-tragedy-man-dies-while-traversing-mountain-experts-warn-of-masked-avalanche-risk/3RVKCNYL3JEPXBPCL3DLDBHT2Y/"
       },
       {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/nz/auckland/four-men-on-jet-skis-saved-from-rocky-icy-waters-off-mangawhai-beach-with-two-suffering-hypothermia/YJTTQA2Y5JFG3JZU4RL3633PJA/"
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNUGN0OWFjQmVRMGYyclEyVUkwRVQxVWpBSnBtVDZkNm50NWZMUGI3OUVjU3IteklMR1pZYzMxeEZTVHZXZjB3ZUF2TXdkWlBURTRJamZfemxBMmpZSVpHX1NtM3hnd1hLMFpLTF96dmhIT1Y2c01wOWdyVEplT1dRR0FRTU1hRHk3RzIwSlhNSnlkMEJqdUpSWGVNTDBxNnM?oc=5"
       }
      ],
-     "original_title": "Four jetskiers rescued off Mangawhai coast",
-     "published_at": "2026-10-17T17:34+00:00",
-     "why_it_matters": "오클랜드 근교 해양 레저 활동 시 급변하는 기상과 저체온증 등 안전사고 예방이 중요합니다."
+     "original_title": "Mt Dixon tragedy: Man dies while traversing mountain, experts warn of masked avalanche risk",
+     "published_at": "2026-10-18T21:36+00:00",
+     "why_it_matters": "여가 활동 중 발생할 수 있는 안전사고 위험을 경고하며 오클랜드 외곽 지역 야외 활동 시 각별한 주의가 필요합니다."
     },
     {
-     "id": "693d21058bb8",
-     "title_ko": "노동당 자본이득세 공약 발표, 과세 대상과 쟁점 정리",
+     "id": "f5ddfb9b9725",
+     "title_ko": "네이피어 남쪽 5km 지점에서 규모 3.7 지진 발생",
      "summary_ko": [
-      "노동당이 11월 총선 공약으로 일부 자산 매각 차익에 한정적으로 적용되는 자본이득세 도입을 제안했습니다.",
-      "주 거주 주택은 제외되며 노동당은 국민 90%가 미대상이고 세수는 보건에 전액 투입된다고 밝혔습니다.",
-      "반면 국민당은 증세 신뢰도 문제를 지적하며 자본이득세 도입에 강력한 반대 입장을 유지하고 있습니다."
-     ],
-     "tags": [
-      "정치",
-      "경제",
-      "부동산"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/18/labours-capital-gains-tax-explained-what-is-it-and-who-will-pay/"
-      }
-     ],
-     "original_title": "Labour’s capital gains tax explained – what is it and who will pay?",
-     "published_at": "2026-10-17T18:11+00:00",
-     "why_it_matters": "총선 결과에 따라 향후 영주권 취득 후 자산 형성 및 부동산 매매 시 세금 규정이 달라질 수 있습니다."
-    },
-    {
-     "id": "2d81cc994229",
-     "title_ko": "미 캘리포니아 강풍 타고 번진 산불로 주택 전소",
-     "summary_ko": [
-      "미국 남부 캘리포니아에서 강풍을 동반한 산불이 빠르게 번지며 해안가 주택 최소 6채가 불탔습니다.",
-      "오렌지 카운티 일대에 검은 연기가 뒤덮이며 주민 약 1만 6천 명에게 대피령이 내려졌습니다.",
-      "소방대원 2명이 온열 질환으로 병원으로 이송되었으며 당국은 정확한 발화 원인을 조사 중입니다."
+      "네이피어 남쪽 5km 지점에서 깊이 23km의 규모 3.7 지진이 발생했습니다.",
+      "지오넷은 이번 지진으로 가벼운 진동이 감지되었다고 기록했습니다.",
+      "인명 피해나 주요 시설 피해 보고는 즉각적으로 전해지지 않았습니다."
      ],
      "tags": [
       "재난",
-      "사건사고"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/17/coastal-homes-burn-as-hot-winds-fuel-california-fires/"
-      }
-     ],
-     "original_title": "Coastal homes burn as hot winds fuel California fires",
-     "published_at": "2026-10-17T04:00+00:00",
-     "why_it_matters": "해외 자연재해 소식으로 뉴질랜드 체류 및 취업 비자에는 직접적인 영향이 없습니다."
-    },
-    {
-     "id": "4bcb9bfea958",
-     "title_ko": "열악한 곰팡이 렌트홈에 거실서 생활한 세입자 가족",
-     "summary_ko": [
-      "습기와 곰팡이가 가득한 열악한 렌트홈 환경으로 인해 한 가족이 거실에서 생활하는 피해가 발생했습니다.",
-      "주택 내 생활 환경이 심각하게 악화되면서 비인간적인 주거 환경이라는 비판이 제기되었습니다.",
-      "임대 주택의 건강 주거 기준 준수와 세입자 보호 규정에 대한 사회적 관심이 커지고 있습니다."
-     ],
-     "tags": [
-      "주거",
-      "렌트",
       "사회"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPaE5LcUZPUmtuOUxtUkV4cElFV01Ra25peDZiMGlJdGlUdHdXOUtISmhZU3Y1Y2ZXRjY0OV9XNHRYeno0RkRlcmNPWmg0VkJPNlh3UTJTSENUVDBkTEY2X2RXN3RSQnlSSTZXN1l1Zzg4XzFWMTRfZzBheThMa0hNQXB0N1hBbWZDNUcwQ1pVY29MQnpjVmpEZFNZZTE0ajN0VVFWeU5VWTZNaEJvUXdDWXpjLUM4ZXpqMmRrUFZn?oc=5"
-      }
-     ],
-     "original_title": "'Subhuman': Family slept in lounge as damp, mouldy rental deteriorated",
-     "published_at": "2026-10-17T00:00+00:00",
-     "why_it_matters": "오클랜드에서 졸업 후 렌트 거주시 곰팡이와 단열 등 주거 기준 충족 여부를 꼼꼼히 점검해야 합니다."
-    },
-    {
-     "id": "87c8f91caedd",
-     "title_ko": "사이클론 와티 접근에 쿡제도 아이투타키 주민 주의보",
-     "summary_ko": [
-      "사이클론 와티가 쿡제도 아이투타키로 접근함에 따라 현지 주민들에게 기상 업데이트 확인이 당부되었습니다.",
-      "태평양 인근 도서 지역에 강풍과 기상 악화가 예상되어 당국이 대비 태세를 강화하고 있습니다.",
-      "주민들은 재난 피해를 최소화하기 위해 안전 지침 준수와 비상 대비를 안내받고 있습니다."
-     ],
-     "tags": [
-      "날씨",
-      "재난"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQR05mV0RvS04xdVlSQzFjTlVsSjQ4bTR5TXdhQkdYZUlQeTZvN0VhZUF0dXpTang3eDZpWkNEUVdJNHh1UkVNS0Q0YXp0QTVXa0NvQkFNMEJXOWFnb1c0S3lnZEh5bjlscUNoazBTSUxCWW5HTHBuVXVvc25VUUoyNGFiRVNhS1dzVEZXbXFEbzBVb3JUWVZnSEVDZDNHOUpPZ3FtNA?oc=5"
-      }
-     ],
-     "original_title": "Aitutaki residents urged to heed updates as Wati approaches",
-     "published_at": "2026-10-17T04:54+00:00",
-     "why_it_matters": "태평양 인접 도서 기상 소식으로 오클랜드 학업 및 졸업 후 비자 발급과는 무관합니다."
-    },
-    {
-     "id": "05adfc400648",
-     "title_ko": "뉴질랜드 1인 가구 40만 돌파, 생활비 부담 가중",
-     "summary_ko": [
-      "뉴질랜드에서 1인 가구를 선택하는 인구가 40만 명에 달하며 새로운 주거 형태로 자리 잡고 있습니다.",
-      "혼자 거주함에 따라 주거비와 공과금 등에서 상대적으로 높은 생활비 프리미엄을 지출하고 있습니다.",
-      "개인 재정 부담이 커지는 상황에서 1인 가구 증가세에 맞춘 경제적 대비가 미흡하다는 지적이 나옵니다."
-     ],
-     "tags": [
-      "주거",
-      "렌트",
-      "물가"
      ],
      "importance": 7,
      "sources": [
       {
        "name": "Stuff",
-       "url": "https://www.stuff.co.nz/money/361047481/400000-kiwis-are-quietly-choosing-new-way-live-and-our-society-isnt-ready-it"
+       "url": "https://www.stuff.co.nz/nz-news/361048230/magnitude-37-earthquake-strikes-5km-south-napier"
       }
      ],
-     "original_title": "400,000 Kiwis are quietly choosing a new way to live – and our finances aren’t ready for it",
-     "published_at": "2026-10-17T15:00+00:00",
-     "why_it_matters": "졸업 후 플랫 대신 독거 시 높은 주거비 지출이 예상되므로 초기 취업 생활비 예산 관리가 필요합니다."
+     "original_title": "Magnitude 3.7 earthquake strikes 5km south of Napier",
+     "published_at": "2026-10-18T23:05+00:00",
+     "why_it_matters": "뉴질랜드 전역에서 빈번한 지진 발생 상황을 보여주며 평소 자연재해 대비 태세를 점검하게 합니다."
     },
     {
-     "id": "10de5a0c69ef",
-     "title_ko": "총선 레이스 본격화, 표심 잡기 나선 각 정당들",
+     "id": "c6550e2667b6",
+     "title_ko": "아이투타키섬을 강타한 열대성 사이클론",
      "summary_ko": [
-      "11월 7일 총선을 앞두고 각 정당들이 전국을 돌며 유권자들의 지지를 얻기 위한 유세전을 펼치고 있습니다.",
-      "소아암 환아들이 간호사 부족으로 고통받고 있다는 문제에 대해 여야 정치권 모두 우려를 표했습니다.",
-      "보건 의료 인력난 등 민생 현안이 선거 쟁점으로 떠오르면서 정당별 대책 경쟁이 치열해지고 있습니다."
+      "어머니 생신을 맞아 아이투타키섬을 방문한 일행이 10년 만의 폭풍을 만났습니다.",
+      "주민들이 가뭄 해소를 위해 비를 기다리던 중 강력한 사이클론이 덮쳤습니다.",
+      "현지 방문객들은 예상치 못한 악천후 속에서도 침착하게 대처하고 있습니다."
      ],
      "tags": [
-      "정치",
-      "의료",
-      "사회"
+      "재난",
+      "날씨"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/nz-news/361048086/nothing-youve-experienced-kiwis-path-pacific-cyclone"
+      }
+     ],
+     "original_title": "The island of Aitutaki was praying for rain. Then a tropical cyclone hit",
+     "published_at": "2026-10-18T21:52+00:00",
+     "why_it_matters": "태평양 지역의 극단적인 기상 변화와 자연재해의 위험성을 보여주는 사례입니다."
+    },
+    {
+     "id": "0a0b1408746b",
+     "title_ko": "헤럴드 발행사 NZME, 뉴스룸 및 개발 부문 추가 구조조정 단행",
+     "summary_ko": [
+      "뉴질랜드 헤럴드의 발행사인 NZME가 새로운 대규모 감원을 발표했습니다.",
+      "오클랜드와 기스본 지역의 뉴스룸 및 제품·개발 팀 직원이 영향을 받을 것으로 보입니다.",
+      "미디어 산업 전반의 침체와 수익성 악화가 구조조정의 배경으로 작용했습니다."
+     ],
+     "tags": [
+      "고용",
+      "경제",
+      "방송"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxQNkpiRWJDZE9mWDRTakl4OWY5VmtIY25sLUgtZ0FVQ243QzV1U2FWNUhweF9zaU1iVWhiOGpHeUFXcloyeV9ObEQyNG1jVEV3SV9teTNVeEZkMWpzSUhPMzh6dWxwSkMtbW00V2xvaU0ycVVpMWpFaWFGOFB4c3FkdVVYcl91S0R2eGN3bHJqd0YyMDFtaEZpTHpTWTZGTmVfWGJZekRFWjhtYlNQcy0tZVcxZHBiYzBMUWtKWnZtWFBZd0xFR0ZTRm1oRG9ac2pvRUd4Sjc4ZTFiTXlBTENLNXh1UjdVSHVxcncxLUYwcHJxVzFYeEpocQ?oc=5"
+      }
+     ],
+     "original_title": "Media industry upheaval: New round of job cuts at Herald publisher NZME",
+     "published_at": "2026-10-18T21:32+00:00",
+     "why_it_matters": "오클랜드 지역 미디어·IT·개발 직군 고용 시장 축소를 시사하며 관련 분야 취업 준비생에게 타격을 줍니다."
+    },
+    {
+     "id": "c3e8644a9d48",
+     "title_ko": "호주, 선진국 중 가장 큰 실업률 상승 전망",
+     "summary_ko": [
+      "호주 경제가 선진국 가운데 가장 가파른 실업률 상승을 겪을 것으로 예상됩니다.",
+      "경기 둔화와 노동시장 과열 완화가 맞물리며 일자리 지표가 악화되고 있습니다.",
+      "이는 인근 호주로의 인력 유출과 양국 경제 흐름에 부정적 영향을 미칠 수 있습니다."
+     ],
+     "tags": [
+      "고용",
+      "경제"
      ],
      "importance": 7,
      "sources": [
       {
        "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/11/election-live/"
+       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOZ3NQR2VqTTcwRGhDV3NlbHAxbWZ4VU1IcEZaVzBlZVotZjJLakRiQzNDbzhpTE96aHg4ZmVRc2N3b0VqeGF2OWI4Yk8tVTJSSUFKR3Ytb0s3ZWFZaEU3Q0ppd0ZMNUg2R0UzckxwRjdFeXkzZ3h6U3lPOVVNT01tcUd4cmFlTTdUY1dod0RWb2kyOVNSXzRXY1Z3SW9NN0JYVkRZ?oc=5"
       }
      ],
-     "original_title": "Election live: Parties work to woo voters across the country",
-     "published_at": "2026-10-17T06:06+00:00",
-     "why_it_matters": "차기 정부 구성 결과에 따라 이민 정책과 의료 등 필수 인력 그린리스트 운용 방향이 영향을 받습니다."
+     "original_title": "Australia tipped for biggest unemployment rise in developed world",
+     "published_at": "2026-10-18T20:52+00:00",
+     "why_it_matters": "타스만 해 건너편의 고용 악화는 뉴질랜드 내 인재 유출입과 취업 시장 경쟁 구도에 간접적인 변수가 됩니다."
     }
    ]
   },
   "nz_auckland": {
    "label": "오클랜드",
-   "briefing": "오클랜드는 부동산 장기 침체가 지속되는 가운데 상수도관 파열과 화재 등 생활 사건사고가 잇따랐습니다.",
+   "briefing": "시티 레일 링크(CRL)의 오인 화재 경보기동으로 아침 출근길 열차 운행에 큰 차질이 빚어졌습니다.",
    "items": [
     {
-     "id": "debaf2da12aa",
-     "title_ko": "오클랜드 도로 상수도관 파열 침수로 인근 상점 영업 중단",
+     "id": "dc73f027fadc",
+     "title_ko": "2026년 셰이크아웃 지진 대피 훈련: 실제 상황 대비",
      "summary_ko": [
-      "오클랜드의 한 도로에서 대형 상수도관이 파열되면서 도로가 침수되는 사고가 발생했습니다.",
-      "갑작스러운 침수 피해로 인해 인근 상점들이 영업을 중단하며 극심한 영업 차질을 빚었습니다.",
-      "노후 상하수도 인프라 정비 필요성과 복구 작업에 따른 지역 교통 불편 문제가 함께 제기되었습니다."
+      "오클랜드 시의회가 실제 지진 상황에 대비한 셰이크아웃 대피 훈련을 실시합니다.",
+      "주민들은 지진 발생 시 행동 요령을 숙지하고 대응 능력을 점검하게 됩니다.",
+      "정기적인 재난 훈련을 통해 지역 사회의 안전 의식을 높이는 효과를 거둡니다."
      ],
      "tags": [
-      "사건사고",
-      "교통"
+      "재난",
+      "사회"
      ],
      "importance": 7,
      "sources": [
       {
-       "name": "1News",
-       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPYlBxdzN1Qkl3eWdUTFNuM01EZkdDS1IzOUVvcmlzZ09zZ3V0X0pERVF4Tm9uTDlOY3phYS1oME1BN2hTdzJjRmpkY3FKWlFlUUZ0ck42NEUtVWxKa3phY2c3ZXJfaDVmS2t5bUdmTHBleXJFN2FRT0NramZkUjI2RTRGREVMWjY0UXdaTzUyX3huRlAtQmRfLWV3dkVKTjBHeVIyQQ?oc=5"
+       "name": "Auckland Council",
+       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE41S00yLXA2dVJJczBzaTlNRncxcWIzM3ZzNGdPS1BzcFhZLXVMNjBDQnpROWh1RktMcXdGTnhwTFYzNjQxZWt0WFVMeEh5U3BQZ0tncS1fS1NnME8zNGpxYzlsYTFTbU5XbjZ6TzV5TWVCMDVu?oc=5"
       }
      ],
-     "original_title": "'Frustrating': Businesses close after burst pipe floods Auckland road",
-     "published_at": "2026-10-17T13:19+00:00",
-     "why_it_matters": "오클랜드 시내 및 통근 경로 내 인프라 사고로 인한 일상 이동과 통학·출근길 불편에 유의해야 합니다."
+     "original_title": "ShakeOut drill 2026: Practice what to do in a real-life earthquake",
+     "published_at": "2026-10-18T23:08+00:00",
+     "why_it_matters": "오클랜드 거주 유학생이 지진 발생 시 대피 절차를 익히고 안전을 확보하는 데 도움이 됩니다."
     },
     {
-     "id": "d56c574dacfd",
-     "title_ko": "오클랜드 집값 고점 대비 24% 급락, 여당 재선 먹구름",
+     "id": "2a9e13f6a893",
+     "title_ko": "오클랜드 시티 레일 링크, 화재 경보기 오작동으로 일시 운행 차질",
      "summary_ko": [
-      "오클랜드 부동산 가격이 2021년 말 정점 대비 24.7% 폭락하며 총선 경제 현안으로 떠올랐습니다.",
-      "9월 전국 및 오클랜드 가격 지수가 0.5% 내외 소폭 반등했으나 시장 회복으로 보기는 어렵습니다.",
-      "부동산 침체 장기화는 국민당의 전통적 지지 기반인 오클랜드 유권자 표심에 큰 부담이 되고 있습니다."
+      "오클랜드 시티 레일 링크(CRL)가 화재 경보기 발령으로 일시 폐쇄되었습니다.",
+      "조사 결과 오인 화재 경보로 판명되어 터널과 역은 빠르게 재개방되었습니다.",
+      "아침 출근 시간대 열차 운행 일정이 일시적으로 지연되고 차질을 빚었습니다."
      ],
      "tags": [
-      "부동산",
-      "경제",
-      "정치"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/business/property-slump-casts-long-shadow-over-nationals-re-election-odds-liam-dann/premium/KLJEI7KEYFGIVDPW6ODMZUU3LY/"
-      }
-     ],
-     "original_title": "Property slump casts long shadow over Nationals re-election odds – Liam Dann",
-     "published_at": "2026-10-17T16:00+00:00",
-     "why_it_matters": "오클랜드 주택 시장 침체 장기화는 렌트비 안정에는 유리하나 전반적인 경제 회복 속도에 영향을 줍니다."
-    },
-    {
-     "id": "c1c7e31e7f6a",
-     "title_ko": "오클랜드 사우스 주택 화재로 전소, 인명피해 없어",
-     "summary_ko": [
-      "오클랜드 사우스 파보나 로버트슨 로드의 한 단층 주택에서 대형 화재가 발생해 전소되었습니다.",
-      "이웃 주민이 비명을 지르며 구조를 요청했으나 다행히 인명 피해나 인접 주택 피해는 없었습니다.",
-      "소방 당국이 신속히 출동해 진화 작업을 완료했으며 화재 원인에 대한 조사가 이어지고 있습니다."
-     ],
-     "tags": [
-      "사건사고",
+      "교통",
       "사회"
      ],
      "importance": 6,
      "sources": [
       {
        "name": "NZ Herald",
-       "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNM0U2MW5RYXRpQ0N1UGFheS1hV3ZjMFdnVmNjSDlzbGNpaDdqVThtMVFJcFp1ZTlTVlZaaEd6QzRiZVhvR2xVbUVNUkc5Q24yQ0h0SUVDZnA4YWZQWC16eVMxSzdJWFBsREMwazVnWlB6Z1VfaUI2SEJqTFBGbGJmazdtMXZ2X2R1ZEtGN0N2VDBQZmplOXZmZk15NFNHQ2o4WGxscTY5QTRybjNJZnRWbUNqenZ5ZmdKYlZzemdIRUhIM1dNU1dzOEhHTFhKSWRZdmowQ2xBUkhrRXpoaXc?oc=5"
+       "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNbE9CeW1xRF92elgwblo0VktzSDZTeEtSQk9QVTNVeEFPOS1IbUdRazQ0OWxaVlJjUS0yc2VoTmZNa1E2QjQ5eUxnNXVkQWxPSHlNSDBULTJFN0dka0xXYnZ5aHBlSkp3em9iUGgyOGFDbkZhT3lhZ3NaeFNvZ0FDNzJZTzJ3aGNycnQxOVJhb1B0M184eHhiWV9sU2pvSnROQ1pWdV9FUm94UDJZeFRoM1o4dkJ5X1J2dzlaZTBoaXJfZl9pdmRlbExUck84Sm1FQVBtQlVoTGlYQU1FZ2J6Z2l5ZHB4Zw?oc=5"
       },
       {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNZGk4THhvNlA2VlBKaFRnMzNDRXZsMml6blFqQUNSeHYxaS1RajhvZWstSVJLZUVQbXRuVkVNQTFld2VfaFdKWi1SSWw2aGZBWW1kbHBaZ3o3Nmo3QUJEVmlTblc5eXI3R1ZBZVhVYkRhc05mMHNRQUlnMDBVSjNCOXlhVXFiX0oyWlVUM2lZdTRDSWthWF9KZmE3SHdXQ3hM?oc=5"
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQVi1zM3pHUW9sR0FtcjNxUGpmbDNmT2NIT2tZTDRRR1B6d2tlcmxWejZOdG85TnVVU3JyNlAwd1k0aUNfM0UzazE0Yi03Z0E5a0ptSWJjWkEtVDI0dl9pTWNlaXVxWER0am8zYkFuUEdLUmxzUEZRUl9DMWRkM2U0cHBQZm03eUtXUmYtMkFlYk82dVVnb05j?oc=5"
+      }
+     ],
+     "original_title": "Delays expected after fire alarm shuts down Auckland’s City Rail Link",
+     "published_at": "2026-10-18T22:03+00:00",
+     "why_it_matters": "오클랜드 대중교통 인프라인 CRL의 운행 차질은 시내로 출퇴근하는 학생과 직장인의 이동 시간에 직접적인 영향을 줍니다."
+    },
+    {
+     "id": "431e2fe3abc0",
+     "title_ko": "오클랜드 북부 쾅가테우서 2층 주택 화재… 헬기까지 동원되어 진화",
+     "summary_ko": [
+      "오클랜드 북부 쾅가테우의 2층 주택에서 발생한 불이 인근 식생으로 번졌습니다.",
+      "보트에 있던 시민의 최초 신고로 소방차가 출동했고 헬리콥터까지 동원되었습니다.",
+      "화재는 인근 소나무 조림지와 주택가를 위협했으나 소방대에 의해 통제되었습니다."
+     ],
+     "tags": [
+      "사건사고",
+      "재난"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/auckland/whangateau-house-fire-firefighters-battle-two-storey-blaze-north-of-auckland/RJLILYIKV5GGZDEV7VJYSWWPWQ/"
       },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQWDJSZUJGd0ZVRUhlOE53Skk2Zk5WYUtfMWpvc2ZQZ21HY0V4LWhpM1pRLW9UU1FyNWFqSC0za2plclFPamx3MS1OVlJ3SVdIQ1hCTUs2QUtFR3F5Y290VkRfMEVzZnhjVm1CVVEwYUlDaG9qRU96TGhOTFdacVZOdHFmU3NjbzlRcDhQUGZHR0MxQU9LbWIwNw?oc=5"
+      }
+     ],
+     "original_title": "Whangateau house fire: Firefighters battle two-storey blaze north of Auckland",
+     "published_at": "2026-10-18T04:58+00:00",
+     "why_it_matters": "오클랜드 인근 지역의 화재 사고 위험을 보여주며 주거지 주변 안전 관리에 대한 경각심을 줍니다."
+    },
+    {
+     "id": "b03943bd5895",
+     "title_ko": "마누레와 공사장에서 도난당한 굴착기 도로 한복판서 발견",
+     "summary_ko": [
+      "야간에 마누레와 지역의 공사장에 두 사람이 침입해 굴착기를 훔쳐 달아났습니다.",
+      "도난당한 굴착기는 이후 도로 한복판에서 버려진 채 발견되었습니다.",
+      "경찰이 현장 조사를 바탕으로 절도범들의 행적을 추적하고 있습니다."
+     ],
+     "tags": [
+      "사건사고",
+      "치안"
+     ],
+     "importance": 6,
+     "sources": [
       {
        "name": "Stuff",
-       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOb3pjRTJkS2Z3VGh0dFBzM21XOVpmNzV4YXdNS2p3TnNhNlpKWHNFUm5hbHB0THY3YmFOUHhDSnRhcVR3LTk4TFVCVHpVeTBaR3lhRnplWFNNbko1WDItMzcyc2EyRVJGWC1GcHZRajl5emU1ZmpIVkd2bFRnYzY2V25ob0pxUkZ4dERxZG1HWFZCUFpXWERoRGg5M19rZw?oc=5"
+       "url": "https://www.stuff.co.nz/nz-news/361048094/digger-stolen-manurewa-building-site-found-middle-road"
       }
      ],
-     "original_title": "'Screamed my lungs out': Fire destroys South Auckland home as neighbour cries for help",
-     "published_at": "2026-10-17T07:24+00:00",
-     "why_it_matters": "오클랜드 남부 주거 지역 내 화재 사고 소식으로 일상적인 주거 안전 및 화재 경보기 확인이 권장됩니다."
+     "original_title": "Digger stolen from Manurewa building site found in the middle of the road",
+     "published_at": "2026-10-18T19:13+00:00",
+     "why_it_matters": "오클랜드 남부 지역의 치안 상태와 공사장 대상 절도 범죄 실태를 보여줍니다."
     },
     {
-     "id": "beca2fd019ad",
-     "title_ko": "오클랜드 태평양계 유권자 등록 급증, 투표율 제고 과제",
+     "id": "e1ae2d726687",
+     "title_ko": "CRL 오인 경보기 여파로 오클랜드 열차망 전반에 운행 차질",
      "summary_ko": [
-      "유권자 등록 마감을 앞두고 오클랜드 맹게레 등 태평양계 밀집 지역의 유권자 등록률이 급증했습니다.",
-      "맹게레 등록률은 93.2%로 2023년 총선 당시 86%를 크게 웃돌았으나 낮은 실투표율 극복이 과제입니다.",
-      "선거관리위원회는 다국어 홍보와 현장 등록소를 운영하며 실질적인 투표 참여를 적극 독려하고 있습니다."
+      "카랑가하페역의 가짜 화재 경보기 발동으로 CRL 및 주요 열차 노선이 중단되었습니다.",
+      "오클랜드 교통당국(AT)은 오전 6시 직전 비상 경보를 발령하고 노선을 우회시켰습니다.",
+      "역은 곧 재개방되었으나 일부 열차는 시간표 정상화를 위해 역을 무정차 통과했습니다."
      ],
      "tags": [
-      "정치",
+      "교통",
       "사회"
      ],
      "importance": 6,
      "sources": [
       {
        "name": "1News",
-       "url": "https://www.1news.co.nz/2026/10/17/enrolment-drive-gains-traction-in-pasifika-communities/"
+       "url": "https://www.1news.co.nz/2026/10/19/disruptions-across-auckland-train-network-after-crl-false-alarm/"
       }
      ],
-     "original_title": "Enrolment drive gains traction in Pasifika communities",
-     "published_at": "2026-10-17T06:03+00:00",
-     "why_it_matters": "총선을 앞둔 오클랜드 지역 정치 지형 변화와 주요 선거구 유권자 동향을 보여주는 소식입니다."
-    },
-    {
-     "id": "0410c462dfe0",
-     "title_ko": "오클랜드 유니텍·MIT 폴리텍, 새 통합 명칭 선정 추진",
-     "summary_ko": [
-      "오클랜드의 대표 직업기술대학인 유니텍과 MIT가 새로운 통합 기관 명칭 선정을 추진하고 있습니다.",
-      "직업교육 체제 개편 흐름에 따라 지역 교육기관으로서의 정체성을 재정립하기 위한 절차입니다.",
-      "새로운 명칭 도입을 통해 지역 사회 및 산업체와의 연계를 강화하고 교육 경쟁력을 높일 계획입니다."
-     ],
-     "tags": [
-      "교육",
-      "사회"
-     ],
-     "importance": 6,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQWmxQSmZZNGhJV2xkcG56bTlxUVp4bWNnUmNBV2hVWjB6UWREMkEwbzRzbmtxSnZFdFNqSFNvQVo4bU85Q2RCSEo3eDVPZlBZVkYyOENEeXRBUFl5MkNacDAzQzM2ZkFMX2ZEcDNNWWZUZl9WR1QyMmNZelhfQ3VkVmFjdzVnQjQybWZ3SmpkUnJfN2NuWUVIQzJrN0JxRmdLYlE?oc=5"
-      }
-     ],
-     "original_title": "Auckland polytechnics Unitec and MIT to choose new name",
-     "published_at": "2026-10-17T05:15+00:00",
-     "why_it_matters": "오클랜드 내 고등교육 체계 개편 소식으로 종합대(UoA) 석사 과정 및 비자 발급과는 무관합니다."
+     "original_title": "Disruptions across Auckland train network after CRL false alarm",
+     "published_at": "2026-10-18T20:22+00:00",
+     "why_it_matters": "오클랜드 대중교통망 장애로 인해 아침 시간 시내로 이동하는 유학생들의 통행에 큰 불편을 초래했습니다."
     }
    ]
   },
   "nz_immigration": {
    "label": "이민 레이더",
-   "briefing": "실업률 상승 속 취업비자 개편 논란과 정부 연립정당 간 이민 정책 이견이 쟁점으로 부각되었습니다.",
+   "briefing": "연정 내 이민 정책 이견과 내무부 적자에 따른 시민권 수수료 대폭 인상 등 이민 이슈가 이어지고 있습니다.",
    "items": [
     {
-     "id": "429ef8094b6a",
-     "title_ko": "실업자 17만 명 속 뉴질랜드퍼스트 취업비자 대수술 압박",
-     "summary_ko": [
-      "실업자 수가 17만 1천 명, 불완전고용률이 13.8%에 달하자 뉴질랜드퍼스트당이 비자 개편을 압박했습니다.",
-      "국내 유휴 인력 활용을 우선시하며 외국인 워크비자(AEWV) 발급 요건을 대폭 강화할 것을 요구했습니다.",
-      "노동 시장 냉각과 정당 간 압박이 맞물려 향후 취업비자 승인 기준과 고용주 인증 심사가 까다로워질 전망입니다."
-     ],
-     "tags": [
-      "비자",
-      "고용",
-      "이민"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "Aviation A2Z",
-       "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQaW9QUWwxWVFIT0JoYWF1T2tGWndHRVNWTWhGc3ExcVJ3TlE1NjRJWUZpU3Zod05mS3ZSTGVVV2NJRHNQckZIRHk2V3N5T0RDWFFrc2ExM093Z01ES2RGOV9GX2R0TS1jeUUzVHZFNm1BUkRjbXR2QlNGelFVNWpCamFiMWxKb25iaEpadTJGLVU3T05hY3VyZGtUSjI5amg5TnlldTJVeHVZdmxreER3?oc=5"
-      }
-     ],
-     "original_title": "171,000 Unemployed and 13.8% Underutilisation as New Zealand First Pushes Work Visa Overhaul",
-     "published_at": "2026-10-16T03:39+00:00",
-     "why_it_matters": "실업률 상승으로 AEWV 고용주 인증과 노동시장 테스트가 강화될 수 있어 유학 후 취업 전략 점검이 필수적입니다."
-    },
-    {
      "id": "d97e31f68fb6",
-     "title_ko": "뉴질랜드 연립정부, 이민 정책 두고 내부 입장차 노출",
+     "title_ko": "뉴질랜드 연립 정부, 이민 정책을 두고 내부 노선 차이 드러내",
      "summary_ko": [
-      "뉴질랜드 연립정부 구성 정당들이 이민 정책과 외국인 인력 유입 규모를 둘러싸고 이견을 보이고 있습니다.",
-      "경제 성장 및 노동력 공급을 중시하는 입장과 자국민 고용 보호를 우선하는 노선이 부딪히고 있습니다.",
-      "정부 내 정책 조율 과정에서 취업비자 및 영주권 심사 기준에 변화가 생길 수 있어 주의가 요구됩니다."
+      "뉴질랜드 연립 정부 내에서 이민 정책의 방향성을 두고 이견이 표출되고 있습니다.",
+      "경제 성장을 위한 노동력 유입과 국내 정치적 규제 강화 주장이 충돌하고 있습니다.",
+      "이러한 연정 내 시각 차이는 향후 이민 및 비자 규정 개편에 영향을 미칠 수 있습니다."
      ],
      "tags": [
       "이민",
-      "비자",
-      "정치"
+      "정치",
+      "비자"
      ],
      "importance": 8,
      "sources": [
@@ -860,19 +819,46 @@
      ],
      "original_title": "New Zealand’s coalition government diverges on immigration",
      "published_at": "2026-10-17T11:00+00:00",
-     "why_it_matters": "연정 내 갈등으로 AEWV 및 SMC 영주권 규정의 변경 속도와 심사 방향에 불확실성이 커질 수 있습니다."
+     "why_it_matters": "정치권의 이민 정책 기조 변화는 졸업 후 취업비자와 영주권 제도를 준비하는 유학생의 진로에 직결됩니다."
     },
     {
-     "id": "978d834119be",
-     "title_ko": "이민자 단체 \"뉴질랜드퍼스트가 우리 정책 채택\"",
+     "id": "01bfea9f0c0f",
+     "title_ko": "내무부 적자 속 뉴질랜드 시민권 취득 비용 대폭 상승",
      "summary_ko": [
-      "한 이민자 권익 옹호 단체는 뉴질랜드퍼스트당이 자신들이 제안한 이민 정책 안을 채택했다고 밝혔습니다.",
-      "이민 제도 개선과 이주 노동자 관련 정책을 둘러싼 정당과 시민사회 간의 논의가 확대되고 있습니다.",
-      "총선을 앞두고 정당들이 다양한 이민 정책 안을 검토하면서 향후 제도 개편 향방에 관심이 쏠립니다."
+      "내무부(DIA)의 6,830만 달러 적자 대응으로 시민권 신청 수수료가 36% 인상되었습니다.",
+      "정부 기관의 재정 적자 보전을 위해 공공 서비스 수수료가 전반적으로 오르고 있습니다.",
+      "비자와 시민권 취득을 앞둔 이민자들의 경제적 부담이 한층 가중될 전망입니다."
      ],
      "tags": [
       "이민",
       "비자",
+      "물가"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPeFRGS0E4Z2IyOU1ENVZVWFZoeU5GN0xhN3NFRkJ5dDh5LUFUaURHZ2cwbmgySlZrWTVaWGRmSEotUEdPNi1nbzVxVEg3aGFHbk9LbEMyMEpXc0VONzdlVTVzeEN4RXFwU2ItVzNZUm9kdVk5TjQwcHU1OWx2Z3J6ME1vMmVRckhBeVhMVHd1VHg0ZTVmSUJGNE5fYU05TFZuU3pERGNoZFBYck5qQjBJblplRVFJWDBwQUg2NFJJQkl1bFB5TFVuamZ3UVRGNFc1cmRXeGpIcGZfVzBXdS1fbWI2Rk9od1pDTEZuRldPaDRPYjQ?oc=5"
+      },
+      {
+       "name": "B2B News",
+       "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQbEFBNFppVFRfTkpHcEpiUllSanpvWHhaZUlkQWFGMmhUTWJubEg2bmIwbnhoQVd6SnVxbVYtcl9DZzg5Z1IyOXBETkpNeHhNRHNyMm9LMEFrNW5VenVHWUNfYUZrZjlzekpFY0VTOXJNbW05VFpfQ09EbGItZUtIVkk2Y2p1TEJ3WTFpRGM1LU1MV09CYUE?oc=5"
+      }
+     ],
+     "original_title": "This is why it costs more than ever to become a NZ citizen",
+     "published_at": "2026-10-18T22:32+00:00",
+     "why_it_matters": "영주권 취득 이후 최종 단계인 시민권 신청 시 수수료 부담이 커져 장기 정착 비용을 높입니다."
+    },
+    {
+     "id": "978d834119be",
+     "title_ko": "이민자 단체, “뉴질랜드 퍼스트가 우리의 이민 정책을 채택했다” 주장",
+     "summary_ko": [
+      "이민자 권익옹호 단체가 뉴질랜드 퍼스트당이 자신들의 정책을 수용했다고 밝혔습니다.",
+      "정치권의 이민 관련 공론화 과정에서 특정 이익단체의 목소리가 반영되고 있습니다.",
+      "이러한 정치적 압박은 향후 이민자 유입 규정 강화 논의에 힘을 실어줄 수 있습니다."
+     ],
+     "tags": [
+      "이민",
       "정치"
      ],
      "importance": 8,
@@ -883,80 +869,32 @@
       }
      ],
      "original_title": "Migrant advocacy group says NZ First has adopted its policy",
-     "published_at": "2026-10-15T22:24+00:00",
-     "why_it_matters": "정당 공약 채택 여부에 따라 차기 정부 출범 후 워크비자 제도와 이민자 보호 규정이 바뀔 수 있습니다."
+     "published_at": "2026-10-18T20:49+00:00",
+     "why_it_matters": "정치권의 이민 관련 강경 기조 강화는 향후 비자 발급 및 영주권 문턱에 영향을 줄 수 있습니다."
     },
     {
-     "id": "2a4cbb38b0c9",
-     "title_ko": "다운증후군 진단에 영주권 비자 지연된 영주권자 자녀",
+     "id": "2c65e453dc71",
+     "title_ko": "윈스턴 피터스, 크라이스트처치서 이민·주택 공약 및 대성당 기부금 발표",
      "summary_ko": [
-      "뉴질랜드 영주권자 부모가 스리랑카에서 낳은 아기가 다운증후군 진단 후 비자 발급이 보류되었습니다.",
-      "뉴질랜드 이민성 의료 기준(ASH) 충족 여부를 심사받으며 가족 전체가 심각한 어려움에 처했습니다.",
-      "이민 심사 시 건강 기준이 영주권 및 동반 가족 비자 취득에 중대한 요건임을 보여주는 사례입니다."
+      "뉴질랜드 퍼스트당 대표 윈스턴 피터스가 크라이스트처치를 방문해 유세에 나섰습니다.",
+      "이 자리에서 이민 축소, 주택 안정화 공약과 함께 1,500만 달러의 대성당 기부금을 약속했습니다.",
+      "총선을 앞두고 이민과 주택 이슈를 중심으로 보수 표심을 공략하는 행보를 보이고 있습니다."
      ],
      "tags": [
       "이민",
-      "비자",
-      "의료"
+      "주거",
+      "정치"
      ],
      "importance": 7,
      "sources": [
       {
-       "name": "https://awaaz.co.nz/",
-       "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPc1A1dHNCQmZKeGJScFlTaUE3M0NxNWVqWmwyc1JiLWNqalg5cnZUSXUwN2JYTThCNUF6amFtN19vNHAtdlJkLVV1NHNOZV94R2VUbEt1NTlmY0N5ZzJJdkk2Yk8wSVZIOGZCeU5OWHBYeFV2aGxVeFRfSDk3S3UzdTM0U0lfdURLOGFUSHd4OEd4V3d1OFg3cmJYaFlTM1k4QUVyTWtvd21DeVh0a2ZIeHJJNTk2Q1lIMGk1VjRQejVqd1ZLVExpZFh3?oc=5"
+       "name": "Chris Lynch Media",
+       "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPTUQ5enhJOXZkUUNoeXdvbEtPZjliVTFmUXhicld6Q1lGU3FNRTVQZjI5ZHU1SXVRbW1GMjd5NldWZzhtSERadzVrN0N5WDhkUDJBVlVXbnNNSnNsT3I1eHlFaXJmcDROampuMDRqR2FxbExYMDZLenItbFRkR3hOWVhkUzl5SG5udk51X3FZWkRaQkY5cnlCRHhQRkR6YTVOQ1h5aUJDUS1DR2xaWHNvQWZLUzgzb2FNZDB0eGtsS1JLRHJpVVNOTHo5UkJ0UXBfbmZFTjlZeHBtOWtiYXV3ekkxdFhFMm9qazN2YnNB?oc=5"
       }
      ],
-     "original_title": "Baby born in Sri Lanka to New Zealand residents caught in limbo after Down syndrome diagnosis",
-     "published_at": "2026-10-16T08:31+00:00",
-     "why_it_matters": "향후 SMC 영주권 신청 시 본인 및 동반 가족의 건강 기준(ASH) 충족 여부가 핵심 요건임을 상기시킵니다."
-    },
-    {
-     "id": "c2d1dbe3c363",
-     "title_ko": "뉴질랜드 신규 영주권자, 2026 총선 투표 자격 안내",
-     "summary_ko": [
-      "뉴질랜드에 정착한 신규 영주권자들의 2026년 총선 투표 자격 요건에 대한 안내가 발표되었습니다.",
-      "뉴질랜드는 12개월 이상 지속 거주한 영주권자에게도 총선 투표권을 부여하는 제도를 운영하고 있습니다.",
-      "선관위는 자격을 갖춘 영주권자들이 유권자 등록을 마치고 시민적 권리를 행사할 것을 당부했습니다."
-     ],
-     "tags": [
-      "영주권",
-      "정치",
-      "이민"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "Indianweekender",
-       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOYnA0STFYSXk3MlFYeHFVY0JvZU9NWS1GbXE3NFpxb2lvemY5ZjNqU3UxMk9TVVgxX184UE1sWWFmYV9GT0M1ZXdBcjlrZGxjbzZnMjBOSWl3TE93TkUybVRqREVHY2pVS3NNUE1WRHRsaVVRN1NWUXhBZlNSN3V2TkpRcVNBTTloMTU3TEM5ZDdjSUJhTzZsRUY4dTNJRThvMmlRNDBxMFQ4WVBhZXFKV2dKTQ?oc=5"
-      }
-     ],
-     "original_title": "New residents in New Zealand: Are you eligible to vote in the 2026 election?",
-     "published_at": "2026-10-16T05:17+00:00",
-     "why_it_matters": "향후 취업 후 영주권을 취득하면 시민권 취득 전이라도 총선 투표에 직접 참여할 자격이 생깁니다."
-    },
-    {
-     "id": "0483f640aea4",
-     "title_ko": "2년간 23만 불 일하고 4만 불만 지급받은 요리사 사건",
-     "summary_ko": [
-      "오클랜드의 한 요리사가 2년 동안 22만 9천 달러 상당의 노동을 제공하고 4만 달러만 지급받았습니다.",
-      "고용주는 이민 노동자의 취약성을 악용해 장시간 노동을 강요하고 임금을 대폭 체불한 것으로 드러났습니다.",
-      "노동 당국의 조사가 이뤄지며 취업비자 근로자에 대한 고용 착취 처벌과 규제 강화 목소리가 커졌습니다."
-     ],
-     "tags": [
-      "고용",
-      "임금",
-      "비자"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "HRM New Zealand",
-       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOLXY2cEMyYmNWYkJvNVJZRTdIWXoxRG4zLWVEU3hvN2xDbGplckMzelZDZC1NOWtJYjlZakJyY21weTlSakJISXlmMEpKRWJrWWdmQktHRVM4Tnl4U3g0TTliNXV0eHhjRWxlRzczZzZCVElxNFNZUEkzUm13TFFyaGM3YlhBTXR6Y2Y3RUZ6VTM3NlZ6eXhOTkdWS0pkWE1zdjRKMXo5Y2YtTFNkQk1Zb0J3ZkM4clNGMExn?oc=5"
-      }
-     ],
-     "original_title": "Auckland cook earned $229K in two years - employer paid $40K",
-     "published_at": "2026-10-16T21:53+00:00",
-     "why_it_matters": "졸업 후 취업 시 비자 스폰서를 빌미로 한 임금 체불이나 착취를 피하고 고용주 인증 조건을 살펴야 합니다."
+     "original_title": "Winston Peters in Christchurch today as NZ First campaigns on immigration, housing and $15 million Cathedral pledge",
+     "published_at": "2026-10-17T23:19+00:00",
+     "why_it_matters": "정치권의 이민자 수 조절 공약은 졸업생 취업비자와 영주권 정책 환경에 민감한 변수입니다."
     }
    ]
   }
@@ -964,14 +902,14 @@
  "extras": {
   "nzd_krw": 754.48,
   "auckland_weather": {
-   "max": 18,
-   "min": 10,
-   "desc": "맑음",
-   "code": 0,
+   "max": 19,
+   "min": 12,
+   "desc": "대체로 맑음",
+   "code": 1,
    "rain_chance": 0
   },
   "processing_times": {
-   "updated_at": "2026-10-17T18:58+00:00",
+   "updated_at": "2026-10-18T23:41+00:00",
    "items": [
     {
      "key": "pswv",
@@ -983,7 +921,7 @@
      "sub": "",
      "note": "80% within 4 weeks",
      "url": "https://www.immigration.govt.nz/visas/post-study-work-visa/",
-     "as_of": "2026-10-17",
+     "as_of": "2026-10-18",
      "status": "ok"
     },
     {
@@ -996,7 +934,7 @@
      "sub": "",
      "note": "Accredited Employer Work Visa (AEWV) | 2 weeks | 5 weeks",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/work-visa-wait-times/",
-     "as_of": "2026-10-17",
+     "as_of": "2026-10-18",
      "status": "ok"
     },
     {
@@ -1009,7 +947,7 @@
      "sub": "",
      "note": "Skilled Migrant Category Resident Visa | 9 weeks | 3.5 months",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
-     "as_of": "2026-10-17",
+     "as_of": "2026-10-18",
      "status": "ok"
     },
     {
@@ -1022,7 +960,7 @@
      "sub": "",
      "note": "Straight to Residence Visa | 8 weeks | 3 months",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
-     "as_of": "2026-10-17",
+     "as_of": "2026-10-18",
      "status": "ok"
     },
     {
@@ -1035,7 +973,7 @@
      "sub": "",
      "note": "Work to Residence Visa | 8 weeks | 3 months",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
-     "as_of": "2026-10-17",
+     "as_of": "2026-10-18",
      "status": "ok"
     },
     {
@@ -1048,7 +986,7 @@
      "sub": "",
      "note": "Permanent Resident Visa | 1.5 weeks | 2 weeks",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
-     "as_of": "2026-10-17",
+     "as_of": "2026-10-18",
      "status": "ok"
     },
     {
@@ -1061,7 +999,7 @@
      "sub": "90%가 4개월 안에 결과 통보",
      "note": "within 6 months of submitting their application, 90% of applicants are granted",
      "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/how-to-apply-for-nz-citizenship/application-timeframes/",
-     "as_of": "2026-10-17",
+     "as_of": "2026-10-18",
      "status": "ok"
     }
    ]
@@ -1071,21 +1009,21 @@
   "mode": "gemini",
   "failed_feeds": [],
   "feeds_total": 33,
-  "stories_after_dedupe": 532,
+  "stories_after_dedupe": 598,
   "usage": {
    "provider": "gemini",
    "requests": 5,
    "models": {
     "gemini-flash-lite-latest": {
-     "calls": 3,
-     "input_tokens": 24031,
-     "output_tokens": 21513,
+     "calls": 4,
+     "input_tokens": 27373,
+     "output_tokens": 28067,
      "cost_usd": 0.0
     },
-    "gemini-3.8-flash": {
-     "calls": 2,
-     "input_tokens": 12491,
-     "output_tokens": 8605,
+    "gemini-flash-latest": {
+     "calls": 1,
+     "input_tokens": 11013,
+     "output_tokens": 4062,
      "cost_usd": 0.0
     }
    },
