@@ -6,7 +6,7 @@ from zoneinfo import ZoneInfo
 import pytest
 
 from build import BriefValidationError, prune_and_index, validate, write_brief
-from common import Article
+from common import Article, Source
 import httpx
 
 from llm import ClaudeLLM, GeminiLLM, LLMError, RequestCapReached, make_llm, to_gemini_schema
@@ -702,3 +702,14 @@ def test_new_exclusions_and_radar_caps(cfg):
     a = art(1, "'Fundraising to stay alive': Nurse's rare cancer")
     assert excluded_reason(a, cfg)
     assert cap_radar(art(2, "Express Entry points: 3 critical changes for applicants"), cfg, 9) == 3
+
+
+def test_preselect_keeps_reserved_feed_items():
+    from rank import _preselect
+    busy = [art(f"b{i}", f"Busy story {i}") for i in range(10)]
+    for a in busy:
+        a.extra_sources = [Source("X", f"https://x.com/{a.id}")]
+    school = art("s1", "Primary school gets new playground")
+    school.feed_id = "gn_nz_education"
+    out = _preselect([*busy, school], 5, {"gn_nz_education"})
+    assert "s1" in {a.id for a in out} and len(out) == 6

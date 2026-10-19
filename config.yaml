@@ -366,8 +366,18 @@ feeds:
     name: "Google News"
     section: nz_national
     google_news: true
+    reserve: true      # 출처 1곳짜리 기사가 많아 후보 추리기에서 밀리지 않게 항상 포함
+    lookback_hours: 48
     # 교육: 초등·중간학교(primary/intermediate) 중심
     url: "https://news.google.com/rss/search?q=%22New+Zealand%22+(%22primary+school%22+OR+%22intermediate+school%22+OR+%22primary+schools%22+OR+%22Ministry+of+Education%22+OR+%22school+lunches%22+OR+teachers+OR+principals)+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_nz_school
+    name: "Google News"
+    section: nz_national
+    google_news: true
+    reserve: true
+    lookback_hours: 48
+    # 초등학교 학부모 관점: 학교 운영·안전·교육과정·급식·학군
+    url: "https://news.google.com/rss/search?q=(%22primary+school%22+OR+%22intermediate+school%22+OR+%22school+zone%22+OR+%22school+lunch%22+OR+%22Education+Review+Office%22+OR+%22Erica+Stanford%22)+NZ+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_nz_business
     name: "Google News"
     section: nz_national

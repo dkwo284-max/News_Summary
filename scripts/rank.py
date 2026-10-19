@@ -247,10 +247,14 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                     a.score = 0  # MIN_SCORE 미만 → 싣지 않음
 
 
-def _preselect(items: list[Article], limit: int) -> list[Article]:
-    """비용 상한: 여러 곳이 보도한 기사 → 최신 기사 순으로 candidate_limit 건만 채점."""
+def _preselect(items: list[Article], limit: int, reserved_feeds: set[str] = frozenset()) -> list[Article]:
+    """비용 상한: 여러 곳이 보도한 기사 → 최신 기사 순으로 candidate_limit 건만 채점.
+    reserve: true 인 피드(예: 초등학교 교육 피드)의 기사는 출처가 1곳이어도 밀려나지 않게 항상 포함."""
     epoch = datetime.min.replace(tzinfo=timezone.utc)
-    return sorted(items, key=lambda a: (len(a.sources), a.published or epoch), reverse=True)[:limit]
+    ranked = sorted(items, key=lambda a: (len(a.sources), a.published or epoch), reverse=True)
+    picked = ranked[:limit]
+    extra = [a for a in ranked[limit:] if a.feed_id in reserved_feeds][:20]
+    return picked + extra
 
 
 def merge_same_story(items: list[Article], threshold: int) -> list[Article]:
@@ -464,7 +468,8 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     for key, sec in sections.items():
         if sec.get("from"):  # 카테고리 섹션(nz_society 등)은 묶음(nz_national)에서 나중에 나눔
             continue
-        by_section[key] = _preselect(by_section.get(key, []), sec.get("candidate_limit", 80))
+        reserved = {f["id"] for f in cfg.get("feeds", []) if f.get("reserve") and f["section"] == key}
+        by_section[key] = _preselect(by_section.get(key, []), sec.get("candidate_limit", 80), reserved)
         by_region[sec["region"]].extend(by_section[key])
     for region, items in by_region.items():
         score_articles(items, cfg, region, llm, now)
