@@ -13,7 +13,7 @@ interface TabDef {
 
 const TABS: TabDef[] = [
   { id: "kr", icon: "🇰🇷", label: "한국", sections: ["kr_society", "kr_economy", "kr_entertainment", "kr_politics"] },
-  { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_national"] },
+  { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_society", "nz_education", "nz_economy", "nz_politics", "nz_national"] },
   { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["nz_auckland"] },
   { id: "imm", icon: "🛂", label: "이민 레이더", sections: ["nz_immigration"] },
 ];
@@ -28,7 +28,16 @@ const KR_CHIPS: { key: SectionKey | "all"; label: string }[] = [
 // ── 상태 ──────────────────────────────────────────────────
 const settings: Settings = loadSettings();
 let brief: Brief | null = null;
-let krChip: SectionKey | "all" = "all";
+type Chip = { key: SectionKey | "all"; label: string };
+const NZ_CHIPS: Chip[] = [
+  { key: "all", label: "전체" },
+  { key: "nz_society", label: "사회" },
+  { key: "nz_education", label: "교육" },
+  { key: "nz_economy", label: "경제" },
+  { key: "nz_politics", label: "정치" },
+];
+// 탭별로 선택한 카테고리 칩
+const chipState: Record<string, SectionKey | "all"> = { kr: "all", nz: "all" };
 let query = "";
 let viewingLatest = true;
 let live: LiveData | null = loadLive();
@@ -239,13 +248,20 @@ function sectionBlock(key: SectionKey, showHeading: boolean): HTMLElement | null
   return wrap;
 }
 
-function renderChips(): HTMLElement {
-  const chips = KR_CHIPS.filter((c) => c.key !== "kr_politics" || settings.showPolitics);
-  if (!chips.some((c) => c.key === krChip)) krChip = "all";
+function renderChips(tabId: string): HTMLElement | null {
+  let chips: Chip[];
+  if (tabId === "kr") {
+    chips = KR_CHIPS.filter((c) => c.key !== "kr_politics" || settings.showPolitics);
+  } else {
+    // 예전 브리핑(뉴질랜드 단일 섹션)에는 칩을 보여주지 않음
+    if (!brief?.sections.nz_society) return null;
+    chips = NZ_CHIPS;
+  }
+  if (!chips.some((c) => c.key === chipState[tabId])) chipState[tabId] = "all";
   return h("div", { class: "chips", role: "group", "aria-label": "카테고리" }, ...chips.map((c) => {
-    const b = h("button", { class: "chip", "aria-pressed": String(krChip === c.key) }, c.label);
+    const b = h("button", { class: "chip", "aria-pressed": String(chipState[tabId] === c.key) }, c.label);
     b.addEventListener("click", () => {
-      krChip = c.key;
+      chipState[tabId] = c.key;
       renderMain();
     });
     return b;
@@ -267,7 +283,10 @@ function renderSearch(): void {
   }
   main.append(h("p", { class: "result-count", role: "status" }, `‘${query}’ 검색 결과 ${hits.length}건`));
   for (const { item, key } of hits) {
-    main.append(card(item, key.startsWith("nz") ? "nz" : "kr", brief.sections[key].label));
+    // 검색 결과에서는 '사회'처럼 같은 이름이 두 나라에 있으므로 나라를 붙여 표시
+    const label = brief.sections[key].label;
+    const tagged = key.startsWith("kr_") ? `한국 ${label}` : ["nz_auckland", "nz_immigration"].includes(key) ? label : `뉴질랜드 ${label}`;
+    main.append(card(item, key.startsWith("nz") ? "nz" : "kr", tagged));
   }
 }
 
@@ -285,11 +304,13 @@ function renderMain(): void {
   }
   const tab = TABS.find((t) => t.id === settings.tab) ?? TABS[0];
   main.setAttribute("aria-labelledby", `tab-${tab.id}`);
-  if (tab.id === "kr") {
-    main.append(renderChips());
-    const keys = krChip === "all" ? visibleSections(tab) : [krChip];
+  if (tab.id === "kr" || tab.id === "nz") {
+    const chips = renderChips(tab.id);
+    if (chips) main.append(chips);
+    const sel = chipState[tab.id];
+    const keys = (sel === "all" ? visibleSections(tab) : [sel]).filter((k) => brief!.sections[k]);
     for (const k of keys) {
-      const block = sectionBlock(k, true);
+      const block = sectionBlock(k, !!chips);
       if (block) main.append(block);
     }
   } else {

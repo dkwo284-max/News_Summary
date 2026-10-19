@@ -10,7 +10,7 @@
     "timezone": { "type": "string" },
     "sections": {
       "type": "object",
-      "required": ["kr_society", "kr_economy", "kr_entertainment", "kr_politics", "nz_national", "nz_auckland", "nz_immigration"],
+      "required": ["kr_society", "kr_economy", "kr_entertainment", "kr_politics", "nz_society", "nz_education", "nz_economy", "nz_politics", "nz_auckland", "nz_immigration"],
       "additionalProperties": { "$ref": "#/$defs/section" }
     },
     "extras": {

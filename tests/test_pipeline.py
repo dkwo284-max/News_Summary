@@ -71,9 +71,10 @@ def test_select_with_llm_builds_immigration_radar(cfg):
     llm = FakeLLM()
     chosen = select(items, cfg, llm, FIXTURE_NOW)
     assert [c["task"] for c in llm.calls] == ["rank", "rank"]  # nz 채점 1회 + 이슈 묶기 1회
-    # 레이더에 실린 비자 기사는 뉴질랜드 탭에서 빠지고, 나머지 8건이 뉴질랜드 탭을 채움
-    assert len(chosen["nz_national"]) == 8
-    assert {a.id for a in chosen["nz_national"]}.isdisjoint({a.id for a in chosen["nz_immigration"]})
+    # 레이더에 실린 비자 기사는 뉴질랜드 탭(사회·교육·경제·정치)에서 빠짐
+    nz = [a for k in ("nz_society", "nz_education", "nz_economy", "nz_politics") for a in chosen[k]]
+    assert nz and {a.id for a in nz}.isdisjoint({a.id for a in chosen["nz_immigration"]})
+    assert {a.id for a in chosen["nz_national"]} == {a.id for a in nz}  # 묶음 = 카테고리 섹션의 합
 
     radar_ids = {a.id for a in chosen["nz_immigration"]}
     assert {"0", "3", "6", "9"} <= radar_ids
@@ -103,8 +104,9 @@ def test_summarize_all_uses_two_requests(cfg):
     kr = art(1, "금리 동결", section="kr_economy")
     kr.score = 7
     llm = FakeLLM()
-    out = summarize_all({"kr_economy": [kr], "nz_national": [art(2, "Visa")]}, cfg, llm)
+    out = summarize_all({"kr_economy": [kr], "nz_society": [art(2, "Visa")]}, cfg, llm)
     assert len(llm.calls) == 2
+    assert "nz_national" not in out and out["nz_society"]["items"][0]["why_it_matters"]
     assert "why_it_matters" not in out["kr_economy"]["items"][0]
     assert out["kr_society"]["items"] == []
 
@@ -634,3 +636,48 @@ def test_gemini_timeout_moves_to_next_model(cfg):
     llm = _gemini(cfg, handler)
     assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 4}
     assert sum("gemini-3.8-flash:" in u for u in urls) == 2 and "gemini-flash-latest" in urls[-1]
+
+
+# ── 뉴질랜드 사회·교육·경제·정치 ──
+
+def test_nz_categories_split_with_ai(cfg):
+    class CatLLM(SplitLLM):
+        CAT = {"e1": "education", "e2": "education", "p1": "politics", "c1": "economy", "s1": "society", "x1": "weird"}
+
+        def json_call(self, **kw):
+            out = super().json_call(**kw)
+            if kw["task"] == "rank" and "scores" in out:
+                for r in out["scores"]:
+                    r["category"] = self.CAT.get(r["id"], "")
+                    r["score"] = 7
+            return out
+    items = [art("e1", "Primary schools get new maths curriculum"), art("e2", "Intermediate school lunches cut"),
+             art("p1", "Coalition parties clash over budget bill"), art("c1", "Reserve Bank holds OCR"),
+             art("s1", "Storm closes roads in Northland"), art("x1", "Something unusual happened")]
+    chosen = select(items, cfg, CatLLM(set(), {}), FIXTURE_NOW)
+    assert {a.id for a in chosen["nz_education"]} == {"e1", "e2"}
+    assert [a.id for a in chosen["nz_politics"]] == ["p1"]
+    assert [a.id for a in chosen["nz_economy"]] == ["c1"]
+    assert {a.id for a in chosen["nz_society"]} == {"s1", "x1"}  # 알 수 없는 분류는 키워드 → 없으면 사회
+    secs = [chosen[k] for k in ("nz_society", "nz_education", "nz_economy", "nz_politics")]
+    ids = [a.id for sec in secs for a in sec]
+    assert len(ids) == len(set(ids))  # 카테고리 간 중복 없음
+
+
+def test_nz_categories_heuristic(cfg):
+    from rank import heuristic_category
+    assert heuristic_category(art(1, "Primary school teachers vote on pay offer"), cfg) == "education"
+    assert heuristic_category(art(2, "Luxon and Hipkins clash in first election debate"), cfg) == "politics"
+    assert heuristic_category(art(3, "Inflation eases as petrol prices fall"), cfg) == "economy"
+    assert heuristic_category(art(4, "Man rescued after kayak capsizes"), cfg) == "society"
+
+
+def test_brief_sections_have_nz_categories_not_pool(cfg, fixtures_dir, monkeypatch, tmp_path):
+    import main as main_mod
+    monkeypatch.setattr(main_mod, "ROOT", tmp_path)
+    rc = main(["--config", str(fixtures_dir.parent.parent.parent / "config.yaml"), "--dry-run", "--no-llm",
+               "--fixtures", str(fixtures_dir), "--now", FIXTURE_NOW.isoformat()])
+    assert rc == 0
+    brief = json.loads((tmp_path / "out" / "dry-run" / "latest.json").read_text())
+    assert "nz_national" not in brief["sections"]
+    assert {"nz_society", "nz_education", "nz_economy", "nz_politics"} <= set(brief["sections"])

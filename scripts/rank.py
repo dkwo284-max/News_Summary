@@ -30,8 +30,9 @@ RANK_SCHEMA = {
                     "same_as": {"type": "string"},
                     "junk": {"type": "boolean"},
                     "radar": {"type": "integer"},
+                    "category": {"type": "string"},
                 },
-                "required": ["id", "score", "immigration", "auckland", "same_as", "junk", "radar"],
+                "required": ["id", "score", "immigration", "auckland", "same_as", "junk", "radar", "category"],
                 "additionalProperties": False,
             },
         }
@@ -75,6 +76,11 @@ def _radar_rule(cfg: dict) -> str:
   규정 해석은 8~10, 관련 통계·고용시장은 5~7, 신규 학생비자·관광비자·계절근로·타국 이민정책은 0~3."""
 
 
+CATEGORY_RULE = """- category: 뉴질랜드 기사 분류 — "education"(교육: 초등·중간학교(primary/intermediate) 정책·교사·교육과정·학교 급식·
+  학군·ERO·유아교육. 대학·유학생 기사도 education 이지만 중요도는 낮게), "politics"(정치: 총선·정당·국회·장관·연정·여론조사),
+  "economy"(경제: 금리·물가·집값·고용·임금·기업·환율·세금·예산), "society"(그 외 사회: 사건사고·의료·날씨·교통·복지 등)."""
+
+
 def _system_prompt(cfg: dict, region: str) -> str:
     criteria = KR_CRITERIA if region == "kr" else _nz_criteria(cfg)
     return f"""당신은 뉴스 편집자입니다. 주어진 기사 목록의 각 항목에 1~10 정수 중요도를 매깁니다.
@@ -83,6 +89,7 @@ def _system_prompt(cfg: dict, region: str) -> str:
 {AUCKLAND_RULE if region == "nz" else '- auckland: 항상 false.'}
 {JUNK_RULE}
 {_radar_rule(cfg) if region == "nz" else '- radar: 항상 0.'}
+{CATEGORY_RULE if region == "nz" else '- category: 항상 빈 문자열 "".'}
 - same_as: 목록의 다른 항목과 같은 사건이거나 같은 이슈의 후속·관련 기사이면(예: 같은 병원 인력난을 다룬 여러 기사,
   같은 기상 악화의 지역별 피해, 같은 비자 정책을 다룬 국내외 보도, 같은 인물의 사연) 그 묶음에서 가장 대표적인 기사의 id,
   아니면 빈 문자열 "". 대표 기사 자신은 "".
@@ -169,6 +176,18 @@ def apply_exclusions(articles: list[Article], cfg: dict) -> list[Article]:
     return kept
 
 
+CATEGORIES = ("society", "education", "economy", "politics")
+
+
+def heuristic_category(a: Article, cfg: dict) -> str:
+    """AI 없이: nz_categories 키워드로 분류 (교육 → 정치 → 경제 순으로 먼저 맞는 것, 없으면 사회)."""
+    cats = cfg.get("nz_categories", {})
+    for cat in ("education", "politics", "economy"):
+        if _kw_hits(a.title, cats.get(cat, [])):
+            return cat
+    return "society"
+
+
 def heuristic_auckland(a: Article, cfg: dict) -> bool:
     """AI 없이: 오클랜드 피드에서 왔거나 제목에 오클랜드 지명이 있으면 오클랜드 소식."""
     return a.section == "nz_auckland" or bool(_kw_hits(a.title, cfg.get("auckland_keywords", ["Auckland"])))
@@ -184,6 +203,7 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
             a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
             a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
             a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
+            a.category = heuristic_category(a, cfg) if region == "nz" else ""
         return
     system = _system_prompt(cfg, region)
     # 같은 기사가 여러 섹션에 있으면 id 가 같다 → 한 번만 보내고 점수는 모두에 적용
@@ -210,6 +230,7 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                     a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
                     a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
                     a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
+                    a.category = heuristic_category(a, cfg) if region == "nz" else ""
                     continue
                 a.score = max(1, min(10, int(row["score"])))
                 a.is_immigration = bool(row.get("immigration")) and region == "nz"
@@ -217,6 +238,8 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                 same = row.get("same_as") or ""
                 a.same_as = same if same in by_id and same != a.id else ""
                 a.junk = bool(row.get("junk"))
+                cat = (row.get("category") or "").lower()
+                a.category = (cat if cat in CATEGORIES else heuristic_category(a, cfg)) if region == "nz" else ""
                 a.radar_score = cap_radar(a, cfg, max(0, min(10, int(row.get("radar") or 0)))) if region == "nz" else 0
                 if a.junk:
                     a.score = 0  # MIN_SCORE 미만 → 싣지 않음
@@ -437,6 +460,8 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     # 섹션별 후보를 추린 뒤, 같은 지역(kr/nz) 후보를 한꺼번에 채점해 요청 수를 최소화
     by_region: dict[str, list[Article]] = defaultdict(list)
     for key, sec in sections.items():
+        if sec.get("from"):  # 카테고리 섹션(nz_society 등)은 묶음(nz_national)에서 나중에 나눔
+            continue
         by_section[key] = _preselect(by_section.get(key, []), sec.get("candidate_limit", 80))
         by_region[sec["region"]].extend(by_section[key])
     for region, items in by_region.items():
@@ -477,10 +502,13 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
 
     kr_used: list[Article] = []  # 한국: 같은 기사가 여러 카테고리(예: 경제·정치)에 나오지 않게, 앞 카테고리 우선
     for key, sec in sections.items():
-        if key == "nz_immigration":
+        if key == "nz_immigration" or sec.get("pool"):
             continue
-        items = by_section[key]
-        if key in ("nz_national", "nz_auckland"):
+        if sec.get("from"):  # 뉴질랜드 사회·교육·경제·정치: 묶음에서 분류별로
+            items = [a for a in by_section.get(sec["from"], []) if (a.category or "society") == sec["category"]]
+        else:
+            items = by_section[key]
+        if key in ("nz_auckland",) or sec.get("from") == "nz_national":
             items = [a for a in items if not (_ids(a) & in_radar)]
         if sec["region"] == "kr":
             used_ids = set().union(*(_ids(x) for x in kr_used)) if kr_used else set()
@@ -489,6 +517,10 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
         chosen[key] = _top(items, sec["top_n"])
         if sec["region"] == "kr":
             kr_used.extend(chosen[key])
+    # 묶음 섹션(nz_national)은 출력하지 않지만, 로그·점검용으로 카테고리 섹션들의 합을 담아 둔다
+    for key, sec in sections.items():
+        if sec.get("pool"):
+            chosen[key] = [a for k, s in sections.items() if s.get("from") == key for a in chosen.get(k, [])]
     chosen = {k: chosen[k] for k in sections}
     for key, items in chosen.items():
         log.info("selected %-17s %d", key, len(items))

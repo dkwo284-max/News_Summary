@@ -217,8 +217,10 @@ def summarize_region(region: str, keys: list[str], chosen: dict[str, list[Articl
 def summarize_all(chosen: dict[str, list[Article]], cfg: dict, llm) -> dict[str, dict]:
     by_region: dict[str, list[str]] = {}
     for k, sec in cfg["sections"].items():
+        if sec.get("pool"):  # 묶음 섹션은 출력하지 않음 (카테고리 섹션으로 나뉨)
+            continue
         by_region.setdefault(sec["region"], []).append(k)
     result: dict[str, dict] = {}
     for region, keys in by_region.items():  # 순차 실행: 무료 등급 분당 한도 보호
         result.update(summarize_region(region, keys, chosen, cfg, llm))
-    return {k: result[k] for k in cfg["sections"]}
+    return {k: result[k] for k in cfg["sections"] if k in result}

@@ -26,7 +26,11 @@ export type SectionKey =
   | "kr_economy"
   | "kr_entertainment"
   | "kr_politics"
-  | "nz_national"
+  | "nz_national" // 이전 브리핑(10/19 이전) 호환
+  | "nz_society"
+  | "nz_education"
+  | "nz_economy"
+  | "nz_politics"
   | "nz_auckland"
   | "nz_immigration";
 

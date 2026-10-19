@@ -36,7 +36,12 @@ sections:
   kr_economy:       { label: "경제",     region: kr, top_n: 5, candidate_limit: 45 }
   kr_entertainment: { label: "연예",     region: kr, top_n: 5, candidate_limit: 45 }
   kr_politics:      { label: "정치",     region: kr, top_n: 5, candidate_limit: 45 }
-  nz_national:      { label: "뉴질랜드", region: nz, top_n: 8, candidate_limit: 90 }
+  # 뉴질랜드 전국 기사는 nz_national 한 묶음으로 수집·선별한 뒤, AI 분류(category)에 따라 아래 4개 섹션으로 나눕니다.
+  nz_national:      { label: "뉴질랜드", region: nz, pool: true, top_n: 18, candidate_limit: 120 }
+  nz_society:       { label: "사회", region: nz, from: nz_national, category: society,   top_n: 5 }
+  nz_education:     { label: "교육", region: nz, from: nz_national, category: education, top_n: 4 }
+  nz_economy:       { label: "경제", region: nz, from: nz_national, category: economy,   top_n: 5 }
+  nz_politics:      { label: "정치", region: nz, from: nz_national, category: politics,  top_n: 4 }
   nz_auckland:      { label: "오클랜드", region: nz, top_n: 5, candidate_limit: 60 }
   # nz_immigration(이민 레이더)은 이민 전용 피드 + 뉴질랜드/오클랜드 후보 중 독자 프로필(아래 profile) 관련도가 높은 기사.
   # 레이더에 실린 기사는 뉴질랜드/오클랜드 탭에서 빠집니다(중복 없음).
@@ -155,6 +160,12 @@ profile:
     - conference
     - seminar
 
+# ── 뉴질랜드 카테고리 (AI 없이 돌 때 분류 키워드, 해당 없으면 사회) ──────────
+nz_categories:
+  education: [school, schools, "primary school", "intermediate school", pupils, students, teacher, teachers, principal, principals, curriculum, NCEA, ERO, kindergarten, "early childhood", "Ministry of Education", "school lunches", "Ka Ora, Ka Ako", literacy, numeracy, "school zone", enrolment]
+  politics: [election, Parliament, MP, MPs, minister, Labour, National, Greens, ACT, "NZ First", "Te Pāti Māori", coalition, poll, Luxon, Hipkins, Seymour, Peters, Cabinet, bill, select committee]
+  economy: [OCR, inflation, CPI, "Reserve Bank", GDP, economy, economic, business, petrol, "house prices", "housing market", mortgage, unemployment, jobs, wage, wages, KiwiSaver, "NZ dollar", budget, tax, bank, banks, Fonterra, exports, recession, "cost of living"]
+
 # ── 뉴질랜드 / 오클랜드 탭 나누기 ─────────────────────────────
 # 같은 사건은 한 탭에만 싣습니다. 오클랜드 지역 소식(시의회·교통·지역 사건사고·오클랜드 병원 등)은
 # 오클랜드 탭으로, 전국 단위 소식(정책·경제·전국 통계)은 오클랜드가 언급돼도 뉴질랜드 탭으로 보냅니다.
@@ -174,7 +185,7 @@ auckland_keywords: [Auckland, "Tāmaki Makaurau", "North Shore", Manukau, "Waite
 llm:
   provider: "gemini"
   max_requests_per_run: 7      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 5회 + 처리기간 추출이 필요할 때 1회
-  rank_batch_size: 200         # 선별 1회 요청에 넣을 최대 후보 수
+  rank_batch_size: 260         # 선별 1회 요청에 넣을 최대 후보 수 (지역별 후보 합계가 이 이하면 지역당 1회)
 
   gemini:
     # 모델 후보 목록: 앞에서부터 시도하고, 단종·사용 불가(404)면 다음 후보로 넘어갑니다.
@@ -345,6 +356,12 @@ feeds:
     google_news: true
     url: "https://news.google.com/rss/headlines/section/topic/NATION?hl=en-NZ&gl=NZ&ceid=NZ:en"
     fallbacks: ["https://news.google.com/rss?hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  - id: gn_nz_education
+    name: "Google News"
+    section: nz_national
+    google_news: true
+    # 교육: 초등·중간학교(primary/intermediate) 중심
+    url: "https://news.google.com/rss/search?q=%22New+Zealand%22+(%22primary+school%22+OR+%22intermediate+school%22+OR+%22primary+schools%22+OR+%22Ministry+of+Education%22+OR+%22school+lunches%22+OR+teachers+OR+principals)+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_nz_business
     name: "Google News"
     section: nz_national
