@@ -126,10 +126,11 @@ class GeminiLLM(BaseLLM):
         # 키는 URL 이 아닌 헤더로 보낸다 (오류 메시지·로그에 키가 찍히지 않게)
         try:
             return self.client.post(GEMINI_URL.format(model=model), headers={"x-goog-api-key": self.key}, json=body)
-        except httpx.TimeoutException:
-            # 응답이 너무 오래 걸리면 과부하(503)처럼 취급 → 같은 모델 1회 재시도 후 다음 모델 후보로
-            log.warning("gemini %s timed out", model)
-            return httpx.Response(503, text="client timeout")
+        except httpx.TransportError as e:
+            # 시간 초과·연결 끊김("Server disconnected") 등 네트워크 오류는 과부하(503)처럼 취급
+            # → 같은 모델 1회 재시도 후 다음 모델 후보로
+            log.warning("gemini %s network error: %s", model, type(e).__name__)
+            return httpx.Response(503, text=f"client {type(e).__name__}")
 
     def _call(self, *, task, system, user, schema, max_tokens) -> dict:
         body = {

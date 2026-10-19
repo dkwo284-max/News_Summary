@@ -681,3 +681,24 @@ def test_brief_sections_have_nz_categories_not_pool(cfg, fixtures_dir, monkeypat
     brief = json.loads((tmp_path / "out" / "dry-run" / "latest.json").read_text())
     assert "nz_national" not in brief["sections"]
     assert {"nz_society", "nz_education", "nz_economy", "nz_politics"} <= set(brief["sections"])
+
+
+def test_gemini_disconnect_moves_to_next_model(cfg):
+    urls = []
+
+    def handler(req):
+        urls.append(str(req.url))
+        if "gemini-3.8-flash:" in str(req.url):
+            raise httpx.RemoteProtocolError("Server disconnected without sending a response.", request=req)
+        return httpx.Response(200, json=_gemini_ok('{"ok": 5}'))
+
+    llm = _gemini(cfg, handler)
+    assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 5}
+    assert "gemini-flash-latest" in urls[-1]
+
+
+def test_new_exclusions_and_radar_caps(cfg):
+    from rank import cap_radar
+    a = art(1, "'Fundraising to stay alive': Nurse's rare cancer")
+    assert excluded_reason(a, cfg)
+    assert cap_radar(art(2, "Express Entry points: 3 critical changes for applicants"), cfg, 9) == 3
