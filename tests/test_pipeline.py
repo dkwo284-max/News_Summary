@@ -713,3 +713,17 @@ def test_preselect_keeps_reserved_feed_items():
     school.feed_id = "gn_nz_education"
     out = _preselect([*busy, school], 5, {"gn_nz_education"})
     assert "s1" in {a.id for a in out} and len(out) == 6
+
+
+def test_foreign_items_dropped_from_nz(cfg):
+    class ForeignLLM(SplitLLM):
+        def json_call(self, **kw):
+            out = super().json_call(**kw)
+            if kw["task"] == "rank" and "scores" in out:
+                for r in out["scores"]:
+                    r["category"], r["score"] = "education", 7
+                    r["nz_related"] = r["id"] != "f1"
+            return out
+    items = [art("n1", "Primary schools trial new reading programme"), art("f1", "Geelong school bans popular game")]
+    chosen = select(items, cfg, ForeignLLM(set(), {}), FIXTURE_NOW)
+    assert [a.id for a in chosen["nz_education"]] == ["n1"]

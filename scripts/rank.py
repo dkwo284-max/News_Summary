@@ -31,8 +31,9 @@ RANK_SCHEMA = {
                     "junk": {"type": "boolean"},
                     "radar": {"type": "integer"},
                     "category": {"type": "string"},
+                    "nz_related": {"type": "boolean"},
                 },
-                "required": ["id", "score", "immigration", "auckland", "same_as", "junk", "radar", "category"],
+                "required": ["id", "score", "immigration", "auckland", "same_as", "junk", "radar", "category", "nz_related"],
                 "additionalProperties": False,
             },
         }
@@ -83,6 +84,10 @@ CATEGORY_RULE = """- category: 뉴질랜드 기사 분류 — "education"(교육
   "economy"(경제: 금리·물가·집값·고용·임금·기업·환율·세금·예산), "society"(그 외 사회: 사건사고·의료·날씨·교통·복지 등)."""
 
 
+NZ_RELATED_RULE = """- nz_related: 뉴질랜드 안의 일이거나 뉴질랜드 정부·주민에게 직접 영향이 있으면 true.
+  호주·피지·미국 등 다른 나라의 학교·사건·정책 소식이면 false (해당 기사는 싣지 않음)."""
+
+
 def _system_prompt(cfg: dict, region: str) -> str:
     criteria = KR_CRITERIA if region == "kr" else _nz_criteria(cfg)
     return f"""당신은 뉴스 편집자입니다. 주어진 기사 목록의 각 항목에 1~10 정수 중요도를 매깁니다.
@@ -92,6 +97,7 @@ def _system_prompt(cfg: dict, region: str) -> str:
 {JUNK_RULE}
 {_radar_rule(cfg) if region == "nz" else '- radar: 항상 0.'}
 {CATEGORY_RULE if region == "nz" else '- category: 항상 빈 문자열 "".'}
+{NZ_RELATED_RULE if region == "nz" else '- nz_related: 항상 true.'}
 - same_as: 목록의 다른 항목과 같은 사건이거나 같은 이슈의 후속·관련 기사이면(예: 같은 병원 인력난을 다룬 여러 기사,
   같은 기상 악화의 지역별 피해, 같은 비자 정책을 다룬 국내외 보도, 같은 인물의 사연) 그 묶음에서 가장 대표적인 기사의 id,
   아니면 빈 문자열 "". 대표 기사 자신은 "".
@@ -243,6 +249,8 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                 cat = (row.get("category") or "").lower()
                 a.category = (cat if cat in CATEGORIES else heuristic_category(a, cfg)) if region == "nz" else ""
                 a.radar_score = cap_radar(a, cfg, max(0, min(10, int(row.get("radar") or 0)))) if region == "nz" else 0
+                if region == "nz" and row.get("nz_related") is False:
+                    a.junk = True  # 뉴질랜드와 무관한 해외 기사
                 if a.junk:
                     a.score = 0  # MIN_SCORE 미만 → 싣지 않음
 
