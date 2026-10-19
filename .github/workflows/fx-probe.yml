@@ -14,18 +14,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Probe
         run: |
-          probe() {
-            echo "=== $1"
-            curl -sS -m 20 -D - -o /tmp/body -H "Origin: https://dkwo284-max.github.io" "$1" | grep -i -E "^(HTTP|access-control-allow-origin|cache-control|age|last-modified|date)" || true
-            head -c 600 /tmp/body | tr -d '\n'; echo
-          }
-          for round in 1 2; do
+          for round in 1 2 3; do
             echo "##### round $round $(date -u +%FT%TZ)"
-            probe "https://api.frankfurter.dev/v1/latest?base=NZD&symbols=KRW"
-            probe "https://open.er-api.com/v6/latest/NZD"
-            probe "https://api.coinbase.com/v2/exchange-rates?currency=NZD"
-            probe "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/nzd.min.json"
-            [ $round = 1 ] && sleep 90
+            echo "frankfurter $(curl -sS -m 20 'https://api.frankfurter.dev/v1/latest?base=NZD&symbols=KRW' | jq -c '[.date,.rates.KRW]')"
+            echo "er-api      $(curl -sS -m 20 'https://open.er-api.com/v6/latest/NZD' | jq -c '[.time_last_update_utc,.rates.KRW]')"
+            echo "coinbase    $(curl -sS -m 20 'https://api.coinbase.com/v2/exchange-rates?currency=NZD' | jq -c '.data.rates.KRW')"
+            echo "fawaz       $(curl -sS -m 20 'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/nzd.min.json' | jq -c '[.date,.nzd.krw]')"
+            [ $round != 3 ] && sleep 120
           done > /tmp/fx-probe.txt 2>&1
           cat /tmp/fx-probe.txt
       - name: Publish
