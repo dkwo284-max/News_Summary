@@ -1,13 +1,15 @@
-"""부가 정보: NZD/KRW 환율(frankfurter), 오클랜드 날씨(Open-Meteo). 둘 다 API 키 불필요."""
+"""부가 정보: NZD/KRW 환율(Coinbase 실시간, 실패 시 frankfurter·ECB 고시), 오클랜드 날씨(Open-Meteo). 모두 API 키 불필요."""
 from __future__ import annotations
 
 import httpx
 
 from common import log
 
-FX_URLS = [
-    "https://api.frankfurter.dev/v1/latest?base={base}&symbols={quote}",
-    "https://api.frankfurter.app/latest?from={base}&to={quote}",
+# 1순위 Coinbase(실시간), 2순위 frankfurter(ECB 고시, 평일 하루 1회 갱신)
+FX_SOURCES = [
+    ("https://api.coinbase.com/v2/exchange-rates?currency={base}", lambda j, q: j["data"]["rates"][q]),
+    ("https://api.frankfurter.dev/v1/latest?base={base}&symbols={quote}", lambda j, q: j["rates"][q]),
+    ("https://api.frankfurter.app/latest?from={base}&to={quote}", lambda j, q: j["rates"][q]),
 ]
 
 # WMO weather code → 한국어
@@ -22,11 +24,11 @@ WMO_KO = {
 
 
 def fetch_fx(client: httpx.Client, base: str, quote: str) -> float | None:
-    for tmpl in FX_URLS:
+    for tmpl, pick in FX_SOURCES:
         try:
             r = client.get(tmpl.format(base=base, quote=quote))
             r.raise_for_status()
-            return round(float(r.json()["rates"][quote]), 2)
+            return round(float(pick(r.json(), quote)), 2)
         except Exception as e:  # noqa: BLE001
             log.warning("fx failed via %s: %s", tmpl.split("/")[2], e)
     return None

@@ -1,6 +1,7 @@
 // 환율·날씨 실시간 새로고침: 브라우저에서 무료 공개 API(키 불필요, CORS 허용)를 직접 호출한다.
 export interface LiveData {
   fx: number | null;
+  fxSource?: string; // "Coinbase 실시간" | "ECB 고시"
   weather: { now: number; max: number; min: number; desc: string; rain?: number } | null;
   at: string; // ISO
 }
@@ -22,18 +23,21 @@ async function getJSON(url: string): Promise<any> {
   return res.json();
 }
 
-async function fetchFx(): Promise<number | null> {
-  const urls = [
-    "https://api.frankfurter.dev/v1/latest?base=NZD&symbols=KRW",
-    "https://api.frankfurter.app/latest?from=NZD&to=KRW",
-  ];
-  for (const u of urls) {
+// 1순위 Coinbase: 분 단위로 갱신되는 실시간 환율 (키 불필요, CORS 허용, 캐시 없음)
+// 2순위 frankfurter: 유럽중앙은행(ECB) 고시 환율 — 평일 하루 1번만 바뀜
+const FX_SOURCES: { name: string; url: string; pick: (j: any) => unknown }[] = [
+  { name: "Coinbase 실시간", url: "https://api.coinbase.com/v2/exchange-rates?currency=NZD", pick: (j) => j?.data?.rates?.KRW },
+  { name: "ECB 고시", url: "https://api.frankfurter.dev/v1/latest?base=NZD&symbols=KRW", pick: (j) => j?.rates?.KRW },
+  { name: "ECB 고시", url: "https://api.frankfurter.app/latest?from=NZD&to=KRW", pick: (j) => j?.rates?.KRW },
+];
+
+async function fetchFx(): Promise<{ value: number; source: string } | null> {
+  for (const s of FX_SOURCES) {
     try {
-      const j = await getJSON(u);
-      const v = Number(j?.rates?.KRW);
-      if (Number.isFinite(v)) return Math.round(v * 100) / 100;
+      const v = Number(s.pick(await getJSON(s.url)));
+      if (Number.isFinite(v) && v > 0) return { value: Math.round(v * 100) / 100, source: s.name };
     } catch {
-      /* 다음 주소 시도 */
+      /* 다음 소스 시도 */
     }
   }
   return null;
@@ -61,7 +65,7 @@ async function fetchWeather(): Promise<LiveData["weather"]> {
 export async function fetchLive(): Promise<LiveData> {
   const [fx, weather] = await Promise.all([fetchFx(), fetchWeather()]);
   if (fx == null && weather == null) throw new Error("live fetch failed");
-  const data: LiveData = { fx, weather, at: new Date().toISOString() };
+  const data: LiveData = { fx: fx?.value ?? null, fxSource: fx?.source, weather, at: new Date().toISOString() };
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
   } catch {

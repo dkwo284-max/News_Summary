@@ -148,7 +148,7 @@ function renderHeader(): void {
     const stamp = liveError
       ? liveError
       : useLive
-        ? `${new Date(live!.at).toLocaleTimeString("ko-KR", { hour: "numeric", minute: "2-digit" })} 기준`
+        ? `${new Date(live!.at).toLocaleTimeString("ko-KR", { hour: "numeric", minute: "2-digit" })} 기준${live!.fxSource ? ` · 환율 ${live!.fxSource}` : ""}`
         : "브리핑 생성 시점 기준";
     extras.append(h("span", { class: "live-row" }, btn, h("span", { class: "stamp", role: "status" }, stamp)));
   }

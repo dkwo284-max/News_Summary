@@ -78,3 +78,21 @@ def test_parse_dia_citizenship():
             "within 6 months of submitting their application, 90% of applicants are granted citizenship.")
     r = parse_processing(text)
     assert r["p90"] == "6개월" and r["pct"] == 90 and r["sub"] == "90%가 4개월 안에 결과 통보"
+
+
+def test_fx_prefers_coinbase_then_frankfurter():
+    from extras import fetch_fx
+
+    def handler(req):
+        if "coinbase" in str(req.url):
+            return httpx.Response(200, json={"data": {"currency": "NZD", "rates": {"KRW": "754.1334257"}}})
+        return httpx.Response(200, json={"rates": {"KRW": 750.0}})
+
+    assert fetch_fx(httpx.Client(transport=httpx.MockTransport(handler)), "NZD", "KRW") == 754.13
+
+    def down(req):
+        if "coinbase" in str(req.url):
+            return httpx.Response(503)
+        return httpx.Response(200, json={"rates": {"KRW": 750.0}})
+
+    assert fetch_fx(httpx.Client(transport=httpx.MockTransport(down)), "NZD", "KRW") == 750.0
