@@ -20,7 +20,8 @@ T = datetime(2026, 10, 15, 20, tzinfo=timezone.utc)
 
 
 def art(i, title, section="nz_national", desc=""):
-    return Article(id=str(i), section=section, title=title, url=f"https://ex.com/{i}", source="RNZ", published=T, description=desc)
+    return Article(id=str(i), section=section, title=title, url=f"https://ex.co.nz/{i}", source="RNZ", published=T,
+                   description=desc, publisher_domain="ex.co.nz")
 
 
 class FakeLLM:
@@ -428,7 +429,7 @@ def test_split_nz_no_overlap_between_tabs(cfg):
     assert nat == {"n1", "a2"}
     assert akl == {"a1", "a3"} or akl == {"n2", "a3"}  # 스타쉽 기사 두 건은 하나로 합쳐짐
     starship = next(a for a in chosen["nz_auckland"] if a.id in {"a1", "n2"})
-    assert len(starship.sources) == 1 or {s.url for s in starship.sources} >= {"https://ex.com/a1", "https://ex.com/n2"}
+    assert len(starship.sources) == 1 or {s.url for s in starship.sources} >= {"https://ex.co.nz/a1", "https://ex.co.nz/n2"}
     assert all(a.section == "nz_auckland" for a in chosen["nz_auckland"])
 
 
@@ -523,7 +524,7 @@ def test_refine_keeps_unrelated_items_separate(cfg):
     ids = {a.id for a in akl}
     assert "a2" in ids and len(akl) == 2  # 무관한 시의회 기사는 따로, 매케이 기사 2건은 하나로
     mckay = next(a for a in akl if a.id != "a2")
-    assert {s.url for s in mckay.sources} == {"https://ex.com/a1", "https://ex.com/a3"} or len(mckay.sources) == 1
+    assert {s.url for s in mckay.sources} == {"https://ex.co.nz/a1", "https://ex.co.nz/a3"} or len(mckay.sources) == 1
 
 
 # ── 제외 · 이민 레이더 (독자 프로필) ──
@@ -727,3 +728,29 @@ def test_foreign_items_dropped_from_nz(cfg):
     items = [art("n1", "Primary schools trial new reading programme"), art("f1", "Geelong school bans popular game")]
     chosen = select(items, cfg, ForeignLLM(set(), {}), FIXTURE_NOW)
     assert [a.id for a in chosen["nz_education"]] == ["n1"]
+
+
+# ── 뉴질랜드 출처 제한 ──
+
+@pytest.mark.parametrize("domain,ok", [
+    ("rnz.co.nz", True), ("nzherald.co.nz", True), ("immigration.govt.nz", True), ("stats.govt.nz", True),
+    ("chrislynchmedia.com", True), ("teaomaori.news", True),
+    ("vietnam.vn", False), ("tuko.co.ke", False), ("legit.ng", False), ("fragomen.com", False), ("", False),
+    ("notnz.com", False),
+])
+def test_is_nz_source(cfg, domain, ok):
+    from rank import is_nz_source
+    a = art(1, "x")
+    a.publisher_domain = domain
+    assert is_nz_source(a, cfg) is ok
+
+
+def test_non_nz_sources_dropped_only_from_nz_sections(cfg):
+    nz_ok = art("n1", "Work visa changes announced", section="nz_immigration")
+    nz_bad = art("n2", "New Zealand work visa changes explained", section="nz_immigration")
+    nz_bad.publisher_domain = "vietnam.vn"
+    kr = art("k1", "금리 동결 결정", section="kr_economy")
+    kr.publisher_domain = "yna.co.kr"
+    chosen = select([nz_ok, nz_bad, kr], cfg, None, FIXTURE_NOW)
+    assert [a.id for a in chosen["nz_immigration"]] == ["n1"]
+    assert [a.id for a in chosen["kr_economy"]] == ["k1"]

@@ -9,6 +9,8 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from urllib.parse import urlsplit
+
 import feedparser
 import httpx
 
@@ -49,6 +51,11 @@ def _split_google_title(title: str, entry) -> tuple[str, str | None]:
     return title, publisher
 
 
+def _host(url: str) -> str:
+    host = urlsplit(url).netloc.lower()
+    return host[4:] if host.startswith("www.") else host
+
+
 def parse_feed(raw: bytes | str, feed: dict, now: datetime, lookback_hours: int, max_items: int, url: str = "") -> list[Article]:
     parsed = feedparser.parse(raw)
     if parsed.bozo and not parsed.entries:
@@ -66,9 +73,12 @@ def parse_feed(raw: bytes | str, feed: dict, now: datetime, lookback_hours: int,
             continue
         source_name = feed["name"]
         google = feed.get("google_news") or "news.google.com" in url
+        domain = _host(link)
         if google:
             title, publisher = _split_google_title(title, entry)
             source_name = publisher or source_name
+            src = entry.get("source")
+            domain = _host(src.get("href", "")) if isinstance(src, dict) else ""
         desc = BYLINE_RE.sub("", clean_text(entry.get("summary") or entry.get("description"), 400))
         if google:
             desc = ""  # Google News 요약란은 제목/링크 목록이라 노이즈
@@ -82,6 +92,7 @@ def parse_feed(raw: bytes | str, feed: dict, now: datetime, lookback_hours: int,
                 published=published,
                 description=desc,
                 feed_id=feed["id"],
+                publisher_domain=domain,
             )
         )
         if len(out) >= max_items:

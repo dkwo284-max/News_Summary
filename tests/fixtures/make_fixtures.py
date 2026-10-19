@@ -73,7 +73,7 @@ def rss(feed_id: str, items: list[tuple[str, str, float, str]]) -> str:
     for title, desc, hours_ago, slug in items:
         pub = format_datetime(FIXTURE_NOW - timedelta(hours=hours_ago))
         entries.append(
-            f"<item><title>{escape(title)}</title><link>https://example.com/{feed_id}/{slug}?utm_source=rss</link>"
+            f"<item><title>{escape(title)}</title><link>https://www.example.co.nz/{feed_id}/{slug}?utm_source=rss</link>"
             f"<description>{escape(desc)}</description><pubDate>{pub}</pubDate></item>"
         )
     return (

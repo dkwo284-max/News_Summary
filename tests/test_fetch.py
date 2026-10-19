@@ -79,3 +79,12 @@ def test_google_news_detected_from_fallback_url():
 <description>&lt;a href="x"&gt;Rents rise again&lt;/a&gt; Stuff</description><pubDate>Thu, 15 Oct 2026 20:00:00 GMT</pubDate></item></channel></rss>"""
     items = parse_feed(rss, FEED, FIXTURE_NOW, 24, 30, url="https://news.google.com/rss/search?q=site:stuff.co.nz")
     assert items[0].title == "Rents rise again" and items[0].source == "Stuff" and items[0].description == ""
+
+
+def test_publisher_domain_from_google_source_and_link():
+    rss = """<rss><channel><item><title>Visa news - Vietnam.vn</title><link>https://news.google.com/rss/articles/x</link>
+<source url="https://www.vietnam.vn">Vietnam.vn</source><pubDate>Thu, 15 Oct 2026 20:00:00 GMT</pubDate></item></channel></rss>"""
+    g = parse_feed(rss, {**FEED, "google_news": True}, FIXTURE_NOW, 24, 30)
+    assert g[0].publisher_domain == "vietnam.vn" and g[0].source == "Vietnam.vn"
+    d = parse_feed(RSS, FEED, FIXTURE_NOW, 24, 30)
+    assert d[0].publisher_domain == "a.example"

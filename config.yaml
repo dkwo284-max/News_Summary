@@ -166,6 +166,18 @@ profile:
     - conference
     - seminar
 
+# ── 뉴질랜드 기사 출처 제한 ─────────────────────────────────
+# 뉴질랜드·오클랜드·이민 레이더 탭에는 뉴질랜드 언론·기관 기사만 싣습니다.
+# 도메인이 .nz 로 끝나면 허용하고, .nz 가 아닌 뉴질랜드 매체는 extra_domains 에 추가하세요.
+nz_sources:
+  enabled: true
+  domain_suffixes: [".nz"]
+  extra_domains:
+    - chrislynchmedia.com   # 크라이스트처치 지역 매체
+    - teaomaori.news        # Te Ao Māori News
+    - waateanews.com        # Waatea News
+    - nzkoreapost.com       # 뉴질랜드 코리아포스트
+
 # ── 뉴질랜드 카테고리 (AI 없이 돌 때 분류 키워드, 해당 없으면 사회) ──────────
 nz_categories:
   education: [school, schools, "primary school", "intermediate school", pupils, students, teacher, teachers, principal, principals, curriculum, NCEA, ERO, kindergarten, "early childhood", "Ministry of Education", "school lunches", "Ka Ora, Ka Ako", literacy, numeracy, "school zone", enrolment]

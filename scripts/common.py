@@ -56,6 +56,7 @@ class Article:
     published: datetime | None
     description: str = ""
     feed_id: str = ""
+    publisher_domain: str = ""  # 실제 언론사 도메인 (Google News 는 <source url>, 그 외는 기사 링크)
     extra_sources: list[Source] = field(default_factory=list)
     # filled by rank.py
     score: float = 0.0

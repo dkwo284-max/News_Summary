@@ -175,10 +175,28 @@ def excluded_reason(a: Article, cfg: dict) -> str | None:
     return None
 
 
+def is_nz_source(a: Article, cfg: dict) -> bool:
+    """뉴질랜드 언론·기관 기사인지: 도메인이 .nz 로 끝나거나 nz_sources.extra_domains 에 있으면 True."""
+    rule = cfg.get("nz_sources", {})
+    d = a.publisher_domain.lower()
+    if not d:
+        return False  # 출처 도메인을 알 수 없으면 제외 (해외 재가공 기사 방지)
+    if any(d == s.lstrip(".") or d.endswith(s) for s in rule.get("domain_suffixes", [".nz"])):
+        return True
+    return any(d == x or d.endswith("." + x) for x in rule.get("extra_domains", []))
+
+
 def apply_exclusions(articles: list[Article], cfg: dict) -> list[Article]:
-    kept, dropped = [], []
+    kept, dropped, foreign = [], [], []
+    nz_sections = {k for k, s in cfg["sections"].items() if s["region"] == "nz"}
     for a in articles:
+        if a.section in nz_sections and cfg.get("nz_sources", {}).get("enabled", True) and not is_nz_source(a, cfg):
+            foreign.append(a)  # 뉴질랜드 탭·오클랜드·이민 레이더는 뉴질랜드 언론사 기사만
+            continue
         (dropped if excluded_reason(a, cfg) else kept).append(a)
+    if foreign:
+        doms = sorted({a.publisher_domain or "?" for a in foreign})
+        log.info("excluded %d non-NZ-source article(s) from NZ sections (%s)", len(foreign), ", ".join(doms[:12]))
     if dropped:
         log.info("excluded %d article(s) by keyword/source (e.g. %s)", len(dropped), "; ".join(d.title[:40] for d in dropped[:3]))
     return kept
