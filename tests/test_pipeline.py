@@ -354,11 +354,11 @@ def test_write_prune_index(cfg, tmp_path):
 # ── 실행 시각 게이트 ──
 
 @pytest.mark.parametrize("tzname,utc_iso,expected", [
-    ("Asia/Seoul", "2026-10-15T22:30:00+00:00", True),        # 07:30 KST
-    ("Asia/Seoul", "2026-10-15T21:30:00+00:00", False),       # 06:30 KST
-    ("Pacific/Auckland", "2026-10-15T18:30:00+00:00", True),  # 07:30 NZDT (UTC+13, 서머타임)
-    ("Pacific/Auckland", "2026-06-15T19:30:00+00:00", True),  # 07:30 NZST (UTC+12)
-    ("Pacific/Auckland", "2026-06-15T18:30:00+00:00", False), # 06:30 NZST
+    ("Asia/Seoul", "2026-10-15T21:30:00+00:00", True),        # 06:30 KST
+    ("Asia/Seoul", "2026-10-15T20:30:00+00:00", False),       # 05:30 KST (run_hour 6 전)
+    ("Pacific/Auckland", "2026-10-15T17:05:00+00:00", True),  # 06:05 NZDT (UTC+13, 서머타임)
+    ("Pacific/Auckland", "2026-06-15T18:05:00+00:00", True),  # 06:05 NZST (UTC+12)
+    ("Pacific/Auckland", "2026-06-15T17:30:00+00:00", False), # 05:30 NZST
 ])
 def test_should_run_gate(cfg, tmp_path, tzname, utc_iso, expected):
     cfg["timezone"] = tzname

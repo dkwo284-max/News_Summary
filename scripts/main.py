@@ -1,7 +1,7 @@
 """Daily Brief 파이프라인: 수집 → 중복제거 → 선별 → 요약 → 저장.
 
 사용 예
-  python scripts/main.py                     # 정해진 시각(현지 07시대)일 때만 실행, 결과를 web/public/data 에 저장
+  python scripts/main.py                     # 정해진 시각(현지 run_hour 시대)일 때만 실행, 결과를 web/public/data 에 저장
   python scripts/main.py --force             # 시각 조건 무시하고 바로 실행
   python scripts/main.py --dry-run           # 실제 수집·AI 요약(기본 Gemini 무료 등급)까지 하되 out/dry-run/ 에만 저장, 알림·정리 없음
   python scripts/main.py --dry-run --no-llm  # AI 호출 없이 (키워드 선별 + RSS 설명) 파이프라인만 점검
