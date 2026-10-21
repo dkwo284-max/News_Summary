@@ -15,38 +15,25 @@ jobs:
       - name: Probe
         run: |
           UA="Mozilla/5.0 (compatible; DailyBriefBot/1.0)"
-          probe() {
-            echo; echo "=== $1"
-            code=$(curl -sS -L -m 30 -A "$UA" -o /tmp/b -w "%{http_code} %{content_type} %{size_download} %{url_effective}" "$1" 2>&1)
-            echo "$code"
-            if file /tmp/b | grep -qi -E "text|csv|json|html|xml"; then
-              python3 - "$2" <<'PY'
-          import re, sys
-          t = open('/tmp/b', errors='ignore').read()
-          pat = sys.argv[1]
-          flat = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', t))
-          hits = [m.start() for m in re.finditer(pat, flat, re.I)][:5]
-          for h in hits: print('  ~', flat[max(0,h-200):h+300])
-          if not hits: print('  (no match) head:', flat[:400])
-          links = sorted(set(re.findall(r'href="([^"]*(?:csv|xlsx|rent|bond|fuel|price)[^"]*)"', t, re.I)))[:25]
-          for l in links: print('  link', l)
-          PY
-            else
-              echo "  binary: $(file /tmp/b)"; head -c 300 /tmp/b | od -c | head -3
-            fi
-          }
           {
-          probe "https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/" "Auckland|csv|download"
-          probe "https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/" "Auckland|median|market rent"
-          probe "https://www.mbie.govt.nz/building-and-energy/energy-and-natural-resources/energy-statistics-and-modelling/energy-statistics/weekly-fuel-price-monitoring/" "csv|regular|petrol|cents"
-          probe "https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv" "91|petrol|diesel|date"
-          probe "https://www.rbnz.govt.nz/monetary-policy/about-monetary-policy/the-official-cash-rate" "official cash rate|OCR|percent|%"
-          probe "https://www.rbnz.govt.nz/" "official cash rate|OCR"
-          probe "https://www.stats.govt.nz/indicators/consumers-price-index-cpi/" "annual|percent|%"
-          probe "https://www.stats.govt.nz/indicators/" "consumers price|CPI|unemployment"
-          probe "https://www.interest.co.nz/borrowing" "1 year|floating|ANZ|ASB"
+          echo "=== rental bond csv links"
+          curl -sS -L -m 30 -A "$UA" https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/ | grep -o -i -E 'href="[^"]+\.(csv|zip)[^"]*"' | sort -u
+          TA=$(curl -sS -L -m 30 -A "$UA" https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/ | grep -o -i -E 'href="[^"]+\.csv[^"]*"' | grep -i -E 'territor|tla|ta-' | head -1 | sed 's/href="//;s/"$//')
+          echo "TA link: $TA"
+          case "$TA" in http*) ;; *) TA="https://www.tenancy.govt.nz$TA";; esac
+          curl -sS -L -m 60 -A "$UA" -o /tmp/ta.csv "$TA"; echo "size $(wc -c < /tmp/ta.csv)"
+          head -3 /tmp/ta.csv | cut -c1-600
+          echo "--- last Auckland rows"; grep -i auckland /tmp/ta.csv | tail -3 | cut -c1-600
+          echo; echo "=== MBIE fuel last rows (Board price)"
+          curl -sS -L -m 60 -A "$UA" -o /tmp/f.csv https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv
+          grep -i "Board price" /tmp/f.csv | tail -6
+          echo; echo "=== OCR alternatives"
+          for u in https://www.interest.co.nz/charts/interest-rates/ocr https://www.interest.co.nz/charts/interest-rates/official-cash-rate https://www.stats.govt.nz/indicators/unemployment-rate/; do
+            echo "--- $u $(curl -sS -L -m 30 -A "$UA" -o /tmp/o -w '%{http_code}' "$u")"
+            python3 -c "import re;t=open('/tmp/o',errors='ignore').read();f=re.sub(r'\s+',' ',re.sub(r'<[^>]+>',' ',t));[print('  ~',f[max(0,m.start()-150):m.start()+250]) for m in list(re.finditer(r'(cash rate|OCR|unemployment rate)[^.]{0,80}\d',f,re.I))[:3]]"
+          done
           } > /tmp/cost-probe.txt 2>&1
-          cat /tmp/cost-probe.txt | head -300
+          cat /tmp/cost-probe.txt
       - name: Publish
         if: always()
         run: |
