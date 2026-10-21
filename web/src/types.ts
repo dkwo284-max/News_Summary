@@ -13,6 +13,7 @@ export interface Item {
   sources: Source[];
   original_title?: string;
   published_at?: string | null;
+  radar?: number;
 }
 
 export interface Section {
@@ -43,8 +44,9 @@ export interface Brief {
     nzd_krw: number | null;
     auckland_weather: { max: number; min: number; desc: string; rain_chance?: number } | null;
     processing_times?: { updated_at: string; items: ProcessingItem[] };
+    living_costs?: LivingCosts;
   };
-  meta?: { mode?: string; failed_feeds?: { id: string; name?: string; error: string }[] };
+  meta?: { mode?: string; failed_feeds?: { id: string; name?: string; error: string }[]; alerts?: Alert[] };
 }
 
 export interface ArchiveIndex {
@@ -63,4 +65,23 @@ export interface ProcessingItem {
   url: string;
   as_of: string;
   status: "ok" | "stale" | "missing";
+  trend?: { since: string; prev_p90: string; delta_days: number };
+}
+
+export interface Alert {
+  kind: "processing" | "radar";
+  text: string;
+  url: string;
+}
+
+export interface FuelPrice {
+  date: string;
+  nzd_per_l: number;
+  wow_cents?: number;
+}
+
+export interface LivingCosts {
+  updated_at: string;
+  rent?: { month: string; median: number; lower: number | null; upper: number | null; yoy_pct?: number; source: string; url: string } | null;
+  fuel?: { source: string; url: string; petrol91?: FuelPrice; petrol95?: FuelPrice; diesel?: FuelPrice } | null;
 }

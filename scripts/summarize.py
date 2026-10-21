@@ -126,6 +126,8 @@ def _item_dict(a: Article, *, title_ko: str, summary: list[str], why: str, tags:
     }
     if region == "nz":
         item["why_it_matters"] = clamp_line(why or "", 120)
+    if a.radar_score:
+        item["radar"] = int(a.radar_score)  # 이민 레이더 관련도 (중요 알림 판단용)
     return item
 
 

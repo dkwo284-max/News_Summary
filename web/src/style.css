@@ -239,3 +239,69 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .tile-foot a { color: #79c0ff; text-decoration: none; margin-left: auto; min-height: 24px; display: inline-flex; align-items: center; }
 .stale { color: #f0b72f; background: #3d2e00; border-radius: 999px; padding: 0 6px; }
 .board-note { margin: 10px 0 0; font-size: 0.75rem; color: #9da7b3; }
+
+/* ── 내 비자 일정 ── */
+.visa-pill.urgent { background: var(--hot-bg); color: var(--hot-text); }
+.visa-pill.soon { background: #fff4d6; color: #6b4b00; }
+:root[data-theme="dark"] .visa-pill.soon { background: #3b2e05; color: #ffe08a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .visa-pill.soon { background: #3b2e05; color: #ffe08a; } }
+.visa-card { margin: 8px 0 14px; padding: 14px 16px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.visa-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.visa-head h2 { margin: 0; font-size: 1rem; }
+.link-btn { border: 0; background: none; color: var(--accent); font-weight: 700; cursor: pointer; padding: 6px 4px; font-size: 0.875rem; }
+.visa-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.visa-row { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "label d" "date d"; gap: 0 10px; padding: 8px 10px; border-radius: 10px; background: var(--bg); }
+.visa-label { grid-area: label; font-weight: 700; font-size: 0.9375rem; }
+.visa-label small { font-weight: 500; color: var(--muted); }
+.visa-date { grid-area: date; font-size: 0.8125rem; color: var(--muted); }
+.visa-row .visa-d { grid-area: d; align-self: center; }
+.visa-d { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-weight: 800; font-size: 1rem; white-space: nowrap; }
+.urgent .visa-d { color: var(--hot-text); }
+.soon .visa-d { color: #9a6700; }
+:root[data-theme="dark"] .soon .visa-d { color: #f0b72f; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .soon .visa-d { color: #f0b72f; } }
+.visa-sub { margin: 14px 0 6px; font-size: 0.875rem; }
+.visa-steps { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; font-size: 0.875rem; }
+.step-top { display: flex; justify-content: space-between; gap: 8px; }
+.step-top .visa-d { font-size: 0.875rem; }
+.step-date { color: var(--muted); font-size: 0.8125rem; }
+.step-note { margin: 2px 0; color: var(--text); }
+.visa-steps a { font-size: 0.8125rem; text-decoration: none; font-weight: 600; }
+.visa-note { color: var(--muted); }
+.visa-editor { display: grid; gap: 8px; }
+.visa-edit-rows { display: grid; gap: 6px; }
+.visa-edit-row { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 6px; padding-bottom: 6px; border-bottom: 1px dashed var(--line); }
+.visa-edit-row input[type="text"] { grid-column: 1 / -1; }
+.visa-edit-row input, .visa-edit-row select, .visa-child input {
+  min-height: 38px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 0 8px; font-size: 0.875rem;
+}
+.visa-child { display: grid; gap: 4px; font-size: 0.8125rem; }
+
+/* ── 처리 기간 추세 ── */
+.tile-trend { font-size: 0.75rem; font-weight: 700; margin-top: 2px; }
+.tile-trend.up { color: #ff7b72; }
+.tile-trend.down { color: #56d364; }
+.tile-trend.flat { color: #9da7b3; }
+
+/* ── 이민 알림 ── */
+.alerts {
+  margin: 8px 0 12px; padding: 12px 14px; border-radius: 14px;
+  background: var(--hot-bg); color: var(--hot-text); border: 1px solid currentColor;
+}
+.alerts h2 { margin: 0 0 6px; font-size: 0.9375rem; }
+.alerts ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.alerts li { font-size: 0.875rem; line-height: 1.45; }
+.alerts a { color: inherit; }
+.alert-kind { display: inline-block; margin-right: 6px; padding: 0 6px; border-radius: 999px; font-size: 0.6875rem; font-weight: 700; background: var(--surface); }
+
+/* ── 오클랜드 생활비 ── */
+.costs { margin: 8px 0 16px; padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.costs .board-meta, .costs .board-note { color: var(--muted); }
+.cost-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .cost-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.cost { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); min-width: 0; }
+.cost-name { font-size: 0.8125rem; font-weight: 600; color: var(--muted); }
+.cost-value { font-size: 1.5rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.cost-value small { font-size: 0.8125rem; font-weight: 600; color: var(--muted); }
+.cost-sub { font-size: 0.8125rem; }
+.cost-src { font-size: 0.75rem; color: var(--accent); text-decoration: none; margin-top: 4px; min-height: 24px; display: inline-flex; align-items: center; }

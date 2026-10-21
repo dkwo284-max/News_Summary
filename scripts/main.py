@@ -42,6 +42,18 @@ def should_run(cfg: dict, local_now: datetime, data_dir: Path) -> tuple[bool, st
     return True, "ok"
 
 
+def build_alerts(sections: dict, extras: dict, cfg: dict) -> list[dict]:
+    """즉시 알릴 만한 것: 처리 기간 급변, 이민 레이더 관련도 9점 이상 기사."""
+    from processing import processing_alerts
+
+    alerts = processing_alerts(extras.get("processing_times") or {})
+    min_radar = int(cfg.get("profile", {}).get("alert_radar_score", 9))
+    for it in sections.get("nz_immigration", {}).get("items", []):
+        if it.get("radar", 0) >= min_radar:
+            alerts.append({"kind": "radar", "text": it["title_ko"], "url": it["sources"][0]["url"] if it["sources"] else ""})
+    return alerts
+
+
 def update_processing_only(cfg: dict, data_dir: Path) -> int:
     """최신 브리핑 파일의 extras.processing_times 만 다시 받아 덮어쓴다 (AI 요청 없음)."""
     from processing import fetch_processing_times
@@ -52,7 +64,10 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
         return 1
     brief = json.loads(latest.read_text(encoding="utf-8"))
     previous = brief.get("extras", {}).get("processing_times")
-    brief.setdefault("extras", {})["processing_times"] = fetch_processing_times(cfg, None, previous)
+    from processing import update_history
+
+    pt = fetch_processing_times(cfg, None, previous)
+    brief.setdefault("extras", {})["processing_times"] = update_history(pt, data_dir, brief["date"])
     body = json.dumps(brief, ensure_ascii=False, indent=1)
     latest.write_text(body, encoding="utf-8")
     (data_dir / f"{brief['date']}.json").write_text(body, encoding="utf-8")
@@ -132,9 +147,19 @@ def main(argv: list[str] | None = None) -> int:
         extras = fetch_extras(cfg)
         # 이민 레이더 전광판: 비자별 처리 기간 (정규식으로 못 찾으면 AI 요청 1회)
         try:
-            extras["processing_times"] = fetch_processing_times(cfg, llm, load_previous(data_dir))
+            from processing import update_history
+
+            pt = fetch_processing_times(cfg, llm, load_previous(data_dir))
+            extras["processing_times"] = update_history(pt, out_dir, local_now.date().isoformat())
         except Exception as e:  # noqa: BLE001 — 전광판 실패가 브리핑 생성을 막지 않게
             log.warning("processing times failed: %s", e)
+        # 오클랜드 정착 비용판: 렌트 중간값·유가 (정부 공개 CSV, AI 요청 없음)
+        try:
+            from costs import fetch_costs
+
+            extras["living_costs"] = fetch_costs(cfg)
+        except Exception as e:  # noqa: BLE001
+            log.warning("living costs failed: %s", e)
 
     usage = llm.log_report() if llm else {"provider": None, "requests": 0, "models": {}, "total_cost_usd": 0}
     brief = {
@@ -149,6 +174,7 @@ def main(argv: list[str] | None = None) -> int:
             "feeds_total": len(feed_stats),
             "stories_after_dedupe": len(articles),
             "usage": usage,
+            "alerts": build_alerts(sections, extras, cfg),
         },
     }
 

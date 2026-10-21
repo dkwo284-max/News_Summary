@@ -96,3 +96,39 @@ def test_fx_prefers_coinbase_then_frankfurter():
         return httpx.Response(200, json={"rates": {"KRW": 750.0}})
 
     assert fetch_fx(httpx.Client(transport=httpx.MockTransport(down)), "NZD", "KRW") == 750.0
+
+
+def test_history_trend_and_alerts(tmp_path):
+    import json as _json
+    from processing import processing_alerts, to_days, update_history
+
+    assert to_days("3.5개월") == 3.5 * 30.4 and to_days("9주") == 63 and to_days("") is None
+    (tmp_path / "processing-history.json").write_text(_json.dumps({
+        "smc": [{"date": "2026-10-10", "p50": "9주", "p90": "3.5개월"}],
+        "aewv": [{"date": "2026-10-12", "p50": "2주", "p90": "5주"}],
+    }))
+    res = {"items": [
+        {"key": "smc", "name": "SMC", "p50": "10주", "p90": "5개월", "status": "ok"},
+        {"key": "aewv", "name": "AEWV", "p50": "2주", "p90": "5주", "status": "ok"},
+        {"key": "pr", "name": "PR", "p50": "", "p90": "2주", "status": "ok"},
+    ]}
+    out = update_history(res, tmp_path, "2026-10-21")
+    by = {it["key"]: it for it in out["items"]}
+    assert by["smc"]["trend"]["delta_days"] == round(5 * 30.4 - 3.5 * 30.4)
+    assert by["aewv"]["trend"]["delta_days"] == 0 and "trend" not in by["pr"]
+    hist = _json.loads((tmp_path / "processing-history.json").read_text())
+    assert hist["smc"][-1] == {"date": "2026-10-21", "p50": "10주", "p90": "5개월"} and len(hist["pr"]) == 1
+    alerts = processing_alerts(out)
+    assert [a["key"] for a in alerts] == ["smc"] and "3.5개월 → 5개월" in alerts[0]["text"]
+    # 같은 날 다시 실행해도 중복으로 쌓이지 않음
+    update_history(res, tmp_path, "2026-10-21")
+    assert len(_json.loads((tmp_path / "processing-history.json").read_text())["smc"]) == 2
+
+
+def test_history_seeded_from_past_briefs(tmp_path):
+    import json as _json
+    from processing import update_history
+    (tmp_path / "2026-10-12.json").write_text(_json.dumps({"extras": {"processing_times": {"items": [
+        {"key": "smc", "p50": "9주", "p90": "3.5개월", "status": "ok"}]}}}))
+    out = update_history({"items": [{"key": "smc", "name": "SMC", "p50": "9주", "p90": "4개월", "status": "ok"}]}, tmp_path, "2026-10-21")
+    assert out["items"][0]["trend"]["prev_p90"] == "3.5개월"

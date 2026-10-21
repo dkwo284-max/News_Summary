@@ -1,7 +1,8 @@
 import "./style.css";
 import { applySettings, loadSettings, saveSettings, type Settings } from "./settings";
 import { fetchLive, loadLive, type LiveData } from "./live";
-import type { ArchiveIndex, Brief, Item, ProcessingItem, SectionKey } from "./types";
+import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
+import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
 // ── 탭/카테고리 정의 ───────────────────────────────────────
 interface TabDef {
@@ -142,6 +143,8 @@ function renderHeader(): void {
     const rain = w.rain_chance != null ? ` · 강수 ${w.rain_chance}%` : "";
     extras.append(h("span", { class: "pill" }, "🌤 오클랜드 ", h("strong", {}, `${w.min}°~${w.max}°`), ` ${w.desc}${rain}`));
   }
+  const vp = headerPill(h);
+  if (vp) extras.append(vp);
   if (viewingLatest) {
     const btn = h("button", { class: "refresh", type: "button", "aria-label": "환율·날씨 새로고침", title: "환율·날씨 새로고침" }, "↻");
     btn.addEventListener("click", () => void refreshLive(btn));
@@ -315,8 +318,15 @@ function renderMain(): void {
     }
   } else {
     if (tab.id === "imm") {
+      const alerts = alertBanner(brief.meta?.alerts ?? []);
+      if (alerts) main.append(alerts);
+      main.append(visaCard(h, openSettings));
       const board = processingBoard();
       if (board) main.append(board);
+    }
+    if (tab.id === "akl") {
+      const costs = costBoard();
+      if (costs) main.append(costs);
     }
     for (const k of visibleSections(tab)) {
       const block = sectionBlock(k, false);
@@ -351,6 +361,13 @@ function processingBoard(): HTMLElement | null {
       h("span", { class: "tile-value", "aria-label": has ? `${pct}% 처리 ${it.p90 || it.p50}` : "확인 불가" }, has ? it.p90 || it.p50 : "—"),
       h("span", { class: "tile-sub" }, sub),
     );
+    const tr = it.trend;
+    if (tr && has) {
+      const d = tr.delta_days;
+      const cls = d > 0 ? "up" : d < 0 ? "down" : "flat";
+      const label = d === 0 ? "지난주와 같음" : `${d > 0 ? "▲" : "▼"} ${Math.abs(d)}일 ${d > 0 ? "늘어남" : "줄어듦"}`;
+      t.append(h("span", { class: `tile-trend ${cls}`, title: `${fmtDateShort(tr.since)} ${tr.prev_p90} → ${it.p90}` }, label));
+    }
     const foot = h("span", { class: "tile-foot" });
     if (it.status === "stale" && it.as_of) foot.append(h("span", { class: "stale" }, `${it.as_of.slice(5).replace("-", "/")} 기준`));
     foot.append(h("a", { href: safeUrl(it.url), target: "_blank", rel: "noopener noreferrer" }, "출처 ↗"));
@@ -365,6 +382,54 @@ function processingBoard(): HTMLElement | null {
     h("ul", { class: "tiles" }, ...pt.items.map(tile)),
     h("p", { class: "board-note" }, "‘80% 처리’는 신청의 80%가 결정된 기간이에요(INZ 기준, 근무일 계산). 서류 상태에 따라 달라질 수 있으니 신청 전 공식 페이지를 꼭 확인하세요."),
   );
+}
+
+// 이민 알림: 처리 기간 급변·레이더 9점 이상 기사
+function alertBanner(alerts: Alert[]): HTMLElement | null {
+  if (!alerts.length) return null;
+  return h("section", { class: "alerts", role: "status", "aria-label": "이민 알림" },
+    h("h2", {}, `🚨 오늘의 이민 알림 ${alerts.length}건`),
+    h("ul", {}, ...alerts.map((a) => h("li", {},
+      h("span", { class: "alert-kind" }, a.kind === "processing" ? "처리 기간" : "중요 뉴스"),
+      a.url ? h("a", { href: safeUrl(a.url), target: "_blank", rel: "noopener noreferrer" }, a.text) : a.text))));
+}
+
+// 오클랜드 정착 비용판: 렌트 중간값·유가 (정부 공개 데이터)
+function costBoard(): HTMLElement | null {
+  const c = brief?.extras?.living_costs;
+  if (!c || (!c.rent && !c.fuel)) return null;
+  const fx = (viewingLatest && live?.fx) || brief!.extras.nzd_krw;
+  const won = (nzd: number) => (fx ? `≈ ${Math.round((nzd * fx) / 10000).toLocaleString("ko-KR")}만 원` : "");
+  const rows: HTMLElement[] = [];
+  const r = c.rent;
+  if (r) {
+    const yoy = r.yoy_pct != null ? `작년 같은 달보다 ${r.yoy_pct > 0 ? "+" : ""}${r.yoy_pct}%` : "";
+    rows.push(h("li", { class: "cost" },
+      h("span", { class: "cost-name" }, `🏠 주간 렌트 중간값 (${Number(r.month.slice(5))}월 신규 계약)`),
+      h("span", { class: "cost-value" }, `$${r.median.toLocaleString("en-NZ")}`, h("small", {}, " /주")),
+      h("span", { class: "cost-sub" }, [won(r.median * 52 / 12) && `한 달 ${won(r.median * 52 / 12)}`, r.lower && r.upper ? `대부분 $${r.lower}~$${r.upper}` : "", yoy].filter(Boolean).join(" · ")),
+      h("a", { class: "cost-src", href: safeUrl(r.url), target: "_blank", rel: "noopener noreferrer" }, "Tenancy Services ↗")));
+  }
+  const f = c.fuel;
+  const fuel = (label: string, p?: FuelPrice) => {
+    if (!p) return null;
+    const w = p.wow_cents;
+    const chg = w == null ? "" : w === 0 ? "지난주와 같음" : `지난주보다 ${w > 0 ? "▲" : "▼"}${Math.abs(w)}c`;
+    return h("li", { class: "cost" },
+      h("span", { class: "cost-name" }, label),
+      h("span", { class: "cost-value" }, `$${p.nzd_per_l.toFixed(2)}`, h("small", {}, " /L")),
+      h("span", { class: "cost-sub" }, [won(p.nzd_per_l * 50) && `50L ${won(p.nzd_per_l * 50)}`, chg].filter(Boolean).join(" · ")),
+      h("a", { class: "cost-src", href: safeUrl(f!.url), target: "_blank", rel: "noopener noreferrer" }, `MBIE ${fmtDateShort(p.date)} ↗`));
+  };
+  if (f) {
+    for (const el of [fuel("⛽ 휘발유 91", f.petrol91), fuel("🚚 경유", f.diesel)]) if (el) rows.push(el);
+  }
+  return h("section", { class: "costs", "aria-labelledby": "costs-title" },
+    h("div", { class: "board-head" },
+      h("h2", { id: "costs-title" }, "💰 오클랜드 생활비 지표"),
+      h("span", { class: "board-meta" }, `${fmtDateShort(c.updated_at)} 확인`)),
+    h("ul", { class: "cost-list" }, ...rows),
+    h("p", { class: "board-note" }, "렌트는 그 달 새로 맺은 임대차의 보증금 신고 기준(오클랜드 전체), 유가는 전국 평균 주유소 게시 가격이에요. 원화는 현재 환율로 어림한 값입니다."));
 }
 
 function renderAll(): void {
@@ -399,10 +464,18 @@ function initSearch(): void {
   });
 }
 
+function openSettings(): void {
+  $("settings-btn").click();
+}
+
 function initSettings(): void {
   const dialog = $<HTMLDialogElement>("settings");
   const politics = $<HTMLInputElement>("opt-politics");
   $("settings-btn").addEventListener("click", () => {
+    renderEditor(h, $("visa-editor"), () => {
+      renderHeader();
+      if (settings.tab === "imm") renderMain();
+    });
     politics.checked = settings.showPolitics;
     dialog.querySelectorAll<HTMLInputElement>('input[name="font"]').forEach((r) => (r.checked = Number(r.value) === settings.fontScale));
     dialog.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach((r) => (r.checked = r.value === settings.theme));
@@ -445,6 +518,10 @@ function initOffline(): void {
 
 async function init(): Promise<void> {
   applySettings(settings);
+  if (importFromHash()) {
+    settings.tab = "imm"; // 설정 링크로 들어오면 비자 일정을 바로 보여줌
+    saveSettings(settings);
+  }
   initSearch();
   initSettings();
   initOffline();

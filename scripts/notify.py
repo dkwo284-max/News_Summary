@@ -12,11 +12,16 @@ from common import log
 
 def compose(brief: dict, cfg: dict) -> str:
     lines = [f"☀️ Daily Brief {brief['date']}"]
+    alerts = (brief.get("meta") or {}).get("alerts") or []
+    if alerts:
+        lines.append("🚨 이민 알림")
+        lines.extend(f"  - {a['text']}" for a in alerts[:5])
     for key, sec in brief["sections"].items():
         if key == "kr_politics":  # 정치는 앱에서 켠 사람만 보도록 알림에서도 제외
             continue
         if sec["items"]:
-            lines.append(f"• {sec['label']}: {sec['briefing']}")
+            country = "한국 " if key.startswith("kr_") else "" if key in ("nz_auckland", "nz_immigration") else "뉴질랜드 "
+            lines.append(f"• {country}{sec['label']}: {sec['briefing']}")
     ex = brief.get("extras") or {}
     if ex.get("nzd_krw"):
         lines.append(f"💱 1 NZD = {ex['nzd_krw']:,}원")

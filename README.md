@@ -86,6 +86,21 @@ cron-job.org 06:00 (NZ) → GitHub Actions  (보조: GitHub 예약 06:05 / 06:20
 - **제외 기사**: `config.yaml` 의 `exclude.title_keywords`(제목 키워드)와 `exclude.sources`(출처)에 걸리는 기사는 수집 직후 뺍니다. 개인 사연·모금, 부동산 매물·분양, 광고·협찬이 기본으로 들어 있어요. 키워드로 못 거른 기사는 AI 가 선별 단계에서 한 번 더 걸러냅니다(`junk`).
 - **이민 레이더**: `profile.summary` 에 적힌 독자 상황을 기준으로 AI 가 기사마다 레이더 관련도(0~10)를 매기고, `radar_min_score`(기본 5) 이상만 관련도 순으로 싣습니다. 기본 프로필은 "UoA 석사 졸업 예정 학생비자 소지자"이고, 졸업 후 취업비자(PSWV)·AEWV·Green List·Skilled Migrant·영주권·시민권을 우선합니다. 신규 학생비자·관광비자·계절근로·타국 정책은 낮게 봅니다. 상황이 바뀌면(예: 취업비자 취득 후) `profile.summary` 만 고치면 됩니다.
 - 레이더에 실린 기사는 뉴질랜드·오클랜드 탭에서 빠지고, 그 자리는 다음 순위 기사로 채워집니다. 뉴질랜드 탭의 "이민자 관점" 문구도 같은 프로필을 기준으로 씁니다.
+- **총선 이민 공약**: 정당별 이민·취업비자·영주권 공약과 연정·새 정부의 이민 정책 방향은 레이더 관련도 7~9로 봅니다. 전용 피드 `gn_nz_election_immigration` 이 이틀치 관련 기사를 따로 모읍니다.
+
+## 이민 알림 · 내 비자 일정
+
+- **🚨 이민 알림**: 처리 기간이 약 1주 전보다 크게 바뀌거나(7일 이상이면서 10% 이상), 레이더 관련도가 `profile.alert_radar_score`(기본 9) 이상인 기사가 있으면 이민 레이더 탭 맨 위에 띄웁니다. 텔레그램·메일 알림을 켜 두면 메시지 첫머리에도 들어갑니다.
+- **처리 기간 추세**: 날마다 값을 `web/public/data/processing-history.json` 에 쌓고, 전광판 칸마다 1주 전 대비 ▲/▼ 일수를 보여줍니다.
+- **📅 내 비자 일정 (D-day)**: 설정(⚙️) → "내 비자 일정"에 가족별 비자 종류·만료일과 자녀 생일을 넣으면, 이민 레이더 탭에 만료 D-day와 할 일(졸업 후 취업비자 준비, 가족 비자 준비, 다음 비자 신청 권장일, 자녀 초등학교 입학)을 날짜순으로 보여줍니다. 상단에도 가장 가까운 D-day 가 표시돼요. **이 정보는 이 기기(브라우저)에만 저장되고 저장소·서버로 보내지 않습니다.** `#setup=<base64url JSON>` 링크로 한 번에 입력할 수도 있습니다.
+
+## 오클랜드 생활비 지표
+
+오클랜드 탭 맨 위에 매일 아침 정부 공개 데이터를 보여줍니다(키·요금 없음, AI 요청 없음).
+
+- 주간 렌트 중간값·사분위 범위·전년 대비: Tenancy Services 렌트 보증금 데이터(TLA 월간 CSV, 신규 임대차 기준, 보통 1~2달 늦게 공개)
+- 휘발유 91·경유 리터당 가격과 전주 대비: MBIE 주간 유가 모니터링(전국 평균 게시 가격)
+- 원화는 현재 환율로 어림합니다. 지역은 `config.yaml` 의 `costs.rent_location` 으로 바꿀 수 있어요(기본 Auckland).
 
 ## 환율·날씨 실시간 새로고침 · 비자 처리 기간 전광판
 
@@ -208,8 +223,14 @@ Claude API 로 바꾸고 싶다면 `llm.provider: "anthropic"` 으로 바꾸고 
     }
     // kr_society, kr_economy, kr_entertainment, kr_politics, nz_auckland, nz_immigration
   },
-  "extras": { "nzd_krw": 812.3, "auckland_weather": { "max": 18, "min": 11, "desc": "구름 조금", "rain_chance": 20 } },
-  "meta": { "mode": "gemini", "failed_feeds": [], "usage": { "provider": "gemini", "requests": 4, "total_cost_usd": 0.0 } }
+  "extras": {
+    "nzd_krw": 812.3, "auckland_weather": { "max": 18, "min": 11, "desc": "구름 조금", "rain_chance": 20 },
+    "processing_times": { "updated_at": "...", "items": [{ "key": "aewv", "p90": "5 weeks", "trend": { "since": "2026-10-14", "prev_p90": "4 weeks", "delta_days": 7 } }] },
+    "living_costs": { "updated_at": "...", "rent": { "month": "2026-08", "median": 650, "lower": 550, "upper": 765, "yoy_pct": -1.5 },
+                      "fuel": { "petrol91": { "date": "2026-10-16", "nzd_per_l": 3.62, "wow_cents": -3.5 }, "diesel": { } } }
+  },
+  "meta": { "mode": "gemini", "failed_feeds": [], "alerts": [{ "kind": "processing", "text": "...", "url": "..." }],
+            "usage": { "provider": "gemini", "requests": 4, "total_cost_usd": 0.0 } }
 }
 ```
 
@@ -218,7 +239,7 @@ Claude API 로 바꾸고 싶다면 `llm.provider: "anthropic"` 으로 바꾸고 
 ```
 .github/workflows/  daily.yml (수집·요약·커밋·배포) · deploy.yml (Pages) · ci.yml · check-feeds.yml
 config.yaml         피드, 섹션별 건수, 타임존, 가중치, 모델, 알림
-scripts/            main.py fetch.py dedupe.py rank.py summarize.py build.py llm.py extras.py notify.py check_feeds.py
+scripts/            main.py fetch.py dedupe.py rank.py summarize.py build.py llm.py extras.py processing.py costs.py notify.py check_feeds.py
 schema/             brief.schema.json
 tests/              pytest + 합성 샘플 피드(tests/fixtures)
 web/                Vite + TypeScript PWA (index.html, src/, public/manifest.json, public/sw.js, public/icons/)

@@ -189,6 +189,71 @@ def fetch_processing_times(cfg: dict, llm=None, previous: dict | None = None, cl
     return {"updated_at": datetime.now(timezone.utc).isoformat(timespec="minutes"), "items": items}
 
 
+HISTORY_FILE = "processing-history.json"
+_DAYS = {"일": 1, "주": 7, "개월": 30.4, "년": 365}
+
+
+def to_days(text: str) -> float | None:
+    """'3.5개월' → 106.4, '9주' → 63"""
+    m = re.fullmatch(r"\s*(\d+(?:\.\d+)?)\s*(일|주|개월|년)\s*", text or "")
+    return float(m.group(1)) * _DAYS[m.group(2)] if m else None
+
+
+def _seed_history(data_dir: Path) -> dict:
+    """기록 파일이 없을 때: 지난 브리핑 파일(YYYY-MM-DD.json)에 남은 처리 기간으로 채운다."""
+    hist: dict[str, list] = {}
+    for p in sorted(data_dir.glob("????-??-??.json")):
+        try:
+            pt = json.loads(p.read_text(encoding="utf-8")).get("extras", {}).get("processing_times") or {}
+        except Exception:  # noqa: BLE001
+            continue
+        for it in pt.get("items", []):
+            if it.get("status") == "ok" and it.get("p90"):
+                hist.setdefault(it["key"], []).append({"date": p.stem, "p50": it.get("p50", ""), "p90": it["p90"]})
+    return hist
+
+
+def update_history(result: dict, data_dir: Path, today: str, keep_days: int = 400) -> dict:
+    """오늘 값을 processing-history.json 에 쌓고, 항목마다 약 1주 전 대비 변화(trend)를 붙인다."""
+    path = data_dir / HISTORY_FILE
+    try:
+        hist = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        hist = _seed_history(data_dir)
+    from datetime import date, timedelta
+
+    t = date.fromisoformat(today)
+    cutoff = (t - timedelta(days=keep_days)).isoformat()
+    week_ago = (t - timedelta(days=6)).isoformat()
+    for it in result.get("items", []):
+        rows = [r for r in hist.get(it["key"], []) if r["date"] >= cutoff and r["date"] != today]
+        prev = [r for r in rows if r["date"] <= week_ago]
+        base = prev[-1] if prev else None
+        if base and it.get("p90") and base.get("p90"):
+            now_d, old_d = to_days(it["p90"]), to_days(base["p90"])
+            if now_d is not None and old_d is not None:
+                it["trend"] = {"since": base["date"], "prev_p90": base["p90"], "delta_days": round(now_d - old_d)}
+        if it.get("status") == "ok" and it.get("p90"):
+            rows.append({"date": today, "p50": it.get("p50", ""), "p90": it["p90"]})
+        hist[it["key"]] = rows
+    data_dir.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(hist, ensure_ascii=False), encoding="utf-8")
+    return result
+
+
+def processing_alerts(result: dict, min_days: int = 7, min_ratio: float = 0.1) -> list[dict]:
+    """처리 기간이 1주 전보다 크게(7일 이상이고 10% 이상) 바뀐 항목."""
+    out = []
+    for it in result.get("items", []):
+        tr = it.get("trend")
+        old = to_days(tr["prev_p90"]) if tr else None
+        if tr and old and abs(tr["delta_days"]) >= min_days and abs(tr["delta_days"]) / old >= min_ratio:
+            arrow = "늘어남" if tr["delta_days"] > 0 else "줄어듦"
+            out.append({"kind": "processing", "key": it["key"],
+                        "text": f"{it['name']} 처리 기간 {tr['prev_p90']} → {it['p90']} ({arrow})", "url": it.get("url", "")})
+    return out
+
+
 def load_previous(data_dir: Path) -> dict | None:
     try:
         return json.loads((data_dir / "latest.json").read_text(encoding="utf-8")).get("extras", {}).get("processing_times")

@@ -122,10 +122,15 @@ profile:
     오클랜드대학교(UoA) 석사 과정을 곧 졸업하는 한국인 유학생(현재 학생비자). 졸업 후 뉴질랜드에서 취업해 영주권까지
     받는 것이 목표. 관심: 졸업 후 취업비자(Post Study Work Visa), 취업비자(AEWV·Accredited Employer, Green List 직종),
     영주권(Skilled Migrant Category, Green List Straight to Residence / Work to Residence), 시민권, 이민 규정 변경과
-    처리 기간·수수료, 졸업생 취업시장. 관심 낮음: 신규 유학생 학생비자 발급·유학생 모집, 관광·방문비자, 계절근로(RSE),
+    처리 기간·수수료, 졸업생 취업시장, 총선 정당별 이민 공약과 새 정부 이민 정책. 관심 낮음: 신규 유학생 학생비자 발급·유학생 모집, 관광·방문비자, 계절근로(RSE),
     다른 나라의 이민 정책.
   radar_min_score: 5     # 레이더 관련도(0~10)가 이 점수 이상인 기사만 이민 레이더에 표시
+  alert_radar_score: 9   # 이 점수 이상이면 '이민 알림'(앱 상단 배너 + 텔레그램/이메일 알림 맨 위)
   radar_high:            # AI 없이 돌 때 레이더 점수를 높게 줄 키워드
+    - "immigration policy"
+    - "immigration pledge"
+    - "migrant"
+    - "migrants"
     - "post study work"
     - "post-study work"
     - PSWV
@@ -237,6 +242,10 @@ extras:
 # 매일 INZ·DIA 공식 페이지에서 처리 기간(표 또는 "80% within 4 weeks" 같은 문장)을 찾아 표시합니다.
 # urls 는 앞에서부터 시도합니다(사이트 개편 대비 후보 여러 개). 못 찾으면 AI 가 본문에서 추출하고,
 # 그래도 실패하면 이전 값을 기준일과 함께 보여줍니다.
+# 오클랜드 생활비 지표 (Tenancy Services 렌트 CSV 의 Location 값)
+costs:
+  rent_location: Auckland
+
 processing_times:
   # INZ 대기 시간 표(…-wait-times)는 '평균(50%)'과 '대부분(80%)' 처리 기간을 함께 보여줘서 먼저 시도합니다.
   # match 는 표에서 해당 비자 행을 찾는 이름입니다.
@@ -419,6 +428,14 @@ feeds:
     lookback_hours: 48
     # 영주권·시민권·이민 규정
     url: "https://news.google.com/rss/search?q=%22New+Zealand%22+(%22skilled+migrant%22+OR+%22residence+visa%22+OR+%22resident+visa%22+OR+residency+OR+citizenship+OR+%22Immigration+New+Zealand%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+
+  - id: gn_nz_election_immigration
+    name: "Google News"
+    section: nz_immigration
+    google_news: true
+    lookback_hours: 48
+    # 총선 정당별 이민·비자·영주권 공약 (뉴질랜드 언론만 남음: nz_sources)
+    url: "https://news.google.com/rss/search?q=%22New+Zealand%22+election+(immigration+OR+migrants+OR+visa+OR+residency)+(policy+OR+pledge+OR+party)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
 
   # ── 오클랜드 ──
   - id: gn_auckland
