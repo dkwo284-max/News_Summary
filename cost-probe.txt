@@ -1,0 +1,28 @@
+=== rental bond csv links
+href="https://www.tenancy.govt.nz/assets/Uploads/Tenancy/Rental-bond-data/Detailed-Quarterly-Tenancy-Q1-2020-Q3-2026.csv?m=5766222a0dc2d94c11545872be77333e32f7c999"
+href="https://www.tenancy.govt.nz/assets/Uploads/Tenancy/Rental-bond-data/detailed-monthly-region-tenancy-october.csv?m=45906e047a67e329e2993f042dc17ad3e0f5d470"
+href="https://www.tenancy.govt.nz/assets/Uploads/Tenancy/Rental-bond-data/detailed-monthly-tla-tenancy-october.csv?m=e7e9c47ce8c12eedd40ee1e4534398d28f5643e2"
+href="https://www.tenancy.govt.nz/assets/Uploads/Tenancy/Rental-bond-data/detailed-quarterly-tenancy-93-to-19.zip?m=4075fa4d366155bcaa31d771cca4e68d0175ef2b"
+TA link: https://www.tenancy.govt.nz/assets/Uploads/Tenancy/Rental-bond-data/detailed-monthly-tla-tenancy-october.csv?m=e7e9c47ce8c12eedd40ee1e4534398d28f5643e2
+size 2360379
+"Time Frame","Location Id","Location","Lodged Bonds","Active Bonds","Closed Bonds","Median Rent","Geometric Mean Rent","Upper Quartile Rent","Lower Quartile Rent","Log Std Dev Weekly Rent"
+"1993-02-01"," -99","ALL","9,147","91,779","7116","150","151","200","120","0.43"
+"1993-02-01"," -1","NA","417","6,471","345","130","129","165","100","0.46"
+--- last Auckland rows
+"2026-06-01","76","Auckland","4,572","169,602","4104","650","618","760","530","0.41"
+"2026-07-01","76","Auckland","5,751","170,883","4248","640","617","750","520","0.38"
+"2026-08-01","76","Auckland","4,644","171,582","3753","650","634","765","550","0.37"
+
+=== MBIE fuel last rows (Board price)
+"2026w41",2026-10-09,"Diesel","Board price",323.757950371223,"NZD c/L","Provisional"
+"2026w41",2026-10-09,"Regular Petrol","Board price",354.375917727208,"NZD c/L","Provisional"
+"2026w41",2026-10-09,"Premium Petrol 95R","Board price",373.681652566363,"NZD c/L","Provisional"
+"2026w42",2026-10-16,"Diesel","Board price",324.547891930762,"NZD c/L","Provisional"
+"2026w42",2026-10-16,"Regular Petrol","Board price",361.679288786569,"NZD c/L","Provisional"
+"2026w42",2026-10-16,"Premium Petrol 95R","Board price",381.435584820506,"NZD c/L","Provisional"
+
+=== OCR alternatives
+--- https://www.interest.co.nz/charts/interest-rates/ocr 200
+--- https://www.interest.co.nz/charts/interest-rates/official-cash-rate 404
+--- https://www.stats.govt.nz/indicators/unemployment-rate/ 200
+  ~  Unemployment rate &#124; Stats NZ (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.
