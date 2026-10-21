@@ -1,0 +1,58 @@
+name: Probe living-cost sources
+
+# 오클랜드 생활비판 데이터 소스 점검(수동). 결과는 cost-probe 브랜치에 기록.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe
+        run: |
+          UA="Mozilla/5.0 (compatible; DailyBriefBot/1.0)"
+          probe() {
+            echo; echo "=== $1"
+            code=$(curl -sS -L -m 30 -A "$UA" -o /tmp/b -w "%{http_code} %{content_type} %{size_download} %{url_effective}" "$1" 2>&1)
+            echo "$code"
+            if file /tmp/b | grep -qi -E "text|csv|json|html|xml"; then
+              python3 - "$2" <<'PY'
+          import re, sys
+          t = open('/tmp/b', errors='ignore').read()
+          pat = sys.argv[1]
+          flat = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', t))
+          hits = [m.start() for m in re.finditer(pat, flat, re.I)][:5]
+          for h in hits: print('  ~', flat[max(0,h-200):h+300])
+          if not hits: print('  (no match) head:', flat[:400])
+          links = sorted(set(re.findall(r'href="([^"]*(?:csv|xlsx|rent|bond|fuel|price)[^"]*)"', t, re.I)))[:25]
+          for l in links: print('  link', l)
+          PY
+            else
+              echo "  binary: $(file /tmp/b)"; head -c 300 /tmp/b | od -c | head -3
+            fi
+          }
+          {
+          probe "https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/" "Auckland|csv|download"
+          probe "https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/" "Auckland|median|market rent"
+          probe "https://www.mbie.govt.nz/building-and-energy/energy-and-natural-resources/energy-statistics-and-modelling/energy-statistics/weekly-fuel-price-monitoring/" "csv|regular|petrol|cents"
+          probe "https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv" "91|petrol|diesel|date"
+          probe "https://www.rbnz.govt.nz/monetary-policy/about-monetary-policy/the-official-cash-rate" "official cash rate|OCR|percent|%"
+          probe "https://www.rbnz.govt.nz/" "official cash rate|OCR"
+          probe "https://www.stats.govt.nz/indicators/consumers-price-index-cpi/" "annual|percent|%"
+          probe "https://www.stats.govt.nz/indicators/" "consumers price|CPI|unemployment"
+          probe "https://www.interest.co.nz/borrowing" "1 year|floating|ANZ|ASB"
+          } > /tmp/cost-probe.txt 2>&1
+          cat /tmp/cost-probe.txt | head -300
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "daily-brief-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan cost-probe
+          git rm -rq --cached . && find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp /tmp/cost-probe.txt .
+          git add cost-probe.txt && git commit -qm "cost probe" && git push -f origin cost-probe
