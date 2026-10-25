@@ -1,0 +1,176 @@
+
+[kr_society] yna_society
+  primary  OK    120  newest 2026-10-25 23:06Z
+           https://www.yna.co.kr/rss/society.xml
+
+[kr_economy] yna_economy
+  primary  OK    120  newest 2026-10-25 23:07Z
+           https://www.yna.co.kr/rss/economy.xml
+
+[kr_entertainment] yna_entertainment
+  primary  OK    120  newest 2026-10-25 23:11Z
+           https://www.yna.co.kr/rss/entertainment.xml
+
+[kr_politics] yna_politics
+  primary  OK    120  newest 2026-10-25 23:00Z
+           https://www.yna.co.kr/rss/politics.xml
+
+[kr_society] gn_kr_society
+  primary  OK     70  newest 2026-10-25 22:39Z
+           https://news.google.com/rss/headlines/section/topic/NATION?hl=ko&gl=KR&ceid=KR:ko
+  fallback OK    100  newest 2026-10-25 23:12Z
+           https://news.google.com/rss/search?q=%EC%82%AC%ED%9A%8C+when:1d&hl=ko&gl=KR&ceid=KR:ko
+
+[kr_economy] gn_kr_economy
+  primary  OK     70  newest 2026-10-25 23:00Z
+           https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=ko&gl=KR&ceid=KR:ko
+  fallback OK    100  newest 2026-10-25 23:11Z
+           https://news.google.com/rss/search?q=%EA%B2%BD%EC%A0%9C+when:1d&hl=ko&gl=KR&ceid=KR:ko
+
+[kr_entertainment] gn_kr_entertainment
+  primary  OK     56  newest 2026-10-25 22:51Z
+           https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT?hl=ko&gl=KR&ceid=KR:ko
+  fallback OK    100  newest 2026-10-25 23:02Z
+           https://news.google.com/rss/search?q=%EC%97%B0%EC%98%88+when:1d&hl=ko&gl=KR&ceid=KR:ko
+
+[kr_politics] gn_kr_politics
+  primary  OK    100  newest 2026-10-25 23:03Z
+           https://news.google.com/rss/search?q=%EC%A0%95%EC%B9%98+when:1d&hl=ko&gl=KR&ceid=KR:ko
+
+[kr_society] hani_society
+  primary  OK     30  no dates
+           https://www.hani.co.kr/rss/society/
+
+[kr_economy] hani_economy
+  primary  OK     30  no dates
+           https://www.hani.co.kr/rss/economy/
+
+[kr_politics] hani_politics
+  primary  OK     30  no dates
+           https://www.hani.co.kr/rss/politics/
+
+[kr_society] chosun_national
+  primary  OK    100  newest 2026-10-25 20:00Z
+           https://www.chosun.com/arc/outboundfeeds/rss/category/national/?outputType=xml
+
+[kr_economy] chosun_economy
+  primary  OK    100  newest 2026-10-25 23:10Z
+           https://www.chosun.com/arc/outboundfeeds/rss/category/economy/?outputType=xml
+
+[kr_politics] chosun_politics
+  primary  OK    100  newest 2026-10-25 20:53Z
+           https://www.chosun.com/arc/outboundfeeds/rss/category/politics/?outputType=xml
+
+[kr_entertainment] chosun_ent
+  primary  OK    100  newest 2026-10-25 23:05Z
+           https://www.chosun.com/arc/outboundfeeds/rss/category/entertainments/?outputType=xml
+
+[kr_economy] mk_economy
+  primary  OK     50  newest 2026-10-25 22:00Z
+           https://www.mk.co.kr/rss/30100041/
+
+[kr_society] mk_society
+  primary  OK     50  newest 2026-10-25 23:08Z
+           https://www.mk.co.kr/rss/50400012/
+
+[nz_national] rnz_national
+  primary  DEAD    0  HTTP 403
+           https://www.rnz.co.nz/rss/national.xml
+  fallback EMPTY   0  no entries
+           https://news.google.com/rss/search?q=site:rnz.co.nz/news/national+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+  fallback OK    100  newest 2026-10-25 23:11Z
+           https://news.google.com/rss/search?q=site:rnz.co.nz+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_national] rnz_business
+  primary  DEAD    0  HTTP 403
+           https://www.rnz.co.nz/rss/business.xml
+  fallback EMPTY   0  no entries
+           https://news.google.com/rss/search?q=site:rnz.co.nz/news/business+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_national] nzh_nz
+  primary  OK     10  newest 2026-10-25 23:00Z
+           https://www.nzherald.co.nz/arc/outboundfeeds/rss/section/nz/?outputType=xml
+
+[nz_national] nzh_business
+  primary  OK     10  newest 2026-10-25 23:00Z
+           https://www.nzherald.co.nz/arc/outboundfeeds/rss/section/business/?outputType=xml
+
+[nz_national] stuff_nz
+  primary  OK     73  newest 2026-10-25 23:01Z
+           https://www.stuff.co.nz/rss
+  fallback OK    100  newest 2026-10-25 22:24Z
+           https://news.google.com/rss/search?q=site:stuff.co.nz+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_national] onenews
+  primary  OK     79  newest 2026-10-25 23:10Z
+           https://www.1news.co.nz/arc/outboundfeeds/rss/?outputType=xml
+  fallback OK     75  newest 2026-10-25 23:13Z
+           https://news.google.com/rss/search?q=site:1news.co.nz+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_national] gn_nz_top
+  primary  OK     70  newest 2026-10-25 22:29Z
+           https://news.google.com/rss/headlines/section/topic/NATION?hl=en-NZ&gl=NZ&ceid=NZ:en
+  fallback OK     38  newest 2026-10-25 22:29Z
+           https://news.google.com/rss?hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_national] gn_nz_education
+  primary  OK      3  newest 2026-10-25 20:55Z
+           https://news.google.com/rss/search?q=%22New+Zealand%22+(%22primary+school%22+OR+%22intermediate+school%22+OR+%22primary+schools%22+OR+%22Ministry+of+Education%22+OR+%22school+lunches%22+OR+teachers+OR+principals)+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_national] gn_nz_school
+  primary  OK      8  newest 2026-10-25 15:00Z
+           https://news.google.com/rss/search?q=(%22primary+school%22+OR+%22intermediate+school%22+OR+%22school+zone%22+OR+%22school+lunch%22+OR+%22Education+Review+Office%22+OR+%22Erica+Stanford%22)+NZ+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_national] gn_nz_business
+  primary  OK     52  newest 2026-10-25 21:42Z
+           https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_immigration] inz_news
+  primary  DEAD    0  HTTP 404
+           https://www.immigration.govt.nz/about-us/media-centre/news-notifications/rss
+  fallback OK     79  newest 2026-10-20 08:38Z
+           https://news.google.com/rss/search?q=site:immigration.govt.nz&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_immigration] gn_nz_work_visa
+  primary  OK      3  newest 2026-10-25 05:29Z
+           https://news.google.com/rss/search?q=%22New+Zealand%22+(%22post+study+work%22+OR+%22post-study+work%22+OR+AEWV+OR+%22accredited+employer%22+OR+%22work+visa%22+OR+%22green+list%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_immigration] gn_nz_residence
+  primary  OK     17  newest 2026-10-25 22:15Z
+           https://news.google.com/rss/search?q=%22New+Zealand%22+(%22skilled+migrant%22+OR+%22residence+visa%22+OR+%22resident+visa%22+OR+residency+OR+citizenship+OR+%22Immigration+New+Zealand%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_immigration] gn_nz_election_immigration
+  primary  OK     17  newest 2026-10-25 22:15Z
+           https://news.google.com/rss/search?q=%22New+Zealand%22+election+(immigration+OR+migrants+OR+visa+OR+residency)+(policy+OR+pledge+OR+party)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_auckland] gn_auckland
+  primary  OK     72  newest 2026-10-25 23:07Z
+           https://news.google.com/rss/search?q=Auckland+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_auckland] nzh_auckland
+  primary  OK     10  newest 2026-10-25 18:42Z
+           https://www.nzherald.co.nz/arc/outboundfeeds/rss/section/nz/auckland/?outputType=xml
+  fallback OK    100  newest 2026-10-25 23:03Z
+           https://news.google.com/rss/search?q=site:nzherald.co.nz+Auckland+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_auckland] rnz_auckland
+  primary  OK     66  newest 2026-10-25 23:09Z
+           https://news.google.com/rss/search?q=site:rnz.co.nz+Auckland+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_auckland] stuff_auckland
+  primary  DEAD    0  HTTP 406
+           https://www.stuff.co.nz/auckland/rss
+  fallback OK     37  newest 2026-10-25 21:46Z
+           https://news.google.com/rss/search?q=site:stuff.co.nz+Auckland+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_auckland] our_auckland
+  primary  DEAD    0  HTTP 403
+           https://ourauckland.aucklandcouncil.govt.nz/rss
+  fallback OK    100  newest 2026-10-25 21:19Z
+           https://news.google.com/rss/search?q=site:ourauckland.aucklandcouncil.govt.nz&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+[nz_auckland] auckland_transport (disabled)
+  primary  OK      6  newest 2026-10-25 22:25Z
+           https://news.google.com/rss/search?q=%22Auckland+Transport%22+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en
+
+살아 있는 URL이 없는 피드: rnz_business
