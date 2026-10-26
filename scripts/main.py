@@ -176,6 +176,14 @@ def main(argv: list[str] | None = None) -> int:
             extras["processing_times"] = update_history(pt, out_dir, local_now.date().isoformat())
         except Exception as e:  # noqa: BLE001 — 전광판 실패가 브리핑 생성을 막지 않게
             log.warning("processing times failed: %s", e)
+        # 동네 비교: 시세 렌트·평균 집값 (주 1회 갱신, 별도 파일 areas.json)
+        if not args.dry_run:
+            try:
+                from areas import update_areas
+
+                update_areas(cfg, out_dir, local_now.date())
+            except Exception as e:  # noqa: BLE001
+                log.warning("areas failed: %s", e)
         # 오클랜드 정착 비용판: 렌트 중간값·유가 (정부 공개 CSV, AI 요청 없음)
         try:
             from costs import fetch_costs

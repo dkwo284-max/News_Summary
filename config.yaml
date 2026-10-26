@@ -43,14 +43,14 @@ sections:
   nz_education:     { label: "교육", region: nz, from: nz_national, category: education, top_n: 4 }
   nz_economy:       { label: "경제", region: nz, from: nz_national, category: economy,   top_n: 5 }
   nz_politics:      { label: "정치", region: nz, from: nz_national, category: politics,  top_n: 4 }
-  # 오클랜드 기사도 nz_auckland 한 묶음으로 선별한 뒤 AI 주제 분류(akl_topic)로 생활·의료·교육·치안·부동산 섹션으로 나눕니다.
+  # 오클랜드 기사도 nz_auckland 한 묶음으로 선별한 뒤 AI 주제 분류(akl_topic)로 생활·치안·부동산·의료·교육 섹션으로 나눕니다.
   # carry_days: 그날 새 소식이 없으면 최근 N일 브리핑의 같은 섹션 기사를 '지난 소식'으로 이어서 보여줍니다.
   nz_auckland:      { label: "오클랜드", region: nz, pool: true, top_n: 20, candidate_limit: 80 }
   akl_life:         { label: "생활",   region: nz, from: nz_auckland, topic: life,      top_n: 5 }
-  akl_health:       { label: "의료",   region: nz, from: nz_auckland, topic: health,    top_n: 4, carry_days: 3 }
-  akl_education:    { label: "교육",   region: nz, from: nz_auckland, topic: education, top_n: 4, carry_days: 3 }
   akl_safety:       { label: "치안",   region: nz, from: nz_auckland, topic: safety,    top_n: 4, carry_days: 2 }
   akl_property:     { label: "부동산", region: nz, from: nz_auckland, topic: property,  top_n: 4, carry_days: 3 }
+  akl_health:       { label: "의료",   region: nz, from: nz_auckland, topic: health,    top_n: 4, carry_days: 3 }
+  akl_education:    { label: "교육",   region: nz, from: nz_auckland, topic: education, top_n: 4, carry_days: 3 }
   # nz_immigration(이민 레이더)은 이민 전용 피드 + 뉴질랜드/오클랜드 후보 중 독자 프로필(아래 profile) 관련도가 높은 기사.
   # 레이더에 실린 기사는 뉴질랜드/오클랜드 탭에서 빠집니다(중복 없음).
   nz_immigration:   { label: "이민 레이더", region: nz, top_n: 6, candidate_limit: 40 }
@@ -261,6 +261,69 @@ extras:
 # 오클랜드 생활비 지표 (Tenancy Services 렌트 CSV 의 Location 값)
 costs:
   rent_location: Auckland
+
+# ── 동네 비교 (오클랜드 탭 '내 동네') ─────────────────────────
+# 앱 설정에서 고른 관심 동네(이 기기에만 저장)의 시세 렌트·평균 집값을 보여주려고, 흔히 찾는 동네를 넉넉히 받아 둡니다.
+# 값: QV 평균 집값을 볼 옛 시 단위 (north_shore | auckland_city | manukau | waitakere | rodney | papakura | franklin)
+areas:
+  refresh_days: 7
+  delay_seconds: 0.5
+  suburbs:
+    Milford: north_shore
+    Takapuna: north_shore
+    Castor Bay: north_shore
+    Forrest Hill: north_shore
+    Sunnynook: north_shore
+    Mairangi Bay: north_shore
+    Campbells Bay: north_shore
+    Murrays Bay: north_shore
+    Browns Bay: north_shore
+    Torbay: north_shore
+    Rothesay Bay: north_shore
+    Albany: north_shore
+    Rosedale: north_shore
+    Unsworth Heights: north_shore
+    Glenfield: north_shore
+    Northcote: north_shore
+    Birkenhead: north_shore
+    Hauraki: north_shore
+    Belmont: north_shore
+    Devonport: north_shore
+    Greenhithe: north_shore
+    Epsom: auckland_city
+    Remuera: auckland_city
+    Mount Eden: auckland_city
+    Mount Albert: auckland_city
+    Ellerslie: auckland_city
+    Greenlane: auckland_city
+    Meadowbank: auckland_city
+    St Heliers: auckland_city
+    Kohimarama: auckland_city
+    Mission Bay: auckland_city
+    Ponsonby: auckland_city
+    Grey Lynn: auckland_city
+    Parnell: auckland_city
+    Onehunga: auckland_city
+    Mount Roskill: auckland_city
+    Sandringham: auckland_city
+    Three Kings: auckland_city
+    Howick: manukau
+    Pakuranga: manukau
+    Botany Downs: manukau
+    Dannemora: manukau
+    Flat Bush: manukau
+    Half Moon Bay: manukau
+    Bucklands Beach: manukau
+    Henderson: waitakere
+    Titirangi: waitakere
+    New Lynn: waitakere
+    Hobsonville: waitakere
+    West Harbour: waitakere
+    Te Atatu Peninsula: waitakere
+    Orewa: rodney
+    Silverdale: rodney
+    Millwater: rodney
+    Whangaparaoa: rodney
 
 processing_times:
   # INZ 대기 시간 표(…-wait-times)는 '평균(50%)'과 '대부분(80%)' 처리 기간을 함께 보여줘서 먼저 시도합니다.

@@ -12,34 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
       - name: Probe
         run: |
-          cat > /tmp/p.py <<'PY'
-          import re, httpx
-          UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
-          c = httpx.Client(timeout=90, follow_redirects=True, headers=UA)
-          def tr(label, f):
-              try: f()
-              except Exception as e: print("ERR", label, repr(e)[:300])
-          def tab():
-              for u in ["https://public.tableau.com/views/VictimisationsTimeandPlace/Summary.csv",
-                        "https://public.tableau.com/views/VictimisationsTimeandPlace/Summary.csv?:showVizHome=no",
-                        "https://public.tableau.com/profile/api/policenz/workbooks?count=50&index=0",
-                        "https://public.tableau.com/profile/api/policenz"]:
-                  r = c.get(u); print("=== tableau", u, r.status_code, r.headers.get("content-type"), len(r.content)); print(r.text[:1500])
-          tr("tab", tab)
-          def wb():
-              r = c.get("https://public.tableau.com/profile/api/policenz/workbooks?count=100&index=0")
-              for w in re.findall(r'"workbookRepoUrl":"([^"]+)".*?"defaultViewRepoUrl":"([^"]+)"', r.text)[:40]: print(" wb", w)
-          tr("wb", wb)
-          def qv():
-              t = c.get("https://www.qv.co.nz/price-index/").text.encode().decode("unicode_escape", "ignore")
-              for k in ("NORTH SHORE CITY", "MANUKAU CITY", "WAITAKERE CITY", "RODNEY DISTRICT"):
-                  i = t.find(f'"{k}"'); print(k, "::", re.sub(r"<[^>]+>", " ", t[i:i+500]))
-          tr("qv", qv)
-          PY
-          python3 -m pip install -q httpx
-          python3 /tmp/p.py > /tmp/area-probe.txt 2>&1; cat /tmp/area-probe.txt
+          pip install -q -r requirements.txt
+          python scripts/areas.py Milford "Mt Eden" Takapuna Albany > /tmp/area-probe.txt 2>&1; cat /tmp/area-probe.txt
       - name: Publish
         if: always()
         run: |
