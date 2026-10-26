@@ -45,9 +45,17 @@ def test_parse_qv():
 
 
 def test_update_areas_respects_refresh(cfg, tmp_path, monkeypatch):
-    (tmp_path / "areas.json").write_text(json.dumps({"updated_at": "2026-10-25", "suburbs": {}}), encoding="utf-8")
+    known = {k: {} for k in cfg["areas"]["suburbs"]}
+    (tmp_path / "areas.json").write_text(json.dumps({"updated_at": "2026-10-25", "suburbs": known}), encoding="utf-8")
     import areas
     monkeypatch.setattr(areas, "fetch_areas", lambda cfg: (_ for _ in ()).throw(AssertionError("should not fetch")))
     assert update_areas(cfg, tmp_path, date(2026, 10, 27)) is False
     monkeypatch.setattr(areas, "fetch_areas", lambda cfg: {"updated_at": "2026-11-02", "suburbs": {"Milford": {"rent": {"house": {}}}}, "districts": {}})
     assert update_areas(cfg, tmp_path, date(2026, 11, 2)) is True
+
+
+def test_update_areas_refetches_when_suburb_added(cfg, tmp_path, monkeypatch):
+    import areas
+    (tmp_path / "areas.json").write_text(json.dumps({"updated_at": "2026-10-26", "suburbs": {"Milford": {}}}), encoding="utf-8")
+    monkeypatch.setattr(areas, "fetch_areas", lambda cfg: {"updated_at": "2026-10-27", "suburbs": {"Newmarket": {"rent": {"apartment": {}}}}, "districts": {}})
+    assert update_areas(cfg, tmp_path, date(2026, 10, 27)) is True

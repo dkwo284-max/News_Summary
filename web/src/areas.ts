@@ -29,18 +29,29 @@ export interface AreasData {
 const KEY = "daily-brief:areas";
 const UOA = "University of Auckland City Campus, Auckland";
 
+// 기본 관심 동네. 저장된 값이 이전 버전(v 없음)이면 한 번 이 기본값으로 바꾼다 (학교는 유지).
+const DEFAULT_SUBURBS = ["Parnell", "Newmarket", "Milford"];
+const DEFAULT_SCHOOLS = ["Milford School"];
+const VERSION = 2;
+
 export function loadWatch(): Watch {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY) || "{}");
-    return { suburbs: Array.isArray(raw.suburbs) ? raw.suburbs : [], schools: Array.isArray(raw.schools) ? raw.schools : [] };
+    const schools = Array.isArray(raw.schools) ? raw.schools : [];
+    if (raw.v !== VERSION) {
+      const w = { suburbs: DEFAULT_SUBURBS, schools: schools.length ? schools : DEFAULT_SCHOOLS };
+      saveWatch(w);
+      return w;
+    }
+    return { suburbs: Array.isArray(raw.suburbs) ? raw.suburbs : [], schools };
   } catch {
-    return { suburbs: [], schools: [] };
+    return { suburbs: DEFAULT_SUBURBS, schools: DEFAULT_SCHOOLS };
   }
 }
 
 export function saveWatch(w: Watch): void {
   try {
-    localStorage.setItem(KEY, JSON.stringify(w));
+    localStorage.setItem(KEY, JSON.stringify({ ...w, v: VERSION }));
   } catch {
     /* ignore */
   }
@@ -102,9 +113,34 @@ const transit = (from: string) =>
   `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(UOA)}&travelmode=transit`;
 const google = (q: string) => `https://www.google.com/search?q=${encodeURIComponent(q)}`;
 
-function rentCell(s: SuburbData | undefined, kind: "house" | "apartment", beds: string): string {
-  const r = s?.rent?.[kind]?.[beds];
-  return r ? money(r.median) : "—";
+// 아파트 방 수별 오클랜드 평균: 받아 둔 모든 동네의 중간값을 계약 건수로 가중 평균
+const BEDS = ["2", "3", "4"];
+function aptAverage(areas: AreasData | null): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const b of BEDS) {
+    let sum = 0, n = 0;
+    for (const s of Object.values(areas?.suburbs ?? {})) {
+      const r = s.rent?.apartment?.[b];
+      if (r) {
+        sum += r.median * r.bonds;
+        n += r.bonds;
+      }
+    }
+    if (n) out[b] = Math.round(sum / n);
+  }
+  return out;
+}
+
+function vsAvg(h: H, v: number, avg: number | undefined): HTMLElement | string {
+  if (!avg) return "";
+  const pct = Math.round((v / avg - 1) * 100);
+  const cls = pct > 0 ? "up" : pct < 0 ? "down" : "flat";
+  return h("span", { class: `vs ${cls}` }, pct === 0 ? "평균" : `${pct > 0 ? "+" : ""}${pct}%`);
+}
+
+function aptCell(h: H, s: SuburbData | undefined, beds: string, avg: Record<string, number>): HTMLElement {
+  const r = s?.rent?.apartment?.[beds];
+  return r ? h("td", {}, money(r.median), " ", vsAvg(h, r.median, avg[beds])) : h("td", {}, "—");
 }
 
 /** 관심 동네 비교표 + 동네별 카드 + 관심 학교 카드 */
@@ -122,20 +158,20 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
   }
   // 1) 비교표
   if (w.suburbs.length) {
-    const head = h("tr", {}, h("th", { scope: "col" }, "동네"), h("th", { scope: "col" }, "주택 3룸"), h("th", { scope: "col" }, "주택 4룸"),
-      h("th", { scope: "col" }, "아파트 2룸"), h("th", { scope: "col" }, "평균 집값*"));
+    const avg = aptAverage(areas);
+    const head = h("tr", {}, h("th", { scope: "col" }, "아파트"), ...BEDS.map((b) => h("th", { scope: "col" }, `${b}룸`)));
     const rows = w.suburbs.map((name) => {
       const s = areas?.suburbs[name];
-      const d = s?.district ? areas?.districts[s.district] : undefined;
-      return h("tr", {}, h("th", { scope: "row" }, name), h("td", {}, rentCell(s, "house", "3")), h("td", {}, rentCell(s, "house", "4")),
-        h("td", {}, rentCell(s, "apartment", "2")), h("td", {}, d ? `${(d.avg_value / 1e6).toFixed(2)}M` : "—"));
+      return h("tr", {}, h("th", { scope: "row" }, name), ...BEDS.map((b) => aptCell(h, s, b, avg)));
     });
+    rows.push(h("tr", { class: "avg-row" }, h("th", { scope: "row" }, "오클랜드 평균"),
+      ...BEDS.map((b) => h("td", {}, avg[b] ? money(avg[b]) : "—"))));
     const period = w.suburbs.map((n) => areas?.suburbs[n]?.rent?.period).find(Boolean);
     root.append(h("section", { class: "hood-card" },
       h("h2", {}, "📊 관심 동네 비교"),
       h("div", { class: "table-wrap" }, h("table", { class: "hood-table" }, h("thead", {}, head), h("tbody", {}, ...rows))),
       h("p", { class: "board-note" },
-        `주간 렌트 중간값${period ? ` (${period} 보증금 신고 기준)` : ""}, Tenancy Services. *평균 집값은 QV 의 옛 시 단위(예: North Shore City) 평균이라 동네 차이는 반영되지 않아요.`,
+        `아파트 주간 렌트 중간값${period ? ` (${period} 보증금 신고 기준)` : ""}, Tenancy Services. %는 오클랜드 ${Object.values(areas?.suburbs ?? {}).filter((x) => x.rent?.apartment).length}개 동네 평균(계약 건수 가중) 대비.`,
         areas ? ` ${areas.updated_at.slice(5).replace("-", "/")} 갱신.` : " 데이터는 다음 아침 실행 뒤 표시됩니다."),
     ));
   }
@@ -146,13 +182,18 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
     const my = hits.filter((x) => x.names.includes(name));
     const safety = my.filter((x) => x.key === "akl_safety").length;
     const card = h("section", { class: "hood-card" }, h("h2", {}, `📍 ${name}`));
-    if (r?.house) {
-      const beds = ["2", "3", "4"].filter((b) => r.house![b]);
+    const apt = r?.apartment;
+    const beds = BEDS.filter((b) => apt?.[b]);
+    if (apt && beds.length) {
+      const avg = aptAverage(areas);
       card.append(h("ul", { class: "hood-rents" }, ...beds.map((b) => {
-        const x = r.house![b];
+        const x = apt[b];
         const month = fx ? ` · 한 달 ≈ ${Math.round((x.median * 52 / 12 * fx) / 10000).toLocaleString("ko-KR")}만 원` : "";
-        return h("li", {}, h("strong", {}, `주택 ${b}룸 ${money(x.median)}/주`), h("span", { class: "muted" }, ` 대부분 ${money(x.lower)}~${money(x.upper)}${month}`));
+        return h("li", {}, h("strong", {}, `아파트 ${b}룸 ${money(x.median)}/주 `), vsAvg(h, x.median, avg[b]),
+          h("span", { class: "muted" }, ` 대부분 ${money(x.lower)}~${money(x.upper)}${month} · ${x.bonds}건`));
       })));
+    } else if (areas) {
+      card.append(h("p", { class: "muted" }, "아파트 2룸 이상 렌트 자료가 없어요 (계약 건수가 적거나 다음 주 갱신 대기)."));
     }
     card.append(h("p", { class: "hood-news" },
       my.length ? `최근 2주 뉴스 ${my.length}건${safety ? ` (치안 ${safety}건)` : ""}` : "최근 2주 이 동네가 나온 뉴스는 없어요."));

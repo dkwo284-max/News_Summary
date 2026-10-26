@@ -149,12 +149,13 @@ def fetch_areas(cfg: dict, only: list[str] | None = None, client: httpx.Client |
 
 
 def update_areas(cfg: dict, data_dir: Path, today: date) -> bool:
-    """areas.json 이 없거나 refresh_days 이상 지났으면 새로 받는다. 받아 온 렌트가 하나도 없으면 기존 파일 유지."""
+    """areas.json 이 없거나 refresh_days 이상 지났거나 config 에 새 동네가 생기면 새로 받는다. 받아 온 렌트가 하나도 없으면 기존 파일 유지."""
     path = data_dir / AREAS_FILE
     days = int(cfg.get("areas", {}).get("refresh_days", 7))
     try:
         old = json.loads(path.read_text(encoding="utf-8"))
-        if (today - date.fromisoformat(old["updated_at"])).days < days:
+        missing = set(cfg.get("areas", {}).get("suburbs", {})) - set(old.get("suburbs", {}))
+        if (today - date.fromisoformat(old["updated_at"])).days < days and not missing:
             return False
     except Exception:  # noqa: BLE001
         old = None

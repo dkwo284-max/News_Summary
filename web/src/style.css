@@ -333,3 +333,9 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .hood-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .hood-links a { font-size: 0.8125rem; text-decoration: none; color: var(--accent); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; min-height: 32px; display: inline-flex; align-items: center; }
 .near { background: var(--why-bg); color: var(--why-text); border-radius: 999px; padding: 0 8px; font-weight: 600; }
+.vs { font-size: 0.75rem; font-weight: 700; }
+.vs.up { color: var(--hot-text); }
+.vs.down { color: var(--why-line); }
+.vs.flat { color: var(--muted); }
+.avg-row th, .avg-row td { color: var(--muted); font-weight: 600; }
+.hood-table .vs { display: block; line-height: 1.2; }
