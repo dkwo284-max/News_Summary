@@ -14,6 +14,7 @@ export interface Item {
   original_title?: string;
   published_at?: string | null;
   radar?: number;
+  carried_from?: string; // 그날 새 소식이 없어 최근 브리핑에서 이어 온 기사
 }
 
 export interface Section {
@@ -32,7 +33,12 @@ export type SectionKey =
   | "nz_education"
   | "nz_economy"
   | "nz_politics"
-  | "nz_auckland"
+  | "nz_auckland" // 이전 브리핑(10/27 이전) 호환
+  | "akl_life"
+  | "akl_health"
+  | "akl_education"
+  | "akl_safety"
+  | "akl_property"
   | "nz_immigration";
 
 export interface Brief {

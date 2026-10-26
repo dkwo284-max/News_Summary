@@ -682,6 +682,8 @@ def test_brief_sections_have_nz_categories_not_pool(cfg, fixtures_dir, monkeypat
     brief = json.loads((tmp_path / "out" / "dry-run" / "latest.json").read_text())
     assert "nz_national" not in brief["sections"]
     assert {"nz_society", "nz_education", "nz_economy", "nz_politics"} <= set(brief["sections"])
+    assert "nz_auckland" not in brief["sections"]
+    assert {"akl_life", "akl_health", "akl_education", "akl_safety", "akl_property"} <= set(brief["sections"])
 
 
 def test_gemini_disconnect_moves_to_next_model(cfg):
@@ -754,3 +756,32 @@ def test_non_nz_sources_dropped_only_from_nz_sections(cfg):
     chosen = select([nz_ok, nz_bad, kr], cfg, None, FIXTURE_NOW)
     assert [a.id for a in chosen["nz_immigration"]] == ["n1"]
     assert [a.id for a in chosen["kr_economy"]] == ["k1"]
+
+
+def test_auckland_split_by_topic(cfg):
+    items = [
+        art("a1", "Middlemore Hospital emergency department wait times worsen", section="nz_auckland"),
+        art("a2", "Auckland police arrest three after Henderson ram raid", section="nz_auckland"),
+        art("a3", "Auckland house prices fall for third month, QV says", section="nz_auckland"),
+        art("a4", "Albany primary school zone to shrink next year", section="nz_auckland"),
+        art("a5", "Auckland Transport changes Northern Express timetable", section="nz_auckland"),
+    ]
+    chosen = select(items, cfg, None, FIXTURE_NOW)
+    got = {k: [a.id for a in chosen[k]] for k in ("akl_health", "akl_safety", "akl_property", "akl_education", "akl_life")}
+    assert got == {"akl_health": ["a1"], "akl_safety": ["a2"], "akl_property": ["a3"], "akl_education": ["a4"], "akl_life": ["a5"]}
+    assert {a.id for a in chosen["nz_auckland"]} == {"a1", "a2", "a3", "a4", "a5"}
+
+
+def test_carry_over_fills_empty_topic_from_recent_brief(cfg, tmp_path):
+    from main import carry_over
+
+    item = {"id": "x1", "title_ko": "병원 소식", "summary_ko": ["a"], "tags": [], "importance": 6,
+            "sources": [{"name": "RNZ", "url": "https://rnz.co.nz/x"}]}
+    old = {"date": "2026-10-24", "sections": {"akl_health": {"label": "의료", "briefing": "", "items": [item]},
+                                             "akl_safety": {"label": "치안", "briefing": "", "items": [item]}}}
+    (tmp_path / "2026-10-24.json").write_text(json.dumps(old), encoding="utf-8")
+    sections = {"akl_health": {"label": "의료", "briefing": "", "items": []},
+                "akl_safety": {"label": "치안", "briefing": "", "items": []}}
+    carry_over(sections, cfg, tmp_path, "2026-10-27")
+    assert sections["akl_health"]["items"][0]["carried_from"] == "2026-10-24"   # carry_days 3
+    assert sections["akl_safety"]["items"] == []                                 # carry_days 2 → 너무 오래됨

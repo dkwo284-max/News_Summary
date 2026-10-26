@@ -32,8 +32,9 @@ RANK_SCHEMA = {
                     "radar": {"type": "integer"},
                     "category": {"type": "string"},
                     "nz_related": {"type": "boolean"},
+                    "akl_topic": {"type": "string"},
                 },
-                "required": ["id", "score", "immigration", "auckland", "same_as", "junk", "radar", "category", "nz_related"],
+                "required": ["id", "score", "immigration", "auckland", "same_as", "junk", "radar", "category", "nz_related", "akl_topic"],
                 "additionalProperties": False,
             },
         }
@@ -59,7 +60,9 @@ def _nz_criteria(cfg: dict) -> str:
 - 그 외 일반 뉴스는 사회적 파급력에 따라 4~6점.
 - 개인 사연·투병기·미담처럼 사회적 파급이 없는 개인 이야기, 뉴질랜드와 직접 관련 없는 해외 뉴스는 1~3점.
 - 교육 기사는 초등·중간학교(primary/intermediate) 관련(교육과정·교사·학교 급식·학군·안전·학부모 안내)을 7~9점,
-  대학·유학생·특정 고등학교 개별 소식은 3~5점으로."""
+  대학·유학생·특정 고등학교 개별 소식은 3~5점으로.
+- 오클랜드에 사는 초등학생 자녀 가족에게 실용적인 오클랜드 소식(병원·GP·응급실 대기, 학교·학군, 동네 치안·범죄 추세,
+  집값·렌트·주택 공급)은 5~8점. 동네 범죄 단건 사건은 4~5점, 지역 치안 추세·경찰 대책은 6~8점."""
 
 
 AUCKLAND_RULE = """- auckland: 오클랜드 지역 소식이면 true — 오클랜드 시의회·교통(AT)·지역 개발, 오클랜드 안에서 일어난 사건사고,
@@ -85,6 +88,13 @@ CATEGORY_RULE = """- category: 뉴질랜드 기사 분류 — "education"(교육
   "economy"(경제: 금리·물가·집값·고용·임금·기업·환율·세금·예산), "society"(그 외 사회: 사건사고·의료·날씨·교통·복지 등)."""
 
 
+AKL_TOPIC_RULE = """- akl_topic: auckland 이 true 인 기사의 주제 — "health"(의료: 오클랜드 병원·GP·응급실·의료 인력·대기·감염병),
+  "education"(교육: 오클랜드 초등·중간학교·학군(school zone)·학교 안전·유치원. 대학 소식도 education),
+  "safety"(치안: 범죄·경찰·강도·램레이드·폭행·화재·큰 교통사고·실종 등 사건사고),
+  "property"(부동산: 집값·렌트·주택 공급·재개발·용도지역(Unitary Plan)·건축 허가·임대 규정),
+  "life"(그 외 생활: 교통·시의회·날씨·행사·상권·환경 등). auckland 가 false 면 빈 문자열 ""."""
+
+
 NZ_RELATED_RULE = """- nz_related: 뉴질랜드 안의 일이거나 뉴질랜드 정부·주민에게 직접 영향이 있으면 true.
   호주·피지·미국 등 다른 나라의 학교·사건·정책 소식이면 false (해당 기사는 싣지 않음)."""
 
@@ -99,6 +109,7 @@ def _system_prompt(cfg: dict, region: str) -> str:
 {_radar_rule(cfg) if region == "nz" else '- radar: 항상 0.'}
 {CATEGORY_RULE if region == "nz" else '- category: 항상 빈 문자열 "".'}
 {NZ_RELATED_RULE if region == "nz" else '- nz_related: 항상 true.'}
+{AKL_TOPIC_RULE if region == "nz" else '- akl_topic: 항상 빈 문자열 "".'}
 - same_as: 목록의 다른 항목과 같은 사건이거나 같은 이슈의 후속·관련 기사이면(예: 같은 병원 인력난을 다룬 여러 기사,
   같은 기상 악화의 지역별 피해, 같은 비자 정책을 다룬 국내외 보도, 같은 인물의 사연) 그 묶음에서 가장 대표적인 기사의 id,
   아니면 빈 문자열 "". 대표 기사 자신은 "".
@@ -215,6 +226,25 @@ def heuristic_category(a: Article, cfg: dict) -> str:
     return "society"
 
 
+AKL_TOPICS = ("life", "health", "education", "safety", "property")
+
+
+def heuristic_akl_topic(a: Article, cfg: dict) -> str:
+    """AI 없이: akl_topics 키워드로 분류 (치안 → 의료 → 교육 → 부동산 순으로 먼저 맞는 것, 없으면 생활)."""
+    topics = cfg.get("akl_topics", {})
+    for t in ("safety", "health", "education", "property"):
+        if _kw_hits(a.title, topics.get(t, [])):
+            return t
+    return "life"
+
+
+def section_topic(a: Article, pool: str, cfg: dict) -> str:
+    """묶음(nz_national / nz_auckland)에서 나눌 때 쓰는 분류. 2차 묶기에서 탭이 바뀌어 분류가 맞지 않으면 키워드로 다시 정한다."""
+    if pool == "nz_auckland":
+        return a.akl_topic if a.akl_topic in AKL_TOPICS else heuristic_akl_topic(a, cfg)
+    return a.category if a.category in CATEGORIES else heuristic_category(a, cfg)
+
+
 def heuristic_auckland(a: Article, cfg: dict) -> bool:
     """AI 없이: 오클랜드 피드에서 왔거나 제목에 오클랜드 지명이 있으면 오클랜드 소식."""
     return a.section == "nz_auckland" or bool(_kw_hits(a.title, cfg.get("auckland_keywords", ["Auckland"])))
@@ -231,6 +261,7 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
             a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
             a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
             a.category = heuristic_category(a, cfg) if region == "nz" else ""
+            a.akl_topic = heuristic_akl_topic(a, cfg) if region == "nz" else ""
         return
     system = _system_prompt(cfg, region)
     # 같은 기사가 여러 섹션에 있으면 id 가 같다 → 한 번만 보내고 점수는 모두에 적용
@@ -258,6 +289,7 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                     a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
                     a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
                     a.category = heuristic_category(a, cfg) if region == "nz" else ""
+                    a.akl_topic = heuristic_akl_topic(a, cfg) if region == "nz" else ""
                     continue
                 a.score = max(1, min(10, int(row["score"])))
                 a.is_immigration = bool(row.get("immigration")) and region == "nz"
@@ -267,6 +299,8 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                 a.junk = bool(row.get("junk"))
                 cat = (row.get("category") or "").lower()
                 a.category = (cat if cat in CATEGORIES else heuristic_category(a, cfg)) if region == "nz" else ""
+                topic = (row.get("akl_topic") or "").lower()
+                a.akl_topic = (topic if topic in AKL_TOPICS else heuristic_akl_topic(a, cfg)) if region == "nz" else ""
                 a.radar_score = cap_radar(a, cfg, max(0, min(10, int(row.get("radar") or 0)))) if region == "nz" else 0
                 if region == "nz" and row.get("nz_related") is False:
                     a.junk = True  # 뉴질랜드와 무관한 해외 기사
@@ -280,7 +314,12 @@ def _preselect(items: list[Article], limit: int, reserved_feeds: set[str] = froz
     epoch = datetime.min.replace(tzinfo=timezone.utc)
     ranked = sorted(items, key=lambda a: (len(a.sources), a.published or epoch), reverse=True)
     picked = ranked[:limit]
-    extra = [a for a in ranked[limit:] if a.feed_id in reserved_feeds][:20]
+    per_feed: dict[str, int] = defaultdict(int)
+    extra = []
+    for a in ranked[limit:]:
+        if a.feed_id in reserved_feeds and per_feed[a.feed_id] < 10:
+            per_feed[a.feed_id] += 1
+            extra.append(a)
     return picked + extra
 
 
@@ -538,11 +577,12 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
     for key, sec in sections.items():
         if key == "nz_immigration" or sec.get("pool"):
             continue
-        if sec.get("from"):  # 뉴질랜드 사회·교육·경제·정치: 묶음에서 분류별로
-            items = [a for a in by_section.get(sec["from"], []) if (a.category or "society") == sec["category"]]
+        if sec.get("from"):  # 뉴질랜드 사회·교육·경제·정치 / 오클랜드 생활·의료·교육·치안·부동산: 묶음에서 분류별로
+            want = sec.get("category") or sec.get("topic")
+            items = [a for a in by_section.get(sec["from"], []) if section_topic(a, sec["from"], cfg) == want]
         else:
             items = by_section[key]
-        if key in ("nz_auckland",) or sec.get("from") == "nz_national":
+        if sec.get("from") in ("nz_national", "nz_auckland"):
             items = [a for a in items if not (_ids(a) & in_radar)]
         if sec["region"] == "kr":
             used_ids = set().union(*(_ids(x) for x in kr_used)) if kr_used else set()

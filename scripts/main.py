@@ -54,6 +54,28 @@ def build_alerts(sections: dict, extras: dict, cfg: dict) -> list[dict]:
     return alerts
 
 
+def carry_over(sections: dict, cfg: dict, data_dir: Path, today: str, max_items: int = 2) -> None:
+    """carry_days 가 있는 섹션(오클랜드 의료·교육·치안·부동산)이 비면 최근 브리핑의 같은 섹션 기사를 '지난 소식'으로 채운다."""
+    from datetime import date, timedelta
+
+    t = date.fromisoformat(today)
+    for key, sec in cfg["sections"].items():
+        days = int(sec.get("carry_days", 0))
+        if not days or key not in sections or sections[key]["items"]:
+            continue
+        for back in range(1, days + 1):
+            d = (t - timedelta(days=back)).isoformat()
+            try:
+                old = json.loads((data_dir / f"{d}.json").read_text(encoding="utf-8"))
+            except Exception:  # noqa: BLE001
+                continue
+            fresh = [it for it in old.get("sections", {}).get(key, {}).get("items", []) if not it.get("carried_from")]
+            if fresh:
+                sections[key]["items"] = [{**it, "carried_from": d} for it in fresh[:max_items]]
+                log.info("carried %d item(s) into %s from %s", len(sections[key]["items"]), key, d)
+                break
+
+
 def update_processing_only(cfg: dict, data_dir: Path) -> int:
     """최신 브리핑 파일의 extras.processing_times 만 다시 받아 덮어쓴다 (AI 요청 없음)."""
     from processing import fetch_processing_times
@@ -139,6 +161,7 @@ def main(argv: list[str] | None = None) -> int:
     if llm is not None and args.fixtures is None:
         attach_excerpts(chosen, cfg)
     sections = summarize_all(chosen, cfg, llm)
+    carry_over(sections, cfg, data_dir, local_now.date().isoformat())
 
     extras = {"nzd_krw": None, "auckland_weather": None}
     if not args.no_extras and args.fixtures is None:

@@ -15,7 +15,7 @@ interface TabDef {
 const TABS: TabDef[] = [
   { id: "kr", icon: "🇰🇷", label: "한국", sections: ["kr_society", "kr_economy", "kr_entertainment", "kr_politics"] },
   { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_society", "nz_education", "nz_economy", "nz_politics", "nz_national"] },
-  { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["nz_auckland"] },
+  { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["akl_life", "akl_health", "akl_education", "akl_safety", "akl_property", "nz_auckland"] },
   { id: "imm", icon: "🛂", label: "이민 레이더", sections: ["nz_immigration"] },
 ];
 const KR_CHIPS: { key: SectionKey | "all"; label: string }[] = [
@@ -37,8 +37,16 @@ const NZ_CHIPS: Chip[] = [
   { key: "nz_economy", label: "경제" },
   { key: "nz_politics", label: "정치" },
 ];
+const AKL_CHIPS: Chip[] = [
+  { key: "all", label: "전체" },
+  { key: "akl_life", label: "생활" },
+  { key: "akl_health", label: "의료" },
+  { key: "akl_education", label: "교육" },
+  { key: "akl_safety", label: "치안" },
+  { key: "akl_property", label: "부동산" },
+];
 // 탭별로 선택한 카테고리 칩
-const chipState: Record<string, SectionKey | "all"> = { kr: "all", nz: "all" };
+const chipState: Record<string, SectionKey | "all"> = { kr: "all", nz: "all", akl: "all" };
 let query = "";
 let viewingLatest = true;
 let live: LiveData | null = loadLive();
@@ -215,6 +223,7 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   const meta = h("div", { class: "card-meta" });
   if (sectionLabel) meta.append(h("span", { class: "sec-label" }, sectionLabel));
   if (item.importance >= 8) meta.append(h("span", { class: "hot", title: `중요도 ${item.importance}/10` }, `중요 ${item.importance}`));
+  if (item.carried_from) meta.append(h("span", { class: "carried", title: "오늘은 새 소식이 없어 최근 소식을 보여줍니다" }, `지난 소식 · ${fmtDateShort(item.carried_from)}`));
   const rt = relTime(item.published_at);
   if (rt) meta.append(h("span", {}, rt));
 
@@ -242,7 +251,7 @@ function sectionBlock(key: SectionKey, showHeading: boolean): HTMLElement | null
   if (!brief) return null;
   const sec = brief.sections[key];
   if (!sec) return null;
-  const region = key.startsWith("nz") ? "nz" : "kr";
+  const region = key.startsWith("kr_") ? "kr" : "nz";
   const wrap = h("section", { class: "section", "aria-labelledby": `h-${key}` });
   wrap.append(h("h2", { id: `h-${key}`, class: showHeading ? "sec-title" : "sr-only" }, sec.label));
   if (sec.briefing) wrap.append(h("p", { class: "briefing" }, h("span", { class: "briefing-label" }, "오늘의 한 줄"), sec.briefing));
@@ -255,6 +264,9 @@ function renderChips(tabId: string): HTMLElement | null {
   let chips: Chip[];
   if (tabId === "kr") {
     chips = KR_CHIPS.filter((c) => c.key !== "kr_politics" || settings.showPolitics);
+  } else if (tabId === "akl") {
+    if (!brief?.sections.akl_life) return null; // 예전 브리핑(오클랜드 단일 섹션)
+    chips = AKL_CHIPS;
   } else {
     // 예전 브리핑(뉴질랜드 단일 섹션)에는 칩을 보여주지 않음
     if (!brief?.sections.nz_society) return null;
@@ -288,8 +300,9 @@ function renderSearch(): void {
   for (const { item, key } of hits) {
     // 검색 결과에서는 '사회'처럼 같은 이름이 두 나라에 있으므로 나라를 붙여 표시
     const label = brief.sections[key].label;
-    const tagged = key.startsWith("kr_") ? `한국 ${label}` : ["nz_auckland", "nz_immigration"].includes(key) ? label : `뉴질랜드 ${label}`;
-    main.append(card(item, key.startsWith("nz") ? "nz" : "kr", tagged));
+    const tagged = key.startsWith("kr_") ? `한국 ${label}` : key.startsWith("akl_") ? `오클랜드 ${label}`
+      : ["nz_auckland", "nz_immigration"].includes(key) ? label : `뉴질랜드 ${label}`;
+    main.append(card(item, key.startsWith("kr_") ? "kr" : "nz", tagged));
   }
 }
 
@@ -307,10 +320,19 @@ function renderMain(): void {
   }
   const tab = TABS.find((t) => t.id === settings.tab) ?? TABS[0];
   main.setAttribute("aria-labelledby", `tab-${tab.id}`);
-  if (tab.id === "kr" || tab.id === "nz") {
+  if (tab.id === "kr" || tab.id === "nz" || tab.id === "akl") {
     const chips = renderChips(tab.id);
     if (chips) main.append(chips);
     const sel = chipState[tab.id];
+    if (tab.id === "akl") {
+      // 생활비 지표는 전체·부동산에서, 주제별 안내 링크는 해당 칩에서
+      if (sel === "all" || sel === "akl_property") {
+        const costs = costBoard();
+        if (costs) main.append(costs);
+      }
+      const guide = topicGuide(sel);
+      if (guide) main.append(guide);
+    }
     const keys = (sel === "all" ? visibleSections(tab) : [sel]).filter((k) => brief!.sections[k]);
     for (const k of keys) {
       const block = sectionBlock(k, !!chips);
@@ -323,10 +345,6 @@ function renderMain(): void {
       main.append(visaCard(h, openSettings));
       const board = processingBoard();
       if (board) main.append(board);
-    }
-    if (tab.id === "akl") {
-      const costs = costBoard();
-      if (costs) main.append(costs);
     }
     for (const k of visibleSections(tab)) {
       const block = sectionBlock(k, false);
@@ -430,6 +448,43 @@ function costBoard(): HTMLElement | null {
       h("span", { class: "board-meta" }, `${fmtDateShort(c.updated_at)} 확인`)),
     h("ul", { class: "cost-list" }, ...rows),
     h("p", { class: "board-note" }, "렌트는 그 달 새로 맺은 임대차의 보증금 신고 기준(오클랜드 전체), 유가는 전국 평균 주유소 게시 가격이에요. 원화는 현재 환율로 어림한 값입니다."));
+}
+
+// 오클랜드 주제별 안내: 새 소식이 없는 날에도 바로 쓸 수 있는 공식 창구
+type Guide = { title: string; links: { label: string; desc: string; url: string }[] };
+const GUIDES: Partial<Record<SectionKey, Guide>> = {
+  akl_health: { title: "🏥 의료 이용 안내", links: [
+    { label: "응급 111", desc: "생명이 위급할 때 (구급차)", url: "tel:111" },
+    { label: "Healthline 0800 611 116", desc: "24시간 무료 전화 상담 · 통역 요청 가능", url: "tel:0800611116" },
+    { label: "Healthpoint", desc: "GP·야간/주말 진료소(A&M)·약국 찾기, 신규 환자 등록 가능 여부", url: "https://www.healthpoint.co.nz/" },
+    { label: "Health NZ", desc: "공공의료 이용 자격(eligibility)은 비자 종류에 따라 달라요 — 사이트에서 'eligibility' 검색", url: "https://www.healthnz.govt.nz/" },
+  ] },
+  akl_education: { title: "🎒 초등학교 안내", links: [
+    { label: "학교 찾기·학군(zone)", desc: "주소로 학군 학교와 학교 정보 확인 (Education Counts)", url: "https://www.educationcounts.govt.nz/find-school" },
+    { label: "ERO 학교 평가 보고서", desc: "학교별 교육평가원 보고서", url: "https://ero.govt.nz/" },
+  ] },
+  akl_safety: { title: "🚓 치안 안내", links: [
+    { label: "응급 111", desc: "범죄 진행 중·위험할 때", url: "tel:111" },
+    { label: "비응급 신고 105", desc: "이미 지난 도난·피해 신고 (온라인 신고는 경찰 홈페이지)", url: "tel:105" },
+    { label: "NZ Police", desc: "지역 경찰서·온라인 신고", url: "https://www.police.govt.nz/" },
+    { label: "동네별 범죄 통계", desc: "경찰 공개 데이터 policedata.nz", url: "https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz" },
+  ] },
+  akl_property: { title: "🏠 부동산 확인 도구", links: [
+    { label: "동네별 시세 렌트", desc: "지역·집 크기별 렌트 (Tenancy Services)", url: "https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/" },
+    { label: "QV 집값 지수", desc: "오클랜드·지역별 주택 가치 추세", url: "https://www.qv.co.nz/price-index/" },
+    { label: "GeoMaps", desc: "주소별 침수 위험·용도지역(Unitary Plan) 확인", url: "https://geomapspublic.aucklandcouncil.govt.nz/viewer/index.html" },
+  ] },
+};
+
+function topicGuide(sel: SectionKey | "all"): HTMLElement | null {
+  const g = sel === "all" ? undefined : GUIDES[sel];
+  if (!g) return null;
+  const empty = !(brief?.sections[sel as SectionKey]?.items.length);
+  return h("details", { class: "guide", ...(empty ? { open: "" } : {}) },
+    h("summary", {}, g.title),
+    h("ul", {}, ...g.links.map((l) => h("li", {},
+      h("a", { href: l.url.startsWith("tel:") ? l.url : safeUrl(l.url), ...(l.url.startsWith("tel:") ? {} : { target: "_blank", rel: "noopener noreferrer" }) }, l.label),
+      h("span", { class: "guide-desc" }, l.desc)))));
 }
 
 function renderAll(): void {

@@ -305,3 +305,12 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .cost-value small { font-size: 0.8125rem; font-weight: 600; color: var(--muted); }
 .cost-sub { font-size: 0.8125rem; }
 .cost-src { font-size: 0.75rem; color: var(--accent); text-decoration: none; margin-top: 4px; min-height: 24px; display: inline-flex; align-items: center; }
+
+/* ── 오클랜드 주제 안내 · 지난 소식 ── */
+.guide { margin: 0 0 12px; padding: 10px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.guide summary { cursor: pointer; font-weight: 700; font-size: 0.9375rem; min-height: 32px; display: flex; align-items: center; }
+.guide ul { list-style: none; margin: 6px 0 2px; padding: 0; display: grid; gap: 8px; }
+.guide li { display: flex; flex-direction: column; gap: 1px; }
+.guide a { color: var(--accent); font-weight: 600; text-decoration: none; min-height: 24px; display: inline-flex; align-items: center; }
+.guide-desc { font-size: 0.8125rem; color: var(--muted); }
+.carried { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 0 8px; font-weight: 600; }

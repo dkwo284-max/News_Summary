@@ -20,7 +20,8 @@ def compose(brief: dict, cfg: dict) -> str:
         if key == "kr_politics":  # 정치는 앱에서 켠 사람만 보도록 알림에서도 제외
             continue
         if sec["items"]:
-            country = "한국 " if key.startswith("kr_") else "" if key in ("nz_auckland", "nz_immigration") else "뉴질랜드 "
+            country = ("한국 " if key.startswith("kr_") else "오클랜드 " if key.startswith("akl_")
+                       else "" if key in ("nz_auckland", "nz_immigration") else "뉴질랜드 ")
             lines.append(f"• {country}{sec['label']}: {sec['briefing']}")
     ex = brief.get("extras") or {}
     if ex.get("nzd_krw"):

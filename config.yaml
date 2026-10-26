@@ -43,7 +43,14 @@ sections:
   nz_education:     { label: "교육", region: nz, from: nz_national, category: education, top_n: 4 }
   nz_economy:       { label: "경제", region: nz, from: nz_national, category: economy,   top_n: 5 }
   nz_politics:      { label: "정치", region: nz, from: nz_national, category: politics,  top_n: 4 }
-  nz_auckland:      { label: "오클랜드", region: nz, top_n: 5, candidate_limit: 60 }
+  # 오클랜드 기사도 nz_auckland 한 묶음으로 선별한 뒤 AI 주제 분류(akl_topic)로 생활·의료·교육·치안·부동산 섹션으로 나눕니다.
+  # carry_days: 그날 새 소식이 없으면 최근 N일 브리핑의 같은 섹션 기사를 '지난 소식'으로 이어서 보여줍니다.
+  nz_auckland:      { label: "오클랜드", region: nz, pool: true, top_n: 20, candidate_limit: 80 }
+  akl_life:         { label: "생활",   region: nz, from: nz_auckland, topic: life,      top_n: 5 }
+  akl_health:       { label: "의료",   region: nz, from: nz_auckland, topic: health,    top_n: 4, carry_days: 3 }
+  akl_education:    { label: "교육",   region: nz, from: nz_auckland, topic: education, top_n: 4, carry_days: 3 }
+  akl_safety:       { label: "치안",   region: nz, from: nz_auckland, topic: safety,    top_n: 4, carry_days: 2 }
+  akl_property:     { label: "부동산", region: nz, from: nz_auckland, topic: property,  top_n: 4, carry_days: 3 }
   # nz_immigration(이민 레이더)은 이민 전용 피드 + 뉴질랜드/오클랜드 후보 중 독자 프로필(아래 profile) 관련도가 높은 기사.
   # 레이더에 실린 기사는 뉴질랜드/오클랜드 탭에서 빠집니다(중복 없음).
   nz_immigration:   { label: "이민 레이더", region: nz, top_n: 6, candidate_limit: 40 }
@@ -190,6 +197,13 @@ nz_categories:
   politics: [election, Parliament, MP, MPs, minister, Labour, National, Greens, ACT, "NZ First", "Te Pāti Māori", coalition, poll, Luxon, Hipkins, Seymour, Peters, Cabinet, bill, select committee]
   economy: [OCR, inflation, CPI, "Reserve Bank", GDP, economy, economic, business, petrol, "house prices", "housing market", mortgage, unemployment, jobs, wage, wages, KiwiSaver, "NZ dollar", budget, tax, bank, banks, Fonterra, exports, recession, "cost of living"]
 
+# ── 오클랜드 주제 (AI 없이 돌 때 분류 키워드, 해당 없으면 생활) ──────────
+akl_topics:
+  health: [hospital, hospitals, GP, GPs, "Health NZ", "Te Whatu Ora", "emergency department", ED, Starship, Middlemore, "North Shore Hospital", "Auckland City Hospital", nurses, doctors, clinic, measles, vaccination, ambulance, "after-hours", pharmacy]
+  education: [school, schools, "primary school", "intermediate school", pupils, students, teacher, teachers, principal, kindergarten, "early childhood", "school zone", enrolment, ERO]
+  safety: [police, crime, burglary, "ram raid", robbery, assault, stabbing, shooting, homicide, murder, arrested, arrest, charged, gang, gangs, theft, fire, crash, "serious crash", missing]
+  property: ["house prices", "house price", "property market", "housing market", rent, rents, rental, rentals, landlord, tenants, housing, "Unitary Plan", rezoning, intensification, QV, REINZ, "building consents", apartments, townhouses, mortgage]
+
 # ── 뉴질랜드 / 오클랜드 탭 나누기 ─────────────────────────────
 # 같은 사건은 한 탭에만 싣습니다. 오클랜드 지역 소식(시의회·교통·지역 사건사고·오클랜드 병원 등)은
 # 오클랜드 탭으로, 전국 단위 소식(정책·경제·전국 통계)은 오클랜드가 언급돼도 뉴질랜드 탭으로 보냅니다.
@@ -208,7 +222,7 @@ auckland_keywords: [Auckland, "Tāmaki Makaurau", "North Shore", Manukau, "Waite
 #   - 한도 초과·오류 시 그날은 AI 없이(키워드 선별 + RSS 원문 설명) 표시됩니다.
 llm:
   provider: "gemini"
-  max_requests_per_run: 7      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 5회 + 처리기간 추출이 필요할 때 1회
+  max_requests_per_run: 8      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 5~6회 + 처리기간 추출이 필요할 때 1회
   rank_batch_size: 260         # 선별 1회 요청에 넣을 최대 후보 수 (지역별 후보 합계가 이 이하면 지역당 1회)
 
   gemini:
@@ -463,6 +477,36 @@ feeds:
     section: nz_auckland
     url: "https://ourauckland.aucklandcouncil.govt.nz/rss"
     fallbacks: ["https://news.google.com/rss/search?q=site:ourauckland.aucklandcouncil.govt.nz&hl=en-NZ&gl=NZ&ceid=NZ:en"]
+  # 오클랜드 주제별 보강 피드 (출처 1곳짜리 기사가 많아 reserve 로 항상 후보에 포함)
+  - id: gn_akl_health
+    name: "Google News"
+    section: nz_auckland
+    google_news: true
+    reserve: true
+    lookback_hours: 48
+    url: "https://news.google.com/rss/search?q=Auckland+(hospital+OR+%22Health+NZ%22+OR+GP+OR+%22emergency+department%22+OR+Starship+OR+Middlemore+OR+%22North+Shore+Hospital%22+OR+nurses)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_akl_school
+    name: "Google News"
+    section: nz_auckland
+    google_news: true
+    reserve: true
+    lookback_hours: 72
+    # 초등·중간학교 중심
+    url: "https://news.google.com/rss/search?q=Auckland+(%22primary+school%22+OR+%22intermediate+school%22+OR+%22school+zone%22+OR+principal+OR+pupils+OR+kindergarten)+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_akl_crime
+    name: "Google News"
+    section: nz_auckland
+    google_news: true
+    reserve: true
+    lookback_hours: 24
+    url: "https://news.google.com/rss/search?q=Auckland+(police+OR+crime+OR+burglary+OR+%22ram+raid%22+OR+robbery+OR+assault+OR+arrested+OR+homicide)+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_akl_property
+    name: "Google News"
+    section: nz_auckland
+    google_news: true
+    reserve: true
+    lookback_hours: 48
+    url: "https://news.google.com/rss/search?q=Auckland+(%22house+prices%22+OR+%22property+market%22+OR+%22housing+market%22+OR+rents+OR+rental+OR+%22Unitary+Plan%22+OR+QV+OR+REINZ+OR+%22building+consents%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: auckland_transport
     name: "Auckland Transport"
     section: nz_auckland
