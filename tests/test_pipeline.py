@@ -785,3 +785,11 @@ def test_carry_over_fills_empty_topic_from_recent_brief(cfg, tmp_path):
     carry_over(sections, cfg, tmp_path, "2026-10-27")
     assert sections["akl_health"]["items"][0]["carried_from"] == "2026-10-24"   # carry_days 3
     assert sections["akl_safety"]["items"] == []                                 # carry_days 2 → 너무 오래됨
+
+
+def test_other_region_title_not_auckland(cfg):
+    items = [art("a1", "Rotorua Lake Road to get 60 social homes", section="nz_auckland"),
+             art("a2", "Auckland and Wellington rents diverge", section="nz_auckland")]
+    chosen = select(items, cfg, None, FIXTURE_NOW)
+    assert [a.id for a in chosen["nz_auckland"]] == ["a2"]
+    assert "a1" in {a.id for k in ("nz_society", "nz_economy", "nz_education", "nz_politics") for a in chosen[k]}

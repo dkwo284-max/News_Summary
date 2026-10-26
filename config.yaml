@@ -208,6 +208,8 @@ akl_topics:
 # 같은 사건은 한 탭에만 싣습니다. 오클랜드 지역 소식(시의회·교통·지역 사건사고·오클랜드 병원 등)은
 # 오클랜드 탭으로, 전국 단위 소식(정책·경제·전국 통계)은 오클랜드가 언급돼도 뉴질랜드 탭으로 보냅니다.
 # AI 가 판단하며, AI 없이 돌 때는 아래 키워드가 제목에 있으면 오클랜드 소식으로 봅니다.
+# 제목에 아래 다른 지역 이름만 있고 오클랜드 지명이 없으면 AI 판단과 상관없이 오클랜드 소식이 아닌 것으로 봅니다.
+other_region_keywords: [Wellington, Christchurch, Hamilton, Tauranga, Dunedin, Rotorua, Nelson, Napier, Hastings, "Whangārei", Whangarei, Queenstown, "Palmerston North", "New Plymouth", Invercargill, Gisborne, Whanganui, "Taupō", Taupo, Timaru, Blenheim, Waikato, Canterbury, Otago, Northland, "Bay of Plenty", "Hawke's Bay", Taranaki, Southland, "West Coast", Marlborough]
 auckland_keywords: [Auckland, "Tāmaki Makaurau", "North Shore", Manukau, "Waitematā", Waitakere, Henderson, Papakura, Ōtāhuhu, Otahuhu, Mangere, "Māngere", Albany, Takapuna, Howick, Pakuranga, Piha, "Waiheke", "Starship", "Auckland Transport", "Auckland Council", "Eden Park", "CRL", "City Rail Link"]
 
 # ── AI 요약 ─────────────────────────────────────────────────

@@ -245,8 +245,15 @@ def section_topic(a: Article, pool: str, cfg: dict) -> str:
     return a.category if a.category in CATEGORIES else heuristic_category(a, cfg)
 
 
+def not_auckland(a: Article, cfg: dict) -> bool:
+    """제목에 다른 지역 이름만 있고 오클랜드 지명이 없으면 오클랜드 소식이 아님 (AI 오분류 보정)."""
+    return bool(_kw_hits(a.title, cfg.get("other_region_keywords", []))) and not _kw_hits(a.title, cfg.get("auckland_keywords", ["Auckland"]))
+
+
 def heuristic_auckland(a: Article, cfg: dict) -> bool:
     """AI 없이: 오클랜드 피드에서 왔거나 제목에 오클랜드 지명이 있으면 오클랜드 소식."""
+    if not_auckland(a, cfg):
+        return False
     return a.section == "nz_auckland" or bool(_kw_hits(a.title, cfg.get("auckland_keywords", ["Auckland"])))
 
 
@@ -293,7 +300,7 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                     continue
                 a.score = max(1, min(10, int(row["score"])))
                 a.is_immigration = bool(row.get("immigration")) and region == "nz"
-                a.is_auckland = bool(row.get("auckland")) and region == "nz"
+                a.is_auckland = bool(row.get("auckland")) and region == "nz" and not not_auckland(a, cfg)
                 same = row.get("same_as") or ""
                 a.same_as = same if same in by_id and same != a.id else ""
                 a.junk = bool(row.get("junk"))
@@ -435,7 +442,8 @@ def _keys(title: str) -> set[str]:
     return en | ko
 
 
-def _apply_groups(items: list[Article], groups: list[dict], tab_key: str | None, min_shared: int = 2) -> list[Article]:
+def _apply_groups(items: list[Article], groups: list[dict], tab_key: str | None, min_shared: int = 2,
+                  cfg: dict | None = None) -> list[Article]:
     """AI 가 묶은 그룹대로 기사를 합친다. 그룹에 없는 기사는 그대로 둔다.
 
     AI 가 무관한 기사를 묶는 경우가 있어서, 이미 받아들인 기사들과 제목 핵심 단어를 min_shared 개 이상
@@ -469,7 +477,7 @@ def _apply_groups(items: list[Article], groups: list[dict], tab_key: str | None,
                 if t != rep.title and t not in rep.related:
                     rep.related.append(t)
         if tab_key:
-            rep.is_auckland = g.get(tab_key) == "auckland"
+            rep.is_auckland = g.get(tab_key) == "auckland" and not (cfg is not None and not_auckland(rep, cfg))
         used.update(m.id for m in members)
         out.append(rep)
     out.extend(a for a in items if a.id not in used)
@@ -492,7 +500,7 @@ def refine_nz(by_section: dict[str, list[Article]], radar: list[Article], cfg: d
         return radar
     window_ids = {a.id for a in nz_items}
     rest = [a for k in ("nz_national", "nz_auckland") for a in by_section[k] if a.id not in window_ids]
-    regrouped = _apply_groups(nz_items, out.get("nz_groups", []), "tab")
+    regrouped = _apply_groups(nz_items, out.get("nz_groups", []), "tab", cfg=cfg)
     nat, akl = [], []
     for a in regrouped + rest:
         a.section = "nz_auckland" if a.is_auckland else "nz_national"
