@@ -1,0 +1,286 @@
+INFO    HTTP Request: GET https://www.qv.co.nz/price-index/ "HTTP/1.1 200 OK"
+INFO    HTTP Request: GET https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/?location=Auckland+-+Milford&action_doSearch=Search "HTTP/1.1 200 OK"
+INFO    HTTP Request: GET https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/?location=Auckland+-+Takapuna&action_doSearch=Search "HTTP/1.1 200 OK"
+INFO    HTTP Request: GET https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/?location=Auckland+-+Albany&action_doSearch=Search "HTTP/1.1 200 OK"
+INFO    areas: rent for 3/3 suburbs, 0 districts
+{
+ "updated_at": "2026-10-26",
+ "rent_source": "https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/",
+ "value_source": "https://www.qv.co.nz/price-index/",
+ "suburbs": {
+  "Milford": {
+   "district": "NORTH SHORE CITY",
+   "rent": {
+    "period": "2026-03~2026-08",
+    "apartment": {
+     "1": {
+      "bonds": 9,
+      "lower": 450,
+      "median": 470,
+      "upper": 510
+     },
+     "2": {
+      "bonds": 55,
+      "lower": 575,
+      "median": 630,
+      "upper": 700
+     }
+    },
+    "house": {
+     "1": {
+      "bonds": 100,
+      "lower": 600,
+      "median": 740,
+      "upper": 927
+     },
+     "2": {
+      "bonds": 200,
+      "lower": 573,
+      "median": 630,
+      "upper": 695
+     },
+     "3": {
+      "bonds": 269,
+      "lower": 690,
+      "median": 780,
+      "upper": 880
+     },
+     "4": {
+      "bonds": 139,
+      "lower": 800,
+      "median": 930,
+      "upper": 1000
+     },
+     "5+": {
+      "bonds": 34,
+      "lower": 856,
+      "median": 1000,
+      "upper": 1198
+     }
+    },
+    "flat": {
+     "1": {
+      "bonds": 33,
+      "lower": 350,
+      "median": 440,
+      "upper": 500
+     },
+     "2": {
+      "bonds": 161,
+      "lower": 500,
+      "median": 580,
+      "upper": 625
+     },
+     "3": {
+      "bonds": 17,
+      "lower": 600,
+      "median": 700,
+      "upper": 790
+     }
+    },
+    "room": {
+     "1": {
+      "bonds": 14,
+      "lower": 200,
+      "median": 210,
+      "upper": 240
+     }
+    },
+    "all": {
+     "bonds": 1054,
+     "lower": 580,
+     "median": 690,
+     "upper": 850
+    },
+    "name": "Milford"
+   }
+  },
+  "Takapuna": {
+   "district": "NORTH SHORE CITY",
+   "rent": {
+    "period": "2026-03~2026-08",
+    "apartment": {
+     "1": {
+      "bonds": 135,
+      "lower": 500,
+      "median": 560,
+      "upper": 610
+     },
+     "2": {
+      "bonds": 226,
+      "lower": 635,
+      "median": 750,
+      "upper": 850
+     },
+     "3": {
+      "bonds": 41,
+      "lower": 773,
+      "median": 938,
+      "upper": 1131
+     }
+    },
+    "flat": {
+     "1": {
+      "bonds": 26,
+      "lower": 315,
+      "median": 430,
+      "upper": 595
+     },
+     "2": {
+      "bonds": 156,
+      "lower": 525,
+      "median": 590,
+      "upper": 650
+     },
+     "3": {
+      "bonds": 12,
+      "lower": 610,
+      "median": 680,
+      "upper": 740
+     }
+    },
+    "house": {
+     "1": {
+      "bonds": 141,
+      "lower": 580,
+      "median": 685,
+      "upper": 891
+     },
+     "2": {
+      "bonds": 182,
+      "lower": 585,
+      "median": 635,
+      "upper": 690
+     },
+     "3": {
+      "bonds": 201,
+      "lower": 671,
+      "median": 795,
+      "upper": 915
+     },
+     "4": {
+      "bonds": 127,
+      "lower": 835,
+      "median": 1000,
+      "upper": 1200
+     },
+     "5+": {
+      "bonds": 37,
+      "lower": 980,
+      "median": 1300,
+      "upper": 1800
+     }
+    },
+    "room": {
+     "1": {
+      "bonds": 21,
+      "lower": 285,
+      "median": 310,
+      "upper": 652
+     }
+    },
+    "all": {
+     "bonds": 1313,
+     "lower": 580,
+     "median": 680,
+     "upper": 860
+    },
+    "name": "Takapuna"
+   }
+  },
+  "Albany": {
+   "district": "NORTH SHORE CITY",
+   "rent": {
+    "period": "2026-03~2026-08",
+    "apartment": {
+     "1": {
+      "bonds": 141,
+      "lower": 399,
+      "median": 498,
+      "upper": 565
+     },
+     "2": {
+      "bonds": 165,
+      "lower": 560,
+      "median": 600,
+      "upper": 680
+     },
+     "3": {
+      "bonds": 32,
+      "lower": 713,
+      "median": 835,
+      "upper": 870
+     },
+     "4": {
+      "bonds": 14,
+      "lower": 630,
+      "median": 695,
+      "upper": 780
+     }
+    },
+    "house": {
+     "1": {
+      "bonds": 165,
+      "lower": 580,
+      "median": 660,
+      "upper": 820
+     },
+     "2": {
+      "bonds": 55,
+      "lower": 540,
+      "median": 580,
+      "upper": 672
+     },
+     "3": {
+      "bonds": 188,
+      "lower": 679,
+      "median": 750,
+      "upper": 796
+     },
+     "4": {
+      "bonds": 210,
+      "lower": 780,
+      "median": 850,
+      "upper": 950
+     },
+     "5+": {
+      "bonds": 45,
+      "lower": 980,
+      "median": 1080,
+      "upper": 1200
+     }
+    },
+    "flat": {
+     "1": {
+      "bonds": 6,
+      "lower": 353,
+      "median": 463,
+      "upper": 550
+     },
+     "2": {
+      "bonds": 17,
+      "lower": 300,
+      "median": 510,
+      "upper": 570
+     }
+    },
+    "room": {
+     "1": {
+      "bonds": 108,
+      "lower": 188,
+      "median": 210,
+      "upper": 254
+     }
+    },
+    "all": {
+     "bonds": 1184,
+     "lower": 530,
+     "median": 660,
+     "upper": 800
+    },
+    "name": "Albany"
+   }
+  }
+ },
+ "districts": {}
+}
