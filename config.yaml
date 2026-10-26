@@ -320,10 +320,6 @@ areas:
     Hobsonville: waitakere
     West Harbour: waitakere
     Te Atatu Peninsula: waitakere
-    Orewa: rodney
-    Silverdale: rodney
-    Millwater: rodney
-    Whangaparaoa: rodney
 
 processing_times:
   # INZ 대기 시간 표(…-wait-times)는 '평균(50%)'과 '대부분(80%)' 처리 기간을 함께 보여줘서 먼저 시도합니다.
