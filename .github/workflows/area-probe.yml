@@ -1,0 +1,81 @@
+name: Probe area data
+
+# 임시 점검(수동): 동네 비교용 데이터 소스. 결과는 area-probe 브랜치에 기록.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe
+        run: |
+          cat > /tmp/p.py <<'PY'
+          import re, json, httpx
+          UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
+          c = httpx.Client(timeout=60, follow_redirects=True, headers=UA)
+          def show(label, r, n=1500):
+              print(f"\n=== {label}: {r.status_code} {r.url} ct={r.headers.get('content-type')} len={len(r.content)}")
+          def text(t): return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t))
+          # 1) Tenancy market rent search
+          for u in ["https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/?location=Milford&period=26&action_doSearch=Search",
+                    "https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/"]:
+              try:
+                  r = c.get(u); show("market-rent", r)
+                  t = r.text
+                  print("forms:", re.findall(r'<form[^>]*>', t)[:5])
+                  print("selects:", re.findall(r'<(?:select|input)[^>]*name="([^"]+)"', t)[:30])
+                  print("api-ish:", sorted(set(re.findall(r'["\'](/[^"\']*(?:api|json|search|rent)[^"\']*)["\']', t)))[:30])
+                  f = text(t); i = f.find("Milford"); print("milford ctx:", f[max(0,i-300):i+1500] if i >= 0 else "none")
+              except Exception as e: print("ERR", u, e)
+          # 2) rental bond data csv links
+          try:
+              r = c.get("https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/")
+              print("\n=== bond links", sorted(set(re.findall(r'href="([^"]+\.(?:csv|zip|xlsx)[^"]*)"', r.text, re.I))))
+          except Exception as e: print("ERR bond", e)
+          # 3) QV district keys
+          try:
+              r = c.get("https://www.qv.co.nz/price-index/"); t = r.text.encode().decode("unicode_escape", "ignore")
+              keys = sorted(set(re.findall(r'"([A-Z][A-Z \-\']{3,40})": \{"name"', t)))
+              print("\n=== QV keys", len(keys), keys[:120])
+              for k in ("NORTH SHORE", "AUCKLAND CITY", "AUCKLAND REGION"):
+                  i = t.find(f'"{k}"'); print(k, "::", text(t[i:i+700]) if i >= 0 else "none")
+          except Exception as e: print("ERR qv", e)
+          # 4) School directory (CKAN)
+          for u in ["https://catalogue.data.govt.nz/api/3/action/package_search?q=directory+of+schools&rows=5",
+                    "https://catalogue.data.govt.nz/api/3/action/package_search?q=schools+directory+education+counts&rows=5"]:
+              try:
+                  r = c.get(u); show("ckan", r)
+                  for p in r.json()["result"]["results"]:
+                      print(" pkg", p["name"], "|", p["title"])
+                      for res in p.get("resources", [])[:6]:
+                          print("   res", res.get("id"), res.get("format"), res.get("datastore_active"), res.get("url"))
+              except Exception as e: print("ERR", u, e)
+          for u in ["https://www.educationcounts.govt.nz/__data/assets/file/0003/62582/Directory-School-current.csv",
+                    "https://www.educationcounts.govt.nz/directories/list-of-nz-schools"]:
+              try:
+                  r = c.get(u); show("edcounts", r); print(r.text[:400])
+              except Exception as e: print("ERR", u, e)
+          # 5) policedata
+          for u in ["https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz",
+                    "https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz/victimisation-time-and-place"]:
+              try:
+                  r = c.get(u); show("police", r)
+                  print("links:", sorted(set(re.findall(r'href="([^"]+(?:csv|xlsx|zip|tableau|public\.tableau)[^"]*)"', r.text, re.I)))[:30])
+              except Exception as e: print("ERR", u, e)
+          PY
+          python3 -m pip install -q httpx
+          python3 /tmp/p.py > /tmp/area-probe.txt 2>&1; cat /tmp/area-probe.txt
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "daily-brief-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan area-probe
+          git rm -rq --cached . && find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp /tmp/area-probe.txt .
+          git add area-probe.txt && git commit -qm "area probe" && git push -f origin area-probe
