@@ -314,3 +314,22 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .guide a { color: var(--accent); font-weight: 600; text-decoration: none; min-height: 24px; display: inline-flex; align-items: center; }
 .guide-desc { font-size: 0.8125rem; color: var(--muted); }
 .carried { background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 0 8px; font-weight: 600; }
+
+/* ── 내 동네 ── */
+.hood { display: grid; gap: 12px; margin-bottom: 16px; }
+.hood-card { padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); min-width: 0; }
+.hood-card h2 { margin: 0 0 8px; font-size: 1rem; }
+.hood-card .muted, .hood-card .board-note { color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+.hood-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; font-variant-numeric: tabular-nums; }
+.hood-table th, .hood-table td { padding: 6px 4px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.hood-table th:first-child, .hood-table td:first-child { text-align: left; }
+.hood-table thead th { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+.hood-rents { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 4px; font-size: 0.875rem; }
+.hood-news { margin: 8px 0 4px; font-weight: 600; font-size: 0.875rem; }
+.hood-hit { margin: 4px 0; font-size: 0.875rem; line-height: 1.45; }
+.hood-hit a { color: var(--text); }
+.hood-timing { margin: 0 0 6px; font-size: 0.875rem; padding: 8px 10px; border-radius: 10px; background: var(--why-bg); color: var(--why-text); }
+.hood-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.hood-links a { font-size: 0.8125rem; text-decoration: none; color: var(--accent); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; min-height: 32px; display: inline-flex; align-items: center; }
+.near { background: var(--why-bg); color: var(--why-text); border-radius: 999px; padding: 0 8px; font-weight: 600; }

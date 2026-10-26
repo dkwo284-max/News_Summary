@@ -2,6 +2,7 @@ import "./style.css";
 import { applySettings, loadSettings, saveSettings, type Settings } from "./settings";
 import { fetchLive, loadLive, type LiveData } from "./live";
 import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
+import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
 // ── 탭/카테고리 정의 ───────────────────────────────────────
@@ -29,7 +30,8 @@ const KR_CHIPS: { key: SectionKey | "all"; label: string }[] = [
 // ── 상태 ──────────────────────────────────────────────────
 const settings: Settings = loadSettings();
 let brief: Brief | null = null;
-type Chip = { key: SectionKey | "all"; label: string };
+type ChipKey = SectionKey | "all" | "hood";
+type Chip = { key: ChipKey; label: string };
 const NZ_CHIPS: Chip[] = [
   { key: "all", label: "전체" },
   { key: "nz_society", label: "사회" },
@@ -39,6 +41,7 @@ const NZ_CHIPS: Chip[] = [
 ];
 const AKL_CHIPS: Chip[] = [
   { key: "all", label: "전체" },
+  { key: "hood", label: "📍 내 동네" },
   { key: "akl_life", label: "생활" },
   { key: "akl_safety", label: "치안" },
   { key: "akl_property", label: "부동산" },
@@ -46,11 +49,12 @@ const AKL_CHIPS: Chip[] = [
   { key: "akl_education", label: "교육" },
 ];
 // 탭별로 선택한 카테고리 칩
-const chipState: Record<string, SectionKey | "all"> = { kr: "all", nz: "all", akl: "all" };
+const chipState: Record<string, ChipKey> = { kr: "all", nz: "all", akl: "all" };
 let query = "";
 let viewingLatest = true;
 let live: LiveData | null = loadLive();
 let liveError = "";
+let watch = loadWatch();
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const main = $<HTMLElement>("main");
@@ -223,6 +227,8 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   const meta = h("div", { class: "card-meta" });
   if (sectionLabel) meta.append(h("span", { class: "sec-label" }, sectionLabel));
   if (item.importance >= 8) meta.append(h("span", { class: "hot", title: `중요도 ${item.importance}/10` }, `중요 ${item.importance}`));
+  const near = mentions(item, [...watch.suburbs, ...watch.schools]);
+  if (near.length) meta.append(h("span", { class: "near" }, `📍 ${near.join(", ")}`));
   if (item.carried_from) meta.append(h("span", { class: "carried", title: "오늘은 새 소식이 없어 최근 소식을 보여줍니다" }, `지난 소식 · ${fmtDateShort(item.carried_from)}`));
   const rt = relTime(item.published_at);
   if (rt) meta.append(h("span", {}, rt));
@@ -324,6 +330,10 @@ function renderMain(): void {
     const chips = renderChips(tab.id);
     if (chips) main.append(chips);
     const sel = chipState[tab.id];
+    if (tab.id === "akl" && sel === "hood") {
+      renderHood();
+      return;
+    }
     if (tab.id === "akl") {
       // 생활비 지표는 전체·부동산에서, 주제별 안내 링크는 해당 칩에서
       if (sel === "all" || sel === "akl_property") {
@@ -333,7 +343,7 @@ function renderMain(): void {
       const guide = topicGuide(sel);
       if (guide) main.append(guide);
     }
-    const keys = (sel === "all" ? visibleSections(tab) : [sel]).filter((k) => brief!.sections[k]);
+    const keys = (sel === "all" ? visibleSections(tab) : [sel as SectionKey]).filter((k) => brief!.sections[k]);
     for (const k of keys) {
       const block = sectionBlock(k, !!chips);
       if (block) main.append(block);
@@ -476,8 +486,8 @@ const GUIDES: Partial<Record<SectionKey, Guide>> = {
   ] },
 };
 
-function topicGuide(sel: SectionKey | "all"): HTMLElement | null {
-  const g = sel === "all" ? undefined : GUIDES[sel];
+function topicGuide(sel: ChipKey): HTMLElement | null {
+  const g = sel === "all" || sel === "hood" ? undefined : GUIDES[sel];
   if (!g) return null;
   const empty = !(brief?.sections[sel as SectionKey]?.items.length);
   return h("details", { class: "guide", ...(empty ? { open: "" } : {}) },
@@ -485,6 +495,30 @@ function topicGuide(sel: SectionKey | "all"): HTMLElement | null {
     h("ul", {}, ...g.links.map((l) => h("li", {},
       h("a", { href: l.url.startsWith("tel:") ? l.url : safeUrl(l.url), ...(l.url.startsWith("tel:") ? {} : { target: "_blank", rel: "noopener noreferrer" }) }, l.label),
       h("span", { class: "guide-desc" }, l.desc)))));
+}
+
+// 📍 내 동네: 최근 2주 브리핑에서 관심 동네·학교가 나온 기사를 모으고, 동네별 렌트·집값과 함께 보여준다
+let recent: Brief[] | null = null;
+async function recentBriefs(): Promise<Brief[]> {
+  if (recent) return recent;
+  const dates = (await loadIndex()).slice(0, 14);
+  const got = await Promise.all(dates.map((d) => getJSON<Brief>(`./data/${d}.json`).catch(() => null)));
+  recent = got.filter((b): b is Brief => !!b);
+  return recent;
+}
+
+const extLink = (url: string, label: string) => h("a", { href: safeUrl(url), target: "_blank", rel: "noopener noreferrer" }, label);
+
+async function renderHood(): Promise<void> {
+  const holder = h("div", { "aria-busy": "true" }, h("p", { class: "muted" }, "내 동네 정보를 불러오는 중…"));
+  main.append(holder);
+  const names = [...watch.suburbs, ...watch.schools];
+  const [areas, briefs] = await Promise.all([loadAreas(), names.length ? recentBriefs() : Promise.resolve([] as Brief[])]);
+  if (chipState.akl !== "hood" || settings.tab !== "akl" || !holder.isConnected) return;
+  const hits: Hit[] = names.length ? findHits(briefs, names) : [];
+  const fx = (viewingLatest && live?.fx) || brief?.extras.nzd_krw;
+  holder.replaceChildren(neighbourhoodView(h, watch, areas, hits, fx, extLink, openSettings));
+  holder.removeAttribute("aria-busy");
 }
 
 function renderAll(): void {
@@ -527,6 +561,10 @@ function initSettings(): void {
   const dialog = $<HTMLDialogElement>("settings");
   const politics = $<HTMLInputElement>("opt-politics");
   $("settings-btn").addEventListener("click", () => {
+    void loadAreas().then((a) => renderWatchEditor(h, $("watch-editor"), Object.keys(a?.suburbs ?? {}), () => {
+      watch = loadWatch();
+      renderMain();
+    }));
     renderEditor(h, $("visa-editor"), () => {
       renderHeader();
       if (settings.tab === "imm") renderMain();
@@ -576,6 +614,12 @@ async function init(): Promise<void> {
   if (importFromHash()) {
     settings.tab = "imm"; // 설정 링크로 들어오면 비자 일정을 바로 보여줌
     saveSettings(settings);
+  }
+  if (importWatchFromHash()) {
+    settings.tab = "akl"; // 관심 동네 링크로 들어오면 내 동네를 바로 보여줌
+    saveSettings(settings);
+    chipState.akl = "hood";
+    watch = loadWatch();
   }
   initSearch();
   initSettings();

@@ -108,7 +108,7 @@ def parse_qv(html: str) -> dict[str, dict]:
     t = html.encode().decode("unicode_escape", "ignore")
     out = {}
     for key in QV_DISTRICTS.values():
-        m = re.search(rf'"{key}": \{{"name": "([^"]+)", "description": "(.*?)"', t)
+        m = re.search(rf'"{key}": \{{"name": "([^"]+)", "description": "(.*?)", "overwrite"', t, re.S)
         if not m:
             continue
         desc = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(2)))

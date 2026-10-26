@@ -94,12 +94,21 @@ cron-job.org 06:00 (NZ) → GitHub Actions  (보조: GitHub 예약 06:05 / 06:20
 - **처리 기간 추세**: 날마다 값을 `web/public/data/processing-history.json` 에 쌓고, 전광판 칸마다 1주 전 대비 ▲/▼ 일수를 보여줍니다.
 - **📅 내 비자 일정 (D-day)**: 설정(⚙️) → "내 비자 일정"에 가족별 비자 종류·만료일과 자녀 생일을 넣으면, 이민 레이더 탭에 만료 D-day와 할 일(졸업 후 취업비자 준비, 가족 비자 준비, 다음 비자 신청 권장일, 자녀 초등학교 입학)을 날짜순으로 보여줍니다. 상단에도 가장 가까운 D-day 가 표시돼요. **이 정보는 이 기기(브라우저)에만 저장되고 저장소·서버로 보내지 않습니다.** `#setup=<base64url JSON>` 링크로 한 번에 입력할 수도 있습니다.
 
-## 오클랜드 탭: 생활·의료·교육·치안·부동산
+## 오클랜드 탭: 생활·치안·부동산·의료·교육 + 📍 내 동네
 
-- 오클랜드 기사는 한 묶음(`nz_auckland`)으로 선별한 뒤 AI 가 주제(`akl_topic`)를 붙여 `akl_life`·`akl_health`·`akl_education`·`akl_safety`·`akl_property` 섹션으로 나눕니다. AI 없이 돌 때는 `config.yaml` 의 `akl_topics` 키워드로 나눕니다.
+- 오클랜드 기사는 한 묶음(`nz_auckland`)으로 선별한 뒤 AI 가 주제(`akl_topic`)를 붙여 `akl_life`·`akl_safety`·`akl_property`·`akl_health`·`akl_education` 섹션으로 나눕니다. AI 없이 돌 때는 `config.yaml` 의 `akl_topics` 키워드로 나눕니다.
 - 주제별 보강 피드(`gn_akl_health`·`gn_akl_school`·`gn_akl_crime`·`gn_akl_property`)가 기사를 따로 모아, 큰 뉴스에 밀려 빠지지 않게 합니다.
 - 그날 새 소식이 없는 주제는 `carry_days`(의료·교육·부동산 3일, 치안 2일) 안의 최근 기사를 **'지난 소식'** 표시와 함께 보여줍니다.
 - 의료·교육·치안·부동산 칩에는 응급 111·Healthline·GP 찾기, 학군 찾기·ERO 보고서, 105 신고·동네별 범죄 통계, 시세 렌트·QV 집값·GeoMaps(침수·용도지역) 같은 공식 창구 링크가 함께 나옵니다.
+
+### 📍 내 동네 (관심 동네·학교 비교)
+
+- 설정(⚙️) → "관심 동네·학교"에 동네(최대 6곳)와 학교를 넣거나, `#areas=Milford,Takapuna&schools=Milford School` 링크로 한 번에 입력합니다. **이 기기에만 저장되고 저장소·서버에는 올라가지 않습니다.**
+- 비교표: 동네별 주택 3·4룸, 아파트 2룸 주간 렌트 중간값(Tenancy Services 시세 렌트, 최근 6개월 보증금 신고 기준)과 QV 평균 집값(옛 시 단위 — 예: North Shore City).
+- 동네 카드: 방 수별 렌트와 원화 환산, 최근 2주 브리핑에서 그 동네가 나온 기사(치안 건수 따로), UoA 대중교통 경로·범죄 통계·침수/용도지역·한인마트·근처 GP 바로가기.
+- 학교 카드: 자녀 생년월일(비자 일정 설정)로 계산한 입학·학군 준비 시점, 최근 2주 관련 기사, 학군·ERO 보고서·학생 수 검색 바로가기.
+- 데이터는 `scripts/areas.py` 가 매주(`areas.refresh_days`) `web/public/data/areas.json` 으로 받습니다. 지원 동네 목록은 `config.yaml` 의 `areas.suburbs`.
+- 학교 목록·동네별 범죄 통계는 공식 사이트가 자동 수집을 막아(Cloudflare·Tableau) 바로가기로 대신합니다.
 
 ## 오클랜드 생활비 지표
 

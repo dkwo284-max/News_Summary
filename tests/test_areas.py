@@ -38,8 +38,9 @@ def test_fetch_rent_follows_suggestion():
 
 
 def test_parse_qv():
-    html = ('{"NORTH SHORE CITY": {"name": "North Shore City", "description": "<p> North Shore City has decreased by -2.40% over '
-            'the past three month period with the average value now sitting at $1,427,311 . This represents</p>"}}')
+    html = ('{"NORTH SHORE CITY": {"name": "North Shore City", "description": "<p data-block-key=\\"ypm5z\\"> North Shore City has '
+            'decreased by -2.40% over the past three month period with the average value now sitting at $1,427,311 . This represents</p>", '
+            '"overwrite": false, "code": "5"}}')
     assert parse_qv(html) == {"NORTH SHORE CITY": {"name": "North Shore City", "avg_value": 1427311}}
 
 
