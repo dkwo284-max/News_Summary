@@ -15,49 +15,28 @@ jobs:
       - name: Probe
         run: |
           cat > /tmp/p.py <<'PY'
-          import re, io, csv, httpx
+          import re, httpx
           UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
           c = httpx.Client(timeout=90, follow_redirects=True, headers=UA)
-          def text(t): return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t))
           def tr(label, f):
               try: f()
               except Exception as e: print("ERR", label, repr(e)[:300])
-          def rent():
-              r = c.get("https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/", params={"location": "Auckland - Milford", "period": "26", "action_doSearch": "Search"})
-              f = text(r.text); i = f.find("Milford"); print("=== market rent", r.status_code, f[i:i+2500])
-          tr("rent", rent)
-          def quarterly():
-              r = c.get("https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/")
-              u = re.search(r'href="([^"]+Detailed-Quarterly-Tenancy[^"]+\.csv[^"]*)"', r.text, re.I).group(1)
-              t = c.get(u).text; lines = t.splitlines(); print("=== quarterly", len(lines)); print("\n".join(lines[:3]))
-              print("\n".join([l for l in lines if "Milford" in l or "Takapuna" in l][-6:]))
-              locs = sorted({row.get("Location","") for row in csv.DictReader(io.StringIO(t))})
-              print("locations", len(locs), [l for l in locs if any(k in l for k in ("Milford","Albany","Takapuna","Northcote","Epsom","Forrest","Sunnynook","Browns","Mairangi","Castor","Hauraki","Devonport","Glenfield","Wairau"))])
-          tr("quarterly", quarterly)
-          def ckan():
-              for u in ["https://catalogue.data.govt.nz/api/3/action/package_search?q=schools", "https://catalogue.data.govt.nz/dataset?q=directory+of+schools"]:
-                  r = c.get(u); print("=== ckan", r.status_code, r.headers.get("content-type"), text(r.text)[:500])
-          tr("ckan", ckan)
-          def arc():
-              for u in ["https://hub.arcgis.com/api/v3/datasets?q=New%20Zealand%20school%20directory&page[size]=10",
-                        "https://opendata.arcgis.com/api/v3/search?q=school%20directory%20new%20zealand"]:
-                  r = c.get(u); print("=== arcgis", r.status_code, r.text[:1500])
-          tr("arc", arc)
-          def police():
-              for u in ["https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz/victimisation-time-and-place"]:
-                  r = c.get(u)
-                  print("=== police iframes", re.findall(r'<iframe[^>]+src="([^"]+)"', r.text)[:10])
-                  print("tableau refs", sorted(set(re.findall(r'https?://[^"\' ]*tableau[^"\' ]*', r.text)))[:20])
-                  print("data links", sorted(set(re.findall(r'href="([^"]*(?:download|data)[^"]*)"', r.text)))[:30])
-          tr("police", police)
-          def wiki():
-              r = c.get("https://en.wikipedia.org/w/api.php", params={"action": "parse", "page": "Milford, New Zealand", "prop": "wikitext", "format": "json", "formatversion": "2"})
-              w = r.json()["parse"]["wikitext"]; i = w.find("Education"); print("=== wiki", w[i:i+1500])
-          tr("wiki", wiki)
-          def tki():
-              for u in ["https://www.educationcounts.govt.nz/find-school/school/profile?school=1416", "https://parents.education.govt.nz/"]:
-                  r = c.get(u); print("=== other", u, r.status_code, text(r.text)[:200])
-          tr("tki", tki)
+          def tab():
+              for u in ["https://public.tableau.com/views/VictimisationsTimeandPlace/Summary.csv",
+                        "https://public.tableau.com/views/VictimisationsTimeandPlace/Summary.csv?:showVizHome=no",
+                        "https://public.tableau.com/profile/api/policenz/workbooks?count=50&index=0",
+                        "https://public.tableau.com/profile/api/policenz"]:
+                  r = c.get(u); print("=== tableau", u, r.status_code, r.headers.get("content-type"), len(r.content)); print(r.text[:1500])
+          tr("tab", tab)
+          def wb():
+              r = c.get("https://public.tableau.com/profile/api/policenz/workbooks?count=100&index=0")
+              for w in re.findall(r'"workbookRepoUrl":"([^"]+)".*?"defaultViewRepoUrl":"([^"]+)"', r.text)[:40]: print(" wb", w)
+          tr("wb", wb)
+          def qv():
+              t = c.get("https://www.qv.co.nz/price-index/").text.encode().decode("unicode_escape", "ignore")
+              for k in ("NORTH SHORE CITY", "MANUKAU CITY", "WAITAKERE CITY", "RODNEY DISTRICT"):
+                  i = t.find(f'"{k}"'); print(k, "::", re.sub(r"<[^>]+>", " ", t[i:i+500]))
+          tr("qv", qv)
           PY
           python3 -m pip install -q httpx
           python3 /tmp/p.py > /tmp/area-probe.txt 2>&1; cat /tmp/area-probe.txt
