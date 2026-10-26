@@ -1,0 +1,23 @@
+200 https://www.healthpoint.co.nz/ <= https://www.healthpoint.co.nz/ :: Healthpoint &bull; Find up-to-date information about providers, referral expectations, ser
+200 https://www.healthnz.govt.nz/ <= https://info.health.nz/ :: Health New Zealand | Te Whatu Ora
+404 https://www.healthnz.govt.nz/eligibility-for-publicly-funded-health-services <= https://info.health.nz/eligibility-for-publicly-funded-health-services/ :: Page not found
+200 https://www.healthnz.govt.nz/online-phone-healthcare/healthline <= https://www.healthline.govt.nz/ :: Healthline
+403 https://www.educationcounts.govt.nz/find-school <= https://www.educationcounts.govt.nz/find-school :: Just a moment...
+403 https://www.ero.govt.nz/ <= https://ero.govt.nz/ :: Azure WAF
+404 https://www.education.govt.nz/parents-and-caregivers <= https://parents.education.govt.nz/ :: Parents and caregivers - Ministry of Education
+307 https://www.education.govt.nz/school/school-terms-and-holidays <= https://www.education.govt.nz/school/school-terms-and-holidays/ :: 
+404 https://www.govt.nz/browse/education/school-and-college/school-term-dates/ <= https://www.govt.nz/browse/education/school-and-college/school-term-dates/ :: Page not found — error 404 | New Zealand Government
+000 https://www.105.police.govt.nz/ <= https://www.105.police.govt.nz/ :: Page not found — error 404 | New Zealand Government
+200 https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz <= https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz :: policedata.nz | New Zealand Police
+200 https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/ <= https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/ :: Market rent &raquo;
+        Tenancy Services
+200 https://geomapspublic.aucklandcouncil.govt.nz/viewer/index.html <= https://geomapspublic.aucklandcouncil.govt.nz/viewer/index.html :: Auckland Council GeoMaps
+200 https://www.qv.co.nz/price-index/ <= https://www.qv.co.nz/price-index/ :: QV House Price Index
+406 https://www.aucklandcouncil.govt.nz/ <= https://www.aucklandcouncil.govt.nz/ :: 406 Not Acceptable
+200 https://www.police.govt.nz/ <= https://www.police.govt.nz/ :: New Zealand Police Home | New Zealand Police
+
+=== QV Auckland snippet
+  ~ nd of September, easing slightly from the 1.9% quarterly decline reported last month. Read more Average price &dollar;892,580 &percnt; Change in 3 months -1.5&percnt; Whangarei District Show more --> Auckland Region Show more --> Tauranga City Show more --> Hamilton City Show more --> Rotorua District Show more --> New Plymouth District Show more --> Napier City Show more --> Hastings District Show more --> Palmerston North City Show more --> Wellington City Show more --> Nelson City Show more -
+  ~  at $538,797 . This represents an annual growth rate of 1.03%\u003C/p\u003E\u0022, \u0022overwrite\u0022: false, \u0022code\u0022: \u002263\u0022}, \u0022AUCKLAND CITY\u0022: {\u0022name\u0022: \u0022Auckland City\u0022, \u0022description\u0022: \u0022\u003Cp data\u002Dblock\u002Dkey\u003D\u005C\u0022ypm5z\u005C\u0022\u003EAuckland City has increased by 0.05% over the past three month period with the average value now sitting at $1,395,991. This represents an annual growth rate of \u002D1.4%.\u0
+  ~ 0022: \u002263\u0022}, \u0022AUCKLAND CITY\u0022: {\u0022name\u0022: \u0022Auckland City\u0022, \u0022description\u0022: \u0022\u003Cp data\u002Dblock\u002Dkey\u003D\u005C\u0022ypm5z\u005C\u0022\u003EAuckland City has increased by 0.05% over the past three month period with the average value now sitting at $1,395,991. This represents an annual growth rate of \u002D1.4%.\u003C/p\u003E\u0022, \u0022overwrite\u0022: false, \u0022code\u0022: \u00227\u0022}, \u0022AUCKLAND REGION\u0022: {\u0022name\u
+  ~ 95,991. This represents an annual growth rate of \u002D1.4%.\u003C/p\u003E\u0022, \u0022overwrite\u0022: false, \u0022code\u0022: \u00227\u0022}, \u0022AUCKLAND REGION\u0022: {\u0022name\u0022: \u0022Auckland Region\u0022, \u0022description\u0022: \u0022\u003Cp data\u002Dblock\u002Dkey\u003D\u005C\u0022yz31i\u005C\u0022\u003EAuckland Region has increased by 7.22% over the past three month period with the average value now sitting at $1,268,509. This represents an annual growth rate of 16.12%\u00
