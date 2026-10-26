@@ -15,58 +15,49 @@ jobs:
       - name: Probe
         run: |
           cat > /tmp/p.py <<'PY'
-          import re, json, httpx
+          import re, io, csv, httpx
           UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
-          c = httpx.Client(timeout=60, follow_redirects=True, headers=UA)
-          def show(label, r, n=1500):
-              print(f"\n=== {label}: {r.status_code} {r.url} ct={r.headers.get('content-type')} len={len(r.content)}")
+          c = httpx.Client(timeout=90, follow_redirects=True, headers=UA)
           def text(t): return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t))
-          # 1) Tenancy market rent search
-          for u in ["https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/?location=Milford&period=26&action_doSearch=Search",
-                    "https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/"]:
-              try:
-                  r = c.get(u); show("market-rent", r)
-                  t = r.text
-                  print("forms:", re.findall(r'<form[^>]*>', t)[:5])
-                  print("selects:", re.findall(r'<(?:select|input)[^>]*name="([^"]+)"', t)[:30])
-                  print("api-ish:", sorted(set(re.findall(r'["\'](/[^"\']*(?:api|json|search|rent)[^"\']*)["\']', t)))[:30])
-                  f = text(t); i = f.find("Milford"); print("milford ctx:", f[max(0,i-300):i+1500] if i >= 0 else "none")
-              except Exception as e: print("ERR", u, e)
-          # 2) rental bond data csv links
-          try:
+          def tr(label, f):
+              try: f()
+              except Exception as e: print("ERR", label, repr(e)[:300])
+          def rent():
+              r = c.get("https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/", params={"location": "Auckland - Milford", "period": "26", "action_doSearch": "Search"})
+              f = text(r.text); i = f.find("Milford"); print("=== market rent", r.status_code, f[i:i+2500])
+          tr("rent", rent)
+          def quarterly():
               r = c.get("https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/")
-              print("\n=== bond links", sorted(set(re.findall(r'href="([^"]+\.(?:csv|zip|xlsx)[^"]*)"', r.text, re.I))))
-          except Exception as e: print("ERR bond", e)
-          # 3) QV district keys
-          try:
-              r = c.get("https://www.qv.co.nz/price-index/"); t = r.text.encode().decode("unicode_escape", "ignore")
-              keys = sorted(set(re.findall(r'"([A-Z][A-Z \-\']{3,40})": \{"name"', t)))
-              print("\n=== QV keys", len(keys), keys[:120])
-              for k in ("NORTH SHORE", "AUCKLAND CITY", "AUCKLAND REGION"):
-                  i = t.find(f'"{k}"'); print(k, "::", text(t[i:i+700]) if i >= 0 else "none")
-          except Exception as e: print("ERR qv", e)
-          # 4) School directory (CKAN)
-          for u in ["https://catalogue.data.govt.nz/api/3/action/package_search?q=directory+of+schools&rows=5",
-                    "https://catalogue.data.govt.nz/api/3/action/package_search?q=schools+directory+education+counts&rows=5"]:
-              try:
-                  r = c.get(u); show("ckan", r)
-                  for p in r.json()["result"]["results"]:
-                      print(" pkg", p["name"], "|", p["title"])
-                      for res in p.get("resources", [])[:6]:
-                          print("   res", res.get("id"), res.get("format"), res.get("datastore_active"), res.get("url"))
-              except Exception as e: print("ERR", u, e)
-          for u in ["https://www.educationcounts.govt.nz/__data/assets/file/0003/62582/Directory-School-current.csv",
-                    "https://www.educationcounts.govt.nz/directories/list-of-nz-schools"]:
-              try:
-                  r = c.get(u); show("edcounts", r); print(r.text[:400])
-              except Exception as e: print("ERR", u, e)
-          # 5) policedata
-          for u in ["https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz",
-                    "https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz/victimisation-time-and-place"]:
-              try:
-                  r = c.get(u); show("police", r)
-                  print("links:", sorted(set(re.findall(r'href="([^"]+(?:csv|xlsx|zip|tableau|public\.tableau)[^"]*)"', r.text, re.I)))[:30])
-              except Exception as e: print("ERR", u, e)
+              u = re.search(r'href="([^"]+Detailed-Quarterly-Tenancy[^"]+\.csv[^"]*)"', r.text, re.I).group(1)
+              t = c.get(u).text; lines = t.splitlines(); print("=== quarterly", len(lines)); print("\n".join(lines[:3]))
+              print("\n".join([l for l in lines if "Milford" in l or "Takapuna" in l][-6:]))
+              locs = sorted({row.get("Location","") for row in csv.DictReader(io.StringIO(t))})
+              print("locations", len(locs), [l for l in locs if any(k in l for k in ("Milford","Albany","Takapuna","Northcote","Epsom","Forrest","Sunnynook","Browns","Mairangi","Castor","Hauraki","Devonport","Glenfield","Wairau"))])
+          tr("quarterly", quarterly)
+          def ckan():
+              for u in ["https://catalogue.data.govt.nz/api/3/action/package_search?q=schools", "https://catalogue.data.govt.nz/dataset?q=directory+of+schools"]:
+                  r = c.get(u); print("=== ckan", r.status_code, r.headers.get("content-type"), text(r.text)[:500])
+          tr("ckan", ckan)
+          def arc():
+              for u in ["https://hub.arcgis.com/api/v3/datasets?q=New%20Zealand%20school%20directory&page[size]=10",
+                        "https://opendata.arcgis.com/api/v3/search?q=school%20directory%20new%20zealand"]:
+                  r = c.get(u); print("=== arcgis", r.status_code, r.text[:1500])
+          tr("arc", arc)
+          def police():
+              for u in ["https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz/victimisation-time-and-place"]:
+                  r = c.get(u)
+                  print("=== police iframes", re.findall(r'<iframe[^>]+src="([^"]+)"', r.text)[:10])
+                  print("tableau refs", sorted(set(re.findall(r'https?://[^"\' ]*tableau[^"\' ]*', r.text)))[:20])
+                  print("data links", sorted(set(re.findall(r'href="([^"]*(?:download|data)[^"]*)"', r.text)))[:30])
+          tr("police", police)
+          def wiki():
+              r = c.get("https://en.wikipedia.org/w/api.php", params={"action": "parse", "page": "Milford, New Zealand", "prop": "wikitext", "format": "json", "formatversion": "2"})
+              w = r.json()["parse"]["wikitext"]; i = w.find("Education"); print("=== wiki", w[i:i+1500])
+          tr("wiki", wiki)
+          def tki():
+              for u in ["https://www.educationcounts.govt.nz/find-school/school/profile?school=1416", "https://parents.education.govt.nz/"]:
+                  r = c.get(u); print("=== other", u, r.status_code, text(r.text)[:200])
+          tr("tki", tki)
           PY
           python3 -m pip install -q httpx
           python3 /tmp/p.py > /tmp/area-probe.txt 2>&1; cat /tmp/area-probe.txt
