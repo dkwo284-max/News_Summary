@@ -150,6 +150,11 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
       (list.some((e) => !e.latlon) ? ` (위치 못 찾은 ${list.filter((e) => !e.latlon).length}건 제외)` : "");
     if (!L || !map || !layer) return;
     layer.clearLayers();
+    // 관심 동네 원은 먼저 그리고 클릭을 통과시킨다 (위에 그리면 도심 사건 점을 가려 눌리지 않음)
+    for (const [s, at] of Object.entries(homes)) {
+      L.circle(at, { radius: RADIUS_KM * 1000, color: "#1d4ed8", weight: 1, dashArray: "4 4", fillOpacity: 0.04, interactive: false }).addTo(layer);
+      L.circleMarker(at, { radius: 5, weight: 2, color: "#1d4ed8", fillColor: "#93c5fd", fillOpacity: 0.9 }).bindTooltip(s, { direction: "top" }).addTo(layer);
+    }
     const groups = new Map<string, Incident[]>();
     for (const e of list) if (e.latlon) groups.set(e.latlon.join(","), [...(groups.get(e.latlon.join(",")) ?? []), e]);
     for (const g of groups.values()) {
@@ -157,11 +162,9 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
       L.circleMarker(g[0].latlon!, { radius: 6 + 3 * Math.sqrt(g.length), weight: 2, color: "#fff", fillColor: SEV_COLOR[worst], fillOpacity: 0.85 })
         .bindPopup(h("div", { class: "gp-info" }, h("div", { class: "inc-place" }, `📍 ${g[0].location}${g.length > 1 ? ` · ${g.length}건` : ""}`),
           h("ul", { class: "inc-list" }, ...g.sort((a, b) => b.date.localeCompare(a.date)).map((e) => incBrief(h, e)))), { maxWidth: 260 })
+        // 마우스를 올리면 무슨 사건인지 바로 (누르면 설명 팝업)
+        .bindTooltip(h("div", {}, ...g.map((e) => h("div", {}, `${SEV_LABEL[e.severity]} ${e.crime || e.title_ko} · ${short(e.date)}`))), { direction: "top", offset: [0, -6] })
         .addTo(layer);
-    }
-    for (const [s, at] of Object.entries(homes)) {
-      L.circle(at, { radius: RADIUS_KM * 1000, color: "#1d4ed8", weight: 1, dashArray: "4 4", fillOpacity: 0.04 }).addTo(layer);
-      L.circleMarker(at, { radius: 5, weight: 2, color: "#1d4ed8", fillColor: "#93c5fd", fillOpacity: 0.9 }).bindTooltip(s, { direction: "top" }).addTo(layer);
     }
   }
   draw();
