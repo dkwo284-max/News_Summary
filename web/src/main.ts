@@ -16,8 +16,8 @@ interface TabDef {
 }
 
 const TABS: TabDef[] = [
-  { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_society", "nz_education", "nz_economy", "nz_politics", "nz_national"] },
   { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["akl_life", "akl_safety", "akl_property", "akl_health", "akl_education", "nz_auckland"] },
+  { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_society", "nz_education", "nz_economy", "nz_politics", "nz_national"] },
   { id: "imm", icon: "🛂", label: "이민 레이더", sections: ["nz_immigration"] },
   { id: "kr", icon: "🇰🇷", label: "한국", sections: ["kr_society", "kr_economy", "kr_entertainment", "kr_politics"] },
 ];

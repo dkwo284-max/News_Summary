@@ -7,7 +7,7 @@ export interface Settings {
 }
 
 const KEY = "daily-brief:settings";
-const DEFAULTS: Settings = { showPolitics: false, fontScale: 1, theme: "system", tab: "nz" };
+const DEFAULTS: Settings = { showPolitics: false, fontScale: 1, theme: "system", tab: "akl" };
 
 export function loadSettings(): Settings {
   try {
