@@ -16,7 +16,7 @@ import json
 import logging
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from common import ROOT, load_config, log, tz
@@ -88,6 +88,12 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
     previous = brief.get("extras", {}).get("processing_times")
     from processing import update_history
 
+    # AI 없이 갱신되는 부가 데이터도 함께 (한인 GP 지도·동네 비교)
+    for mod, fn, args in (("korean_gp", "update_korean_gp", (cfg, data_dir)), ("areas", "update_areas", (cfg, data_dir, date.fromisoformat(brief["date"])))):
+        try:
+            getattr(__import__(mod), fn)(*args)
+        except Exception as e:  # noqa: BLE001
+            log.warning("%s failed: %s", mod, e)
     pt = fetch_processing_times(cfg, None, previous)
     brief.setdefault("extras", {})["processing_times"] = update_history(pt, data_dir, brief["date"])
     body = json.dumps(brief, ensure_ascii=False, indent=1)
