@@ -90,7 +90,9 @@ function tidy(list: Incident[], suburbs: Record<string, [number, number]>): Inci
     if (dup) continue;
     let suburb = e.suburb;
     if ((!suburb || /^auckland$/i.test(suburb)) && e.latlon) {
-      const near = Object.entries(suburbs).map(([n, at]) => ({ n, d: km(at, e.latlon!) })).sort((a, b) => a.d - b.d)[0];
+      // 동네 목록에 도심이 없어서 CBD 사건이 Parnell 등으로 붙지 않도록 Auckland Central 을 후보에 넣는다
+      const centres: Record<string, [number, number]> = { ...suburbs, "Auckland Central": [-36.8485, 174.7633] };
+      const near = Object.entries(centres).map(([n, at]) => ({ n, d: km(at, e.latlon!) })).sort((a, b) => a.d - b.d)[0];
       suburb = near && near.d <= 3 ? near.n : suburb;
     }
     out.push({ ...e, suburb: /^auckland$/i.test(suburb) ? "" : suburb });
