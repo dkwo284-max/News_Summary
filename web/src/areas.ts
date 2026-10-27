@@ -209,6 +209,7 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
       link("https://geomapspublic.aucklandcouncil.govt.nz/viewer/index.html", "🌊 침수·용도지역"),
       link(gmaps(`Korean grocery near ${name}, Auckland`), "🛒 한인마트"),
       link(gmaps(`GP medical centre ${name}, Auckland`), "🩺 근처 GP"),
+      link(gmaps(`Korean speaking GP doctor near ${name}, Auckland`), "🇰🇷 한국어 GP"),
     ));
     root.append(card);
   }
