@@ -1,6 +1,7 @@
 """미리 만든 Q&A: 요약이 끝난 뒤 주요 기사마다 독자가 물어볼 만한 질문과 답을 AI 요청 1회로 만든다.
 
-- 대상: 이민 레이더 기사 전부 → 나머지는 중요도순으로 qa.max_items 건까지 (config.yaml 의 qa)
+- 대상: 뉴질랜드·오클랜드·이민 레이더 기사는 중요도와 상관없이 전부, 한국 기사는 중요도 min_importance 이상을
+  중요도순으로 kr_max_items 건까지 (config.yaml 의 qa). 응답이 너무 길어지지 않게 batch_size 건씩 나눠 요청한다.
 - 답은 기사 요약·본문 발췌 안의 정보로만. 기사에 없는 내용은 "기사에는 나오지 않아요"라고 하고 확인할 곳을 안내.
 - 실패해도 브리핑은 Q&A 없이 그대로 생성된다.
 """
@@ -62,23 +63,27 @@ def _block(item: dict, label: str, art: Article | None) -> str:
 
 
 def pick_targets(sections: dict, cfg: dict) -> list[tuple[str, dict]]:
-    """(섹션 키, 기사) 목록. 이민 레이더 먼저, 나머지는 중요도순. 같은 기사는 한 번만."""
+    """(섹션 키, 기사) 목록. 뉴질랜드·오클랜드·이민 레이더는 전부(레이더 먼저), 한국은 중요도순 일부. 같은 기사는 한 번만."""
     qcfg = cfg.get("qa", {})
-    limit = int(qcfg.get("max_items", 16))
+    kr_limit = int(qcfg.get("kr_max_items", 8))
     min_imp = int(qcfg.get("min_importance", 6))
     skip = set(qcfg.get("skip_sections", []))
-    first = [("nz_immigration", it) for it in sections.get("nz_immigration", {}).get("items", [])]
-    rest = [(k, it) for k, sec in sections.items() if k != "nz_immigration" and k not in skip
-            for it in sec.get("items", []) if it.get("importance", 0) >= min_imp]
-    rest.sort(key=lambda x: x[1].get("importance", 0), reverse=True)
-    out, seen = [], set()
-    for k, it in first + rest:
+    region = lambda k: cfg["sections"].get(k, {}).get("region", "kr" if k.startswith("kr_") else "nz")
+    nz = [(k, it) for k, sec in sections.items() if region(k) == "nz" and k not in skip for it in sec.get("items", [])]
+    nz.sort(key=lambda x: x[0] != "nz_immigration")  # 레이더 먼저 (안정 정렬이라 섹션 순서 유지)
+    kr = [(k, it) for k, sec in sections.items() if region(k) == "kr" and k not in skip
+          for it in sec.get("items", []) if it.get("importance", 0) >= min_imp]
+    kr.sort(key=lambda x: x[1].get("importance", 0), reverse=True)
+    out, seen, n_kr = [], set(), 0
+    for k, it in nz + kr:
         if it.get("carried_from") or it["id"] in seen:
             continue
+        if region(k) == "kr":
+            if n_kr >= kr_limit:
+                continue
+            n_kr += 1
         seen.add(it["id"])
         out.append((k, it))
-        if len(out) >= limit:
-            break
     return out
 
 
@@ -91,15 +96,19 @@ def attach_qa(sections: dict, chosen: dict[str, list[Article]], cfg: dict, llm) 
     if not targets:
         return 0
     per_item = int(qcfg.get("per_item", 3))
+    batch = int(qcfg.get("batch_size", 22))
     arts = {a.id: a for items in chosen.values() for a in items}
-    user = "\n\n---\n\n".join(_block(it, sections[k]["label"], arts.get(it["id"])) for k, it in targets)
-    try:
-        out = llm.json_call(task="summary", system=_system(cfg, per_item), user=user, schema=QA_SCHEMA, max_tokens=24000)
-    except Exception as e:  # noqa: BLE001 — Q&A 실패가 브리핑 생성을 막지 않게
-        log.warning("Q&A AI failed: %s", e)
-        return 0
+    rows = []
+    for start in range(0, len(targets), batch):
+        chunk = targets[start:start + batch]
+        user = "\n\n---\n\n".join(_block(it, sections[k]["label"], arts.get(it["id"])) for k, it in chunk)
+        try:
+            out = llm.json_call(task="summary", system=_system(cfg, per_item), user=user, schema=QA_SCHEMA, max_tokens=24000)
+            rows.extend(out.get("items", []))
+        except Exception as e:  # noqa: BLE001 — Q&A 실패가 브리핑 생성을 막지 않게 (남은 묶음도 시도)
+            log.warning("Q&A AI failed for batch %d: %s", start // batch + 1, e)
     by_id = {}
-    for row in out.get("items", []):
+    for row in rows:
         qa = [{"q": x["q"].strip()[:80], "a": x["a"].strip()[:300]} for x in row.get("qa", [])
               if x.get("q", "").strip() and x.get("a", "").strip()][:per_item]
         if qa:

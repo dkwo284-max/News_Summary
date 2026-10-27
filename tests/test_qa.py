@@ -18,7 +18,14 @@ SECTIONS = {
 
 def test_pick_targets_order_and_filters(cfg):
     ids = [it["id"] for _, it in pick_targets(SECTIONS, cfg)]
-    assert ids == ["im1", "e1"]   # 레이더 먼저, 중요도 6 미만·연예·지난 소식 제외
+    assert ids == ["im1", "e1", "e2"]   # 뉴질랜드는 중요도와 상관없이 전부(레이더 먼저), 연예·지난 소식 제외
+
+
+def test_pick_targets_kr_limited_by_importance(cfg):
+    secs = {"kr_society": {"label": "사회", "items": [_item(f"k{i}", 10 - i) for i in range(12)]},
+            "akl_life": {"label": "생활", "items": [_item("a1", 3)]}}
+    ids = [it["id"] for _, it in pick_targets(secs, cfg)]
+    assert ids[0] == "a1" and ids[1:] == [f"k{i}" for i in range(5)]   # 한국은 중요도 6 이상만 (10..6 → 5건)
 
 
 class QALLM:
@@ -46,3 +53,16 @@ def test_attach_qa_failure_is_soft(cfg):
             raise RuntimeError("429")
     secs = json.loads(json.dumps(SECTIONS))
     assert attach_qa(secs, {}, cfg, Boom()) == 0 and attach_qa(secs, {}, cfg, None) == 0
+
+
+def test_attach_qa_batches(cfg):
+    secs = {"akl_life": {"label": "생활", "items": [_item(f"a{i}", 3) for i in range(30)]}}
+    calls = []
+
+    class BatchLLM:
+        def json_call(self, *, user, **kw):
+            ids = [line.split()[1] for line in user.splitlines() if line.startswith("[id]")]
+            calls.append(len(ids))
+            return {"items": [{"id": i, "qa": [{"q": "질문?", "a": "답."}]} for i in ids]}
+
+    assert attach_qa(secs, {}, cfg, BatchLLM()) == 30 and calls == [22, 8]
