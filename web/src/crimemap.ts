@@ -63,10 +63,27 @@ function incLine(h: H, e: Incident): HTMLElement {
   return h("li", {}, h("span", { class: "tl-date" }, short(e.date)), badge(h, e.severity), " ", e.crime ? h("strong", {}, `${e.crime} `) : null, title);
 }
 
+/** 같은 장소·같은 등급 보도가 3일 안에 또 나오면 한 사건으로 보고, 동네 이름이 없거나 "Auckland" 뿐이면 가장 가까운 동네(3km 이내)로 채운다 */
+function tidy(list: Incident[], suburbs: Record<string, [number, number]>): Incident[] {
+  const out: Incident[] = [];
+  for (const e of [...list].sort((a, b) => a.date.localeCompare(b.date))) {
+    const dup = out.find((x) => x.severity === e.severity && x.location.toLowerCase() === e.location.toLowerCase()
+      && Math.abs(daysAgo(x.date) - daysAgo(e.date)) <= 3);
+    if (dup) continue;
+    let suburb = e.suburb;
+    if ((!suburb || /^auckland$/i.test(suburb)) && e.latlon) {
+      const near = Object.entries(suburbs).map(([n, at]) => ({ n, d: km(at, e.latlon!) })).sort((a, b) => a.d - b.d)[0];
+      suburb = near && near.d <= 3 ? near.n : suburb;
+    }
+    out.push({ ...e, suburb: /^auckland$/i.test(suburb) ? "" : suburb });
+  }
+  return out;
+}
+
 /** 관심 동네 반경 2km 안에서 최근 days 일 1급 사건 (알림 배너용) */
 export function nearbySerious(data: IncidentData | null, homes: Record<string, [number, number]>, days = 7): { e: Incident; s: string; d: number }[] {
   const out: { e: Incident; s: string; d: number }[] = [];
-  for (const e of inDays(data?.incidents ?? [], days)) {
+  for (const e of inDays(tidy(data?.incidents ?? [], {}), days)) {
     if (e.severity !== "1" || !e.latlon) continue;
     for (const [s, at] of Object.entries(homes)) {
       const d = km(at, e.latlon);
@@ -92,7 +109,7 @@ export function safetyAlert(h: H, data: IncidentData | null, homes: Record<strin
 export function safetySection(h: H, data: IncidentData | null, homes: Record<string, [number, number]>,
   allSuburbs: Record<string, [number, number]>): HTMLElement {
   const root = h("div", { class: "hood" });
-  const all = data?.incidents ?? [];
+  const all = tidy(data?.incidents ?? [], allSuburbs);
   // ── 1) 지도 ──
   let period = 30;
   let onlySerious = false;
