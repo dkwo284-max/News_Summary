@@ -90,7 +90,8 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
 
     # AI 없이 갱신되는 부가 데이터도 함께 (한인 GP 지도·동네 비교)
     for mod, fn, args in (("korean_gp", "update_korean_gp", (cfg, data_dir)), ("areas", "update_areas", (cfg, data_dir, date.fromisoformat(brief["date"]))),
-                          ("crime_stats", "update_crime_stats", (data_dir,))):
+                          ("crime_stats", "update_crime_stats", (data_dir,)),
+                          ("incidents", "update_incidents", ({}, cfg, data_dir, brief["date"]))):
         try:
             getattr(__import__(mod), fn)(*args)
         except Exception as e:  # noqa: BLE001

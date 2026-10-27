@@ -399,3 +399,8 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .risk-list { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 8px; font-size: 0.875rem; line-height: 1.5; }
 .risk-list .vs { font-size: 0.8125rem; }
 .risk-top { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 0.875rem; }
+.inc-place { font-size: 0.75rem; color: #4b5563; margin-bottom: 2px; }
+.inc-brief { padding-top: 6px; border-top: 1px solid #e5e7eb; }
+.inc-brief:first-child { border-top: 0; padding-top: 0; }
+.inc-brief p { margin: 3px 0 2px; font-size: 0.8125rem; line-height: 1.45; color: #111827; }
+.inc-link { font-size: 0.75rem; }

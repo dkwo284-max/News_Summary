@@ -39,6 +39,7 @@ def test_update_incidents_accumulates_and_geocodes(cfg, tmp_path, monkeypatch):
     ids = {e["id"]: e for e in data["incidents"]}
     assert n == 3 and set(ids) == {"keep", "n1", "n2"}         # 90일 지난 것·지난 소식 제외
     assert ids["n1"]["latlon"] == [-36.85, 174.76] and "latlon" not in ids["n2"]
+    assert ids["n1"]["summary"] == "s"
     assert calls == ["Myers Park, Auckland, New Zealand", "Nowhere Lane, Auckland, New Zealand", "Nowhere, Auckland, New Zealand"]
 
 

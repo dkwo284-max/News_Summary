@@ -15,6 +15,7 @@ export interface Incident {
   crime: string;
   location: string;
   suburb: string;
+  summary?: string; // 한 줄 설명 (지도 팝업)
   latlon?: [number, number];
 }
 interface IncidentData { updated_at: string; keep_days: number; incidents: Incident[] }
@@ -58,9 +59,12 @@ const short = (d: string) => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}
 function badge(h: H, s: Sev): HTMLElement {
   return h("span", { class: `sev sev-${s}` }, SEV_LABEL[s]);
 }
-function incLine(h: H, e: Incident): HTMLElement {
-  const title = /^https?:/.test(e.url) ? h("a", { href: e.url, target: "_blank", rel: "noopener noreferrer" }, e.title_ko) : e.title_ko;
-  return h("li", {}, h("span", { class: "tl-date" }, short(e.date)), badge(h, e.severity), " ", e.crime ? h("strong", {}, `${e.crime} `) : null, title);
+// 지도 팝업: 등급·종류·날짜 한 줄 + 무슨 일이었는지 한 문장 + 기사 링크
+function incBrief(h: H, e: Incident): HTMLElement {
+  return h("li", { class: "inc-brief" },
+    h("div", {}, badge(h, e.severity), h("strong", {}, e.crime || SEV_LABEL[e.severity]), h("span", { class: "muted" }, ` · ${short(e.date)}`)),
+    h("p", {}, e.summary || e.title_ko),
+    /^https?:/.test(e.url) ? h("a", { href: e.url, target: "_blank", rel: "noopener noreferrer", class: "inc-link" }, "기사 보기 ↗") : null);
 }
 
 /** 같은 장소·같은 등급 보도가 3일 안에 또 나오면 한 사건으로 보고, 동네 이름이 없거나 "Auckland" 뿐이면 가장 가까운 동네(3km 이내)로 채운다 */
@@ -151,8 +155,8 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
     for (const g of groups.values()) {
       const worst = (["1", "2", "3", "accident"] as Sev[]).find((s) => g.some((e) => e.severity === s))!;
       L.circleMarker(g[0].latlon!, { radius: 6 + 3 * Math.sqrt(g.length), weight: 2, color: "#fff", fillColor: SEV_COLOR[worst], fillOpacity: 0.85 })
-        .bindPopup(h("div", { class: "gp-info" }, h("strong", {}, `${g[0].location} · ${g.length}건`),
-          h("ul", { class: "inc-list" }, ...g.sort((a, b) => b.date.localeCompare(a.date)).map((e) => incLine(h, e)))))
+        .bindPopup(h("div", { class: "gp-info" }, h("div", { class: "inc-place" }, `📍 ${g[0].location}${g.length > 1 ? ` · ${g.length}건` : ""}`),
+          h("ul", { class: "inc-list" }, ...g.sort((a, b) => b.date.localeCompare(a.date)).map((e) => incBrief(h, e)))), { maxWidth: 260 })
         .addTo(layer);
     }
     for (const [s, at] of Object.entries(homes)) {

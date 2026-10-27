@@ -54,6 +54,7 @@ def _load(path: Path) -> dict:
 def _entry(it: dict, day: str, inc: dict) -> dict:
     return {"id": it["id"], "date": day, "title_ko": it["title_ko"],
             "url": (it.get("sources") or [{}])[0].get("url", ""),
+            "summary": (it.get("summary_ko") or [""])[0][:120],
             "severity": inc["severity"], "crime": inc.get("crime", ""),
             "location": inc["location"], "suburb": inc.get("suburb", "")}
 
@@ -121,6 +122,13 @@ def update_incidents(sections: dict, cfg: dict, data_dir: Path, today: str, llm=
                 entries[it["id"]] = _entry(it, today, inc)
     cutoff = (date.fromisoformat(today) - timedelta(days=keep)).isoformat()
     entries = {k: e for k, e in entries.items() if e["date"] >= cutoff}
+    # 지도 팝업용 한 줄 설명이 없는 예전 항목은 그날 브리핑에서 채운다
+    for e in entries.values():
+        if not e.get("summary"):
+            b = _load(data_dir / f"{e['date']}.json")
+            it = next((x for sec in b.get("sections", {}).values() for x in sec.get("items", []) if x["id"] == e["id"]), None)
+            if it:
+                e["summary"] = (it.get("summary_ko") or [""])[0][:120]
     cache: dict[str, list[float] | None] = dict(old.get("geocache", {}))
     own = client is None
     client = client or httpx.Client(timeout=30, follow_redirects=True, headers={"User-Agent": cfg["fetch"]["user_agent"]})
