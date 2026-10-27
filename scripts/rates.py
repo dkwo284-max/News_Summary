@@ -11,6 +11,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import math
 from datetime import date, timedelta
 
 import httpx
@@ -45,9 +46,11 @@ def parse_bis(text: str) -> dict[str, list[tuple[str, float]]]:
     out: dict[str, list[tuple[str, float]]] = {}
     for r in csv.DictReader(io.StringIO(text)):
         try:
-            out.setdefault(r["REF_AREA"], []).append((r["TIME_PERIOD"], float(r["OBS_VALUE"])))
+            v = float(r["OBS_VALUE"])
         except (KeyError, ValueError):
             continue
+        if math.isfinite(v):  # BIS 는 값이 없는 날을 NaN 으로 준다 (JSON 에 NaN 이 들어가면 앱이 못 읽음)
+            out.setdefault(r["REF_AREA"], []).append((r["TIME_PERIOD"], v))
     return out
 
 
@@ -56,9 +59,11 @@ def parse_fred(text: str) -> list[tuple[str, float]]:
     pts = []
     for row in rows:
         try:
-            pts.append((row[0], float(row[1])))
+            v = float(row[1])
         except (IndexError, ValueError):
             continue
+        if math.isfinite(v):
+            pts.append((row[0], v))
     return pts
 
 

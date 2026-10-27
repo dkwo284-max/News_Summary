@@ -82,3 +82,16 @@ class Article:
             names.add(s.name)
             out.append(s)
         return out
+
+
+def finite(obj):
+    """JSON 에 NaN·Infinity 가 들어가면 브라우저가 파일을 못 읽으므로 None 으로 바꾼다."""
+    import math
+
+    if isinstance(obj, float):
+        return obj if math.isfinite(obj) else None
+    if isinstance(obj, dict):
+        return {k: finite(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [finite(v) for v in obj]
+    return obj

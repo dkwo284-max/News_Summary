@@ -8,7 +8,7 @@ from pathlib import Path
 
 import jsonschema
 
-from common import ROOT, log
+from common import ROOT, finite, log
 
 SCHEMA_PATH = ROOT / "schema" / "brief.schema.json"
 DATE_FILE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})\.json$")
@@ -38,7 +38,7 @@ def total_items(brief: dict) -> int:
 
 def write_brief(brief: dict, data_dir: Path) -> Path:
     data_dir.mkdir(parents=True, exist_ok=True)
-    body = json.dumps(brief, ensure_ascii=False, indent=1)
+    body = json.dumps(finite(brief), ensure_ascii=False, indent=1, allow_nan=False)
     day_path = data_dir / f"{brief['date']}.json"
     day_path.write_text(body, encoding="utf-8")
     (data_dir / "latest.json").write_text(body, encoding="utf-8")

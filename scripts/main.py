@@ -19,7 +19,7 @@ import sys
 from datetime import date, datetime, timezone
 from pathlib import Path
 
-from common import ROOT, load_config, log, tz
+from common import ROOT, finite, load_config, log, tz
 
 EXIT_EMPTY, EXIT_INVALID = 2, 3
 
@@ -105,7 +105,7 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
         log.warning("extras refresh failed: %s", e)
     pt = fetch_processing_times(cfg, None, previous)
     brief.setdefault("extras", {})["processing_times"] = update_history(pt, data_dir, brief["date"])
-    body = json.dumps(brief, ensure_ascii=False, indent=1)
+    body = json.dumps(finite(brief), ensure_ascii=False, indent=1, allow_nan=False)
     latest.write_text(body, encoding="utf-8")
     (data_dir / f"{brief['date']}.json").write_text(body, encoding="utf-8")
     set_output("generated", "true")

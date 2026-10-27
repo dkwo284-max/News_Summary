@@ -9,6 +9,8 @@ D,NZ,2025-10-01,2.5
 D,NZ,2026-08-20,2.5
 D,NZ,2026-08-21,2.75
 D,NZ,2026-10-20,2.75
+D,NZ,2026-10-21,NaN
+D,NZ,2026-10-22,
 D,KR,2025-10-01,2.5
 D,KR,2026-10-20,2.5
 D,US,2026-10-20,3.875
@@ -36,3 +38,8 @@ def test_fetch_rates_prefers_fresher_fred_range():
     assert us["source"] == "FRED" and us["range"] == [3.75, 4.0] and us["as_of"] == "2026-10-27"
     assert us["changed_on"] == "2026-09-17" and us["previous"] == 3.625
     assert out["rates"]["NZ"]["source"] == "BIS"
+
+
+def test_finite_replaces_nan():
+    from common import finite
+    assert finite({"a": [1.0, float("nan")], "b": {"c": float("inf")}}) == {"a": [1.0, None], "b": {"c": None}}
