@@ -1,0 +1,220 @@
+=== https://stats.bis.org/api/v1/data/WS_CBPOL/D.NZ+KR+US/all?startPeriod=2025-06-01&format=csv
+200 text/csv;charset=UTF-8
+FREQ,REF_AREA,UNIT_MEASURE,UNIT_MULT,TIME_FORMAT,COMPILATION,DECIMALS,SOURCE_REF,SUPP_INFO_BREAKS,TITLE,TIME_PERIOD,OBS_VALUE,OBS_STATUS,OBS_CONF,OBS_PRE_BREAK
+D,KR,368,0,,From 7 Mar 2008 onwards: Bank of Korea base rate; from 6 May 1999 to 6 Mar 2008: target overnight call rate(base rate). ,4,Bank of Korea,The Bank of Korea base rate has been changed from the overnight call rate to 7 day repurchase agreements rate since Feb 2008., Central bank policy rates - Korea - Daily - End of period,2025-06-02,2.5,A,F,
+D,KR,368,0,,From 7 Mar 2008 onwards: Bank of Korea base rate; from 6 May 1999 to 6 Mar 2008: target overnight call rate(base rate). ,4,Bank of Korea,The Bank of Korea base rate has been changed from the overnight call rate to 7 day repurchase agreements rate since Feb 2008., Central bank policy rates - Korea - Daily - End of period,2025-06-04,2.5,A,F,
+D,KR,368,0,,From 7 Mar 2008 onwards: Bank of Korea base rate; from 6 May 1999 to 6 Mar 2008: target overnight call rate(base rate). ,4,Bank of Korea,The Bank of Korea base rate has been changed from the overnight call rate to 7 day repurchase agreements rate since Feb 2008., Central bank policy rates - Korea - Daily - End of period,2025-06-05,2.5,A,F,
+D,KR,368,0,,From 7 Mar 2008 onwards: Bank of Korea base rate; from 6 May 1999 to 6 Mar 2008: target overnight call rate(base rate). ,4,Bank of Korea,The Bank of Korea base rate has been changed from the overnight call rate to 7 day repurchase agreements rate since Feb 2008., Ce
+--- tail
+3.875,A,F,
+D,US,368,0,,From 19 Dec 1985 onwards: mid-point of the Federal Reserve target rate; from 1 Jul 1954 to 18 Dec 1985: US Fed Funds effective rate.,4,US Federal Reserve System,, Central bank policy rates - United States - Daily - End of period,2026-10-18,3.875,A,F,
+D,US,368,0,,From 19 Dec 1985 onwards: mid-point of the Federal Reserve target rate; from 1 Jul 1954 to 18 Dec 1985: US Fed Funds effective rate.,4,US Federal Reserve System,, Central bank policy rates - United States - Daily - End of period,2026-10-19,3.875,A,F,
+D,US,368,0,,From 19 Dec 1985 onwards: mid-point of the Federal Reserve target rate; from 1 Jul 1954 to 18 Dec 1985: US Fed Funds effective rate.,4,US Federal Reserve System,, Central bank policy rates - United States - Daily - End of period,2026-10-20,3.875,A,F,
+
+=== https://stats.bis.org/api/v2/data/dataflow/BIS/WS_CBPOL/1.0/D.NZ+KR+US?startPeriod=2025-06-01&format=csv
+200 text/csv;charset=UTF-8
+FREQ,REF_AREA,UNIT_MEASURE,UNIT_MULT,TIME_FORMAT,COMPILATION,DECIMALS,SOURCE_REF,SUPP_INFO_BREAKS,TITLE,TIME_PERIOD,OBS_VALUE,OBS_STATUS,OBS_CONF,OBS_PRE_BREAK
+D,KR,368,0,,From 7 Mar 2008 onwards: Bank of Korea base rate; from 6 May 1999 to 6 Mar 2008: target overnight call rate(base rate). ,4,Bank of Korea,The Bank of Korea base rate has been changed from the overnight call rate to 7 day repurchase agreements rate since Feb 2008., Central bank policy rates - Korea - Daily - End of period,2025-06-02,2.5,A,F,
+D,KR,368,0,,From 7 Mar 2008 onwards: Bank of Korea base rate; from 6 May 1999 to 6 Mar 2008: target overnight call rate(base rate). ,4,Bank of Korea,The Bank of Korea base rate has been changed from the overnight call rate to 7 day repurchase agreements rate since Feb 2008., Central bank policy rates - Korea - Daily - End of period,2025-06-04,2.5,A,F,
+D,KR,368,0,,From 7 Mar 2008 onwards: Bank of Korea base rate; from 6 May 1999 to 6 Mar 2008: target overnight call rate(base rate). ,4,Bank of Korea,The Bank of Korea base rate has been changed from the overnight call rate to 7 day repurchase agreements rate since Feb 2008., Central bank policy rates - Korea - Daily - End of period,2025-06-05,2.5,A,F,
+D,KR,368,0,,From 7 Mar 2008 onwards: Bank of Korea base rate; from 6 May 1999 to 6 Mar 2008: target overnight call rate(base rate). ,4,Bank of Korea,The Bank of Korea base rate has been changed from the overnight call rate to 7 day repurchase agreements rate since Feb 2008., Ce
+--- tail
+3.875,A,F,
+D,US,368,0,,From 19 Dec 1985 onwards: mid-point of the Federal Reserve target rate; from 1 Jul 1954 to 18 Dec 1985: US Fed Funds effective rate.,4,US Federal Reserve System,, Central bank policy rates - United States - Daily - End of period,2026-10-18,3.875,A,F,
+D,US,368,0,,From 19 Dec 1985 onwards: mid-point of the Federal Reserve target rate; from 1 Jul 1954 to 18 Dec 1985: US Fed Funds effective rate.,4,US Federal Reserve System,, Central bank policy rates - United States - Daily - End of period,2026-10-19,3.875,A,F,
+D,US,368,0,,From 19 Dec 1985 onwards: mid-point of the Federal Reserve target rate; from 1 Jul 1954 to 18 Dec 1985: US Fed Funds effective rate.,4,US Federal Reserve System,, Central bank policy rates - United States - Daily - End of period,2026-10-20,3.875,A,F,
+
+=== https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFEDTARU
+200 application/csv
+observation_date,DFEDTARU
+2008-12-16,0.25
+2008-12-17,0.25
+2008-12-18,0.25
+2008-12-19,0.25
+2008-12-20,0.25
+2008-12-21,0.25
+2008-12-22,0.25
+2008-12-23,0.25
+2008-12-24,0.25
+2008-12-25,0.25
+2008-12-26,0.25
+2008-12-27,0.25
+2008-12-28,0.25
+2008-12-29,0.25
+2008-12-30,0.25
+2008-12-31,0.25
+2009-01-01,0.25
+2009-01-02,0.25
+2009-01-03,0.25
+2009-01-04,0.25
+2009-01-05,0.25
+2009-01-06,0.25
+2009-01-07,0.25
+2009-01-08,0.25
+2009-01-09,0.25
+2009-01-10,0.25
+2009-01-11,0.25
+2009-01-12,0.25
+2009-01-13,0.25
+2009-01-14,0.25
+2009-01-15,0.25
+2009-01-16,0.25
+2009-01-17,0.25
+2009-01-18,0.25
+2009-01-19,0.25
+2009-01-20,0.25
+2009-01-21,0.25
+2009-01-22,0.25
+2009-01-23,0.25
+
+--- tail
+2026-09-08,3.75
+2026-09-09,3.75
+2026-09-10,3.75
+2026-09-11,3.75
+2026-09-12,3.75
+2026-09-13,3.75
+2026-09-14,3.75
+2026-09-15,3.75
+2026-09-16,3.75
+2026-09-17,4.00
+2026-09-18,4.00
+2026-09-19,4.00
+2026-09-20,4.00
+2026-09-21,4.00
+2026-09-22,4.00
+2026-09-23,4.00
+2026-09-24,4.00
+2026-09-25,4.00
+2026-09-26,4.00
+2026-09-27,4.00
+2026-09-28,4.00
+2026-09-29,4.00
+2026-09-30,4.00
+2026-10-01,4.00
+2026-10-02,4.00
+2026-10-03,4.00
+2026-10-04,4.00
+2026-10-05,4.00
+2026-10-06,4.00
+2026-10-07,4.00
+2026-10-08,4.00
+2026-10-09,4.00
+2026-10-10,4.00
+2026-10-11,4.00
+2026-10-12,4.00
+2026-10-13,4.00
+2026-10-14,4.00
+2026-10-15,4.00
+2026-10-16,4.00
+2026-10-17,4.00
+2026-10-18,4.00
+2026-10-19,4.00
+2026-10-20,4.00
+2026-10-21,4.00
+2026-10-22,4.00
+2026-10-23,4.00
+2026-10-24,4.00
+2026-10-25,4.00
+2026-10-26,4.00
+2026-10-27,4.00
+
+=== https://www.rbnz.govt.nz/monetary-policy/about-monetary-policy/the-official-cash-rate
+403 text/html; charset=UTF-8
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Website unavailable - Reserve Bank of New Zealand - Te Pūtea Matua</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<style>*{box-sizing:border-box}body{font-family:Arial,sans-serif;font-size:16px}.header,body{background-color:#343434;color:#fff}.header{padding:15px;text-align:center;font-size:1.5em}a{text-decoration:underline;color:#fff}a:hover,a:visited{color:#ed1166}.column{float:left;width:100%;padding:10px}.row:after{content:"";display:table;clear:both}.center{display:block;margin-left:auto;margin-right:auto;width:50%;margin-bottom:25px}@media (max-width:720px){.center{width:90%}}@media (max-width:720px){.column{width:100%}}@media (max-width:720px){.title{font-size:larger}}@media (min-width:540px) and (max-width:720px){.alert.p,.error-title,.error-token{font-size:medium;text-align:center}}@media (max-width:540px){.alert.p,.error-title,.error-token{font-size:small;text-align:center}}.alert{border:2px solid #ed1166;background-color:#fff;margin-bottom:50px;padding:15px}.alert p{text-align:center}.alert a,.alert p{color:#000}.alert a:hover,.alert a:visited{color:#ed1166}.error-title{text-align:center}.cferror_details{list-style-type:none}</style>
+<meta http-equiv="refresh" content="360"></head>
+<body>
+<div class="header">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABKcAAAG5CAMAAABsuqcDAAAAilBMVEX///
+--- tail
+),t=r.setCharAt(t,e+n,String.fromCharCode(65+(15&a)))},set_latency:function(t,e){return e&=65535,t=r.set_byte(t,40,e>>8),t=r.set_byte(t,41,255&e),t=r.set_byte(t,35,2)},wait_perf_data:function(){try{var t=window.performance.timing;if(0<t.loadEventEnd){var e=t.loadEventEnd-t.navigationStart;if(e<60001){var a=r.set_latency(r.f5_p,e);window.document.cookie="f5avr1988579428aaaaaaaaaaaaaaaa_cspm_="+encodeURIComponent(a)+";path=/"}return}}catch(t){return}setTimeout(r.wait_perf_data,100)},go:function(){for(var t=window.document.cookie.split(/\s*;\s*/),e=0;e<t.length;++e){var a=t[e].split(/\s*=\s*/);if("f5_cspm"==a[0]&&"1234"==a[1]){var n=new Date;n.setTime(n.getTime()-1e3),window.document.cookie="f5_cspm=;expires="+n.toUTCString()+";path=/;",setTimeout(r.wait_perf_data,100)}}}};r.go()}();</script>
+=== https://www.bok.or.kr/eng/main/main.do
+200 text/html;charset=utf-8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- tail
+');
+				}
+			});
+			//자동 재생 멈춤
+			$('.visual__swiper-button-stop').click(function() {
+				$(this).parents(".visualSet").addClass("current-stop");
+				$(this).hide().next().show().focus()
+				slideVisual.autoplay.stop();
+				$(".visualSet .autoplay-progress .progress").removeClass("active first");
+			});
+			//자동 재생 플레이
+			$('.visual__swiper-button-play').click(function() {
+				$(this).parents(".visualSet").removeClass("current-stop");
+				$(this).hide().prev().show().focus()
+				slideVisual.autoplay.start();
+				$(".visualSet .autoplay-progress .progress").addClass("active");
+			});
+
+			$('.visual__swiper-button-next, .visual__swiper-button-prev').click(function() {
+				$(".visual__swiper-button-play").hide().prev().show()
+			});
+		});
+		</script>
+
+
+</body>
+</html>
+=== https://api.coinbase.com/v2/exchange-rates?currency=USD
+200 application/json
+{"data":{"currency":"USD","rates":{"00":"111.5733968855401993","1INCH":"11.3713186829141387","2Z":"34.6740638002773925","A8":"230.756345338100296","AAVE":"0.0075585789871504","ABT":"3.6127167630057803","ACH":"200.1200720432259356","ACS":"6839.9452804377564979","ACX":"21.8826193375784878","ADA":"4.8887802493277927","AED":"3.6729333333333334","AERGO":"47.7349754164876605","AERO":"1.4436889139128301","AFN":"64.6072955","AGLD":"5.7455194024128152","AI":"57.1102227298686465","AIOZ":"10.3702167375298144","AKT":"1.4699397324709687","ALCX":"0.4545454545454545","ALEO":"31.8390219052470708","ALEPH":"66.7852141892117794","ALGO":"9.69274013763691","ALICE":"7.2072072072072072","ALIGN":"229.9735700638400539","ALL":"81.086218","ALLO":"5.3418803418803419","ALT":"154.3209876543209877","AMD":"360.4850895","AMP":"1402.1312394840157039","ANG":"1.79","ANKR":"248.2156928918407579","ANT":"8.9810284709161222","AOA":"917.1666665","APE":"8.1879963972815852","API3":"3.8343558282208589","APR":"20.4498977505112474","APT":"1.4598540145985401","ARB":"6.0146758089738963","ARKM":"8.349670364496926","ARPA":"102.2663377163598687","ARS":"1538.25965","ARX":"4.1169205434335117","ASM":"185.1851851851851852","AST":"197.4333662388943731","ASTER":"1.4132278123233465","ATA":"1562.4226300963828747","ATH":"173.2501732501732502","ATOM":"0.6191567085629373","AUCTION":"0.2919111422482996","AUD":"1.4231646666666667","AUDD":"1.4231646666666667","AUDIO":"69.9935617894205913","AURORA":"19.4605534581403495","AVAX":"0.1128540796
+--- tail
+"2.763185","XAF":"589.4808465","XAN":"111.4827201783723523","XCD":"2.701275","XCN":"248.8181139586961931","XLM":"5.8924046903541335","XMON":"0.0150982534016904","XOF":"589.4808465","XPF":"107.23864","XPL":"13.6054421768707483","XRP":"0.7586102260658474","XSGD":"1.2808649999999999","XTZ":"3.5714285714285714","XYO":"321.5434083601286174","YB":"15.6656393605027644","YER":"236.1375135","YFI":"0.0004751112948208","YFII":"0.0410068232325256","ZAMA":"13.0259215839520646","ZAR":"16.6056333333333333","ZEC":"0.0007714323183855","ZEN":"0.1694915254237288","ZETA":"25.5250189370910967","ZETACHAIN":"25.543738137219251","ZK":"82.9944393725620383","ZKC":"29.9211903061371758","ZKP":"23.1290324007103498","ZMW":"20.156633","ZORA":"152.6251526251526252","ZRO":"0.6034274680183442","ZRX":"9.5681038040328213"}}}
+=== https://api.coinbase.com/v2/prices/BTC-USD/spot
+200 application/json
+{"data":{"amount":"80592.695","base":"BTC","currency":"USD"}}
+--- tail
+{"data":{"amount":"80592.695","base":"BTC","currency":"USD"}}
+=== BOK base rate text
+ Operation General Principles of Monetary Policy Operation Detailed Explanatory Notes Objectives &amp; Framework of Monetary Policy Objectives of Monetary Policy Inflation Targeting The Bank of Korea Base Rate Decision-making Process of Monetary Policy Monetary Policy Instruments Open Market Operations Lending and Deposit Facilities Reserve Requirements Monetary Policy Transmission Mechanism Monetary Policy Board Monetary Policy Board History of the Monetary Policy Board Meeting Dates Financial Stability Financial Stability Definition and Importance of Financial Stability Why Should the Centra
