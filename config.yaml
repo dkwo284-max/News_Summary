@@ -43,11 +43,11 @@ sections:
   nz_education:     { label: "교육", region: nz, from: nz_national, category: education, top_n: 4 }
   nz_economy:       { label: "경제", region: nz, from: nz_national, category: economy,   top_n: 5 }
   nz_politics:      { label: "정치", region: nz, from: nz_national, category: politics,  top_n: 4 }
-  # 오클랜드 기사도 nz_auckland 한 묶음으로 선별한 뒤 AI 주제 분류(akl_topic)로 생활·치안·부동산·의료·교육 섹션으로 나눕니다.
+  # 오클랜드 기사도 nz_auckland 한 묶음으로 선별한 뒤 AI 주제 분류(akl_topic)로 치안·생활·부동산·의료·교육 섹션으로 나눕니다.
   # carry_days: 그날 새 소식이 없으면 최근 N일 브리핑의 같은 섹션 기사를 '지난 소식'으로 이어서 보여줍니다.
   nz_auckland:      { label: "오클랜드", region: nz, pool: true, top_n: 20, candidate_limit: 80 }
-  akl_life:         { label: "생활",   region: nz, from: nz_auckland, topic: life,      top_n: 5 }
   akl_safety:       { label: "치안",   region: nz, from: nz_auckland, topic: safety,    top_n: 4, carry_days: 2 }
+  akl_life:         { label: "생활",   region: nz, from: nz_auckland, topic: life,      top_n: 5 }
   akl_property:     { label: "부동산", region: nz, from: nz_auckland, topic: property,  top_n: 4, carry_days: 3 }
   akl_health:       { label: "의료",   region: nz, from: nz_auckland, topic: health,    top_n: 4, carry_days: 3 }
   akl_education:    { label: "교육",   region: nz, from: nz_auckland, topic: education, top_n: 4, carry_days: 3 }

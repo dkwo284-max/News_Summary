@@ -16,7 +16,7 @@ interface TabDef {
 }
 
 const TABS: TabDef[] = [
-  { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["akl_life", "akl_safety", "akl_property", "akl_health", "akl_education", "nz_auckland"] },
+  { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["akl_safety", "akl_life", "akl_property", "akl_health", "akl_education", "nz_auckland"] },
   { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_society", "nz_education", "nz_economy", "nz_politics", "nz_national"] },
   { id: "imm", icon: "🛂", label: "이민 레이더", sections: ["nz_immigration"] },
   { id: "kr", icon: "🇰🇷", label: "한국", sections: ["kr_society", "kr_economy", "kr_entertainment", "kr_politics"] },
@@ -43,9 +43,9 @@ const NZ_CHIPS: Chip[] = [
 ];
 const AKL_CHIPS: Chip[] = [
   { key: "all", label: "전체" },
-  { key: "hood", label: "📍 내 동네" },
-  { key: "akl_life", label: "생활" },
   { key: "akl_safety", label: "치안" },
+  { key: "akl_life", label: "생활" },
+  { key: "hood", label: "📍 내 동네" },
   { key: "akl_property", label: "부동산" },
   { key: "akl_health", label: "의료" },
   { key: "akl_education", label: "교육" },
