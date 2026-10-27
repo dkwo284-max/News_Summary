@@ -1,0 +1,36 @@
+name: Probe Korean GP page
+
+# 임시 점검(수동): hanin.nz 한인 GP 페이지 구조. 결과는 gp-probe 브랜치에 기록.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe
+        run: |
+          mkdir -p /tmp/out && cd /tmp/out
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"
+          curl -sS -L -m 60 -A "$UA" -D headers.txt -o page.html https://hanin.nz/korean-gp || true
+          curl -sS -L -m 30 -A "$UA" -o robots.txt https://hanin.nz/robots.txt || true
+          python3 - <<'PY'
+          import re
+          t = open("page.html", encoding="utf-8", errors="ignore").read()
+          with open("summary.txt", "w") as f:
+              f.write(f"len={len(t)}\n")
+              f.write("scripts: " + "\n".join(re.findall(r'<script[^>]+src="([^"]+)"', t)[:40]) + "\n")
+              f.write("api-ish: " + "\n".join(sorted(set(re.findall(r'["\'](https?://[^"\']*(?:api|json|supabase|firebase|graphql)[^"\']*|/api/[^"\']*)["\']', t)))[:40]) + "\n")
+              text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", t, flags=re.S)))
+              f.write("TEXT:\n" + text[:20000] + "\n")
+          PY
+      - name: Publish
+        if: always()
+        run: |
+          cd /tmp/out
+          git init -q -b gp-probe && git config user.name "daily-brief-bot" && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "gp probe"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" gp-probe
