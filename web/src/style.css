@@ -404,3 +404,6 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .inc-brief:first-child { border-top: 0; padding-top: 0; }
 .inc-brief p { margin: 3px 0 2px; font-size: 0.8125rem; line-height: 1.45; color: #111827; }
 .inc-link { font-size: 0.75rem; }
+.type-break { margin-top: 2px; }
+.type-break summary { cursor: pointer; font-size: 0.75rem; color: var(--accent); font-weight: 600; min-height: 28px; display: inline-flex; align-items: center; }
+.type-break ul { list-style: none; margin: 2px 0 4px; padding: 0; display: grid; gap: 3px; font-size: 0.8125rem; }

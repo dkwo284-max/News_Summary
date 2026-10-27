@@ -59,6 +59,20 @@ const short = (d: string) => `${Number(d.slice(5, 7))}/${Number(d.slice(8, 10))}
 function badge(h: H, s: Sev): HTMLElement {
   return h("span", { class: `sev sev-${s}` }, SEV_LABEL[s]);
 }
+// 동네별 위험 요약: 사건 종류별 건수 (접어 두었다가 펼쳐 보기)
+function typeDetails(h: H, list: Incident[]): HTMLElement | null {
+  if (!list.length) return null;
+  const order: Sev[] = ["1", "2", "3", "accident"];
+  const groups = new Map<string, { sev: Sev; n: number }>();
+  for (const e of list) {
+    const key = `${e.severity}|${e.crime || SEV_LABEL[e.severity]}`;
+    groups.set(key, { sev: e.severity, n: (groups.get(key)?.n ?? 0) + 1 });
+  }
+  const rows = [...groups.entries()].sort((a, b) => order.indexOf(a[1].sev) - order.indexOf(b[1].sev) || b[1].n - a[1].n);
+  return h("details", { class: "type-break" }, h("summary", {}, "종류별 보기"),
+    h("ul", {}, ...rows.map(([k, v]) => h("li", {}, badge(h, v.sev), `${k.split("|")[1]} ${v.n}건`))));
+}
+
 // 지도 팝업: 등급·종류·날짜 한 줄 + 무슨 일이었는지 한 문장 + 기사 링크
 function incBrief(h: H, e: Incident): HTMLElement {
   return h("li", { class: "inc-brief" },
@@ -198,7 +212,7 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
         !l.length ? "보도 없음" : cls === "up" ? "평균보다 많음" : cls === "down" ? "평균보다 적음" : "평균 수준"),
         h("span", { class: "muted" }, ` 점수 ${sc} (평균 ${avg.toFixed(1)}) · 반경 ${RADIUS_KM}km ${l.length}건` +
           (l.length ? ` (1급 ${l.filter((e) => e.severity === "1").length} · 2급 ${l.filter((e) => e.severity === "2").length} · 3급 ${l.filter((e) => e.severity === "3").length})` : "") +
-          ` · 이전 30일 ${p.length}건`));
+          ` · 이전 30일 ${p.length}건`), typeDetails(h, l));
     })));
   }
   card.append(h("p", { class: "hood-news" }, "보도가 많았던 동네 Top 5"));
@@ -206,7 +220,8 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
     card.append(h("ol", { class: "risk-top" }, ...top.map(({ s, l }) => {
       const before = prev.filter((e) => e.suburb === s).length;
       const arrow = l.length > before ? ` ▲${l.length - before}` : l.length < before ? ` ▼${before - l.length}` : "";
-      return h("li", {}, h("strong", {}, s), ` ${l.length}건`, h("span", { class: "muted" }, ` (1급 ${l.filter((e) => e.severity === "1").length})${arrow}`));
+      return h("li", {}, h("strong", {}, s), ` ${l.length}건`, h("span", { class: "muted" }, ` (1급 ${l.filter((e) => e.severity === "1").length})${arrow}`),
+        typeDetails(h, l));
     })));
   } else {
     card.append(h("p", { class: "muted" }, "최근 30일 보도된 범죄가 아직 없어요."));
