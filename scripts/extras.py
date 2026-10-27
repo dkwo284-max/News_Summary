@@ -1,4 +1,5 @@
-"""부가 정보: NZD/KRW 환율(Coinbase 실시간, 실패 시 frankfurter·ECB 고시), 오클랜드 날씨(Open-Meteo). 모두 API 키 불필요."""
+"""부가 정보: NZD·USD/KRW 환율과 비트코인 USD 가격(Coinbase 실시간, 환율은 실패 시 frankfurter·ECB 고시),
+오클랜드 날씨(Open-Meteo), 뉴질랜드·한국·미국 기준금리(BIS·FRED). 모두 API 키 불필요."""
 from __future__ import annotations
 
 import httpx
@@ -67,7 +68,28 @@ def fetch_weather(client: httpx.Client, w: dict) -> dict | None:
 def fetch_extras(cfg: dict) -> dict:
     ex = cfg["extras"]
     with httpx.Client(timeout=15) as client:
-        return {
+        out = {
             "nzd_krw": fetch_fx(client, ex["fx"]["base"], ex["fx"]["quote"]),
+            "usd_krw": fetch_fx(client, "USD", "KRW"),
+            "btc_usd": fetch_btc(client),
             "auckland_weather": fetch_weather(client, ex["weather"]),
         }
+    try:
+        from rates import fetch_rates
+
+        with httpx.Client(timeout=40, follow_redirects=True) as client:
+            out["policy_rates"] = fetch_rates(client)
+    except Exception as e:  # noqa: BLE001
+        log.warning("policy rates failed: %s", e)
+    return out
+
+
+def fetch_btc(client: httpx.Client) -> float | None:
+    """비트코인 1개 USD 가격 (Coinbase 실시간)."""
+    try:
+        r = client.get("https://api.coinbase.com/v2/exchange-rates?currency=BTC")
+        r.raise_for_status()
+        return round(float(r.json()["data"]["rates"]["USD"]))
+    except Exception as e:  # noqa: BLE001
+        log.warning("btc price failed: %s", e)
+        return None

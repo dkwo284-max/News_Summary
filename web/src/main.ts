@@ -150,6 +150,10 @@ function renderHeader(): void {
   const useLive = viewingLatest && live != null;
   const fx = useLive && live!.fx != null ? live!.fx : brief.extras?.nzd_krw;
   if (fx) extras.append(h("span", { class: "pill" }, "💱 1 NZD = ", h("strong", {}, `${fx.toLocaleString("ko-KR")}원`)));
+  const usd = useLive && live!.usd != null ? live!.usd : brief.extras?.usd_krw;
+  if (usd) extras.append(h("span", { class: "pill" }, "💵 1 USD = ", h("strong", {}, `${usd.toLocaleString("ko-KR")}원`)));
+  const btc = useLive && live!.btc != null ? live!.btc : brief.extras?.btc_usd;
+  if (btc) extras.append(h("span", { class: "pill" }, "₿ 1 BTC = ", h("strong", {}, `$${btc.toLocaleString("en-US")}`)));
   const lw = useLive ? live!.weather : null;
   const w = brief.extras?.auckland_weather;
   if (lw) {
@@ -371,8 +375,8 @@ function renderMain(): void {
       return;
     }
     if (tab.id === "akl") {
-      // 생활비 지표는 전체·부동산에서, 주제별 안내 링크는 해당 칩에서
-      if (sel === "all" || sel === "akl_property") {
+      // 생활비 지표는 부동산에서만, 주제별 안내 링크는 해당 칩에서
+      if (sel === "akl_property") {
         const costs = costBoard();
         if (costs) main.append(costs);
       }
@@ -393,6 +397,10 @@ function renderMain(): void {
           if (slot.isConnected) slot.replaceChildren(gpSection(h, gp, watch.suburbs));
         });
       }
+    }
+    if (tab.id === "nz" && sel === "nz_economy") {
+      const rates = ratesBoard();
+      if (rates) main.append(rates);
     }
     const keys = (sel === "all" ? visibleSections(tab) : [sel as SectionKey]).filter((k) => brief!.sections[k]);
     for (const k of keys) {
@@ -471,6 +479,39 @@ function alertBanner(alerts: Alert[]): HTMLElement | null {
     h("ul", {}, ...alerts.map((a) => h("li", {},
       h("span", { class: "alert-kind" }, a.kind === "processing" ? "처리 기간" : "중요 뉴스"),
       a.url ? h("a", { href: safeUrl(a.url), target: "_blank", rel: "noopener noreferrer" }, a.text) : a.text))));
+}
+
+// 뉴질랜드 경제 칩: 뉴질랜드·한국·미국 기준금리 비교표
+function ratesBoard(): HTMLElement | null {
+  const pr = brief?.extras?.policy_rates;
+  if (!pr || !Object.keys(pr.rates).length) return null;
+  const pct = (v: number) => `${v.toFixed(2)}%`;
+  const diff = (a: number, b: number) => {
+    const bp = Math.round((a - b) * 100);
+    return bp === 0 ? h("span", { class: "vs flat" }, "변동 없음") : h("span", { class: `vs ${bp > 0 ? "up" : "down"}` }, `${bp > 0 ? "▲" : "▼"}${Math.abs(bp)}bp`);
+  };
+  const order: ("NZ" | "KR" | "US")[] = ["NZ", "KR", "US"];
+  const flag = { NZ: "🇳🇿", KR: "🇰🇷", US: "🇺🇸" };
+  const rows = order.filter((c) => pr.rates[c]).map((c) => {
+    const r = pr.rates[c]!;
+    const now = r.range ? `${pct(r.range[0])}~${pct(r.range[1])}` : pct(r.value);
+    return h("tr", {},
+      h("th", { scope: "row" }, `${flag[c]} ${r.name}`, h("small", { class: "rate-label" }, r.label)),
+      h("td", {}, h("strong", {}, now)),
+      h("td", {}, r.changed_on && r.previous != null ? h("span", {}, diff(r.value, r.previous), h("small", { class: "rate-date" }, fmtDateShort(r.changed_on))) : "—"),
+      h("td", {}, r.year_ago != null ? h("span", {}, pct(r.year_ago), " ", diff(r.value, r.year_ago)) : "—"));
+  });
+  const nz = pr.rates.NZ, kr = pr.rates.KR, us = pr.rates.US;
+  const gaps = [nz && kr ? `뉴질랜드-한국 ${Math.round((nz.value - kr.value) * 100)}bp` : "", nz && us ? `뉴질랜드-미국 ${Math.round((nz.value - us.value) * 100)}bp` : ""].filter(Boolean);
+  const asOf = [...new Set(order.filter((c) => pr.rates[c]).map((c) => fmtDateShort(pr.rates[c]!.as_of)))].join("·");
+  return h("section", { class: "hood-card rates", "aria-labelledby": "rates-title" },
+    h("h2", { id: "rates-title" }, "🏦 기준금리 비교"),
+    h("div", { class: "table-wrap" }, h("table", { class: "hood-table" },
+      h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "국가"), h("th", { scope: "col" }, "현재"), h("th", { scope: "col" }, "최근 변경"), h("th", { scope: "col" }, "1년 전"))),
+      h("tbody", {}, ...rows))),
+    h("p", { class: "board-note" },
+      gaps.length ? `금리 차: ${gaps.join(" · ")}. ` : "",
+      `${asOf} 기준 (BIS 중앙은행 정책금리, 미국은 FRED 목표 범위). BIS 자료는 1주 정도 늦게 반영되니 최근 결정은 뉴스를 함께 보세요.`));
 }
 
 // 오클랜드 정착 비용판: 렌트 중간값·유가 (정부 공개 데이터)

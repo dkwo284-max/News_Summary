@@ -407,3 +407,6 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .type-break { margin-top: 2px; }
 .type-break summary { cursor: pointer; font-size: 0.75rem; color: var(--accent); font-weight: 600; min-height: 28px; display: inline-flex; align-items: center; }
 .type-break ul { list-style: none; margin: 2px 0 4px; padding: 0; display: grid; gap: 3px; font-size: 0.8125rem; }
+.rate-label { display: block; font-size: 0.6875rem; color: var(--muted); font-weight: 500; }
+.rate-date { display: block; font-size: 0.6875rem; color: var(--muted); }
+.rates .hood-table td { vertical-align: top; }

@@ -96,6 +96,13 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
             getattr(__import__(mod), fn)(*args)
         except Exception as e:  # noqa: BLE001
             log.warning("%s failed: %s", mod, e)
+    # 환율·비트코인·기준금리·날씨도 함께 새로 (AI 없음)
+    try:
+        from extras import fetch_extras
+
+        brief.setdefault("extras", {}).update({k: v for k, v in fetch_extras(cfg).items() if v is not None})
+    except Exception as e:  # noqa: BLE001
+        log.warning("extras refresh failed: %s", e)
     pt = fetch_processing_times(cfg, None, previous)
     brief.setdefault("extras", {})["processing_times"] = update_history(pt, data_dir, brief["date"])
     body = json.dumps(brief, ensure_ascii=False, indent=1)

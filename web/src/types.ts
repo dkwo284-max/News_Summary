@@ -54,6 +54,9 @@ export interface Brief {
     auckland_weather: { max: number; min: number; desc: string; rain_chance?: number } | null;
     processing_times?: { updated_at: string; items: ProcessingItem[] };
     living_costs?: LivingCosts;
+    usd_krw?: number | null;
+    btc_usd?: number | null;
+    policy_rates?: PolicyRates | null;
   };
   meta?: { mode?: string; failed_feeds?: { id: string; name?: string; error: string }[]; alerts?: Alert[] };
 }
@@ -93,4 +96,20 @@ export interface LivingCosts {
   updated_at: string;
   rent?: { month: string; median: number; lower: number | null; upper: number | null; yoy_pct?: number; source: string; url: string } | null;
   fuel?: { source: string; url: string; petrol91?: FuelPrice; petrol95?: FuelPrice; diesel?: FuelPrice } | null;
+}
+
+export interface PolicyRate {
+  name: string;
+  label: string;
+  value: number;
+  as_of: string;
+  changed_on?: string;
+  previous?: number;
+  year_ago?: number;
+  range?: [number, number];
+  source: string;
+}
+export interface PolicyRates {
+  updated_at: string;
+  rates: Partial<Record<"NZ" | "KR" | "US", PolicyRate>>;
 }
