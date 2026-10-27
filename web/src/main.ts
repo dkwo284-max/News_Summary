@@ -3,6 +3,7 @@ import { applySettings, loadSettings, saveSettings, type Settings } from "./sett
 import { fetchLive, loadLive, type LiveData } from "./live";
 import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
 import { gpSection, loadGP } from "./gpmap";
+import { loadIncidents, safetyAlert, safetySection } from "./crimemap";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
@@ -355,6 +356,16 @@ function renderMain(): void {
     const chips = renderChips(tab.id);
     if (chips) main.append(chips);
     const sel = chipState[tab.id];
+    if (tab.id === "akl") {
+      // 관심 동네 반경 2km 안 최근 7일 1급 사건 알림 (모든 칩 위)
+      const alertSlot = h("div", {});
+      main.append(alertSlot);
+      void Promise.all([loadIncidents(), loadGP()]).then(([inc, gp]) => {
+        const homes = Object.fromEntries(watch.suburbs.filter((x) => gp?.suburbs[x]).map((x) => [x, gp!.suburbs[x]]));
+        const a = safetyAlert(h, inc, homes);
+        if (a && alertSlot.isConnected) alertSlot.replaceChildren(a);
+      });
+    }
     if (tab.id === "akl" && sel === "hood") {
       renderHood();
       return;
@@ -367,6 +378,14 @@ function renderMain(): void {
       }
       const guide = topicGuide(sel);
       if (guide) main.append(guide);
+      if (sel === "akl_safety") {
+        const slot = h("div", {});
+        main.append(slot);
+        void Promise.all([loadIncidents(), loadGP()]).then(([inc, gp]) => {
+          const homes = Object.fromEntries(watch.suburbs.filter((x) => gp?.suburbs[x]).map((x) => [x, gp!.suburbs[x]]));
+          if (slot.isConnected) slot.replaceChildren(safetySection(h, inc, homes, gp?.suburbs ?? {}));
+        });
+      }
       if (sel === "akl_health") {
         const slot = h("div", {});
         main.append(slot);

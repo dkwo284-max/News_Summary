@@ -89,7 +89,8 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
     from processing import update_history
 
     # AI 없이 갱신되는 부가 데이터도 함께 (한인 GP 지도·동네 비교)
-    for mod, fn, args in (("korean_gp", "update_korean_gp", (cfg, data_dir)), ("areas", "update_areas", (cfg, data_dir, date.fromisoformat(brief["date"])))):
+    for mod, fn, args in (("korean_gp", "update_korean_gp", (cfg, data_dir)), ("areas", "update_areas", (cfg, data_dir, date.fromisoformat(brief["date"]))),
+                          ("crime_stats", "update_crime_stats", (data_dir,))):
         try:
             getattr(__import__(mod), fn)(*args)
         except Exception as e:  # noqa: BLE001
@@ -170,6 +171,14 @@ def main(argv: list[str] | None = None) -> int:
     # 인사이트: 나에게 미치는 영향·할 일 + 이 이슈의 흐름(지난 30일) (AI 요청 2~3회, 실패해도 계속)
     from insight import attach_insights
     attach_insights(sections, chosen, cfg, llm, data_dir, local_now.date().isoformat())
+    # 치안 지도: 오클랜드 사건 위치·등급 누적 (처음 한 번만 지난 기사 채우기 AI 요청 1회)
+    if not args.dry_run and args.fixtures is None:
+        try:
+            from incidents import update_incidents
+
+            update_incidents(sections, cfg, data_dir, local_now.date().isoformat(), llm)
+        except Exception as e:  # noqa: BLE001
+            log.warning("incidents failed: %s", e)
     carry_over(sections, cfg, data_dir, local_now.date().isoformat())
 
     extras = {"nzd_krw": None, "auckland_weather": None}
@@ -193,6 +202,14 @@ def main(argv: list[str] | None = None) -> int:
                 update_areas(cfg, out_dir, local_now.date())
             except Exception as e:  # noqa: BLE001
                 log.warning("areas failed: %s", e)
+        # 경찰 공식 통계 (data/police/ 에 올린 CSV 가 있을 때만)
+        if not args.dry_run:
+            try:
+                from crime_stats import update_crime_stats
+
+                update_crime_stats(out_dir)
+            except Exception as e:  # noqa: BLE001
+                log.warning("crime stats failed: %s", e)
         # 한인 GP 지도: hanin.nz 목록 + 좌표 (좌표는 캐시, 새 주소만 조회)
         if not args.dry_run:
             try:

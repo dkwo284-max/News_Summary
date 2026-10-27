@@ -3,7 +3,8 @@
 ① 영향: 뉴질랜드·오클랜드·이민 레이더 기사 전부. 독자 프로필 기준 영향도(high/medium/low/none)·이유·할 일·지켜볼 신호.
 ② 흐름: 지난 브리핑에서 제목 핵심 단어가 겹치는 기사를 후보로 고르고(코드), AI 가 같은 이슈인지 확인하면서
    '지난 보도와 달라진 점' 한 줄을 쓴다. 확인된 지난 기사의 흐름까지 이어 붙여 이슈가 길어질수록 타임라인이 자란다.
-두 가지를 한 요청에 묶어 batch_size 건씩 보낸다(보통 2~3회). 실패해도 브리핑은 그대로 생성된다.
+③ 사건 위치: 오클랜드 기사에서 범죄·사건사고의 위치와 등급(1급: 마약 포함 강력 범죄)을 뽑아 incidents.py 가 지도용으로 쌓는다.
+세 가지를 한 요청에 묶어 batch_size 건씩 보낸다(보통 2~3회). 실패해도 브리핑은 그대로 생성된다.
 """
 from __future__ import annotations
 
@@ -15,6 +16,7 @@ from common import Article, log
 from rank import _keys
 
 LEVELS = ("high", "medium", "low", "none")
+SEVERITIES = ("1", "2", "3", "accident")  # 1급: 살인·흉기·총기·성범죄·납치·마약 / 2급: 강도·폭행·램레이드 / 3급: 절도·파손 / 사고
 
 SCHEMA = {
     "type": "object",
@@ -31,8 +33,13 @@ SCHEMA = {
                     "watch": {"type": "string"},
                     "same_issue": {"type": "array", "items": {"type": "string"}},
                     "changed": {"type": "string"},
+                    "severity": {"type": "string"},
+                    "crime": {"type": "string"},
+                    "location": {"type": "string"},
+                    "suburb": {"type": "string"},
                 },
-                "required": ["id", "impact", "reason", "actions", "watch", "same_issue", "changed"],
+                "required": ["id", "impact", "reason", "actions", "watch", "same_issue", "changed",
+                             "severity", "crime", "location", "suburb"],
                 "additionalProperties": False,
             },
         }
@@ -60,6 +67,15 @@ def _system(cfg: dict) -> str:
 - same_issue: 후보 중 이 기사와 '같은 이슈'(같은 정책·사건·논란의 이전 보도)인 것의 id 만. 단어만 겹치는 다른 사건은 제외.
 - changed: same_issue 가 있으면 지난 보도와 비교해 '이번에 새로 달라진 점'을 한 문장(60자 이내). 없으면 "".
 후보가 없으면 same_issue [], changed "".
+
+[사건 위치 추출] 표시가 있는 기사(오클랜드 기사)만 — 오클랜드 안에서 실제로 일어난 범죄·사건사고일 때:
+- severity: "1"(살인·살인미수, 흉기·총기 공격, 성범죄, 납치, 마약 제조·밀수·거래·대량 압수) /
+  "2"(강도, 폭행, 램레이드·차량 돌진 절도, 차량 탈취, 방화) / "3"(절도, 침입 절도, 기물 파손, 사기) /
+  "accident"(범죄가 아닌 교통사고·화재·실종·익사 등). 사건이 아니거나(정책·통계·재판 일정만) 위치를 알 수 없으면 "".
+- crime: 사건 종류를 한국어로 짧게(예: "흉기 피습", "마약 압수", "램레이드"). 아니면 "".
+- location: 기사에 나온 가장 구체적인 장소를 영어로(예: "Myers Park, Auckland Central", "Lake Road, Devonport"). 아니면 "".
+- suburb: 그 장소의 오클랜드 동네 이름 하나를 영어로(예: "Auckland Central", "Devonport", "Manurewa"). 아니면 "".
+그 외 기사는 severity·crime·location·suburb 모두 "".
 
 사실은 주어진 기사 정보 안에서만. 날짜·수치를 지어내지 말고, 법률·투자 조언을 단정하지 마세요. 모든 id 에 대해 한 번씩 반환하세요."""
 
@@ -120,7 +136,7 @@ def build_timeline(confirmed: list[dict]) -> list[dict]:
 
 # ── 요청 ──────────────────────────────────────────────────
 
-def _block(item: dict, label: str, art: Article | None, assess: bool, cands: list[dict]) -> str:
+def _block(item: dict, label: str, art: Article | None, assess: bool, cands: list[dict], incident: bool = False) -> str:
     parts = [f"[id] {item['id']}", f"[섹션] {label}", f"[제목] {item['title_ko']}"]
     if item.get("original_title") and item["original_title"] != item["title_ko"]:
         parts.append(f"[원문 제목] {item['original_title']}")
@@ -130,6 +146,8 @@ def _block(item: dict, label: str, art: Article | None, assess: bool, cands: lis
     if art is not None and art.excerpt:
         parts.append(f"[본문 발췌] {art.excerpt[:900]}")
     parts.append("[영향 평가]" if assess else "[영향 평가: 생략]")
+    if incident:
+        parts.append("[사건 위치 추출]")
     if cands:
         parts.append("[지난 보도 후보] " + " / ".join(f"({c['id']}) {c['date']} {c['title_ko']}" for c in cands))
     return "\n".join(parts)
@@ -168,7 +186,7 @@ def attach_insights(sections: dict, chosen: dict[str, list[Article]], cfg: dict,
     rows: dict[str, dict] = {}
     for start in range(0, len(targets), batch):
         chunk = targets[start:start + batch]
-        user = "\n\n---\n\n".join(_block(it, sections[k]["label"], arts.get(it["id"]), assess, cands)
+        user = "\n\n---\n\n".join(_block(it, sections[k]["label"], arts.get(it["id"]), assess, cands, k.startswith("akl_"))
                                   for k, it, assess, cands in chunk)
         try:
             out = llm.json_call(task="summary", system=_system(cfg), user=user, schema=SCHEMA, max_tokens=24000)
@@ -176,6 +194,7 @@ def attach_insights(sections: dict, chosen: dict[str, list[Article]], cfg: dict,
         except Exception as e:  # noqa: BLE001 — 인사이트 실패가 브리핑 생성을 막지 않게 (남은 묶음도 시도)
             log.warning("insight AI failed for batch %d: %s", start // batch + 1, e)
     by_id = {it["id"]: (assess, cands) for _, it, assess, cands in targets}
+    akl_ids = {it["id"] for k, it, _, _ in targets if k.startswith("akl_")}
     n_imp = n_tl = 0
     for sec in sections.values():
         for it in sec.get("items", []):
@@ -192,6 +211,10 @@ def attach_insights(sections: dict, chosen: dict[str, list[Article]], cfg: dict,
                     "watch": row.get("watch", "").strip()[:80] if level != "none" else "",
                 }
                 n_imp += 1
+            sev = (row.get("severity") or "").strip().lower()
+            if it["id"] in akl_ids and sev in SEVERITIES and row.get("location", "").strip():
+                it["incident"] = {"severity": sev, "crime": row.get("crime", "").strip()[:30],
+                                  "location": row["location"].strip()[:100], "suburb": row.get("suburb", "").strip()[:40]}
             ok = {c["id"] for c in cands}
             confirmed = [c for c in cands if c["id"] in set(row.get("same_issue", [])) & ok]
             if confirmed:

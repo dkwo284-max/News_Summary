@@ -224,7 +224,7 @@ auckland_keywords: [Auckland, "Tāmaki Makaurau", "North Shore", Manukau, "Waite
 #   - 한도 초과·오류 시 그날은 AI 없이(키워드 선별 + RSS 원문 설명) 표시됩니다.
 llm:
   provider: "gemini"
-  max_requests_per_run: 10     # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 7~8회(인사이트 2~3회 포함) + 처리기간 추출이 필요할 때 1회
+  max_requests_per_run: 11     # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 7~8회(인사이트 2~3회 포함) + 처리기간 추출이 필요할 때 1회
   rank_batch_size: 260         # 선별 1회 요청에 넣을 최대 후보 수 (지역별 후보 합계가 이 이하면 지역당 1회)
 
   gemini:
@@ -258,6 +258,14 @@ insight:
   batch_size: 22
   history_days: 30
   skip_sections: [kr_entertainment]
+
+# ── 치안 지도 (오클랜드 탭 → 치안) ────────────────────────
+# 오클랜드 기사에서 뽑은 사건 위치·등급(1급: 살인·흉기·총기·성범죄·납치·마약 / 2급: 강도·폭행·램레이드 / 3급: 절도·파손 / 사고)을
+# keep_days 일치 쌓아 지도에 표시합니다. 처음 한 번은 지난 backfill_days 일 기사로 채웁니다(AI 요청 1회).
+# 경찰 공식 통계는 data/police/ 에 CSV 를 올리면 반영됩니다 (data/police/README.md).
+incidents:
+  keep_days: 90
+  backfill_days: 30
 
 # ── 부가 정보 ───────────────────────────────────────────────
 extras:
