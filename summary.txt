@@ -1,0 +1,42 @@
+len=168332
+scripts: /_next/static/chunks/1rm737diirj6u.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/3tnfet3t3ijhf.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/329j824l1odqw.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/0vvb_q8l7fca3.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/3nc6x0_y5iwnk.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/turbopack-0fbm-zzp6lpw0.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/1vnwi56-fdd8i.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/1ntn7efqc-iiw.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/18loquii1t_ru.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/12uulcpfcg3u1.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/28oigr8f3hr98.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/0ko3q1a45kv3r.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/3jnpdrl1s_05l.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/21n2qgu6sjtli.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/40aale7gi_oun.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/0pxek-_rg3-gf.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+https://www.googletagmanager.com/gtag/js?id=G-D96DLJBG5X
+https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8367114128263269
+/_next/static/chunks/0cz1d0mv5g_q7.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+/_next/static/chunks/1ycd5by80-dnr.js?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf
+api-ish: https://www.google.com/maps/search/?api=1&amp;query=Balmoral%20Doctors%20502%20Dominion%20Road%2C%20Mt%20Eden
+https://www.google.com/maps/search/?api=1&amp;query=Birkenhead%20Medical%20Centre%204%20Rawene%20Road%2C%20Birkenhead
+https://www.google.com/maps/search/?api=1&amp;query=Browns%20Bay%20Medical%20Centre%2013%E2%80%9315%20Bute%20Road%2C%20Browns%20Bay
+https://www.google.com/maps/search/?api=1&amp;query=Doctors%20at%20Kingsland%20491A%20New%20North%20Road%2C%20Kingsland
+https://www.google.com/maps/search/?api=1&amp;query=Green%20Cross%20Clinic%204%20Auburn%20Street%2C%20Takapuna
+https://www.google.com/maps/search/?api=1&amp;query=Health%20New%20Lynn%20Level%201%2C%20Totara%20Health%20Services%2C%201%20McCrae%20Way%2C%20New%20Lynn
+https://www.google.com/maps/search/?api=1&amp;query=Health-I%20Care%20215%20Wairau%20Road%2C%20Wairau%20Valley
+https://www.google.com/maps/search/?api=1&amp;query=Main%20North%20Road%20Medical%20Centre%20102%20Main%20North%20Road%2C%20Papanui%2C%20Christchurch
+https://www.google.com/maps/search/?api=1&amp;query=Orewa%20Medical%20Centre%208d%20Tamariki%20Avenue%2C%20%C5%8Crewa
+https://www.google.com/maps/search/?api=1&amp;query=Ponsonby%20Doctors%201%2F582%20Karangahape%20Road%2C%20Grey%20Lynn
+https://www.google.com/maps/search/?api=1&amp;query=Silverdale%20Medical%20%EC%8B%A4%EB%B2%84%EB%8D%B0%EC%9D%BC%20%2F%20%EB%A0%88%EB%93%9C%EB%B9%84%EC%B9%98
+https://www.google.com/maps/search/?api=1&amp;query=Tend%20Pakuranga%20Medical%20Centre%2011%E2%80%9313%20Cortina%20Place%2C%20Pak%C5%ABranga
+https://www.google.com/maps/search/?api=1&amp;query=The%20Doctors%20Apollo%20119%20Apollo%20Drive%2C%20Rosedale%2C%20Auckland
+https://www.google.com/maps/search/?api=1&amp;query=The%20Doctors%20Sunset%203%2F317%20Sunset%20Road%2C%20Sunnynook%2C%20Auckland%200632
+https://www.google.com/maps/search/?api=1&amp;query=Torbay%20Medical%20Centre%20%2F%20Long%20Bay%20Medical%201042%20Beach%20Road%2C%20Torbay%20%C2%B7%2055a%20Glenvar%20Ridge%20Road%2C%20Long%20Bay
+https://www.google.com/maps/search/?api=1&amp;query=Tui%20Medical%20Level%201%2C%20Unit%2011%2C%2026%20Bryant%20Road%2C%20Te%20Rapa%20Hamilton
+https://www.google.com/maps/search/?api=1&amp;query=White%20Cross%20Northmed%20GP%203%20Akoranga%20Drive%2C%20Northcote
+https://zuuegpzpblmgpbvbhyax.supabase.co/storage/v1/object/public/articles/97ee0d74-911b-437e-9bda-be9287318d27/1c4cbfde-9ab0-40cc-81d8-b87624a62b7b.png
+https://zuuegpzpblmgpbvbhyax.supabase.co/storage/v1/object/public/articles/97ee0d74-911b-437e-9bda-be9287318d27/1c4cbfde-9ab0-40cc-81d8-b87624a62b7b.png\
+TEXT:
+ 뉴질랜드 한인 GP 목록 — 함께라서, 더 가까운 뉴질랜드 - 한인.nz 뉴스 커뮤니티 마켓 쿠폰 구인구직 업소록 부동산 생활정보 도서관 KO 로그인 회원가입 로그인 KRW/NZD ₩ 754.88 ▲0.81 Auckland ☁️ 19°C Wellington ☀️ 13°C Christchurch ☁️ 13°C Queenstown ☁️ 12°C 공지사항 이용안내 달력 HANIN.NZ 뉴질랜드 한인 교민을 위한 종합 커뮤니티 플랫폼. 함께라서, 더 가까운 뉴질랜드 뉴스 · 마켓 · 구인구직 · 업소록 · 부동산 · 도서관 · 끄적끄적 · 오늘의 밥상 · 이민·유학 · 육아·교육 · 워킹홀리데이 · 컬럼·오피니언 · 이용안내 · 신뢰도 안내 · 공지사항 · 자주 묻는 질문 · 소개 · 웹 에이전시 · 사업제휴 · 고객센터 · 신고하기 커뮤니티 끄적끄적 이민·유학 육아·교육 워킹홀리데이 컬럼·오피니언 서비스 뉴스 마켓 구인구직 업소록 부동산 도서관 도움말 이용안내 신뢰도 안내 공지사항 자주 묻는 질문 광고 문의 회사 소개 웹 에이전시 사업제휴 이용약관 개인정보처리방침 고객센터 신고하기 이용약관 개인정보처리방침 광고 문의 📱 앱 설치 © 2026 HANIN.NZ LTD. All rights reserved. 📱 앱 설치 홈 커뮤니티 마켓 쿠폰 더보기 전체 뉴스 생활정보 커뮤니티 컬럼 마켓 구인구직 부동산 업소록 도서관 ▾ 업소록 / 한인 GP 목록 🩺 뉴질랜드 한인 GP 목록 뉴질랜드의 한인(한국계) GP를 지역별로 정리했습니다. 병원 이름·주소·전화·등록 가능 여부를 한눈에 확인하세요. 19 곳 전체 오클랜드 크라이스트처치 해밀턴 의사 이동·등록 가능 여부는 수시로 바뀝니다. 방문 전 반드시 병원에 전화로 확인하세요. 🩺 오클랜드 17 곳 Balmoral Doctors 등록 가능 Dr Yoon Hong 📍 502 Dominion Road, Mt Eden 병원 웹사이트 ↗ Healthpoint ↗ 09 630 3518 Birkenhead Medical Centre 등록 가능 Dr Tony Ryu · Dr Claire Han · Dr Stephen Sohn 📍 4 Rawene Road, Birkenhead 병원 웹사이트 ↗ 09 419 1636 Browns Bay Medical Centre 등록 가능 Dr David Lim · Dr Jeong (Brian) Ok · Dr Angela Lee 📍 13–15 Bute Road, Browns Bay 병원 웹사이트 ↗ Healthpoint ↗ 09 479 5422 Doctors at Kingsland 등록 조건부 Dr Hugh Sung · Dr Andrew Jo 📍 491A New North Road, Kingsland ℹ️ 일부만 받습니다. 워크인(예약 없는 방문)은 받지 않습니다. 병원 웹사이트 ↗ Healthpoint ↗ 09 846 2296 Green Cross Clinic 등록 가능 Dr Jeong G. Park 📍 4 Auburn Street, Takapuna ℹ️ 변동 가능성 있으니 전화 확인 권장 Healthpoint ↗ 09 486 1001 Health New Lynn 등록 마감 Dr Isaac Cho 📍 Level 1, Totara Health Services, 1 McCrae Way, New Lynn 병원 웹사이트 ↗ 09 827 8888 Health-I Care 등록 마감 Dr Luke (Jong-Hyun) Park 📍 215 Wairau Road, Wairau Valley 병원 웹사이트 ↗ Healthpoint ↗ 09 444 8682 Millhouse Integrative Medical Centre 등록 마감 Dr Stephanie Nam ℹ️ 8월 이후 등록 가능 병원 웹사이트 ↗ Healthpoint ↗ 09 537 4980 Northpoint Medical Centre 등록 가능 Dr. Daniel Kim 병원 웹사이트 ↗ 09 320 4759 Orewa Medical Centre 등록 마감 Dr TJ Choi 📍 8d Tamariki Avenue, Ōrewa 병원 웹사이트 ↗ 09 426 5437 Ponsonby Doctors 등록 마감 Dr Mina Han 📍 1/582 Karangahape Road, Grey Lynn ℹ️ On leave 병원 웹사이트 ↗ 09 280 2923 Silverdale Medical 등록 일부 Dr Paul Kim · Dr Andrew Han · Dr Chowool Kim · Dr Andy Kim · Dr Shelly Lee 📍 실버데일 / 레드비치 ℹ️ Dr Andy Kim 등록 가능 병원 웹사이트 ↗ 09 427 9997 Tend Pakuranga Medical Centre 등록 마감 Dr Ji-Young Park 📍 11–13 Cortina Place, Pakūranga ℹ️ 8월 20일 이후 등록가능 병원 웹사이트 ↗ Healthpoint ↗ 09 300 5076 The Doctors Apollo 등록 가능 Dr Chaey Leem · Dr Kevin Park · Dr Tae Park 📍 119 Apollo Drive, Rosedale, Auckland 병원 웹사이트 ↗ Healthpoint ↗ 09 477 3700 The Doctors Sunset 등록 가능 Dr Michelle Kweon 📍 3/317 Sunset Road, Sunnynook, Auckland 0632 병원 웹사이트 ↗ Healthpoint ↗ 09 478 2878 Torbay Medical Centre / Long Bay Medical 등록 마감 Dr Jesse Joung · Dr Sunee Kim 📍 1042 Beach Road, Torbay · 55a Glenvar Ridge Road, Long Bay 병원 웹사이트 ↗ Healthpoint ↗ 09 477 9000 White Cross Northmed GP 등록 가능 Dr Jungmoon Park 📍 3 Akoranga Drive, Northcote 병원 웹사이트 ↗ 09 486 3248 🩺 크라이스트처치 1 곳 Main North Road Medical Centre 등록 가능 Dr Ashley Ha 📍 102 Main North Road, Papanui, Christchurch 병원 웹사이트 ↗ 03 352 6152 🩺 해밀턴 1 곳 Tui Medical 등록 가능 Dr Jeffrey Park 📍 Level 1, Unit 11, 26 Bryant Road, Te Rapa Hamilton 병원 웹사이트 ↗ 0800 175 175 제보를 받습니다 🙌 이 목록은 함께 만들어가는 문서입니다. 새로 알게 된 한인 GP, 그만두셨거나 병원을 옮기신 선생님, 잘못된 정보 수정 — 무엇이든 알려주세요. GP 선생님이 직접 알려주셔도 좋습니다. 새 GP 제보 이직/병원 이동 그만두심/폐업 정보 수정 기타 제보 보내기 본 정보는 작성 시점 기준이며 의료 조언이 아닙니다. 등록 가능 여부·진료 언어는 반드시 해당 병원에 직접 확인하세요. 응급 상황에서는 111에 연락하세요. 출처: Healthpoint, 각 병원 공식 웹사이트, Medical Council of New Zealand. 

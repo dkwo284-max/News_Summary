@@ -1,0 +1,14 @@
+HTTP/2 200 
+age: 0
+cache-control: private, no-cache, no-store, max-age=0, must-revalidate
+content-type: text/html; charset=utf-8
+date: Tue, 27 Oct 2026 03:29:08 GMT
+link: </>; rel=preconnect; crossorigin="", </_next/static/chunks/0dz5j5-edp7lp.css?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf>; rel=preload; as="style", </_next/static/chunks/07651delk6_xa.css?dpl=dpl_fDhzPEtPKSKax7DkTrPs1LYck1rf>; rel=preload; as="style"
+server: Vercel
+strict-transport-security: max-age=63072000
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+x-matched-path: /korean-gp
+x-powered-by: Next.js
+x-vercel-cache: MISS
+x-vercel-id: iad1::syd1::nzd4j-1793071747449-5d946ab63632
+

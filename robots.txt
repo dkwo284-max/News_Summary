@@ -1,0 +1,21 @@
+User-Agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /settings
+Disallow: /profile/edit
+Disallow: /notifications
+Disallow: /inquiries
+Disallow: /chat
+Disallow: /points
+Disallow: /business/dashboard
+Disallow: /agents/dashboard
+Disallow: /search
+Disallow: /*/new
+Disallow: /*/edit
+Disallow: /*/write
+Disallow: /advertise/buy
+Disallow: /directory/register
+
+Host: https://hanin.nz
+Sitemap: https://hanin.nz/sitemap.xml
