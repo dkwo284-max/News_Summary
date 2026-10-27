@@ -119,7 +119,7 @@ export function gpSection(h: H, gp: GPData | null, watched: string[]): HTMLEleme
     for (const x of homes) {
       pts.push(x.at);
       L.circleMarker(x.at, { radius: 6, weight: 2, color: "#1d4ed8", fillColor: "#93c5fd", fillOpacity: 0.9 })
-        .bindTooltip(x.s, { permanent: true, direction: "top", className: "gp-home-label" })
+        .bindTooltip(x.s, { direction: "top", className: "gp-home-label" })
         .addTo(layer);
     }
     if (pts.length) map.fitBounds(L.latLngBounds(pts), { padding: [24, 24], maxZoom: 13 });
