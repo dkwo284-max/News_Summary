@@ -14,6 +14,7 @@ export interface Item {
   original_title?: string;
   published_at?: string | null;
   radar?: number;
+  qa?: { q: string; a: string }[]; // 미리 만든 예상 질문·답
   carried_from?: string; // 그날 새 소식이 없어 최근 브리핑에서 이어 온 기사
 }
 

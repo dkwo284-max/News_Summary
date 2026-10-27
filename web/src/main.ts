@@ -240,6 +240,13 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   if (region === "nz" && item.why_it_matters) {
     art.append(h("div", { class: "why" }, h("span", { class: "why-label" }, "이민자 관점"), h("p", {}, item.why_it_matters)));
   }
+  if (item.qa?.length) {
+    // 질문을 누르면 답이 펼쳐짐
+    art.append(h("details", { class: "qa" },
+      h("summary", {}, `💬 Q&A ${item.qa.length}`),
+      ...item.qa.map((x) => h("details", { class: "qa-item" }, h("summary", {}, h("span", { class: "qa-q" }, "Q."), " ", x.q), h("p", {}, x.a))),
+      h("p", { class: "qa-note" }, "AI가 기사 내용만으로 미리 만든 답이에요. 중요한 결정 전에는 원문·공식 안내를 확인하세요.")));
+  }
   if (item.original_title && item.original_title !== item.title_ko) {
     art.append(h("p", { class: "orig", lang: region === "nz" ? "en" : "ko" }, item.original_title));
   }
@@ -298,6 +305,7 @@ function renderSearch(): void {
     for (const key of visibleSections(tab)) {
       for (const item of brief.sections[key]?.items ?? []) {
         const hay = [item.title_ko, item.original_title ?? "", item.why_it_matters ?? "", ...item.summary_ko, ...item.tags,
+          ...(item.qa ?? []).flatMap((x) => [x.q, x.a]),
           ...item.sources.map((s) => s.name)].join(" ").toLowerCase();
         if (hay.includes(q) && !hits.some((x) => x.item.id === item.id)) hits.push({ item, key }); // 이민 레이더 중복 제외
       }

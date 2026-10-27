@@ -224,7 +224,7 @@ auckland_keywords: [Auckland, "Tāmaki Makaurau", "North Shore", Manukau, "Waite
 #   - 한도 초과·오류 시 그날은 AI 없이(키워드 선별 + RSS 원문 설명) 표시됩니다.
 llm:
   provider: "gemini"
-  max_requests_per_run: 8      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 5~6회 + 처리기간 추출이 필요할 때 1회
+  max_requests_per_run: 9      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 6~7회(Q&A 포함) + 처리기간 추출이 필요할 때 1회
   rank_batch_size: 260         # 선별 1회 요청에 넣을 최대 후보 수 (지역별 후보 합계가 이 이하면 지역당 1회)
 
   gemini:
@@ -248,6 +248,16 @@ llm:
     pricing:                     # USD per 1M tokens — 비용 로그 계산용
       claude-haiku-5-5:  { input: 0.10, output: 0.50 }
       claude-sonnet-5-5: { input: 2.00, output: 10.00 }
+
+# ── 미리 만든 Q&A ───────────────────────────────────────────
+# 요약 뒤 AI 요청 1회로 주요 기사마다 예상 질문·답을 만듭니다(기사 카드의 💬 Q&A).
+# 대상: 이민 레이더 전부 → 나머지 섹션은 중요도 min_importance 이상을 중요도순으로 max_items 건까지.
+qa:
+  enabled: true
+  max_items: 16
+  per_item: 3
+  min_importance: 6
+  skip_sections: [kr_entertainment]
 
 # ── 부가 정보 ───────────────────────────────────────────────
 extras:

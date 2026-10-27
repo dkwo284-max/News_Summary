@@ -150,7 +150,7 @@ def main(argv: list[str] | None = None) -> int:
     articles = dedupe(articles, cfg["dedupe"]["title_similarity"])
     log.info("after dedupe: %d stories", len(articles))
 
-    # 3) 선별 / 4) 요약 — AI 요청은 보통 5회(지역별 선별 1 + NZ 이슈 묶기 1 + 지역별 요약 1)
+    # 3) 선별 / 4) 요약 — AI 요청은 보통 6회(지역별 선별 1 + NZ 이슈 묶기 1 + 지역별 요약 1 + Q&A 1)
     llm = None
     if not args.no_llm:
         from llm import LLMError, make_llm
@@ -167,6 +167,9 @@ def main(argv: list[str] | None = None) -> int:
     if llm is not None and args.fixtures is None:
         attach_excerpts(chosen, cfg)
     sections = summarize_all(chosen, cfg, llm)
+    # 미리 만든 Q&A: 주요 기사마다 예상 질문·답 (AI 요청 1회, 실패해도 계속)
+    from qa import attach_qa
+    attach_qa(sections, chosen, cfg, llm)
     carry_over(sections, cfg, data_dir, local_now.date().isoformat())
 
     extras = {"nzd_krw": None, "auckland_weather": None}

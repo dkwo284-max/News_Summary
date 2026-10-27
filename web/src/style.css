@@ -363,3 +363,13 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .hood-gp p { margin: 4px 0; }
 .hood-gp a { color: var(--text); font-weight: 600; }
 .hood-gp-title { font-weight: 700; font-size: 0.8125rem; }
+
+/* ── 미리 만든 Q&A ── */
+.qa { margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; }
+.qa > summary { cursor: pointer; font-weight: 700; font-size: 0.875rem; color: var(--accent); min-height: 40px; display: flex; align-items: center; }
+.qa-item { border-top: 1px solid var(--line); }
+.qa-item > summary { cursor: pointer; font-weight: 600; font-size: 0.875rem; padding: 10px 0; line-height: 1.45; list-style: none; }
+.qa-item > summary::-webkit-details-marker { display: none; }
+.qa-q { color: var(--accent); font-weight: 800; }
+.qa-item p { margin: 0 0 10px; font-size: 0.875rem; line-height: 1.6; padding: 8px 10px; border-radius: 8px; background: var(--accent-soft); }
+.qa-note { margin: 4px 0 10px; font-size: 0.75rem; color: var(--muted); }
