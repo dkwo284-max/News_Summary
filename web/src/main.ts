@@ -60,6 +60,8 @@ let watch = loadWatch();
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const main = $<HTMLElement>("main");
 
+const IMPACT_LABEL = { high: "높음", medium: "보통", low: "낮음", none: "없음" } as const;
+
 // ── 유틸 ──────────────────────────────────────────────────
 function h<K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -237,15 +239,29 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   const summary = h("ul", { class: "summary" }, ...item.summary_ko.map((s) => h("li", {}, s)));
   const art = h("article", { class: "card" }, meta, title, summary);
 
-  if (region === "nz" && item.why_it_matters) {
+  const imp = item.impact;
+  if (imp && imp.level !== "none") {
+    // 내게 미치는 영향: 영향도·이유·할 일·지켜볼 것 (이유가 없으면 이민자 관점 문장)
+    const box = h("div", { class: `why impact-${imp.level}` },
+      h("span", { class: "why-label" }, "내게 미치는 영향 ", h("span", { class: `impact-badge ${imp.level}` }, IMPACT_LABEL[imp.level])),
+      h("p", {}, imp.reason || item.why_it_matters || ""));
+    if (imp.actions.length) box.append(h("ul", { class: "impact-actions", "aria-label": "할 일" }, ...imp.actions.map((x) => h("li", {}, x))));
+    if (imp.watch) box.append(h("p", { class: "impact-watch" }, h("strong", {}, "지켜볼 것 "), imp.watch));
+    art.append(box);
+  } else if (imp) {
+    art.append(h("p", { class: "impact-none" }, `내 상황 영향 거의 없음${imp.reason ? ` · ${imp.reason}` : ""}`));
+  } else if (region === "nz" && item.why_it_matters) {
     art.append(h("div", { class: "why" }, h("span", { class: "why-label" }, "이민자 관점"), h("p", {}, item.why_it_matters)));
   }
-  if (item.qa?.length) {
-    // 질문을 누르면 답이 펼쳐짐
-    art.append(h("details", { class: "qa" },
-      h("summary", {}, `💬 Q&A ${item.qa.length}`),
-      ...item.qa.map((x) => h("details", { class: "qa-item" }, h("summary", {}, h("span", { class: "qa-q" }, "Q."), " ", x.q), h("p", {}, x.a))),
-      h("p", { class: "qa-note" }, "AI가 기사 내용만으로 미리 만든 답이에요. 중요한 결정 전에는 원문·공식 안내를 확인하세요.")));
+  if (item.timeline?.length) {
+    // 이 이슈의 흐름: 지난 브리핑의 같은 이슈 보도 (오래된 순) + 이번에 달라진 점
+    const list = h("ol", { class: "timeline" },
+      ...item.timeline.map((t) => h("li", {}, h("span", { class: "tl-date" }, fmtDateShort(t.date)),
+        /^https?:/.test(t.url) ? h("a", { href: safeUrl(t.url), target: "_blank", rel: "noopener noreferrer" }, t.title_ko) : t.title_ko)),
+      h("li", { class: "tl-now" }, h("span", { class: "tl-date" }, "오늘"), item.title_ko));
+    art.append(h("details", { class: "thread" },
+      h("summary", {}, `🧵 이 이슈의 흐름 ${item.timeline.length + 1}건`, item.changed ? h("span", { class: "tl-changed" }, `달라진 점: ${item.changed}`) : null),
+      list));
   }
   if (item.original_title && item.original_title !== item.title_ko) {
     art.append(h("p", { class: "orig", lang: region === "nz" ? "en" : "ko" }, item.original_title));
@@ -305,7 +321,7 @@ function renderSearch(): void {
     for (const key of visibleSections(tab)) {
       for (const item of brief.sections[key]?.items ?? []) {
         const hay = [item.title_ko, item.original_title ?? "", item.why_it_matters ?? "", ...item.summary_ko, ...item.tags,
-          ...(item.qa ?? []).flatMap((x) => [x.q, x.a]),
+          item.impact?.reason ?? "", ...(item.impact?.actions ?? []), item.changed ?? "",
           ...item.sources.map((s) => s.name)].join(" ").toLowerCase();
         if (hay.includes(q) && !hits.some((x) => x.item.id === item.id)) hits.push({ item, key }); // 이민 레이더 중복 제외
       }

@@ -364,12 +364,26 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .hood-gp a { color: var(--text); font-weight: 600; }
 .hood-gp-title { font-weight: 700; font-size: 0.8125rem; }
 
-/* ── 미리 만든 Q&A ── */
-.qa { margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; }
-.qa > summary { cursor: pointer; font-weight: 700; font-size: 0.875rem; color: var(--accent); min-height: 40px; display: flex; align-items: center; }
-.qa-item { border-top: 1px solid var(--line); }
-.qa-item > summary { cursor: pointer; font-weight: 600; font-size: 0.875rem; padding: 10px 0; line-height: 1.45; list-style: none; }
-.qa-item > summary::-webkit-details-marker { display: none; }
-.qa-q { color: var(--accent); font-weight: 800; }
-.qa-item p { margin: 0 0 10px; font-size: 0.875rem; line-height: 1.6; padding: 8px 10px; border-radius: 8px; background: var(--accent-soft); }
-.qa-note { margin: 4px 0 10px; font-size: 0.75rem; color: var(--muted); }
+/* ── 내게 미치는 영향 ── */
+.impact-badge { display: inline-block; margin-left: 4px; padding: 0 7px; border-radius: 999px; font-size: 0.6875rem; font-weight: 800; color: #fff; }
+.impact-badge.high { background: #dc2626; }
+.impact-badge.medium { background: #d97706; }
+.impact-badge.low { background: #6b7280; }
+.why.impact-high { border-left-color: #dc2626; }
+.why.impact-medium { border-left-color: #d97706; }
+.impact-actions { margin: 6px 0 0; padding-left: 18px; font-size: 0.875rem; line-height: 1.5; }
+.impact-actions li::marker { content: "✓ "; }
+.impact-watch { margin: 6px 0 0; font-size: 0.8125rem; }
+.impact-none { margin: 8px 0 0; font-size: 0.8125rem; color: var(--muted); }
+
+/* ── 이 이슈의 흐름 ── */
+.thread { margin-top: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 0 12px; }
+.thread > summary { cursor: pointer; font-weight: 700; font-size: 0.875rem; color: var(--accent); padding: 10px 0; line-height: 1.45; }
+.tl-changed { display: block; margin-top: 2px; font-weight: 600; color: var(--text); }
+.timeline { list-style: none; margin: 0 0 10px; padding: 0 0 0 14px; border-left: 2px solid var(--line); display: grid; gap: 8px; }
+.timeline li { position: relative; font-size: 0.875rem; line-height: 1.45; }
+.timeline li::before { content: ""; position: absolute; left: -20px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.timeline li.tl-now::before { background: var(--accent); }
+.timeline a { color: var(--text); }
+.tl-date { display: inline-block; min-width: 44px; margin-right: 6px; color: var(--muted); font-variant-numeric: tabular-nums; font-size: 0.8125rem; }
+.tl-now { font-weight: 700; }

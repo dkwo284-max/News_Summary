@@ -14,7 +14,9 @@ export interface Item {
   original_title?: string;
   published_at?: string | null;
   radar?: number;
-  qa?: { q: string; a: string }[]; // 미리 만든 예상 질문·답
+  impact?: { level: "high" | "medium" | "low" | "none"; reason: string; actions: string[]; watch: string }; // 내게 미치는 영향
+  timeline?: { date: string; title_ko: string; url: string; id?: string }[]; // 이 이슈의 지난 보도 (오래된 순)
+  changed?: string; // 지난 보도와 달라진 점
   carried_from?: string; // 그날 새 소식이 없어 최근 브리핑에서 이어 온 기사
 }
 
