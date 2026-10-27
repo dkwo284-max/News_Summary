@@ -1,6 +1,7 @@
 // 관심 동네·학교: 이 기기(localStorage)에만 저장. 동네별 렌트·집값은 매주 갱신되는 data/areas.json 에서.
 import type { Brief, Item, SectionKey } from "./types";
 import { loadPlan } from "./visa";
+import { nearest, statusBadge, type GPData } from "./gpmap";
 
 type H = <K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -145,7 +146,8 @@ function aptCell(h: H, s: SuburbData | undefined, beds: string, avg: Record<stri
 
 /** 관심 동네 비교표 + 동네별 카드 + 관심 학교 카드 */
 export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits: Hit[], fx: number | null | undefined,
-  link: (url: string, label: string) => HTMLElement, openSettings: () => void): HTMLElement {
+  link: (url: string, label: string) => HTMLElement, openSettings: () => void,
+  gp: GPData | null = null, showGPMap?: () => void): HTMLElement {
   const root = h("div", { class: "hood" });
   if (!w.suburbs.length && !w.schools.length) {
     const b = h("button", { type: "button", class: "link-btn" }, "관심 동네 입력하기");
@@ -195,6 +197,16 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
     } else if (areas) {
       card.append(h("p", { class: "muted" }, "아파트 2룸 이상 렌트 자료가 없어요 (계약 건수가 적거나 다음 주 갱신 대기)."));
     }
+    const gps = nearest(gp, name);
+    if (gps.length) {
+      const more = h("button", { type: "button", class: "link-btn" }, "한인 GP 지도 →");
+      if (showGPMap) more.addEventListener("click", showGPMap);
+      card.append(h("div", { class: "hood-gp" },
+        h("span", { class: "hood-gp-title" }, "🇰🇷 가까운 한인 GP"),
+        ...gps.map(({ c, d }) => h("p", {}, c.phone ? h("a", { href: `tel:${c.phone.replace(/\s/g, "")}` }, c.name) : c.name, " ",
+          statusBadge(h, c), h("span", { class: "muted" }, ` ${d.toFixed(1)}km`))),
+        showGPMap ? more : null));
+    }
     card.append(h("p", { class: "hood-news" },
       my.length ? `최근 2주 뉴스 ${my.length}건${safety ? ` (치안 ${safety}건)` : ""}` : "최근 2주 이 동네가 나온 뉴스는 없어요."));
     for (const x of my.slice(0, 4)) {
@@ -209,7 +221,6 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
       link("https://geomapspublic.aucklandcouncil.govt.nz/viewer/index.html", "🌊 침수·용도지역"),
       link(gmaps(`Korean grocery near ${name}, Auckland`), "🛒 한인마트"),
       link(gmaps(`GP medical centre ${name}, Auckland`), "🩺 근처 GP"),
-      link(gmaps(`Korean speaking GP doctor near ${name}, Auckland`), "🇰🇷 한국어 GP"),
     ));
     root.append(card);
   }

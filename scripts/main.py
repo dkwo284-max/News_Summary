@@ -184,6 +184,14 @@ def main(argv: list[str] | None = None) -> int:
                 update_areas(cfg, out_dir, local_now.date())
             except Exception as e:  # noqa: BLE001
                 log.warning("areas failed: %s", e)
+        # 한인 GP 지도: hanin.nz 목록 + 좌표 (좌표는 캐시, 새 주소만 조회)
+        if not args.dry_run:
+            try:
+                from korean_gp import update_korean_gp
+
+                update_korean_gp(cfg, out_dir)
+            except Exception as e:  # noqa: BLE001
+                log.warning("korean gp failed: %s", e)
         # 오클랜드 정착 비용판: 렌트 중간값·유가 (정부 공개 CSV, AI 요청 없음)
         try:
             from costs import fetch_costs

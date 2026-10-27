@@ -2,6 +2,7 @@ import "./style.css";
 import { applySettings, loadSettings, saveSettings, type Settings } from "./settings";
 import { fetchLive, loadLive, type LiveData } from "./live";
 import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
+import { gpSection, loadGP } from "./gpmap";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
@@ -342,6 +343,13 @@ function renderMain(): void {
       }
       const guide = topicGuide(sel);
       if (guide) main.append(guide);
+      if (sel === "akl_health") {
+        const slot = h("div", {});
+        main.append(slot);
+        void loadGP().then((gp) => {
+          if (slot.isConnected) slot.replaceChildren(gpSection(h, gp, watch.suburbs));
+        });
+      }
     }
     const keys = (sel === "all" ? visibleSections(tab) : [sel as SectionKey]).filter((k) => brief!.sections[k]);
     for (const k of keys) {
@@ -467,8 +475,7 @@ const GUIDES: Partial<Record<SectionKey, Guide>> = {
     { label: "응급 111", desc: "생명이 위급할 때 (구급차)", url: "tel:111" },
     { label: "Healthline 0800 611 116", desc: "24시간 무료 전화 상담 · 통역 요청 가능", url: "tel:0800611116" },
     { label: "Healthpoint", desc: "GP·야간/주말 진료소(A&M)·약국 찾기, 신규 환자 등록 가능 여부", url: "https://www.healthpoint.co.nz/" },
-    { label: "🇰🇷 한국어 GP 찾기 (지도)", desc: "오클랜드에서 한국어로 진료하는 GP — 등록 가능 여부는 병원에 직접 확인", url: "https://www.google.com/maps/search/?api=1&query=Korean%20speaking%20GP%20doctor%20Auckland" },
-    { label: "🇰🇷 한인 GP 검색", desc: "한인 커뮤니티 글·후기로 한국인 의사 찾기", url: "https://www.google.com/search?q=%EC%98%A4%ED%81%B4%EB%9E%9C%EB%93%9C+%ED%95%9C%EA%B5%AD%EC%9D%B8+GP+%EC%9D%98%EC%82%AC" },
+    { label: "🇰🇷 한인 GP 목록 (한인.nz)", desc: "아래 지도의 원본 목록 — 지역별 한인 GP·등록 가능 여부", url: "https://hanin.nz/korean-gp" },
     { label: "Health NZ", desc: "공공의료 이용 자격(eligibility)은 비자 종류에 따라 달라요 — 사이트에서 'eligibility' 검색", url: "https://www.healthnz.govt.nz/" },
   ] },
   akl_education: { title: "🎒 초등학교 안내", links: [
@@ -515,11 +522,16 @@ async function renderHood(): Promise<void> {
   const holder = h("div", { "aria-busy": "true" }, h("p", { class: "muted" }, "내 동네 정보를 불러오는 중…"));
   main.append(holder);
   const names = [...watch.suburbs, ...watch.schools];
-  const [areas, briefs] = await Promise.all([loadAreas(), names.length ? recentBriefs() : Promise.resolve([] as Brief[])]);
+  const [areas, briefs, gp] = await Promise.all([loadAreas(), names.length ? recentBriefs() : Promise.resolve([] as Brief[]), loadGP()]);
   if (chipState.akl !== "hood" || settings.tab !== "akl" || !holder.isConnected) return;
   const hits: Hit[] = names.length ? findHits(briefs, names) : [];
   const fx = (viewingLatest && live?.fx) || brief?.extras.nzd_krw;
-  holder.replaceChildren(neighbourhoodView(h, watch, areas, hits, fx, extLink, openSettings));
+  const showGPMap = () => {
+    chipState.akl = "akl_health";
+    renderMain();
+    window.scrollTo({ top: 0 });
+  };
+  holder.replaceChildren(neighbourhoodView(h, watch, areas, hits, fx, extLink, openSettings, gp, showGPMap));
   holder.removeAttribute("aria-busy");
 }
 

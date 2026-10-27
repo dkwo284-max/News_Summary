@@ -110,6 +110,13 @@ cron-job.org 06:00 (NZ) → GitHub Actions  (보조: GitHub 예약 06:05 / 06:20
 - 데이터는 `scripts/areas.py` 가 매주(`areas.refresh_days`) `web/public/data/areas.json` 으로 받습니다. 지원 동네 목록은 `config.yaml` 의 `areas.suburbs`.
 - 학교 목록·동네별 범죄 통계는 공식 사이트가 자동 수집을 막아(Cloudflare·Tableau) 바로가기로 대신합니다.
 
+### 🇰🇷 한인 GP 지도
+
+- 오클랜드 탭 **의료** 칩에 한인 GP 지도와 목록이 나옵니다(초록 = 등록 가능, 주황 = 조건부·일부, 회색 = 마감). "등록 가능만" 버튼으로 거를 수 있고, 관심 동네가 있으면 가까운 순으로 정렬하고 거리를 보여줍니다.
+- **📍 내 동네** 카드마다 가장 가까운 한인 GP 2곳(전화 연결)과 지도 바로가기가 붙습니다.
+- 목록 출처는 [한인.nz 뉴질랜드 한인 GP 목록](https://hanin.nz/korean-gp)이며 매일 아침 `scripts/korean_gp.py` 가 받아 `web/public/data/korean-gp.json` 에 저장합니다. 좌표는 OpenStreetMap Nominatim 으로 한 번만 찾아 파일에 캐시합니다(초당 1회 제한 준수). 지도 타일 © OpenStreetMap.
+- 의사 이동·등록 가능 여부는 수시로 바뀌므로, 방문 전 병원에 전화로 확인하세요.
+
 ## 오클랜드 생활비 지표
 
 오클랜드 탭 맨 위에 매일 아침 정부 공개 데이터를 보여줍니다(키·요금 없음, AI 요청 없음).

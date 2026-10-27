@@ -339,3 +339,27 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .vs.flat { color: var(--muted); }
 .avg-row th, .avg-row td { color: var(--muted); font-weight: 600; }
 .hood-table .vs { display: block; line-height: 1.2; }
+
+/* ── 한인 GP 지도 ── */
+.gp-tools { display: flex; gap: 8px; margin-bottom: 8px; }
+.gp-map { height: 340px; border-radius: 12px; border: 1px solid var(--line); overflow: hidden; z-index: 0; background: var(--bg); }
+.gp-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 8px 0 4px; font-size: 0.75rem; color: var(--muted); }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-left: 4px; }
+.dot.open, .gp-status.open { background: #16a34a; }
+.dot.partial, .gp-status.partial { background: #d97706; }
+.dot.closed, .gp-status.closed { background: #9ca3af; }
+.dot.home { background: #93c5fd; border: 2px solid #1d4ed8; }
+.gp-status { color: #fff; border-radius: 999px; padding: 0 7px; font-size: 0.6875rem; font-weight: 700; white-space: nowrap; }
+.gp-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.gp-list li { padding: 10px 0; border-top: 1px solid var(--line); }
+.gp-info { display: grid; gap: 2px; font-size: 0.875rem; line-height: 1.45; }
+.gp-doctors { font-weight: 600; }
+.gp-links { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 2px; }
+.gp-links a { color: var(--accent); text-decoration: none; font-weight: 600; min-height: 28px; display: inline-flex; align-items: center; }
+.leaflet-popup-content .gp-info { color: #111827; min-width: 200px; }
+.leaflet-popup-content .muted { color: #4b5563; }
+.gp-home-label { font-weight: 700; font-size: 0.75rem; }
+.hood-gp { margin: 8px 0; padding: 8px 10px; border-radius: 10px; background: var(--accent-soft); font-size: 0.875rem; }
+.hood-gp p { margin: 4px 0; }
+.hood-gp a { color: var(--text); font-weight: 600; }
+.hood-gp-title { font-weight: 700; font-size: 0.8125rem; }
