@@ -1988,7 +1988,7 @@
   }
  },
  "extras": {
-  "nzd_krw": 754.21,
+  "nzd_krw": 755.8,
   "auckland_weather": {
    "max": 19,
    "min": 12,
@@ -1997,7 +1997,7 @@
    "rain_chance": 51
   },
   "processing_times": {
-   "updated_at": "2026-10-27T20:40+00:00",
+   "updated_at": "2026-10-27T21:25+00:00",
    "items": [
     {
      "key": "pswv",
@@ -2155,6 +2155,47 @@
      "date": "2026-10-16",
      "nzd_per_l": 3.25,
      "wow_cents": 0.8
+    }
+   }
+  },
+  "usd_krw": 1329.92,
+  "btc_usd": 80572,
+  "policy_rates": {
+   "updated_at": "2026-10-27",
+   "rates": {
+    "NZ": {
+     "name": "뉴질랜드",
+     "label": "OCR",
+     "value": 2.75,
+     "as_of": "2026-10-16",
+     "changed_on": "2026-10-12",
+     "previous": NaN,
+     "year_ago": 2.5,
+     "source": "BIS"
+    },
+    "KR": {
+     "name": "한국",
+     "label": "기준금리",
+     "value": 3.0,
+     "as_of": "2026-10-08",
+     "changed_on": "2026-08-27",
+     "previous": 2.75,
+     "year_ago": 2.5,
+     "source": "BIS"
+    },
+    "US": {
+     "name": "미국",
+     "label": "연방기금 목표",
+     "value": 3.875,
+     "as_of": "2026-10-27",
+     "changed_on": "2026-09-17",
+     "previous": 3.625,
+     "year_ago": 4.125,
+     "source": "FRED",
+     "range": [
+      3.75,
+      4.0
+     ]
     }
    }
   }
