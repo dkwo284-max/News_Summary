@@ -1,0 +1,10 @@
+{
+  "name": "My Hub · 나의 앱 모음",
+  "short_name": "My Hub",
+  "lang": "ko",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f5f7",
+  "theme_color": "#1d4ed8",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
