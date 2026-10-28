@@ -4,7 +4,7 @@ app_url: "https://dkwo284-max.github.io/Whale_Radar/"
 
 # SEC 는 요청 헤더에 연락처를 밝히도록 요구합니다(공정 접근 정책). 저장소 Secret SEC_USER_AGENT 가 있으면 그것을 씁니다.
 sec:
-  user_agent: "WhaleRadar/1.0 (+https://github.com/dkwo284-max/Whale_Radar)"
+  user_agent: "WhaleRadar dkwo284-max@users.noreply.github.com"
   request_interval: 0.15     # SEC 한도(초당 10회) 아래로
   threshold_pct: 5           # 직전 분기 대비 보유 수량 ±5% 이상이면 BUY/SELL, 사이는 HOLD
   top_positions: 50          # 투자자별로 보여줄 종목 수 (평가액 큰 순, 전량 매도 포함)
