@@ -1988,16 +1988,16 @@
   }
  },
  "extras": {
-  "nzd_krw": 756.27,
+  "nzd_krw": 750.97,
   "auckland_weather": {
    "max": 19,
    "min": 12,
    "desc": "약한 이슬비",
    "code": 51,
-   "rain_chance": 51
+   "rain_chance": 59
   },
   "processing_times": {
-   "updated_at": "2026-10-27T21:27+00:00",
+   "updated_at": "2026-10-28T02:53+00:00",
    "items": [
     {
      "key": "pswv",
@@ -2009,7 +2009,7 @@
      "sub": "",
      "note": "80% within 3 weeks",
      "url": "https://www.immigration.govt.nz/visas/post-study-work-visa/",
-     "as_of": "2026-10-27",
+     "as_of": "2026-10-28",
      "status": "ok",
      "trend": {
       "since": "2026-10-22",
@@ -2027,7 +2027,7 @@
      "sub": "",
      "note": "Accredited Employer Work Visa (AEWV) | 2 weeks | 5 weeks",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/work-visa-wait-times/",
-     "as_of": "2026-10-27",
+     "as_of": "2026-10-28",
      "status": "ok",
      "trend": {
       "since": "2026-10-22",
@@ -2045,7 +2045,7 @@
      "sub": "",
      "note": "Skilled Migrant Category Resident Visa | 9.5 weeks | 4 months",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
-     "as_of": "2026-10-27",
+     "as_of": "2026-10-28",
      "status": "ok",
      "trend": {
       "since": "2026-10-22",
@@ -2063,7 +2063,7 @@
      "sub": "",
      "note": "Straight to Residence Visa | 8 weeks | 3.5 months",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
-     "as_of": "2026-10-27",
+     "as_of": "2026-10-28",
      "status": "ok",
      "trend": {
       "since": "2026-10-22",
@@ -2081,7 +2081,7 @@
      "sub": "",
      "note": "Work to Residence Visa | 8 weeks | 3 months",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
-     "as_of": "2026-10-27",
+     "as_of": "2026-10-28",
      "status": "ok",
      "trend": {
       "since": "2026-10-22",
@@ -2099,7 +2099,7 @@
      "sub": "",
      "note": "Permanent Resident Visa | 1.5 weeks | 2 weeks",
      "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
-     "as_of": "2026-10-27",
+     "as_of": "2026-10-28",
      "status": "ok",
      "trend": {
       "since": "2026-10-22",
@@ -2117,7 +2117,7 @@
      "sub": "90%가 4개월 안에 결과 통보",
      "note": "within 6 months of submitting their application, 90% of applicants are granted",
      "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/how-to-apply-for-nz-citizenship/application-timeframes/",
-     "as_of": "2026-10-27",
+     "as_of": "2026-10-28",
      "status": "ok",
      "trend": {
       "since": "2026-10-22",
@@ -2158,10 +2158,10 @@
     }
    }
   },
-  "usd_krw": 1330.55,
-  "btc_usd": 80542,
+  "usd_krw": 1336.91,
+  "btc_usd": 80831,
   "policy_rates": {
-   "updated_at": "2026-10-27",
+   "updated_at": "2026-10-28",
    "rates": {
     "NZ": {
      "name": "뉴질랜드",
@@ -2198,7 +2198,8 @@
      ]
     }
    }
-  }
+  },
+  "jpy100_krw": 846.88
  },
  "meta": {
   "mode": "gemini",
