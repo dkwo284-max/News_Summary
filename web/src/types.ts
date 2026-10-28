@@ -55,6 +55,7 @@ export interface Brief {
     processing_times?: { updated_at: string; items: ProcessingItem[] };
     living_costs?: LivingCosts;
     usd_krw?: number | null;
+    jpy100_krw?: number | null;
     btc_usd?: number | null;
     policy_rates?: PolicyRates | null;
   };

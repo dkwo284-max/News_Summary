@@ -1,4 +1,4 @@
-"""부가 정보: NZD·USD/KRW 환율과 비트코인 USD 가격(Coinbase 실시간, 환율은 실패 시 frankfurter·ECB 고시),
+"""부가 정보: NZD·USD·JPY(100엔)/KRW 환율과 비트코인 USD 가격(Coinbase 실시간, 환율은 실패 시 frankfurter·ECB 고시),
 오클랜드 날씨(Open-Meteo), 뉴질랜드·한국·미국 기준금리(BIS·FRED). 모두 API 키 불필요."""
 from __future__ import annotations
 
@@ -24,12 +24,16 @@ WMO_KO = {
 }
 
 
-def fetch_fx(client: httpx.Client, base: str, quote: str) -> float | None:
+def _per100(v: float | None) -> float | None:
+    return round(v * 100, 2) if v is not None else None
+
+
+def fetch_fx(client: httpx.Client, base: str, quote: str, digits: int = 2) -> float | None:
     for tmpl, pick in FX_SOURCES:
         try:
             r = client.get(tmpl.format(base=base, quote=quote))
             r.raise_for_status()
-            return round(float(pick(r.json(), quote)), 2)
+            return round(float(pick(r.json(), quote)), digits)
         except Exception as e:  # noqa: BLE001
             log.warning("fx failed via %s: %s", tmpl.split("/")[2], e)
     return None
@@ -71,6 +75,7 @@ def fetch_extras(cfg: dict) -> dict:
         out = {
             "nzd_krw": fetch_fx(client, ex["fx"]["base"], ex["fx"]["quote"]),
             "usd_krw": fetch_fx(client, "USD", "KRW"),
+            "jpy100_krw": _per100(fetch_fx(client, "JPY", "KRW", digits=4)),  # 한국식 표기: 100엔 = 원
             "btc_usd": fetch_btc(client),
             "auckland_weather": fetch_weather(client, ex["weather"]),
         }

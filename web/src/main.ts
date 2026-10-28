@@ -152,6 +152,8 @@ function renderHeader(): void {
   if (fx) extras.append(h("span", { class: "pill" }, "💱 1 NZD = ", h("strong", {}, `${fx.toLocaleString("ko-KR")}원`)));
   const usd = useLive && live!.usd != null ? live!.usd : brief.extras?.usd_krw;
   if (usd) extras.append(h("span", { class: "pill" }, "💵 1 USD = ", h("strong", {}, `${usd.toLocaleString("ko-KR")}원`)));
+  const jpy = useLive && live!.jpy != null ? live!.jpy : brief.extras?.jpy100_krw;
+  if (jpy) extras.append(h("span", { class: "pill" }, "💴 100 JPY = ", h("strong", {}, `${jpy.toLocaleString("ko-KR")}원`)));
   const btc = useLive && live!.btc != null ? live!.btc : brief.extras?.btc_usd;
   if (btc) extras.append(h("span", { class: "pill" }, "₿ 1 BTC = ", h("strong", {}, `$${btc.toLocaleString("en-US")}`)));
   const lw = useLive ? live!.weather : null;

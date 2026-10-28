@@ -3,6 +3,7 @@ export interface LiveData {
   fx: number | null;
   fxSource?: string; // "Coinbase 실시간" | "ECB 고시"
   usd?: number | null; // 1 USD = 원
+  jpy?: number | null; // 100 JPY = 원
   btc?: number | null; // 1 BTC = USD
   weather: { now: number; max: number; min: number; desc: string; rain?: number } | null;
   at: string; // ISO
@@ -45,12 +46,12 @@ async function fetchFx(): Promise<{ value: number; source: string } | null> {
   return null;
 }
 
-// 1 USD = 원 (Coinbase, 실패 시 ECB 고시), 1 BTC = USD (Coinbase)
-async function fetchUsd(): Promise<number | null> {
-  for (const url of ["https://api.coinbase.com/v2/exchange-rates?currency=USD", "https://api.frankfurter.dev/v1/latest?base=USD&symbols=KRW"]) {
+// 1 USD·100 JPY = 원 (Coinbase, 실패 시 ECB 고시), 1 BTC = USD (Coinbase)
+async function fetchKrw(base: "USD" | "JPY", per = 1): Promise<number | null> {
+  for (const url of [`https://api.coinbase.com/v2/exchange-rates?currency=${base}`, `https://api.frankfurter.dev/v1/latest?base=${base}&symbols=KRW`]) {
     try {
       const j = await getJSON(url);
-      const v = Number(j?.data?.rates?.KRW ?? j?.rates?.KRW);
+      const v = Number(j?.data?.rates?.KRW ?? j?.rates?.KRW) * per;
       if (Number.isFinite(v) && v > 0) return Math.round(v * 100) / 100;
     } catch {
       /* 다음 소스 */
@@ -88,9 +89,9 @@ async function fetchWeather(): Promise<LiveData["weather"]> {
 }
 
 export async function fetchLive(): Promise<LiveData> {
-  const [fx, weather, usd, btc] = await Promise.all([fetchFx(), fetchWeather(), fetchUsd(), fetchBtc()]);
+  const [fx, weather, usd, jpy, btc] = await Promise.all([fetchFx(), fetchWeather(), fetchKrw("USD"), fetchKrw("JPY", 100), fetchBtc()]);
   if (fx == null && weather == null && usd == null && btc == null) throw new Error("live fetch failed");
-  const data: LiveData = { fx: fx?.value ?? null, fxSource: fx?.source, usd, btc, weather, at: new Date().toISOString() };
+  const data: LiveData = { fx: fx?.value ?? null, fxSource: fx?.source, usd, jpy, btc, weather, at: new Date().toISOString() };
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
   } catch {
