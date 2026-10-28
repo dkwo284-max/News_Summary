@@ -1,0 +1,16 @@
+{
+  "name": "웨일 레이더 · Whale Radar",
+  "short_name": "웨일 레이더",
+  "description": "거물 투자자의 SEC 공시와 뉴스를 매일 한국어로",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f9",
+  "theme_color": "#0f1720",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

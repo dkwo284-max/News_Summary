@@ -1,0 +1,40 @@
+from meta import sic_sector
+from news import parse_feed, summarize
+
+RSS = """<?xml version="1.0"?><rss version="2.0"><channel>
+<item><title>Buffett's Berkshire trims Apple stake again - Reuters</title><link>https://news.google.com/a</link>
+<pubDate>Mon, 26 Oct 2026 10:00:00 GMT</pubDate><description>&lt;a href="x"&gt;Buffett's Berkshire trims Apple stake again&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;font&gt;Reuters&lt;/font&gt;</description>
+<source url="https://reuters.com">Reuters</source></item>
+<item><title>Old story - CNBC</title><link>https://news.google.com/b</link><pubDate>Mon, 01 Jan 2024 10:00:00 GMT</pubDate><source url="https://cnbc.com">CNBC</source></item>
+</channel></rss>"""
+
+
+def test_sic_sector():
+    assert sic_sector(3571) == "IT" and sic_sector(2834) == "헬스케어" and sic_sector(1311) == "에너지"
+    assert sic_sector(6022) == "금융" and sic_sector(6798) == "부동산" and sic_sector(None) == "ETF·기타"
+    assert sic_sector(4911) == "유틸리티" and sic_sector(2080) == "필수소비재" and sic_sector(5812) == "경기소비재"
+
+
+def test_parse_feed():
+    items = parse_feed(RSS, "buffett", 30)
+    assert len(items) == 1
+    x = items[0]
+    assert x["title"] == "Buffett's Berkshire trims Apple stake again" and x["source"] == "Reuters" and x["desc"] == ""
+
+
+class FakeLLM:
+    enabled = True
+
+    def json_call(self, system, user, schema, max_tokens=16000):
+        return {"items": [{"id": "a1", "relevant": True, "kind": "news", "title_ko": "버크셔, 애플 지분 또 축소",
+                           "summary": ["애플 보유 수량을 줄였다."], "calls": [{"ticker": "$aapl", "stance": "SELL", "note": "지분 축소", "sector": "IT"}]},
+                          {"id": "a2", "relevant": False, "kind": "news", "title_ko": "x", "summary": [], "calls": []}]}
+
+
+def test_summarize_filters_irrelevant():
+    cfg = {"investors": [{"id": "buffett", "name": "워런 버핏", "firm": "Berkshire"}], "news": {}}
+    items = [{"id": "a1", "investor": "buffett", "title": "t", "source": "s", "url": "u", "date": "2026-10-26", "desc": ""},
+             {"id": "a2", "investor": "buffett", "title": "t2", "source": "s", "url": "u2", "date": "2026-10-26", "desc": ""}]
+    out, warn, dropped = summarize(items, cfg, FakeLLM())
+    assert [x["id"] for x in out] == ["a1"] and dropped == ["a2"] and warn is None
+    assert out[0]["calls"] == [{"ticker": "AAPL", "stance": "SELL", "note": "지분 축소", "sector": "IT"}] and out[0]["basis"] == "제목"

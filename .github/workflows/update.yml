@@ -1,0 +1,65 @@
+name: Whale Radar update
+
+# 매일 SEC 공시·뉴스를 모아 web/data 에 저장하고 GitHub Pages 로 배포합니다.
+# 미국 공시는 미국 업무시간에 올라오므로 미국 장 마감 뒤(UTC 22시 ≈ 뉴질랜드 아침 11시)에 돌립니다.
+on:
+  schedule:
+    - cron: "17 22 * * *"
+  workflow_dispatch:
+    inputs:
+      news:
+        description: "뉴스·AI 요약도 함께 (false 면 SEC 공시만)"
+        default: "true"
+  push:
+    branches: [main]
+    paths: ["web/**", "!web/data/**"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt pytest
+      - run: python -m pytest -q
+      - name: Collect
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT }}
+        run: python scripts/build.py ${{ github.event.inputs.news == 'false' && '--no-news' || '' }}
+      - name: Commit data
+        run: |
+          git config user.name "whale-radar-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/data cache
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "data: $(date -u +%F)"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
+
+  deploy:
+    needs: update
+    if: always() && (needs.update.result == 'success' || needs.update.result == 'skipped')
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: web }
+      - id: pages
+        uses: actions/deploy-pages@v4

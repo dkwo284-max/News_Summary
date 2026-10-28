@@ -1,0 +1,41 @@
+# Whale Radar (웨일 레이더) 설정 — 거물 투자자의 SEC 공시와 뉴스를 매일 모아 보여줍니다.
+
+app_url: "https://dkwo284-max.github.io/Whale_Radar/"
+
+# SEC 는 요청 헤더에 연락처를 밝히도록 요구합니다(공정 접근 정책). 저장소 Secret SEC_USER_AGENT 가 있으면 그것을 씁니다.
+sec:
+  user_agent: "WhaleRadar/1.0 (+https://github.com/dkwo284-max/Whale_Radar)"
+  request_interval: 0.15     # SEC 한도(초당 10회) 아래로
+  threshold_pct: 5           # 직전 분기 대비 보유 수량 ±5% 이상이면 BUY/SELL, 사이는 HOLD
+  top_positions: 50          # 투자자별로 보여줄 종목 수 (평가액 큰 순, 전량 매도 포함)
+  timeline_days: 180         # Form 4·13D/G 를 몇 일치 모을지
+  max_event_filings: 12      # 투자자별로 내용까지 읽을 최근 Form 4·13D/G 수
+  stale_days: 200            # 마지막 13F 기준일이 이보다 오래되면 '최근 공시 없음'
+
+news:
+  lookback_days: 30
+  keep_days: 120
+  per_investor: 6            # 투자자별 새 기사 최대 수 (AI 요약 대상)
+  max_ai_items: 40           # 하루 AI 요약 최대 기사 수 (무료 한도 보호)
+
+llm:
+  # Gemini 무료 등급. 저장소 Secret GEMINI_API_KEY 가 없으면 요약 없이 제목만 보여줍니다.
+  models: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-3.8-flash-lite", "gemini-flash-lite-latest"]
+  max_requests_per_run: 4
+  timeout_seconds: 240
+
+# 추적할 투자자 — cik 는 SEC 기관 번호(https://www.sec.gov/cgi-bin/browse-edgar 에서 검색)
+# news 는 Google 뉴스 검색어. 실행할 때 SEC 등록 이름과 맞는지 확인해 경고를 남깁니다(expect).
+investors:
+  - { id: buffett,      name: "워런 버핏",        firm: "Berkshire Hathaway · 가치투자",     cik: 1067983, expect: "BERKSHIRE HATHAWAY", news: '"Warren Buffett" OR "Berkshire Hathaway"' }
+  - { id: ackman,       name: "빌 애크먼",        firm: "Pershing Square · 행동주의",        cik: 1336528, expect: "PERSHING SQUARE",    news: '"Bill Ackman" OR "Pershing Square"' }
+  - { id: burry,        name: "마이클 버리",      firm: "Scion Asset Management · 역발상",   cik: 1649339, expect: "SCION ASSET",        news: '"Michael Burry"' }
+  - { id: druckenmiller, name: "스탠리 드러켄밀러", firm: "Duquesne Family Office · 매크로",  cik: 1536411, expect: "DUQUESNE",           news: '"Stanley Druckenmiller" OR "Druckenmiller"' }
+  - { id: tepper,       name: "데이비드 테퍼",    firm: "Appaloosa · 이벤트 드리븐",         cik: 1656456, expect: "APPALOOSA",          news: '"David Tepper" Appaloosa' }
+  - { id: dalio,        name: "레이 달리오",      firm: "Bridgewater Associates · 매크로",   cik: 1350694, expect: "BRIDGEWATER",        news: '"Ray Dalio" OR "Bridgewater Associates"' }
+  - { id: loeb,         name: "댄 로브",          firm: "Third Point · 행동주의",            cik: 1040273, expect: "THIRD POINT",        news: '"Dan Loeb" OR "Third Point"' }
+  - { id: klarman,      name: "세스 클라먼",      firm: "Baupost Group · 가치투자",          cik: 1061768, expect: "BAUPOST",            news: '"Seth Klarman" OR "Baupost"' }
+  - { id: icahn,        name: "칼 아이칸",        firm: "Icahn Capital · 행동주의",          cik: 921669,  expect: "ICAHN",              news: '"Carl Icahn"' }
+  - { id: wood,         name: "캐시 우드",        firm: "ARK Invest · 혁신 성장주",          cik: 1697748, expect: "ARK INVESTMENT",     news: '"Cathie Wood" OR "ARK Invest"' }
+  - { id: lilu,         name: "리 루",            firm: "Himalaya Capital · 가치투자",       cik: 1709323, expect: "HIMALAYA",           news: '"Li Lu" Himalaya Capital' }
+  - { id: einhorn,      name: "데이비드 아인혼",  firm: "Greenlight Capital · 가치·공매도",  cik: 1079114, expect: "GREENLIGHT",         news: '"David Einhorn" OR "Greenlight Capital"' }
