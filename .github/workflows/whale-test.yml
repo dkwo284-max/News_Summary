@@ -31,5 +31,5 @@ jobs:
           git config user.name "whale-radar-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p logs && cp build.log logs/ || true
-          git add -f web/data cache logs out 2>/dev/null || true
+          for d in web/data cache logs out; do [ -e "$d" ] && git add -f "$d"; done
           git commit -qm "test run data" && git push -q origin HEAD:whale-radar || echo "nothing to commit"
