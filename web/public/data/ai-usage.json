@@ -1,1 +1,1 @@
-{"app": "daily-brief", "provider": "gemini", "cap": 14, "updated": "2026-10-29", "days": {"2026-10-29": {"requests": 8, "runs": 1}}}
+{"app": "daily-brief", "provider": "gemini", "cap": 14, "updated": "2026-10-30", "days": {"2026-10-29": {"requests": 8, "runs": 1}, "2026-10-30": {"requests": 6, "runs": 1}}}
