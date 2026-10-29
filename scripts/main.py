@@ -125,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--now", help="현재 시각 대체 (ISO 8601, 테스트용)")
     ap.add_argument("--update-processing", action="store_true",
                     help="AI·뉴스 수집 없이 최신 브리핑의 비자 처리 기간 전광판만 갱신")
+    ap.add_argument("--ignore-cap", action="store_true", help="AI 하루 상한(llm.daily_cap) 무시")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args(argv)
 
@@ -149,6 +150,15 @@ def main(argv: list[str] | None = None) -> int:
             log.info("skip: %s", why)
             return 0
 
+    # AI 하루 상한: 오늘 브리핑이 이미 있는데 재실행(--force)하면서 상한을 넘게 되면 건너뛴다 (아침 첫 생성은 항상 진행)
+    today = local_now.date().isoformat()
+    if not (args.dry_run or args.no_llm or args.ignore_cap):
+        from usage import over_cap
+        over, used, cap = over_cap(data_dir, today, cfg)
+        if over and (data_dir / f"{today}.json").exists():
+            log.warning("skip: AI 하루 상한 — 오늘 %d/%d회 사용, 이미 오늘 브리핑이 있음 (--ignore-cap 으로 무시)", used, cap)
+            return 0
+
     # 1) 수집
     from fetch import fetch_all
     articles, failures, feed_stats = fetch_all(cfg, now_utc, args.fixtures)
@@ -159,7 +169,7 @@ def main(argv: list[str] | None = None) -> int:
     articles = dedupe(articles, cfg["dedupe"]["title_similarity"])
     log.info("after dedupe: %d stories", len(articles))
 
-    # 3) 선별 / 4) 요약 — AI 요청은 보통 6회(지역별 선별 1 + NZ 이슈 묶기 1 + 지역별 요약 1 + 인사이트 2~3)
+    # 3) 선별 / 4) 요약 — AI 요청은 보통 6회(지역별 선별 1 + NZ 이슈 묶기 1 + 지역별 요약 1 + 인사이트 1)
     llm = None
     if not args.no_llm:
         from llm import LLMError, make_llm
@@ -235,6 +245,9 @@ def main(argv: list[str] | None = None) -> int:
             log.warning("living costs failed: %s", e)
 
     usage = llm.log_report() if llm else {"provider": None, "requests": 0, "models": {}, "total_cost_usd": 0}
+    if llm is not None and not args.dry_run:
+        from usage import record
+        record(data_dir, local_now.date().isoformat(), usage.get("requests", 0), cfg)
     brief = {
         "date": local_now.date().isoformat(),
         "generated_at": datetime.now(timezone.utc).astimezone(tz(cfg)).isoformat(timespec="seconds"),
