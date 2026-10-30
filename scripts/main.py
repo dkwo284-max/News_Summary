@@ -125,7 +125,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--now", help="현재 시각 대체 (ISO 8601, 테스트용)")
     ap.add_argument("--update-processing", action="store_true",
                     help="AI·뉴스 수집 없이 최신 브리핑의 비자 처리 기간 전광판만 갱신")
-    ap.add_argument("--ignore-cap", action="store_true", help="AI 하루 상한(llm.daily_cap) 무시")
+    ap.add_argument("--ignore-cap", action="store_true", help="AI 공용 예산(budget.py) 무시")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args(argv)
 
@@ -150,13 +150,18 @@ def main(argv: list[str] | None = None) -> int:
             log.info("skip: %s", why)
             return 0
 
-    # AI 하루 상한: 오늘 브리핑이 이미 있는데 재실행(--force)하면서 상한을 넘게 되면 건너뛴다 (아침 첫 생성은 항상 진행)
+    # AI 공용 예산(My Hub budget.json): 내 보장량 + 공유 예비분 중 오늘 남은 몫. 하루 = 오클랜드 00시 리셋(local_now 가 오클랜드 시간).
+    # 오늘 브리핑이 이미 있는데 재실행(--force)하면서 몫이 모자라면 건너뛴다 (아침 첫 생성은 보장량이 있어 항상 진행)
     today = local_now.date().isoformat()
+    ai_left = None
     if not (args.dry_run or args.no_llm or args.ignore_cap):
-        from usage import over_cap
-        over, used, cap = over_cap(data_dir, today, cfg)
-        if over and (data_dir / f"{today}.json").exists():
-            log.warning("skip: AI 하루 상한 — 오늘 %d/%d회 사용, 이미 오늘 브리핑이 있음 (--ignore-cap 으로 무시)", used, cap)
+        from budget import allowance, describe
+        from usage import used_today
+        lc = cfg.get("llm", {})
+        ai_left, binfo = allowance("daily-brief", used_today(data_dir, today), int(lc.get("guaranteed", 7)), today)
+        log.info("%s", describe("daily-brief", ai_left, binfo))
+        if ai_left < int(lc.get("expected_per_run", 6)) and (data_dir / f"{today}.json").exists():
+            log.warning("skip: AI 예산 부족 — 오늘 남은 %d회, 이미 오늘 브리핑이 있음 (--ignore-cap 으로 무시)", ai_left)
             return 0
 
     # 1) 수집
@@ -178,6 +183,8 @@ def main(argv: list[str] | None = None) -> int:
         except LLMError as e:
             log.error("%s", e)
             return 1
+        if ai_left is not None:  # 오늘 남은 몫을 넘지 않게 (핵심 선별·요약이 앞에 있어 모자라면 뒤의 인사이트가 먼저 빠짐)
+            llm.max_requests = min(llm.max_requests, max(ai_left, 0))
 
     from rank import select
     chosen = select(articles, cfg, llm, now_utc)
