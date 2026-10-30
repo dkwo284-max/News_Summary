@@ -55,6 +55,8 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          # 정해진 시각의 실제 배포(예약·cron-job.org 의 force=false)는 Flash, 수동 '지금 생성'(force=true) 같은 테스트는 Flash-Lite
+          AI_PROFILE: ${{ (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && !inputs.force)) && 'production' || 'test' }}
           FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.force && '--force' || '' }}
           ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.processing_only && '--update-processing' || '' }}
         run: python scripts/main.py $FORCE $ONLY

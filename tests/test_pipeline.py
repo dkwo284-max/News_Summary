@@ -793,3 +793,14 @@ def test_other_region_title_not_auckland(cfg):
     chosen = select(items, cfg, None, FIXTURE_NOW)
     assert [a.id for a in chosen["nz_auckland"]] == ["a2"]
     assert "a1" in {a.id for k in ("nz_society", "nz_economy", "nz_education", "nz_politics") for a in chosen[k]}
+
+
+def test_production_profile_prefers_flash_and_test_prefers_lite(cfg, monkeypatch):
+    monkeypatch.delenv("AI_PROFILE", raising=False)
+    llm = _gemini(cfg, lambda req: httpx.Response(200, json=_gemini_ok("{}")))
+    assert llm.models_for("rank")[0] == "gemini-3.8-flash-lite" and llm.models_for("summary")[0] == "gemini-flash-lite-latest"
+    assert llm.min_interval == 10
+    monkeypatch.setenv("AI_PROFILE", "production")
+    llm = _gemini(cfg, lambda req: httpx.Response(200, json=_gemini_ok("{}")))
+    assert llm.models_for("rank")[0] == "gemini-3.8-flash" and llm.models_for("summary") == ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
+    assert llm.min_interval == 13

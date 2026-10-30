@@ -237,8 +237,13 @@ llm:
     # 모델 후보 목록: 앞에서부터 시도하고, 단종·사용 불가(404)면 다음 후보로 넘어갑니다.
     # 사용 가능한 무료 모델은 AI Studio(https://aistudio.google.com) 모델 목록에서 확인하세요.
     rank_model: ["gemini-3.8-flash-lite", "gemini-flash-lite-latest", "gemini-3.8-flash", "gemini-flash-latest"]
-    # 무료 한도(AI Studio 확인): Flash 는 하루 20회·분당 5회뿐이고 Flash-Lite 는 하루 500회·분당 15회 → Flash-Lite 를 먼저 쓰고 Flash 는 예비로만
+    # 무료 한도(AI Studio 확인): Flash 는 하루 20회·분당 5회, Flash-Lite 는 하루 500회·분당 15회.
+    #  - 수정·테스트 실행(수동 실행의 '지금 생성', 로컬): 위 *_model — Flash-Lite 를 먼저 써서 Flash 한도를 아낌
+    #  - 실제 배포 실행(정해진 시각의 자동 실행, AI_PROFILE=production): 아래 *_model_production — Flash 를 먼저, 한도에 걸리면 Flash-Lite
     summary_model: ["gemini-flash-lite-latest", "gemini-3.8-flash", "gemini-flash-latest"]
+    rank_model_production: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
+    summary_model_production: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
+    production_min_interval_seconds: 13   # Flash 분당 5회 한도 보호
     # thinking_budget: 0         # Gemini 2.5 계열에서만 사용 (사고 끔). Gemini 3 계열에서는 넣지 마세요
     min_interval_seconds: 10     # 요청 간 최소 간격 (분당 한도 보호)
     retry_wait_seconds: 60       # 429(분당 한도 초과) 시 한 번만 재시도하기 전 대기
