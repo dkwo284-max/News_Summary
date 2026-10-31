@@ -81,13 +81,57 @@ function incBrief(h: H, e: Incident): HTMLElement {
     /^https?:/.test(e.url) ? h("a", { href: e.url, target: "_blank", rel: "noopener noreferrer", class: "inc-link" }, "기사 보기 ↗") : null);
 }
 
-/** 같은 장소·같은 등급 보도가 3일 안에 또 나오면 한 사건으로 보고, 동네 이름이 없거나 "Auckland" 뿐이면 가장 가까운 동네(3km 이내)로 채운다 */
+// ── 같은 사건의 후속 보도 합치기 ──
+const GEO_WORDS = new Set(["auckland", "central", "south", "north", "east", "west", "city", "cbd", "nz", "new", "zealand", "region"]);
+const ROAD_WORDS = new Set(["street", "st", "road", "rd", "highway", "hwy", "avenue", "ave", "the"]);
+const STOP_KO = /오클랜드|뉴질랜드|사건|혐의|체포|기소|경찰/g;
+
+/** 장소 이름에서 동네·도로 일반어를 뺀 핵심 단어. 쉼표 앞(가장 구체적인 부분)만 쓴다. 비면 "Auckland" 처럼 장소를 특정하지 못하는 이름 */
+function placeWords(location: string): Set<string> {
+  const head = location.split(",")[0].toLowerCase().replace(/\bmt\b/g, "mount");
+  return new Set(head.split(/[^a-zā-ū0-9]+/).filter((w) => w && !GEO_WORDS.has(w) && !ROAD_WORDS.has(w)));
+}
+function samePlace(a: string, b: string): boolean {
+  const x = placeWords(a), y = placeWords(b);
+  if (!x.size || !y.size) return false;
+  const [small, big] = x.size <= y.size ? [x, y] : [y, x];
+  return [...small].every((w) => big.has(w));
+}
+function bigrams(s: string): Map<string, number> {
+  const t = s.replace(STOP_KO, "").replace(/[^가-힣a-z0-9]/gi, "");
+  const m = new Map<string, number>();
+  for (let i = 0; i < t.length - 1; i++) m.set(t.slice(i, i + 2), (m.get(t.slice(i, i + 2)) ?? 0) + 1);
+  return m;
+}
+/** 제목 글자쌍 겹침 (Dice 계수, 0~1) */
+function titleSim(a: string, b: string): number {
+  const x = bigrams(a), y = bigrams(b);
+  let hit = 0, nx = 0, ny = 0;
+  for (const v of x.values()) nx += v;
+  for (const v of y.values()) ny += v;
+  for (const [k, v] of x) hit += Math.min(v, y.get(k) ?? 0);
+  return nx + ny ? (2 * hit) / (nx + ny) : 0;
+}
+const amounts = (s: string) => new Set(s.match(/\d+[천백]?만|\d+억/g) ?? []);
+
+/** 같은 등급이고 4일 안에 나온 보도가, 구체적인 장소가 같거나 제목이 거의 같으면 한 사건의 후속 보도로 본다.
+ *  금액이 서로 다르면(예: 코카인 4천만 vs 8천만 달러) 비슷한 제목이어도 다른 사건. "Auckland" 처럼 장소를 특정 못 하는 보도끼리는 장소만으로 합치지 않는다. */
+export function sameIncident(a: Incident, b: Incident): boolean {
+  if (a.severity !== b.severity || Math.abs(daysAgo(a.date) - daysAgo(b.date)) > 4) return false;
+  const ma = amounts(a.title_ko), mb = amounts(b.title_ko);
+  if (ma.size && mb.size && ![...ma].some((m) => mb.has(m))) return false;
+  return samePlace(a.location, b.location) || titleSim(a.title_ko, b.title_ko) >= 0.6;
+}
+
+/** 후속 보도를 합치고(가장 먼저 보도된 기사를 남김), 동네 이름이 없거나 "Auckland" 뿐이면 가장 가까운 동네(3km 이내)로 채운다 */
 function tidy(list: Incident[], suburbs: Record<string, [number, number]>): Incident[] {
   const out: Incident[] = [];
   for (const e of [...list].sort((a, b) => a.date.localeCompare(b.date))) {
-    const dup = out.find((x) => x.severity === e.severity && x.location.toLowerCase() === e.location.toLowerCase()
-      && Math.abs(daysAgo(x.date) - daysAgo(e.date)) <= 3);
-    if (dup) continue;
+    const dup = out.find((x) => sameIncident(x, e));
+    if (dup) {
+      dup.latlon ??= e.latlon;
+      continue;
+    }
     let suburb = e.suburb;
     if ((!suburb || /^auckland$/i.test(suburb)) && e.latlon) {
       // 동네 목록에 도심이 없어서 CBD 사건이 Parnell 등으로 붙지 않도록 Auckland Central 을 후보에 넣는다
