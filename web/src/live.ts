@@ -6,6 +6,7 @@ export interface LiveData {
   jpy?: number | null; // 100 JPY = 원
   btc?: number | null; // 1 BTC = USD
   weather: { now: number; max: number; min: number; desc: string; rain?: number } | null;
+  weatherAt?: string; // 날씨를 마지막으로 받은 시각 (ISO)
   at: string; // ISO
 }
 
@@ -88,10 +89,17 @@ async function fetchWeather(): Promise<LiveData["weather"]> {
   }
 }
 
-export async function fetchLive(): Promise<LiveData> {
-  const [fx, weather, usd, jpy, btc] = await Promise.all([fetchFx(), fetchWeather(), fetchKrw("USD"), fetchKrw("JPY", 100), fetchBtc()]);
+// 날씨는 Open-Meteo 가 15분 단위로 갱신하므로 1분마다 다시 받지 않고, 직전 값이 10분 이내면 재사용한다
+const WEATHER_TTL_MS = 10 * 60 * 1000;
+
+export async function fetchLive(prev?: LiveData | null): Promise<LiveData> {
+  const reuse = !!prev?.weather && !!prev.weatherAt && Date.now() - new Date(prev.weatherAt).getTime() < WEATHER_TTL_MS;
+  const [fx, weather, usd, jpy, btc] = await Promise.all([
+    fetchFx(), reuse ? Promise.resolve(prev!.weather) : fetchWeather(), fetchKrw("USD"), fetchKrw("JPY", 100), fetchBtc(),
+  ]);
   if (fx == null && weather == null && usd == null && btc == null) throw new Error("live fetch failed");
-  const data: LiveData = { fx: fx?.value ?? null, fxSource: fx?.source, usd, jpy, btc, weather, at: new Date().toISOString() };
+  const at = new Date().toISOString();
+  const data: LiveData = { fx: fx?.value ?? null, fxSource: fx?.source, usd, jpy, btc, weather, weatherAt: reuse ? prev!.weatherAt : weather ? at : undefined, at };
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
   } catch {

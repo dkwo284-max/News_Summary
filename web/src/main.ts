@@ -57,7 +57,8 @@ let viewingLatest = true;
 let live: LiveData | null = loadLive();
 let liveError = "";
 let liveBusy = false;
-const AUTO_REFRESH_MS = 5 * 60 * 1000;
+const AUTO_REFRESH_MS = 60 * 1000;
+const AUTO_REFRESH_MIN_AGE_MS = 50 * 1000; // 갱신 직후 타이머가 겹쳐도 한 번 건너뛰지 않도록 주기보다 조금 짧게
 let watch = loadWatch();
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -183,25 +184,26 @@ function renderHeader(): void {
   }
 }
 
-async function refreshLive(): Promise<void> {
+// auto: 자동 갱신은 버튼을 돌리지 않고, 실패해도 직전 값을 그대로 둔다(1분마다 오류 문구가 깜빡이지 않게)
+async function refreshLive(auto = false): Promise<void> {
   if (liveBusy) return;
   liveBusy = true;
-  renderHeader();
+  if (!auto) renderHeader();
   try {
-    live = await fetchLive();
+    live = await fetchLive(live);
     liveError = "";
   } catch {
-    liveError = navigator.onLine ? "새로고침 실패 — 잠시 후 다시" : "오프라인 — 새로고침 불가";
+    if (!auto || !live) liveError = navigator.onLine ? "새로고침 실패 — 잠시 후 다시" : "오프라인 — 새로고침 불가";
   }
   liveBusy = false;
   renderHeader();
 }
 
-// 접속·탭 복귀·온라인 복구 때 자동으로 환율·날씨를 갱신한다. 방금 갱신했다면(5분 이내) 건너뛴다.
+// 접속·탭 복귀·온라인 복구 때, 그리고 탭이 열려 있는 동안 1분마다 환율·날씨를 자동 갱신한다. 방금 갱신했다면 건너뛴다.
 function autoRefreshLive(): void {
   if (!viewingLatest || document.hidden || !navigator.onLine) return;
-  if (live && Date.now() - new Date(live.at).getTime() < AUTO_REFRESH_MS) return;
-  void refreshLive();
+  if (live && Date.now() - new Date(live.at).getTime() < AUTO_REFRESH_MIN_AGE_MS) return;
+  void refreshLive(true);
 }
 
 function renderTabs(): void {
@@ -741,7 +743,7 @@ async function init(): Promise<void> {
   await initDates();
   document.addEventListener("visibilitychange", autoRefreshLive);
   window.addEventListener("online", autoRefreshLive);
-  window.setInterval(autoRefreshLive, AUTO_REFRESH_MS); // 탭을 열어 둔 채로 있어도 5분마다 갱신
+  window.setInterval(autoRefreshLive, AUTO_REFRESH_MS); // 탭을 열어 둔 채로 있어도 1분마다 갱신 (숨겨진 탭은 건너뜀)
   if ("serviceWorker" in navigator && import.meta.env.PROD) {
     navigator.serviceWorker.register("./sw.js").catch(() => undefined);
   }
