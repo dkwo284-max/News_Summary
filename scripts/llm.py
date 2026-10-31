@@ -45,9 +45,16 @@ class BaseLLM:
     def model_for(self, task: str) -> str:
         return self.models_for(task)[0]
 
+    @staticmethod
+    def production() -> bool:
+        """정해진 시각의 실제 배포 실행이면 True (환경변수 AI_PROFILE=production). 수정·테스트 실행과 로컬은 False."""
+        return os.environ.get("AI_PROFILE", "").strip().lower() == "production"
+
     def models_for(self, task: str) -> list[str]:
-        """config 의 *_model 은 문자열 또는 후보 목록(앞에서부터 시도)."""
-        m = self.pcfg[f"{task}_model"]
+        """config 의 *_model 은 문자열 또는 후보 목록(앞에서부터 시도).
+        실제 배포 실행은 *_model_production(있으면)을 쓴다 — 테스트는 하루 500회짜리 Flash-Lite, 배포는 Flash."""
+        m = self.pcfg.get(f"{task}_model_production") if self.production() else None
+        m = m or self.pcfg[f"{task}_model"]
         return [m] if isinstance(m, str) else list(m)
 
     def json_call(self, *, task: str, system: str, user: str, schema: dict, max_tokens: int = 16000) -> dict:
@@ -115,6 +122,8 @@ class GeminiLLM(BaseLLM):
         self.client = client or httpx.Client(timeout=httpx.Timeout(float(self.pcfg.get("timeout_seconds", 300)), connect=30))
         self.sleep = sleep
         self.min_interval = float(self.pcfg.get("min_interval_seconds", 10))
+        if self.production():  # Flash 는 분당 5회 → 간격을 더 넓게
+            self.min_interval = max(self.min_interval, float(self.pcfg.get("production_min_interval_seconds", 13)))
         self._last = 0.0
         self._working: dict[str, list[str]] = {}
 

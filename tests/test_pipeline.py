@@ -180,13 +180,13 @@ def test_gemini_503_moves_to_next_model(cfg):
 
     def handler(req):
         urls.append(str(req.url))
-        if "gemini-3.8-flash:" in str(req.url):
+        if "gemini-flash-lite-latest:" in str(req.url):   # 요약 모델 목록의 첫 번째(Flash-Lite)
             return httpx.Response(503, json={"error": {"status": "UNAVAILABLE"}})
         return httpx.Response(200, json=_gemini_ok('{"ok": 3}'))
 
     llm = _gemini(cfg, handler, sleeps)
     assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 3}
-    assert len(urls) == 3 and "gemini-flash-latest" in urls[2] and 20.0 in sleeps
+    assert len(urls) == 3 and "gemini-3.8-flash:" in urls[2] and 20.0 in sleeps
 
 
 def test_gemini_429_retries_once_then_errors(cfg):
@@ -630,13 +630,13 @@ def test_gemini_timeout_moves_to_next_model(cfg):
 
     def handler(req):
         urls.append(str(req.url))
-        if "gemini-3.8-flash:" in str(req.url):
+        if "gemini-flash-lite-latest:" in str(req.url):
             raise httpx.ReadTimeout("The read operation timed out", request=req)
         return httpx.Response(200, json=_gemini_ok('{"ok": 4}'))
 
     llm = _gemini(cfg, handler)
     assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 4}
-    assert sum("gemini-3.8-flash:" in u for u in urls) == 2 and "gemini-flash-latest" in urls[-1]
+    assert sum("gemini-flash-lite-latest:" in u for u in urls) == 2 and "gemini-3.8-flash:" in urls[-1]
 
 
 # ── 뉴질랜드 사회·교육·경제·정치 ──
@@ -691,13 +691,13 @@ def test_gemini_disconnect_moves_to_next_model(cfg):
 
     def handler(req):
         urls.append(str(req.url))
-        if "gemini-3.8-flash:" in str(req.url):
+        if "gemini-flash-lite-latest:" in str(req.url):   # 요약 모델 목록의 첫 번째(Flash-Lite)가 연결을 끊으면
             raise httpx.RemoteProtocolError("Server disconnected without sending a response.", request=req)
         return httpx.Response(200, json=_gemini_ok('{"ok": 5}'))
 
     llm = _gemini(cfg, handler)
     assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 5}
-    assert "gemini-flash-latest" in urls[-1]
+    assert "gemini-3.8-flash:" in urls[-1]   # 다음 후보로 넘어간다
 
 
 def test_new_exclusions_and_radar_caps(cfg):
@@ -814,3 +814,14 @@ def test_other_region_title_not_auckland(cfg):
     chosen = select(items, cfg, None, FIXTURE_NOW)
     assert [a.id for a in chosen["nz_auckland"]] == ["a2"]
     assert "a1" in {a.id for k in ("nz_society", "nz_economy", "nz_education", "nz_politics") for a in chosen[k]}
+
+
+def test_production_profile_prefers_flash_and_test_prefers_lite(cfg, monkeypatch):
+    monkeypatch.delenv("AI_PROFILE", raising=False)
+    llm = _gemini(cfg, lambda req: httpx.Response(200, json=_gemini_ok("{}")))
+    assert llm.models_for("rank")[0] == "gemini-3.8-flash-lite" and llm.models_for("summary")[0] == "gemini-flash-lite-latest"
+    assert llm.min_interval == 10
+    monkeypatch.setenv("AI_PROFILE", "production")
+    llm = _gemini(cfg, lambda req: httpx.Response(200, json=_gemini_ok("{}")))
+    assert llm.models_for("rank")[0] == "gemini-3.8-flash" and llm.models_for("summary") == ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
+    assert llm.min_interval == 13

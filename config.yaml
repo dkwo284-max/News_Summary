@@ -220,18 +220,30 @@ auckland_keywords: [Auckland, "Tāmaki Makaurau", "North Shore", Manukau, "Waite
 #     그 키의 Google Cloud 프로젝트에 결제(Billing)를 연결하지 마세요.
 #     결제가 연결되지 않은 키는 무료 등급으로만 동작하고, 한도를 넘으면 요금 대신 429 오류가 납니다.
 #   - 무료 등급 한도(분당/일일 요청 수)는 Google 이 자주 바꿉니다. AI Studio 의 Rate limit 화면에서 확인하세요.
-#   - 하루 1회 실행에 보내는 요청은 보통 5회(선별 2 + NZ 이슈 묶기 1 + 요약 2)이고, max_requests_per_run 을 넘지 않습니다.
+#   - 하루 1회 실행에 보내는 요청은 보통 6회(선별 2 + NZ 이슈 묶기 1 + 요약 2 + 인사이트 1)이고, max_requests_per_run 을 넘지 않습니다.
+#   - 같은 날 다시 실행한 요청까지 web/public/data/ai-usage.json 에 합산되며, 내 몫(보장량 + 공유 예비분)이 모자란 재실행은 건너뜁니다.
 #   - 한도 초과·오류 시 그날은 AI 없이(키워드 선별 + RSS 원문 설명) 표시됩니다.
 llm:
   provider: "gemini"
-  max_requests_per_run: 11     # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수 (무료 한도 보호). 보통 7~8회(인사이트 2~3회 포함) + 처리기간 추출이 필요할 때 1회
+  max_requests_per_run: 9      # 한 번 실행에서 보낼 수 있는 최대 AI 요청 수. 보통 6회(선별 2 + 이슈 묶기 1 + 요약 2 + 인사이트 1) + 처리기간 추출이 필요할 때 1회
+  # 세 앱(Daily Brief·웨일 레이더·로보틱스 레이더)이 같은 키의 하루 몫을 My Hub 의 budget.json 으로 나눠 씁니다.
+  # 하루 = 오클랜드 00시 리셋. 내 보장량은 다른 앱이 못 뺏고, 남은 보장량·공유 예비분은 필요한 앱이 가져갑니다.
+  # 아래 값은 My Hub 를 읽지 못할 때 쓰는 안전값이고, 실제 배분은 https://dkwo284-max.github.io/budget.json 에서 바꿉니다.
+  guaranteed: 7                # 내 보장량 (평소 6회 + 비자 처리 기간 AI 추출 1회)
+  expected_per_run: 6          # 재실행 여부를 판단할 때 쓰는 한 번 실행의 예상 요청 수
   rank_batch_size: 260         # 선별 1회 요청에 넣을 최대 후보 수 (지역별 후보 합계가 이 이하면 지역당 1회)
 
   gemini:
     # 모델 후보 목록: 앞에서부터 시도하고, 단종·사용 불가(404)면 다음 후보로 넘어갑니다.
     # 사용 가능한 무료 모델은 AI Studio(https://aistudio.google.com) 모델 목록에서 확인하세요.
     rank_model: ["gemini-3.8-flash-lite", "gemini-flash-lite-latest", "gemini-3.8-flash", "gemini-flash-latest"]
-    summary_model: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
+    # 무료 한도(AI Studio 확인): Flash 는 하루 20회·분당 5회, Flash-Lite 는 하루 500회·분당 15회.
+    #  - 수정·테스트 실행(수동 실행의 '지금 생성', 로컬): 위 *_model — Flash-Lite 를 먼저 써서 Flash 한도를 아낌
+    #  - 실제 배포 실행(정해진 시각의 자동 실행, AI_PROFILE=production): 아래 *_model_production — Flash 를 먼저, 한도에 걸리면 Flash-Lite
+    summary_model: ["gemini-flash-lite-latest", "gemini-3.8-flash", "gemini-flash-latest"]
+    rank_model_production: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
+    summary_model_production: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
+    production_min_interval_seconds: 13   # Flash 분당 5회 한도 보호
     # thinking_budget: 0         # Gemini 2.5 계열에서만 사용 (사고 끔). Gemini 3 계열에서는 넣지 마세요
     min_interval_seconds: 10     # 요청 간 최소 간격 (분당 한도 보호)
     retry_wait_seconds: 60       # 429(분당 한도 초과) 시 한 번만 재시도하기 전 대기
@@ -252,10 +264,10 @@ llm:
 # ── 인사이트 (기사 카드의 '내게 미치는 영향'·'이 이슈의 흐름') ─────────────
 # 뉴질랜드·오클랜드·이민 레이더 기사 전부에 영향도·이유·할 일·지켜볼 신호를 붙이고,
 # 지난 history_days 일 브리핑에서 같은 이슈의 이전 보도를 찾아 흐름과 '달라진 점'을 붙입니다(한국 기사는 흐름만).
-# batch_size 건씩 나눠 요청합니다(보통 2~3회).
+# batch_size 건씩 나눠 요청합니다(보통 1회 — 하루 기사 50건 안팎이 한 번에 들어감).
 insight:
   enabled: true
-  batch_size: 22
+  batch_size: 60
   history_days: 30
   skip_sections: [kr_entertainment]
 
