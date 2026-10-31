@@ -246,7 +246,23 @@ legend { font-weight: 700; margin-bottom: 6px; }
 :root[data-theme="dark"] .visa-pill.soon { background: #3b2e05; color: #ffe08a; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .visa-pill.soon { background: #3b2e05; color: #ffe08a; } }
 .visa-card { margin: 8px 0 14px; padding: 14px 16px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
-.visa-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.visa-card:is(details) { padding: 0; }
+.visa-empty { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 10px; padding: 8px 14px; }
+.visa-empty .visa-sum-name { font-size: 0.9375rem; }
+.visa-empty .muted { flex: 1 1 auto; font-size: 0.8125rem; }
+.visa-sum { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; list-style: none; min-height: 48px; }
+.visa-sum::-webkit-details-marker { display: none; }
+.visa-sum:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; border-radius: 16px; }
+.visa-sum-body { flex: 1 1 auto; min-width: 0; display: grid; gap: 1px; }
+.visa-sum-line { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.visa-sum-name { font-weight: 700; font-size: 0.9375rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.visa-sum-sub { font-size: 0.8125rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.visa-sum-next .visa-d { font-size: 0.8125rem; }
+.visa-chev { flex: none; color: var(--muted); transition: transform 0.15s; }
+.visa-card[open] .visa-chev { transform: rotate(180deg); }
+.visa-card.urgent { border-color: var(--hot-text); }
+.visa-body { padding: 0 16px 14px; border-top: 1px solid var(--line); }
+.visa-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 8px; }
 .visa-head h2 { margin: 0; font-size: 1rem; }
 .link-btn { border: 0; background: none; color: var(--accent); font-weight: 700; cursor: pointer; padding: 6px 4px; font-size: 0.875rem; }
 .visa-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }

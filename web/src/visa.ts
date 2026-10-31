@@ -93,6 +93,10 @@ function addYears(s: string, n: number): string {
 function fmt(s: string): string {
   return parseDate(s).toLocaleDateString("ko-KR", { year: "numeric", month: "long", day: "numeric" });
 }
+function fmtShort(s: string): string {
+  const d = parseDate(s);
+  return `${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()}`;
+}
 function dLabel(n: number): string {
   return n > 0 ? `D-${n}` : n === 0 ? "D-Day" : `D+${-n}`;
 }
@@ -105,6 +109,7 @@ export interface Milestone {
   title: string;
   note?: string;
   link?: string;
+  isExpiry?: boolean; // 비자 만료일 자체 (접힌 요약에서는 "다음 할 일"에서 뺀다)
 }
 
 /** 비자 종류별로 챙겨야 할 날짜. 근거는 INZ 비자 승인서·PSWV 안내 문구. */
@@ -115,7 +120,7 @@ export function milestones(p: VisaPlan): Milestone[] {
   for (const v of p.visas) byExpiry.set(v.expiry, [...(byExpiry.get(v.expiry) ?? []), v]);
   for (const [expiry, group] of byExpiry) {
     const names = group.map((v) => v.label).join(" · ");
-    out.push({ date: expiry, title: `비자 만료: ${names}`, note: "만료 전에 다음 비자를 신청해야 합법 체류가 이어집니다.", link: INZ.expired });
+    out.push({ date: expiry, title: `비자 만료: ${names}`, note: "만료 전에 다음 비자를 신청해야 합법 체류가 이어집니다.", link: INZ.expired, isExpiry: true });
     out.push({
       date: addMonths(expiry, -1),
       title: `다음 비자 신청 권장일: ${names}`,
@@ -161,32 +166,62 @@ export function headerPill(h: H): HTMLElement | null {
   return h("span", { class: `pill visa-pill ${urgency(n)}`, title: `${v.label} 만료 ${fmt(v.expiry)}` }, "📅 ", h("strong", {}, `${v.label} ${dLabel(n)}`));
 }
 
-/** 이민 레이더 탭 상단 카드 */
+let visaOpen = false; // 탭을 오가거나 다시 그려도 사용자가 펼친 상태를 유지 (새로고침하면 접힘)
+
+/** 이민 레이더 탭 상단 카드. 기본은 접힌 상태이며, 접힌 줄에는 가장 가까운 만료 D-day와 다음 할 일만 보여준다. */
 export function visaCard(h: H, openSettings: () => void): HTMLElement {
   const p = loadPlan();
-  const wrap = h("section", { class: "visa-card", "aria-labelledby": "visa-title" });
-  const head = h("div", { class: "visa-head" }, h("h2", { id: "visa-title" }, "📅 내 비자 일정"));
-  const edit = h("button", { class: "link-btn", type: "button" }, p.visas.length ? "수정" : "입력하기");
-  edit.addEventListener("click", openSettings);
-  head.append(edit);
-  wrap.append(head);
   if (!p.visas.length) {
-    wrap.append(h("p", { class: "muted" }, "설정에서 비자 만료일을 입력하면 D-day와 준비 일정을 보여드려요. 정보는 이 기기에만 저장됩니다."));
-    return wrap;
+    const empty = h("section", { class: "visa-card visa-empty", "aria-label": "내 비자 일정" },
+      h("span", { class: "visa-sum-name" }, "📅 내 비자 일정"),
+      h("span", { class: "muted" }, "만료일을 입력하면 D-day를 보여드려요"));
+    const add = h("button", { class: "link-btn", type: "button" }, "입력하기");
+    add.addEventListener("click", openSettings);
+    empty.append(add);
+    return empty;
   }
+  const sorted = [...p.visas].sort((a, b) => a.expiry.localeCompare(b.expiry));
+  const focus = sorted.find((v) => daysUntil(v.expiry) >= 0) ?? sorted[sorted.length - 1]; // 다가오는 만료가 없으면 가장 최근 만료
+  const fn = daysUntil(focus.expiry);
+  const names = sorted.filter((v) => v.expiry === focus.expiry).map((v) => v.label).join(" · ");
+  const more = new Set(sorted.map((v) => v.expiry)).size - 1;
+  const steps = milestones(p).filter((m) => daysUntil(m.date) >= 0);
+  const nextTodo = steps.find((m) => !m.isExpiry);
+  const sub = `${fmtShort(focus.expiry)} 만료${more > 0 ? ` · 외 ${more}건` : ""}`;
+
+  const wrap = h("details", { class: `visa-card ${urgency(fn)}` });
+  wrap.open = visaOpen;
+  wrap.addEventListener("toggle", () => {
+    visaOpen = wrap.open;
+  });
+  wrap.append(h("summary", { class: "visa-sum" },
+    h("span", { class: "visa-sum-body" },
+      h("span", { class: "visa-sum-line" },
+        h("span", { class: "visa-sum-name" }, `📅 ${names}`),
+        h("span", { class: "visa-d" }, dLabel(fn))),
+      h("span", { class: "visa-sum-sub" }, sub),
+      nextTodo ? h("span", { class: `visa-sum-sub visa-sum-next ${urgency(daysUntil(nextTodo.date))}` },
+        "다음 할 일 ", h("strong", { class: "visa-d" }, dLabel(daysUntil(nextTodo.date))), ` ${nextTodo.title.split(":")[0]}`) : null),
+    h("span", { class: "visa-chev", "aria-hidden": "true" }, "▾")));
+
+  const body = h("div", { class: "visa-body" });
+  const edit = h("button", { class: "link-btn", type: "button" }, "수정");
+  edit.addEventListener("click", openSettings);
+  body.append(h("div", { class: "visa-head" }, h("h2", {}, "내 비자 일정"), edit));
+  wrap.append(body);
   const list = h("ul", { class: "visa-list" });
-  for (const v of [...p.visas].sort((a, b) => a.expiry.localeCompare(b.expiry))) {
+  for (const v of sorted) {
     const n = daysUntil(v.expiry);
     list.append(h("li", { class: `visa-row ${urgency(n)}` },
       h("span", { class: "visa-label" }, v.label, h("small", {}, ` · ${KIND_LABEL[v.kind]}`)),
       h("span", { class: "visa-date" }, `${fmt(v.expiry)} 만료`),
       h("span", { class: "visa-d" }, dLabel(n))));
   }
-  wrap.append(list);
-  const next = milestones(p).filter((m) => daysUntil(m.date) >= 0).slice(0, 5);
+  body.append(list);
+  const next = steps.slice(0, 5);
   if (next.length) {
-    wrap.append(h("h3", { class: "visa-sub" }, "다가오는 할 일"));
-    wrap.append(h("ol", { class: "visa-steps" }, ...next.map((m) => {
+    body.append(h("h3", { class: "visa-sub" }, "다가오는 할 일"));
+    body.append(h("ol", { class: "visa-steps" }, ...next.map((m) => {
       const n = daysUntil(m.date);
       const li = h("li", { class: urgency(n) },
         h("div", { class: "step-top" }, h("strong", {}, m.title), h("span", { class: "visa-d" }, dLabel(n))),
@@ -196,7 +231,7 @@ export function visaCard(h: H, openSettings: () => void): HTMLElement {
       return li;
     })));
   }
-  wrap.append(h("p", { class: "board-note visa-note" }, "날짜 계산은 참고용이에요. 실제 신청 조건과 기한은 INZ 공식 안내와 본인 비자 승인서를 기준으로 확인하세요."));
+  body.append(h("p", { class: "board-note visa-note" }, "날짜 계산은 참고용이에요. 실제 신청 조건과 기한은 INZ 공식 안내와 본인 비자 승인서를 기준으로 확인하세요."));
   return wrap;
 }
 

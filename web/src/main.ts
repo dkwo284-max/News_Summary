@@ -56,6 +56,8 @@ let query = "";
 let viewingLatest = true;
 let live: LiveData | null = loadLive();
 let liveError = "";
+let liveBusy = false;
+const AUTO_REFRESH_MS = 5 * 60 * 1000;
 let watch = loadWatch();
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -134,6 +136,7 @@ async function loadBrief(date?: string): Promise<void> {
   }
   main.removeAttribute("aria-busy");
   renderAll();
+  autoRefreshLive();
 }
 
 // ── 렌더링 ────────────────────────────────────────────────
@@ -168,8 +171,9 @@ function renderHeader(): void {
   const vp = headerPill(h);
   if (vp) extras.append(vp);
   if (viewingLatest) {
-    const btn = h("button", { class: "refresh", type: "button", "aria-label": "환율·날씨 새로고침", title: "환율·날씨 새로고침" }, "↻");
-    btn.addEventListener("click", () => void refreshLive(btn));
+    const btn = h("button", { class: `refresh${liveBusy ? " spinning" : ""}`, type: "button", "aria-label": "환율·날씨 새로고침", title: "환율·날씨 새로고침" }, "↻");
+    btn.disabled = liveBusy;
+    btn.addEventListener("click", () => void refreshLive());
     const stamp = liveError
       ? liveError
       : useLive
@@ -179,16 +183,25 @@ function renderHeader(): void {
   }
 }
 
-async function refreshLive(btn: HTMLButtonElement): Promise<void> {
-  btn.disabled = true;
-  btn.classList.add("spinning");
+async function refreshLive(): Promise<void> {
+  if (liveBusy) return;
+  liveBusy = true;
+  renderHeader();
   try {
     live = await fetchLive();
     liveError = "";
   } catch {
     liveError = navigator.onLine ? "새로고침 실패 — 잠시 후 다시" : "오프라인 — 새로고침 불가";
   }
+  liveBusy = false;
   renderHeader();
+}
+
+// 접속·탭 복귀·온라인 복구 때 자동으로 환율·날씨를 갱신한다. 방금 갱신했다면(5분 이내) 건너뛴다.
+function autoRefreshLive(): void {
+  if (!viewingLatest || document.hidden || !navigator.onLine) return;
+  if (live && Date.now() - new Date(live.at).getTime() < AUTO_REFRESH_MS) return;
+  void refreshLive();
 }
 
 function renderTabs(): void {
@@ -726,6 +739,9 @@ async function init(): Promise<void> {
   initOffline();
   await loadBrief();
   await initDates();
+  document.addEventListener("visibilitychange", autoRefreshLive);
+  window.addEventListener("online", autoRefreshLive);
+  window.setInterval(autoRefreshLive, AUTO_REFRESH_MS); // 탭을 열어 둔 채로 있어도 5분마다 갱신
   if ("serviceWorker" in navigator && import.meta.env.PROD) {
     navigator.serviceWorker.register("./sw.js").catch(() => undefined);
   }
