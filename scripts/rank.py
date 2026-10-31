@@ -315,11 +315,13 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                     a.score = 0  # MIN_SCORE 미만 → 싣지 않음
 
 
-def _preselect(items: list[Article], limit: int, reserved_feeds: set[str] = frozenset()) -> list[Article]:
-    """비용 상한: 여러 곳이 보도한 기사 → 최신 기사 순으로 candidate_limit 건만 채점.
+def _preselect(items: list[Article], limit: int, reserved_feeds: set[str] = frozenset(),
+               relevance=None) -> list[Article]:
+    """비용 상한: 키워드 관련도(relevance) → 여러 곳이 보도한 기사 → 최신 기사 순으로 candidate_limit 건만 채점.
+    관련도로 먼저 거르면 후보를 줄여도 이민·주거·생활비 기사가 밀려나지 않고, 스포츠·연예성 기사가 먼저 빠진다.
     reserve: true 인 피드(예: 초등학교 교육 피드)의 기사는 출처가 1곳이어도 밀려나지 않게 항상 포함."""
     epoch = datetime.min.replace(tzinfo=timezone.utc)
-    ranked = sorted(items, key=lambda a: (len(a.sources), a.published or epoch), reverse=True)
+    ranked = sorted(items, key=lambda a: (relevance(a) if relevance else 0, len(a.sources), a.published or epoch), reverse=True)
     picked = ranked[:limit]
     per_feed: dict[str, int] = defaultdict(int)
     extra = []
@@ -543,7 +545,8 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
         if sec.get("from"):  # 카테고리 섹션(nz_society 등)은 묶음(nz_national)에서 나중에 나눔
             continue
         reserved = {f["id"] for f in cfg.get("feeds", []) if f.get("reserve") and f["section"] == key}
-        by_section[key] = _preselect(by_section.get(key, []), sec.get("candidate_limit", 80), reserved)
+        relevance = lambda a, region=sec["region"]: heuristic_score(a, cfg, region, now)[0]
+        by_section[key] = _preselect(by_section.get(key, []), sec.get("candidate_limit", 80), reserved, relevance)
         by_region[sec["region"]].extend(by_section[key])
     for region, items in by_region.items():
         score_articles(items, cfg, region, llm, now)

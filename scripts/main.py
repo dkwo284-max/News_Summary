@@ -118,6 +118,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--config", default=str(ROOT / "config.yaml"))
     ap.add_argument("--force", action="store_true", help="시각 조건·중복 실행 검사 무시")
+    ap.add_argument("--skip-existing", action="store_true", help="--force 여도 오늘 브리핑이 이미 있으면 AI 호출 없이 종료 (중복 실행 방지)")
     ap.add_argument("--dry-run", action="store_true", help="out/dry-run 에만 저장, 알림·정리 안 함")
     ap.add_argument("--no-llm", action="store_true", help="AI 호출 없이 휴리스틱으로 실행")
     ap.add_argument("--fixtures", type=Path, help="피드를 이 폴더의 <feed_id>.xml 에서 읽음 (오프라인 테스트)")
@@ -142,6 +143,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.update_processing:
         return update_processing_only(cfg, data_dir)
+
+    if args.skip_existing and not args.dry_run and (data_dir / f"{local_now.date().isoformat()}.json").exists():
+        log.info("skip: brief for %s already exists (--skip-existing)", local_now.date())
+        return 0
 
     if not (args.force or args.dry_run):
         ok, why = should_run(cfg, local_now, data_dir)

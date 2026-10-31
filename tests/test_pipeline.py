@@ -718,6 +718,27 @@ def test_preselect_keeps_reserved_feed_items():
     assert "s1" in {a.id for a in out} and len(out) == 6
 
 
+def test_preselect_prefers_relevant_over_irrelevant(cfg):
+    from rank import _preselect, heuristic_score
+    now = datetime(2026, 10, 16, 6, 0, tzinfo=timezone.utc)
+    sport = [art(f"sp{i}", f"All Blacks rugby match report {i}") for i in range(4)]
+    visa = art("v1", "New work visa rules for migrant workers announced")
+    out = _preselect([*sport, visa], 2, relevance=lambda a: heuristic_score(a, cfg, "nz", now)[0])
+    assert "v1" in {a.id for a in out} and len(out) == 2
+
+
+def test_skip_existing_avoids_regeneration(fixtures_dir, tmp_path):
+    root = fixtures_dir.parent.parent.parent
+    cfg_path = tmp_path / "config.yaml"
+    text = (root / "config.yaml").read_text(encoding="utf-8")
+    cfg_path.write_text(text.replace('data_dir: "web/public/data"', f'data_dir: "{(tmp_path / "data").as_posix()}"'), encoding="utf-8")
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "2026-10-16.json").write_text("{}")
+    now = datetime(2026, 10, 16, 7, 0, tzinfo=ZoneInfo("Pacific/Auckland")).isoformat()
+    rc = main(["--config", str(cfg_path), "--force", "--skip-existing", "--no-llm", "--fixtures", str(fixtures_dir), "--now", now])
+    assert rc == 0 and (tmp_path / "data" / "2026-10-16.json").read_text() == "{}"
+
+
 def test_foreign_items_dropped_from_nz(cfg):
     class ForeignLLM(SplitLLM):
         def json_call(self, **kw):

@@ -33,19 +33,19 @@ output:
 # region: kr | nz  (nz 섹션은 "이민자 관점(why_it_matters)"을 생성)
 # candidate_limit: AI 선별 단계에 보낼 최대 후보 수 (지역별 합계가 rank_batch_size 이하면 선별 요청 1회)
 sections:
-  kr_society:       { label: "사회",     region: kr, top_n: 5, candidate_limit: 45 }
-  kr_economy:       { label: "경제",     region: kr, top_n: 5, candidate_limit: 45 }
-  kr_entertainment: { label: "연예",     region: kr, top_n: 5, candidate_limit: 45 }
-  kr_politics:      { label: "정치",     region: kr, top_n: 5, candidate_limit: 45 }
+  kr_society:       { label: "사회",     region: kr, top_n: 5, candidate_limit: 35 }
+  kr_economy:       { label: "경제",     region: kr, top_n: 5, candidate_limit: 35 }
+  kr_entertainment: { label: "연예",     region: kr, top_n: 5, candidate_limit: 35 }
+  kr_politics:      { label: "정치",     region: kr, top_n: 5, candidate_limit: 35 }
   # 뉴질랜드 전국 기사는 nz_national 한 묶음으로 수집·선별한 뒤, AI 분류(category)에 따라 아래 4개 섹션으로 나눕니다.
-  nz_national:      { label: "뉴질랜드", region: nz, pool: true, top_n: 18, candidate_limit: 120 }
+  nz_national:      { label: "뉴질랜드", region: nz, pool: true, top_n: 18, candidate_limit: 90 }
   nz_society:       { label: "사회", region: nz, from: nz_national, category: society,   top_n: 5 }
   nz_education:     { label: "교육", region: nz, from: nz_national, category: education, top_n: 4 }
   nz_economy:       { label: "경제", region: nz, from: nz_national, category: economy,   top_n: 5 }
   nz_politics:      { label: "정치", region: nz, from: nz_national, category: politics,  top_n: 4 }
   # 오클랜드 기사도 nz_auckland 한 묶음으로 선별한 뒤 AI 주제 분류(akl_topic)로 치안·생활·부동산·의료·교육 섹션으로 나눕니다.
   # carry_days: 그날 새 소식이 없으면 최근 N일 브리핑의 같은 섹션 기사를 '지난 소식'으로 이어서 보여줍니다.
-  nz_auckland:      { label: "오클랜드", region: nz, pool: true, top_n: 20, candidate_limit: 80 }
+  nz_auckland:      { label: "오클랜드", region: nz, pool: true, top_n: 20, candidate_limit: 60 }
   akl_safety:       { label: "치안",   region: nz, from: nz_auckland, topic: safety,    top_n: 4, carry_days: 2 }
   akl_life:         { label: "생활",   region: nz, from: nz_auckland, topic: life,      top_n: 5 }
   akl_property:     { label: "부동산", region: nz, from: nz_auckland, topic: property,  top_n: 4, carry_days: 3 }

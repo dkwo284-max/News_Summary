@@ -18,6 +18,10 @@ on:
         description: "뉴스·AI 없이 비자 처리 기간 전광판만 갱신"
         type: boolean
         default: false
+      overwrite:
+        description: "오늘 브리핑이 이미 있어도 다시 생성 (AI 요청이 다시 소모됨)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -57,7 +61,8 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.force && '--force' || '' }}
           ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.processing_only && '--update-processing' || '' }}
-        run: python scripts/main.py $FORCE $ONLY
+          SKIP: ${{ github.event_name == 'workflow_dispatch' && !inputs.overwrite && '--skip-existing' || '' }}  # 수동·외부 호출이 겹쳐도 하루 한 번만 AI 소모
+        run: python scripts/main.py $FORCE $ONLY $SKIP
 
       - name: Commit data
         if: steps.run.outputs.generated == 'true'

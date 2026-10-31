@@ -63,7 +63,7 @@ cron-job.org 06:00 (NZ) → GitHub Actions  (보조: GitHub 예약 06:05 / 06:20
 
 ### 2. 첫 실행
 - `main` 브랜치에 병합한 뒤 **Actions → Check feeds → Run workflow** 로 피드 상태를 먼저 확인합니다. 죽은 피드는 `config.yaml` 에서 URL을 바꾸거나 `enabled: false` 로 끕니다.
-- **Actions → Daily Brief → Run workflow** 로 수동 실행합니다. `force` 가 기본으로 켜져 있어 시각 조건 없이 바로 생성됩니다. 끝나면 Pages 에 배포됩니다.
+- **Actions → Daily Brief → Run workflow** 로 수동 실행합니다. `force` 가 기본으로 켜져 있어 시각 조건 없이 바로 생성됩니다. 오늘 브리핑이 이미 있으면 AI 를 호출하지 않고 건너뛰며(중복 실행 방지), 다시 만들려면 `overwrite` 를 켜세요. 끝나면 Pages 에 배포됩니다.
 - 사이트 주소: `https://<계정>.github.io/<저장소>/` (예: https://dkwo284-max.github.io/News_Summary/)
 
 > 예약 실행(`schedule`)은 GitHub 정책상 **기본 브랜치(main)** 에서만 동작합니다.
@@ -211,6 +211,7 @@ cd web && npm install && npm run dev           # http://localhost:5173 (web/publ
 | 옵션 | 설명 |
 |---|---|
 | `--force` | 시각 조건·중복 실행 검사를 무시 |
+| `--skip-existing` | `--force` 여도 오늘 브리핑이 이미 있으면 AI 호출 없이 종료 (Actions 수동 실행의 기본값, `overwrite` 로 해제) |
 | `--dry-run` | `out/dry-run/` 에만 저장, 알림·오래된 파일 정리 안 함 |
 | `--no-llm` | AI 호출 없이 키워드 점수 + RSS 설명으로 실행 (요약·번역 없음, 점검용) |
 | `--fixtures DIR` | 피드를 `DIR/<feed_id>.xml` 에서 읽음 |
