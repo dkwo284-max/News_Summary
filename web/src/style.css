@@ -451,3 +451,20 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .eth-mine > summary { cursor: pointer; font-weight: 700; font-size: .875rem; min-height: 32px; display: flex; align-items: center; margin-top: 8px; }
 .eth-mine .hood-table { font-size: .8125rem; }
 .eth-mine .hood-table th, .eth-mine .hood-table td { padding: 5px 3px; }
+.eth-view { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.eth-hint { margin: 4px 0 8px; }
+.eth-lead { margin: 6px 0 2px; }
+.eth-toplist { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 2px; }
+.eth-toprow { display: grid; grid-template-columns: 26px minmax(84px, 1.3fr) minmax(30px, 1fr) 64px; gap: 6px; align-items: center; width: 100%; background: none; border: 0; padding: 4px 2px; font: inherit; color: inherit; text-align: left; cursor: pointer; border-radius: 6px; }
+.eth-toprow:hover { background: rgba(127,127,127,.12); }
+.eth-toplist .pin { border-top: 1px dashed rgba(127,127,127,.4); margin-top: 4px; padding-top: 4px; }
+.eth-rk { font-variant-numeric: tabular-nums; opacity: .7; text-align: right; white-space: nowrap; }
+.eth-toprow .eth-val { white-space: nowrap; text-align: right; }
+.eth-toprow .eth-val small { display: block; }
+.eth-toprow .eth-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.eth-toprow .eth-val small { opacity: .7; font-size: .68rem; }
+.eth-top > summary { cursor: pointer; font-weight: 600; margin: 10px 0 0; }
+.eth-mine td small { display: block; font-size: .66rem; line-height: 1.25; opacity: .75; font-weight: 400; white-space: nowrap; }
+.eth-mine tr.cur > * { background: rgba(127,127,127,.16); }
+.eth-pick { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline dotted; cursor: pointer; text-align: left; }
+@media (max-width: 520px) { .eth-toprow { grid-template-columns: 24px minmax(70px, 1.2fr) minmax(24px, .8fr) 58px; gap: 4px; font-size: .8125rem; } .eth-mine .hood-table th, .eth-mine .hood-table td { padding: 4px 2px; } .eth-mine .hood-table { font-size: .75rem; } }

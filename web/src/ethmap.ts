@@ -67,6 +67,9 @@ function breaks(values: number[]): number[] {
 }
 const classOf = (x: number, br: number[]) => br.filter((b) => x > b).length;
 
+const fmt = (v: number) => (v > 0 && v < 1 ? `${v.toFixed(2)}%` : pct(v));
+type View = "density" | "share";
+
 export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElement> {
   const sec = h("section", { class: "hood-card eth" }, h("h2", {}, "🌏 지역별 민족 구성 지도"));
   const data = await load();
@@ -77,20 +80,43 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
   const feats = data.features;
   const ix = Object.fromEntries(data.codes.map((c, i) => [c, i]));
   const count = (p: Props, cat: Cat, old = false) => cat.codes.reduce((s, c) => s + ((old ? p.d18 : p.d)[ix[c]] ?? 0), 0);
+  /** 밀집도: 그 동네 주민 중 이 분류의 비율 */
   const share = (p: Props, cat: Cat) => (p.t ? (count(p, cat) / p.t) * 100 : 0);
   const total = feats.reduce((s, f) => s + f.properties.t, 0);
-  const avg = (cat: Cat) => (feats.reduce((s, f) => s + count(f.properties, cat), 0) / total) * 100;
+  const totals = new Map<string, number>();
+  /** 오클랜드 전체에서 이 분류 인원 (= 100%) */
+  const catTotal = (cat: Cat) => {
+    if (!totals.has(cat.key)) totals.set(cat.key, feats.reduce((s, f) => s + count(f.properties, cat), 0));
+    return totals.get(cat.key) ?? 0;
+  };
+  const avg = (cat: Cat) => (catTotal(cat) / total) * 100;
+  /** 분포: 오클랜드 전체 이 분류 인원 중 이 동네에 사는 비중 */
+  const dist = (p: Props, cat: Cat) => (catTotal(cat) ? (count(p, cat) / catTotal(cat)) * 100 : 0);
   let cur = CATS[1]; // 한국인부터
+  let view: View = "density";
+  const metric = (p: Props, cat: Cat) => (view === "share" ? dist(p, cat) : share(p, cat));
+  const plainName = (c: Cat) => c.label.replace(" 전체", "").replace("(라틴아메리카)", "").replace(/계$/, "");
+  const per100 = (v: number) => (v < 0.5 ? "1명도 안 되는" : `약 ${v < 10 ? (Math.round(v * 10) / 10).toString() : Math.round(v)}명인`);
+  const mult = (v: number, cat: Cat) => (avg(cat) ? v / avg(cat) : 0);
+  const multTxt = (m: number) => `평균의 ${m >= 10 ? Math.round(m) : m.toFixed(1)}배`;
+  /** 순위: 밀집도는 주민 300명 이상 동네끼리, 분포는 전체 동네끼리 */
+  function rankOf(val: number, cat: Cat, v: View): { rank: number; n: number } {
+    const vals = feats.filter((f) => (v === "share" ? f.properties.t > 0 : f.properties.t >= 300)).map((f) => (v === "share" ? dist(f.properties, cat) : share(f.properties, cat)));
+    return { rank: 1 + vals.filter((x) => x > val).length, n: vals.length };
+  }
 
   const chips = h("div", { class: "eth-chips" });
+  const toggle = h("div", { class: "eth-view", role: "group", "aria-label": "보기 방식" });
   const mapEl = h("div", { class: "gp-map", role: "region", "aria-label": "지역별 민족 구성 지도" });
+  const hint = h("p", { class: "board-note eth-hint" });
   const legend = h("p", { class: "gp-legend" });
+  const top = h("div", {});
   const find = h("input", { type: "text", list: "eth-sa2", placeholder: "동네 찾기 (예: Albany, Newmarket)", "aria-label": "동네 찾기" });
   const dl = h("datalist", { id: "eth-sa2" }, ...feats.map((f) => h("option", { value: f.properties.n })));
   const mine = h("div", {});
   sec.append(
     h("p", { class: "board-note" }, "2023 인구총조사 거주자의 민족 구성이에요. ", h("b", {}, "범죄와는 무관한 인구 분포"), "이며, 한 사람이 여러 민족을 답할 수 있어 비율의 합이 100%를 넘을 수 있어요."),
-    chips, h("div", { class: "eth-find" }, find, dl), mapEl, legend, mine,
+    chips, toggle, h("div", { class: "eth-find" }, find, dl), mapEl, legend, hint, top, mine,
     h("p", { class: "board-note" },
       "출처: Stats NZ 2023 Census (동네 = Statistical Area 2, 자료 CEN23_ECI_016). 통계청이 소수 값을 무작위로 반올림해 인구가 적은 동네는 오차가 큽니다. ",
       "미국인·캐나다인·아랍·브라질 등 더 세부 구분은 동네 단위 자료가 없어 아래 '출신별 세부(지역위원회)'에서 봅니다."));
@@ -102,38 +128,127 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
   const watchedLc = watched.map((w) => w.toLowerCase());
   const isMine = (n: string) => watchedLc.some((w) => n.toLowerCase().startsWith(w));
 
+  /** 동네를 눌렀을 때: 선택한 분류를 쉬운 말로 먼저, 그 아래 전체 분류 */
   function detail(p: Props): HTMLElement {
-    return h("div", { class: "gp-info" }, h("strong", {}, p.n), h("div", { class: "muted" }, `응답자 약 ${p.t.toLocaleString("ko-KR")}명 (2023)`),
+    const d = share(p, cur), n = count(p, cur), T = catTotal(cur);
+    const r = p.t >= 300 ? rankOf(d, cur, "density") : null;
+    return h("div", { class: "gp-info" }, h("strong", {}, p.n), h("div", { class: "muted" }, `주민 응답자 약 ${p.t.toLocaleString("ko-KR")}명 (2023)`),
+      h("div", { class: "eth-lead" }, h("b", {}, plainName(cur)), ` — 주민 100명 중 ${per100(d)} (오클랜드 평균 ${per100(avg(cur))})`),
+      h("div", { class: "muted", style: "font-size:.75rem" },
+        `${n.toLocaleString("ko-KR")}명 · ${multTxt(mult(d, cur))}${r ? ` · ${r.n}곳 중 ${r.rank}위` : ""} · 오클랜드 ${plainName(cur)} 전체(${T.toLocaleString("ko-KR")}명)의 ${fmt(dist(p, cur))}`),
+      h("div", { class: "muted", style: "margin-top:6px;font-size:.75rem" }, "전체 분류 (그 동네 주민 중 비율)"),
       h("ul", { class: "eth-bars" }, ...CATS.map((c) => {
         const s = share(p, c), s18 = p.t18 ? (count(p, c, true) / p.t18) * 100 : null;
-        const d = s18 != null ? Math.round(s - s18) : null;
+        const dd = s18 != null ? Math.round(s - s18) : null;
         return h("li", {}, h("span", { class: "eth-name" }, c.label.replace(" 전체", "")),
           h("span", { class: "eth-track" }, h("i", { style: `width:${Math.min(100, s)}%;background:${ramp(c.hue, 3)}` })),
-          h("span", { class: "eth-val" }, pct(s), d ? h("small", { class: d > 0 ? "up" : "down" }, ` ${d > 0 ? "▲" : "▼"}${Math.abs(d)}`) : ""));
+          h("span", { class: "eth-val" }, pct(s), dd ? h("small", { class: dd > 0 ? "up" : "down" }, ` ${dd > 0 ? "▲" : "▼"}${Math.abs(dd)}`) : ""));
       })),
       h("div", { class: "muted", style: "font-size:.75rem" }, "▲▼ = 2018년 대비 %p 변화"));
   }
 
+  function focus(code: string) {
+    if (!L || !map || !layer) return;
+    layer.eachLayer((lyr) => {
+      const gl = lyr as import("leaflet").Layer & { feature?: { properties: Props } };
+      if (gl.feature?.properties.c === code) {
+        map!.fitBounds((lyr as import("leaflet").Polygon).getBounds(), { maxZoom: 14 });
+        (lyr as import("leaflet").Path).openPopup();
+      }
+    });
+    mapEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  // 관심 동네 (이름이 같은 SA2 여러 곳을 한 열로 합침)
+  const cols = watched.map((w) => {
+    const m = feats.filter((f) => f.properties.n.toLowerCase().startsWith(w.toLowerCase()));
+    const t = m.reduce((s, f) => s + f.properties.t, 0);
+    return { w, t, m };
+  }).filter((c) => c.t > 0);
+
+  function renderTop() {
+    const pool = feats.filter((f) => (view === "share" ? f.properties.t > 0 : f.properties.t >= 300))
+      .map((f) => ({ p: f.properties, v: metric(f.properties, cur) })).sort((a, b) => b.v - a.v);
+    const shown = pool.slice(0, 10);
+    const max = shown[0]?.v || 1;
+    const row = (x: { p: Props; v: number }, rank: number, pin: boolean) => {
+      const btn = h("button", { type: "button", class: "eth-toprow" },
+        h("span", { class: "eth-rk" }, String(rank)),
+        h("span", { class: "eth-name" }, `${isMine(x.p.n) ? "📍 " : ""}${x.p.n}`),
+        h("span", { class: "eth-track" }, h("i", { style: `width:${Math.max(2, (x.v / max) * 100)}%;background:${ramp(cur.hue, 3)}` })),
+        h("span", { class: "eth-val" }, fmt(x.v), h("small", {}, `${count(x.p, cur).toLocaleString("ko-KR")}명`)));
+      btn.addEventListener("click", () => focus(x.p.c));
+      return h("li", { class: pin ? "pin" : "" }, btn);
+    };
+    const lis = shown.map((x, i) => row(x, i + 1, false));
+    // 관심 동네가 상위 10곳 밖이면 아래에 순위와 함께 덧붙임
+    for (const c of cols) {
+      const i = pool.findIndex((x) => c.m.some((f) => f.properties.c === x.p.c));
+      if (i >= 10) lis.push(row(pool[i], i + 1, true));
+    }
+    top.replaceChildren(h("details", { class: "eth-top", open: "" },
+      h("summary", {}, `🏆 ${plainName(cur)} ${view === "share" ? "비중이 큰" : "비율이 높은"} 동네 TOP 10`),
+      h("ol", { class: "eth-toplist" }, ...lis),
+      h("p", { class: "muted", style: "font-size:.75rem;margin:4px 0 0" },
+        view === "share" ? "숫자 = 오클랜드 전체 이 분류 인원 중 그 동네 몫 · 뒤는 인원수" : "숫자 = 그 동네 주민 중 비율(주민 300명 이상 동네만) · 뒤는 인원수")));
+  }
+
+  function renderMine() {
+    mine.replaceChildren();
+    if (!cols.length) return;
+    const cell = (cat: Cat, n: number, t: number) => {
+      const d = t ? (n / t) * 100 : 0;
+      return view === "share"
+        ? h("td", {}, fmt(catTotal(cat) ? (n / catTotal(cat)) * 100 : 0), h("small", {}, `${n.toLocaleString("ko-KR")}명`), h("small", {}, `주민 ${fmt(d)}`))
+        : h("td", {}, fmt(d), h("small", {}, `×${mult(d, cat).toFixed(1)}`), h("small", {}, `${n.toLocaleString("ko-KR")}명`));
+    };
+    mine.append(h("details", { class: "eth-mine", open: "" },
+      h("summary", {}, "📍 관심 동네 비교표 (분류를 누르면 지도가 바뀌어요)"),
+      h("p", { class: "muted", style: "font-size:.75rem;margin:2px 0 6px" }, view === "share"
+        ? "큰 숫자 = 오클랜드 전체 그 분류 인원(100%) 중 이 동네 비중 · 작은 숫자 = 인원수, 동네 주민 중 비율"
+        : "큰 숫자 = 동네 주민 중 비율 · 작은 숫자 = 오클랜드 평균 대비 배수(×), 인원수"),
+      h("div", { class: "table-wrap" }, h("table", { class: "hood-table" },
+        h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "분류"), ...cols.map((c) => h("th", { scope: "col" }, c.w)),
+          h("th", { scope: "col" }, view === "share" ? "전체" : "평균"))),
+        h("tbody", {}, ...CATS.map((cat) => {
+          const name = h("button", { type: "button", class: "eth-pick" }, plainName(cat));
+          name.addEventListener("click", () => { cur = cat; draw(); });
+          return h("tr", { class: cat === cur ? "cur" : "" }, h("th", { scope: "row" }, name),
+            ...cols.map((c) => cell(cat, c.m.reduce((s, f) => s + count(f.properties, cat), 0), c.t)),
+            h("td", { class: "avg-row" }, view === "share" ? "100%" : fmt(avg(cat)), h("small", {}, `${catTotal(cat).toLocaleString("ko-KR")}명`)));
+        }))))));
+  }
+
   function draw() {
-    const vals = feats.filter((f) => f.properties.t >= 300).map((f) => share(f.properties, cur));
+    const vals = feats.filter((f) => (view === "share" ? f.properties.t > 0 : f.properties.t >= 300)).map((f) => metric(f.properties, cur));
     const br = breaks(vals);
-    legend.replaceChildren(h("strong", {}, `${cur.label} 비율`), cur.sub ? ` (${cur.sub}) ` : " ",
+    const T = catTotal(cur).toLocaleString("ko-KR");
+    legend.replaceChildren(h("strong", {}, view === "share" ? `${cur.label} — 오클랜드 전체(${T}명)의 몇 %가 사는지` : `${cur.label} — 동네 주민 중 비율`), cur.sub ? ` (${cur.sub}) ` : " ",
       ...[0, 1, 2, 3, 4].flatMap((k) => [h("span", { class: "dot", style: `background:${ramp(cur.hue, k)};border:1px solid #9ca3af` }),
-        `${k === 0 ? `~${pct(br[0])}` : k === 4 ? `${pct(br[3])}~` : `${pct(br[k - 1])}~${pct(br[k])}`} `]),
-      h("span", { class: "muted" }, `· 오클랜드 전체 ${pct(avg(cur))}`));
+        `${k === 0 ? `~${fmt(br[0])}` : k === 4 ? `${fmt(br[3])}~` : `${fmt(br[k - 1])}~${fmt(br[k])}`} `]),
+      h("span", { class: "muted" }, view === "share" ? "· 모든 동네를 더하면 100%" : `· 오클랜드 전체 ${fmt(avg(cur))}`));
+    hint.textContent = view === "share"
+      ? `색이 진할수록 오클랜드 ${plainName(cur)} 전체 중 많은 사람이 사는 동네예요. 인구가 많은 동네는 자연히 진해져요.`
+      : `색이 진할수록 그 동네 주민 중 ${plainName(cur)}이(가) 차지하는 비율이 높아요. 오클랜드 평균은 ${fmt(avg(cur))}예요.`;
     chips.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.k === cur.key)));
+    toggle.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === view)));
+    renderTop();
+    renderMine();
     if (!L || !map) return;
     layer?.remove();
     layer = L.geoJSON(data as unknown as import("geojson").GeoJsonObject, {
       style: (f) => {
         const p = f!.properties as Props;
         const m = isMine(p.n);
-        return { fillColor: ramp(cur.hue, classOf(share(p, cur), br)), fillOpacity: 0.85, color: m ? "#1d4ed8" : "#ffffff", weight: m ? 2.5 : 0.6 };
+        return { fillColor: ramp(cur.hue, classOf(metric(p, cur), br)), fillOpacity: 0.85, color: m ? "#1d4ed8" : "#ffffff", weight: m ? 2.5 : 0.6 };
       },
       onEachFeature: (f, lyr) => {
         const p = f.properties as Props;
-        lyr.bindTooltip(`${p.n} · ${cur.label} ${pct(share(p, cur))} (${count(p, cur).toLocaleString("ko-KR")}명)`, { sticky: true });
-        lyr.bindPopup(detail(p), { maxWidth: 270 });
+        const n = count(p, cur).toLocaleString("ko-KR");
+        lyr.bindTooltip(view === "share"
+          ? `${p.n} · 오클랜드 ${plainName(cur)} 전체의 ${fmt(dist(p, cur))} (${n}명)`
+          : `${p.n} · 주민 중 ${plainName(cur)} ${fmt(share(p, cur))} (${n}명)`, { sticky: true });
+        lyr.bindPopup(() => detail(p), { maxWidth: 290 });
         lyr.on("mouseover", () => (lyr as import("leaflet").Path).setStyle({ weight: 2.5, color: "#111827" }));
         lyr.on("mouseout", () => layer?.resetStyle(lyr as import("leaflet").Path));
       },
@@ -153,34 +268,20 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
     }
     chips.append(wrap);
   }
+  // 보기 방식 전환
+  for (const [v, label] of [["density", "동네 주민 중 비율"], ["share", "이 분류 전체 중 비중"]] as const) {
+    const b = h("button", { type: "button", class: "chip", "data-v": v, "aria-pressed": String(v === view) }, label);
+    b.addEventListener("click", () => {
+      view = v;
+      draw();
+    });
+    toggle.append(b);
+  }
   find.addEventListener("change", () => {
     const q = find.value.trim().toLowerCase();
     const f = feats.find((x) => x.properties.n.toLowerCase() === q) ?? (q.length >= 3 ? feats.find((x) => x.properties.n.toLowerCase().startsWith(q)) : undefined);
-    if (!f || !L || !map || !layer) return;
-    layer.eachLayer((lyr) => {
-      const gl = lyr as import("leaflet").Layer & { feature?: { properties: Props } };
-      if (gl.feature?.properties.c === f.properties.c) {
-        map!.fitBounds((lyr as import("leaflet").Polygon).getBounds(), { maxZoom: 14 });
-        (lyr as import("leaflet").Path).openPopup();
-      }
-    });
+    if (f) focus(f.properties.c);
   });
-
-  // 관심 동네 비교표: 행 = 분류, 열 = 관심 동네 + 오클랜드 평균
-  const cols = watched.map((w) => {
-    const m = feats.filter((f) => f.properties.n.toLowerCase().startsWith(w.toLowerCase()));
-    const t = m.reduce((s, f) => s + f.properties.t, 0);
-    return { w, t, m };
-  }).filter((c) => c.t > 0);
-  if (cols.length) {
-    mine.append(h("details", { class: "eth-mine", open: "" },
-      h("summary", {}, "📍 관심 동네 비교표"),
-      h("div", { class: "table-wrap" }, h("table", { class: "hood-table" },
-        h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "분류"), ...cols.map((c) => h("th", { scope: "col" }, c.w)), h("th", { scope: "col" }, "오클랜드"))),
-        h("tbody", {}, ...CATS.map((cat) => h("tr", {}, h("th", { scope: "row" }, cat.label.replace(" 전체", "").replace("(라틴아메리카)", "").replace(/계$/, "")),
-          ...cols.map((c) => h("td", {}, pct((c.m.reduce((s, f) => s + count(f.properties, cat), 0) / c.t) * 100))),
-          h("td", { class: "avg-row" }, pct(avg(cat))))))))));
-  }
 
   draw();
   void Promise.all([import("leaflet"), import("leaflet/dist/leaflet.css"), whenConnected(mapEl)]).then(([mod, , ok]) => {
