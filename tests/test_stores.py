@@ -17,3 +17,14 @@ def test_convert_classifies_and_dedupes():
     out = stores.convert(osm)
     assert len(out["woolworths"]) == 2  # 같은 자리 중복은 하나, 주유소·다른 마트 제외
     assert [s["n"] for s in out["chemist"]] == ["Chemist Warehouse Newmarket"]
+
+
+def test_fresh_skips_recent_file(tmp_path, monkeypatch):
+    from datetime import date, timedelta
+    f = tmp_path / "stores.json"
+    monkeypatch.setattr(stores, "OUT", f)
+    assert stores.fresh() is False  # 파일 없음
+    f.write_text('{"updated_at": "%s"}' % (date.today() - timedelta(days=100)).isoformat())
+    assert stores.fresh() is True
+    f.write_text('{"updated_at": "%s"}' % (date.today() - timedelta(days=400)).isoformat())
+    assert stores.fresh() is False

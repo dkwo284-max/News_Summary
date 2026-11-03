@@ -1,6 +1,7 @@
 """울월쓰(Woolworths NZ)·케미스트웨어하우스 매장 위치 → web/public/data/stores.json
 
-- 출처: OpenStreetMap(Overpass API, 무료·키 없음). 매장은 자주 바뀌지 않아 한 달에 한 번(또는 수동) 갱신한다(.github/workflows/stores.yml).
+- 출처: OpenStreetMap(Overpass API, 무료·키 없음). 매장은 자주 바뀌지 않아 매일 도는 파이프라인에는 넣지 않고,
+  1년에 한 번(또는 수동 --force) 갱신한다(.github/workflows/stores.yml). 파일이 1년 안에 만든 것이면 자동 실행은 건너뛴다.
 - 앱에서 관심 동네 중심 좌표와 직선거리(km)를 계산해 가장 가까운 매장을 보여준다. 도로 거리·영업시간은 아님.
 """
 from __future__ import annotations
@@ -92,7 +93,21 @@ def fetch() -> dict:
     return {"elements": elements}
 
 
+MAX_AGE_DAYS = 365
+
+
+def fresh() -> bool:
+    try:
+        old = json.loads(OUT.read_text(encoding="utf-8"))
+        return (date.today() - date.fromisoformat(old["updated_at"])).days < MAX_AGE_DAYS
+    except Exception:  # noqa: BLE001 — 파일이 없거나 깨졌으면 새로 받는다
+        return False
+
+
 def main() -> int:
+    if "--force" not in sys.argv and fresh():
+        print("stores: data is under a year old — skipping (use --force to refresh)")
+        return 0
     chains = convert(fetch())
     if not all(chains.values()):
         print("stores: a chain came back empty — not writing", {k: len(v) for k, v in chains.items()}, file=sys.stderr)
