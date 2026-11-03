@@ -21,14 +21,11 @@ jobs:
           r = c.get("https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/all/latest")
           flows = r.json()["references"]
           rows = [(v["id"], v.get("name", "")) for v in flows.values()]
-          print("dataflows", len(rows))
           for i, n in rows:
-              ln = n.lower()
-              if ("ethnic" in ln or "ethnicity" in ln) and ("census" in ln or "2023" in ln or "area" in ln or "sa2" in ln or "statistical" in ln):
-                  print("  FLOW", i, "|", n)
-          for i, n in rows:
-              if "census" in n.lower() and ("statistical area 2" in n.lower() or "sa2" in n.lower()):
-                  print("  SA2FLOW", i, "|", n)
+              if i.startswith("CEN23") and ("thnic" in n or "ETHNIC" in n.upper()):
+                  print("  FLOW23", i, "|", n[:230])
+          print("--- CEN23 ids total:", sum(1 for i, _ in rows if i.startswith("CEN23")))
+          print("--- CEN23 SA2 flows:", [i for i, n in rows if i.startswith("CEN23") and "SA2" in n][:40])
           PY
           cat probe.txt | cut -c1-300 | head -120
       - name: Publish
