@@ -20,13 +20,13 @@ ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.privat
 BBOX = "-37.45,174.20,-36.15,175.30"  # 오클랜드 광역시 + 와이헤케
 # 체인별로 따로 묻는다(서버 부담↓). shop 태그로 먼저 좁힌 뒤 이름을 거른다.
 QUERIES = [
-    f'''[out:json][timeout:60];
+    f'''[out:json][timeout:40];
 (
   nwr["shop"="supermarket"]["name"~"Woolworths|Countdown",i]({BBOX});
   nwr["shop"="supermarket"]["brand"~"Woolworths|Countdown",i]({BBOX});
 );
 out center tags;''',
-    f'''[out:json][timeout:60];
+    f'''[out:json][timeout:40];
 (
   nwr["shop"~"^(chemist|pharmacy)$"]["name"~"Chemist Warehouse",i]({BBOX});
   nwr["shop"~"^(chemist|pharmacy)$"]["brand"~"Chemist Warehouse",i]({BBOX});
@@ -69,10 +69,10 @@ def convert(osm: dict) -> dict:
 def fetch() -> dict:
     """두 질의 결과를 합친다. 서버가 바쁘면 다른 서버로, 그래도 안 되면 잠시 쉬었다 다시."""
     elements: list[dict] = []
-    with httpx.Client(timeout=90, headers={"User-Agent": "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"}) as client:
+    with httpx.Client(timeout=45, headers={"User-Agent": "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"}) as client:
         for q in QUERIES:
             last = None
-            for attempt in range(3):
+            for attempt in range(2):
                 got = None
                 for url in ENDPOINTS:
                     try:
