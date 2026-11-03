@@ -825,3 +825,10 @@ def test_production_profile_prefers_flash_and_test_prefers_lite(cfg, monkeypatch
     llm = _gemini(cfg, lambda req: httpx.Response(200, json=_gemini_ok("{}")))
     assert llm.models_for("rank")[0] == "gemini-3.8-flash" and llm.models_for("summary") == ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
     assert llm.min_interval == 13
+
+
+def test_summary_prompt_asks_for_area_on_home_invasions_and_forbids_ethnicity():
+    from summarize import _system_prompt
+    nz = _system_prompt("nz", {"akl_safety": "치안"}, "독자")
+    assert "주택 침입" in nz and "발생 지역" in nz and "인종·국적" in nz
+    assert "발생 지역" not in _system_prompt("kr", {"kr_society": "사회"})

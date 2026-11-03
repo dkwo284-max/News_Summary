@@ -58,6 +58,13 @@ def _system_prompt(region: str, sections: dict[str, str], profile: str = "") -> 
         if region == "nz"
         else "- why_it_matters: 빈 문자열(\"\")로 두세요."
     )
+    place = (
+        "- 지역 표기(오클랜드 치안): 주택 침입·주택강도(home invasion)·침입 절도(burglary)·무장 강도 같은 주거지 범죄 기사는 "
+        "summary_ko 첫 줄에 발생 지역(동네·구역 이름, 예: '마누레와', '노스쇼어 브라운스 베이')을 반드시 넣으세요. "
+        "기사에 지역이 없으면 '지역 미공개'라고 쓰고, 지어내지 마세요. 피해자·용의자의 인종·국적은 기사에 적혀 있어도 요약에 쓰지 마세요."
+        if region == "nz"
+        else ""
+    )
     sec_list = ", ".join(f"{k}({v})" for k, v in sections.items())
     return f"""당신은 한국어 아침 뉴스 브리핑 편집자입니다. 이번 묶음의 섹션: {sec_list}.
 {reader}
@@ -66,6 +73,7 @@ def _system_prompt(region: str, sections: dict[str, str], profile: str = "") -> 
 - summary_ko: 정확히 3줄. 각 줄은 80자 이내의 완결된 문장. 핵심 사실 → 배경/수치 → 전망/영향 순서.
   [같은 이슈의 관련 기사]가 있으면 그 흐름까지 아울러 이슈 전체를 요약하세요(제목에 없는 사실은 만들지 말 것).
 {why}
+{place}
 - tags: 1~3개. 가능하면 다음 중에서: {TAG_VOCAB}
 그리고 각 섹션마다 그 섹션 기사들을 아우르는 '오늘의 한 줄 브리핑'을 60자 이내 한 문장으로 쓰세요
 (briefings 배열에 section 키와 함께, 기사가 있는 섹션만).

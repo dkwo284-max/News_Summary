@@ -254,6 +254,10 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   if (item.importance >= 8) meta.append(h("span", { class: "hot", title: `중요도 ${item.importance}/10` }, `중요 ${item.importance}`));
   const near = mentions(item, [...watch.suburbs, ...watch.schools]);
   if (near.length) meta.append(h("span", { class: "near" }, `📍 ${near.join(", ")}`));
+  // 치안 기사: 사건이 난 지역을 한눈에 (주택 침입·강도는 특히 지역이 중요)
+  if (item.incident && (item.incident.suburb || item.incident.location)) {
+    meta.append(h("span", { class: "place", title: item.incident.location }, `📍 ${item.incident.suburb || item.incident.location}`));
+  }
   if (item.carried_from) meta.append(h("span", { class: "carried", title: "오늘은 새 소식이 없어 최근 소식을 보여줍니다" }, `지난 소식 · ${fmtDateShort(item.carried_from)}`));
   const rt = relTime(item.published_at);
   if (rt) meta.append(h("span", {}, rt));

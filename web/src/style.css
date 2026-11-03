@@ -426,3 +426,4 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .rate-label { display: block; font-size: 0.6875rem; color: var(--muted); font-weight: 500; }
 .rate-date { display: block; font-size: 0.6875rem; color: var(--muted); }
 .rates .hood-table td { vertical-align: top; }
+.place { background: var(--hot-bg); color: var(--hot-text); border-radius: 999px; padding: 0 8px; font-weight: 700; }
