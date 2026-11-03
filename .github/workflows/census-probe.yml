@@ -18,14 +18,26 @@ jobs:
           python3 - > probe.txt 2>&1 <<'PY'
           import re, json, httpx
           c = httpx.Client(timeout=120, follow_redirects=True, headers={"User-Agent": "DailyBriefBot/1.0 (personal project)"})
-          r = c.get("https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/all/latest")
-          flows = r.json()["references"]
-          rows = [(v["id"], v.get("name", "")) for v in flows.values()]
-          for i, n in rows:
-              if i.startswith("CEN23") and ("thnic" in n or "ETHNIC" in n.upper()):
-                  print("  FLOW23", i, "|", n[:230])
-          print("--- CEN23 ids total:", sum(1 for i, _ in rows if i.startswith("CEN23")))
-          print("--- CEN23 SA2 flows:", [i for i, n in rows if i.startswith("CEN23") and "SA2" in n][:40])
+          H = {"Accept": "application/vnd.sdmx.structure+json;version=1.0"}
+          r = c.get("https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/CEN23_ECI_016/latest?references=all", headers=H)
+          print("status", r.status_code, len(r.content))
+          j = r.json()
+          d = j.get("data", j)
+          dsd = (d.get("dataStructures") or [{}])[0]
+          dims = dsd.get("dataStructureComponents", {}).get("dimensionList", {}).get("dimensions", [])
+          print("DIMS", [(x["id"], x.get("position")) for x in dims])
+          cls = {x["id"]: x for x in d.get("codelists", [])}
+          for dm in dims:
+              ref = dm.get("localRepresentation", {}).get("enumeration", "")
+              cid = ref.split(":")[-1].split("(")[0] if ref else ""
+              cl = cls.get(cid)
+              if cl:
+                  codes = cl.get("codes", [])
+                  print(f"--- {dm['id']} codelist {cid}: {len(codes)} codes")
+                  if dm["id"] in ("ETHNICITY", "ETH", "ETHNIC") or "ETH" in dm["id"].upper() or len(codes) < 60:
+                      for cc in codes[:140]: print("     ", cc["id"], "|", cc.get("name") or cc.get("names", {}).get("en"))
+                  else:
+                      for cc in codes[:5]: print("     ", cc["id"], "|", cc.get("name") or cc.get("names", {}).get("en"))
           PY
           cat probe.txt | cut -c1-300 | head -120
       - name: Publish
