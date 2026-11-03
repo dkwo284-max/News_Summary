@@ -1,0 +1,234 @@
+key present: True length: 32
+structure ECI_018 200 89230
+DIMS [('CEN23_YEAR_001', 0), ('CEN23_GEO_008', 1), ('CEN23_ETH_004', 2), ('CEN23_AGE_003', 3), ('CEN23_GEN_002', 4)]
+--- CEN23_YEAR_001 3 codes
+     2013 | 2013
+     2018 | 2018
+     2023 | 2023
+--- CEN23_GEO_008 133 codes
+     02 | Auckland Region | parent: 9999
+     999999 | Total - New Zealand by territorial authority and Auckland local board | parent: None
+     076 | Auckland | parent: 999999
+     07601 | Rodney Local Board Area | parent: 999999
+     07602 | Hibiscus and Bays Local Board Area | parent: 999999
+     07603 | Upper Harbour Local Board Area | parent: 999999
+     07604 | Kaipātiki Local Board Area | parent: 999999
+     07605 | Devonport-Takapuna Local Board Area | parent: 999999
+     07606 | Henderson-Massey Local Board Area | parent: 999999
+     07607 | Waitākere Ranges Local Board Area | parent: 999999
+     07608 | Aotea/Great Barrier Local Board Area | parent: 999999
+     07609 | Waiheke Local Board Area | parent: 999999
+     07610 | Waitematā Local Board Area | parent: 999999
+     07611 | Whau Local Board Area | parent: 999999
+     07612 | Albert-Eden Local Board Area | parent: 999999
+     07613 | Puketāpapa Local Board Area | parent: 999999
+     07614 | Ōrākei Local Board Area | parent: 999999
+     07615 | Maungakiekie-Tāmaki Local Board Area | parent: 999999
+     07616 | Howick Local Board Area | parent: 999999
+     07617 | Māngere-Ōtāhuhu Local Board Area | parent: 999999
+     07618 | Ōtara-Papatoetoe Local Board Area | parent: 999999
+     07619 | Manurewa Local Board Area | parent: 999999
+     07620 | Papakura Local Board Area | parent: 999999
+     07621 | Franklin Local Board Area | parent: 999999
+     102 | Auckland | parent: 10
+--- CEN23_ETH_004 188 codes
+     999999 | Total people - ethnicity | parent: None
+     1 | European | parent: 999999
+     10000 | European nfd | parent: 1
+     11111 | New Zealand European | parent: 1
+     12100 | British nfd | parent: 1
+     12111 | Celtic nfd | parent: 1
+     12112 | Channel Islander | parent: 1
+     12113 | Cornish | parent: 1
+     12114 | English | parent: 1
+     12116 | Irish | parent: 1
+     12117 | Manx | parent: 1
+     12119 | Scottish | parent: 1
+     12121 | Welsh | parent: 1
+     12199 | British nec | parent: 1
+     12211 | Dutch | parent: 1
+     12311 | Greek | parent: 1
+     12411 | Polish | parent: 1
+     12500 | South Slav nfd | parent: 1
+     12511 | Croatian | parent: 1
+     12512 | Dalmatian | parent: 1
+     12513 | Macedonian | parent: 1
+     12514 | Serbian | parent: 1
+     12515 | Slovenian | parent: 1
+     12516 | Bosnian | parent: 1
+     12599 | South Slav nec | parent: 1
+     12611 | Italian | parent: 1
+     12711 | German | parent: 1
+     12811 | Australian | parent: 1
+     12911 | Albanian | parent: 1
+     12912 | Armenian | parent: 1
+     12913 | Austrian | parent: 1
+     12914 | Belgian | parent: 1
+     12915 | Bulgarian | parent: 1
+     12916 | Belorussian | parent: 1
+     12918 | Cypriot nfd | parent: 1
+     12919 | Czech | parent: 1
+     12920 | Danish | parent: 1
+     12921 | Estonian | parent: 1
+     12922 | Finnish | parent: 1
+     12923 | Flemish | parent: 1
+     12924 | French | parent: 1
+     12926 | Hungarian | parent: 1
+     12927 | Icelandic | parent: 1
+     12928 | Latvian | parent: 1
+     12929 | Lithuanian | parent: 1
+     12930 | Maltese | parent: 1
+     12931 | Norwegian | parent: 1
+     12932 | Portuguese | parent: 1
+     12933 | Romanian | parent: 1
+     12934 | Romani | parent: 1
+     12935 | Russian | parent: 1
+     12937 | Slavic | parent: 1
+     12938 | Slovak | parent: 1
+     12939 | Spanish | parent: 1
+     12940 | Swedish | parent: 1
+     12941 | Swiss | parent: 1
+     12942 | Ukrainian | parent: 1
+     12943 | American | parent: 1
+     12945 | Canadian | parent: 1
+     12947 | New Caledonian | parent: 1
+     12948 | South African European | parent: 1
+     12949 | Afrikaner | parent: 1
+     12950 | Zimbabwean European | parent: 1
+     12999 | European nec | parent: 1
+     2 | Māori | parent: 999999
+     3 | Pacific Peoples | parent: 999999
+     30000 | Pacific Peoples nfd | parent: 3
+     31111 | Samoan | parent: 3
+     32100 | Cook Islands Maori | parent: 3
+     33111 | Tongan | parent: 3
+     34111 | Niuean | parent: 3
+     35111 | Tokelauan | parent: 3
+     36111 | Fijian | parent: 3
+     37112 | Indigenous Australian | parent: 3
+     37122 | Hawaiian | parent: 3
+     37124 | Kiribati | parent: 3
+     37130 | Nauruan | parent: 3
+     37135 | Papua New Guinean | parent: 3
+     37137 | Pitcairn Islander | parent: 3
+     37138 | Rotuman | parent: 3
+     37140 | Tahitian | parent: 3
+     37141 | Solomon Islander | parent: 3
+     37144 | Tuvaluan | parent: 3
+     37145 | Ni Vanuatu | parent: 3
+     37199 | Pacific Peoples nec | parent: 3
+     4 | Asian | parent: 999999
+     40000 | Asian nfd | parent: 4
+     41000 | Southeast Asian nfd | parent: 4
+     41111 | Filipino | parent: 4
+     41211 | Cambodian | parent: 4
+     41311 | Vietnamese | parent: 4
+     41411 | Burmese | parent: 4
+     41412 | Indonesian | parent: 4
+     41413 | Lao | parent: 4
+     41414 | Malay | parent: 4
+     41415 | Thai | parent: 4
+     41416 | Karen | parent: 4
+     41417 | Chin | parent: 4
+     41499 | Southeast Asian nec | parent: 4
+     42100 | Chinese nfd | parent: 4
+     42111 | Hong Kong Chinese | parent: 4
+     42112 | Cambodian Chinese | parent: 4
+     42113 | Malaysian Chinese | parent: 4
+     42114 | Singaporean Chinese | parent: 4
+     42115 | Vietnamese Chinese | parent: 4
+     42116 | Taiwanese | parent: 4
+     42199 | Chinese nec | parent: 4
+     43100 | Indian nfd | parent: 4
+     43111 | Bengali | parent: 4
+     43112 | Fijian Indian | parent: 4
+     43114 | Indian Tamil | parent: 4
+     43115 | Punjabi | parent: 4
+     43116 | Sikh | parent: 4
+     43117 | Anglo Indian | parent: 4
+     43118 | Malaysian Indian | parent: 4
+     43119 | South African Indian | parent: 4
+     43199 | Indian nec | parent: 4
+     44100 | Sri Lankan nfd | parent: 4
+     44111 | Sinhalese | parent: 4
+     44112 | Sri Lankan Tamil | parent: 4
+     44199 | Sri Lankan nec | parent: 4
+     44211 | Japanese | parent: 4
+     44311 | Korean | parent: 4
+     44411 | Afghan | parent: 4
+     44412 | Bangladeshi | parent: 4
+     44413 | Nepali | parent: 4
+     44414 | Pakistani | parent: 4
+     44415 | Tibetan | parent: 4
+     44416 | Eurasian | parent: 4
+     44417 | Bhutanese | parent: 4
+     44418 | Maldivian | parent: 4
+     44419 | Mongolian | parent: 4
+     44499 | Asian nec | parent: 4
+     5 | Middle Eastern/Latin American/African | parent: 999999
+     51100 | Middle Eastern nfd | parent: 5
+     51111 | Algerian | parent: 5
+     51112 | Arab | parent: 5
+     51113 | Assyrian | parent: 5
+     51114 | Egyptian | parent: 5
+     51115 | Iranian/Persian | parent: 5
+     51116 | Iraqi | parent: 5
+     51117 | Israeli/Jewish | parent: 5
+     51118 | Jordanian | parent: 5
+     51119 | Kurd | parent: 5
+     51120 | Lebanese | parent: 5
+     51122 | Moroccan | parent: 5
+     51124 | Palestinian | parent: 5
+     51125 | Syrian | parent: 5
+     51127 | Turkish | parent: 5
+     51199 | Middle Eastern nec | parent: 5
+     52100 | Latin American nfd | parent: 5
+     52111 | Argentinian | parent: 5
+     52112 | Bolivian | parent: 5
+     52113 | Brazilian | parent: 5
+     52114 | Chilean | parent: 5
+     52115 | Colombian | parent: 5
+     52118 | Ecuadorian | parent: 5
+     52123 | Mexican | parent: 5
+     52127 | Peruvian | parent: 5
+     52128 | Puerto Rican | parent: 5
+     52129 | Uruguayan | parent: 5
+     52130 | Venezuelan | parent: 5
+     52199 | Latin American nec | parent: 5
+     53100 | African nfd | parent: 5
+     53113 | Jamaican | parent: 5
+     53114 | Kenyan | parent: 5
+     53115 | Nigerian | parent: 5
+     53116 | African American | parent: 5
+     53118 | Caribbean | parent: 5
+     53119 | Somali | parent: 5
+     53120 | Eritrean | parent: 5
+     53121 | Ethiopian | parent: 5
+     53122 | Ghanaian | parent: 5
+     53123 | Burundian | parent: 5
+     53124 | Congolese | parent: 5
+     53125 | Sudanese | parent: 5
+     53126 | Zambian | parent: 5
+     53127 | Other Zimbabwean | parent: 5
+     53199 | African nec | parent: 5
+     6 | Other Ethnicity | parent: 999999
+     61113 | Indigenous American | parent: 6
+     61115 | Mauritian | parent: 6
+     61116 | Seychellois | parent: 6
+     61117 | Other South African | parent: 6
+     61118 | New Zealander | parent: 6
+     61199 | Other Ethnicity nec | parent: 6
+     777777 | Total people stated - ethnicity | parent: 999999
+     9 | Not elsewhere included | parent: 999999
+--- CEN23_AGE_003 25 codes
+     99 | Total - age
+     1 | Under 15 years
+     2 | 15-29 years
+     3 | 30-64 years
+     4 | 65 years and over
+     01 | 0-4 years
+--- CEN23_GEN_002 4 codes
+     99 | Total - gender
+     1 | Male / Tāne
+     2 | Female / Wahine
+     3 | Another gender / He ira kē anō
