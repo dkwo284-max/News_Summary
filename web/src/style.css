@@ -427,3 +427,18 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .rate-date { display: block; font-size: 0.6875rem; color: var(--muted); }
 .rates .hood-table td { vertical-align: top; }
 .place { background: var(--hot-bg); color: var(--hot-text); border-radius: 999px; padding: 0 8px; font-weight: 700; }
+
+/* ── 지역별 민족 구성 지도 ── */
+.eth-chips { flex-wrap: wrap; }
+.eth-find { margin: 6px 0; }
+.eth-find input { width: 100%; font: inherit; font-size: .9rem; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+.eth-bars { list-style: none; margin: 6px 0 4px; padding: 0; display: grid; gap: 4px; font-size: .8125rem; }
+.eth-bars li { display: grid; grid-template-columns: 92px 1fr 62px; gap: 6px; align-items: center; }
+.eth-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.eth-track { height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+.eth-track i { display: block; height: 100%; }
+.eth-val { text-align: right; font-variant-numeric: tabular-nums; }
+.eth-val small.up { color: #b91c1c; }
+.eth-val small.down { color: #059669; }
+.leaflet-popup-content .eth-bars { color: #111827; }
+.eth .gp-map { height: 380px; }
