@@ -18,17 +18,15 @@ jobs:
           python3 - > probe.txt 2>&1 <<'PY'
           import re, json, httpx
           c = httpx.Client(timeout=120, follow_redirects=True, headers={"User-Agent": "DailyBriefBot/1.0 (personal project)"})
-          r = c.get("https://www.stats.govt.nz/large-datasets/csv-files-for-download/")
-          t = r.text
-          print("page", r.status_code, len(t))
-          hrefs = re.findall(r'href="([^"]+)"', t)
-          files = sorted({h for h in hrefs if re.search(r"\.(zip|csv|xlsx)(\?|$)", h, re.I)})
-          print("files", len(files))
-          for h in files: 
-              if re.search(r"2023|census|ethnic", h, re.I): print("  file", h)
-          for h in sorted({h for h in hrefs if re.search(r"census", h, re.I)})[:50]: print("  page-link", h)
-          i = t.lower().find("2023 census")
-          print("ctx:", re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", t[max(0,i-300):i+900]))[:900])
+          import urllib.parse
+          for q in ["census 2023 ethnic group SA2 New Zealand", "census 2018 ethnicity Korean statistical area 2", "New Zealand census ethnic group Korean Chinese by area"]:
+              u = "https://hub.arcgis.com/api/v3/datasets?q=" + urllib.parse.quote(q) + "&page[size]=12"
+              r = c.get(u); print("===", r.status_code, q)
+              try:
+                  for it in r.json().get("data", []):
+                      a = it.get("attributes", {})
+                      print("  ", a.get("name"), "|", a.get("url"), "| fields:", [f.get("name") for f in (a.get("fields") or [])][:14])
+              except Exception as e: print("  parse err", e)
           PY
           cat probe.txt | cut -c1-300 | head -120
       - name: Publish
