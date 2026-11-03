@@ -1,0 +1,46 @@
+name: Probe Stats NZ census data
+
+# 임시(수동): 지역별 민족 구성 데이터(통계청 인구총조사) 위치 점검. 결과는 census-probe 브랜치.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe
+        run: |
+          pip install -q httpx
+          mkdir -p /tmp/out && cd /tmp/out
+          python3 - > probe.txt 2>&1 <<'PY'
+          import re, httpx
+          c = httpx.Client(timeout=60, follow_redirects=True, headers={"User-Agent": "DailyBriefBot/1.0 (personal project)"})
+          def show(u, n=400):
+              try:
+                  r = c.get(u); print(f"=== {r.status_code} {r.headers.get('content-type')} len={len(r.content)} {u}"); return r
+              except Exception as e: print("ERR", u, repr(e)[:200]); return None
+          r = show("https://www.stats.govt.nz/large-datasets/csv-files-for-download/")
+          if r is not None and r.status_code == 200:
+              for m in sorted(set(re.findall(r'href="([^"]*(?:census|Census)[^"]*)"', r.text)))[:60]: print("  link", m)
+          r = show("https://www.stats.govt.nz/large-datasets/csv-files-for-download/census-2023")
+          if r is not None and r.status_code == 200:
+              for m in sorted(set(re.findall(r'href="([^"]+\.(?:zip|csv)[^"]*)"', r.text)))[:60]: print("  file", m)
+          for u in ["https://api.data.stats.govt.nz/rest/dataflow/all", "https://explore.data.stats.govt.nz/", "https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/all/latest"]:
+              r = show(u)
+              if r is not None and r.status_code == 200: print(r.text[:1500])
+          # SA2 경계 (ArcGIS Hub 공개 서비스 검색)
+          r = show("https://hub.arcgis.com/api/v3/datasets?q=statistical%20area%202%202023%20generalised&page[size]=8")
+          if r is not None and r.status_code == 200:
+              for d in re.findall(r'"name":"([^"]+)"', r.text)[:8]: print("  ds", d)
+              for u in re.findall(r'"url":"(https://[^"]*FeatureServer[^"]*)"', r.text)[:6]: print("  fs", u)
+          PY
+          cat probe.txt | cut -c1-300 | head -120
+      - name: Publish
+        if: always()
+        run: |
+          cd /tmp/out && git init -q -b census-probe && git config user.name bot && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm probe
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" census-probe
