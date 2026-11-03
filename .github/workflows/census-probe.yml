@@ -18,26 +18,16 @@ jobs:
           python3 - > probe.txt 2>&1 <<'PY'
           import re, json, httpx
           c = httpx.Client(timeout=120, follow_redirects=True, headers={"User-Agent": "DailyBriefBot/1.0 (personal project)"})
-          H = {"Accept": "application/vnd.sdmx.structure+json;version=1.0"}
-          r = c.get("https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/CEN23_ECI_016/latest?references=all", headers=H)
-          print("status", r.status_code, len(r.content))
-          j = r.json()
-          d = j.get("data", j)
-          dsd = (d.get("dataStructures") or [{}])[0]
-          dims = dsd.get("dataStructureComponents", {}).get("dimensionList", {}).get("dimensions", [])
-          print("DIMS", [(x["id"], x.get("position")) for x in dims])
-          cls = {x["id"]: x for x in d.get("codelists", [])}
-          for dm in dims:
-              ref = dm.get("localRepresentation", {}).get("enumeration", "")
-              cid = ref.split(":")[-1].split("(")[0] if ref else ""
-              cl = cls.get(cid)
-              if cl:
-                  codes = cl.get("codes", [])
-                  print(f"--- {dm['id']} codelist {cid}: {len(codes)} codes")
-                  if dm["id"] in ("ETHNICITY", "ETH", "ETHNIC") or "ETH" in dm["id"].upper() or len(codes) < 60:
-                      for cc in codes[:140]: print("     ", cc["id"], "|", cc.get("name") or cc.get("names", {}).get("en"))
-                  else:
-                      for cc in codes[:5]: print("     ", cc["id"], "|", cc.get("name") or cc.get("names", {}).get("en"))
+          for u in ["https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/CEN23_ECI_016/latest?references=all",
+                    "https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/CEN23_ECI_016/latest",
+                    "https://api.data.stats.govt.nz/rest/datastructure/STATSNZ/all/latest",
+                    "https://api.data.stats.govt.nz/rest/data/STATSNZ,CEN23_ECI_016,1.0/all?lastNObservations=1&dimensionAtObservation=AllDimensions&format=csv"]:
+              for hdr in [{}, {"Accept": "application/vnd.sdmx.structure+json;version=1.0"}]:
+                  r = c.get(u, headers=hdr)
+                  print("===", r.status_code, r.headers.get("content-type"), len(r.content), u[-70:], hdr and "structure-accept")
+                  print("   ", r.text[:300].replace("\n", " "))
+          r = c.get("https://explore.data.stats.govt.nz/")
+          for m in sorted(set(re.findall(r'(?:subscription|api[ -]?key|developer)[^"<]{0,120}', r.text, re.I)))[:8]: print("  hint", m)
           PY
           cat probe.txt | cut -c1-300 | head -120
       - name: Publish
