@@ -411,8 +411,8 @@ function renderMain(): void {
           if (slot.isConnected) slot.replaceChildren(safetySection(h, inc, homes, gp?.suburbs ?? {}));
         });
       }
-      if (sel === "akl_safety") {
-        // 지역별 민족 구성(인구총조사 거주자 분포 — 범죄 자료 아님)
+      if (sel === "akl_property") {
+        // 지역별 민족 구성(인구총조사 거주자 분포 — 동네 고를 때 참고, 범죄 자료 아님)
         const eslot = h("div", {});
         main.append(eslot);
         void import("./ethmap").then(async (m) => [await m.ethnicSection(h, watch.suburbs), await m.originSection(h)] as const).then(([el, origin]) => {
