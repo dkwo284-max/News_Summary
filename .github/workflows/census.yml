@@ -1,6 +1,7 @@
 name: Census ethnic map data
 
-# 수동 실행: Stats NZ 2023 인구총조사의 지역별 민족 구성(SA2)을 받아 web/public/data/census-akl.json 으로 저장합니다(5년마다 필요할 때만).
+# 수동 실행: Stats NZ 2023 인구총조사의 지역별 민족 구성을 받아 web/public/data/census-akl.json(동네 SA2, 상세 3단계)과
+# census-akl-detail.json(지역위원회, 상세 4단계: 미국인·아랍·브라질 등)으로 저장합니다(5년마다 필요할 때만). 상세는 STATSNZ_API_KEY Secret 이 필요합니다.
 on:
   workflow_dispatch:
 
@@ -17,11 +18,15 @@ jobs:
         with: { python-version: "3.12" }
       - run: pip install -q httpx
       - run: python scripts/census.py
+      - name: Detailed ethnicity (needs STATSNZ_API_KEY secret)
+        env:
+          STATSNZ_API_KEY: ${{ secrets.STATSNZ_API_KEY }}
+        run: python scripts/census_detail.py
       - name: Commit
         run: |
           git config user.name "daily-brief-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add web/public/data/census-akl.json
+          git add web/public/data/census-akl.json web/public/data/census-akl-detail.json
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "data: census ethnic distribution (SA2)"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
