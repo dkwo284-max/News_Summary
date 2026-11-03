@@ -23,14 +23,28 @@ jobs:
           print("key present:", bool(key), "length:", len(key))
           if not key: raise SystemExit("no key")
           c = httpx.Client(timeout=180, follow_redirects=True, headers={"Ocp-Apim-Subscription-Key": key, "User-Agent": "DailyBriefBot/1.0 (personal project)"})
-          geo = "152400+138501+137400+125900+117300"
-          eth = "9999+7777+1+111+121+129+3+4+410+411+412+413+414+421+431+441+442+443+444+5+511+521+531+6+9"
-          url = f"https://api.data.stats.govt.nz/rest/data/STATSNZ,CEN23_ECI_016,1.0/2018+2023.{geo}.{eth}.99.99"
-          for accept in ["application/vnd.sdmx.data+csv;version=1.0.0", "text/csv", "application/vnd.sdmx.data+json;version=1.0.0", "application/json"]:
-              r = c.get(url, headers={"Accept": accept})
-              print("===", r.status_code, accept, r.headers.get("content-type"), len(r.content))
-              print(r.text[:700].replace("\n", " | "))
-              if r.status_code == 200 and "csv" in accept: break
+          r = c.get("https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/CEN23_ECI_018/latest?references=all", headers={"Accept": "application/vnd.sdmx.structure+json;version=1.0"})
+          print("structure ECI_018", r.status_code, len(r.content))
+          d = r.json().get("data", {})
+          dsd = d["dataStructures"][0]
+          dims = dsd["dataStructureComponents"]["dimensionList"]["dimensions"]
+          print("DIMS", [(x["id"], x["position"]) for x in dims])
+          cls = {x["id"]: x for x in d.get("codelists", [])}
+          nm = lambda cc: cc.get("name") or (cc.get("names") or {}).get("en")
+          for dm in dims:
+              ref = dm.get("localRepresentation", {}).get("enumeration", "")
+              cl = cls.get(ref.split("=")[-1].split(":")[-1].split("(")[0])
+              if not cl: continue
+              codes = cl["codes"]
+              print(f"--- {dm['id']} {len(codes)} codes")
+              if "ETH" in dm["id"]:
+                  for cc in codes: print("    ", cc["id"], "|", nm(cc), "| parent:", cc.get("parent"))
+              elif "GEO" in dm["id"]:
+                  for cc in codes:
+                      n = nm(cc) or ""
+                      if "Auckland" in n or "Local Board" in n or "Board" in n: print("    ", cc["id"], "|", n, "| parent:", cc.get("parent"))
+              else:
+                  for cc in codes[:6]: print("    ", cc["id"], "|", nm(cc))
           PY
           cut -c1-220 probe.txt | head -220
       - name: Publish
