@@ -4,6 +4,7 @@ import { fetchLive, loadLive, type LiveData } from "./live";
 import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
 import { gpSection, loadGP } from "./gpmap";
 import { loadIncidents, safetyAlert, safetySection } from "./crimemap";
+import { loadStores } from "./stores";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
@@ -635,7 +636,7 @@ async function renderHood(): Promise<void> {
   const holder = h("div", { "aria-busy": "true" }, h("p", { class: "muted" }, "내 동네 정보를 불러오는 중…"));
   main.append(holder);
   const names = [...watch.suburbs, ...watch.schools];
-  const [areas, briefs, gp] = await Promise.all([loadAreas(), names.length ? recentBriefs() : Promise.resolve([] as Brief[]), loadGP()]);
+  const [areas, briefs, gp, stores] = await Promise.all([loadAreas(), names.length ? recentBriefs() : Promise.resolve([] as Brief[]), loadGP(), loadStores()]);
   if (chipState.akl !== "hood" || settings.tab !== "akl" || !holder.isConnected) return;
   const hits: Hit[] = names.length ? findHits(briefs, names) : [];
   const fx = (viewingLatest && live?.fx) || brief?.extras.nzd_krw;
@@ -644,7 +645,7 @@ async function renderHood(): Promise<void> {
     renderMain();
     window.scrollTo({ top: 0 });
   };
-  holder.replaceChildren(neighbourhoodView(h, watch, areas, hits, fx, extLink, openSettings, gp, showGPMap));
+  holder.replaceChildren(neighbourhoodView(h, watch, areas, hits, fx, extLink, openSettings, gp, showGPMap, stores));
   holder.removeAttribute("aria-busy");
 }
 

@@ -1,0 +1,31 @@
+name: Store locations (Woolworths, Chemist Warehouse)
+
+# 한 달에 한 번(또는 수동): OpenStreetMap 에서 울월쓰·케미스트웨어하우스 매장 위치를 받아 web/public/data/stores.json 으로 저장합니다.
+# 앱이 관심 동네와의 직선거리(km)를 계산합니다. AI 호출 없음·키 없음.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 12 * *"
+
+permissions:
+  contents: write
+
+jobs:
+  stores:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q httpx
+      - run: python scripts/stores.py
+      - name: Commit
+        run: |
+          git config user.name "daily-brief-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/data/stores.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "data: Woolworths / Chemist Warehouse locations"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
