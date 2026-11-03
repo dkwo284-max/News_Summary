@@ -60,7 +60,8 @@ def convert(osm: dict) -> dict:
         lat, lon = round(c["lat"], 5), round(c["lon"], 5)
         if any(s["n"] == name and abs(s["ll"][0] - lat) < 0.0015 and abs(s["ll"][1] - lon) < 0.0015 for s in out[chain]):
             continue
-        out[chain].append({"n": name, "ll": [lat, lon]})
+        where = (tags.get("addr:suburb") or tags.get("addr:street") or tags.get("addr:city") or "").strip()
+        out[chain].append({"n": name, "a": where, "ll": [lat, lon]})
     return {k: sorted(v, key=lambda s: s["n"]) for k, v in out.items()}
 
 

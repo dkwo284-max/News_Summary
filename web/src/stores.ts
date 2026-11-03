@@ -1,7 +1,7 @@
 // 울월쓰·케미스트웨어하우스까지의 직선거리: data/stores.json (OpenStreetMap, 한 달에 한 번 갱신, scripts/stores.py)
 import { km } from "./gpmap";
 
-export interface Store { n: string; ll: [number, number] }
+export interface Store { n: string; a?: string; ll: [number, number] }
 export interface StoreData {
   updated_at: string;
   source: string;
@@ -30,4 +30,10 @@ export function nearestStore(data: StoreData | null, at: [number, number] | unde
     if (!best || d < best.d) best = { s, d };
   }
   return best;
+}
+
+/** 매장 이름표: 이름 앞 체인명은 빼고 동네(주소)가 있으면 그것, 없으면 이름 */
+export function storeLabel(s: Store): string {
+  const short = s.n.replace(/^(Woolworths|Countdown|Chemist Warehouse)\s*/i, "").trim();
+  return short || s.a || "";
 }

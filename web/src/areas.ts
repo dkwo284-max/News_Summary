@@ -2,7 +2,7 @@
 import type { Brief, Item, SectionKey } from "./types";
 import { loadPlan } from "./visa";
 import { nearest, statusBadge, type GPData } from "./gpmap";
-import { nearestStore, type StoreData } from "./stores";
+import { nearestStore, storeLabel, type StoreData } from "./stores";
 
 type H = <K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -188,7 +188,7 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
   if (w.suburbs.length) {
     const km1 = (name: string, chain: "woolworths" | "chemist") => {
       const x = nearestStore(stores, gp?.suburbs[name], chain);
-      return x ? h("td", {}, h("strong", {}, `${x.d.toFixed(1)}km`), h("small", { class: "muted store-name" }, x.s.n.replace(/^(Woolworths|Countdown|Chemist Warehouse)\s*/i, "") || x.s.n)) : h("td", {}, "—");
+      return x ? h("td", {}, h("strong", {}, `${x.d.toFixed(1)}km`), h("small", { class: "muted store-name" }, storeLabel(x.s))) : h("td", {}, "—");
     };
     root.append(h("section", { class: "hood-card" },
       h("h2", {}, "🛒 장보기·약국까지 거리"),
@@ -196,7 +196,7 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
         h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "동네"), h("th", { scope: "col" }, "울월쓰"), h("th", { scope: "col" }, "케미스트웨어하우스"))),
         h("tbody", {}, ...w.suburbs.map((name) => h("tr", {}, h("th", { scope: "row" }, name), km1(name, "woolworths"), km1(name, "chemist")))))),
       h("p", { class: "board-note" }, stores
-        ? `동네 중심에서 가장 가까운 매장까지의 직선거리예요(실제 도로 거리는 더 길 수 있어요). 매장 위치: ${stores.source}, ${stores.updated_at.slice(5).replace("-", "/")} 기준 · 울월쓰 ${stores.chains.woolworths.stores.length}곳, 케미스트웨어하우스 ${stores.chains.chemist.stores.length}곳.`
+        ? `동네 중심에서 가장 가까운 매장까지의 직선거리예요(실제 도로 거리는 더 길 수 있어요). 지도(OpenStreetMap)에 올라 있는 매장만 계산해서 새 매장이 빠졌을 수 있으니, 정확한 위치는 각 동네 카드의 지도 링크로 확인하세요. 매장 위치: ${stores.source}, ${stores.updated_at.slice(5).replace("-", "/")} 기준 · 울월쓰 ${stores.chains.woolworths.stores.length}곳, 케미스트웨어하우스 ${stores.chains.chemist.stores.length}곳.`
         : "매장 위치 데이터를 아직 받지 못했어요 (Actions → Store locations 실행 후 표시).")));
   }
   // 2) 동네별 카드
@@ -223,9 +223,9 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
     const cw = nearestStore(stores, gp?.suburbs[name], "chemist");
     if (ww || cw) {
       card.append(h("p", { class: "hood-stores" },
-        ww ? `🛒 울월쓰 ${ww.d.toFixed(1)}km (${ww.s.n.replace(/^(Woolworths|Countdown)\s*/i, "") || ww.s.n})` : "",
+        ww ? `🛒 울월쓰 ${ww.d.toFixed(1)}km${storeLabel(ww.s) ? ` (${storeLabel(ww.s)})` : ""}` : "",
         ww && cw ? " · " : "",
-        cw ? `💊 케미스트웨어하우스 ${cw.d.toFixed(1)}km (${cw.s.n.replace(/^Chemist Warehouse\s*/i, "") || cw.s.n})` : ""));
+        cw ? `💊 케미스트웨어하우스 ${cw.d.toFixed(1)}km${storeLabel(cw.s) ? ` (${storeLabel(cw.s)})` : ""}` : ""));
     }
     const gps = nearest(gp, name);
     if (gps.length) {
@@ -250,6 +250,8 @@ export function neighbourhoodView(h: H, w: Watch, areas: AreasData | null, hits:
       link("https://www.police.govt.nz/about-us/publications-statistics/data-and-statistics/policedatanz", "🚓 범죄 통계"),
       link("https://geomapspublic.aucklandcouncil.govt.nz/viewer/index.html", "🌊 침수·용도지역"),
       link(gmaps(`Korean grocery near ${name}, Auckland`), "🛒 한인마트"),
+      link(gmaps(`Woolworths near ${name}, Auckland`), "🛒 울월쓰"),
+      link(gmaps(`Chemist Warehouse near ${name}, Auckland`), "💊 케미스트웨어하우스"),
       link(gmaps(`GP medical centre ${name}, Auckland`), "🩺 근처 GP"),
     ));
     root.append(card);
