@@ -1,0 +1,50 @@
+name: Probe Stats NZ detailed ethnicity (needs STATSNZ_API_KEY)
+
+# 임시(수동): 상세 민족 표 CEN23_ECI_016 구조 점검. 키는 출력하지 않는다. 결과는 census-probe 브랜치.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    env:
+      STATSNZ_API_KEY: ${{ secrets.STATSNZ_API_KEY }}
+    steps:
+      - name: Probe
+        run: |
+          pip install -q httpx
+          mkdir -p /tmp/out && cd /tmp/out
+          python3 - > probe.txt 2>&1 <<'PY'
+          import os, json, httpx
+          key = os.environ.get("STATSNZ_API_KEY", "").strip()
+          print("key present:", bool(key), "length:", len(key))
+          if not key: raise SystemExit("no key")
+          c = httpx.Client(timeout=180, follow_redirects=True, headers={"Ocp-Apim-Subscription-Key": key, "User-Agent": "DailyBriefBot/1.0 (personal project)"})
+          r = c.get("https://api.data.stats.govt.nz/rest/dataflow/STATSNZ/CEN23_ECI_016/latest?references=all", headers={"Accept": "application/vnd.sdmx.structure+json;version=1.0"})
+          print("structure", r.status_code, len(r.content), r.headers.get("content-type"))
+          if r.status_code != 200: print(r.text[:300]); raise SystemExit
+          j = r.json(); d = j.get("data", j)
+          dsd = d["dataStructures"][0]
+          dims = dsd["dataStructureComponents"]["dimensionList"]["dimensions"]
+          print("DIMS", [(x["id"], x["position"]) for x in dims])
+          cls = {x["id"]: x for x in d.get("codelists", [])}
+          for dm in dims:
+              ref = dm.get("localRepresentation", {}).get("enumeration", "")
+              cid = ref.split("=")[-1].split(":")[-1].split("(")[0]
+              cl = cls.get(cid)
+              if not cl: print("---", dm["id"], "no codelist", ref); continue
+              codes = cl["codes"]; nm = lambda cc: cc.get("name") or (cc.get("names") or {}).get("en")
+              print(f"--- {dm['id']} [{cid}] {len(codes)} codes")
+              lim = 400 if "ETH" in dm["id"].upper() else 12
+              for cc in codes[:lim]: print("    ", cc["id"], "|", nm(cc), "| parent:", cc.get("parent"))
+          PY
+          cut -c1-220 probe.txt | head -220
+      - name: Publish
+        if: always()
+        run: |
+          cd /tmp/out && git init -q -b census-probe && git config user.name bot && git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm probe
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" census-probe
