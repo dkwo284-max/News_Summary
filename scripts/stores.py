@@ -14,16 +14,24 @@ from pathlib import Path
 import httpx
 
 OUT = Path(__file__).resolve().parent.parent / "web" / "public" / "data" / "stores.json"
-ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter",
+             "https://overpass.kumi.systems/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"]
 BBOX = "-37.45,174.20,-36.15,175.30"  # 오클랜드 광역시 + 와이헤케
-QUERY = f"""[out:json][timeout:90];
+# 체인별로 따로 묻는다(서버 부담↓). shop 태그로 먼저 좁힌 뒤 이름을 거른다.
+QUERIES = [
+    f'''[out:json][timeout:60];
 (
   nwr["shop"="supermarket"]["name"~"Woolworths|Countdown",i]({BBOX});
   nwr["shop"="supermarket"]["brand"~"Woolworths|Countdown",i]({BBOX});
-  nwr["shop"~"chemist|pharmacy"]["name"~"Chemist Warehouse",i]({BBOX});
-  nwr["shop"~"chemist|pharmacy"]["brand"~"Chemist Warehouse",i]({BBOX});
 );
-out center tags;"""
+out center tags;''',
+    f'''[out:json][timeout:60];
+(
+  nwr["shop"~"^(chemist|pharmacy)$"]["name"~"Chemist Warehouse",i]({BBOX});
+  nwr["shop"~"^(chemist|pharmacy)$"]["brand"~"Chemist Warehouse",i]({BBOX});
+);
+out center tags;''',
+]
 CHAINS = {
     "woolworths": "울월쓰 (Woolworths)",
     "chemist": "케미스트웨어하우스",
@@ -57,19 +65,30 @@ def convert(osm: dict) -> dict:
 
 
 def fetch() -> dict:
-    last = None
-    with httpx.Client(timeout=120, headers={"User-Agent": "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"}) as client:
-        for attempt in range(3):
-            for url in ENDPOINTS:
-                try:
-                    r = client.post(url, data={"data": QUERY})
-                    if r.status_code == 200:
-                        return r.json()
-                    last = f"{url}: HTTP {r.status_code}"
-                except httpx.HTTPError as e:
-                    last = f"{url}: {e}"
-            time.sleep(15 * (attempt + 1))
-    raise RuntimeError(last or "overpass failed")
+    """두 질의 결과를 합친다. 서버가 바쁘면 다른 서버로, 그래도 안 되면 잠시 쉬었다 다시."""
+    elements: list[dict] = []
+    with httpx.Client(timeout=90, headers={"User-Agent": "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"}) as client:
+        for q in QUERIES:
+            last = None
+            for attempt in range(3):
+                got = None
+                for url in ENDPOINTS:
+                    try:
+                        r = client.post(url, data={"data": q})
+                        if r.status_code == 200:
+                            got = r.json()
+                            break
+                        last = f"{url}: HTTP {r.status_code}"
+                    except (httpx.HTTPError, ValueError) as e:
+                        last = f"{url}: {type(e).__name__} {e}"
+                    print("stores:", last, file=sys.stderr)
+                if got is not None:
+                    elements += got.get("elements", [])
+                    break
+                time.sleep(20 * (attempt + 1))
+            else:
+                raise RuntimeError(last or "overpass failed")
+    return {"elements": elements}
 
 
 def main() -> int:
