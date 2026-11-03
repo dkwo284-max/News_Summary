@@ -94,6 +94,7 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
   const dist = (p: Props, cat: Cat) => (catTotal(cat) ? (count(p, cat) / catTotal(cat)) * 100 : 0);
   let cur = CATS[1]; // 한국인부터
   let view: View = "density";
+  let sel: Props | null = null; // 지도에서 고른 동네 (오른쪽/아래 상세 패널에 표시)
   const metric = (p: Props, cat: Cat) => (view === "share" ? dist(p, cat) : share(p, cat));
   const plainName = (c: Cat) => c.label.replace(" 전체", "").replace("(라틴아메리카)", "").replace(/계$/, "");
   const per100 = (v: number) => (v < 0.5 ? "1명도 안 되는" : `약 ${v < 10 ? (Math.round(v * 10) / 10).toString() : Math.round(v)}명인`);
@@ -111,12 +112,15 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
   const hint = h("p", { class: "board-note eth-hint" });
   const legend = h("p", { class: "gp-legend" });
   const top = h("div", {});
+  const panel = h("aside", { class: "eth-panel", "aria-live": "polite" });
+  const sizeBtn = h("button", { type: "button", class: "chip eth-size", "aria-pressed": "false" }, "⤢ 지도 크게");
+  const stage = h("div", { class: "eth-stage" }, mapEl, panel);
   const find = h("input", { type: "text", list: "eth-sa2", placeholder: "동네 찾기 (예: Albany, Newmarket)", "aria-label": "동네 찾기" });
   const dl = h("datalist", { id: "eth-sa2" }, ...feats.map((f) => h("option", { value: f.properties.n })));
   const mine = h("div", {});
   sec.append(
     h("p", { class: "board-note" }, "2023 인구총조사 거주자의 민족 구성이에요. ", h("b", {}, "범죄와는 무관한 인구 분포"), "이며, 한 사람이 여러 민족을 답할 수 있어 비율의 합이 100%를 넘을 수 있어요."),
-    chips, toggle, h("div", { class: "eth-find" }, find, dl), mapEl, legend, hint, top, mine,
+    chips, toggle, h("div", { class: "eth-find" }, find, dl, sizeBtn), stage, legend, hint, top, mine,
     h("p", { class: "board-note" },
       "출처: Stats NZ 2023 Census (동네 = Statistical Area 2, 자료 CEN23_ECI_016). 통계청이 소수 값을 무작위로 반올림해 인구가 적은 동네는 오차가 큽니다. ",
       "미국인·캐나다인·아랍·브라질 등 더 세부 구분은 동네 단위 자료가 없어 아래 '출신별 세부(지역위원회)'에서 봅니다."));
@@ -147,14 +151,19 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
       h("div", { class: "muted", style: "font-size:.75rem" }, "▲▼ = 2018년 대비 %p 변화"));
   }
 
+  function select(p: Props) {
+    sel = p;
+    panel.replaceChildren(detail(p));
+    layer?.eachLayer((l) => layer?.resetStyle(l as import("leaflet").Path));
+  }
+
   function focus(code: string) {
+    const f = feats.find((x) => x.properties.c === code);
+    if (f) select(f.properties);
     if (!L || !map || !layer) return;
     layer.eachLayer((lyr) => {
       const gl = lyr as import("leaflet").Layer & { feature?: { properties: Props } };
-      if (gl.feature?.properties.c === code) {
-        map!.fitBounds((lyr as import("leaflet").Polygon).getBounds(), { maxZoom: 14 });
-        (lyr as import("leaflet").Path).openPopup();
-      }
+      if (gl.feature?.properties.c === code) map!.fitBounds((lyr as import("leaflet").Polygon).getBounds(), { maxZoom: 14 });
     });
     mapEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }
@@ -234,13 +243,14 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
     toggle.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === view)));
     renderTop();
     renderMine();
+    if (sel) panel.replaceChildren(detail(sel));
     if (!L || !map) return;
     layer?.remove();
     layer = L.geoJSON(data as unknown as import("geojson").GeoJsonObject, {
       style: (f) => {
         const p = f!.properties as Props;
-        const m = isMine(p.n);
-        return { fillColor: ramp(cur.hue, classOf(metric(p, cur), br)), fillOpacity: 0.85, color: m ? "#1d4ed8" : "#ffffff", weight: m ? 2.5 : 0.6 };
+        const m = isMine(p.n), on = sel?.c === p.c;
+        return { fillColor: ramp(cur.hue, classOf(metric(p, cur), br)), fillOpacity: 0.85, color: on ? "#111827" : m ? "#1d4ed8" : "#ffffff", weight: on ? 3 : m ? 2.5 : 0.6 };
       },
       onEachFeature: (f, lyr) => {
         const p = f.properties as Props;
@@ -248,7 +258,7 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
         lyr.bindTooltip(view === "share"
           ? `${p.n} · 오클랜드 ${plainName(cur)} 전체의 ${fmt(dist(p, cur))} (${n}명)`
           : `${p.n} · 주민 중 ${plainName(cur)} ${fmt(share(p, cur))} (${n}명)`, { sticky: true });
-        lyr.bindPopup(() => detail(p), { maxWidth: 290 });
+        lyr.on("click", () => select(p));
         lyr.on("mouseover", () => (lyr as import("leaflet").Path).setStyle({ weight: 2.5, color: "#111827" }));
         lyr.on("mouseout", () => layer?.resetStyle(lyr as import("leaflet").Path));
       },
@@ -277,12 +287,21 @@ export async function ethnicSection(h: H, watched: string[]): Promise<HTMLElemen
     });
     toggle.append(b);
   }
+  sizeBtn.addEventListener("click", () => {
+    const big = stage.classList.toggle("big");
+    sizeBtn.setAttribute("aria-pressed", String(big));
+    sizeBtn.textContent = big ? "⤡ 지도 작게" : "⤢ 지도 크게";
+    setTimeout(() => map?.invalidateSize(), 50);
+  });
   find.addEventListener("change", () => {
     const q = find.value.trim().toLowerCase();
     const f = feats.find((x) => x.properties.n.toLowerCase() === q) ?? (q.length >= 3 ? feats.find((x) => x.properties.n.toLowerCase().startsWith(q)) : undefined);
     if (f) focus(f.properties.c);
   });
 
+  const first = cols[0]?.m.slice().sort((a, b) => b.properties.t - a.properties.t)[0];
+  if (first) sel = first.properties;
+  else panel.append(h("p", { class: "muted" }, "지도에서 동네를 누르면 여기에 자세히 나와요."));
   draw();
   void Promise.all([import("leaflet"), import("leaflet/dist/leaflet.css"), whenConnected(mapEl)]).then(([mod, , ok]) => {
     if (!ok) return;
