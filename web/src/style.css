@@ -442,3 +442,12 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .eth-val small.down { color: #059669; }
 .leaflet-popup-content .eth-bars { color: #111827; }
 .eth .gp-map { height: 380px; }
+.eth-chips { display: grid; gap: 6px; margin-bottom: 6px; }
+.eth-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.eth-rowlabel { font-size: .7rem; font-weight: 700; color: var(--muted); width: 100%; }
+.eth-row .chip { min-height: 32px; padding: 0 10px; font-size: .8125rem; }
+.eth-wide li { grid-template-columns: 112px 1fr 96px; }
+.eth-origin .hood-news { margin: 4px 0 6px; }
+.eth-mine > summary { cursor: pointer; font-weight: 700; font-size: .875rem; min-height: 32px; display: flex; align-items: center; margin-top: 8px; }
+.eth-mine .hood-table { font-size: .8125rem; }
+.eth-mine .hood-table th, .eth-mine .hood-table td { padding: 5px 3px; }

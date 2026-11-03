@@ -415,8 +415,8 @@ function renderMain(): void {
         // 지역별 민족 구성(인구총조사 거주자 분포 — 범죄 자료 아님)
         const eslot = h("div", {});
         main.append(eslot);
-        void import("./ethmap").then((m) => m.ethnicSection(h, watch.suburbs)).then((el) => {
-          if (eslot.isConnected) eslot.replaceChildren(el);
+        void import("./ethmap").then(async (m) => [await m.ethnicSection(h, watch.suburbs), await m.originSection(h)] as const).then(([el, origin]) => {
+          if (eslot.isConnected) eslot.replaceChildren(el, ...(origin ? [origin] : []));
         });
       }
       if (sel === "akl_health") {
