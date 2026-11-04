@@ -40,6 +40,7 @@ class FakeLLM:
                 if " | " not in line:
                     continue
                 i, rest = line.split(" | ", 1)
+                i = i.split("] ")[-1]  # 한국·뉴질랜드 통합 선별은 줄 앞에 [KR]/[NZ] 가 붙는다
                 visa = "visa" in rest.lower()
                 rows.append({"id": i, "score": 9 if visa else 5, "immigration": visa, "radar": 8 if visa else 0})
             return {"scores": rows}
@@ -71,7 +72,7 @@ def test_select_with_llm_builds_immigration_radar(cfg):
     items.append(art(99, "INZ notice", section="nz_immigration"))
     llm = FakeLLM()
     chosen = select(items, cfg, llm, FIXTURE_NOW)
-    assert [c["task"] for c in llm.calls] == ["rank", "rank"]  # nz 채점 1회 + 이슈 묶기 1회
+    assert [c["task"] for c in llm.calls] == ["rank"]  # 채점 1회 (이슈 묶기는 같은 호출의 same_as)
     # 레이더에 실린 비자 기사는 뉴질랜드 탭(사회·교육·경제·정치)에서 빠짐
     nz = [a for k in ("nz_society", "nz_education", "nz_economy", "nz_politics") for a in chosen[k]]
     assert nz and {a.id for a in nz}.isdisjoint({a.id for a in chosen["nz_immigration"]})
@@ -485,6 +486,7 @@ class GroupLLM(SplitLLM):
 
 
 def test_refine_groups_issue_and_moves_tab(cfg):
+    cfg["llm"]["regroup_call"] = True  # 선택 기능: 별도 이슈 묶기 호출
     items = [
         art("n1", "Starship cancer treatment delayed for toddler"),       # 1차에서 전국으로 분류됨
         art("a1", "Starship cancer ward three months from full staffing", section="nz_auckland"),
@@ -513,6 +515,7 @@ def test_refine_groups_issue_and_moves_tab(cfg):
 
 
 def test_refine_keeps_unrelated_items_separate(cfg):
+    cfg["llm"]["regroup_call"] = True
     items = [
         art("a1", "Hamish McKay evicted from Mission Bay rental after dispute", section="nz_auckland"),
         art("a2", "Auckland Council approves new library budget", section="nz_auckland"),
@@ -832,3 +835,38 @@ def test_summary_prompt_asks_for_area_on_home_invasions_and_forbids_ethnicity():
     nz = _system_prompt("nz", {"akl_safety": "치안"}, "독자")
     assert "주택 침입" in nz and "발생 지역" in nz and "인종·국적" in nz
     assert "발생 지역" not in _system_prompt("kr", {"kr_society": "사회"})
+
+
+# ── 통합 선별 (한국+뉴질랜드 1회) · 이슈 묶기 호출 없음 ──
+
+def test_combined_rank_is_one_request_for_both_regions(cfg):
+    kr = [art(f"k{i}", f"한국 뉴스 {i}", section="kr_society") for i in range(3)]
+    nz = [art("n1", "New visa rules announced"), art("n2", "Council library hours change")]
+    llm = FakeLLM()
+    select([*kr, *nz], cfg, llm, FIXTURE_NOW)
+    ranks = [c for c in llm.calls if c["task"] == "rank"]
+    assert len(ranks) == 1
+    user = ranks[0]["user"]
+    assert "[KR] k0 | " in user and "[NZ] n1 | " in user  # 지역 표시가 붙는다
+    assert "[KR]" in ranks[0]["system"] and "[NZ]" in ranks[0]["system"]
+    assert "같은 대표 id" in ranks[0]["system"]  # 이슈 묶기 지시가 같은 호출에 들어 있다
+
+
+def test_combined_rank_can_be_turned_off(cfg):
+    cfg["llm"]["combined_rank"] = False
+    llm = FakeLLM()
+    select([art("k1", "한국 뉴스", section="kr_society"), art("n1", "New visa rules")], cfg, llm, FIXTURE_NOW)
+    assert sum(1 for c in llm.calls if c["task"] == "rank") == 2
+
+
+def test_same_issue_merges_without_regroup_call(cfg):
+    """AI same_as 를 못 달았어도 제목 핵심어가 3개 이상 겹치면 같은 이슈로 한 건만 센다."""
+    items = [
+        art("a1", "Auckland engineers pay equity claim changes announced", section="nz_auckland"),
+        art("a2", "Engineers pay equity claim changes spark union anger", section="nz_auckland"),
+        art("a3", "Piha campground to reopen this summer", section="nz_auckland"),
+    ]
+    llm = SplitLLM(auckland_ids={"a1", "a2", "a3"}, same_as={})
+    akl = select(items, cfg, llm, FIXTURE_NOW)["nz_auckland"]
+    assert [c["task"] for c in llm.calls] == ["rank"]
+    assert len(akl) == 2 and any(len(a.related) == 1 for a in akl)

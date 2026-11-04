@@ -1,6 +1,7 @@
 """선별: 섹션별 중요도(1~10)를 매기고 상위 N건을 고른다.
 
-AI(기본 Gemini 무료 등급)가 있으면 지역(kr/nz)별로 묶어 배치 채점 — 보통 지역당 요청 1회.
+AI(기본 Gemini 무료 등급)가 있으면 한국·뉴질랜드 후보를 한 번에 채점한다 — 보통 요청 1회(llm.combined_rank).
+이슈 묶기(같은 사건·후속 기사)도 같은 호출의 same_as 로 처리해 별도 묶기 호출을 하지 않는다(llm.regroup_call 로 되살릴 수 있음).
 없거나(--no-llm) 실패하면 키워드·출처수 기반 휴리스틱.
 """
 from __future__ import annotations
@@ -113,6 +114,36 @@ def _system_prompt(cfg: dict, region: str) -> str:
 - same_as: 목록의 다른 항목과 같은 사건이거나 같은 이슈의 후속·관련 기사이면(예: 같은 병원 인력난을 다룬 여러 기사,
   같은 기상 악화의 지역별 피해, 같은 비자 정책을 다룬 국내외 보도, 같은 인물의 사연) 그 묶음에서 가장 대표적인 기사의 id,
   아니면 빈 문자열 "". 대표 기사 자신은 "".
+목록의 모든 id 에 대해 정확히 한 번씩 점수를 반환하세요."""
+
+
+SAME_AS_RULE = """- same_as: 목록의 다른 항목과 같은 사건이거나 같은 이슈의 후속·관련 기사이면(예: 같은 병원 인력난을 다룬 여러 기사,
+  같은 기상 악화의 지역별 피해, 같은 비자 정책을 다룬 국내외 보도, 같은 인물의 사연) 그 묶음에서 가장 대표적인 기사의 id,
+  아니면 빈 문자열 "". 대표 기사 자신은 "". 한 묶음의 모든 기사는 같은 대표 id 를 가리키게 하세요(묶음이 둘로 갈라지지 않게).
+  중요도가 높아 상위에 오를 만한 기사끼리는 특히 빠짐없이 묶으세요. 서로 다른 지역([KR]/[NZ]) 기사끼리는 묶지 않습니다."""
+
+
+def _combined_system_prompt(cfg: dict) -> str:
+    """한국·뉴질랜드 기사를 한 번에 채점하는 프롬프트. 각 기사 줄 맨 앞의 [KR]/[NZ] 가 적용할 규칙을 정한다."""
+    return f"""당신은 뉴스 편집자입니다. 주어진 기사 목록의 각 항목에 1~10 정수 중요도를 매깁니다.
+각 줄 맨 앞의 [KR] 또는 [NZ] 는 그 기사의 지역이며, 지역마다 아래 규칙을 따로 적용하세요.
+
+## [KR] 기사
+{KR_CRITERIA}
+- auckland 는 false, radar 는 0, category 는 "", nz_related 는 true, akl_topic 은 "" 로 고정.
+
+## [NZ] 기사
+{_nz_criteria(cfg)}
+{AUCKLAND_RULE}
+{_radar_rule(cfg)}
+{CATEGORY_RULE}
+{NZ_RELATED_RULE}
+{AKL_TOPIC_RULE}
+
+## 모든 기사 공통
+- immigration: 비자·이민·영주권·시민권·이민 정책/통계와 직접 관련 있으면 true, 아니면 false.
+{JUNK_RULE}
+{SAME_AS_RULE}
 목록의 모든 id 에 대해 정확히 한 번씩 점수를 반환하세요."""
 
 
@@ -259,16 +290,76 @@ def heuristic_auckland(a: Article, cfg: dict) -> bool:
 
 # ── 채점 ────────────────────────────────────────────────────
 
+def _heuristic_fill(a: Article, cfg: dict, region: str, now: datetime) -> None:
+    a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
+    a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
+    a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
+    a.category = heuristic_category(a, cfg) if region == "nz" else ""
+    a.akl_topic = heuristic_akl_topic(a, cfg) if region == "nz" else ""
+
+
+def _apply_row(a: Article, row: dict, cfg: dict, region: str, known_ids) -> None:
+    a.score = max(1, min(10, int(row["score"])))
+    a.is_immigration = bool(row.get("immigration")) and region == "nz"
+    a.is_auckland = bool(row.get("auckland")) and region == "nz" and not not_auckland(a, cfg)
+    same = row.get("same_as") or ""
+    a.same_as = same if same in known_ids and same != a.id else ""
+    a.junk = bool(row.get("junk"))
+    cat = (row.get("category") or "").lower()
+    a.category = (cat if cat in CATEGORIES else heuristic_category(a, cfg)) if region == "nz" else ""
+    topic = (row.get("akl_topic") or "").lower()
+    a.akl_topic = (topic if topic in AKL_TOPICS else heuristic_akl_topic(a, cfg)) if region == "nz" else ""
+    a.radar_score = cap_radar(a, cfg, max(0, min(10, int(row.get("radar") or 0)))) if region == "nz" else 0
+    if region == "nz" and row.get("nz_related") is False:
+        a.junk = True  # 뉴질랜드와 무관한 해외 기사
+    if a.junk:
+        a.score = 0  # MIN_SCORE 미만 → 싣지 않음
+
+
+def score_regions(by_region: dict[str, list[Article]], cfg: dict, llm, now: datetime) -> None:
+    """한국·뉴질랜드 후보를 한 번에 채점한다(요청 1회). 후보가 rank_batch_size 를 넘으면 그만큼 나눠서 보낸다.
+    AI 가 없거나(--no-llm) 실패한 묶음은 휴리스틱. llm.combined_rank: false 면 예전처럼 지역별로 따로 보낸다."""
+    regions = [r for r, items in by_region.items() if items]
+    if not regions:
+        return
+    if llm is None or len(regions) == 1 or not cfg["llm"].get("combined_rank", True):
+        for region in regions:
+            score_articles(by_region[region], cfg, region, llm, now)
+        return
+    # 같은 기사가 여러 섹션에 있으면 id 가 같다 → 한 번만 보내고 점수는 모두에 적용
+    by_id: dict[str, list[tuple[str, Article]]] = defaultdict(list)
+    for region in regions:
+        for a in by_region[region]:
+            by_id[a.id].append((region, a))
+    unique = [group[0] for group in by_id.values()]
+    system = _combined_system_prompt(cfg)
+    batch = int(cfg["llm"].get("rank_batch_size", 420))
+    for start in range(0, len(unique), batch):
+        chunk = unique[start:start + batch]
+        user = "기사 목록 ([지역] id | 출처 | 제목 — 설명):\n" + "\n".join(f"[{region.upper()}] {_line(a)}" for region, a in chunk)
+        scored: dict[str, dict] = {}
+        try:
+            out = llm.json_call(task="rank", system=system, user=user, schema=RANK_SCHEMA, max_tokens=48000)
+            for row in out.get("scores", []):
+                if row.get("id") in by_id:
+                    scored[row["id"]] = row
+        except Exception as e:  # noqa: BLE001 — 선별 실패 시 휴리스틱으로 대체
+            log.warning("rank AI failed (%s); falling back to heuristic for %d items", e, len(chunk))
+        for _, rep in chunk:
+            row = scored.get(rep.id)
+            for region, a in by_id[rep.id]:
+                if row is None:  # 모델이 빠뜨린 항목·실패한 배치는 휴리스틱
+                    _heuristic_fill(a, cfg, region, now)
+                else:
+                    _apply_row(a, row, cfg, region, by_id)
+
+
 def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datetime) -> None:
     if not items:
         return
     if llm is None:
         for a in items:
-            a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
-            a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
-            a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
-            a.category = heuristic_category(a, cfg) if region == "nz" else ""
-            a.akl_topic = heuristic_akl_topic(a, cfg) if region == "nz" else ""
+            _heuristic_fill(a, cfg, region, now)
         return
     system = _system_prompt(cfg, region)
     # 같은 기사가 여러 섹션에 있으면 id 가 같다 → 한 번만 보내고 점수는 모두에 적용
@@ -292,27 +383,9 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
             row = scored.get(rep.id)
             for a in by_id[rep.id]:
                 if row is None:  # 모델이 빠뜨린 항목·실패한 배치는 휴리스틱
-                    a.score, a.is_immigration = heuristic_score(a, cfg, region, now)
-                    a.is_auckland = region == "nz" and heuristic_auckland(a, cfg)
-                    a.radar_score = heuristic_radar(a, cfg) if region == "nz" else 0
-                    a.category = heuristic_category(a, cfg) if region == "nz" else ""
-                    a.akl_topic = heuristic_akl_topic(a, cfg) if region == "nz" else ""
-                    continue
-                a.score = max(1, min(10, int(row["score"])))
-                a.is_immigration = bool(row.get("immigration")) and region == "nz"
-                a.is_auckland = bool(row.get("auckland")) and region == "nz" and not not_auckland(a, cfg)
-                same = row.get("same_as") or ""
-                a.same_as = same if same in by_id and same != a.id else ""
-                a.junk = bool(row.get("junk"))
-                cat = (row.get("category") or "").lower()
-                a.category = (cat if cat in CATEGORIES else heuristic_category(a, cfg)) if region == "nz" else ""
-                topic = (row.get("akl_topic") or "").lower()
-                a.akl_topic = (topic if topic in AKL_TOPICS else heuristic_akl_topic(a, cfg)) if region == "nz" else ""
-                a.radar_score = cap_radar(a, cfg, max(0, min(10, int(row.get("radar") or 0)))) if region == "nz" else 0
-                if region == "nz" and row.get("nz_related") is False:
-                    a.junk = True  # 뉴질랜드와 무관한 해외 기사
-                if a.junk:
-                    a.score = 0  # MIN_SCORE 미만 → 싣지 않음
+                    _heuristic_fill(a, cfg, region, now)
+                else:
+                    _apply_row(a, row, cfg, region, by_id)
 
 
 def _preselect(items: list[Article], limit: int, reserved_feeds: set[str] = frozenset(),
@@ -332,8 +405,9 @@ def _preselect(items: list[Article], limit: int, reserved_feeds: set[str] = froz
     return picked + extra
 
 
-def merge_same_story(items: list[Article], threshold: int) -> list[Article]:
-    """AI 의 same_as 판단 + 제목 유사도로 같은 사건을 하나로 합친다. 대표는 점수·출처 수가 가장 높은 기사."""
+def merge_same_story(items: list[Article], threshold: int, key_overlap: int = 0) -> list[Article]:
+    """AI 의 same_as 판단 + 제목 유사도로 같은 사건을 하나로 합친다. 대표는 점수·출처 수가 가장 높은 기사.
+    key_overlap > 0 이면 제목 핵심 단어가 그만큼 겹치는 기사도 같은 이슈로 본다(별도 이슈 묶기 호출을 쓰지 않을 때의 보강)."""
     from dedupe import _merge, similar
 
     parent = {id(a): id(a) for a in items}
@@ -361,7 +435,8 @@ def merge_same_story(items: list[Article], threshold: int) -> list[Article]:
             union(a, b)
     for i, a in enumerate(items):
         for b in items[i + 1:]:
-            if find(id(a)) != find(id(b)) and similar(a.title, b.title, threshold):
+            if find(id(a)) != find(id(b)) and (similar(a.title, b.title, threshold)
+                                               or (key_overlap and len(_keys(a.title) & _keys(b.title)) >= key_overlap)):
                 union(a, b)
 
     groups: dict[int, list[Article]] = defaultdict(list)
@@ -381,11 +456,11 @@ def merge_same_story(items: list[Article], threshold: int) -> list[Article]:
     return reps
 
 
-def split_nz(by_section: dict[str, list[Article]], threshold: int) -> None:
+def split_nz(by_section: dict[str, list[Article]], threshold: int, key_overlap: int = 0) -> None:
     """뉴질랜드/오클랜드 후보를 합쳐 같은 사건을 하나로 묶고, 오클랜드 지역 소식은 오클랜드 탭으로,
     전국 소식은 뉴질랜드 탭으로 다시 나눈다. → 두 탭에 같은 소식이 겹치지 않는다."""
     pool = [*by_section.get("nz_national", []), *by_section.get("nz_auckland", [])]
-    reps = merge_same_story(pool, threshold)
+    reps = merge_same_story(pool, threshold, key_overlap)
     nat, akl = [], []
     for a in reps:
         a.section = "nz_auckland" if a.is_auckland else "nz_national"
@@ -548,8 +623,7 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
         relevance = lambda a, region=sec["region"]: heuristic_score(a, cfg, region, now)[0]
         by_section[key] = _preselect(by_section.get(key, []), sec.get("candidate_limit", 80), reserved, relevance)
         by_region[sec["region"]].extend(by_section[key])
-    for region, items in by_region.items():
-        score_articles(items, cfg, region, llm, now)
+    score_regions(by_region, cfg, llm, now)
 
     threshold = cfg["dedupe"]["title_similarity"]
     # 한국: 섹션 안에서 AI 가 같은 사건이라고 본 기사 합치기
@@ -557,8 +631,10 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
         if sec["region"] == "kr":
             by_section[key] = merge_same_story(by_section[key], threshold)
     # 뉴질랜드/오클랜드: 겹치지 않게 다시 나누기
+    # 별도 이슈 묶기 호출이 없으면(기본) 제목 핵심 단어가 3개 이상 겹치는 기사도 같은 이슈로 합친다
+    overlap = 0 if (llm is not None and cfg["llm"].get("regroup_call", False)) else 3
     if "nz_national" in sections and "nz_auckland" in sections:
-        split_nz(by_section, threshold)
+        split_nz(by_section, threshold, overlap)
 
     # 이민 레이더: 이민 전용 피드 + 다른 NZ 섹션에서 이민 관련으로 분류된 기사
     flagged = [a for k in ("nz_national", "nz_auckland") for a in by_section.get(k, []) if a.is_immigration]
@@ -567,10 +643,11 @@ def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = 
         a.is_immigration = True
     # 같은 비자 이슈를 다룬 국내외 기사 여러 건은 한 장으로 (AI same_as + 제목 유사도)
     merged = merge_same_story(
-        dedupe([*pool, *[_clone_to(a, "nz_immigration") for a in flagged]], threshold), threshold,
+        dedupe([*pool, *[_clone_to(a, "nz_immigration") for a in flagged]], threshold), threshold, overlap,
     )
-    # 2차: 상위 후보만 모아 이슈 묶기·탭 재배정 (AI 요청 1회)
-    if llm is not None and "nz_national" in sections and "nz_auckland" in sections:
+    # 2차: 상위 후보만 모아 이슈 묶기·탭 재배정 (AI 요청 1회). 기본은 꺼 둔다 — 같은 이슈는 채점 호출의 same_as 와
+    # 제목 핵심어 겹침(merge_same_story)으로 묶는다. llm.regroup_call: true 로 예전처럼 따로 호출할 수 있다.
+    if llm is not None and cfg["llm"].get("regroup_call", False) and "nz_national" in sections and "nz_auckland" in sections:
         merged = refine_nz(by_section, merged, cfg, llm)
 
     junk = sum(1 for items in by_section.values() for a in items if a.junk)
