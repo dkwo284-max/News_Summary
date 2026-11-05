@@ -112,3 +112,40 @@ def test_build_keeps_previous_values_when_ai_fails():
         out = leisure.build(src, {}, old, client, BadLLM(), "2026-11-05")
     a = out["facilities"][0]
     assert a["fees"][0]["amount"] == 1000 and a["checked"] == "2025-11-01"   # 실패하면 이전 값과 이전 확인일 유지
+
+
+def test_collect_text_falls_back_to_home_links_when_listed_page_is_gone():
+    leisure.time.sleep = lambda s: None
+
+    def handler(req: httpx.Request) -> httpx.Response:
+        url = str(req.url)
+        if url.endswith("/old-membership"):
+            return httpx.Response(404)
+        if url.endswith("/fees-2027"):
+            return httpx.Response(200, text="<p>Adult $900 per year</p>", headers={"content-type": "text/html"})
+        if url.endswith("/members-area"):
+            return httpx.Response(401)
+        return httpx.Response(200, text='<a href="/members-area">Members area</a><a href="/fees-2027">Membership fees</a><p>Welcome</p>',
+                              headers={"content-type": "text/html"})
+
+    fac = {"id": "x", "name": "X", "home": "https://x.nz", "pages": ["https://x.nz/old-membership"]}
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        text, used = leisure.collect_text(client, fac)
+    assert "$900" in text and "https://x.nz/fees-2027" in used and not any("members-area" in u for u in used)
+
+
+def test_locate_tries_address_then_bounded_name():
+    calls = []
+
+    def handler(req: httpx.Request) -> httpx.Response:
+        q = dict(req.url.params)
+        calls.append((q["q"], q.get("bounded")))
+        if q.get("bounded") == "1":
+            return httpx.Response(200, json=[{"lat": "-36.80", "lon": "174.75"}])
+        return httpx.Response(200, json=[])
+
+    leisure.time.sleep = lambda s: None
+    s = {"name": "Foo Golf Club (공공)", "geo": "Foo Golf Club, Auckland", "geo2": "1 Foo Rd, Auckland"}
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        assert leisure.locate(client, s) == [-36.8, 174.75]
+    assert [c[0] for c in calls] == ["Foo Golf Club, Auckland", "1 Foo Rd, Auckland", "Foo Golf Club"]

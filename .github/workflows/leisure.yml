@@ -1,7 +1,7 @@
 name: Leisure fees (golf, sailing, kayak, fishing)
 
 # 1년에 한 번(9월 중순) 또는 수동: 레저 시설 공식 페이지에서 요금표를 읽어 web/public/data/leisure.json 으로 만듭니다.
-# 좌표는 OpenStreetMap(Nominatim), 요금은 Gemini 로 추출한 뒤 금액이 페이지 글에 실제로 있는지 검증합니다(시설 10곳당 AI 요청 1회).
+# 좌표는 OpenStreetMap(Nominatim), 요금은 Gemini 로 추출한 뒤 금액이 페이지 글에 실제로 있는지 검증합니다(시설 5곳당 AI 요청 1회).
 # 자동 실행은 파일이 330일 안에 만든 것이면 건너뜁니다. 수동 실행은 항상 새로 읽습니다. 매일 도는 실행에는 들어 있지 않습니다.
 on:
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
       - name: Build leisure.json
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          AI_PROFILE: production   # 요금 추출은 정확도가 중요해서 Flash 우선 (1년에 한 번)
+          AI_PROFILE: test   # Flash-Lite 우선 (하루 500회 한도) — 금액은 페이지 글과 대조해 검증하므로 Lite 로 충분
           ONLY: ${{ github.event.inputs.only }}
           STALE: ${{ github.event_name == 'schedule' && '--if-stale' || '' }}
           CAP: ${{ github.event.inputs.ignore_cap == 'true' && '--ignore-cap' || '' }}

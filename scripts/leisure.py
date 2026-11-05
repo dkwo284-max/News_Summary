@@ -4,7 +4,7 @@
 - 요금은 해마다 한 번(또는 수동) 갱신한다(.github/workflows/leisure.yml). 평소 매일 도는 파이프라인에는 들어 있지 않다.
 - 흐름: 좌표(Nominatim, 캐시) → 공식 페이지 글 받기(HTML·PDF) → AI(Gemini)로 요금 항목만 뽑기 → 검증 → 저장.
 - 검증: AI 가 뽑은 금액이 실제 페이지 글에 그 숫자로 들어 있지 않으면 버린다(추정·환산·창작 방지). 못 읽은 시설은 이전 값을 유지하고
-  "미확인"으로 표시한다. AI 요청은 시설 10곳당 1회(전체 보통 3~4회, 1년에 한 번). 키·예산이 없으면 AI 단계는 건너뛴다.
+  "미확인"으로 표시한다. AI 요청은 시설 5곳당 1회(전체 보통 6~7회, 1년에 한 번). 키·예산이 없으면 AI 단계는 건너뛴다.
 
     python scripts/leisure.py              # 전체 갱신
     python scripts/leisure.py --no-ai      # 좌표·수동 값만 (AI·요금 페이지 읽기 없음)
@@ -36,10 +36,11 @@ KINDS = ["golf", "sailing", "kayak", "fishing"]
 FEE_KINDS = ["adult", "couple", "family", "junior", "student", "social", "joining", "greenfee18", "greenfee9", "hire", "tour", "berth", "other"]
 PERIODS = ["year", "season", "month", "week", "day", "hour", "round", "once", "person"]
 STATUS = ["open", "waitlist", "closed", "unknown"]
-BATCH = 10            # AI 한 번에 보내는 시설 수
-PAGE_CHARS = 6000     # 페이지당 AI 에 보내는 최대 글자
-FACILITY_CHARS = 11000
+BATCH = 5             # AI 한 번에 보내는 시설 수(작게 보내야 과부하·한도에 덜 걸림)
+PAGE_CHARS = 5000     # 페이지당 AI 에 보내는 최대 글자
+FACILITY_CHARS = 8000
 LINK_WORDS = re.compile(r"member|subscri|fee|rate|green|price|pricing|join|categor|cost", re.I)
+SKIP_LINKS = re.compile(r"login|log-in|signin|sign-in|members?-?area|member-?portal|cart|checkout|wp-admin", re.I)
 
 SCHEMA = {
     "type": "object",
@@ -122,11 +123,22 @@ def _pdf_to_text(data: bytes) -> str:
 
 def fetch_page(client: httpx.Client, url: str) -> tuple[str, str]:
     """(글, 원본 HTML). 실패하면 빈 값."""
-    try:
-        r = client.get(url)
-        r.raise_for_status()
-    except Exception as e:  # noqa: BLE001
-        log.warning("leisure fetch failed %s: %s", url, e)
+    r = None
+    for attempt in range(2):
+        try:
+            r = client.get(url)
+            r.raise_for_status()
+            break
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code >= 500 and attempt == 0:
+                time.sleep(4)
+                continue
+            log.warning("leisure fetch failed %s: %s", url, e)
+            return "", ""
+        except Exception as e:  # noqa: BLE001
+            log.warning("leisure fetch failed %s: %s", url, e)
+            return "", ""
+    if r is None:
         return "", ""
     ctype = r.headers.get("content-type", "")
     if "pdf" in ctype or url.lower().split("?")[0].endswith(".pdf"):
@@ -142,6 +154,8 @@ def discover_links(html: str, base: str, limit: int = 3) -> list[str]:
         href, label = m.group(1), re.sub(r"<[^>]+>", " ", m.group(2))
         url = urljoin(base, href)
         if urlparse(url).netloc != host or url == base or url.lower().endswith((".jpg", ".png", ".jpeg", ".gif")):
+            continue
+        if SKIP_LINKS.search(label) or SKIP_LINKS.search(urlparse(url).path):
             continue
         if LINK_WORDS.search(label) or LINK_WORDS.search(urlparse(url).path):
             if url not in out:
@@ -182,12 +196,24 @@ def collect_text(client: httpx.Client, fac: dict) -> tuple[str, list[str]]:
             chunks.append(f"[{fac['home']}]\n{focus(text, PAGE_CHARS // 2)}")
             used.append(fac["home"])
         pages = discover_links(home_html, fac["home"])
+    explicit = bool(fac.get("pages"))
     for url in pages[:3]:
         text, _ = fetch_page(client, url)
         if text:
             chunks.append(f"[{url}]\n{focus(text, PAGE_CHARS)}")
             used.append(url)
         time.sleep(0.4)
+    if explicit and not chunks and fac.get("home"):  # 적어 둔 페이지 주소가 바뀌었으면 홈페이지에서 다시 찾는다
+        text, home_html = fetch_page(client, fac["home"])
+        if text:
+            chunks.append(f"[{fac['home']}]\n{focus(text, PAGE_CHARS // 2)}")
+            used.append(fac["home"])
+        for url in discover_links(home_html, fac["home"])[:2]:
+            text, _ = fetch_page(client, url)
+            if text:
+                chunks.append(f"[{url}]\n{focus(text, PAGE_CHARS)}")
+                used.append(url)
+            time.sleep(0.4)
     return "\n\n".join(chunks)[:FACILITY_CHARS], used
 
 
@@ -253,9 +279,12 @@ def in_auckland(lat: float, lon: float) -> bool:
     return BBOX[0] <= lat <= BBOX[1] and BBOX[2] <= lon <= BBOX[3]
 
 
-def geocode(client: httpx.Client, query: str) -> list[float] | None:
+def geocode(client: httpx.Client, query: str, bounded: bool = False) -> list[float] | None:
+    params = {"q": query, "format": "json", "limit": 1, "countrycodes": "nz"}
+    if bounded:  # 오클랜드 안에서만 찾기 (왼쪽,위,오른쪽,아래)
+        params.update({"viewbox": f"{BBOX[2]},{BBOX[1]},{BBOX[3]},{BBOX[0]}", "bounded": 1})
     try:
-        r = client.get(NOMINATIM, params={"q": query, "format": "json", "limit": 1, "countrycodes": "nz"})
+        r = client.get(NOMINATIM, params=params)
     except httpx.HTTPError as e:
         log.warning("geocode failed %s: %s", query, e)
         return None
@@ -265,6 +294,19 @@ def geocode(client: httpx.Client, query: str) -> list[float] | None:
     row = r.json()[0]
     lat, lon = float(row["lat"]), float(row["lon"])
     return [round(lat, 5), round(lon, 5)] if in_auckland(lat, lon) else None
+
+
+def locate(client: httpx.Client, s: dict) -> list[float] | None:
+    """좌표 찾기: 적어 둔 geo → 주소(geo2) → 이름만(오클랜드 안에서)."""
+    tries = [(s.get("geo") or f"{s['name']}, Auckland", False)]
+    if s.get("geo2"):
+        tries.append((s["geo2"], False))
+    tries.append((re.sub(r"\s*\(.*?\)", "", s["name"]), True))
+    for q, bounded in tries:
+        ll = geocode(client, q, bounded)
+        if ll:
+            return ll
+    return None
 
 
 # ── AI 추출 ─────────────────────────────────────────────
@@ -287,8 +329,8 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, llm, today: 
             continue
         prev = old_by_id.get(s["id"], {})
         geo = s.get("geo") or f"{s['name']}, Auckland"
-        if geo not in geocache:
-            geocache[geo] = geocode(client, geo)
+        if not geocache.get(geo):  # 못 찾은 곳(null)은 다음 실행에서 다시 시도
+            geocache[geo] = locate(client, s)
         fac = {"id": s["id"], "kind": s["kind"], "name": s["name"], "area": s.get("area", ""), "ll": geocache.get(geo),
                "home": s.get("home") or "", "gmaps": "https://www.google.com/maps/search/?api=1&query=" + quote_plus(f"{s['name']} Auckland"),
                "fees": prev.get("fees", []), "status": prev.get("status", "unknown"), "season": prev.get("season", ""),
@@ -301,13 +343,21 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, llm, today: 
                 todo.append((fac, text, used))
         facilities.append(fac)
     if llm is not None and todo:
-        for i in range(0, len(todo), BATCH):
-            chunk = todo[i:i + BATCH]
-            try:
-                rows = extract(llm, [(f, t) for f, t, _ in chunk])
-            except Exception as e:  # noqa: BLE001 — 실패하면 이전 값을 그대로 둔다
-                log.warning("leisure AI failed for batch %d: %s", i // BATCH + 1, e)
-                continue
+        chunks = [todo[i:i + BATCH] for i in range(0, len(todo), BATCH)]
+        results: list[tuple[list, dict]] = []
+        for attempt in range(2):  # 실패한 묶음은 잠시 쉬었다 한 번 더
+            failed = []
+            for n, chunk in enumerate(chunks, 1):
+                try:
+                    results.append((chunk, extract(llm, [(f, t) for f, t, _ in chunk])))
+                except Exception as e:  # noqa: BLE001 — 실패하면 이전 값을 그대로 둔다
+                    log.warning("leisure AI failed for batch %d (try %d): %s", n, attempt + 1, str(e)[:200])
+                    failed.append(chunk)
+            if not failed:
+                break
+            chunks = failed
+            time.sleep(90)
+        for chunk, rows in results:
             for fac, text, used in chunk:
                 row = rows.get(fac["id"])
                 if row is None:
@@ -374,7 +424,7 @@ def main(argv: list[str] | None = None) -> int:
                 log.warning("AI 예산 부족(남은 %d회, 필요 %d회) — 요금 읽기는 건너뛰고 좌표·수동 값만 갱신 (--ignore-cap 으로 무시)", left, batches)
             else:
                 llm = make_llm(cfg)
-                llm.max_requests = batches
+                llm.max_requests = batches * 2  # 실패한 묶음 재시도 여유
         except Exception as e:  # noqa: BLE001
             log.warning("AI 를 쓸 수 없어 요금 읽기를 건너뜁니다: %s", e)
 
