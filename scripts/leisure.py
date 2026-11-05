@@ -259,8 +259,11 @@ def normalize_primary(fees: list[dict], facility_kind: str) -> list[dict]:
     """한 종류(adult·couple·family·joining·greenfee)에는 대표 1개만 남기고 나머지는 other 로 내린다(이름은 그대로).
     - 골프 외 시설에는 greenfee 종류가 없으므로 other 로.
     - adult 대표: 이름이 풀·언리미티드·7일 등 '정규'이면서 주니어·가족·위크데이 등이 아닌 것 중 가장 비싼 것(없으면 가장 비싼 것).
-    - joining 대표: 가족·커플·주니어가 아닌 것 중 가장 싼 것(성인 개인 입회비)."""
+    - joining 대표: 가족·커플·주니어가 아닌 것 중 가장 비싼 것(보통 정규 18홀 회원의 입회비. 사교·9홀 등은 더 싸다)."""
     out = [dict(f) for f in fees]
+    for f in out:  # 입회비를 other 로 내려 둔 이전 값도 다시 후보로
+        if f["kind"] == "other" and f["period"] in ("once", "year") and re.search(r"joining|entrance|entry fee", f["label"], re.I):
+            f["kind"] = "joining"
     if facility_kind != "golf":
         for f in out:
             if f["kind"] in ("greenfee18", "greenfee9"):
@@ -277,7 +280,7 @@ def normalize_primary(fees: list[dict], facility_kind: str) -> list[dict]:
     joins = [f for f in out if f["kind"] == "joining"]
     if joins:
         indiv = [f for f in joins if not re.search(r"family|couple|joint|junior", f["label"], re.I)] or joins
-        demote_except("joining", min(indiv, key=lambda f: f["amount"]))
+        demote_except("joining", max(indiv, key=lambda f: f["amount"]))
     for k in ("couple", "family", "greenfee18", "greenfee9"):
         group = [f for f in out if f["kind"] == k]
         if len(group) > 1:
@@ -302,8 +305,7 @@ def merge_manual(fac: dict, manual: dict) -> dict:
         mine = {(f["kind"], f.get("label", "")) for f in m["fees"]}
         fac["fees"] = [f for f in fac.get("fees", []) if (f["kind"], f.get("label", "")) not in mine] + \
                       [{**f, "source": "manual"} for f in m["fees"]]
-        if m.get("checked"):
-            fac["checked"] = m["checked"]
+        fac["checked"] = m.get("checked", "")  # 직접 넣은 요금은 확인일을 적어야 확인일로 표시(없으면 "확인 전")
     return fac
 
 

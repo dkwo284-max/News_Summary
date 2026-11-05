@@ -507,3 +507,4 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .leisure-rate { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
 .leisure-weather td, .leisure-weather th { white-space: normal; text-align: left; vertical-align: top; }
 .leisure-weather td small { display: inline; font-size: .75rem; }
+.leisure-fees .fee-quote { display: block; font-size: .72rem; }

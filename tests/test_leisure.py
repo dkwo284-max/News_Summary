@@ -164,6 +164,11 @@ def test_normalize_primary_keeps_one_adult_and_demotes_the_rest():
     kinds = {f["label"]: f["kind"] for f in out}
     assert kinds["Full Playing (7 day)"] == "adult" and kinds["6 Day Membership"] == "other" and kinds["Weekday"] == "other"
     assert kinds["Joining fee"] == "joining" and kinds["Family joining"] == "other"
+    again = {f["label"]: f["kind"] for f in leisure.normalize_primary(out, "golf")}
+    assert again == kinds   # 여러 번 적용해도 같다
+    cheap = leisure.normalize_primary([{"label": "Joining fee (social)", "kind": "joining", "amount": 125, "period": "once"},
+                                       {"label": "Joining fee (full)", "kind": "joining", "amount": 500, "period": "once"}], "golf")
+    assert [f["kind"] for f in cheap] == ["other", "joining"]   # 정규 회원 입회비(가장 비싼 개인용)가 대표
     assert kinds["Visitor"] == "greenfee18"
     # 골프가 아니면 greenfee 종류를 쓰지 않는다
     boat = leisure.normalize_primary([{"label": "Public trip", "kind": "greenfee18", "amount": 65, "period": "day"}], "fishing")

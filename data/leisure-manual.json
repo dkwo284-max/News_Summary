@@ -2,10 +2,38 @@
   "_설명": "손으로 적는 값. 시설 id 별로 평점(rating)·직접 확인한 요금(fees)·메모(note)·상태(status)·숨김(hide)을 적으면 자동 수집값보다 우선합니다. 평점은 구글 지도에서 직접 보고 적고 기준 시점(asof)을 남기세요(분기에 한 번쯤 갱신). 요금 항목 kind: adult·couple·family·junior·student·social·joining·greenfee18·greenfee9·hire·tour·berth·other, period: year·season·month·week·day·hour·round·once·person.",
   "_예시": {
     "g-pupuke": {
-      "rating": {"v": 4.4, "n": 320, "asof": "2026-11"},
-      "fees": [{"label": "Full Playing (직접 확인)", "kind": "adult", "amount": 1885, "period": "year"}],
+      "rating": {
+        "v": 4.4,
+        "n": 320,
+        "asof": "2026-11"
+      },
+      "fees": [
+        {
+          "label": "Full Playing (직접 확인)",
+          "kind": "adult",
+          "amount": 1885,
+          "period": "year"
+        }
+      ],
       "checked": "2026-11-05",
       "note": "입회비 별도"
     }
+  },
+  "g-pupuke": {
+    "fees": [
+      {
+        "label": "Full Playing (구글 검색에 나온 클럽 회원 페이지 기준, 연도 불명 — 공식 사이트에서 확인)",
+        "kind": "adult",
+        "amount": 1885,
+        "period": "year"
+      },
+      {
+        "label": "Joining fee (같은 출처, 연도 불명)",
+        "kind": "joining",
+        "amount": 500,
+        "period": "once"
+      }
+    ],
+    "note": "공식 사이트가 동적 페이지라 자동 수집이 안 됩니다. 값은 검색 결과에서 확인한 것이고 시점이 불명확해요."
   }
 }

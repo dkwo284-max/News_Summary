@@ -198,7 +198,8 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   function detail(f: Facility): HTMLElement {
     const d = h("div", { class: "leisure-detail" });
     const rows = f.fees.map((x) => h("li", {}, h("strong", {}, money(x.amount, x.period)), ` ${x.label}`,
-      x.source === "manual" ? h("small", { class: "muted" }, " (직접 확인)") : null));
+      x.source === "manual" ? h("small", { class: "muted" }, " (직접 입력)") : null,
+      x.quote && x.source !== "manual" ? h("small", { class: "muted fee-quote" }, `원문: “${x.quote}”`) : null));
     d.append(rows.length ? h("ul", { class: "leisure-fees" }, ...rows) : h("p", { class: "muted" }, "요금을 자동으로 읽지 못했어요. 공식 사이트·전화로 확인하세요."));
     const meta = [f.season ? `적용 시즌: ${f.season}` : "", f.status ? `상태: ${STATUS[f.status] ?? f.status}` : "", f.checked ? `확인일 ${f.checked}` : "확인 전"].filter(Boolean).join(" · ");
     d.append(h("p", { class: "muted" }, meta));
@@ -234,7 +235,9 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   function cards(items: Facility[]): HTMLElement[] {
     return items.map((f) => {
       const d = dist(f);
-      const top = f.fees.slice(0, 3).map((x) => `${x.label} ${money(x.amount, x.period)}`).join(" · ");
+      const order = ["adult", "couple", "family", "social", "joining", "tour", "berth", "hire", "student", "junior", "greenfee18", "greenfee9", "other"];
+      const rank = (x: Fee) => (order.includes(x.kind) ? order.indexOf(x.kind) : order.length);
+      const top = [...f.fees].sort((a, b) => rank(a) - rank(b)).slice(0, 3).map((x) => `${x.label} ${money(x.amount, x.period)}`).join(" · ");
       const head = h("button", { type: "button", class: "leisure-name", "aria-expanded": String(selected === f.id) }, f.name);
       head.addEventListener("click", () => { selected = selected === f.id ? null : f.id; renderList(); });
       const r = ratingOf(f);
