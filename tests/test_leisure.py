@@ -149,3 +149,22 @@ def test_locate_tries_address_then_bounded_name():
     with httpx.Client(transport=httpx.MockTransport(handler)) as client:
         assert leisure.locate(client, s) == [-36.8, 174.75]
     assert [c[0] for c in calls] == ["Foo Golf Club, Auckland", "1 Foo Rd, Auckland", "Foo Golf Club"]
+
+
+def test_normalize_primary_keeps_one_adult_and_demotes_the_rest():
+    fees = [
+        {"label": "6 Day Membership", "kind": "adult", "amount": 1634, "period": "year"},
+        {"label": "Full Playing (7 day)", "kind": "adult", "amount": 1996, "period": "year"},
+        {"label": "Weekday", "kind": "adult", "amount": 1419, "period": "year"},
+        {"label": "Family joining", "kind": "joining", "amount": 3500, "period": "once"},
+        {"label": "Joining fee", "kind": "joining", "amount": 2000, "period": "once"},
+        {"label": "Visitor", "kind": "greenfee18", "amount": 70, "period": "round"},
+    ]
+    out = leisure.normalize_primary(fees, "golf")
+    kinds = {f["label"]: f["kind"] for f in out}
+    assert kinds["Full Playing (7 day)"] == "adult" and kinds["6 Day Membership"] == "other" and kinds["Weekday"] == "other"
+    assert kinds["Joining fee"] == "joining" and kinds["Family joining"] == "other"
+    assert kinds["Visitor"] == "greenfee18"
+    # 골프가 아니면 greenfee 종류를 쓰지 않는다
+    boat = leisure.normalize_primary([{"label": "Public trip", "kind": "greenfee18", "amount": 65, "period": "day"}], "fishing")
+    assert boat[0]["kind"] == "other"

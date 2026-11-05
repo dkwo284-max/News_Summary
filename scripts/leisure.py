@@ -4,7 +4,7 @@
 - 요금은 해마다 한 번(또는 수동) 갱신한다(.github/workflows/leisure.yml). 평소 매일 도는 파이프라인에는 들어 있지 않다.
 - 흐름: 좌표(Nominatim, 캐시) → 공식 페이지 글 받기(HTML·PDF) → AI(Gemini)로 요금 항목만 뽑기 → 검증 → 저장.
 - 검증: AI 가 뽑은 금액이 실제 페이지 글에 그 숫자로 들어 있지 않으면 버린다(추정·환산·창작 방지). 못 읽은 시설은 이전 값을 유지하고
-  "미확인"으로 표시한다. AI 요청은 시설 5곳당 1회(전체 보통 6~7회, 1년에 한 번). 키·예산이 없으면 AI 단계는 건너뛴다.
+  "미확인"으로 표시한다. AI 요청은 시설 3곳당 1회(전체 보통 10회 안팎, 1년에 한 번). 키·예산이 없으면 AI 단계는 건너뛴다.
 
     python scripts/leisure.py              # 전체 갱신
     python scripts/leisure.py --no-ai      # 좌표·수동 값만 (AI·요금 페이지 읽기 없음)
@@ -36,7 +36,7 @@ KINDS = ["golf", "sailing", "kayak", "fishing"]
 FEE_KINDS = ["adult", "couple", "family", "junior", "student", "social", "joining", "greenfee18", "greenfee9", "hire", "tour", "berth", "other"]
 PERIODS = ["year", "season", "month", "week", "day", "hour", "round", "once", "person"]
 STATUS = ["open", "waitlist", "closed", "unknown"]
-BATCH = 5             # AI 한 번에 보내는 시설 수(작게 보내야 과부하·한도에 덜 걸림)
+BATCH = 3             # AI 한 번에 보내는 시설 수(작게 보내야 과부하·한도에 덜 걸림)
 PAGE_CHARS = 5000     # 페이지당 AI 에 보내는 최대 글자
 FACILITY_CHARS = 8000
 LINK_WORDS = re.compile(r"member|subscri|fee|rate|green|price|pricing|join|categor|cost", re.I)
@@ -251,6 +251,40 @@ def clean_fees(fees: list[dict], text: str) -> list[dict]:
     return out
 
 
+PRIMARY_LABEL = re.compile(r"full|unlimited|7.?day|seven|standard|playing|18|adult|single|individual|open|regular", re.I)
+GROUP_LABEL = re.compile(r"family|couple|joint|junior|student|youth|social|corporate|country|9.?hole|week.?day|midweek|off.?peak|intermediate|senior|ladies", re.I)
+
+
+def normalize_primary(fees: list[dict], facility_kind: str) -> list[dict]:
+    """한 종류(adult·couple·family·joining·greenfee)에는 대표 1개만 남기고 나머지는 other 로 내린다(이름은 그대로).
+    - 골프 외 시설에는 greenfee 종류가 없으므로 other 로.
+    - adult 대표: 이름이 풀·언리미티드·7일 등 '정규'이면서 주니어·가족·위크데이 등이 아닌 것 중 가장 비싼 것(없으면 가장 비싼 것).
+    - joining 대표: 가족·커플·주니어가 아닌 것 중 가장 싼 것(성인 개인 입회비)."""
+    out = [dict(f) for f in fees]
+    if facility_kind != "golf":
+        for f in out:
+            if f["kind"] in ("greenfee18", "greenfee9"):
+                f["kind"] = "other"
+    def demote_except(kind: str, keep: dict | None) -> None:
+        for f in out:
+            if f["kind"] == kind and f is not keep:
+                f["kind"] = "other"
+    adults = [f for f in out if f["kind"] == "adult" and f["period"] in ("year", "season")]
+    if adults:
+        regular = [f for f in adults if PRIMARY_LABEL.search(f["label"]) and not GROUP_LABEL.search(f["label"])] or \
+                  [f for f in adults if not GROUP_LABEL.search(f["label"])] or adults
+        demote_except("adult", max(regular, key=lambda f: f["amount"]))
+    joins = [f for f in out if f["kind"] == "joining"]
+    if joins:
+        indiv = [f for f in joins if not re.search(r"family|couple|joint|junior", f["label"], re.I)] or joins
+        demote_except("joining", min(indiv, key=lambda f: f["amount"]))
+    for k in ("couple", "family", "greenfee18", "greenfee9"):
+        group = [f for f in out if f["kind"] == k]
+        if len(group) > 1:
+            demote_except(k, group[0] if k.startswith("greenfee") else min(group, key=lambda f: f["amount"]))
+    return out
+
+
 def merge_manual(fac: dict, manual: dict) -> dict:
     """data/leisure-manual.json 의 평점·직접 확인한 요금·메모를 덮어쓴다(수동 값이 우선)."""
     m = manual.get(fac["id"])
@@ -362,7 +396,7 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, llm, today: 
                 row = rows.get(fac["id"])
                 if row is None:
                     continue
-                fees = clean_fees(row.get("fees", []), text)
+                fees = normalize_primary(clean_fees(row.get("fees", []), text), fac["kind"])
                 if fees or not fac.get("fees"):
                     fac["fees"] = fees
                 fac["status"] = row.get("status") if row.get("status") in STATUS else "unknown"
@@ -371,6 +405,8 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, llm, today: 
                     fac["note"] = str(row["note"])[:80]
                 fac["checked"] = today
                 fac["src"] = used
+    for f in facilities:  # 이전 실행 값도 같은 규칙으로 정리(여러 번 적용해도 결과가 같다)
+        f["fees"] = normalize_primary(f.get("fees", []), f["kind"])
     facilities = [merge_manual(f, manual) for f in facilities]
     facilities = [f for f in facilities if not f.get("hide")]
     return {"updated_at": today, "source": "각 시설 공식 사이트(연 1회 AI로 요금표 추출 후 금액 검증), 좌표 OpenStreetMap",
