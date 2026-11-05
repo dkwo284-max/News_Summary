@@ -75,8 +75,9 @@ def fetch_one(client: httpx.Client, query: str) -> dict:
     raise RuntimeError(last or "overpass failed")
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     """종류별로 따로 받는다. 일부만 받아져도 저장하고(못 받은 종류는 이전 값 유지), 하나도 못 받으면 실패."""
+    only = set(filter(None, ((argv or sys.argv[1:] or [""])[0]).split(","))) or set(QUERIES)  # 예: python scripts/spots.py pier
     old: dict[str, list[dict]] = {t: [] for t in QUERIES}
     try:
         for sp in json.loads(OUT.read_text(encoding="utf-8")).get("spots", []):
@@ -86,6 +87,8 @@ def main() -> int:
     got: dict[str, dict] = {}
     with httpx.Client(timeout=45, headers={"User-Agent": "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"}) as client:
         for kind, q in QUERIES.items():
+            if kind not in only:
+                continue
             try:
                 got[kind] = fetch_one(client, q)
             except Exception as e:  # noqa: BLE001
@@ -94,12 +97,12 @@ def main() -> int:
         print("spots: nothing fetched — not writing", file=sys.stderr)
         return 1
     fresh = convert(got)
-    spots = fresh + [sp for k in QUERIES if k not in got for sp in old.get(k, [])]
+    spots = fresh + [sp for k in QUERIES if k not in got for sp in old.get(k, [])]  # 못 받았거나 이번에 안 묻은 종류는 이전 값 유지
     counts = {t: sum(1 for sp in spots if sp["t"] == t) for t in QUERIES}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({"updated_at": date.today().isoformat(), "source": "OpenStreetMap (Overpass)", "spots": spots},
                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(counts, "(failed types kept from previous)" if len(got) < len(QUERIES) else "")
+    print(counts, "(나머지 종류는 이전 값 유지)" if len(got) < len(QUERIES) else "")
     return 0
 
 
