@@ -1,18 +1,21 @@
 """레저(골프·요트·카약·낚시) 요금 데이터: 공식 페이지를 읽어 web/public/data/leisure.json 을 만든다.
 
 - 시설 목록은 data/leisure-src.json (손으로 관리), 평점·직접 확인한 요금은 data/leisure-manual.json 에 적는다.
-- 요금은 해마다 한 번(또는 수동) 갱신한다(.github/workflows/leisure.yml). 평소 매일 도는 파이프라인에는 들어 있지 않다.
+- 요금은 잘 안 바뀌므로 매일 도는 파이프라인에는 넣지 않았다. 워크플로(.github/workflows/leisure.yml)는 한 달에 한 번 공식 페이지를 받아
+  "페이지 글의 지문"이 이전과 같으면 AI 를 쓰지 않고, 바뀐 시설만 AI 로 다시 읽는다(보통 AI 0회). 요금·가입 상태가 바뀌면 changes 에 기록하고 알림.
 - 흐름: 좌표(Nominatim, 캐시) → 공식 페이지 글 받기(HTML·PDF) → AI(Gemini)로 요금 항목만 뽑기 → 검증 → 저장.
 - 검증: AI 가 뽑은 금액이 실제 페이지 글에 그 숫자로 들어 있지 않으면 버린다(추정·환산·창작 방지). 못 읽은 시설은 이전 값을 유지하고
   "미확인"으로 표시한다. AI 요청은 시설 3곳당 1회(전체 보통 10회 안팎, 1년에 한 번). 키·예산이 없으면 AI 단계는 건너뛴다.
 
-    python scripts/leisure.py              # 전체 갱신
+    python scripts/leisure.py              # 바뀐 페이지만 AI 로 갱신 (지문이 같으면 AI 0회)
+    python scripts/leisure.py --seed-hashes   # 이미 읽은 값의 지문만 기록(AI 없음)
     python scripts/leisure.py --no-ai      # 좌표·수동 값만 (AI·요금 페이지 읽기 없음)
     python scripts/leisure.py --only g-wainui,g-pupuke
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import io
 import json
 import logging
@@ -353,31 +356,78 @@ def extract(llm, batch: list[tuple[dict, str]]) -> dict[str, dict]:
     return {row.get("id"): row for row in out.get("items", [])}
 
 
-def build(src: dict, manual: dict, old: dict, client: httpx.Client, llm, today: str, only: set[str] | None = None) -> dict:
+WATCH_KINDS = ("adult", "couple", "family", "joining", "greenfee18")
+
+
+def text_hash(text: str) -> str:
+    """페이지 글의 지문. 같으면 AI 로 다시 읽지 않는다(공백·대소문자 차이는 무시)."""
+    return hashlib.sha1(re.sub(r"\s+", " ", text).strip().lower().encode("utf-8")).hexdigest()[:16]
+
+
+def fee_map(fees: list[dict]) -> dict[str, float]:
+    return {f["kind"]: f["amount"] for f in fees if f["kind"] in WATCH_KINDS and f.get("period") in ("year", "season", "once", "round")}
+
+
+def detect_changes(prev: dict, fac: dict, today: str) -> list[dict]:
+    """이전에 확인된 값(연회비·입회비 등)과 가입 상태가 바뀌었으면 변경 기록으로. 처음 읽은 값은 변경이 아니다."""
+    if not prev.get("checked"):
+        return []
+    out = []
+    old, new = fee_map(prev.get("fees", [])), fee_map(fac.get("fees", []))
+    for k in WATCH_KINDS:
+        if k in old and k in new and abs(old[k] - new[k]) >= 1:
+            out.append({"date": today, "id": fac["id"], "name": fac["name"], "field": k, "old": old[k], "new": new[k]})
+    ps, ns = prev.get("status", "unknown"), fac.get("status", "unknown")
+    if ps != ns and "unknown" not in (ps, ns):
+        out.append({"date": today, "id": fac["id"], "name": fac["name"], "field": "status", "old": ps, "new": ns})
+    return out
+
+
+def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, today: str, only: set[str] | None = None,
+          seed_hashes: bool = False) -> dict:
+    """get_llm(batches) → AI 클라이언트 또는 None(예산·키 없음). 바뀐 페이지가 있을 때만 호출한다.
+    흐름: 페이지 글 받기(AI 없음) → 지문이 이전과 같으면 건너뜀 → 바뀐 시설만 AI 로 읽기."""
     old_by_id = {f["id"]: f for f in old.get("facilities", [])}
     geocache: dict[str, list[float] | None] = dict(old.get("geocache", {}))
     facilities: list[dict] = []
-    todo: list[tuple[dict, str, list[str]]] = []
+    todo: list[tuple[dict, str, list[str], str]] = []
+    prevs: dict[str, dict] = {}
+    unchanged = 0
     for s in src["facilities"]:
         if only and s["id"] not in only:
             if s["id"] in old_by_id:
                 facilities.append(merge_manual(dict(old_by_id[s["id"]]), manual))
             continue
         prev = old_by_id.get(s["id"], {})
+        prevs[s["id"]] = prev
         geo = s.get("geo") or f"{s['name']}, Auckland"
         if not geocache.get(geo):  # 못 찾은 곳(null)은 다음 실행에서 다시 시도
             geocache[geo] = locate(client, s)
         fac = {"id": s["id"], "kind": s["kind"], "name": s["name"], "area": s.get("area", ""), "ll": geocache.get(geo),
                "home": s.get("home") or "", "gmaps": "https://www.google.com/maps/search/?api=1&query=" + quote_plus(f"{s['name']} Auckland"),
                "fees": prev.get("fees", []), "status": prev.get("status", "unknown"), "season": prev.get("season", ""),
-               "note": s.get("note") or prev.get("note", ""), "checked": prev.get("checked", ""), "src": prev.get("src", [])}
+               "note": s.get("note") or prev.get("note", ""), "checked": prev.get("checked", ""), "src": prev.get("src", []),
+               "text_hash": prev.get("text_hash", "")}
         if s.get("note"):
             fac["note"] = s["note"]
-        if llm is not None and (s.get("home") or s.get("pages")):
-            text, used = collect_text(client, s)
-            if text:
-                todo.append((fac, text, used))
         facilities.append(fac)
+        if not (s.get("home") or s.get("pages")):
+            continue
+        text, used = collect_text(client, s)
+        if not text:
+            continue
+        h = text_hash(text)
+        if prev.get("text_hash") == h and prev.get("fees"):
+            fac["checked"] = today        # 페이지가 그대로라 이전에 읽은 값이 여전히 유효
+            unchanged += 1
+        elif seed_hashes and prev.get("fees") and not prev.get("text_hash"):
+            fac["text_hash"] = h          # 이미 읽어 둔 값의 지문만 기록(AI 없음) — 다음부터 바뀐 페이지만 AI 로
+            unchanged += 1
+        else:
+            todo.append((fac, text, used, h))
+    log.info("leisure: %d page(s) unchanged (no AI), %d to read", unchanged, len(todo))
+    llm = get_llm(-(-len(todo) // BATCH)) if todo else None
+    changes: list[dict] = []
     if llm is not None and todo:
         chunks = [todo[i:i + BATCH] for i in range(0, len(todo), BATCH)]
         results: list[tuple[list, dict]] = []
@@ -385,8 +435,8 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, llm, today: 
             failed = []
             for n, chunk in enumerate(chunks, 1):
                 try:
-                    results.append((chunk, extract(llm, [(f, t) for f, t, _ in chunk])))
-                except Exception as e:  # noqa: BLE001 — 실패하면 이전 값을 그대로 둔다
+                    results.append((chunk, extract(llm, [(f, t) for f, t, _, _ in chunk])))
+                except Exception as e:  # noqa: BLE001 — 실패하면 이전 값을 그대로 둔다(지문도 안 남겨 다음에 다시 시도)
                     log.warning("leisure AI failed for batch %d (try %d): %s", n, attempt + 1, str(e)[:200])
                     failed.append(chunk)
             if not failed:
@@ -394,11 +444,12 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, llm, today: 
             chunks = failed
             time.sleep(90)
         for chunk, rows in results:
-            for fac, text, used in chunk:
+            for fac, text, used, h in chunk:
                 row = rows.get(fac["id"])
                 if row is None:
                     continue
                 fees = normalize_primary(clean_fees(row.get("fees", []), text), fac["kind"])
+                before = {**fac, "fees": list(fac.get("fees", []))}
                 if fees or not fac.get("fees"):
                     fac["fees"] = fees
                 fac["status"] = row.get("status") if row.get("status") in STATUS else "unknown"
@@ -407,12 +458,16 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, llm, today: 
                     fac["note"] = str(row["note"])[:80]
                 fac["checked"] = today
                 fac["src"] = used
+                fac["text_hash"] = h      # 요금이 없어도 지문은 남겨, 같은 페이지를 또 AI 로 읽지 않게
+                changes += detect_changes(before, fac, today)
     for f in facilities:  # 이전 실행 값도 같은 규칙으로 정리(여러 번 적용해도 결과가 같다)
         f["fees"] = normalize_primary(f.get("fees", []), f["kind"])
     facilities = [merge_manual(f, manual) for f in facilities]
     facilities = [f for f in facilities if not f.get("hide")]
-    return {"updated_at": today, "source": "각 시설 공식 사이트(연 1회 AI로 요금표 추출 후 금액 검증), 좌표 OpenStreetMap",
-            "facilities": facilities, "geocache": geocache}
+    cutoff = date.fromisoformat(today).toordinal() - 400
+    history = [c for c in old.get("changes", []) if date.fromisoformat(c["date"]).toordinal() >= cutoff] + changes
+    return {"updated_at": today, "source": "각 시설 공식 사이트(바뀐 페이지만 AI로 요금표 추출 후 금액 검증), 좌표 OpenStreetMap",
+            "facilities": facilities, "changes": history[-80:], "new_changes": changes, "geocache": geocache}
 
 
 def load_json(path: Path, default):
@@ -422,12 +477,20 @@ def load_json(path: Path, default):
         return default
 
 
+def describe_change(c: dict) -> str:
+    if c["field"] == "status":
+        names = {"open": "가입 가능", "waitlist": "대기 명단", "closed": "신규 마감"}
+        return f"{c['name']}: 가입 상태 {names.get(c['old'], c['old'])} → {names.get(c['new'], c['new'])}"
+    label = {"adult": "성인 연회비", "couple": "커플 연회비", "family": "가족 연회비", "joining": "입회비", "greenfee18": "방문자 18홀"}.get(c["field"], c["field"])
+    return f"{c['name']}: {label} ${c['old']:,.0f} → ${c['new']:,.0f}"
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-ai", action="store_true")
     ap.add_argument("--only", default="")
     ap.add_argument("--ignore-cap", action="store_true", help="AI 공용 예산 무시")
-    ap.add_argument("--if-stale", action="store_true", help="파일이 330일 안에 만든 것이면 건너뜀 (자동 실행용)")
+    ap.add_argument("--seed-hashes", action="store_true", help="이미 읽어 둔 값의 페이지 지문만 기록(AI 없음)")
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s", datefmt="%H:%M:%S")
     for noisy in ("httpx", "httpcore", "trafilatura"):
@@ -437,21 +500,15 @@ def main(argv: list[str] | None = None) -> int:
     manual = {k: v for k, v in manual.items() if not k.startswith("_")}
     only = set(filter(None, args.only.split(","))) or None
     today = date.today().isoformat()
-    if args.if_stale and old.get("updated_at"):
-        try:
-            if (date.today() - date.fromisoformat(old["updated_at"])).days < 330:
-                log.info("leisure: data is %s — under a year old, skipping (--if-stale)", old["updated_at"])
-                return 0
-        except ValueError:
-            pass
-    todo_n = len([s for s in src["facilities"] if (s.get("home") or s.get("pages")) and (not only or s["id"] in only)])
-    batches = -(-todo_n // BATCH)
+    state: dict = {"llm": None}
 
-    llm = None
-    if not args.no_ai:
+    def get_llm(batches: int):
+        """바뀐 페이지가 있을 때만 AI 를 준비한다. 예산이 모자라면 None(다음 실행에서 이어서)."""
+        if args.no_ai or batches <= 0:
+            return None
         try:
-            from llm import LLMError, make_llm
             from budget import allowance, describe, nz_today
+            from llm import make_llm
             from usage import used_today
 
             data_dir = ROOT / cfg["output"]["data_dir"]
@@ -459,25 +516,37 @@ def main(argv: list[str] | None = None) -> int:
             left, info = allowance("daily-brief", used_today(data_dir, day), int(cfg["llm"].get("guaranteed", 7)), day)
             log.info("%s", describe("daily-brief", left, info))
             if left < batches and not args.ignore_cap:
-                log.warning("AI 예산 부족(남은 %d회, 필요 %d회) — 요금 읽기는 건너뛰고 좌표·수동 값만 갱신 (--ignore-cap 으로 무시)", left, batches)
-            else:
-                llm = make_llm(cfg)
-                llm.max_requests = batches * 2  # 실패한 묶음 재시도 여유
+                log.warning("AI 예산 부족(남은 %d회, 필요 %d회) — 바뀐 페이지 읽기는 다음 실행으로 미룸 (--ignore-cap 으로 무시)", left, batches)
+                return None
+            state["llm"] = make_llm(cfg)
+            state["llm"].max_requests = batches * 2  # 실패한 묶음 재시도 여유
+            return state["llm"]
         except Exception as e:  # noqa: BLE001
-            log.warning("AI 를 쓸 수 없어 요금 읽기를 건너뜁니다: %s", e)
+            log.warning("AI 를 쓸 수 없어 바뀐 페이지 읽기를 건너뜁니다: %s", e)
+            return None
 
     ua = cfg["fetch"]["user_agent"]
     with httpx.Client(timeout=30, follow_redirects=True, headers={"User-Agent": ua}) as client:
-        out = build(src, manual, old, client, llm, today, only)
+        out = build(src, manual, old, client, get_llm, today, only, args.seed_hashes)
+    new_changes = out.pop("new_changes", [])
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     priced = sum(1 for f in out["facilities"] if f["fees"])
-    log.info("leisure: %d facilities, %d with fees, %d located", len(out["facilities"]), priced, sum(1 for f in out["facilities"] if f["ll"]))
+    log.info("leisure: %d facilities, %d with fees, %d located, %d change(s)", len(out["facilities"]), priced,
+             sum(1 for f in out["facilities"] if f["ll"]), len(new_changes))
+    llm = state["llm"]
     if llm is not None and llm.requests:
         from budget import nz_today
         from usage import record
 
         record(ROOT / cfg["output"]["data_dir"], nz_today(), llm.requests, cfg)
+    if new_changes:
+        try:
+            from notify import notify_text
+
+            notify_text("레저 요금·가입 상태 변경", "\n".join(["🏌️ 레저 변경"] + [f"- {describe_change(c)}" for c in new_changes] + [cfg["output"]["app_url"]]), cfg)
+        except Exception as e:  # noqa: BLE001
+            log.warning("leisure notify failed: %s", e)
     return 0
 
 

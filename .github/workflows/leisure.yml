@@ -1,20 +1,25 @@
 name: Leisure fees (golf, sailing, kayak, fishing)
 
-# 1년에 한 번(9월 중순) 또는 수동: 레저 시설 공식 페이지에서 요금표를 읽어 web/public/data/leisure.json 으로 만듭니다.
-# 좌표는 OpenStreetMap(Nominatim), 요금은 Gemini 로 추출한 뒤 금액이 페이지 글에 실제로 있는지 검증합니다(시설 3곳당 AI 요청 1회).
-# 자동 실행은 파일이 330일 안에 만든 것이면 건너뜁니다. 수동 실행은 항상 새로 읽습니다. 매일 도는 실행에는 들어 있지 않습니다.
+# 한 달에 한 번(15일) 또는 수동: 레저 시설 공식 페이지를 받아 web/public/data/leisure.json 을 갱신합니다.
+# 요금은 잘 안 바뀌므로 페이지 글의 "지문"이 이전과 같으면 AI 를 쓰지 않고(보통 AI 0회), 바뀐 시설만 Gemini 로 다시 읽은 뒤
+# 금액이 페이지 글에 실제로 있는지 검증합니다(시설 3곳당 AI 1회). 요금·가입 상태가 바뀌면 기록하고 알림(설정에서 켠 경우).
+# 매일 도는 실행에는 들어 있지 않습니다.
 on:
   workflow_dispatch:
     inputs:
       only:
         description: "일부 시설만(쉼표로 구분한 id, 예: g-wainui,g-pupuke). 비우면 전체"
         default: ""
+      seed_hashes:
+        description: "이미 읽어 둔 값의 페이지 지문만 기록 (AI 없음, 처음 한 번)"
+        type: boolean
+        default: false
       ignore_cap:
         description: "AI 공용 예산 무시 (예산이 모자라 건너뛰었을 때 한 번만)"
         type: boolean
         default: false
   schedule:
-    - cron: "17 4 15 9 *"
+    - cron: "17 4 15 * *"
 
 permissions:
   contents: write
@@ -34,9 +39,14 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           AI_PROFILE: test   # Flash-Lite 우선 (하루 500회 한도) — 금액은 페이지 글과 대조해 검증하므로 Lite 로 충분
           ONLY: ${{ github.event.inputs.only }}
-          STALE: ${{ github.event_name == 'schedule' && '--if-stale' || '' }}
+          SEED: ${{ github.event.inputs.seed_hashes == 'true' && '--seed-hashes' || '' }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
           CAP: ${{ github.event.inputs.ignore_cap == 'true' && '--ignore-cap' || '' }}
-        run: python scripts/leisure.py $STALE $CAP ${ONLY:+--only "$ONLY"}
+        run: python scripts/leisure.py $SEED $CAP ${ONLY:+--only "$ONLY"}
       - name: Commit
         run: |
           git config user.name "daily-brief-bot"

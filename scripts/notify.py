@@ -72,3 +72,18 @@ def notify(brief: dict, cfg: dict) -> None:
             fn()
         except Exception as e:  # noqa: BLE001 — 알림 실패로 브리핑 생성이 실패 처리되지 않게
             log.error("%s notify failed: %s", name, e)
+
+
+def notify_text(subject: str, text: str, cfg: dict) -> None:
+    """브리핑이 아닌 일반 알림(예: 레저 요금 변경). config 의 notify 설정(텔레그램·이메일)을 따른다."""
+    n = cfg.get("notify", {})
+    for name, enabled, fn in (
+        ("telegram", n.get("telegram", {}).get("enabled"), lambda: send_telegram(text)),
+        ("email", n.get("email", {}).get("enabled"), lambda: send_email(subject, text)),
+    ):
+        if not enabled:
+            continue
+        try:
+            fn()
+        except Exception as e:  # noqa: BLE001
+            log.error("%s notify failed: %s", name, e)

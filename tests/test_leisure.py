@@ -83,7 +83,7 @@ def test_build_end_to_end_with_fake_network(tmp_path):
                           {"id": "g-b", "kind": "golf", "name": "B Golf Club", "home": None}]}
     llm = FakeLLM()
     with httpx.Client(transport=httpx.MockTransport(handler)) as client:
-        out = leisure.build(src, {}, {}, client, llm, "2026-11-05")
+        out = leisure.build(src, {}, {}, client, lambda n: llm, "2026-11-05")
     a = next(f for f in out["facilities"] if f["id"] == "g-a")
     assert a["ll"] == [-36.78, 174.77] and [f["amount"] for f in a["fees"]] == [1885.0]   # 창작 금액은 걸러짐
     assert a["status"] == "open" and a["checked"] == "2026-11-05" and a["src"] == ["https://a.nz/membership"]
@@ -109,7 +109,7 @@ def test_build_keeps_previous_values_when_ai_fails():
             return httpx.Response(200, json=[])
         return httpx.Response(200, text="<p>$1,000</p>", headers={"content-type": "text/html"})
     with httpx.Client(transport=httpx.MockTransport(handler)) as client:
-        out = leisure.build(src, {}, old, client, BadLLM(), "2026-11-05")
+        out = leisure.build(src, {}, old, client, lambda n: BadLLM(), "2026-11-05")
     a = out["facilities"][0]
     assert a["fees"][0]["amount"] == 1000 and a["checked"] == "2025-11-01"   # 실패하면 이전 값과 이전 확인일 유지
 
@@ -173,3 +173,58 @@ def test_normalize_primary_keeps_one_adult_and_demotes_the_rest():
     # 골프가 아니면 greenfee 종류를 쓰지 않는다
     boat = leisure.normalize_primary([{"label": "Public trip", "kind": "greenfee18", "amount": 65, "period": "day"}], "fishing")
     assert boat[0]["kind"] == "other"
+
+
+def _page_handler(text):
+    def handler(req):
+        if "nominatim" in str(req.url):
+            return httpx.Response(200, json=[{"lat": "-36.8", "lon": "174.7"}])
+        return httpx.Response(200, text=f"<html><body><p>{text}</p></body></html>", headers={"content-type": "text/html"})
+    return handler
+
+
+def test_unchanged_page_skips_ai_entirely():
+    """페이지 글이 이전과 같으면 AI 를 준비하지도 않는다(get_llm 이 호출되지 않음)."""
+    leisure.time.sleep = lambda s: None
+    page = "Full membership $1,885 per year"
+    h = leisure.text_hash(f"[https://a.nz/m]\n{leisure.focus(page, leisure.PAGE_CHARS)}")
+    old = {"facilities": [{"id": "g-a", "kind": "golf", "name": "A", "fees": [{"label": "Full", "kind": "adult", "amount": 1885.0, "period": "year", "quote": ""}],
+                           "status": "open", "season": "2026", "checked": "2025-11-01", "ll": [-36.8, 174.7], "src": [], "text_hash": ""}]}
+    src = {"facilities": [{"id": "g-a", "kind": "golf", "name": "A", "home": "https://a.nz", "pages": ["https://a.nz/m"]}]}
+    asked = []
+    with httpx.Client(transport=httpx.MockTransport(_page_handler(page))) as client:
+        # 1) 지문이 아직 없으면 --seed-hashes 로 기록만(AI 없음)
+        seeded = leisure.build(src, {}, old, client, lambda n: asked.append(n), "2026-11-05", seed_hashes=True)
+        assert asked == [] and seeded["facilities"][0]["text_hash"] and seeded["facilities"][0]["checked"] == "2025-11-01"
+        # 2) 지문이 있고 페이지가 같으면 AI 없이 확인일만 갱신
+        again = leisure.build(src, {}, seeded, client, lambda n: asked.append(n), "2026-12-05")
+    assert asked == [] and again["facilities"][0]["checked"] == "2026-12-05" and again["facilities"][0]["fees"][0]["amount"] == 1885.0
+    assert h  # 지문 계산이 결정적
+
+
+def test_changed_page_reads_with_ai_and_records_price_change():
+    leisure.time.sleep = lambda s: None
+
+    class NewPriceLLM:
+        requests = 0
+
+        def json_call(self, **kw):
+            return {"items": [{"id": "g-a", "status": "waitlist", "season": "2027", "note": "", "fees": [
+                {"label": "Full", "kind": "adult", "amount": 1990, "period": "year", "quote": "Full $1,990"}]}]}
+
+    old = {"facilities": [{"id": "g-a", "kind": "golf", "name": "A", "fees": [{"label": "Full", "kind": "adult", "amount": 1885.0, "period": "year", "quote": ""}],
+                           "status": "open", "season": "2026", "checked": "2025-11-01", "ll": [-36.8, 174.7], "src": [], "text_hash": "old"}]}
+    src = {"facilities": [{"id": "g-a", "kind": "golf", "name": "A", "home": "https://a.nz", "pages": ["https://a.nz/m"]}]}
+    asked = []
+    with httpx.Client(transport=httpx.MockTransport(_page_handler("Full $1,990 per year"))) as client:
+        out = leisure.build(src, {}, old, client, lambda n: (asked.append(n), NewPriceLLM())[1], "2026-11-05")
+    assert asked == [1]
+    assert out["facilities"][0]["fees"][0]["amount"] == 1990.0 and out["facilities"][0]["text_hash"] != "old"
+    fields = {(c["field"], c["old"], c["new"]) for c in out["new_changes"]}
+    assert ("adult", 1885.0, 1990.0) in fields and ("status", "open", "waitlist") in fields
+    assert out["changes"] and "성인 연회비" in leisure.describe_change(next(c for c in out["new_changes"] if c["field"] == "adult"))
+
+
+def test_first_reading_is_not_reported_as_a_change():
+    fac = {"id": "x", "name": "X", "fees": [{"label": "F", "kind": "adult", "amount": 100.0, "period": "year"}], "status": "open"}
+    assert leisure.detect_changes({"checked": "", "fees": []}, fac, "2026-11-05") == []

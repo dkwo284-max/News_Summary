@@ -1,0 +1,31 @@
+name: Fishing / kayak / swim spots
+
+# 1년에 한 번(또는 수동): OpenStreetMap 에서 보트 램프·부두·해변 위치를 받아 web/public/data/spots.json 으로 저장합니다.
+# 장소는 거의 안 바뀌고 AI 를 쓰지 않습니다. 매일 도는 실행에는 들어 있지 않습니다.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 3 20 9 *"
+
+permissions:
+  contents: write
+
+jobs:
+  spots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q httpx
+      - run: python scripts/spots.py
+      - name: Commit
+        run: |
+          git config user.name "daily-brief-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/data/spots.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "data: fishing/kayak/swim spots"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
