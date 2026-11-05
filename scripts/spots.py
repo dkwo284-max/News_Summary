@@ -19,9 +19,9 @@ ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.privat
              "https://overpass.kumi.systems/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"]
 BBOX = "-37.45,174.20,-36.15,175.30"  # 오클랜드 광역시 + 와이헤케
 QUERIES = {
-    "ramp": f'[out:json][timeout:40];nwr["leisure"="slipway"]({BBOX});out center tags;',
-    "pier": f'[out:json][timeout:40];(nwr["man_made"="pier"]["name"]({BBOX});nwr["leisure"="fishing"]["name"]({BBOX}););out center tags;',
-    "beach": f'[out:json][timeout:40];nwr["natural"="beach"]["name"]({BBOX});out center tags;',
+    "ramp": f'[out:json][timeout:30];nwr["leisure"="slipway"]({BBOX});out center tags;',
+    "pier": f'[out:json][timeout:30];(nwr["man_made"="pier"]["name"]({BBOX});nwr["leisure"="fishing"]["name"]({BBOX}););out center tags;',
+    "beach": f'[out:json][timeout:30];nwr["natural"="beach"]["name"]({BBOX});out center tags;',
 }
 LIMITS = {"ramp": 160, "pier": 120, "beach": 220}
 DEFAULT_NAME = {"ramp": "보트 램프", "pier": "부두", "beach": "해변"}
@@ -61,7 +61,7 @@ def convert(responses: dict[str, dict]) -> list[dict]:
 
 def fetch_one(client: httpx.Client, query: str) -> dict:
     last = None
-    for attempt in range(3):
+    for attempt in range(2):
         for url in ENDPOINTS:
             try:
                 r = client.post(url, data={"data": query})
@@ -76,17 +76,30 @@ def fetch_one(client: httpx.Client, query: str) -> dict:
 
 
 def main() -> int:
+    """종류별로 따로 받는다. 일부만 받아져도 저장하고(못 받은 종류는 이전 값 유지), 하나도 못 받으면 실패."""
+    old: dict[str, list[dict]] = {t: [] for t in QUERIES}
+    try:
+        for sp in json.loads(OUT.read_text(encoding="utf-8")).get("spots", []):
+            old.setdefault(sp["t"], []).append(sp)
+    except Exception:  # noqa: BLE001
+        pass
+    got: dict[str, dict] = {}
     with httpx.Client(timeout=45, headers={"User-Agent": "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"}) as client:
-        got = {k: fetch_one(client, q) for k, q in QUERIES.items()}
-    spots = convert(got)
-    counts = {t: sum(1 for s in spots if s["t"] == t) for t in QUERIES}
-    if not all(counts.values()):
-        print("spots: a type came back empty — not writing", counts, file=sys.stderr)
+        for kind, q in QUERIES.items():
+            try:
+                got[kind] = fetch_one(client, q)
+            except Exception as e:  # noqa: BLE001
+                print(f"spots: {kind} failed — keeping previous ({len(old.get(kind, []))}): {e}", file=sys.stderr)
+    if not got:
+        print("spots: nothing fetched — not writing", file=sys.stderr)
         return 1
+    fresh = convert(got)
+    spots = fresh + [sp for k in QUERIES if k not in got for sp in old.get(k, [])]
+    counts = {t: sum(1 for sp in spots if sp["t"] == t) for t in QUERIES}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({"updated_at": date.today().isoformat(), "source": "OpenStreetMap (Overpass)", "spots": spots},
                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(counts)
+    print(counts, "(failed types kept from previous)" if len(got) < len(QUERIES) else "")
     return 0
 
 
