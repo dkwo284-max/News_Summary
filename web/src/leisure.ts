@@ -324,7 +324,8 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
       return b;
     });
     const spotChips = SPOTS.map((s) => {
-      const b = h("button", { type: "button", class: "chip", "aria-pressed": String(spotOn.has(s.key)) }, `${s.icon} ${s.label}`);
+      const n = spots.filter((x) => x.t === s.key).length;
+      const b = h("button", { type: "button", class: "chip", "aria-pressed": String(spotOn.has(s.key)) }, `${s.icon} ${s.label}${spots.length ? ` (${n || "데이터 없음"})` : ""}`);
       b.addEventListener("click", () => { spotOn.has(s.key) ? spotOn.delete(s.key) : spotOn.add(s.key); renderAll(); });
       return b;
     });
