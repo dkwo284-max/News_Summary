@@ -33,7 +33,7 @@ const KR_CHIPS: { key: SectionKey | "all"; label: string }[] = [
 // ── 상태 ──────────────────────────────────────────────────
 const settings: Settings = loadSettings();
 let brief: Brief | null = null;
-type ChipKey = SectionKey | "all" | "hood";
+type ChipKey = SectionKey | "all" | "hood" | "leisure";
 type Chip = { key: ChipKey; label: string };
 const NZ_CHIPS: Chip[] = [
   { key: "all", label: "전체" },
@@ -48,6 +48,7 @@ const AKL_CHIPS: Chip[] = [
   { key: "akl_life", label: "생활" },
   { key: "hood", label: "📍 내 동네" },
   { key: "akl_property", label: "부동산" },
+  { key: "leisure", label: "🏌️ 레저" },
   { key: "akl_health", label: "의료" },
   { key: "akl_education", label: "교육" },
 ];
@@ -396,6 +397,10 @@ function renderMain(): void {
       renderHood();
       return;
     }
+    if (tab.id === "akl" && sel === "leisure") {
+      renderLeisure();
+      return;
+    }
     if (tab.id === "akl") {
       // 생활비 지표는 부동산에서만, 주제별 안내 링크는 해당 칩에서
       if (sel === "akl_property") {
@@ -610,7 +615,7 @@ const GUIDES: Partial<Record<SectionKey, Guide>> = {
 };
 
 function topicGuide(sel: ChipKey): HTMLElement | null {
-  const g = sel === "all" || sel === "hood" ? undefined : GUIDES[sel];
+  const g = sel === "all" || sel === "hood" || sel === "leisure" ? undefined : GUIDES[sel];
   if (!g) return null;
   const empty = !(brief?.sections[sel as SectionKey]?.items.length);
   return h("details", { class: "guide", ...(empty ? { open: "" } : {}) },
@@ -631,6 +636,18 @@ async function recentBriefs(): Promise<Brief[]> {
 }
 
 const extLink = (url: string, label: string) => h("a", { href: safeUrl(url), target: "_blank", rel: "noopener noreferrer" }, label);
+
+async function renderLeisure(): Promise<void> {
+  const holder = h("div", { "aria-busy": "true" }, h("p", { class: "muted" }, "레저 정보를 불러오는 중…"));
+  main.append(holder);
+  const [gp, mod] = await Promise.all([loadGP(), import("./leisure")]);
+  if (chipState.akl !== "leisure" || settings.tab !== "akl" || !holder.isConnected) return;
+  const fx = (viewingLatest && live?.fx) || brief?.extras.nzd_krw;
+  const view = await mod.leisureView(h, { suburbs: watch.suburbs, gp, fx, link: extLink });
+  if (chipState.akl !== "leisure" || !holder.isConnected) return;
+  holder.replaceChildren(view);
+  holder.removeAttribute("aria-busy");
+}
 
 async function renderHood(): Promise<void> {
   const holder = h("div", { "aria-busy": "true" }, h("p", { class: "muted" }, "내 동네 정보를 불러오는 중…"));

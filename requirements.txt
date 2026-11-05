@@ -5,3 +5,4 @@ anthropic>=1.14,<2
 rapidfuzz>=3.9
 PyYAML>=6.0
 jsonschema>=4.22
+pypdf>=4.0

@@ -484,3 +484,26 @@ legend { font-weight: 700; margin-bottom: 6px; }
 @media (max-width: 520px) { .eth-toprow { grid-template-columns: 24px minmax(70px, 1.2fr) minmax(24px, .8fr) 58px; gap: 4px; font-size: .8125rem; } .eth-mine .hood-table th, .eth-mine .hood-table td { padding: 4px 2px; } .eth-mine .hood-table { font-size: .75rem; } }
 .hood-stores { margin: 6px 0; font-size: .875rem; }
 .store-name { display: block; font-size: .7rem; font-weight: 400; }
+
+/* 레저 */
+.leisure-controls { display: grid; gap: 8px; margin: 8px 0; }
+.leisure-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.leisure-row select { font: inherit; font-size: .875rem; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+.leisure-krw { font-size: .8125rem; color: var(--muted); }
+.leisure-table { font-size: .8125rem; }
+.leisure-table th:first-child { min-width: 140px; }
+.leisure-table td small, .leisure-table th small { display: block; font-size: .68rem; opacity: .75; font-weight: 400; }
+.leisure-table td small.old { color: #b45309; opacity: 1; }
+.leisure-table small.tag { display: inline-block; background: rgba(217,119,6,.15); color: #b45309; border-radius: 6px; padding: 0 6px; margin-top: 2px; }
+.leisure-name { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: inherit; text-align: left; cursor: pointer; text-decoration: underline dotted; }
+.leisure-name[aria-expanded="true"] { color: var(--accent, #2563eb); }
+.leisure-table tr.cur > * { background: rgba(127,127,127,.14); }
+.leisure-panel { margin-top: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); }
+.leisure-panel h3 { margin: 0 0 6px; font-size: .95rem; }
+.leisure-detail { display: grid; gap: 6px; font-size: .875rem; }
+.leisure-fees { list-style: none; margin: 4px 0; padding: 0; display: grid; gap: 4px; }
+.leisure-calc { border: 1px dashed var(--line); border-radius: 10px; padding: 8px 10px; }
+.leisure-calc input, .leisure-rate input { width: 4.5rem; font: inherit; padding: 3px 6px; margin: 0 4px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+.leisure-rate { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.leisure-weather td, .leisure-weather th { white-space: normal; text-align: left; vertical-align: top; }
+.leisure-weather td small { display: inline; font-size: .75rem; }
