@@ -19,9 +19,11 @@ ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.privat
              "https://overpass.kumi.systems/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"]
 BBOX = "-37.45,174.20,-36.15,175.30"  # 오클랜드 광역시 + 와이헤케
 QUERIES = {
-    "ramp": f'[out:json][timeout:30];nwr["leisure"="slipway"]({BBOX});out center tags;',
-    "pier": f'[out:json][timeout:30];(nwr["man_made"="pier"]["name"]({BBOX});nwr["leisure"="fishing"]["name"]({BBOX}););out center tags;',
-    "beach": f'[out:json][timeout:30];nwr["natural"="beach"]["name"]({BBOX});out center tags;',
+    "ramp": [f'[out:json][timeout:30];nwr["leisure"="slipway"]({BBOX});out center tags qt;'],
+    # 부두는 질의 하나가 무거워 서버가 504 를 내서, 작은 질의 둘로 나눠 받아 합친다
+    "pier": [f'[out:json][timeout:30];way["man_made"="pier"]["name"]({BBOX});out center tags qt;',
+             f'[out:json][timeout:30];nwr["leisure"="fishing"]["name"]({BBOX});out center tags qt;'],
+    "beach": [f'[out:json][timeout:30];nwr["natural"="beach"]["name"]({BBOX});out center tags qt;'],
 }
 LIMITS = {"ramp": 160, "pier": 120, "beach": 220}
 DEFAULT_NAME = {"ramp": "보트 램프", "pier": "부두", "beach": "해변"}
@@ -90,7 +92,7 @@ def main(argv: list[str] | None = None) -> int:
             if kind not in only:
                 continue
             try:
-                got[kind] = fetch_one(client, q)
+                got[kind] = {"elements": [el for query in q for el in fetch_one(client, query).get("elements", [])]}
             except Exception as e:  # noqa: BLE001
                 print(f"spots: {kind} failed — keeping previous ({len(old.get(kind, []))}): {e}", file=sys.stderr)
     if not got:
