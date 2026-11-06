@@ -314,7 +314,11 @@ function sectionBlock(key: SectionKey, showHeading: boolean): HTMLElement | null
   wrap.append(h("h2", { id: `h-${key}`, class: showHeading ? "sec-title" : "sr-only" }, sec.label));
   if (sec.briefing) wrap.append(h("p", { class: "briefing" }, h("span", { class: "briefing-label" }, "오늘의 한 줄"), sec.briefing));
   if (!sec.items.length) wrap.append(h("p", { class: "empty" }, "새 소식이 없습니다."));
-  for (const item of sec.items) wrap.append(card(item, region));
+  // 이민 레이더는 최신 기사가 맨 위(발행 시각 내림차순, 시각이 없는 기사는 뒤로 — 같으면 선별 순서 유지)
+  const items = key === "nz_immigration"
+    ? [...sec.items].sort((x, y) => (y.published_at ? Date.parse(y.published_at) : -Infinity) - (x.published_at ? Date.parse(x.published_at) : -Infinity))
+    : sec.items;
+  for (const item of items) wrap.append(card(item, region));
   return wrap;
 }
 
