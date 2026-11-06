@@ -246,6 +246,8 @@ llm:
     rank_model_production: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
     summary_model_production: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
     production_min_interval_seconds: 13   # Flash 분당 5회 한도 보호
+    rounds: 2                    # 모든 모델이 과부하(503)·한도(429)면 잠시 쉬었다 후보 전체를 한 번 더 시도
+    cooldown_seconds: 120        # 라운드 사이 쉬는 시간
     # thinking_budget: 0         # Gemini 2.5 계열에서만 사용 (사고 끔). Gemini 3 계열에서는 넣지 마세요
     min_interval_seconds: 10     # 요청 간 최소 간격 (분당 한도 보호)
     retry_wait_seconds: 60       # 429(분당 한도 초과) 시 한 번만 재시도하기 전 대기

@@ -191,6 +191,7 @@ def test_gemini_503_moves_to_next_model(cfg):
 
 
 def test_gemini_429_retries_once_then_errors(cfg):
+    cfg["llm"]["gemini"]["rounds"] = 1
     calls, sleeps = [], []
 
     def handler(req):
@@ -870,3 +871,37 @@ def test_same_issue_merges_without_regroup_call(cfg):
     akl = select(items, cfg, llm, FIXTURE_NOW)["nz_auckland"]
     assert [c["task"] for c in llm.calls] == ["rank"]
     assert len(akl) == 2 and any(len(a.related) == 1 for a in akl)
+
+
+def test_gemini_cools_down_and_retries_all_candidates_once_more(cfg):
+    """모든 후보가 503 이면 잠시 쉬었다 한 번 더 — 두 번째 라운드에서 성공하면 그 결과를 쓴다."""
+    cfg["llm"]["gemini"]["rounds"] = 2
+    cfg["llm"]["gemini"]["cooldown_seconds"] = 77
+    sleeps, state = [], {"n": 0}
+    n_models = len(cfg["llm"]["gemini"]["rank_model"])
+
+    def handler(req):
+        state["n"] += 1
+        if state["n"] <= 2 * n_models:   # 첫 라운드: 모델마다 2회(재시도 포함) 전부 과부하
+            return httpx.Response(503, json={"error": {"status": "UNAVAILABLE"}})
+        return httpx.Response(200, json=_gemini_ok('{"ok": 9}'))
+
+    llm = _gemini(cfg, handler, sleeps)
+    assert llm.json_call(task="rank", system="s", user="u", schema={}) == {"ok": 9}
+    assert 77.0 in sleeps and llm.requests == 1
+
+
+def test_failed_calls_do_not_count_against_the_request_budget(cfg):
+    cfg["llm"]["gemini"]["rounds"] = 1
+    cfg["llm"]["max_requests_per_run"] = 2
+    llm = _gemini(cfg, lambda req: httpx.Response(503, json={}))
+    for _ in range(3):
+        with pytest.raises(LLMError):
+            llm.json_call(task="rank", system="s", user="u", schema={})
+    assert llm.requests == 0                       # 응답을 받지 못했으니 하루 몫을 쓰지 않음
+    for _ in range(3):                              # 시도 4~6번째까지는 실패해도 계속 시도(상한 = 요청 상한의 3배 = 6)
+        with pytest.raises(LLMError) as e:
+            llm.json_call(task="rank", system="s", user="u", schema={})
+        assert not isinstance(e.value, RequestCapReached)
+    with pytest.raises(RequestCapReached, match="max attempts"):
+        llm.json_call(task="rank", system="s", user="u", schema={})

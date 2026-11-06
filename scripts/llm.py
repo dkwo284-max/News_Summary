@@ -62,8 +62,14 @@ class BaseLLM:
             raise LLMError(f"AI disabled for this run: {self.disabled}")
         if self.requests >= self.max_requests:
             raise RequestCapReached(f"max_requests_per_run={self.max_requests} reached")
+        # 하루 몫(요청 수)에는 '응답을 받은' 호출만 센다 — 서버 과부하(503)·한도(429)로 실패한 호출이 몫을 먹지 않게.
+        # 대신 실패가 끝없이 이어지지 않도록 시도 횟수에도 상한(요청 상한의 3배)을 둔다.
+        self.attempts = getattr(self, "attempts", 0) + 1
+        if self.attempts > self.max_requests * 3:
+            raise RequestCapReached(f"max attempts per run ({self.max_requests * 3}) reached")
+        out = self._call(task=task, system=system, user=user, schema=schema, max_tokens=max_tokens)
         self.requests += 1
-        return self._call(task=task, system=system, user=user, schema=schema, max_tokens=max_tokens)
+        return out
 
     def _call(self, **kw) -> dict:  # pragma: no cover
         raise NotImplementedError
@@ -160,23 +166,34 @@ class GeminiLLM(BaseLLM):
         # 성공한 모델은 기억해 다음 요청에 먼저 사용
         candidates = self._working.get(task, []) + [m for m in self.models_for(task) if m not in self._working.get(task, [])]
         last_err = None
-        for model in candidates:
-            r = self._post(model, body)
-            if r.status_code in (429, 500, 503):
-                wait = float(self.pcfg.get("retry_wait_seconds", 60) if r.status_code == 429 else self.pcfg.get("overload_wait_seconds", 20))
-                log.warning("gemini %s HTTP %s — retrying once in %ss", model, r.status_code, wait)
-                self.sleep(wait)
+        # 모든 후보가 429·503 처럼 '잠시 뒤 나아질 수 있는' 오류로 실패하면, 잠깐 쉬었다가 후보 전체를 한 번 더(라운드) 시도한다.
+        # (404 처럼 영구적인 실패만 있으면 쉬지 않는다.)
+        rounds = max(1, int(self.pcfg.get("rounds", 2)))
+        for rnd in range(rounds):
+            transient = False
+            for model in candidates:
                 r = self._post(model, body)
-            if r.status_code in (404, 429, 500, 503):
-                last_err = f"gemini HTTP {r.status_code} for {model}: {r.text[:200]}"
-                log.warning("gemini model %s failed (HTTP %s) — trying next candidate", model, r.status_code)
-                continue
-            if r.status_code >= 400:
-                if r.status_code in (401, 403) or "API_KEY_INVALID" in r.text:
-                    self.disabled = f"gemini HTTP {r.status_code} (API 키 확인 필요)"
-                raise LLMError(f"gemini HTTP {r.status_code}: {r.text[:300]}")
-            self._working[task] = [model]
-            return self._parse(model, r.json())
+                if r.status_code in (429, 500, 503):
+                    wait = float(self.pcfg.get("retry_wait_seconds", 60) if r.status_code == 429 else self.pcfg.get("overload_wait_seconds", 20))
+                    log.warning("gemini %s HTTP %s — retrying once in %ss", model, r.status_code, wait)
+                    self.sleep(wait)
+                    r = self._post(model, body)
+                if r.status_code in (404, 429, 500, 503):
+                    last_err = f"gemini HTTP {r.status_code} for {model}: {r.text[:200]}"
+                    transient = transient or r.status_code != 404
+                    log.warning("gemini model %s failed (HTTP %s) — trying next candidate", model, r.status_code)
+                    continue
+                if r.status_code >= 400:
+                    if r.status_code in (401, 403) or "API_KEY_INVALID" in r.text:
+                        self.disabled = f"gemini HTTP {r.status_code} (API 키 확인 필요)"
+                    raise LLMError(f"gemini HTTP {r.status_code}: {r.text[:300]}")
+                self._working[task] = [model]
+                return self._parse(model, r.json())
+            if not transient or rnd == rounds - 1:
+                break
+            cool = float(self.pcfg.get("cooldown_seconds", 120))
+            log.warning("gemini: all candidates busy — cooling down %ss before round %d/%d", cool, rnd + 2, rounds)
+            self.sleep(cool)
         raise LLMError(last_err or "no gemini model candidates")
 
     def _parse(self, model: str, data: dict) -> dict:
