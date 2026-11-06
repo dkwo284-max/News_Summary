@@ -22,6 +22,10 @@ on:
         description: "오늘 브리핑이 이미 있어도 다시 생성 (AI 요청이 다시 소모됨)"
         type: boolean
         default: false
+      ignore_cap:
+        description: "AI 공용 예산(남은 몫) 무시 — 오늘 AI 호출이 서버 오류로 실패해 브리핑이 영어·휴리스틱으로 나왔을 때 한 번만"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -64,7 +68,8 @@ jobs:
           FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.force && '--force' || '' }}
           ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.processing_only && '--update-processing' || '' }}
           SKIP: ${{ github.event_name == 'workflow_dispatch' && !inputs.overwrite && '--skip-existing' || '' }}  # 수동·외부 호출이 겹쳐도 하루 한 번만 AI 소모
-        run: python scripts/main.py $FORCE $ONLY $SKIP
+          CAP: ${{ github.event_name == 'workflow_dispatch' && inputs.ignore_cap && '--ignore-cap' || '' }}
+        run: python scripts/main.py $FORCE $ONLY $SKIP $CAP
 
       - name: Commit data
         if: steps.run.outputs.generated == 'true'
