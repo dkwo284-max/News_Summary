@@ -1,0 +1,2249 @@
+{
+ "date": "2026-11-07",
+ "generated_at": "2026-11-07T07:15:09+13:00",
+ "timezone": "Pacific/Auckland",
+ "sections": {
+  "kr_society": {
+   "label": "사회",
+   "briefing": "법무장관 후보 지명과 농협회장 구속영장 기각 등 주요 사법 현안이 이어졌습니다.",
+   "items": [
+    {
+     "id": "0967827daee9",
+     "title_ko": "이용철 법무장관 후보 “검찰개혁 차질없이 완수하겠다”",
+     "summary_ko": [
+      "이용철 법무부 장관 후보자가 이재명 대통령의 지명 직후 검찰개혁의 차질 없는 완수를 약속했습니다.",
+      "참여정부 청와대 법무비서관 경험을 바탕으로 공소청과 중수청 출범 등 형사사법체계 개편 안착에 힘쓰겠다고 밝혔습니다.",
+      "새로운 제도의 안정적 정착과 함께 범죄 피해자 및 사회적 약자의 인권 보호에 최선을 다할 전망입니다."
+     ],
+     "tags": [
+      "정치",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/society/12200764"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261106175200004"
+      }
+     ],
+     "original_title": "이용철 법무장관 후보 “검찰개혁 차질없이 완수하겠다”",
+     "published_at": "2026-11-06T09:27+00:00"
+    },
+    {
+     "id": "61850fe4bca7",
+     "title_ko": "공소청, '금품수수 의혹' 강호동 농협중앙회장 구속영장 기각",
+     "summary_ko": [
+      "공소청이 1억원대 금품수수 등의 혐의를 받는 강호동 농협중앙회장에 대해 경찰이 신청한 구속영장을 기각했습니다.",
+      "주요 혐의에 대한 소명이 부족하고 장기간 수사 경과 등을 고려할 때 현 단계에서 구속의 필요성을 인정하기 어렵다고 설명했습니다.",
+      "향후 경찰의 추가 수사 여부와 보완 수사 방향에 이목이 집중될 것으로 보입니다."
+     ],
+     "tags": [
+      "사건사고",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261106175800004"
+      },
+      {
+       "name": "MBC 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9KNWVSM25xNG55b09SLUFXOC1faV9ZamhoTVlMMk9VTkRPb0ZRM3JMa0FOV3hOM3VxNTVaRzhCbU9rcXUtRnM5Nms5dUNIZHNBZ3VJY2x1RDczREhEOGRWWWFWdVZVVG9scXVMVXljMi0xVmpoR2RF0gF3QVVfeXFMT3NtcTczNHdQbU03Xy11cXdUMF9IeElQLThwSUk0ZW5IemcwU2c1MWJ4ODI4OFNwbk5sdWEwUWpNaGJUMUdreW43Z0wxengzUkszNzVmRHhjVmxIb3pjbElCRXZnck9kSXJDT2NLdE9FamwwQ3JfeWM?oc=5"
+      },
+      {
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/society/12200770"
+      },
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/court_law/2026/11/07/6QID5VEGYREAJMD6HEM6AJBDE4/"
+      }
+     ],
+     "original_title": "공소청, '금품수수 의혹' 강호동 농협중앙회장 구속영장 기각",
+     "published_at": "2026-11-06T15:36+00:00"
+    },
+    {
+     "id": "6ff90f03da41",
+     "title_ko": "12월 법관회의, 이달 30일로 앞당겨… 대법원장 국조·탄핵 대응 논의",
+     "summary_ko": [
+      "전국법관대표회의가 이달 30일로 일정을 앞당겨 개최될 예정입니다.",
+      "대법원장에 대한 국정조사와 탄핵 추진 등 사법부 현안에 대한 대응 방안을 집중적으로 논의할 것으로 보입니다.",
+      "사법부 내부의 의견 수렴 결과가 향후 정국과 법원 운영에 큰 영향을 미칠 전망입니다."
+     ],
+     "tags": [
+      "사회",
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/court_law/2026/11/07/6LYW4UP6ENFSBOMT54TEHRTACI/"
+      }
+     ],
+     "original_title": "12월 법관회의, 이달 30일로 앞당겨… 대법원장 국조·탄핵 대응 방안 논의",
+     "published_at": "2026-11-06T15:36+00:00"
+    },
+    {
+     "id": "9d01eb32c0d0",
+     "title_ko": "“李, 본인 사건 수사 특검을 셀프 임명… 법치주의 대원칙 어긋나”",
+     "summary_ko": [
+      "야당과 법조계 일각에서 대통령 본인 관련 사건의 특검 임명에 대해 강한 비판 목소리가 나왔습니다.",
+      "대통령이 자신과 연관된 수사를 이끌 특검을 임명하는 것은 법치주의 대원칙에 어긋난다는 지적이 제기되었습니다.",
+      "이번 논란은 향후 특검 운영과 정국 주도권을 둘러싼 여야 간 공방을 더욱 심화시킬 것으로 보입니다."
+     ],
+     "tags": [
+      "정치",
+      "사회"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/court_law/2026/11/07/F3CQ5CKKLVGSNJZNGDMQKZPGTI/"
+      }
+     ],
+     "original_title": "“李, 본인 사건 수사 특검을 셀프 임명… 법치주의 대원칙 어긋나”",
+     "published_at": "2026-11-06T15:39+00:00"
+    },
+    {
+     "id": "876a85297a63",
+     "title_ko": "2년 공석이던 경찰청장에 김종철 직무대행",
+     "summary_ko": [
+      "약 2년 동안 공석으로 유지되었던 경찰청장 자리에 김종철 직무대행 체제가 들어섰습니다.",
+      "장기간 이어진 수장 공백 사태를 해소하고 조직의 안정을 꾀하기 위한 조치로 풀이됩니다.",
+      "새로운 지휘 체제 아래에서 치안 및 경찰 조직 개혁 과제가 어떻게 추진될지 주목됩니다."
+     ],
+     "tags": [
+      "사회",
+      "치안"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/national_general/2026/11/07/YKYAQHPOYBFNVDHNNI4PHR4PU4/"
+      }
+     ],
+     "original_title": "2년 공석이던 경찰청장에 김종철 직무대행",
+     "published_at": "2026-11-06T15:39+00:00"
+    }
+   ]
+  },
+  "kr_economy": {
+   "label": "경제",
+   "briefing": "증시 급락과 가상자산 거래소 중단 등 금융시장의 변동성이 크게 확대되었습니다.",
+   "items": [
+    {
+     "id": "b7bf9a29dcea",
+     "title_ko": "코스피, AI 쇼크… 장중 5000 붕괴",
+     "summary_ko": [
+      "국내 증시가 인공지능 관련 충격의 여파로 급락하며 코스피 지수가 장중 5000선 아래로 내려앉았습니다.",
+      "글로벌 기술주 약세와 투자 심리 위축이 겹치면서 지수 하방 압력이 크게 커졌습니다.",
+      "단기적인 시장 변동성이 확대됨에 따라 투자자들의 불안감과 추가 하락 우려가 증대되고 있습니다."
+     ],
+     "tags": [
+      "증시",
+      "경제"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/stock-finance/2026/11/07/27CXDOBX5BDJPIXAPSTMSQTBNU/"
+      }
+     ],
+     "original_title": "코스피, AI 쇼크… 장중 5000 붕괴",
+     "published_at": "2026-11-06T15:40+00:00"
+    },
+    {
+     "id": "c03a7f2e1358",
+     "title_ko": "‘블루 쓰나미’에 무너진 나스닥… 하루새 시총 3355조원, 사상 최대 증발",
+     "summary_ko": [
+      "미국 정치권의 선거 결과 여파로 뉴욕증시 나스닥 지수가 큰 폭으로 하락했습니다.",
+      "하루 만에 증발한 시가총액만 3355조원에 달해 사상 최대 규모를 기록했습니다.",
+      "글로벌 금융시장의 불확실성이 커지면서 국내외 증시에 연쇄적인 충격이 이어질 것으로 예상됩니다."
+     ],
+     "tags": [
+      "증시",
+      "경제"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/stock-finance/2026/11/07/K34VNEVPFJGWZFZLITH34OS7SA/"
+      }
+     ],
+     "original_title": "‘블루 쓰나미’에 무너진 나스닥… 하루새 시총 3355조원, 사상 최대 증발",
+     "published_at": "2026-11-06T15:38+00:00"
+    },
+    {
+     "id": "d8e4d0295a3a",
+     "title_ko": "미국 10월 고용 16만5천 명 ‘깜짝 증가’…12월 금리 인상 전망 강화",
+     "summary_ko": [
+      "미국의 10월 비농업 부문 고용이 16만5천 명 늘어나며 시장 예상치를 웃도는 증가세를 보였습니다.",
+      "탄탄한 고용 지표가 확인되면서 연방준비제도의 12월 추가 금리 인상 가능성에 무게가 실리고 있습니다.",
+      "글로벌 금리 향방이 다시 안개 속으로 빠져들며 환율과 증시에 부담으로 작용할 전망입니다."
+     ],
+     "tags": [
+      "고용",
+      "금리",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "KBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBQSDhpSkl4Z0ZlbFNYOGZjQ29GU0xmR0lQVi1FR3pRVE8xQ2JOcEpIbkJ2Y3VFUFBKZ1lrVXowZHE4NGRwalBvSWRPWjFnaU1WeWFRb01hVDlWVDg?oc=5"
+      },
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/int_economy/2026/11/06/37MXHMUDSFDLLMOFLRMFPT45YE/"
+      }
+     ],
+     "original_title": "미국 10월 고용 16만5천 명 ‘깜짝 증가’…12월 금리 인상 전망 강화",
+     "published_at": "2026-11-06T15:06+00:00"
+    },
+    {
+     "id": "d36bf1de073d",
+     "title_ko": "증권사들, 담보비율 낮추고 반대매매 유예… “변동성 증폭 방지”",
+     "summary_ko": [
+      "국내 주요 증권사들이 최근 증시 급락에 대응해 신용융자 담보비율을 낮추고 반대매매를 유예하는 조치를 시행했습니다.",
+      "정부의 신용융자 담보비율 유지 의무 면제 방침에 발맞추어 구체적인 시장 안정화 대책에 나선 것입니다.",
+      "이번 조치가 투자자들의 강제 청산 우려를 덜어주고 증시의 급격한 변동성을 완화하는 데 기여할 것으로 기대됩니다."
+     ],
+     "tags": [
+      "증시",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/stock-finance/2026/11/06/MQ2DEYJRGFQTOYJZHBSWIZRQGM/"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261106190300008"
+      }
+     ],
+     "original_title": "증권사들, 담보비율 낮추고 반대매매 유예… “변동성 증폭 방지”",
+     "published_at": "2026-11-06T14:12+00:00"
+    },
+    {
+     "id": "ddd9909a27c0",
+     "title_ko": "코인 거래소 고팍스, 해킹 협박에 입출금·매매 서비스 중단",
+     "summary_ko": [
+      "가상자산 거래소 고팍스가 최근 발생한 고객 정보 유출과 해킹 협박 이메일 수신으로 서비스를 중단했습니다.",
+      "오후부터 가상자산 입출금 및 매매를 전면 중단하고 보유 자산을 콜드월렛으로 이전하기로 결정했습니다.",
+      "이용자 자산 보호를 최우선으로 삼아 추가 피해를 막고 보안 점검을 강화할 방침입니다."
+     ],
+     "tags": [
+      "경제",
+      "기술",
+      "사건사고"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/stock-finance/2026/11/06/GA2TGNJQMM2GMODEHE2TCY3DHA/"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261106174751002"
+      }
+     ],
+     "original_title": "코인 거래소 고팍스, 해킹 협박에 입출금·매매 서비스 중단",
+     "published_at": "2026-11-06T10:37+00:00"
+    }
+   ]
+  },
+  "kr_entertainment": {
+   "label": "연예",
+   "briefing": "뉴진스 계약 논란과 방송인 소식 등 연예계 이슈가 다양하게 보도되었습니다.",
+   "items": [
+    {
+     "id": "ce6fdf6fafec",
+     "title_ko": "‘뉴진스’ 계약 불공정 논란…“가혹하다” vs “사실아냐”",
+     "summary_ko": [
+      "그룹 뉴진스를 둘러싼 전속계약 불공정 논란이 가중되며 양측의 입장이 팽팽하게 맞서고 있습니다.",
+      "계약 조건이 지나치게 가혹하다는 주장과 사실이 아니라는 반박이 동시에 제기되었습니다.",
+      "이번 논란은 향후 아티스트 활동과 기획사 간의 계약 관행 전반에 적잖은 파장을 남길 것으로 보입니다."
+     ],
+     "tags": [
+      "연예",
+      "방송"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "KBS 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5udVpNRDJqRjdKRDR3MjF5Z3l1QkVHNElQYm1mb00tNWN0VlA2S0M4SWJGT2hqdF9kQk9aWjVlOVhIWmRpLXJBT0hpY2JxM3pub2k5YjBZMDd4VmJqOWlPNjNXR2hJZw?oc=5"
+      }
+     ],
+     "original_title": "‘뉴진스’ 계약 불공정 논란…“가혹하다” vs “사실아냐”",
+     "published_at": "2026-11-06T12:36+00:00"
+    },
+    {
+     "id": "20fe77e483d7",
+     "title_ko": "“AI로 조진웅 교체 시도했지만…” 두번째 시그널 12월7일 공개",
+     "summary_ko": [
+      "인공지능 기술을 활용해 배우 조진웅의 교체를 시도했던 사연과 제작 비화가 주목받고 있습니다.",
+      "관련 프로젝트의 두 번째 결과물인 '시그널'이 다가오는 12월 7일에 공개될 예정입니다.",
+      "새로운 기술적 시도가 담긴 콘텐츠가 대중에게 어떤 평가를 받을지 관심이 집중됩니다."
+     ],
+     "tags": [
+      "연예",
+      "방송",
+      "기술"
+     ],
+     "importance": 3,
+     "sources": [
+      {
+       "name": "한겨레",
+       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBEWXl6cXZjejdHd1RJWUt1WHdnVTJJTnFBN3lHWWcxLXJ1OXVZYThFQmhIQ1E1RDd6aUNxSkRlZURPMXFpVXItaUtHUm5wVGpKYUdYUlJpWEJKMGl0U1pBcnNQMk1UZnhQeko3X1pUQUthQQ?oc=5"
+      }
+     ],
+     "original_title": "“AI로 조진웅 교체 시도했지만…” 두번째 시그널 12월7일 공개",
+     "published_at": "2026-11-06T13:15+00:00"
+    },
+    {
+     "id": "30df1b7415f4",
+     "title_ko": "김구라, 아들 그리 결혼설에…",
+     "summary_ko": [
+      "방송인 김구라가 아들 그리의 결혼설과 관련해 솔직한 심경을 밝혔습니다.",
+      "인생은 뜻대로 되지 않으며 세상 일은 알 수 없다는 취지의 발언으로 눈길을 끌었습니다.",
+      "해당 발언은 대중의 다양한 반응을 이끌어내며 소소한 화제를 모으고 있습니다."
+     ],
+     "tags": [
+      "연예"
+     ],
+     "importance": 3,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/2026/11/06/WVWWUGNJBRESHEOEIS5DBAMXP4/"
+      }
+     ],
+     "original_title": "김구라, 아들 그리 결혼설에…\"살다가도 이혼하는 판\"",
+     "published_at": "2026-11-06T12:22+00:00"
+    }
+   ]
+  },
+  "kr_politics": {
+   "label": "정치",
+   "briefing": "조작기소 특검법 통과와 법무부 장관 지명 등 정국이 크게 요동쳤습니다.",
+   "items": [
+    {
+     "id": "fd087d30869c",
+     "title_ko": "조작기소 특검법 국회 통과… 여야 공방 격화",
+     "summary_ko": [
+      "이재명 대통령 관련 사건과 윤석열 정부 검찰의 조작기소 의혹을 수사하는 특검법이 여당 주도로 본회의를 통과했습니다.",
+      "정치검찰의 행태를 엄벌해야 한다는 주장과 대통령의 사법 리스크를 덮기 위한 방탄용 악법이라는 비판이 맞섰습니다.",
+      "법안 통과를 둘러싼 여야 간의 극한 대립이 당분간 정국을 강타할 것으로 전망됩니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "YTN",
+       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1PSF9GTjJqcS1hUmVuMnRKcW02T0RTeEprV2ZuQ1E3eFp0M0cwZXV2Nzllekl1U1pWZ01vZTF1U0NUNVBLN0E1OWVHZUJXbkNjTk1TZi0tcndOd19MTkJEaU9qdFVrSzVmXy1NeUFRaw?oc=5"
+      },
+      {
+       "name": "굿모닝충청",
+       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5fMjkwMGVhZ3RIc3RNekNSRU4xbmNjQXlnWFN2SDZKTVo4ZHlUSHZfaWNsVGV2NlNZNEhNUDAxOGQ0ZWtRanhobUdWeXlwbkhxTVlOVTNXRjJkRE9zQ0RZVC1obGxzUnhLSGNRa3ZORGlIQQ?oc=5"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261106131151001"
+      }
+     ],
+     "original_title": "'조작기소 특검법' 국회 통과...\"정치검찰 엄벌\" vs \"대통령 죄 지우기\"",
+     "published_at": "2026-11-06T12:37+00:00"
+    },
+    {
+     "id": "d88a0420da6b",
+     "title_ko": "李, 이용철 방사청장을 법무장관 후보로 지명",
+     "summary_ko": [
+      "이재명 대통령이 이용철 방위사업청장을 신임 법무부 장관 후보자로 공식 지명했습니다.",
+      "참여정부 시절 법무비서관을 지낸 이력을 바탕으로 개혁 과제를 완수할 적임자로 평가받았습니다.",
+      "새로운 장관 후보자 지명이 향후 검찰 개혁과 사법 정책 추진에 탄력을 줄지 주목됩니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/politics_general/2026/11/07/6DOVAPI6IZCKDOQG3SUS4JAPJY/"
+      }
+     ],
+     "original_title": "李, 이용철 방사청장을 법무장관 후보로 지명",
+     "published_at": "2026-11-06T15:40+00:00"
+    },
+    {
+     "id": "d77348d154fa",
+     "title_ko": "이 대통령 \"내편만 옳다는 건 광신…극단적 진영주의 경계\"",
+     "summary_ko": [
+      "이재명 대통령이 진영 간 갈등과 극단적인 정치 문화를 정조준해 비판 메시지를 냈습니다.",
+      "내 편만 무조건 옳다고 여기는 태도는 광신에 가깝다며 극단적 진영주의를 경계해야 한다고 강조했습니다.",
+      "대통령의 이번 발언이 향후 정국 운영과 여야 관계 개선에 어떤 변화를 가져올지 이목이 쏠립니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "연합뉴스TV",
+       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1YeU42UXdCb0J6Q1E5SXlaLWR1TVdxcXRjbnJfdm0teDFIZDlRZDdQUFF5ZFRJOU8tZTQ0X21FVDNjS0ZGb292STZDeUR4cFBTMndQaFlnbkFNM052UGZDWFZ1RDNkc0k?oc=5"
+      },
+      {
+       "name": "강원일보",
+       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE8xWXl5LW8xbUx2ODVBX2IyMWt1bkJBVXJUTUUzdmRWSm9QRjdYVzFlSVJPeG5leFZHZmNRWkhNSWZnT1hpemdncWp0ZnNkWWRzQkwwQVE0ZGxJVDQ?oc=5"
+      }
+     ],
+     "original_title": "이 대통령 \"내편만 옳다는 건 광신…극단적 진영주의 경계\"",
+     "published_at": "2026-11-06T13:02+00:00"
+    },
+    {
+     "id": "40d9c3a6fd2b",
+     "title_ko": "조작기소 특검 강행한 날… 새 법무에 성남라인",
+     "summary_ko": [
+      "조작기소 특검법이 강행 처리된 날, 정부가 신임 법무부 장관 후보자로 '성남라인' 인사를 지명했습니다.",
+      "여당의 입법 드라이브와 핵심 요직 인사가 맞물리며 정권 차원의 개혁 기조가 더욱 뚜렷해졌습니다.",
+      "야권의 거센 반발 속에서 향후 정국 주도권을 잡기 위한 여야의 기싸움이 더욱 치열해질 전망입니다."
+     ],
+     "tags": [
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/assembly/2026/11/07/UJHUK2UEBZCQZBMHAGM7J6BJU4/"
+      }
+     ],
+     "original_title": "조작기소 특검 강행한 날… 새 법무에 성남라인",
+     "published_at": "2026-11-06T15:40+00:00"
+    },
+    {
+     "id": "f63d58439f45",
+     "title_ko": "한국 원잠 사업 스타트, 암초는 美 민주당",
+     "summary_ko": [
+      "한국의 원자력 잠수함 건조 사업이 본격적인 시동을 걸었으나 미국 민주당의 우려라는 암초를 만났습니다.",
+      "핵확산 방지와 동맹국 정책 조율 등을 이유로 미 의회 내에서 신중론이 제기되고 있습니다.",
+      "성공적인 사업 추진을 위해서는 향후 미국 정치권과의 긴밀한 외교적 조율이 필수적일 것으로 보입니다."
+     ],
+     "tags": [
+      "정치",
+      "기술"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/diplomacy-defense/2026/11/07/H3XJMEDRAVFCBEQPI3MPYP4PAQ/"
+      }
+     ],
+     "original_title": "한국 원잠 사업 스타트, 암초는 美 민주당",
+     "published_at": "2026-11-06T15:40+00:00"
+    }
+   ]
+  },
+  "nz_society": {
+   "label": "사회",
+   "briefing": "구리 도둑으로 인한 통신망 장애가 잇따르고 병원 IT 시스템 불안정도 도마에 올랐습니다.",
+   "items": [
+    {
+     "id": "2dda1efcda09",
+     "title_ko": "구리 도둑의 통신선 훼손으로 오클랜드 인터넷 마비",
+     "summary_ko": [
+      "스완슨과 매시 지역에서 구리 도둑이 통신 케이블을 훼손해 1만 명이 인터넷 장애를 겪었습니다.",
+      "광케이블과 구리선이 나란히 매설되어 절도범들이 광케이블까지 절단하면서 통신 대란이 발생했습니다.",
+      "이로 인해 학교 응급 상황에서 의료 기록 접근이 지연되는 등 중대한 공공 피해로 이어졌습니다."
+     ],
+     "tags": [
+      "사회",
+      "사건사고",
+      "기술"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/crime-and-justice/2385506/copper-thieves-causing-widespread-fibre-outages-in-hunt-for-scrap-metal"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/auckland/police-slam-copper-thieves-after-school-left-unable-to-access-students-medical-info-during-health-emergency/BRA5IDDLNZAANGRGQM42Y3YBQU/"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQZm1KTFMwLVBHbmd5QkNtQy02enhmTnlzeHU0SmR6d3d4eEVXc0xWdVFfSl9jWXhsNHJ6Q3JQZ0o3c3JQbXdYVHhuT1ZtUzRsQ0ZYZlZpb1h6NGg0NFZPZGVkNU9mdlNvR2ZQR1B5NXFGU2k5ckxZdHVHQ3hYZDJ5elhVOS1YWU51b3REcjd4WWI4UUZpRTJTVzFaQm9vNXc5Y21Pam5rb29RZHVQUVNxT1htVmNtN2xyWncw?oc=5"
+      }
+     ],
+     "original_title": "Copper thieves causing widespread fibre outages in hunt for scrap metal",
+     "published_at": "2026-11-06T02:48+00:00",
+     "why_it_matters": "졸업 후 오클랜드에서 거주하며 재택근무나 구직을 준비할 때 필수적인 통신 인프라 안정성에 영향을 줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 지역 통신선 훼손으로 인한 인터넷 장애는 졸업 후 구직 및 재택 활동에 지장을 줌.",
+      "actions": [
+       "모바일 핫스팟 등 비상 통신 수단 점검"
+      ],
+      "watch": "오클랜드 통신망 복구 작업 및 구리 도단 범죄 단속 현황"
+     }
+    },
+    {
+     "id": "708d5c7179cf",
+     "title_ko": "스쿨버스 가스켓 결함으로 어린이들 병원 이송",
+     "summary_ko": [
+      "스쿨버스 차량 결함으로 매연이 유입되어 어린이들이 병원으로 이송되는 사고가 발생했습니다.",
+      "정확한 원인 조사와 함께 학생들의 대중교통 안전에 대한 우려가 커졌습니다.",
+      "관련 기관의 철저한 차량 점검과 후속 조치가 요구되고 있습니다."
+     ],
+     "tags": [
+      "사회",
+      "사건사고",
+      "교통"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQRmtuelR6bG9UbERiYjhtX2V2am5MeHFWUEhOOG5fLUh1RFJQT3MtblZkY1l0SUkybjFKb0lzTWt5TzM0dndORnhUMkVqUGdNQ1hkWHQ0LTA4bWtrOFh5MHYybUpoV1BLbVhoYTJleGdBNWsxekxxREhJdzFkaEhKdVVDSWwwek5oNnduNVhjQ2tNcUNvRmM1ZERITG9xQlo3a1AyUTF0YWhaSDFqaHBRR0hDeThZT3gwLXBFWEhSUWs2WF9BMDJMdkhNSQ?oc=5"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQZGJSLWdSOEMxc3ljYThVc3BpRVlpNDdERmtUWjdBSEYxdXpaMDF0ZDlhekd6TVpYQ1NDMGcya2k2VzhsLUwtZ1dyZFhoQ1UtekxVaHVpN21aZ2EyU09oVUdvME9Kd0QteFJ6aDJrWGRmYW5POGVkNnJYckhiMER3MnQ1NjVUTndqN2FIWGYxdTBNTEQ4dXZ5WEZpQQ?oc=5"
+      }
+     ],
+     "original_title": "Nine children sent to Wellington Hospital after head gasket blew on school bus",
+     "published_at": "2026-11-04T02:11+00:00",
+     "why_it_matters": "오클랜드 대중교통 이용 시 발생할 수 있는 안전 사고와 밀접한 관련이 있습니다.",
+     "impact": {
+      "level": "low",
+      "reason": "웰링턴 스쿨버스 사고로 오클랜드 거주 초등 입학 예정 자녀의 통학 안전에 직접 영향은 없음.",
+      "actions": [],
+      "watch": "학교버스 정비 및 안전 점검 강화 여부"
+     }
+    },
+    {
+     "id": "e4c9ed280f96",
+     "title_ko": "보건부 IT 장애로 환자 치료 차질 논란",
+     "summary_ko": [
+      "노조 설문조사 결과 보건부 산하 시설의 잦은 IT 장애가 수술 취소 등 환자 치료에 악영향을 미치는 것으로 나타났습니다.",
+      "의료진의 대다수가 전년보다 IT 문제가 심화되었다고 응답해 시스템 개선 필요성이 제기되었습니다.",
+      "정치권에서는 선거를 앞둔 시점의 발표라며 공방을 벌이고 있어 향후 보건 정책 방향에 관심이 모입니다."
+     ],
+     "tags": [
+      "의료",
+      "사회",
+      "정치"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/health/2367874/regular-it-outages-impacting-patient-care-surveys-find-but-minister-dismisses-it-as-political"
+      }
+     ],
+     "original_title": "Regular IT outages impacting patient care, surveys find, but minister dismisses it as political",
+     "published_at": "2026-11-05T22:57+00:00",
+     "why_it_matters": "오클랜드 거주 시 의료 서비스 접근성과 공공 보건 시스템의 효율성을 가늠하는 지표가 됩니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 거주 시 의료 서비스 이용 중 IT 장애로 인한 진료 차질 가능성이 있음.",
+      "actions": [
+       "병원 예약 시 진료 일정 재확인"
+      ],
+      "watch": "보건부(Health NZ)의 IT 시스템 개선 대책 발표"
+     }
+    },
+    {
+     "id": "7d66eadadbc9",
+     "title_ko": "청소년들 사이로 번지는 위험한 마약 흡입 전자담배",
+     "summary_ko": [
+      "14세 청소년들까지 좀비 같은 블랙아웃을 유발하는 약물 성분이 든 전자담배를 흡입하고 있습니다.",
+      "보건 전문가는 해당 약물이 응급실에서나 쓰이는 위험한 물질이라고 경고했습니다.",
+      "청소년 마약류 접근에 대한 사회적 경각심이 한층 높아지고 있습니다."
+     ],
+     "tags": [
+      "사회",
+      "의료"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/nz-news/361055431/teens-young-14-inhaling-anaesthetic-laced-vapes-can-cause-zombie-blackouts"
+      }
+     ],
+     "original_title": "Kids as young as 14 inhaling drug-laced vapes that can cause ‘zombie-like blackout’",
+     "published_at": "2026-11-06T07:58+00:00",
+     "why_it_matters": "지역사회 청소년 안전과 밀접하며 향후 오클랜드 생활환경의 치안 및 보건 이슈로 이어집니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "초등 입학 예정 자녀를 둔 학부모로서 지역사회의 청소년 마약 및 전자담배 확산은 주의 깊게 볼 사안임.",
+      "actions": [
+       "자녀 대상 약물 및 전자담배 유해성 교육"
+      ],
+      "watch": "보건부 및 교육부의 청소년 대상 전자담배 규제 강화 조치"
+     }
+    },
+    {
+     "id": "598b2f9fc2a6",
+     "title_ko": "웰링턴 학교들 경찰 사건으로 일제히 폐쇄",
+     "summary_ko": [
+      "관심 인물 수색 등 경찰 작전으로 인해 웰링턴 지역의 여러 학교가 긴급 폐쇄 조치되었습니다.",
+      "오전 시간대 학교 주변 보안 유지를 위해 학생과 교직원이 실내에 머물렀습니다.",
+      "경찰의 신속한 대응으로 추가 피해 없이 상황이 관리되었습니다."
+     ],
+     "tags": [
+      "사회",
+      "치안",
+      "사건사고"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVldhNHR5SXFEVWZ4RXlXSnNfTGE5Y0Q2alpsT19TT1d3Rzh1QThUTVZHWG1UMUxpUGp1ZFRpSzVTMkVHMkZSajUxcVotS25Mal9Bd09hVGdCb29EenlISlJHU3c2TEU0WnlsNHZjaEU0Y0MzcEFzSFA0Ynl6NHpIaVlBTnZwTlFCVWRjOUNTWFlQdVQ5bFpHeFoxQVdBa3JMbHBMTVJ3Wlhnb28?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/crime-and-justice/2374917/multiple-wellington-schools-locked-down-after-potential-sighting-of-person-of-interest"
+      }
+     ],
+     "original_title": "Multiple Wellington schools under lockdown following police incident",
+     "published_at": "2026-11-06T00:40+00:00",
+     "why_it_matters": "지역사회와 교육 기관의 긴급 대응 체계 및 치안 상황을 보여줍니다.",
+     "impact": {
+      "level": "none",
+      "reason": "웰링턴 지역의 학교 폐쇄 조치로 오클랜드 거주 가족에게 직접 영향 없음.",
+      "actions": [],
+      "watch": ""
+     }
+    }
+   ]
+  },
+  "nz_education": {
+   "label": "교육",
+   "briefing": "학교 호스텔이 면허 정지로 폐쇄되는 등 교육 현장의 안전과 규제가 강화되고 있습니다.",
+   "items": [
+    {
+     "id": "36d8681cb870",
+     "title_ko": "고등학교 농업 교육 과정 독립 과목으로 유지",
+     "summary_ko": [
+      "정부의 방침 선회로 고등학교 농업 커리큘럼이 단독 과목으로 계속 유지되게 되었습니다.",
+      "교육계와 농업계에서는 상식적인 결정이라며 환영의 뜻을 나타냈습니다.",
+      "학생들에게 다양한 실무 중심 진로 교육 기회가 보존될 전망입니다."
+     ],
+     "tags": [
+      "교육",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "Stuff.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNMVk1aXh5Y1Q4Y1RfdFh1c3JBSF9oTWEzTFZvNmpxbjBQSkhHWkxpdWVXaGoyVUstRjR1dTJlTXRTSk43b1NrdGI4TTE2dXdBV0I0QTBWMVFvSzFpTVZ1Y2RuWmlqb0E4Yk0xWUE4Vms0SnpQSDZ5RHYwcGI4aUR2dXlGRDBXM2VuSGRHV1RBNHhBQQ?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQUkN5b3E3eVF3Nll6NXliMWY1a2pDZjNqTTRrQXhaUGJMWjY4cjE0WXlIYUdZX0g5bnpaSk4yYnhaZU5xQ0xlZ3BsUWVWSFhwZDJTNFBXQkRHSFp2dFNheXhoaGpQam9Udi1SSWZQWW1xRmQtcnVsb082cFM1Q0JCem5Cdk9QbXVTbU1xREVMdXFWZ0Y1OXd5aFczVFhWUHdoemRaNHBxdkNaMDhZempsRkplUGVlak9XMTJtNFVhdU54Y0gtNmJ0Rkdn?oc=5"
+      },
+      {
+       "name": "B2B News",
+       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPMzg0T3FqeGZYaXV6UE1Qb2MxZ2o2Zm9LQkdMU0JtSi1CVUlMQk5uT1VNR2hyQnd1VnVGRkxvY0s1aGVvR2R2eVk2T0xtR2RJRDVIRlFrY0xpdmlGUWVxYlZZb2xNc0hMY0VZaXFBVHVmU0lfZVpvWm8xS19sUWp1SUJqTVRpQXZ5S1R2SXMxQVo?oc=5"
+      },
+      {
+       "name": "ODT",
+       "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOSVJYSVhNblltdVZpUElQN0JPazZBR1JMLWhZNTZzeUl2N082X1dRblU5bVRGS1FXUVZMVUtuVzNNSnFuZkV1OGdqY3dOZm9MMHNxZlNRSmhaTnAycktQaEh2TWxqWVdiVm1PdzQ4LU5NX2tIRnFXLWJ3VlBoSm9PLTFjZEdZdUlycnFEVmhnOVRNemlHV19YX3Y4ZFQwOTh2VkJjSUVwMmlRbk44YnlHQkRONzQycjZLSlQyeTdDUEI0bE9yWkdCbXBIN0U?oc=5"
+      }
+     ],
+     "original_title": "School agriculture curriculum won’t be fenced in",
+     "published_at": "2026-11-05T15:00+00:00",
+     "why_it_matters": "뉴질랜드 교육부의 커리큘럼 정책 변화 방향과 학교 교육의 다양성을 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "고등학교 농업 커리큘럼 유지 소식으로 초등학생 자녀를 둔 가족에게는 당장 직접적 영향이 적음.",
+      "actions": [],
+      "watch": "뉴질랜드 교육부의 학교 커리큘럼 개편 후속 조치"
+     }
+    },
+    {
+     "id": "4b6a1c9cba27",
+     "title_ko": "교육 검토 보고서 부실 지적에 기숙사 운영 정지",
+     "summary_ko": [
+      "교육 검토청(ERO)의 엄격한 조사 결과에 따라 하토 파오라 칼리지 기숙사의 운영 면허가 정지되었습니다.",
+      "학생들의 안전과 이익에 반한다는 판단에 따라 금요일 오후부터 효력이 발생했습니다.",
+      "학부모들은 긍정적 변화가 고려되지 않았다며 아쉬움을 표명했습니다."
+     ],
+     "tags": [
+      "교육",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/education/2389451/hato-paora-college-hostel-closes-after-damning-education-review-office-report"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPckVpb3VORVpJWFdsVXRKemRndFhneVV0dC11aWFxN1p6U2JtZEpCQ1ctdElNeFlzOXkyd2VRLVRzdVZJdTllM21wd3llR1lEUk91Q1A2NUJfRHliSGpaRDgyYXU3b2c5SDlmR0w4VnJVVThUVDY4SThyQWhRd1ZmQ1ZubjZyM3FHTzY1NjctQ1BZRi1WcHFudnFOWGttRE9TNHo0SktBcU83dE1LOXY2emMzbEhOOTFkemVlUmlTU1R6X3RJZkxPU3dPaw?oc=5"
+      }
+     ],
+     "original_title": "Hato Pāora College hostel closes after damning Education Review Office report",
+     "published_at": "2026-11-06T09:03+00:00",
+     "why_it_matters": "교육 기관의 학생 보호 의무와 규제 당국의 엄격한 기숙사 관리 기준을 시사합니다.",
+     "impact": {
+      "level": "none",
+      "reason": "마나와투 지역 고등학교 기숙사 운영 정지 건으로 오클랜드 유학생 가족과 무관함.",
+      "actions": [],
+      "watch": ""
+     }
+    },
+    {
+     "id": "0757f3c5d300",
+     "title_ko": "어린이 학습 방식을 반영한 온라인 초등학교 에미",
+     "summary_ko": [
+      "아이들의 실제 학습 방식을 중심으로 설계된 새로운 온라인 초등학교 플랫폼이 소개되었습니다.",
+      "전통적인 교실 환경을 넘어선 대안 교육 모델로 주목받고 있습니다.",
+      "디지털 기술을 활용한 교육의 확장 가능성을 보여줍니다."
+     ],
+     "tags": [
+      "교육",
+      "기술"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPNEcyd3JHQjF4SGlaVFZBeUlhMnRMdjZHajVDejdoZ3JWZVA1YzN2R2pBekc2a3JmT242cktLYjlqaGRZTDJhMlllazgwVEFhX2gtRW05VTI0NDl2UENOdEdrMUgxd1hqSGk5M2xWRE5XYWd1V0lNY3puaWJjdVIza1c0eTFkUlRNSTF2RFZGSzVyenMzMkZpSjJETmJUekwtX3hEeEwtOXh5TEJrYWd5TC1NQS15X1FNUFNNVXltaGtxejlXcVRPLWhhSHEyemlpWnJQR01n?oc=5"
+      }
+     ],
+     "original_title": "Emi: The online primary school built around how kids actually learn",
+     "published_at": "2026-11-05T22:28+00:00",
+     "why_it_matters": "뉴질랜드 교육 부문의 혁신 트렌드와 디지털 학습 환경 변화를 엿볼 수 있습니다.",
+     "impact": {
+      "level": "low",
+      "reason": "대안 온라인 초등학교 플랫폼 소개이나 자녀의 공립 초등학교 취학 계획에는 당장 영향이 적음.",
+      "actions": [],
+      "watch": "디지털 교육 플랫폼 확산 추이"
+     }
+    },
+    {
+     "id": "b1cfa8056a70",
+     "title_ko": "초등학생이 명명한 푸드스터프스의 첫 전기 트럭",
+     "summary_ko": [
+      "유통업체 푸드스터프스의 첫 친환경 전기 트럭 도입을 초등학생이 직접 명명하며 축하했습니다.",
+      "물류 부문의 탄소 배출 감축을 위한 업계의 노력이 이어지고 있습니다.",
+      "지속 가능한 비즈니스 환경 조성을 위한 상징적 행보입니다."
+     ],
+     "tags": [
+      "경제",
+      "교육",
+      "사회"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "Stuff.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNEJyODd4bnFWMFBwZVI5ckJKOUt6TEdrWnRVY0VJSzFjeG9tQlJhMVJSREV6amp2NTFxajNHOE9SVFdTcHhIc0NGdlNHa1dxdmRFT2oyR05CbTlaT0pIR0s0QVFzZGpsYkNCbG43RXdraDFQVUhoMU1DZ056WDd3YUl6c2tZd2EybGVNYWIyeExXZ3NWdUFjbncyc1BMRlA2cVptSjB4S0dWZw?oc=5"
+      }
+     ],
+     "original_title": "Primary school pupil christens Foodstuffs’ first electric truck",
+     "published_at": "2026-11-05T19:55+00:00",
+     "why_it_matters": "오클랜드의 친환경 경제 전환과 유통 물류 분야의 변화를 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "유통업체의 친환경 전기 트럭 도입 소식으로 오클랜드 지역 경제의 친환경 트렌드 참고용임.",
+      "actions": [],
+      "watch": "상용차 전기 전환 속도"
+     }
+    }
+   ]
+  },
+  "nz_economy": {
+   "label": "경제",
+   "briefing": "주택 매물이 12년 만에 최고치를 기록한 가운데 고소득자 기준과 주택 시장 흐름이 주목받고 있습니다.",
+   "items": [
+    {
+     "id": "a8dfe6114007",
+     "title_ko": "지난 10년간 실질 주택 가격 변동 미미",
+     "summary_ko": [
+      "뉴질랜드 주택 가격이 물가를 반영한 실질 가치 기준으로 지난 10년 동안 거의 오르지 않았습니다.",
+      "장기적인 부동산 시장의 정체기와 경제적 여파가 분석되었습니다.",
+      "향후 주택 구입 전략에 중요한 참고 지표가 될 것입니다."
+     ],
+     "tags": [
+      "부동산",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "ODT",
+       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxORE1ZOFZXZzRRNlc1ZGJYTHloeTYweldBOVRxQnR2LUZtN3RqV2NsejVDbmdtUjFOem1tYWFOcHJMUk80S3N1dENPNEpOWEFYM1FOUTItOGhRelhlbVhXUkFYM0R3YXptUF95OEl1UXdwWC0wb2RKNlRGQU1lRVdXSlZJUW1QaUNTVFVCMzFrcExYYVZUamo0bURn?oc=5"
+      },
+      {
+       "name": "Property Noise",
+       "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQYlRPWnY5YVlQZndZWE5nV05NdjVNSFVlaUU5d09lODN1bUc3TXR5alZPLVFRalFnRGVEV1hHaUhmYmlqUUFHZG5KcVZzckVSX0dmQjlYOVpIVFlTOWdwNWo4T3VfZnkzWVFnQ3k4U0wxWFNfeEtNalBFdU9Kc3hOd2N4azVNZWd0N2tPSlRqOWRSU3gwNGE0?oc=5"
+      }
+     ],
+     "original_title": "NZ house prices haven't moved in real terms in a decade",
+     "published_at": "2026-11-04T20:48+00:00",
+     "why_it_matters": "졸업 후 오클랜드에서 장기 거주나 부동산 구입을 계획할 때 경제적 기초 자료가 됩니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "지난 10년간 실질 주택 가격이 정체되어 졸업 후 오클랜드에서 장기 주거 및 주택 구입을 준비할 때 긍정적임.",
+      "actions": [
+       "부동산 시장 실거래가 동향 분석 및 저축 계획 수립"
+      ],
+      "watch": "기준금리 인하에 따른 주택 매수 심리 변화"
+     }
+    },
+    {
+     "id": "7772c09152d3",
+     "title_ko": "12년 만에 10월 매물 최대치 기록한 부동산 시장",
+     "summary_ko": [
+      "전국 부동산 매물이 2014년 이후 10월 기준으로 가장 많은 수준을 기록했습니다.",
+      "선거와 글로벌 불확실성 속에서 신규 매물 등록은 소폭 감소했으나 전체 가용 재고는 11.4% 증가했습니다.",
+      "전국 평균 호가는 2.7% 하락해 구매자들에게 더 많은 선택지가 주어지고 있습니다."
+     ],
+     "tags": [
+      "부동산",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/business/2380088/property-listings-hit-highest-october-level-in-12-years"
+      }
+     ],
+     "original_title": "Property listings hit highest October level in 12 years",
+     "published_at": "2026-11-06T00:07+00:00",
+     "why_it_matters": "오클랜드 부동산 시장에서 구매자 우위 환경이 조성되어 향후 주거지 마련에 유리할 수 있습니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 부동산 매물이 증가하고 호가가 하락하여 향후 아파트 렌트 및 주택 구매 시 선택지가 넓어짐.",
+      "actions": [
+       "오클랜드 지역 매물 시세 및 렌트비 동향 모니터링"
+      ],
+      "watch": "총선 이후 오클랜드 부동산 시장 가격 안정세 지속 여부"
+     }
+    },
+    {
+     "id": "41004df5e663",
+     "title_ko": "구매자 우위 속에서 10월에도 하락세 지속된 주택 가치",
+     "summary_ko": [
+      "부동산 시장에서 구매자가 주도권을 쥔 가운데 주택 가치 하락세가 10월에도 이어졌습니다.",
+      "매물 증가와 관망세가 겹치며 가격 조정 국면이 지속되고 있습니다.",
+      "시장 참여자들의 신중한 접근이 요구되는 시점입니다."
+     ],
+     "tags": [
+      "부동산",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Interest.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOVGZaNGhrcUZiRUpoMHZGZG80R29rMFhCeGl3eXF0NC1MY0JUX1hfUjAzN2Nrc194ZWh5MExVZTR3RVZsazBNTFpnUHZfcHdHQl9LTWhoYTVHVEVrS3NfcTF3VERwN3dfUUZ5dVBBTDBXVEVPN0dMWHRYMnpRcEt5Unk4VkpENVdQSjZEbi1KQ2c3RTJKbUdiWDJJdDJjcmVGa0w5ZEduZ05MSnJKRzA5c1I2S3R1b2dvNzhKSFoyTks?oc=5"
+      }
+     ],
+     "original_title": "Housing values continued falling in October as buyers call the shots",
+     "published_at": "2026-11-05T08:00+00:00",
+     "why_it_matters": "오클랜드에서 취업 후 주거 안정을 도모할 때 주택 구입 시기 결정에 영향을 줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "주택 가치 하락세가 지속되어 오클랜드에서 졸업 후 내집 마련을 계획할 때 유리한 시장 환경이 조성됨.",
+      "actions": [
+       "주택 시장 가격 추이 및 모기지 금리 비교"
+      ],
+      "watch": "시중 은행의 모기지 이자율 인하 경쟁"
+     }
+    },
+    {
+     "id": "8fd555948b30",
+     "title_ko": "상위 10% 임금 소득자 기준과 소득 분포 현황",
+     "summary_ko": [
+      "뉴질랜드에서 급여 소득 상위 10%에 들려면 연간 최소 13만 5000달러를 벌어야 합니다.",
+      "국세청 자료에 따르면 연소득 100만 달러 이상 고소득자도 980명으로 집계되었습니다.",
+      "인플레이션 대비 저소득층의 실질 소득은 증가한 반면 최상위 소득 비중은 정체 양상을 보였습니다."
+     ],
+     "tags": [
+      "경제",
+      "고용",
+      "임금"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/business/are-you-in-the-top-10-of-income-earners/BS3JNAYQVNFRBA4OTWWCTXSG3I/"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/business/2368100/are-you-in-the-top-10-percent-of-income-earners"
+      }
+     ],
+     "original_title": "Are you in the top 10% of income earners?",
+     "published_at": "2026-11-06T02:00+00:00",
+     "why_it_matters": "졸업 후 취업 시장에서 목표로 삼을 수 있는 임금 수준과 노동시장 소득 분포를 파악하는 데 도움을 줍니다.",
+     "impact": {
+      "level": "high",
+      "reason": "UoA 석사 졸업 후 뉴질랜드 노동시장에서 목표로 삼을 고소득 기준과 임금 분포를 파악하는 지표가 됨.",
+      "actions": [
+       "전공별 연봉 수준 및 상위 10%(13만5천 달러 이상) 직무 분석",
+       "이력서 및 링크드인 프로필 최적화"
+      ],
+      "watch": "국세청(IRD)의 연간 소득 통계 및 임금 상승률 발표"
+     }
+    },
+    {
+     "id": "071bff69d490",
+     "title_ko": "총선 앞두고 관망세로 돌아선 부동산 시장",
+     "summary_ko": [
+      "총선 투표일을 앞두고 뉴질랜드 부동산 시장의 거래 활동이 일시적으로 정체되었습니다.",
+      "정치적 불확실성이 해소되기를 기다리는 구매자와 판매자의 관망세가 뚜렷합니다.",
+      "선거 결과에 따라 향후 부동산 시장의 방향성이 결정될 전망입니다."
+     ],
+     "tags": [
+      "부동산",
+      "경제",
+      "정치"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "Stuff.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxObThadUtFdUxJR2FsZU5FSWVzbjVONFdJaV9BV3V4YVR1Qm14QWhMb2hEdGxnbV8wU2IxVU85YmMyUHRMWUx3N2g5Q0U2RUhIZ2hORFFBY1FteTIzenFpMUtCdFJEQW9FV1A0Znhyd2drM29nelNhb3VOeHJZM004Z2JPS0NvQjVrY25VT0U0MWo?oc=5"
+      },
+      {
+       "name": "Interest.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQZlNYWDZ1SGZ0bDRZb19Wb2NxWXNmU2NFWklzblExdHVITkJCQkVUZUpsc2NndUU2Y00zVUlwRVhUb05ndmNlMHNrOFdPX0pUT2RYY0hJV1lFcGFweGZVU1MwUWVnNnJWalA2QkY2MEwyRlg1dXlhWFVNOVlYT2s5dS14SllEMzJoSWVQb3Q2RzlWTlBMaTA0aDVkSW9QeGtxd2ZhbUVIbFlwamhNMGRHU3RwTQ?oc=5"
+      }
+     ],
+     "original_title": "The property market is on election watch - just like the rest of us",
+     "published_at": "2026-11-05T22:23+00:00",
+     "why_it_matters": "오클랜드 부동산 시장의 단기적 변동성을 이해하고 주거 계획을 세우는 데 참고가 됩니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "총선 전후 부동산 시장의 관망세로 인해 렌트 및 주택 매매 계약 시 가격 협상에 유리할 수 있음.",
+      "actions": [
+       "부동산 중개인을 통한 매물 및 렌트 시세 확인"
+      ],
+      "watch": "총선 직후 부동산 거래량 회복 여부"
+     }
+    }
+   ]
+  },
+  "nz_politics": {
+   "label": "정치",
+   "briefing": "총선 투표일이 마침내 진행되며 유권자들이 최종 선택을 내리는 하루가 되었습니다.",
+   "items": [
+    {
+     "id": "862da7a63c6c",
+     "title_ko": "2026 총선 투표 마감일의 모든 것",
+     "summary_ko": [
+      "2026년 총선 투표가 전국 2300여 개 투표소에서 최종 마감되었습니다.",
+      "유권자들은 후보와 정당에 투표하며 신분증 지참 여부와 투표소 이용 방법이 안내되었습니다.",
+      "오클랜드 등 북섬 일부 지역은 악천후 속에서도 투표가 진행되었으며 개표 방송이 이어집니다."
+     ],
+     "tags": [
+      "정치",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/election-2026-all-you-need-to-know-on-the-final-day-of-voting/OE6Q7XK2IVBKDFP56CMPFLM6JU/"
+      },
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/11/07/the-election-day-rules-you-need-to-know-and-how-to-watch-the-results-come-in/"
+      }
+     ],
+     "original_title": "Election 2026: All you need to know on the final day of voting",
+     "published_at": "2026-11-06T17:00+00:00",
+     "why_it_matters": "새 정부의 이민 정책과 비자 규정에 직접적인 영향을 미치는 정권 심판 및 교체 결과를 결정하는 중대한 행사입니다.",
+     "impact": {
+      "level": "high",
+      "reason": "새 정부의 이민 정책, 취업비자(AEWV), 영주권(SMC) 제도의 방향을 결정할 총선 투표 마감일임.",
+      "actions": [
+       "총선 개표 결과 및 새 정부 구성 정당별 이민 공약 분석"
+      ],
+      "watch": "2026 총선 공식 개표 결과 및 연립 정부 구성 협상"
+     }
+    },
+    {
+     "id": "5352e5e186c1",
+     "title_ko": "스토프와 함께하는 총선 투표일 생생한 소식",
+     "summary_ko": [
+      "총선 투표일의 최신 업데이트와 결과, 분석 및 축하 현장이 실시간으로 보도됩니다.",
+      "다양한 선거 관련 소식이 한곳에 모여 유권자들의 접근성을 높였습니다.",
+      "선거 결과가 가져올 정치적 변화에 대한 관심이 집중됩니다."
+     ],
+     "tags": [
+      "정치",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/politics/361054832/live-updates-election-night-blog"
+      }
+     ],
+     "original_title": "Join us for Election Day on Stuff - this is what’s coming",
+     "published_at": "2026-11-06T15:00+00:00",
+     "why_it_matters": "새롭게 구성될 정부의 이민 및 고용 정책 변화를 실시간으로 파악하는 창구가 됩니다.",
+     "impact": {
+      "level": "high",
+      "reason": "총선 결과에 따라 향후 이민자 취업 및 영주권 취득 요건이 달라지므로 개표 소식을 실시간 확인해야 함.",
+      "actions": [
+       "주요 언론사의 총선 개표 실시간 방송 시청"
+      ],
+      "watch": "선거관리위원회의 최종 투표 결과 발표"
+     }
+    },
+    {
+     "id": "96d8300c689c",
+     "title_ko": "여성 비하 발언으로 논란에 휩인 뉴질랜드 퍼스트 후보",
+     "summary_ko": [
+      "뉴질랜드 퍼스트당 후보의 성차별적 발언이 정치권과 대중의 강한 비판을 받았습니다.",
+      "선거 막판 부적절한 언행으로 인해 정당 이미지에 타격이 불가피해졌습니다.",
+      "유권자들의 표심에도 적지 않은 영향을 미칠 것으로 보입니다."
+     ],
+     "tags": [
+      "정치",
+      "사회"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "Times.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNcXR6WVk1S0t0bldUb3lSa1ViLXZ2enhKTFR5NGY1RXhyLUR1WlFodjYxN0g0Uk5FemM5WkU1WXU0Yng0TlRXVHlKclhWa0ZRVWlmdnhNXzl1YU5BUTNhZzM1Nk43TWh6cFB6YldLbklGbDNJVE8zTWR5czRTNml0bUJrWGRwZTlBSlFyRDItTlNlR0stakV6MEM5QzZHMWlXR3Y5UQ?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQSEQ5cVpBYlhKTXpsVlU1YjB5ZG9vRHFKY3RJOEhGY0FIT2ltWVpYSks1SHU1WGRSS0dVbnIxNmNPQzVqNFVsS2hYVE9JZEduYW1BdVBqOFhyVk5wZjQyRUZvMTZZYktiTXZ5cVhGZ0FWbWt5Mk1fOG8zeHgwYjVYM3pCLXJKdDdHTW1iR3I2YlNKWkp5Uk9kZXRnWlFOTkFjN1Y3VTVPV2EzRlg4djNxS29yODlkem40RUxwamg1YlJsc3VLdEFkaGZFbkFGQkNlNUI3LWZXV2FrQQ?oc=5"
+      }
+     ],
+     "original_title": "NZ First candidate in hot water over remarks about women",
+     "published_at": "2026-11-05T22:54+00:00",
+     "why_it_matters": "총선 정국에서 각 정당 후보들의 자질 논란이 이민 및 사회 정책 공약 외 변수로 작용합니다.",
+     "impact": {
+      "level": "low",
+      "reason": "정당 후보자의 구설수는 총선 판세에 영향을 주나 직접적인 이민 정책 변화와는 간접적임.",
+      "actions": [],
+      "watch": "후보자 논란이 정당 지지율 및 선거 결과에 미치는 영향"
+     }
+    },
+    {
+     "id": "a12cece8e773",
+     "title_ko": "투표일에 선거 관련 보도가 제한되는 이유",
+     "summary_ko": [
+      "뉴질랜드 선거법에 따라 투표일 당일에는 선거 운동이나 관련 논평 방송이 엄격히 제한됩니다.",
+      "유권자가 외부 영향 없이 독립적으로 투표하도록 보장하기 위한 조치입니다.",
+      "공정한 선거 관리를 위한 제도적 전통의 일환입니다."
+     ],
+     "tags": [
+      "정치",
+      "사회"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOLVZvd0ZFb1NHZWVPeGJHNDJELW1ueFpTSm5Oak9HZ1NkYUI3QkRpejdBWnlNVlYwejJTQ0NTWml4T2h2NnlVaTMyUU9FYjZ0aUQtbk1RX3pXSzQ2UDcybGk1WXJYSV9GYms4ZlNoeFBtWFpmZnRxZDZ5RldJVHFzcmNnU3lYUk8yRFNVUnpKY0ljQnEtV01aQ1NXenp0ZHM0YXBKX3V1NkhLVXgzMUUybmYyNjN5M3lOZjBSdllFWTZWdGJR?oc=5"
+      }
+     ],
+     "original_title": "Explainer: Why you won’t hear much about the election on election day",
+     "published_at": "2026-11-06T15:57+00:00",
+     "why_it_matters": "뉴질랜드의 투표 문화와 선거 관련 규정을 이해하는 데 도움이 됩니다.",
+     "impact": {
+      "level": "low",
+      "reason": "뉴질랜드의 선거일 보도 제한 규정을 설명하는 내용으로 문화적 이해에 도움을 줌.",
+      "actions": [],
+      "watch": "선거법상 미디어 규정 준수 동향"
+     }
+    }
+   ]
+  },
+  "akl_safety": {
+   "label": "치안",
+   "briefing": "오클랜드 학교 폭행 및 변전소 화재 등 사건사고와 함께 교묘한 사기 수법이 주의를 끌고 있습니다.",
+   "items": [
+    {
+     "id": "06752979ae18",
+     "title_ko": "오클랜드 남부 알프리스턴 칼리지 학생 폭행 사건으로 두 명 기소",
+     "summary_ko": [
+      "오클랜드 알프리스턴 칼리지에서 20대 남녀가 학교에 무단 침입해 학생을 폭행하고 말리던 이들을 공격했습니다.",
+      "이 사건으로 학교가 봉쇄 조치되었으며 경찰은 두 명을 체포해 기소했습니다.",
+      "학교 내 안전 문제와 외부인 침입에 대한 우려가 커지고 있습니다."
+     ],
+     "tags": [
+      "치안",
+      "사건사고",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQa1M2eTBxRE13Q0lhUlctLWpLNERWWVhpeWRPWkYydTZqamJxOE1zU3FDUlU3di14dVlpdmttdlRMWVdUazRoNmtLaURuMVhtbEhVX1c5WW1iOU12eXN6My1zVUpuSEJhRnZvVkVYeE9xUHM4bkFSaFpENXhMSm1yR1NtNHNKeTZuM0t1ZFVvRHBobERSbzQweWpJdkxsVWM?oc=5"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxQOVdRTDRrYUF6Zm1aSWZwdjV1MVh4THc3QWZ1dmZvTUZMM0dDbDM0RFR0cktDbmRoVXBmc3NrdlpsdnFHUnZyZHRDT1NpelRkQmVFVDBjU3VWMGc3SjNxbmZoSGc2NEhnM21YeVRUZDNOdHgxelFueC1SdnUtTjRhRmt5d0dnM3dkbERsMEpiV3ZoZFdQTVZIOG1OdXhvcnI2VWd6X2h6X0VTNmp2d3kxTk9LSWVEMEpteDFZdHhWWHVkcTNJcEpBZ0xIUXY2NnlRd3NqOXlqZ09CWjhJYTdCd3liTkJ3Vm1sTW1za3JHTFZRRzA?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/crime-and-justice/2378633/two-charged-over-alfriston-college-alleged-assault"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQbzhIUlJqOW9OMVpzYjhYeHc3YndMaWRyYlFOR2ZhMXVBTDhhYVBwQllOckxiSGpLaHBQYzl5dWdOY3dNWlFoSE9mSC13Zm9vMV9DZ016aWRTdkd6b2RIS3JoM0ZHMGRZc1FNU2xUMnpOeWQ0OXVSUERENF9vaUlUOXlpVnBuMV9qcHhxQXlYU20taWJyRmtnN1RvR1hRMTg?oc=5"
+      }
+     ],
+     "original_title": "Two charged after three students assaulted at Auckland college",
+     "published_at": "2026-11-06T16:25+00:00",
+     "why_it_matters": "오클랜드 내 교육 기관 주변의 치안 상황과 학생 안전 대책의 중요성을 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 남부 고등학교에서 발생한 외부인 침입 폭행 사건으로 자녀 교육 시설 치안에 경각심을 줌.",
+      "actions": [
+       "자녀가 다니거나 다닐 학교의 외부인 출입 통제 보안 시스템 확인"
+      ],
+      "watch": "경찰의 학교 주변 순찰 강화 조치"
+     },
+     "incident": {
+      "severity": "2",
+      "crime": "학교 무단 침입 및 폭행",
+      "location": "Alfriston College, Manurewa, Auckland",
+      "suburb": "Manurewa"
+     }
+    },
+    {
+     "id": "240190366047",
+     "title_ko": "오클랜드 펜로즈 변전소 대형 화재로 작업자 부상",
+     "summary_ko": [
+      "오클랜드 펜로즈 지역의 대형 변전소 화재 및 기름 유출 사고로 부상을 입은 작업자가 병원 치료를 받고 있습니다.",
+      "화재 직후 지역 일대에 전력 공급 차질이 빚어졌으나 대부분 복구되었습니다.",
+      "주요 전력 시설의 안전 관리 체계에 대한 점검이 요구되고 있습니다."
+     ],
+     "tags": [
+      "치안",
+      "사건사고",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNNExnd1ctRkl3ZEJzSG5sdmUtalF0RVBSRFlNdnRYbzlwR0JnbWdscWhOa01KYTRsOFZjSjg5WV9teEs1djBwZ0UtelhvYlZvMWVZYklES3ZBUUhFNHh2RTQzTnR6TUVTTUIzYkFlMy04SEg4NjlUWUpRb3VYZEtPYU5DODh0OUl2WGJwOTJtWUlEdFJTZVZfQk9xdUZZSDctdFUtdC1TM3VwSmFBdjF2OU9TLV9rV0Y1WlUwbnZyeVJWQXdUc1E?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOamozcWZlUF9BRGoyZlc0WnBscGFwM3VOUzdjWkNsZDlxdDJXU1N1TU00bFJvSWx2YUZ4akFCSE5YVlFYRndKN1JBU0UyX2ZOT0FIZEdsdGl1THFKVWM0T2dSR3hfQVZVZzBSYzhPam5vYTNfVG42dUpCdnJlRzQxWnVBNXNGeVUwWWRCc2dOMWFDTWhLVFV2S0F0SkpEOWtGZUxlTEswRVpIemoy?oc=5"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNUTRaOGNNTW5vYk9aYk1KZ1pxWVNicHY0NDZwcjFjRGNoc1RFV2lEMXBhcC1SZ2dQUXFCam5DUVNqNERmYnIzci11MjV1d1MxU2lxNk5RUXNwX3NfbDBJTE9JUXcwM3Zna0NmREl2Y01lWmY2UDFibjU0bjZaRnpRaDB0QnVJUlRuZGMwUw?oc=5"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPbVdMLVNIRHZFbWpueE83SXZRckNLemFYSDZwcXpKN21XbU5zR2VFZ3ZSYTJIZVp0bTd0SHk1cFV6V2hLeWVUYjZ5dTNJQ3dGQlE3SmNCWUU0YmQ3ckUwaVk4RG5aZnh5N3g2NzR3UjRaYXdReHYtTTgzdUx1bEc4Sl8yMVdwU1JJdy1TSHNuc2hqTnd6Y3JZVzBDQW12UlpPTlVXRWJR?oc=5"
+      }
+     ],
+     "original_title": "Injured worker still in hospital after large Auckland substation fire",
+     "published_at": "2026-11-06T03:28+00:00",
+     "why_it_matters": "오클랜드 핵심 인프라 사고로 인한 정전 가능성과 도시 안전 상태를 점검하게 합니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 펜로즈 변전소 화재로 인한 전력 공급 장애 가능성은 오클랜드 거주 생활의 인프라 안정성에 영향을 줌.",
+      "actions": [
+       "비상용 전자기기 충전 및 정전 대비 점검"
+      ],
+      "watch": "트랜스파워(Transpower)의 전력망 복구 및 안전 진단 결과"
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "",
+      "location": "Penrose Substation, Auckland",
+      "suburb": "Penrose"
+     }
+    },
+    {
+     "id": "7e2b05ee40c2",
+     "title_ko": "오클랜드 상점 침입 시도 중 차에 치인 직원",
+     "summary_ko": [
+      "오클랜드의 한 상점에서 주거침입 시도를 막던 직원이 범인들의 차량에 치이는 사고가 발생했습니다.",
+      "경찰은 10대 용의자 2명을 체포하고 11세에서 14세 사이의 어린 아이들도 조사하고 있습니다.",
+      "상점 대상 범죄의 연령대가 낮아지고 폭력성이 심해져 지역사회의 불안이 가중되고 있습니다."
+     ],
+     "tags": [
+      "치안",
+      "사건사고",
+      "사회"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/nz-news/361055803/store-worker-hit-car-during-burglary-attempt-children-young-11-questioned"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNeUFKVjJIOWZmdTFnVHdUclFvVkhJald5RW85QkhKMEZJTGpudDZTTUU0c3JkU0lVM1ZXR0ZOT21qeGNXektMNFdfTjFPeDRpUWFKckNNTnlnd1VBc2lKZEFZV2xfTDUzdkZiUHpfUWJaYzgwNVFxNDhxRTlyXzVhY0tKdDlzM3pjSHRPRXpXb3JidWh6ZVQySUdqdFVLMXdLV2c?oc=5"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/auckland/teenagers-arrested-after-worker-hit-by-vehicle-during-alleged-aggravated-robbery/7F3UWRQAEBD57GHZ7BGFJW6MZI/"
+      }
+     ],
+     "original_title": "Store worker hit by car during burglary attempt, children as young as 11 questioned",
+     "published_at": "2026-11-06T07:57+00:00",
+     "why_it_matters": "오클랜드 상업 지역의 치안 불안과 소매점 범죄 증가 추세를 직접적으로 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 상점가에서 발생한 소매점 범죄와 폭력성 증가는 오클랜드 거주 및 생활 치안에 직접적인 불안 요인임.",
+      "actions": [
+       "야간 외출 시 상업 지역 치안 주의"
+      ],
+      "watch": "경찰의 소매점 대상 청소년 범죄 대응 대책"
+     },
+     "incident": {
+      "severity": "2",
+      "crime": "상점 침입 시도 및 차량 돌진",
+      "location": "Auckland",
+      "suburb": "Auckland Central"
+     }
+    },
+    {
+     "id": "3d15e5366c1a",
+     "title_ko": "해외 사기단에 1만 5천 달러 갈취당한 오클랜드 중식당",
+     "summary_ko": [
+      "오클랜드의 중식당들이 해외 사기 조직의 대규모 예약 사기 수법에 노출되어 수만 달러의 피해를 입었습니다.",
+      "사기꾼들은 대전제 조건으로 중국 공급업체의 전복을 선결제하도록 유도한 뒤 가짜 송금 확인증을 보냈습니다.",
+      "경찰은 크리스마스 시즌을 앞두고 유사한 사전 결제 사기에 대한 각별한 주의를 당부했습니다."
+     ],
+     "tags": [
+      "치안",
+      "사건사고",
+      "경제"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/11/06/chinese-restaurant-duped-out-of-15000-by-group-booking-scam/"
+      },
+      {
+       "name": "Times.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQcXdyU1lGdEVpTzNkUnpUQzdDX3FOTTdZM3RNOTZBX3YtdGNIal9JYTdDcWZDM3JBX0Y0LUgtejFxUzA5aTFqaEdZY3Y0R3JBZ2JhQWZGR3dlOHU0NHJDOWwwdzRvVEoyZmJWQWRad1gxV0I1dTlJUnprMjRVZDNHaDI5UVZwZw?oc=5"
+      }
+     ],
+     "original_title": "Chinese restaurant duped out of $15,000 by group-booking scam",
+     "published_at": "2026-11-06T16:42+00:00",
+     "why_it_matters": "오클랜드 자영업 시장을 노린 해외 발 사기 범죄의 위험성을 경고합니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 자영업 시장을 노린 해외 사기 범죄 증가로 향후 창업이나 요식업계 취업 시 주의가 필요함.",
+      "actions": [
+       "사전 결제 및 해외 송금 관련 사기 수법 숙지"
+      ],
+      "watch": "경찰의 상업 시설 대상 사기 주의보 발령"
+     },
+     "incident": {
+      "severity": "3",
+      "crime": "사기 및 대금 갈취",
+      "location": "Auckland",
+      "suburb": "Auckland Central"
+     }
+    }
+   ]
+  },
+  "akl_life": {
+   "label": "생활",
+   "briefing": "오클랜드에 강력한 폭풍과 낙뢰가 덮쳐 시설 피해와 투표소 차질이 발생했습니다.",
+   "items": [
+    {
+     "id": "1aea4fc9e9ba",
+     "title_ko": "오클랜드 폭풍우 속 벼락으로 화재 잇달아 발생",
+     "summary_ko": [
+      "오클랜드 시티, 와이타케레 등지에 벼락이 내리치며 화재가 발생하고 강풍과 폭우가 덮쳤습니다.",
+      "기상청은 노스아일랜드 전역에 심각한 폭풍우 경보를 발령하고 돌발 홍수와 배수 관리를 당부했습니다.",
+      "악천후로 인해 일부 투표소가 조기 마감되고 정전과 교통 혼잡이 빚어졌습니다."
+     ],
+     "tags": [
+      "날씨",
+      "재난",
+      "교통"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/weather/2384152/lightning-strikes-cause-fires-in-auckland-during-severe-storm-rain-passes-over-far-north"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/nz-news/361055758/torrential-rain-and-lightning-what-friday-thunderstorm-outlook-means-you"
+      },
+      {
+       "name": "Newstalk ZB",
+       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPY1lDM0xPSkxVZG5oQV9PWUF0YnJPN21MaHZaTWVmSFVjWkJnWEZEaE82eXpaSUY0UEpYc1p0ZWFwelBYa05ZWW5tWmJCNGFQS0JFNmlfLTgwQXlYdjJMcHdZXzFIUDk4MVVyRzRGc0cxWU5wSlVWbklpQlJBWXZJa0ZiNjNidWJBbTVNYnZGQ1hDRkJQTW1KalBtcy1MM0R4TFBjNU9UT295UnhqRUJOVlB2NW44QUEyMENmY28tTTZKV0ZzQlRWOQ?oc=5"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNcWY1aTdzUV9seVZiMFRHN0xrOENhbHU3TllrSHFTUXFuOTdrUnJjZjhjT29fOWUtWWEwMVBnMzlmSWY4Y2ZVTFZPUi1SWW1qeUxZeXpxeUY5NERuek1hVk9oTDNFVDJlN0pLV2RBSlZxX1VaSlVkQzM4ME1jOGFzdEhfRkJlaVhicEJLejNHMUlSODVuUzhUZzFleUNMcm9DR1pnWDRQTnNJZw?oc=5"
+      }
+     ],
+     "original_title": "Lightning strikes cause fires in Auckland during severe storm, rain passes over Far North",
+     "published_at": "2026-11-06T08:40+00:00",
+     "why_it_matters": "오클랜드 거주 지역의 기상 악화 시 안전 유의사항과 대중교통 이용에 차질을 줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 폭풍우와 벼락 화재는 거주지 안전 및 대중교통 이용에 직접적인 차질을 줌.",
+      "actions": [
+       "기상청(MetService) 악천후 경보 확인 및 야외 활동 자제",
+       "아파트 렌트 세대 배수 상태 점검"
+      ],
+      "watch": "기상청의 오클랜드 폭풍우 경보 해제 시점"
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "",
+      "location": "Auckland City",
+      "suburb": "Auckland Central"
+     }
+    },
+    {
+     "id": "f80eddb8d271",
+     "title_ko": "구리선 도절로 한 달간 고립된 80대 노인",
+     "summary_ko": [
+      "서부 오클랜드에서 발생한 통신선 구리 도둑질로 인해 80대 주민이 한 달간 외부와 단절되었습니다.",
+      "통신 인프라 훼손이 고령 취약계층의 일상생활에 큰 불편을 초래했습니다.",
+      "범죄 피해 복구 지연에 대한 비판과 대책 마련 목소리가 커지고 있습니다."
+     ],
+     "tags": [
+      "사회",
+      "치안",
+      "사건사고"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPdlVMZHRhQWNLR0Fka2s4MjZCZUVJY3h3YzFIbG03RzNsOE9HT0VSUjFhQ3lhYThIZDVvdW9GQjNfUzc0U2phNWFKckpJTVBEcXVzZURiOVlwVVluY0pidVpFSDJxWW5jYVpUaE9RbUVGV1pGU3dfOEdhQnp2NmM3VlN1MkhzN205R2dmWDcwOXc5R3hWanlRcXZEMHVONEFMUHc?oc=5"
+      }
+     ],
+     "original_title": "West Auckland copper theft left 80-year-old isolated for a month",
+     "published_at": "2026-11-06T17:29+00:00",
+     "why_it_matters": "오클랜드 지역 인프라 범죄가 주민들의 일상에 미치는 심각한 피해를 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 지역 통신선 도난으로 인한 고립 사고는 인프라 범죄가 일상생활에 미치는 위험성을 보여줌.",
+      "actions": [],
+      "watch": "통신사(Spark 등)의 가입자 회선 보호 및 복구 대책"
+     },
+     "incident": {
+      "severity": "3",
+      "crime": "통신선 절도",
+      "location": "West Auckland",
+      "suburb": "Waitakere"
+     }
+    },
+    {
+     "id": "1523fa618e3a",
+     "title_ko": "오클랜드 FC와 웰링턴 피닉스의 뉴질랜드 더비",
+     "summary_ko": [
+      "2026-27 A리그 맨 시즌 첫 뉴질랜드 더비에서 오클랜드 FC와 웰링턴 피닉스가 맞붙습니다.",
+      "리그 선두를 달리는 웰링턴 피닉스가 오클랜드의 완벽한 더비 연승 기록을 깨기 위해 출격합니다.",
+      "양팀 팬들의 뜨거운 관심 속에 흥미진진한 승부가 예상됩니다."
+     ],
+     "tags": [
+      "스포츠",
+      "사회"
+     ],
+     "importance": 3,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNTVNLUUxhV2xyM3RORGcxUjd6c2JNY24wMDNIajE0VHFuTUhVNlFSZElhWnY2UkJTYWxLSXRoZEZuOG9mY0xXLWlfc3VnV1RwaUk5eklja09RVzlmWlVPVE42eWhSVWxocV9PNlBZR1RjaEpYTkYxV1h3TUo4enhhZWZ4Snl5Zl91Nmc0amF5NFlSSU45RmRtYm55RTM3c1FLNm1NRVRyeHZIWFpELTBMNzZxVVRNRGJRbUpHMVpmXzB5amtEQUwzNXlXTTBndFpyYkVnem9yUHpxekdWSWxrS21NaFgzNEdlLUdmdDVZLWkwNUg4Ym04enhYRkFoWEk?oc=5"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNbWd3bl9MbTVlY1dnbEdJRkgwbUo1TDZMR015RUtfSFl3UXVPSEhTVXFBUXJrN0w3V0x6amw2OHBncWNEU1AzRC1JNzJVa05MU3laNWlNSkV6c3pESElDcnNHZHIzUnZmNlVraEZyaF85Skp0eUs4dld3Y2d6X1d6Ukk5QXZoN2pXQXVnVlUyUW5RNlpiS2Y1cG54cVpYeXZlMzBvall0a0JsRnd6OVdpcmhpNlI?oc=5"
+      },
+      {
+       "name": "www.thepost.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQRjNsX0ZndWs3V1RkRWJCZXlzZEM4UzJBRXh1dzdMMDJLNnJyNTcyVGpxTUNBWUZ2Tmx4OW5palRoYjYtMVo5dmRiY2FRR1doZl9lemVjczFuLXNDQm8tYjhLRkFoMm9uMVBJc3dsNWRZNTZqdkFiSlFSRXBNZ2wxeUw2ZXpjdUZFcE9HZ1BfalhUOVAtdXBwVk9jajh6QXNTdmg1ZDdOTEtNZ1FUdmFHM21VRnBjSEVJek5DQTI1ckpYUDRNaGZEV1pVbGZXaVd1OG5wXzFsTVFsZw?oc=5"
+      }
+     ],
+     "original_title": "Auckland FC v Wellington Phoenix: Everything you need to know about the New Zealand derby",
+     "published_at": "2026-11-06T15:00+00:00",
+     "why_it_matters": "오클랜드 지역 스포츠 문화와 주말 여가 생활에 활력을 불어넣는 대형 이벤트입니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 FC의 축구 더비 매치는 주말 여가 생활에 활력을 주는 지역 이벤트임.",
+      "actions": [],
+      "watch": "A리그 경기 일정 및 티켓 예매"
+     }
+    },
+    {
+     "id": "3674f1f93230",
+     "title_ko": "오클랜드 팀명 변경 가능성을 다룬 스포츠 칼럼",
+     "summary_ko": [
+      "오클랜드 지역 팀의 명칭 변화에 대한 지역 언론의 칼럼이 게재되었습니다.",
+      "팬들과 지역 커뮤니티의 반응을 조명하며 팀 정체성에 대한 논의를 다뤘습니다.",
+      "향후 지역 스포츠 브랜드 전략에 시사점을 던집니다."
+     ],
+     "tags": [
+      "스포츠",
+      "사회"
+     ],
+     "importance": 3,
+     "sources": [
+      {
+       "name": "https://franklintimes.co.nz/",
+       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5vVDV0ZnZkNWgwZlNWVWFnT19URE9zZ2Z6RDExaXVmWHZHaERxNzhqLUZmX0F6cFJEcm56N0hjdUxKWjJrbXBnbXA2QmdnelpCV2p6WjJ0VkYxQQ?oc=5"
+      }
+     ],
+     "original_title": "Auckland… Steamers?",
+     "published_at": "2026-11-06T14:05+00:00",
+     "why_it_matters": "오클랜드 지역 사회의 문화적 관심사와 스포츠 트렌드를 반영합니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 지역 스포츠 팀 명칭 변경 관련 칼럼으로 지역 문화 이해용임.",
+      "actions": [],
+      "watch": "지역 스포츠 커뮤니티 반응"
+     }
+    }
+   ]
+  },
+  "akl_property": {
+   "label": "부동산",
+   "briefing": "오클랜드 주택 시장에서 매도자와 구매자 간 가격 눈치 싸움이 계속되고 있습니다.",
+   "items": [
+    {
+     "id": "bb7e484cb77c",
+     "title_ko": "130만 달러 호가에 20만 달러 낮은 금액을 제시하는 구매자들",
+     "summary_ko": [
+      "크라이스트처치로의 이전을 앞둔 오클랜드 주택 소유주가 시세보다 낮은 매수 제안을 받고 고민에 빠졌습니다.",
+      "희망 가격과 실제 구매자들의 제시 가격 사이에 간극이 존재함을 보여줍니다.",
+      "부동산 시장 정체 속에서 주택 매도 전략 선택의 중요성을 시사합니다."
+     ],
+     "tags": [
+      "부동산",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/home-property/361055404/they-want-13m-their-auckland-home-buyers-are-offering-200000-less-what-should-they-do"
+      }
+     ],
+     "original_title": "They want $1.3m for their Auckland home. Buyers are offering $200,000 less. What should they do?",
+     "published_at": "2026-11-06T15:00+00:00",
+     "why_it_matters": "오클랜드에서 다른 지역으로 이동하거나 주택을 매각할 때 시장 현실을 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 주택 매도시 희망 가격과 실제 매수 제안가 간의 괴리가 커 렌트 및 주거 이동 시 참고가 됨.",
+      "actions": [
+       "오클랜드 부동산 실거래가 및 매물 호가 비교"
+      ],
+      "watch": "부동산 시장의 매수·매도자 간 가격 협상 추세"
+     }
+    },
+    {
+     "id": "6e13464c7d6c",
+     "title_ko": "오클랜드 노스쇼어의 다채로운 수백만 달러 부동산 시장 조명",
+     "summary_ko": [
+      "오클랜드 노스쇼어 지역의 고급 주택 시장 동향이 언론 프로그램을 통해 소개되었습니다.",
+      "고가 부동산 매물들의 특징과 지역 주거 가치를 분석했습니다.",
+      "프리미엄 부동산 부문의 흐름을 엿볼 수 있습니다."
+     ],
+     "tags": [
+      "부동산",
+      "경제"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxQTW5uY1R4bVJwcGpReDdjRVhaUTZiMDJYRTFDcnR3TmkwaDZxdXVzeGVUQXFFQ3NUaC05RkZZVHlRNGlfaW5icnRuT2R4TldUV1d6MThlNUl5SWZwbjB3bzY5a2FfaFlKMFJubU8xNWVXVDJXUHFzcERKMUtWTzJwdkl4eGZJWFlMZWlQTVYybHNFeTNNa1E5YlVkRVFYREI3U0libWtMWU83cnZqV3NKRkZkRmhyX05OTk9Bd2hjekpwbVhfQnBWQ1R3UUlGSDZ6THA1N3ZFLTl4bzdhT05McDRUV3FrTFZ3Z09NekhTRXVsMDR5VmwyU2oxc1RNQ0NkLXo0?oc=5"
+      }
+     ],
+     "original_title": "Inside Auckland's Multi-Million Dollar North Shore Property Market | Ryan Bridge TODAY",
+     "published_at": "2026-11-04T19:53+00:00",
+     "why_it_matters": "오클랜드 노스쇼어 지역의 주거 환경과 부동산 가치 수준을 파악하는 데 도움을 줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 노스쇼어의 고급 주택 시장 동향으로 프리미엄 부동산 환경을 보여줌.",
+      "actions": [],
+      "watch": "노스쇼어 지역 주거용 부동산 시세"
+     }
+    },
+    {
+     "id": "435782689fc8",
+     "title_ko": "공간 활용도를 높이는 오클랜드 창고 시설",
+     "summary_ko": [
+      "오클랜드의 상업용 창고들이 제한된 공간 내에 더 많은 재고를 적재하기 위해 효율성을 극대화하고 있습니다.",
+      "물류 및 공급망 관리의 비용 절감 방안으로 공간 최적화가 주목받고 있습니다.",
+      "상업용 부동산 시장의 새로운 트렌드를 형성하고 있습니다."
+     ],
+     "tags": [
+      "부동산",
+      "경제"
+     ],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "channellife.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQdHhzYnhoTHVTVmpGQ1hOc3NtU3BuNEtDYVRrakZ3ZUVOZ1c0ZjlrUVZpNHZmbDJENkt3NzJfbzEwMkh4TVcwU09FM2xfZm1LZWdtSWxDNUVjY2txeVlta1p6N2dLWEZsTVZpN1pLbGdNVTV5VFpkZk9GNEZIUkZHVE9aTFVrbjgtZWRrcHN0RQ?oc=5"
+      }
+     ],
+     "original_title": "Auckland warehouses squeeze more stock into same space",
+     "published_at": "2026-11-04T22:08+00:00",
+     "why_it_matters": "오클랜드 물류 및 상업용 부동산 시장의 운영 방식을 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 상업용 창고 시설의 공간 활용 트렌드로 물류 및 산업용 부동산 동향을 보여줌.",
+      "actions": [],
+      "watch": "상업용 물류 센터 임대 시장 동향"
+     }
+    }
+   ]
+  },
+  "akl_health": {
+   "label": "의료",
+   "briefing": "의료 대기열 지연과 간호사의 해외 치료 모금 등 보건 체계의 한계가 드러나고 있습니다.",
+   "items": [
+    {
+     "id": "97ad517de4a7",
+     "title_ko": "서부 오클랜드 부부의 척수 수술과 암 치료 대기 고통",
+     "summary_ko": [
+      "서부 오클랜드 써니베일에 거주하는 고령 부부가 심각한 척수 협착증과 치료 대기열로 인해 극심한 통증에 시달리고 있습니다.",
+      "척수 수술 대기 중 고관절 염증이 발생해 추가적인 주사 치료 지연까지 겹쳐 고통이 가중되었습니다.",
+      "공공 보건 의료 시스템의 긴 대기 시간 문제와 환자들이 겪는 어려움을 보여줍니다."
+     ],
+     "tags": [
+      "의료",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/west-auckland-couple-face-painful-wait-for-spinal-surgery-and-cancer-care/premium/LCLP575C4FFZHPL4V7WPWY3BLM/"
+      }
+     ],
+     "original_title": "West Auckland couple face painful wait for spinal surgery and cancer care",
+     "published_at": "2026-11-06T16:05+00:00",
+     "why_it_matters": "오클랜드 공공 의료 체계의 대기열 문제를 보여주며 의료 보장과 보험의 중요성을 환기합니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "서부 오클랜드 공공 의료 체계의 대기열 문제를 다루어 사보험 가입의 필요성을 환기함.",
+      "actions": [
+       "가족 의료보험(Health Insurance) 보장 내용 점검"
+      ],
+      "watch": "보건부의 공공 병원 수술 대기 시간 단축 계획"
+     }
+    },
+    {
+     "id": "1e78b4419c55",
+     "title_ko": "간호사들 한계 직면 속 메이슨 클리닉 인력난 논란",
+     "summary_ko": [
+      "메이슨 클리닉의 간호 인력이 한계에 달해 위험한 도박이라는 비판과 함께 인력난 논란이 불거졌습니다.",
+      "의료진의 번아웃과 환자 안전에 대한 우려가 제기되었습니다.",
+      "보건 부문 인력 확충과 근무 환경 개선의 시급성을 드러냅니다."
+     ],
+     "tags": [
+      "의료",
+      "고용",
+      "사회"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxOU3MtaVR4QnVwQXlWOFRXdlg4QnZfWnNMZGpUdXBSRjBUMFR6RzQwQkpKS2tzaWlWdkRDd0tvTjRBbE96WkExSFEya2Nxa3JPZ2FNd1kwWnptUjVEMXAwelltcUZrQW14dFpoWEc0bDl4MFlPTEFEVS1nNDNzQXRLWldZaTNrMV84NE00a1dSZUJTY2l1Y0VHakxqS3hvWTNWbmt1c1BickJpb01LYkhRVDJrRnBadndNTzlCcFVMQmY1Z1B6V3I3M2ZQdy1td2Q0aDNnZjRoMEJ4YWxTVTBfQ085VDhjUVBDcWR0WTdxX08?oc=5"
+      }
+     ],
+     "original_title": "'Dangerous gamble': Row over Mason Clinic staffing as nurses reach 'breaking point'",
+     "published_at": "2026-11-05T20:40+00:00",
+     "why_it_matters": "오클랜드 의료 현장의 인력 부족 실태와 보건 분야 고용 환경을 엿볼 수 있습니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 의료 현장의 인력난 심화는 공공 의료 서비스 질에 영향을 미침.",
+      "actions": [],
+      "watch": "보건 당국의 간호사 인력 확충 및 처우 개선 대책"
+     }
+    },
+    {
+     "id": "f396528afae4",
+     "title_ko": "미들모어 병원 투표소 부재로 환자와 직원들 투표 불편",
+     "summary_ko": [
+      "일부 오클랜드 병원에 환자와 직원을 위한 투표소가 마련되지 않아 아쉬움을 샀습니다.",
+      "의료 현장에 머무는 이들의 참정권 보장이 미흡했다는 지적이 나왔습니다.",
+      "선거 참여 기회 확대의 필요성이 제기되었습니다."
+     ],
+     "tags": [
+      "의료",
+      "정치",
+      "사회"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPUVlYQmdvanp5WFhWQmFDNHF4VGV4cDZxZzVJQ1A0b3RhSVZLXzdiMi1YWEo4OEZVaWdtUGMtUjg0cTZsNlhQbGJoUjV0eXRtcEJld3FDaTk4OFFwVHBuaExBeGFCNVc4clFpSFFVWWc0enRqWm4zQ3RUbW96R2hjYmFzS3ZSdUZMdlYySER2SWdwZE9RNzg0Y3FJNHVsS1hoc2stdk1SMkpEVkFLaEs0dDJ4elAtQVdwM2lRbTVFc1Y1ZnE1eVpMaW01cjBYZVRCS3RQaFBadDNrbkthd2FoNHFnYUI?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQQWRvQ3M4MGgzS0diTmtDOGVYb0ljMVg5VVE1bGdwM3VCOTF1UDM5dDlLamtHYnR3ZTZSZXVDSHdnZjh5TDZ2ckkxZ2VBWXdYWG85WjQ1TGRZaG1obHFCRFZHX1RjeEtZUHhiM2dBcEZnUlBuaHdPVDYyODd1TUVtZ3BEZ1JHeWdBeEdWUFFEVllLbXdfWUF5bm5BNkcyMHNiZWNCYmFR?oc=5"
+      }
+     ],
+     "original_title": "'Why don't we have one?': No voting booth at Middlemore for patients, staff",
+     "published_at": "2026-11-05T21:32+00:00",
+     "why_it_matters": "오클랜드 주요 병원 내 공공 서비스 접근성과 선거 참여 여건을 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 주요 병원 내 투표소 부재로 환자와 의료진의 참정권 행사에 불편이 있었음.",
+      "actions": [],
+      "watch": "선거관리위원회의 병원 등 특수 시설 투표권 보장 개선안"
+     }
+    },
+    {
+     "id": "6c7b00fc6465",
+     "title_ko": "암 재발로 중국에서 생명 구호 치료 찾는 신생아실 간호사",
+     "summary_ko": [
+      "스타십 어린이병원 신생아실에서 27년간 헌신해 온 간호사가 림프종 재발로 뉴질랜드 내 치료 옵션이 소진되었습니다.",
+      "가족들은 모금 페이지를 개설해 중국에서 CAR-T 세포 치료를 받기 위한 비용을 모으고 있습니다.",
+      "평생 환자를 돌보던 의료진이 환자 입장이 되어 해외 치료에 의존하는 안타까운 상황이 전해졌습니다."
+     ],
+     "tags": [
+      "의료",
+      "사회"
+     ],
+     "importance": 4,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/11/07/neonatal-nurse-seeks-lifesaving-treatment-in-china-after-cancer-returns/"
+      }
+     ],
+     "original_title": "Neonatal nurse seeks lifesaving treatment in China after cancer returns",
+     "published_at": "2026-11-06T17:11+00:00",
+     "why_it_matters": "오클랜드 의료 현장의 현실과 중증 질환 치료에 있어 국내외 의료 접근성의 한계를 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 스타십 병원 의료진의 투병과 해외 치료 의존 사례는 뉴질랜드 중증 질환 의료 체계의 한계를 보여줌.",
+      "actions": [
+       "중대 질병 대비 의료 실비 보험 특약 확인"
+      ],
+      "watch": "해외 선진 치료법 도입 및 공공 의료 지원 확대 여부"
+     }
+    }
+   ]
+  },
+  "akl_education": {
+   "label": "교육",
+   "briefing": "학교 내 정치 홍보물 철거와 유아 체벌 관련 교사 징계 사안이 다뤄졌습니다.",
+   "items": [
+    {
+     "id": "6c0819ad6da9",
+     "title_ko": "노동당 로고가 부착된 선거 홍보물 철거한 오클랜드 학교",
+     "summary_ko": [
+      "오클랜드의 한 학교가 노동당 로고가 포함된 선거 홍보물을 민원 제기에 따라 철거 조치했습니다.",
+      "학교 구내에서의 정치적 중립성을 유지하기 위한 조치로 시행되었습니다.",
+      "선거 기간 교육 시설 내 정치적 규정 준수의 중요성을 보여줍니다."
+     ],
+     "tags": [
+      "정치",
+      "교육"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxNc1hTYzJTNlNmUmZXZU80U3FHTzhwdlpqMW9OeXNSSkQwTEgyRGUyQXZXR0tmbE1ucDQzOVdoWURLUlpQWFFhSllnalNIdVA4N2hUMFhnVVJnMDJBMFZNRXhnS1R4R2xtQ0ZRSWNyenlpYUJ5Uk1TWHpwRUZseE56enU0Q25nSTVWdlBPb1BVTXVhUXg2SHlYTUpmWTZBQV9zRlV6SE1VS21NdVVfWEZvbUoxN1lFVnVwbGcwS1pHQk9JT0Rzakx0bXh5Z3FyS0JXSUxGMVd2YlAyZHlFYnh1RzM0enZQa2VkXzV2ZFhxN0t3S1k?oc=5"
+      }
+     ],
+     "original_title": "Auckland school removes election pamphlets with Labour logo after complaint",
+     "published_at": "2026-11-06T03:57+00:00",
+     "why_it_matters": "학교 시설 내 정치적 중립 규정과 오클랜드 지역의 선거 관리 지침을 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 학교 내 정치적 홍보물 철거 조치로 교육 기관의 중립성 유지 지침을 보여줌.",
+      "actions": [
+       "학교 시설 내 정치 활동 규정 확인"
+      ],
+      "watch": "선관위의 학교 투표소 및 교육 시설 관리 지침 준수 여부"
+     }
+    },
+    {
+     "id": "bdefa5fb8e1c",
+     "title_ko": "유아 폭행 혐의 오클랜드 교사 징계 재판소 결과 발표",
+     "summary_ko": [
+      "유아들을 체포·폭행한 혐의를 받는 오클랜드 교사에 대한 교사징계재판소의 조사 결과가 발표되었습니다.",
+      "어린 아동을 상대로 한 부적절한 신체적 접촉에 대해 엄중한 심리가 진행되었습니다.",
+      "교육 종사자의 윤리 기준과 아동 안전 보호 조치의 중요성이 강조되었습니다."
+     ],
+     "tags": [
+      "교육",
+      "사회",
+      "치안"
+     ],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQYmdFZDRlRnU4dEdxR3VDMUtXVjBxejRCMHREdXQ0X1pOaUpWZ216RHhJNTRBUGxjTXhHN3ZSd0NWX3VJajNWZG1EaldfWmR3Y0syRjBaSmNMTVpvQlVxQ0tEbzEtQjJxS3h1akJfNnlaUVVzMmNjUFFKMFhLZVJCdFd1ZmJJYjJIRVJGb1VqcjNCVXU5TjJzWE0zeGVQT1J0UGxER2hjaGNtV0R2cHk4QndsSjVYdnpfbmNjZ00xM2pJRjk2akdBRENB?oc=5"
+      }
+     ],
+     "original_title": "Disciplinary tribunal gives findings on Auckland teacher accused of smacking toddlers",
+     "published_at": "2026-11-05T07:06+00:00",
+     "why_it_matters": "오클랜드 교육 기관의 교사 자격 심사 및 아동 보호 기준을 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 유아교육 교사 징계 사건으로 자녀가 다닐 유아교육기관(ECE)의 교사 자격 및 아동 보호 기준 점검에 도움을 줌.",
+      "actions": [
+       "자녀의 유아교육기관(ECE) 아동 안전 및 교사 자격 증명 확인"
+      ],
+      "watch": "교육평가원(ERO)의 유아교육기관 감사 결과 발표"
+     }
+    }
+   ]
+  },
+  "nz_immigration": {
+   "label": "이민 레이더",
+   "briefing": "이주 노동자 불법 수수료를 차단하는 법적 판결과 비자 정책 변화가 주목받고 있습니다.",
+   "items": [
+    {
+     "id": "e7163ca70967",
+     "title_ko": "이주 노동자 채용 비리 고리 차단한 고등법원 판결",
+     "summary_ko": [
+      "고용법원은 해외에서 뉴질랜드 일자리를 얻기 위해 불법으로 지급한 채용 수수료를 이주 노동자가 반환 청구할 수 있다고 판결했습니다.",
+      "베이오브플렌티의 키위 농장 업체의 부당 행위 조사에 이어 수만 달러에 달하던 기존의 사각지대를 해소했습니다.",
+      "이번 판결로 취약한 이주 노동자들을 악덕 고용주로부터 보호하는 강력한 법적 기반이 마련되었습니다."
+     ],
+     "tags": [
+      "이민",
+      "고용",
+      "비자"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/pacific/2354939/employment-court-decision-closes-loophole-exploited-by-migrant-worker-recruiters"
+      }
+     ],
+     "original_title": "Court decision closes loophole exploited by migrant worker recruiters",
+     "published_at": "2026-11-05T22:42+00:00",
+     "why_it_matters": "졸업 후 뉴질랜드에서 취업비자 및 고용 계약을 맺을 때 부당한 금전 요구로부터 권리를 보호받는 중요한 법적 선례가 됩니다.",
+     "radar": 10,
+     "impact": {
+      "level": "high",
+      "reason": "졸업 후 취업비자와 고용계약 시 해외 채용 수수료 부당 요구를 막는 법적 보호막이 강화됨.",
+      "actions": [
+       "고용 계약 전 부당한 해외 수수료 요구 조항이 없는지 확인",
+       "MBIE 및 고용기준청(Employment Standards) 가이드라인 검토"
+      ],
+      "watch": "2026년 고용법원 판결 후속 지침 발표 여부"
+     },
+     "timeline": [
+      {
+       "date": "2026-10-16",
+       "title_ko": "법원, 해외에서 비용 지불 받아도 '일자리 대가 금품 수수' 처벌 판결",
+       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOVjFKUjlfSE44bEZIeGsxb2V2TDVhQmR2a041eTlFeldiMGxnMnVEQWhzYVc2VGNCdl9telYzVk0tRjBiWXhuM0YwV0Y1cG9seVAzU1lkUGh0b0JHUjFzd1Y2ci1fbjBZdUZ2RnNqTmRZVEJ3c1gzRVBVaWNrNDBaN19KaGhsY3NBc3JvbEpETHp4Q05XWVA4NFRucmZ4QkhVSFhJN25EZEEwVTE2amh3aGJvb3I5N1BTUGpMSUhIYjc?oc=5",
+       "id": "ff884df8c839"
+      },
+      {
+       "date": "2026-10-21",
+       "title_ko": "뉴질랜드 취업 대가 해외 수수료 징수는 불법… 노동법원 판결",
+       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPbG0zLVZZMjlWeDJHRUgycElXclhHd3ZZTUZsOWVTWjZzRl9BaHREZUplRnI5S2VOMUxHYzhiQmxPYUFaNUpCeEt0WVJUVFd1bVNNaEtoOG1JOUowRkhjdXpwTnl6VzlBVmRrazNBNEFDeXpkSDVDTVl5RWZzMjlNUzlBUWpoVVYxdzRGQVllaFMtVEFNZ3VEQmQ4cVNjVmxwcTA3RjJGLU9nV25GWG1EdWVpa25jUVRsZ0R2V0ctVnlkUmt5MjN4VzBYb2padFBhUmZtZVF5QQ?oc=5",
+       "id": "e88ba9758bae"
+      },
+      {
+       "date": "2026-10-23",
+       "title_ko": "고용법원, 뉴질랜드 일자리 명목 해외 이주민 금전 요구 불법 판결",
+       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPa3ZnLU83QTNLU1czMXZmbGRPUjBmQUdkRDl0b1N3eHN0R2FCMmhocHJiNG9qZGNYTXlRMm9yRVhmUzZZTVBKTW1RYjl2NGwxQWFJaVMydXhlNG15N3lTdEI2YXlGdGEySHZXbWNkUTlBbUwwU1VaTlkyTEM0WV85VkFYVUI3Yk1MS2NYVkdfbThFWlNUdmk0alJ1aVV1MVdjZ2dXU05JdlFMdENVeWc?oc=5",
+       "id": "cef72e2aebcb"
+      }
+     ],
+     "changed": "해외에서 지불한 채용 수수료에 대한 노동자의 반환 청구권을 명확히 인정함."
+    },
+    {
+     "id": "f6fcdfbe3a49",
+     "title_ko": "영주권, 불법 체류자, 난민 정책 제시한 정당들",
+     "summary_ko": [
+      "각 정당들이 총선을 앞두고 영주권 발급, 불법 체류자 및 난민 관련 이민 공약을 발표했습니다.",
+      "정당별로 이민자 유입 규모와 비자 심사 기준에 대해 엇갈린 입장을 내놓았습니다.",
+      "선거 결과에 따라 향후 이민 정책과 비자 제도에 큰 변화가 예상됩니다."
+     ],
+     "tags": [
+      "이민",
+      "정치",
+      "비자"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNWTFXYjhMVlFHd0pja1JwbEI4NVhtR2NUZnJwSV9DMnlsRG5mVktPVnowakFlYW5CYUs0QVkzci1rVVdqa1UwRG9xNkh4UkUxeHg5dXZCS1hyV1FhbWVsQzlGQmVWMWVsYno4X2Jhc1YwRXFBVmY5WkJuZllTeWcxdk0wOVVoaUdqOUhXY2dIZ1JCZ0t6WEFxby1lcFBOeWt2TS03YnppY1pleFBIdU5EekYwYlNYQXotaEpMX2V4QWFmNkxoTXc?oc=5"
+      }
+     ],
+     "original_title": "Residency, overstayers and asylum seekers: Parties set out their stalls",
+     "published_at": "2026-11-05T21:17+00:00",
+     "why_it_matters": "졸업생 취업비자(PSWV) 소지자로서 향후 영주권 취득 경로와 이민 규정 변화에 직접적인 영향을 미칩니다.",
+     "radar": 9,
+     "impact": {
+      "level": "high",
+      "reason": "새 정부의 이민 정책과 영주권·비자 심사 기준에 직접적인 변화를 예고하는 총선 공약임.",
+      "actions": [
+       "각 정당의 비자 및 영주권 공약 비교 검토",
+       "졸업생 취업비자(PSWV) 및 SMC 관련 정책 변화 주시"
+      ],
+      "watch": "2026 총선 최종 개표 결과 및 새 이민장관의 정책 발표"
+     }
+    },
+    {
+     "id": "92fc113c393b",
+     "title_ko": "은행 시스템 공백으로 위험에 처한 뉴질랜드 골든 비자 투자금",
+     "summary_ko": [
+      "뉴질랜드의 투자 이민(골든 비자) 제도가 국내 은행권의 지원 부족과 규제 공백으로 수십억 달러의 투자금을 놓칠 위기에 처했습니다.",
+      "해외 고액 자산가들이 투자 이민을 추진하는 과정에서 금융권의 소극적인 태도가 걸림돌로 작용하고 있습니다.",
+      "국가 경제 활성화와 자본 유치를 위해 이민 및 금융 정책의 조율이 시급하다는 지적이 나옵니다."
+     ],
+     "tags": [
+      "이민",
+      "경제",
+      "비자"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "Impact PR - Public Relations",
+       "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBoWHA4U3FoWFpSeWxvU1pNMkpLb1pNZEdRRWRLNFpLYWhTM3BGNzRrN2gyRVNsYWVjYVVUelVPNFBvR2l3OHFmcmJYN1FuWURqWHNQN2RkUjcyR0E3TVFGcFU4WnlfZ0pZclhMNmo0WWdtdURCU1pj?oc=5"
+      }
+     ],
+     "original_title": "New Zealand Golden Visa Billions at Risk From Banking Gap",
+     "published_at": "2026-11-06T16:16+00:00",
+     "why_it_matters": "정부의 전체적인 투자 이민 및 자본 유치 정책 방향과 경제 활력도를 가늠하는 지표가 됩니다.",
+     "radar": 8,
+     "impact": {
+      "level": "low",
+      "reason": "고액 투자 이민 제도의 경제적 동향으로 직접적인 비자 변경과는 거리가 있음.",
+      "actions": [],
+      "watch": "정부의 투자 이민 및 뱅킹 규제 보완 대책"
+     }
+    },
+    {
+     "id": "528aba0f93d2",
+     "title_ko": "HIV 감염자 비자 장벽 폐지한 뉴질랜드",
+     "summary_ko": [
+      "뉴질랜드 정부가 비자 발급 과정에서 HIV 감염자에 대한 차별적인 의료 장벽을 공식적으로 제거했습니다.",
+      "모든 이주민과 방문객에게 보다 공평한 보건 심사 기준이 적용되게 되었습니다.",
+      "인권 보호와 공중보건 정책의 현대화를 반영한 조치로 평가받습니다."
+     ],
+     "tags": [
+      "이민",
+      "의료",
+      "비자"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "YOUR EX",
+       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQVW5rN0NvWHlTRDR0MlhMeXFoMzBJYi1KNFloVk15QVp0ajZ6V1NvbjVqa3NiNDdSZE80cFZvWXlyUExyeUFwMGJudmpCX0VNTzExUm1LT0Rpb2dIQkU4UmZnMmpoeXk4VE91UmxpeGpvZm1ZOFZwSjhYUER4VnhyQnBQanBad3c?oc=5"
+      }
+     ],
+     "original_title": "HIV Care for Everyone: NZ Removes Visa Barriers",
+     "published_at": "2026-11-05T00:32+00:00",
+     "why_it_matters": "비자 신청 시 요구되는 건강검진 및 의료 수용성 관련 이민 규정의 변화를 보여줍니다.",
+     "radar": 8,
+     "impact": {
+      "level": "medium",
+      "reason": "비자 신체검사 및 보건 심사 기준이 완화되어 향후 비자 연장 시 의료 장벽이 낮아짐.",
+      "actions": [
+       "이민국 비자 신청용 건강검진 가이드라인 개정 내용 확인"
+      ],
+      "watch": "이민국의 비자 신청 지침(INZ Operational Manual) 업데이트"
+     }
+    },
+    {
+     "id": "d1a2483f844a",
+     "title_ko": "이주 노동자 수수료 갈취와 임금 체불로 20만 달러 명령받은 노동 고용주",
+     "summary_ko": [
+      "노동 고용 관련 위법 행위를 저지른 인력 채용 디렉터에게 이주 노동자 착취와 임금 미지급 책임으로 20만 달러 이상의 배상 명령이 내려졌습니다.",
+      "정부 당국은 외국인 근로자를 대상으로 한 부당 수수료 갈취 행위에 대해 무관용 원칙을 고수하고 있습니다.",
+      "부당 고용주에 대한 처벌이 강화되면서 이주 노동 시장의 투명성이 제고될 전망입니다."
+     ],
+     "tags": [
+      "이민",
+      "고용",
+      "임금"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNbkJET2FFZFkwdXkwbWdKY0FhS1hGZXk4b1h5eGJkRFhTVGU2VlZFX0RNQUt6UUVPV3FJNDlhTTVWUWppQ1RkQUNFanpTRnVNUnRHNS04c25ubF95MnE0RWNjbFQ5WmJuR3pwSEQycHJRYXAzQUFPLUoxYlBzcnVmamVxcVBFaDJzRXFsT2ZaVm9vVkhXckdIcGQ1SlM2WWRMMHBnWkhtM095bkE?oc=5"
+      }
+     ],
+     "original_title": "Labour hire director to pay $203k over migrant worker fees, underpayments",
+     "published_at": "2026-11-04T20:56+00:00",
+     "why_it_matters": "향후 AEWV 등 취업비자로 일할 때 고용주의 불법 행위 여부를 감시하고 권익을 보호받는 데 중요한 기준이 됩니다.",
+     "radar": 8,
+     "impact": {
+      "level": "high",
+      "reason": "취업비자 소지자가 겪을 수 있는 고용주의 불법 수수료 갈취와 임금 체불에 대한 경각심을 높임.",
+      "actions": [
+       "AEWV 고용주 인증 여부 및 고용 계약서 준수 사항 점검"
+      ],
+      "watch": "노동청(Labour Inspectorate)의 이주 노동자 고용 사업장 단속 결과"
+     },
+     "timeline": [
+      {
+       "date": "2026-10-16",
+       "title_ko": "법원, 해외에서 비용 지불 받아도 '일자리 대가 금품 수수' 처벌 판결",
+       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOVjFKUjlfSE44bEZIeGsxb2V2TDVhQmR2a041eTlFeldiMGxnMnVEQWhzYVc2VGNCdl9telYzVk0tRjBiWXhuM0YwV0Y1cG9seVAzU1lkUGh0b0JHUjFzd1Y2ci1fbjBZdUZ2RnNqTmRZVEJ3c1gzRVBVaWNrNDBaN19KaGhsY3NBc3JvbEpETHp4Q05XWVA4NFRucmZ4QkhVSFhJN25EZEEwVTE2amh3aGJvb3I5N1BTUGpMSUhIYjc?oc=5",
+       "id": "ff884df8c839"
+      },
+      {
+       "date": "2026-10-21",
+       "title_ko": "뉴질랜드 취업 대가 해외 수수료 징수는 불법… 노동법원 판결",
+       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPbG0zLVZZMjlWeDJHRUgycElXclhHd3ZZTUZsOWVTWjZzRl9BaHREZUplRnI5S2VOMUxHYzhiQmxPYUFaNUpCeEt0WVJUVFd1bVNNaEtoOG1JOUowRkhjdXpwTnl6VzlBVmRrazNBNEFDeXpkSDVDTVl5RWZzMjlNUzlBUWpoVVYxdzRGQVllaFMtVEFNZ3VEQmQ4cVNjVmxwcTA3RjJGLU9nV25GWG1EdWVpa25jUVRsZ0R2V0ctVnlkUmt5MjN4VzBYb2padFBhUmZtZVF5QQ?oc=5",
+       "id": "e88ba9758bae"
+      },
+      {
+       "date": "2026-10-23",
+       "title_ko": "고용법원, 뉴질랜드 일자리 명목 해외 이주민 금전 요구 불법 판결",
+       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPa3ZnLU83QTNLU1czMXZmbGRPUjBmQUdkRDl0b1N3eHN0R2FCMmhocHJiNG9qZGNYTXlRMm9yRVhmUzZZTVBKTW1RYjl2NGwxQWFJaVMydXhlNG15N3lTdEI2YXlGdGEySHZXbWNkUTlBbUwwU1VaTlkyTEM0WV85VkFYVUI3Yk1MS2NYVkdfbThFWlNUdmk0alJ1aVV1MVdjZ2dXU05JdlFMdENVeWc?oc=5",
+       "id": "cef72e2aebcb"
+      },
+      {
+       "date": "2026-11-06",
+       "title_ko": "고용법원 판결로 해외 채용 수수료 부당징수 제동",
+       "url": "https://www.rnz.co.nz/news/pacific/2354939/employment-court-decision-closes-loophole-exploited-by-migrant-worker-recruiters",
+       "id": "e7163ca70967"
+      }
+     ],
+     "changed": "인력 채용 디렉터에게 20만 달러 이상의 고액 배상 명령이 내려짐."
+    },
+    {
+     "id": "0927a083ef02",
+     "title_ko": "11월 고용 및 이민 법률 동향 리포트",
+     "summary_ko": [
+      "덴턴스 켄싱턴 스완의 11월 고용 및 이민 법률 뉴스레터가 최신 규정 변화를 요약했습니다.",
+      "고용법 개정과 이주 노동자 관련 주요 판례들이 기업과 근로자들에게 안내되었습니다.",
+      "노동 시장의 법적 준수 사항을 점검하는 데 유용한 정보가 제공됩니다."
+     ],
+     "tags": [
+      "이민",
+      "고용",
+      "비자"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Dentons Kensington Swan",
+       "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNRU9xeWVZMnRrRnota2FMMDdsMXktQjd0ZXBuUm90d3RUM0hHMkEzSi1EYnMzMFA2bkpNdVdOazA3WVc5UHlSZHhRcHBpY25zMjJuRlB6RmhGYWtFZ25xWlFOaHJwM3ptTzI1b21VaWwycm5MVW1QYnB1WXlFZGg3Vm9vNEZUemQ1SDVsSjByN2tJb1BYQW12b1NRbnVpY1NTTGdYM1lxNmt6anJfblJNVk9lNGQ2bnNzR0E?oc=5"
+      }
+     ],
+     "original_title": "Employment Echo – November Edition",
+     "published_at": "2026-11-04T21:03+00:00",
+     "why_it_matters": "졸업 후 취업 및 비자 신청 과정에서 알아야 할 최신 고용법과 이민 법무 트렌드를 파악할 수 있습니다.",
+     "radar": 7,
+     "impact": {
+      "level": "medium",
+      "reason": "졸업 후 취업 및 비자 신청에 필요한 최신 고용법과 이민 법무 동향을 파악할 수 있음.",
+      "actions": [
+       "덴턴스 켄싱턴 스완 등 주요 로펌의 이민·고용 뉴스레터 구독"
+      ],
+      "watch": "11월 이후 추가 발표될 고용법 개정안 세부 내용"
+     }
+    }
+   ]
+  }
+ },
+ "extras": {
+  "nzd_krw": 755.16,
+  "usd_krw": 1362.81,
+  "jpy100_krw": 861.2,
+  "btc_usd": 75657,
+  "auckland_weather": {
+   "max": 20,
+   "min": 16,
+   "desc": "뇌우",
+   "code": 95,
+   "rain_chance": 100
+  },
+  "policy_rates": {
+   "updated_at": "2026-11-06",
+   "rates": {
+    "NZ": {
+     "name": "뉴질랜드",
+     "label": "OCR",
+     "value": 2.75,
+     "as_of": "2026-10-30",
+     "changed_on": "2026-09-03",
+     "previous": 2.5,
+     "year_ago": 2.5,
+     "source": "BIS"
+    },
+    "KR": {
+     "name": "한국",
+     "label": "기준금리",
+     "value": 3.0,
+     "as_of": "2026-10-08",
+     "changed_on": "2026-08-27",
+     "previous": 2.75,
+     "year_ago": 2.5,
+     "source": "BIS"
+    },
+    "US": {
+     "name": "미국",
+     "label": "연방기금 목표",
+     "value": 3.875,
+     "as_of": "2026-11-06",
+     "changed_on": "2026-09-17",
+     "previous": 3.625,
+     "year_ago": 3.875,
+     "source": "FRED",
+     "range": [
+      3.75,
+      4.0
+     ]
+    }
+   }
+  },
+  "processing_times": {
+   "updated_at": "2026-11-06T18:14+00:00",
+   "items": [
+    {
+     "key": "pswv",
+     "name": "졸업 후 취업비자 (PSWV)",
+     "group": "졸업 후",
+     "p50": "",
+     "p90": "3.5주",
+     "pct": 80,
+     "sub": "",
+     "note": "80% within 3.5 weeks",
+     "url": "https://www.immigration.govt.nz/visas/post-study-work-visa/",
+     "as_of": "2026-11-06",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-01",
+      "prev_p90": "3주",
+      "delta_days": 4
+     }
+    },
+    {
+     "key": "aewv",
+     "name": "고용주 인증 취업비자 (AEWV)",
+     "group": "취업비자",
+     "p50": "2주",
+     "p90": "5주",
+     "pct": 80,
+     "sub": "",
+     "note": "Accredited Employer Work Visa (AEWV) | 2 weeks | 5 weeks",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/work-visa-wait-times/",
+     "as_of": "2026-11-06",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-01",
+      "prev_p90": "5주",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "smc",
+     "name": "숙련 이민 영주권 (SMC)",
+     "group": "영주권",
+     "p50": "3개월",
+     "p90": "5개월",
+     "pct": 80,
+     "sub": "",
+     "note": "Skilled Migrant Category Resident Visa | 3 months | 5 months",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
+     "as_of": "2026-11-06",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-01",
+      "prev_p90": "4개월",
+      "delta_days": 30
+     }
+    },
+    {
+     "key": "gl_str",
+     "name": "Green List 즉시 영주권 (Straight to Residence)",
+     "group": "영주권",
+     "p50": "8.5주",
+     "p90": "4개월",
+     "pct": 80,
+     "sub": "",
+     "note": "Straight to Residence Visa | 8.5 weeks | 4 months",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
+     "as_of": "2026-11-06",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-01",
+      "prev_p90": "3.5개월",
+      "delta_days": 15
+     }
+    },
+    {
+     "key": "wtr",
+     "name": "취업 후 영주권 (Work to Residence)",
+     "group": "영주권",
+     "p50": "9주",
+     "p90": "3개월",
+     "pct": 80,
+     "sub": "",
+     "note": "Work to Residence Visa | 9 weeks | 3 months",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
+     "as_of": "2026-11-06",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-01",
+      "prev_p90": "3개월",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "pr",
+     "name": "영구 영주권 (Permanent Resident Visa)",
+     "group": "영주권",
+     "p50": "1.5주",
+     "p90": "2주",
+     "pct": 80,
+     "sub": "",
+     "note": "Permanent Resident Visa | 1.5 weeks | 2 weeks",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
+     "as_of": "2026-11-06",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-01",
+      "prev_p90": "2주",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "citizenship",
+     "name": "시민권 (Grant of Citizenship)",
+     "group": "시민권",
+     "p50": "",
+     "p90": "6개월",
+     "pct": 85,
+     "sub": "94%가 5개월 안에 결과 통보",
+     "note": "within 6 months of submitting their application, 85% of applicants are granted",
+     "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/how-to-apply-for-nz-citizenship/application-timeframes/",
+     "as_of": "2026-11-06",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-01",
+      "prev_p90": "6개월",
+      "delta_days": 0
+     }
+    }
+   ]
+  },
+  "living_costs": {
+   "updated_at": "2026-11-06",
+   "rent": {
+    "month": "2026-08",
+    "median": 650.0,
+    "lower": 550.0,
+    "upper": 765.0,
+    "source": "Tenancy Services (신규 임대차 보증금 기준)",
+    "url": "https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/",
+    "yoy_pct": 0.0
+   },
+   "fuel": {
+    "source": "MBIE 주간 유가 모니터링 (전국 평균 게시 가격)",
+    "url": "https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring",
+    "petrol91": {
+     "date": "2026-10-30",
+     "nzd_per_l": 3.57,
+     "wow_cents": -4.4
+    },
+    "petrol95": {
+     "date": "2026-10-30",
+     "nzd_per_l": 3.77,
+     "wow_cents": -3.8
+    },
+    "diesel": {
+     "date": "2026-10-30",
+     "nzd_per_l": 3.22,
+     "wow_cents": -1.6
+    }
+   }
+  }
+ },
+ "meta": {
+  "mode": "gemini",
+  "failed_feeds": [],
+  "feeds_total": 40,
+  "stories_after_dedupe": 779,
+  "usage": {
+   "provider": "gemini",
+   "requests": 4,
+   "models": {
+    "gemini-flash-lite-latest": {
+     "calls": 4,
+     "input_tokens": 59057,
+     "output_tokens": 52607,
+     "cost_usd": 0.0
+    }
+   },
+   "total_cost_usd": 0.0
+  },
+  "alerts": [
+   {
+    "kind": "processing",
+    "key": "smc",
+    "text": "숙련 이민 영주권 (SMC) 처리 기간 4개월 → 5개월 (늘어남)",
+    "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/"
+   },
+   {
+    "kind": "processing",
+    "key": "gl_str",
+    "text": "Green List 즉시 영주권 (Straight to Residence) 처리 기간 3.5개월 → 4개월 (늘어남)",
+    "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/"
+   },
+   {
+    "kind": "radar",
+    "text": "이주 노동자 채용 비리 고리 차단한 고등법원 판결",
+    "url": "https://www.rnz.co.nz/news/pacific/2354939/employment-court-decision-closes-loophole-exploited-by-migrant-worker-recruiters"
+   },
+   {
+    "kind": "radar",
+    "text": "영주권, 불법 체류자, 난민 정책 제시한 정당들",
+    "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNWTFXYjhMVlFHd0pja1JwbEI4NVhtR2NUZnJwSV9DMnlsRG5mVktPVnowakFlYW5CYUs0QVkzci1rVVdqa1UwRG9xNkh4UkUxeHg5dXZCS1hyV1FhbWVsQzlGQmVWMWVsYno4X2Jhc1YwRXFBVmY5WkJuZllTeWcxdk0wOVVoaUdqOUhXY2dIZ1JCZ0t6WEFxby1lcFBOeWt2TS03YnppY1pleFBIdU5EekYwYlNYQXotaEpMX2V4QWFmNkxoTXc?oc=5"
+   }
+  ]
+ }
+}
