@@ -76,12 +76,6 @@ function saveRating(id: string, r: Rating | null): void {
 }
 
 const num = (n: number) => n.toLocaleString("en-NZ", { maximumFractionDigits: 2 });
-const monthsAgo = (asof: string): number | null => {
-  const m = /^(\d{4})-(\d{2})/.exec(asof);
-  if (!m) return null;
-  const now = new Date();
-  return (now.getFullYear() - +m[1]) * 12 + (now.getMonth() + 1 - +m[2]);
-};
 const feeOf = (f: Facility, kind: string): Fee | undefined => f.fees.find((x) => x.kind === kind);
 const yearly = (f: Facility, kind: string): number | null => {
   const x = feeOf(f, kind);
@@ -130,7 +124,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   let sort = "dist";
   let krw = false;
   let radius = 0;
-  let base = o.suburbs.find((s) => o.gp?.suburbs[s]) ?? "";
+  let base = ""; // 거리 기준 기본값은 시내(CBD)
   let selected: { fac?: string; spot?: number } = {};
   let household: "adult" | "couple" | "family" = "adult";
   let years = 5;
@@ -338,7 +332,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     radSel.addEventListener("change", () => { radius = +radSel.value; drawMap(); });
     const sortSel = h("select", { "aria-label": "골프 표 정렬" },
       h("option", { value: "dist" }, "표: 가까운 순"), h("option", { value: "fee" }, "표: 연회비 낮은 순"),
-      h("option", { value: "rating" }, "표: 평점 높은 순"), h("option", { value: "name" }, "표: 이름순"));
+      h("option", { value: "name" }, "표: 이름순"));
     sortSel.value = sort;
     sortSel.addEventListener("change", () => { sort = sortSel.value; renderGolf(); });
     const krwBox = h("input", { type: "checkbox", id: "leisure-krw" });
@@ -367,24 +361,15 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     const items = facilities.filter((f) => f.kind === "golf");
     const val = (f: Facility): number => {
       if (sort === "fee") return yearly(f, "adult") ?? Number.POSITIVE_INFINITY;
-      if (sort === "rating") return -(ratingOf(f)?.v ?? -1);
       return dist(f.ll) ?? Number.POSITIVE_INFINITY;
     };
     return [...items].sort((a, b) => (sort === "name" ? a.name.localeCompare(b.name) : val(a) - val(b)));
   };
 
-  function ratingCell(f: Facility): HTMLElement {
-    const r = ratingOf(f);
-    if (!r) return h("td", { class: "muted" }, "—");
-    const age = r.asof ? monthsAgo(r.asof) : null;
-    return h("td", {}, `★${r.v.toFixed(1)}`, r.n ? h("small", {}, `${r.n.toLocaleString("ko-KR")}건`) : null,
-      r.asof ? h("small", { class: age != null && age >= 9 ? "old" : "" }, `${r.asof}${age != null && age >= 9 ? " (오래됨)" : ""}`) : null);
-  }
-
   function renderGolf() {
     if (!on.has("golf") || !facilities.some((f) => f.kind === "golf")) { golfBox.replaceChildren(); return; }
     const items = sortedGolf();
-    const head = h("tr", {}, ...["클럽", "거리", "성인 1", "커플(2인)", "가족", "입회비", "평점"].map((t) => h("th", { scope: "col" }, t)));
+    const head = h("tr", {}, ...["클럽", "거리", "성인 1", "입회비", "사이트"].map((t) => h("th", { scope: "col" }, t)));
     const body = items.map((f) => {
       const d = dist(f.ll);
       const cell = (k: string) => {
@@ -396,11 +381,12 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
       const state = f.status && f.status !== "open" && f.status !== "unknown" ? h("small", { class: "tag" }, STATUS[f.status]) : null;
       return h("tr", { class: selected.fac === f.id ? "cur" : "" },
         h("th", { scope: "row" }, name, h("small", { class: "muted" }, `${f.area ?? ""}${f.checked ? "" : " · 요금 미확인"}`), state),
-        h("td", {}, d != null ? `${d.toFixed(1)}km` : "—"), cell("adult"), cell("couple"), cell("family"), cell("joining"), ratingCell(f));
+        h("td", {}, d != null ? `${d.toFixed(1)}km` : "—"), cell("adult"), cell("joining"),
+        h("td", {}, f.home ? o.link(f.home, "🌐") : h("span", { class: "muted" }, "—")));
     });
     golfBox.replaceChildren(h("section", { class: "hood-card" }, h("h2", {}, `⛳ 골프장 회원권 (${items.length}곳)`),
       h("div", { class: "table-wrap" }, h("table", { class: "hood-table leisure-table" }, h("thead", {}, head), h("tbody", {}, ...body))),
-      h("p", { class: "board-note" }, `클럽 이름을 누르면 지도가 그 클럽으로 이동하고 옆(모바일은 지도 아래) 패널에 전체 요금·손익분기 계산·평점 입력이 열려요. 연회비는 성인 1인 정규(풀 플레잉) 기준, 커플은 성인 2인 합계예요. “—”는 공식 페이지에서 확인되지 않은 항목입니다. 갱신 ${data?.updated_at ?? ""}. 정회원 가입은 입회 심사·대기 명단이 있는 곳이 많고, 일부 클럽은 요금을 공개하지 않아요.`)));
+      h("p", { class: "board-note" }, `클럽 이름을 누르면 지도가 그 클럽으로 이동하고 옆(모바일은 지도 아래) 패널에 전체 요금·손익분기 계산·평점 입력이 열려요. 연회비는 성인 1인 정규(풀 플레잉) 기준, 커플은 성인 2인 합계예요. 커플·가족 연회비, 평점은 이 패널과 아래 가입 비용 비교에서 봐요. “—”는 공식 페이지에서 확인되지 않은 항목입니다. 갱신 ${data?.updated_at ?? ""}. 정회원 가입은 입회 심사·대기 명단이 있는 곳이 많고, 일부 클럽은 요금을 공개하지 않아요.`)));
   }
 
   // ── 가입 비용 비교 ──

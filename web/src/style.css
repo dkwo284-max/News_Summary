@@ -514,3 +514,5 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .leisure-list li { display: block; }
 .gp-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
 @media (min-width: 900px) { .leisure-stage .gp-map { height: 66vh; min-height: 460px; } }
+.leisure-table th:first-child { white-space: normal; min-width: 0; max-width: 150px; }
+.leisure-table th, .leisure-table td { padding-left: 3px; padding-right: 3px; }
