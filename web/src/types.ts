@@ -60,7 +60,10 @@ export interface Brief {
     btc_usd?: number | null;
     policy_rates?: PolicyRates | null;
   };
-  meta?: { mode?: string; failed_feeds?: { id: string; name?: string; error: string }[]; alerts?: Alert[] };
+  meta?: {
+    mode?: string; failed_feeds?: { id: string; name?: string; error: string }[]; alerts?: Alert[];
+    degraded?: boolean; degraded_reason?: string; retries?: number; // AI 요약·선별 실패 → 같은 날 자동 재시도
+  };
 }
 
 export interface ArchiveIndex {

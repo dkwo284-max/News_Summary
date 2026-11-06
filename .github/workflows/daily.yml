@@ -8,6 +8,10 @@ on:
     #   표준시   NZST(UTC+12, 4월 초~9월 말): 18:05/18:20/18:35 UTC
     # 두 시간대를 모두 걸어두고, scripts/main.py 가 현지 06~07시대이고 오늘 브리핑이 없을 때만 생성한다.
     - cron: "5,20,35 17,18 * * *"
+    # AI 실패 자동 복구: 아침 브리핑이 Gemini 오류로 원문·휴리스틱으로 나갔으면(meta.degraded) 다시 생성 (하루 최대 2번, AI 를 쓰는 건 실패한 날만)
+    #   NZ 서머타임 기준 10:10 / 14:10 (표준시에는 09:10 / 13:10)
+    - cron: "10 21 * * *"
+    - cron: "10 1 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -69,7 +73,8 @@ jobs:
           ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.processing_only && '--update-processing' || '' }}
           SKIP: ${{ github.event_name == 'workflow_dispatch' && !inputs.overwrite && '--skip-existing' || '' }}  # 수동·외부 호출이 겹쳐도 하루 한 번만 AI 소모
           CAP: ${{ github.event_name == 'workflow_dispatch' && inputs.ignore_cap && '--ignore-cap' || '' }}
-        run: python scripts/main.py $FORCE $ONLY $SKIP $CAP
+          RETRY: ${{ (github.event.schedule == '10 21 * * *' || github.event.schedule == '10 1 * * *') && '--retry-degraded' || '' }}
+        run: python scripts/main.py $FORCE $ONLY $SKIP $CAP $RETRY
 
       - name: Commit data
         if: steps.run.outputs.generated == 'true'

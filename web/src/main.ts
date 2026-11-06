@@ -6,6 +6,8 @@ import { gpSection, loadGP } from "./gpmap";
 import { loadIncidents, safetyAlert, safetySection } from "./crimemap";
 import { loadStores } from "./stores";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
+import { buildSeen, followUpdates, isFollowed, isOld, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, unfollow, type SeenIndex } from "./news-tools";
+import { trackerCard } from "./tracker";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
 // ── 탭/카테고리 정의 ───────────────────────────────────────
@@ -62,6 +64,8 @@ let liveBusy = false;
 const AUTO_REFRESH_MS = 60 * 1000;
 const AUTO_REFRESH_MIN_AGE_MS = 50 * 1000; // 갱신 직후 타이머가 겹쳐도 한 번 건너뛰지 않도록 주기보다 조금 짧게
 let watch = loadWatch();
+let newOnly = loadNewOnly(); // 새 소식만 보기 (지난 브리핑에 나온 기사·반복 기사·지난 소식 숨김)
+let seenIdx: SeenIndex | null = null; // 지금 보는 브리핑 이전 3일치 기사 (새 소식 판단용)
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const main = $<HTMLElement>("main");
@@ -138,8 +142,16 @@ async function loadBrief(date?: string): Promise<void> {
     brief = null;
   }
   main.removeAttribute("aria-busy");
+  seenIdx = null;
   renderAll();
   autoRefreshLive();
+  // 지난 브리핑을 받아 '새 소식' 판단 기준을 만든 뒤 다시 그린다 (받기 전에는 '지난 소식'만 숨김)
+  const cur = brief;
+  if (cur) void recentBriefs().then((r) => {
+    if (brief !== cur) return;
+    seenIdx = buildSeen(cur, r);
+    if (!query) renderMain();
+  }).catch(() => undefined);
 }
 
 // ── 렌더링 ────────────────────────────────────────────────
@@ -265,7 +277,7 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   if (rt) meta.append(h("span", {}, rt));
 
   const summary = h("ul", { class: "summary" }, ...item.summary_ko.map((s) => h("li", {}, s)));
-  const art = h("article", { class: "card" }, meta, title, summary);
+  const art = h("article", { class: `card${item.impact && item.impact.level !== "none" ? ` imp-${item.impact.level}` : ""}` }, meta, title, summary);
 
   const imp = item.impact;
   if (imp && imp.level !== "none") {
@@ -296,10 +308,16 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   }
   const foot = h("div", { class: "card-foot" });
   if (item.tags.length) foot.append(h("ul", { class: "tags", "aria-label": "태그" }, ...item.tags.map((t) => h("li", {}, `#${t}`))));
+  const fol = h("button", { type: "button", class: "follow-btn", "aria-pressed": String(isFollowed(item)) }, isFollowed(item) ? "📌 팔로우 중" : "📌 팔로우");
+  fol.addEventListener("click", () => {
+    const on = toggleFollow(item, brief?.date ?? "");
+    fol.setAttribute("aria-pressed", String(on));
+    fol.textContent = on ? "📌 팔로우 중" : "📌 팔로우";
+  });
   foot.append(
     h("div", { class: "sources" }, ...item.sources.map((s) =>
       h("a", { href: safeUrl(s.url), target: "_blank", rel: "noopener noreferrer" }, `${s.name} ↗`),
-    )),
+    ), fol),
   );
   art.append(foot);
   return art;
@@ -314,11 +332,15 @@ function sectionBlock(key: SectionKey, showHeading: boolean): HTMLElement | null
   wrap.append(h("h2", { id: `h-${key}`, class: showHeading ? "sec-title" : "sr-only" }, sec.label));
   if (sec.briefing) wrap.append(h("p", { class: "briefing" }, h("span", { class: "briefing-label" }, "오늘의 한 줄"), sec.briefing));
   if (!sec.items.length) wrap.append(h("p", { class: "empty" }, "새 소식이 없습니다."));
+  const shown = newOnly ? sec.items.filter((it) => !isOld(it, seenIdx)) : sec.items;
+  const hidden = sec.items.length - shown.length;
+  if (newOnly && sec.items.length && !shown.length) wrap.append(h("p", { class: "empty" }, `오늘 처음 나온 소식이 없어요 (지난 소식 ${hidden}건 숨김).`));
   // 이민 레이더는 최신 기사가 맨 위(발행 시각 내림차순, 시각이 없는 기사는 뒤로 — 같으면 선별 순서 유지)
   const items = key === "nz_immigration"
-    ? [...sec.items].sort((x, y) => (y.published_at ? Date.parse(y.published_at) : -Infinity) - (x.published_at ? Date.parse(x.published_at) : -Infinity))
-    : sec.items;
+    ? [...shown].sort((x, y) => (y.published_at ? Date.parse(y.published_at) : -Infinity) - (x.published_at ? Date.parse(x.published_at) : -Infinity))
+    : shown;
   for (const item of items) wrap.append(card(item, region));
+  if (newOnly && hidden && shown.length) wrap.append(h("p", { class: "muted hidden-note" }, `지난 브리핑에 나온 소식 ${hidden}건은 숨겼어요.`));
   return wrap;
 }
 
@@ -369,6 +391,63 @@ function renderSearch(): void {
   }
 }
 
+// AI 요약·선별이 실패한 날: 원문으로 보이는 이유와 자동 재시도 안내
+function degradedBanner(): HTMLElement | null {
+  const m = brief?.meta;
+  if (!m?.degraded || !viewingLatest) return null;
+  const tries = m.retries ?? 0;
+  const msg = tries >= 2
+    ? "오늘은 AI 서버 오류로 요약·번역이 일부 실패했고, 자동 재시도(2회)도 실패했어요. 영어 원문으로 보이는 기사가 있어요."
+    : `오늘은 AI 서버 오류로 요약·번역이 일부 실패해 영어 원문으로 보이는 기사가 있어요. 오클랜드 시간 ${tries === 0 ? "10시·14시쯤" : "14시쯤"} 자동으로 다시 만들어요.`;
+  return h("section", { class: "degraded", role: "status" }, h("strong", {}, "⚠️ AI 요약 일부 실패 "), msg);
+}
+
+// 오늘 한눈에: 지금 탭의 새 소식·영향 높음·팔로우 업데이트 수 + '새 소식만' 토글
+function overview(keys: SectionKey[]): HTMLElement | null {
+  if (!brief) return null;
+  const ids = new Set<string>();
+  const items = keys.flatMap((k) => brief!.sections[k]?.items ?? []).filter((it) => (ids.has(it.id) ? false : (ids.add(it.id), true)));
+  if (!items.length) return null;
+  const fresh = items.filter((it) => !isOld(it, seenIdx)).length;
+  const high = items.filter((it) => it.impact?.level === "high").length;
+  const fu = followUpdates(brief).reduce((n, f) => n + f.items.length, 0);
+  const tile = (n: number | string, label: string, cls = "") => h("div", { class: `ov-tile ${cls}` }, h("span", { class: "ov-n" }, String(n)), h("span", { class: "ov-l" }, label));
+  const tog = h("button", { type: "button", class: "chip ov-toggle", "aria-pressed": String(newOnly) }, newOnly ? "🆕 새 소식만 보는 중" : "🆕 새 소식만 보기");
+  tog.addEventListener("click", () => {
+    newOnly = !newOnly;
+    saveNewOnly(newOnly);
+    renderMain();
+  });
+  // 새 소식 비율 막대 (새 소식 / 전체)
+  const bar = h("div", { class: "ov-bar", role: "img", "aria-label": `전체 ${items.length}건 중 새 소식 ${fresh}건` },
+    h("i", { style: `width:${Math.round((fresh / items.length) * 100)}%` }));
+  return h("section", { class: "overview", "aria-label": "오늘 한눈에" },
+    h("div", { class: "ov-tiles" },
+      tile(fresh, seenIdx ? "새 소식" : "새 소식(확인 중)", "ov-new"),
+      tile(items.length - fresh, "지난·반복"),
+      tile(high, "영향 높음", high ? "ov-high" : ""),
+      fu ? tile(fu, "팔로우 업데이트", "ov-follow") : null),
+    bar, tog);
+}
+
+// 팔로우한 이슈: 오늘 브리핑에 나온 관련 기사
+function followSection(): HTMLElement | null {
+  if (!brief || !loadFollows().length) return null;
+  const ups = followUpdates(brief);
+  const n = ups.reduce((a, f) => a + f.items.length, 0);
+  const box = h("details", { class: "follows" }, h("summary", {}, `📌 팔로우 중인 이슈 ${ups.length}개${n ? ` · 오늘 새 소식 ${n}건` : " · 오늘은 새 소식 없음"}`));
+  box.open = n > 0;
+  box.append(h("ul", {}, ...ups.map(({ follow, items }) => {
+    const x = h("button", { type: "button", class: "link-btn", "aria-label": `${follow.title} 팔로우 해제` }, "해제");
+    x.addEventListener("click", () => { unfollow(follow.id); renderMain(); });
+    return h("li", {}, h("div", { class: "fl-head" }, h("strong", {}, follow.title), h("small", { class: "muted" }, ` ${follow.since.slice(5).replace("-", "/")}부터`), " ", x),
+      items.length ? h("ul", { class: "fl-items" }, ...items.slice(0, 4).map(({ item, section }) => h("li", {},
+        h("span", { class: "sec-label" }, section), " ",
+        item.sources[0] ? h("a", { href: safeUrl(item.sources[0].url), target: "_blank", rel: "noopener noreferrer" }, item.title_ko) : item.title_ko))) : h("p", { class: "muted" }, "오늘은 관련 새 소식이 없어요."));
+  })));
+  return box;
+}
+
 function renderMain(): void {
   main.replaceChildren();
   if (!brief) {
@@ -383,10 +462,18 @@ function renderMain(): void {
   }
   const tab = TABS.find((t) => t.id === settings.tab) ?? TABS[0];
   main.setAttribute("aria-labelledby", `tab-${tab.id}`);
+  const banner = degradedBanner();
+  if (banner) main.append(banner);
   if (tab.id === "kr" || tab.id === "nz" || tab.id === "akl") {
     const chips = renderChips(tab.id);
     if (chips) main.append(chips);
     const sel = chipState[tab.id];
+    if (sel !== "hood" && sel !== "leisure") {
+      const ov = overview((sel === "all" ? visibleSections(tab) : [sel as SectionKey]).filter((k) => brief!.sections[k]));
+      if (ov) main.append(ov);
+      const fs = followSection();
+      if (fs) main.append(fs);
+    }
     if (tab.id === "akl") {
       // 관심 동네 반경 2km 안 최근 7일 1급 사건 알림 (모든 칩 위)
       const alertSlot = h("div", {});
@@ -451,6 +538,17 @@ function renderMain(): void {
       const alerts = alertBanner(brief.meta?.alerts ?? []);
       if (alerts) main.append(alerts);
       main.append(visaCard(h, openSettings));
+      // 이민 단계 트래커: 최근 2주 브리핑을 받으면 관련 소식까지 채운다
+      const tslot = h("div", {}, trackerCard(h, brief, null, openSettings));
+      main.append(tslot);
+      const cur = brief;
+      void recentBriefs().then((r) => {
+        if (tslot.isConnected && brief === cur) tslot.replaceChildren(trackerCard(h, cur, r.filter((b) => b.date !== cur.date), openSettings));
+      }).catch(() => undefined);
+      const ov = overview(visibleSections(tab));
+      if (ov) main.append(ov);
+      const fs = followSection();
+      if (fs) main.append(fs);
       const board = processingBoard();
       if (board) main.append(board);
     }

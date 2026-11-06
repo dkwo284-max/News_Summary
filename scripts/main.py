@@ -127,6 +127,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--update-processing", action="store_true",
                     help="AI·뉴스 수집 없이 최신 브리핑의 비자 처리 기간 전광판만 갱신")
     ap.add_argument("--ignore-cap", action="store_true", help="AI 공용 예산(budget.py) 무시")
+    ap.add_argument("--retry-degraded", action="store_true",
+                    help="오늘 브리핑이 AI 실패(요약·선별)로 원문·휴리스틱으로 나갔을 때만 다시 생성 (하루 최대 2번, 자동 재시도 예약 실행용)")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args(argv)
 
@@ -144,6 +146,25 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.update_processing:
         return update_processing_only(cfg, data_dir)
+
+    retries = 0
+    if args.retry_degraded:
+        try:
+            cur = json.loads((data_dir / f"{local_now.date().isoformat()}.json").read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            log.info("skip: no brief for %s yet (--retry-degraded)", local_now.date())
+            return 0
+        m = cur.get("meta") or {}
+        retries = int(m.get("retries", 0))
+        if not m.get("degraded"):
+            log.info("skip: today's brief is fine (--retry-degraded)")
+            return 0
+        if retries >= 2:
+            log.warning("skip: already retried %d times today (--retry-degraded)", retries)
+            return 0
+        log.info("retrying degraded brief (%s), attempt %d", m.get("degraded_reason", ""), retries + 1)
+        retries += 1
+        args.force = True
 
     if args.skip_existing and not args.dry_run and (data_dir / f"{local_now.date().isoformat()}.json").exists():
         log.info("skip: brief for %s already exists (--skip-existing)", local_now.date())
@@ -165,7 +186,7 @@ def main(argv: list[str] | None = None) -> int:
         lc = cfg.get("llm", {})
         ai_left, binfo = allowance("daily-brief", used_today(data_dir, today), int(lc.get("guaranteed", 7)), today)
         log.info("%s", describe("daily-brief", ai_left, binfo))
-        if ai_left < int(lc.get("expected_per_run", 6)) and (data_dir / f"{today}.json").exists():
+        if ai_left < int(lc.get("expected_per_run", 6)) and (data_dir / f"{today}.json").exists() and not args.retry_degraded:
             log.warning("skip: AI 예산 부족 — 오늘 남은 %d회, 이미 오늘 브리핑이 있음 (--ignore-cap 으로 무시)", ai_left)
             return 0
 
@@ -256,6 +277,11 @@ def main(argv: list[str] | None = None) -> int:
         except Exception as e:  # noqa: BLE001
             log.warning("living costs failed: %s", e)
 
+    # AI 가 있었는데 요약·선별이 실패해 원문·휴리스틱으로 나간 섹션이 있으면 '품질 저하' 표시 → 화면 안내 + 같은 날 자동 재시도
+    import rank as _rank
+    failed_secs = [k for k, sec in sections.items() if sec.get("error")]
+    degraded_reason = "; ".join(filter(None, ["요약 실패: " + ", ".join(failed_secs) if failed_secs else "", "선별 실패" if _rank.FAILED else ""]))
+    degraded = llm is not None and bool(degraded_reason)
     usage = llm.log_report() if llm else {"provider": None, "requests": 0, "models": {}, "total_cost_usd": 0}
     if llm is not None and not args.dry_run:
         from usage import record
@@ -273,6 +299,9 @@ def main(argv: list[str] | None = None) -> int:
             "stories_after_dedupe": len(articles),
             "usage": usage,
             "alerts": build_alerts(sections, extras, cfg),
+            "degraded": degraded,
+            "degraded_reason": degraded_reason,
+            "retries": retries,
         },
     }
 

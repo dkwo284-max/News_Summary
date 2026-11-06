@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from common import Article, log
 from dedupe import dedupe
 
+FAILED = False  # 이번 실행에서 AI 선별이 실패해 휴리스틱으로 대체된 묶음이 있었는지 (main.py 가 degraded 판단에 사용)
 MIN_SCORE = 3  # 이 점수 미만(스포츠 결과·가십 등)은 자리가 남아도 싣지 않음
 
 RANK_SCHEMA = {
@@ -344,6 +345,8 @@ def score_regions(by_region: dict[str, list[Article]], cfg: dict, llm, now: date
                 if row.get("id") in by_id:
                     scored[row["id"]] = row
         except Exception as e:  # noqa: BLE001 — 선별 실패 시 휴리스틱으로 대체
+            global FAILED
+            FAILED = True
             log.warning("rank AI failed (%s); falling back to heuristic for %d items", e, len(chunk))
         for _, rep in chunk:
             row = scored.get(rep.id)
@@ -378,6 +381,8 @@ def score_articles(items: list[Article], cfg: dict, region: str, llm, now: datet
                 if row.get("id") in by_id:
                     scored[row["id"]] = row
         except Exception as e:  # noqa: BLE001 — 선별 실패 시 휴리스틱으로 대체
+            global FAILED
+            FAILED = True
             log.warning("rank AI failed (%s); falling back to heuristic for %d items", e, len(chunk))
         for rep in chunk:
             row = scored.get(rep.id)
@@ -607,6 +612,8 @@ def _ids(a: Article) -> set[str]:
 
 
 def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = None) -> dict[str, list[Article]]:
+    global FAILED
+    FAILED = False
     now = now or datetime.now(timezone.utc)
     sections = cfg["sections"]
     articles = apply_exclusions(articles, cfg)  # 개인 사연·매물·광고성 기사 (키워드·출처)

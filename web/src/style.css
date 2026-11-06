@@ -516,3 +516,54 @@ legend { font-weight: 700; margin-bottom: 6px; }
 @media (min-width: 900px) { .leisure-stage .gp-map { height: 66vh; min-height: 460px; } }
 .leisure-table th:first-child { white-space: normal; min-width: 0; max-width: 150px; }
 .leisure-table th, .leisure-table td { padding-left: 3px; padding-right: 3px; }
+
+/* ── 오늘 한눈에 ── */
+.overview { display: grid; gap: 8px; margin: 8px 0 12px; padding: 10px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.ov-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(76px, 1fr)); gap: 6px; }
+.ov-tile { display: grid; justify-items: start; padding: 6px 8px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line); }
+.ov-n { font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.ov-l { font-size: .75rem; color: var(--muted); }
+.ov-new .ov-n { color: #2563eb; }
+.ov-high .ov-n { color: #dc2626; }
+.ov-follow .ov-n { color: #7c3aed; }
+.ov-bar { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.ov-bar i { display: block; height: 100%; background: #2563eb; border-radius: 999px; }
+.ov-toggle { justify-self: start; }
+.hidden-note { font-size: .8125rem; margin: 4px 0 12px; }
+
+/* ── AI 실패 안내 ── */
+.degraded { margin: 8px 0; padding: 10px 12px; border-radius: 12px; background: rgba(217,119,6,.12); border: 1px solid rgba(217,119,6,.45); font-size: .875rem; }
+
+/* ── 팔로우 ── */
+.follows { margin: 0 0 12px; padding: 10px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.follows > summary { cursor: pointer; font-weight: 600; }
+.follows > ul { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; }
+.fl-items { margin: 4px 0 0; padding-left: 18px; font-size: .875rem; }
+.follow-btn { margin-left: auto; background: none; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; font: inherit; font-size: .75rem; color: var(--muted); cursor: pointer; }
+.follow-btn[aria-pressed="true"] { color: #7c3aed; border-color: #7c3aed; }
+
+/* ── 카드: 영향도 왼쪽 색 띠 ── */
+.card.imp-high { border-left: 4px solid #dc2626; }
+.card.imp-medium { border-left: 4px solid #d97706; }
+.card.imp-low { border-left: 4px solid #9ca3af; }
+
+/* ── 이민 단계 트래커 ── */
+.trk { margin: 8px 0 12px; padding: 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.trk h2 { margin: 0 0 10px; font-size: 1rem; }
+.trk-steps { list-style: none; margin: 0 0 10px; padding: 0; display: grid; grid-template-columns: repeat(6, 1fr); position: relative; }
+.trk-steps::before { content: ""; position: absolute; top: 13px; left: 8%; right: 8%; height: 2px; background: var(--line); }
+.trk-step { display: grid; justify-items: center; gap: 2px; position: relative; text-align: center; font-size: .72rem; }
+.trk-dot { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--bg); border: 2px solid var(--line); font-weight: 700; font-size: .75rem; z-index: 1; }
+.trk-step.done .trk-dot { background: #16a34a; border-color: #16a34a; color: #fff; }
+.trk-step.now .trk-dot { background: #2563eb; border-color: #2563eb; color: #fff; box-shadow: 0 0 0 4px rgba(37,99,235,.2); }
+.trk-step.next .trk-dot { border-color: #2563eb; color: #2563eb; }
+.trk-step.now .trk-name, .trk-step.next .trk-name { font-weight: 700; }
+.trk-proc { color: var(--muted); font-size: .68rem; }
+.trk-body { display: grid; gap: 6px; font-size: .875rem; }
+.trk-body p { margin: 0; }
+.trk-apply.urgent strong { color: #dc2626; }
+.trk-apply.past strong { color: #9ca3af; }
+.trk-news { border-top: 1px dashed var(--line); padding-top: 6px; }
+.trk-news-title { font-weight: 600; font-size: .8125rem; }
+.trk-news ul { margin: 4px 0 0; padding-left: 18px; }
+.trk-news .impact-badge { margin-left: 4px; }
