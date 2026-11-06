@@ -1,11 +1,9 @@
 name: Store locations (Woolworths, Chemist Warehouse)
 
-# 1년에 한 번(또는 수동): OpenStreetMap 에서 울월쓰·케미스트웨어하우스 매장 위치를 받아 web/public/data/stores.json 으로 저장합니다.
+# 수동 실행만 (내 동네의 거리 표시는 삭제됨 — 데이터가 필요할 때만): OpenStreetMap 에서 울월쓰·케미스트웨어하우스 매장 위치를 받아 web/public/data/stores.json 으로 저장합니다.
 # 매장은 잘 안 바뀌므로 매일 도는 실행에는 넣지 않았고, 자동 실행도 파일이 1년 안이면 건너뜁니다. 수동 실행은 항상 새로 받습니다. AI 호출 없음·키 없음.
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 3 12 11 *"
 
 permissions:
   contents: write
