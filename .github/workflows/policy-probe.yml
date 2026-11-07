@@ -1,0 +1,37 @@
+name: policy-probe
+on:
+  push:
+    branches: [policy-probe]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch pages
+        run: |
+          python3 - <<'PY'
+          import re, urllib.request, html
+          urls = [
+           "https://www.labour.org.nz/election-policy-pages/other-policies/immigration/",
+           "https://www.national.org.nz/news/20250923-hon-nicola-willis-new-residence-options-to-bolster-workforce",
+           "https://www.immigration.govt.nz/about-us/news-centre/further-changes-to-the-skilled-migrant-category-to-come-into-effect-in-august-2026/",
+           "https://www.rnz.co.nz/news/politics_election-2026/2368099/residency-overstayers-and-asylum-seekers-parties-set-out-their-stalls",
+           "https://www.rnz.co.nz/news/politics_election-2026/2163416/act-publishes-manifesto-with-22b-in-cuts-ditches-migration-promise",
+           "https://pacific.scoop.co.nz/2026/09/nz-first-announces-immigration-reform-policies/",
+           "https://www.rnz.co.nz/news/politics_election-2026/1332164/new-zealand-first-unveils-plans-for-dramatic-overhaul-of-immigration-system",
+           "https://www.greens.org.nz/immigration_changes_a_green_win",
+           "https://www.nzherald.co.nz/nz/politics/election-2026-act-reveals-immigration-campaign-polices/WTABGHRF5JACTK2HZ5AEH74EJ4/",
+           "https://community.scoop.co.nz/2026/09/labour-to-ensure-an-immigration-system-that-works-for-new-zealand/",
+           "https://eastasiaforum.org/2026/10/17/new-zealands-coalition-government-diverges-on-immigration/",
+          ]
+          for u in urls:
+              print("=" * 100); print("URL", u)
+              try:
+                  req = urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (compatible; policy-check)"})
+                  raw = urllib.request.urlopen(req, timeout=40).read().decode("utf-8", "ignore")
+                  raw = re.sub(r"(?is)<(script|style|nav|header|footer)[^>]*>.*?</\1>", " ", raw)
+                  t = html.unescape(re.sub(r"<[^>]+>", " ", raw)); t = re.sub(r"\s+", " ", t)
+                  i = max(0, min([m.start() for m in re.finditer(r"(?i)immigra|visa|resid", t)][:1] or [0]) - 200)
+                  print(t[i:i + 3800])
+              except Exception as e:
+                  print("ERR", e)
+          PY
