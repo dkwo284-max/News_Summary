@@ -14,13 +14,9 @@ jobs:
           def text(raw):
               t = html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", raw))); return re.sub(r"\s+", " ", t)
           raw = urllib.request.urlopen(urllib.request.Request("https://www.aucklandleisure.co.nz/prices-and-membership/", headers={"User-Agent": UA}), timeout=40).read().decode("utf-8", "ignore")
-          t = text(raw)
-          names = ["ActivZone","Albany Stadium Pool","Allan Brewster Leisure Centre","Beach Haven Sports Centre","Birkenhead Pool and Leisure Centre","Cameron Pool and Leisure Centre","East Coast Bays Leisure Centre","Ellerslie Leisure Centre","Franklin Pool and Leisure Centre","Glen Innes Pool and Leisure Centre","Glenfield Pool and Leisure Centre","Grey Lynn Paddling Pool","Howick Leisure Centre","Jubilee Swimming Pool and Aquatic Centre","Karanga Plaza Harbour Pool","Lagoon Pool and Leisure Centre","Lloyd Elsmore Park Pool and Leisure Centre","Manurewa Leisure Centre","Manurewa Pool and Leisure Centre","Massey Park Pool","Massey Gym and Leisure Centre","Moana Nui-a-Kiwa Pool and Leisure Centre","Mt Albert Aquatic Centre","Onehunga War Memorial Pool and Leisure Centre","Ōtāhuhu Pool and Leisure Centre","Ōtara Pool and Leisure Centre","Pakuranga Leisure Centre","Papakura Leisure Centre","Papatoetoe Centennial Pool and Leisure Centre","Parnell Baths","Sir William Jordan Leisure Centre","Stanmore Bay Pool and Leisure Centre","Takapuna Pool and Leisure Centre","Te Oka / Pt Erin Pool","Tepid Baths","Tōtara Park Pools","West Wave Pool and Leisure Centre","Whiteside Pool","Lynfield Youth and Leisure Centre","Mt Albert Community and Leisure Centre"]
-          hits = []
-          for n in names:
-              for m in re.finditer(re.escape(n), t): hits.append((m.start(), n))
-          hits.sort()
-          blocks = [m.start() for m in re.finditer(r"Pool admission prices Pool admission prices", t)]
-          print("BLOCKS", blocks)
-          print("NAMEHITS", hits)
+          seq = []
+          for m in re.finditer(r"<(h[1-6]|button|summary)[^>]*>(.*?)</\1>", raw, re.S | re.I):
+              tx = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", m.group(2)))).strip()
+              if tx and len(tx) < 90: seq.append(f"{m.group(1)}:{tx}")
+          print("HEADINGS", " | ".join(seq))
           PY
