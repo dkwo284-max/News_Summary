@@ -1,0 +1,846 @@
+{
+  "updated": "2026-11-07",
+  "note": "정당 공약·정부 정책을 사람이 공식 자료(정당 사이트·INZ·정부 보도자료)와 주요 언론 기사로 확인해 적은 기록입니다. 해석·평가는 넣지 않았고, 확인하지 못한 항목은 비워 두었습니다. 최종 판단은 반드시 원문 링크로 하세요.",
+  "election": {
+    "date": "2026-11-07",
+    "status": "투표일 (개표 진행 중) — 결과·연정 구성이 확정되기 전의 공약 기준입니다",
+    "detail": "선거관리위원회는 공식 결과를 11월 27일 발표할 예정입니다. 표시된 공약은 어느 정당이 정부에 참여하든 연정 협상을 거쳐야 정책이 됩니다.",
+    "sources": [
+      "elections",
+      "elresults"
+    ]
+  },
+  "sources": {
+    "labour": {
+      "label": "노동당 이민 정책",
+      "url": "https://www.labour.org.nz/election-policy-pages/other-policies/immigration/",
+      "type": "공식"
+    },
+    "natrel": {
+      "label": "국민당·정부 보도자료 (2025-09-23)",
+      "url": "https://www.national.org.nz/news/20250923-hon-nicola-willis-new-residence-options-to-bolster-workforce",
+      "type": "공식"
+    },
+    "inz_mar": {
+      "label": "INZ 공지 (2026-03-05) SMC 세부 확정",
+      "url": "https://www.immigration.govt.nz/about-us/news-centre/further-changes-to-the-skilled-migrant-category-to-come-into-effect-in-august-2026/",
+      "type": "공식"
+    },
+    "inz_jun": {
+      "label": "INZ 공지 (2026-06-18) SMC 최종 세부",
+      "url": "https://www.immigration.govt.nz/about-us/news-centre/final-details-about-changes-to-the-skilled-migrant-category-resident-visa-and-work-to-residence-visa/",
+      "type": "공식"
+    },
+    "rnz_stalls": {
+      "label": "RNZ (2026-11-06) 정당별 이민 공약 정리",
+      "url": "https://www.rnz.co.nz/news/politics_election-2026/2368099/residency-overstayers-and-asylum-seekers-parties-set-out-their-stalls",
+      "type": "언론"
+    },
+    "rnz_nzf": {
+      "label": "RNZ (2026-09-11) 뉴질랜드 퍼스트 이민 정책",
+      "url": "https://www.rnz.co.nz/news/politics_election-2026/1332164/new-zealand-first-unveils-plans-for-dramatic-overhaul-of-immigration-system",
+      "type": "언론"
+    },
+    "rnz_conf": {
+      "label": "RNZ (2026-09-11) 이민 컨퍼런스 정당 발표",
+      "url": "https://www.rnz.co.nz/news/politics_election-2026/1340334/act-and-nz-first-pitch-tighter-immigration-controls-others-warn-against-anti-immigration-policies",
+      "type": "언론"
+    },
+    "rnz_act": {
+      "label": "RNZ ACT 선거 공약집 (영주권 폐지 철회)",
+      "url": "https://www.rnz.co.nz/news/politics_election-2026/2163416/act-publishes-manifesto-with-22b-in-cuts-ditches-migration-promise",
+      "type": "언론"
+    },
+    "rnz_adv": {
+      "label": "RNZ (2026-10-19) 뉴질랜드 퍼스트 신규 취업비자",
+      "url": "https://www.rnz.co.nz/news/politics_election-2026/1940991/migrant-advocacy-group-says-nz-first-has-adopted-its-policy",
+      "type": "언론"
+    },
+    "herald_act": {
+      "label": "NZ Herald ACT 이민 6대 공약",
+      "url": "https://www.nzherald.co.nz/nz/politics/election-2026-act-reveals-immigration-campaign-polices/WTABGHRF5JACTK2HZ5AEH74EJ4/",
+      "type": "언론"
+    },
+    "news1": {
+      "label": "1News (2025-09-23) 신규 경로·NZ First '이견 인정'",
+      "url": "https://www.1news.co.nz/2025/09/23/new-residency-pathways-for-skilled-migrants-nz-first-agree-to-disagree/",
+      "type": "언론"
+    },
+    "eaf": {
+      "label": "East Asia Forum (2026-10-18) 연정의 이민 이견",
+      "url": "https://eastasiaforum.org/2026/10/17/new-zealands-coalition-government-diverges-on-immigration/",
+      "type": "해설"
+    },
+    "elections": {
+      "label": "선거관리위원회 주요 일정",
+      "url": "https://elections.nz/media-and-news/2026/key-dates-for-2026-general-election",
+      "type": "공식"
+    },
+    "elresults": {
+      "label": "공식 개표 결과",
+      "url": "https://www.electionresults.govt.nz/",
+      "type": "공식"
+    },
+    "inz_news": {
+      "label": "INZ 뉴스센터",
+      "url": "https://www.immigration.govt.nz/about-us/news-centre/",
+      "type": "공식"
+    }
+  },
+  "dirs": {
+    "loosen": {
+      "label": "완화",
+      "icon": "↗"
+    },
+    "tighten": {
+      "label": "강화",
+      "icon": "↘"
+    },
+    "keep": {
+      "label": "유지",
+      "icon": "＝"
+    },
+    "mixed": {
+      "label": "혼합",
+      "icon": "±"
+    },
+    "review": {
+      "label": "검토",
+      "icon": "?"
+    },
+    "none": {
+      "label": "공약 확인 못함",
+      "icon": "–"
+    }
+  },
+  "statuses": {
+    "enacted": "시행 중",
+    "bill": "법안 심의",
+    "pledge": "선거 공약",
+    "stated": "발언·기조",
+    "dropped": "철회"
+  },
+  "issues": [
+    {
+      "id": "pr_path",
+      "icon": "🏠",
+      "label": "영주권·시민권",
+      "stages": [
+        "residence",
+        "pr",
+        "citizenship"
+      ]
+    },
+    {
+      "id": "work_visa",
+      "icon": "💼",
+      "label": "취업비자",
+      "stages": [
+        "work",
+        "pswv"
+      ]
+    },
+    {
+      "id": "welfare",
+      "icon": "💳",
+      "label": "복지·비용",
+      "stages": [
+        "residence",
+        "pr"
+      ]
+    },
+    {
+      "id": "cap",
+      "icon": "📊",
+      "label": "이민 규모",
+      "stages": [
+        "residence",
+        "pr",
+        "work"
+      ]
+    },
+    {
+      "id": "enforcement",
+      "icon": "🚨",
+      "label": "불법체류·추방",
+      "stages": [
+        "work",
+        "residence"
+      ]
+    },
+    {
+      "id": "students",
+      "icon": "🎓",
+      "label": "유학생",
+      "stages": [
+        "student",
+        "pswv"
+      ]
+    },
+    {
+      "id": "family",
+      "icon": "👨‍👩‍👧",
+      "label": "가족·난민",
+      "stages": [
+        "residence",
+        "pr"
+      ]
+    }
+  ],
+  "parties": [
+    {
+      "id": "national",
+      "name": "국민당",
+      "short": "국민",
+      "role": "연립정부 주도 · 이민부 장관 소속",
+      "positions": {
+        "pr_path": {
+          "dir": "loosen",
+          "status": "enacted",
+          "text": "숙련 이민(SMC)에 '숙련 경력'·'기술직(트레이드)' 영주권 경로 2개를 신설해 2026-08-24 시행. 영주권(PR) 제도 폐지는 반대 — 이민부 장관은 'PR이 안정성과 우수 인력 유치의 경쟁력'이라고 발언.",
+          "src": [
+            "natrel",
+            "inz_mar",
+            "rnz_conf"
+          ]
+        },
+        "work_visa": {
+          "dir": "keep",
+          "status": "stated",
+          "text": "현재의 고용주 인증 취업비자(AEWV) 틀을 유지하며 요건을 조정해 왔습니다 (예: 2025-03 AEWV 중위임금 요건 폐지 — 이 항목은 2차 자료 기준이라 INZ 원문 확인 필요).",
+          "src": [
+            "inz_news"
+          ],
+          "conf": "secondary"
+        },
+        "cap": {
+          "dir": "keep",
+          "status": "stated",
+          "text": "'숙련 인력은 유치하되 이민 규모는 책임 있게 관리'가 기조. 수치 상한 공약은 확인하지 못함.",
+          "src": [
+            "natrel"
+          ]
+        },
+        "enforcement": {
+          "dir": "tighten",
+          "status": "bill",
+          "text": "이민 위험관리 강화 개정안(Immigration (Enhanced Risk Management) Amendment Bill): 추방 책임 확대, 이민보호재판소 항소권 일부 제한, 망명 신청 철회자의 비자 신청 제한. 8월 특별위원회를 마쳤고 선거 후 다시 처리해야 법이 됩니다. 태평양 불법체류자 사면에는 반대.",
+          "src": [
+            "rnz_stalls",
+            "rnz_conf"
+          ]
+        },
+        "students": {
+          "dir": "loosen",
+          "status": "enacted",
+          "text": "뉴질랜드 대학 학력자가 영주권에 필요한 국내 근무 기간 단축. 학사 학위 점수 3→4점 (2026-08 시행, INZ).",
+          "src": [
+            "natrel",
+            "inz_jun"
+          ]
+        }
+      }
+    },
+    {
+      "id": "labour",
+      "name": "노동당",
+      "short": "노동",
+      "role": "제1야당 (이번 선거 도전)",
+      "positions": {
+        "pr_path": {
+          "dir": "mixed",
+          "status": "pledge",
+          "text": "영주권 자격까지 필요한 뉴질랜드 거주 기간을 2년→4년으로 연장(정착 교육 병행). 한편 뉴질랜드에서 태어난 아이의 시민권 경로를 신설.",
+          "src": [
+            "labour"
+          ]
+        },
+        "work_visa": {
+          "dir": "loosen",
+          "status": "pledge",
+          "text": "AEWV는 유지·강화하되, 입국 3개월 뒤부터 인증 고용주 사이 이직 허용.",
+          "src": [
+            "labour",
+            "rnz_stalls"
+          ]
+        },
+        "cap": {
+          "dir": "mixed",
+          "status": "pledge",
+          "text": "인력 구조·주택·인프라 여력에 맞춘 '이민 정부정책성명(GPS)'으로 규모를 계획. 수치 상한은 없음.",
+          "src": [
+            "labour"
+          ]
+        },
+        "enforcement": {
+          "dir": "loosen",
+          "status": "pledge",
+          "text": "인도적 사유의 추방 항소권 보호.",
+          "src": [
+            "labour"
+          ]
+        },
+        "family": {
+          "dir": "review",
+          "status": "pledge",
+          "text": "부모 비자의 재정 기준, 건강·영어 규정을 검토. 태평양 도서국(PIF) 시민 방문 비자 면제 확대.",
+          "src": [
+            "labour",
+            "rnz_stalls"
+          ]
+        }
+      }
+    },
+    {
+      "id": "nzfirst",
+      "name": "뉴질랜드 퍼스트",
+      "short": "NZ퍼스트",
+      "role": "연립정부 파트너",
+      "positions": {
+        "pr_path": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "시민권·영주권 자격 기간을 5년→10년으로 2배, 신청 수수료 인상, 출생 시민권은 시민의 자녀로 제한.",
+          "src": [
+            "rnz_nzf"
+          ]
+        },
+        "work_visa": {
+          "dir": "mixed",
+          "status": "pledge",
+          "text": "AEWV를 대체하는 새 취업비자: 특정 고용주에 묶이지 않고 지역·직종 단위로 모집. 이민 지지 단체는 고용주 종속 해소 방향을 환영했습니다.",
+          "src": [
+            "rnz_adv",
+            "rnz_stalls"
+          ]
+        },
+        "welfare": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "비시민권자(영주권자 포함)는 첫 10년 구직수당·주거보조 등 복지 수급 불가. 연금·투표권도 시민 한정.",
+          "src": [
+            "rnz_nzf",
+            "rnz_stalls"
+          ]
+        },
+        "cap": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "영주 비자를 연 2만 건으로 제한하는 국민투표 공약(인프라 확보가 전제), 30년 인구 계획.",
+          "src": [
+            "rnz_nzf",
+            "rnz_stalls"
+          ]
+        },
+        "enforcement": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "불법체류자 추방과 재신청 금지, 취업비자로 입국한 사람·심사 중인 신청자의 망명 제한. 단 태평양 도서국 불법체류자에게는 24개월 동안 합법 비자를 신청할 유예 기간.",
+          "src": [
+            "rnz_nzf",
+            "rnz_stalls"
+          ]
+        },
+        "students": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "학생비자의 졸업 후 자동 취업권 없음, 출국 후에야 다른 비자 신청.",
+          "src": [
+            "rnz_nzf"
+          ]
+        }
+      }
+    },
+    {
+      "id": "act",
+      "name": "ACT당",
+      "short": "ACT",
+      "role": "연립정부 파트너",
+      "positions": {
+        "pr_path": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "공약집에서 '영주권 비자 폐지' 공약을 철회. 기존 영주권자는 규정 불변, 앞으로 영주권을 받는 사람은 5년 중 2년 이상 체류해야 유지 (호주·캐나다식).",
+          "src": [
+            "rnz_act"
+          ]
+        },
+        "work_visa": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "고용 가능 직종 카테고리를 매년 만료시키고 수요 증빙으로만 갱신, 임시 취업비자에 하루 $6 인프라 부담금, 모든 AEWV에 기본 영어 요건(계절 근로자는 완화).",
+          "src": [
+            "herald_act"
+          ]
+        },
+        "welfare": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "영주권 계열 비자는 첫 5년 복지 수급 대기 기간.",
+          "src": [
+            "herald_act"
+          ]
+        },
+        "enforcement": {
+          "dir": "tighten",
+          "status": "pledge",
+          "text": "INZ 내 불법체류 전담 단속반, Uber 등 플랫폼의 취업권 확인·신고 의무, 불법체류를 도운 고용주의 인증 박탈, 중범죄 영주권자 추방 기한 제한 폐지.",
+          "src": [
+            "herald_act",
+            "rnz_stalls"
+          ]
+        },
+        "family": {
+          "dir": "review",
+          "status": "pledge",
+          "text": "부모 영주권 비자의 추첨(ballot)을 없애고 대기열 방식으로 (ACT 의원 발언).",
+          "src": [
+            "rnz_conf"
+          ]
+        }
+      }
+    },
+    {
+      "id": "greens",
+      "name": "녹색당",
+      "short": "녹색",
+      "role": "야당",
+      "positions": {
+        "pr_path": {
+          "dir": "loosen",
+          "status": "pledge",
+          "text": "'정착 영주권 경로': 뉴질랜드에 5년 이상 산 사람(비자 만료자 포함)에게 영주권 경로 제공.",
+          "src": [
+            "rnz_conf",
+            "rnz_stalls"
+          ]
+        },
+        "work_visa": {
+          "dir": "loosen",
+          "status": "pledge",
+          "text": "비자와 단일 고용주 분리, 비자 사이 12개월 대기(stand-down) 폐지, 이직 허용.",
+          "src": [
+            "rnz_conf",
+            "rnz_stalls"
+          ]
+        },
+        "enforcement": {
+          "dir": "loosen",
+          "status": "pledge",
+          "text": "불법체류자 사면·합법화 프로그램 (약 2만 명 추산 발언).",
+          "src": [
+            "rnz_conf"
+          ]
+        },
+        "family": {
+          "dir": "loosen",
+          "status": "pledge",
+          "text": "난민 쿼터 연 1,500→5,000명(2029년), 이민자·난민 건강 요건 폐지, 기후 이주 입법, 태평양 비자프리 우선.",
+          "src": [
+            "rnz_stalls"
+          ]
+        }
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2025-09-23",
+      "party": "national",
+      "issue": "pr_path",
+      "dir": "loosen",
+      "title": "국민당·정부, 영주권 신규 경로 2개 발표",
+      "detail": "숙련 경력 경로(관련 경력 5년 중 NZ 2년 이상, 중위임금 1.1배)와 기술직 경로(Level 4 이상 자격). 연정 파트너 NZ First는 '이견을 인정한다'며 동의하지 않았습니다.",
+      "src": [
+        "natrel",
+        "news1"
+      ]
+    },
+    {
+      "date": "2026-03-05",
+      "party": "gov",
+      "issue": "pr_path",
+      "dir": "keep",
+      "title": "INZ, 직종 목록(적색·황색)과 임금 기준 단순화 확정",
+      "detail": "기술직 경로 대상 직종 확정. 적색 목록 직종은 신규 경로 대상 제외. 향후 AEWV를 연장해 영주권 근무 경력을 채울 수 있게 하겠다고 예고.",
+      "src": [
+        "inz_mar"
+      ]
+    },
+    {
+      "date": "2026-05",
+      "party": "act",
+      "issue": "work_visa",
+      "dir": "tighten",
+      "title": "ACT, 이민 6대 공약 발표",
+      "detail": "직종 카테고리 매년 만료, 영주권 계열 5년 복지 대기, 임시 취업비자 일 $6 부담금, AEWV 영어 요건, 불법체류 전담반, 중범죄 추방 기한 폐지.",
+      "src": [
+        "herald_act"
+      ]
+    },
+    {
+      "date": "2026-06-18",
+      "party": "gov",
+      "issue": "pr_path",
+      "dir": "keep",
+      "title": "INZ, SMC 개편 최종 세부 공개",
+      "detail": "임금 기준을 영주권 신청 시점에 다시 높이지 않고 경력 시작 때 기준을 적용. 학사 점수 3→4점. 해외 기술직 자격의 120학점 요건 삭제.",
+      "src": [
+        "inz_jun"
+      ]
+    },
+    {
+      "date": "2026-08",
+      "party": "gov",
+      "issue": "enforcement",
+      "dir": "tighten",
+      "title": "이민 위험관리 개정안, 특별위원회 단계 통과",
+      "detail": "추방 책임 확대·항소권 일부 제한·망명 철회자 비자 신청 제한. 선거 후 다시 처리해야 합니다.",
+      "src": [
+        "rnz_stalls"
+      ]
+    },
+    {
+      "date": "2026-08-24",
+      "party": "gov",
+      "issue": "pr_path",
+      "dir": "loosen",
+      "title": "SMC 개편 시행 (신규 경로 2개 포함)",
+      "detail": "이날 이후 접수분부터 신규 3경로 체계로 심사. 이전 접수분은 종전 규정.",
+      "src": [
+        "inz_mar",
+        "inz_jun"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "party": "nzfirst",
+      "issue": "pr_path",
+      "dir": "tighten",
+      "title": "뉴질랜드 퍼스트, 이민 정책 10여 개 발표",
+      "detail": "시민권·영주권 기간 2배, 출생시민권 제한, 10년 복지 불가, 연 2만 영주 비자 국민투표, 졸업 후 취업권 자동 부여 폐지 등.",
+      "src": [
+        "rnz_nzf"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "party": "labour",
+      "issue": "pr_path",
+      "dir": "mixed",
+      "title": "노동당, 이민 정책 발표",
+      "detail": "영주권까지 거주 2→4년, NZ 출생 아이 시민권 경로, 부모 비자 재정 기준 검토. 컨퍼런스에서는 포퓰리즘식 이민 때리기에 반대한다고 발언.",
+      "src": [
+        "rnz_conf",
+        "labour"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "party": "act",
+      "issue": "pr_path",
+      "dir": "tighten",
+      "title": "ACT, 영주권 비자 폐지·체류 요건(5년 중 730일) 제안",
+      "detail": "이민부 장관(국민당)은 영주권 폐지에 공개 반대했습니다. 이후 공약집에서 철회.",
+      "src": [
+        "rnz_conf"
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "party": "greens",
+      "issue": "pr_path",
+      "dir": "loosen",
+      "title": "녹색당, 정착 영주권 경로·사면 주장",
+      "detail": "5년 거주자 영주권 경로, 12개월 대기 폐지, 이직 허용.",
+      "src": [
+        "rnz_conf"
+      ]
+    },
+    {
+      "date": "2026-10",
+      "party": "act",
+      "issue": "pr_path",
+      "dir": "keep",
+      "title": "ACT 공약집: 영주권 비자 폐지 철회",
+      "detail": "'이민자 공동체의 불안'을 듣고 철회. 앞으로의 영주권자는 5년 중 2년 체류해야 유지한다는 쪽으로 조정.",
+      "src": [
+        "rnz_act"
+      ]
+    },
+    {
+      "date": "2026-10-19",
+      "party": "nzfirst",
+      "issue": "work_visa",
+      "dir": "mixed",
+      "title": "뉴질랜드 퍼스트, 고용주에 묶이지 않는 신규 취업비자 제안",
+      "detail": "AEWV 대체. 지역·직종 단위 모집. 이민자 노동 단체는 방향은 환영하되 당 지도부 발언을 문제 삼았습니다.",
+      "src": [
+        "rnz_adv"
+      ]
+    },
+    {
+      "date": "2026-10-23",
+      "party": "gov",
+      "issue": "work_visa",
+      "dir": "loosen",
+      "title": "INZ, 인도 아이코닉 취업비자 발표",
+      "detail": "인도 출신 인력 대상 신규 카테고리 (기사 요약 기준, 세부 확인 필요).",
+      "src": [
+        "inz_news"
+      ],
+      "conf": "secondary"
+    },
+    {
+      "date": "2026-11-06",
+      "party": "gov",
+      "issue": "pr_path",
+      "dir": "keep",
+      "title": "INZ, 2027-03-08 적용 Green List 변경 공지",
+      "detail": "직종 목록 변경. 세부는 INZ 공지 확인 (기사 요약 기준).",
+      "src": [
+        "inz_news"
+      ],
+      "conf": "secondary"
+    },
+    {
+      "date": "2026-11-07",
+      "party": "gov",
+      "issue": "cap",
+      "dir": "keep",
+      "title": "총선 투표일",
+      "detail": "결과는 개표 후 확정, 공식 선언은 11월 27일 예정.",
+      "src": [
+        "elections",
+        "elresults"
+      ]
+    }
+  ],
+  "govt": [
+    {
+      "id": "smc_paths",
+      "type": "done",
+      "title": "숙련 이민(SMC) 신규 영주권 경로 2개",
+      "party": "national",
+      "date": "2026-08-24",
+      "stages": [
+        "residence",
+        "work"
+      ],
+      "detail": "숙련 경력 경로 (관련 경력 5년 중 NZ 2년 이상, 중위임금 1.1배)와 기술직 경로(Level 4 이상 자격, 관련 경력 4년 중 NZ 18개월 이상, SMC 중위임금). 적색 목록 직종은 제외, 황색 직종은 추가 요건. 접수 시점이 기준입니다.",
+      "src": [
+        "natrel",
+        "inz_mar",
+        "inz_jun"
+      ]
+    },
+    {
+      "id": "smc_wage",
+      "type": "done",
+      "title": "SMC 임금 기준 1회 충족 + 학사 점수 상향",
+      "party": "national",
+      "date": "2026-08-24",
+      "stages": [
+        "residence",
+        "work"
+      ],
+      "detail": "대부분 신청자는 경력을 쌓기 시작할 때의 임금 기준만 맞추면 됩니다. 학사 3→4점, Level 8·9 점수에는 학사 증빙 필요. 취업→영주권(WTR) 비자도 같은 방식으로 정렬.",
+      "src": [
+        "inz_jun"
+      ]
+    },
+    {
+      "id": "aewv_ext",
+      "type": "pending",
+      "title": "AEWV를 연장해 영주권 근무 경력 채우기",
+      "party": "national",
+      "date": null,
+      "stages": [
+        "work",
+        "residence"
+      ],
+      "detail": "INZ는 '향후 도입'이라고만 밝혔고 시행일은 공지에 없습니다 (일부 해설은 2027년이라고 하나 INZ 원문에서는 확인하지 못함).",
+      "src": [
+        "inz_mar"
+      ]
+    },
+    {
+      "id": "erm_bill",
+      "type": "pending",
+      "title": "이민 위험관리 개정안 (추방·망명·항소)",
+      "party": "national",
+      "date": null,
+      "stages": [
+        "residence",
+        "pr"
+      ],
+      "detail": "8월 특별위원회 단계를 통과했지만 선거 후 다시 처리해야 합니다. 추방 책임 확대·이민보호재판소 항소권 일부 제한 포함.",
+      "src": [
+        "rnz_stalls"
+      ]
+    },
+    {
+      "id": "x_employer",
+      "type": "pledge",
+      "title": "고용주 이동 허용 (고용주 종속 완화)",
+      "parties": [
+        "nzfirst",
+        "labour",
+        "greens"
+      ],
+      "stages": [
+        "work"
+      ],
+      "detail": "노동당은 3개월 뒤 인증 고용주 간 이직, 녹색당은 단일 고용주 연동 해제와 12개월 대기 폐지, 뉴질랜드 퍼스트는 고용주 비종속 신규 비자를 약속했습니다. 세 정당 공통 방향입니다.",
+      "src": [
+        "rnz_stalls",
+        "rnz_adv"
+      ]
+    },
+    {
+      "id": "x_pr",
+      "type": "pledge",
+      "title": "영주권·시민권 요건 강화",
+      "parties": [
+        "labour",
+        "act",
+        "nzfirst"
+      ],
+      "stages": [
+        "residence",
+        "pr",
+        "citizenship"
+      ],
+      "detail": "노동당 거주 2→4년, ACT 신규 영주권자 5년 중 2년 체류, 뉴질랜드 퍼스트 영주권·시민권 5→10년. 정도는 크게 다릅니다.",
+      "src": [
+        "rnz_stalls",
+        "labour",
+        "rnz_act",
+        "rnz_nzf"
+      ]
+    },
+    {
+      "id": "x_cap",
+      "type": "pledge",
+      "title": "영주 비자 연 2만 건 상한 국민투표",
+      "parties": [
+        "nzfirst"
+      ],
+      "stages": [
+        "residence",
+        "pr",
+        "citizenship"
+      ],
+      "detail": "뉴질랜드 퍼스트 단독 공약. 정책이 되려면 연정 협상을 통과해야 합니다.",
+      "src": [
+        "rnz_stalls",
+        "rnz_nzf"
+      ]
+    },
+    {
+      "id": "x_levy",
+      "type": "pledge",
+      "title": "임시 취업비자 하루 $6 인프라 부담금",
+      "parties": [
+        "act"
+      ],
+      "stages": [
+        "work"
+      ],
+      "detail": "ACT 단독 공약.",
+      "src": [
+        "herald_act"
+      ]
+    },
+    {
+      "id": "x_amnesty",
+      "type": "pledge",
+      "title": "장기 체류 불법체류자 구제",
+      "parties": [
+        "greens",
+        "nzfirst"
+      ],
+      "stages": [],
+      "detail": "녹색당은 사면·합법화 프로그램, 뉴질랜드 퍼스트는 태평양 도서국 불법체류자에게 24개월 유예 기간을 약속했습니다. 국민당 이민부 장관은 사면 방식이 '또 다른 불법체류 세대를 만든다'며 반대했습니다.",
+      "src": [
+        "rnz_stalls",
+        "rnz_conf"
+      ]
+    },
+    {
+      "id": "greenlist_2027",
+      "type": "pending",
+      "title": "Green List 주요 변경 (2027-03-08 적용 예정)",
+      "party": "national",
+      "date": "2027-03-08",
+      "stages": [
+        "residence",
+        "work",
+        "pswv"
+      ],
+      "detail": "INZ가 2026-11-06 공지한 Green List(직종 기반 영주권 경로) 변경입니다. 어떤 직종이 바뀌는지는 이 앱이 읽은 기사 요약 수준이라 INZ 공지 원문으로 꼭 확인하세요.",
+      "src": [
+        "inz_news"
+      ],
+      "conf": "secondary"
+    },
+    {
+      "id": "india_iconic",
+      "type": "pending",
+      "title": "인도 아이코닉 취업비자 도입 발표",
+      "party": "national",
+      "date": null,
+      "stages": [
+        "work"
+      ],
+      "detail": "뉴질랜드–인도 협정에 따른 인도 출신 인력 대상 신규 취업비자 카테고리로 INZ가 2026-10-23경 발표했다고 보도됐습니다. 시행일과 요건은 INZ 공지를 확인하세요 (기사 요약 기준).",
+      "src": [
+        "inz_news"
+      ],
+      "conf": "secondary"
+    }
+  ],
+  "watch": [
+    {
+      "when": "2026-11-27",
+      "title": "공식 개표 결과 선언",
+      "why": "의석이 확정되면 연립 구성 가능한 조합이 정리됩니다.",
+      "src": [
+        "elections",
+        "elresults"
+      ]
+    },
+    {
+      "when": "연정 협상",
+      "title": "이민부 장관 소속 정당",
+      "why": "뉴질랜드 퍼스트는 이민부 장관을 자기 당 의원이 맡아야 한다고 주장했습니다. 누가 맡느냐에 따라 위 공약 중 무엇이 정책이 되는지가 크게 갈립니다.",
+      "src": [
+        "rnz_stalls"
+      ]
+    },
+    {
+      "when": "새 국회 개회 후",
+      "title": "이민 위험관리 개정안 재개 여부",
+      "why": "선거 전에 마무리되지 못했습니다.",
+      "src": [
+        "rnz_stalls"
+      ]
+    },
+    {
+      "when": "2026-08-24 이후",
+      "title": "SMC 신규 경로의 첫 선발·처리 결과",
+      "why": "새 체계가 실제 처리 기간·초청 점수에 미치는 영향을 INZ 공지와 처리 기간 전광판에서 확인하세요.",
+      "src": [
+        "inz_news"
+      ]
+    },
+    {
+      "when": "미정",
+      "title": "AEWV 연장(영주권 경력 채우기) 시행일",
+      "why": "INZ가 날짜를 공지하는 즉시 이 표에 기록합니다.",
+      "src": [
+        "inz_mar"
+      ]
+    }
+  ]
+}

@@ -624,3 +624,53 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .pb { white-space: nowrap; line-height: 1.5; }
 .lset { margin: 8px 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); display: grid; gap: 8px; }
 .lset > summary { cursor: pointer; font-weight: 600; font-size: .875rem; }
+
+/* 정당 이민 정책 추적 */
+.policy { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.policy > summary { cursor: pointer; font-weight: 700; font-size: 1.05rem; }
+.pol-election { margin: 10px 0; padding: 8px 10px; border-radius: 10px; background: rgba(124,58,237,.1); border: 1px solid rgba(124,58,237,.3); font-size: .85rem; }
+.pol-election p { margin: 4px 0; }
+.pol-tabs { display: flex; gap: 4px; margin: 8px 0; overflow-x: auto; }
+.pol-tab { flex: 1 0 auto; border: 1px solid var(--line); background: none; color: inherit; font: inherit; font-size: .8rem; padding: 6px 9px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.pol-tab[aria-selected="true"] { background: #2563eb; border-color: #2563eb; color: #fff; }
+.pol-matrix { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: .8rem; }
+.pol-matrix th, .pol-matrix td { padding: 3px; text-align: center; }
+.pol-matrix thead th { font-size: .72rem; font-weight: 600; word-break: keep-all; }
+.pol-matrix tbody th { text-align: left; width: 28%; font-weight: 600; word-break: keep-all; line-height: 1.25; }
+.pol-matrix tr.mine th { color: #2563eb; }
+.pol-cell { width: 100%; min-height: 44px; display: grid; justify-items: center; align-content: center; gap: 0; border-radius: 10px; border: 1px solid var(--line); background: none; color: inherit; font: inherit; cursor: pointer; padding: 2px; }
+.pol-cell[aria-pressed="true"] { outline: 2px solid #2563eb; outline-offset: 1px; }
+.pol-ic { font-size: 1rem; font-weight: 700; line-height: 1; }
+.pol-lb { font-size: .66rem; }
+.d-loosen { background: rgba(13,148,136,.16); border-color: rgba(13,148,136,.5); }
+.d-tighten { background: rgba(234,88,12,.15); border-color: rgba(234,88,12,.5); }
+.d-keep { background: rgba(100,116,139,.15); border-color: rgba(100,116,139,.45); }
+.d-mixed { background: rgba(124,58,237,.14); border-color: rgba(124,58,237,.45); }
+.d-review { background: rgba(37,99,235,.13); border-color: rgba(37,99,235,.45); }
+.d-none { background: none; border-style: dashed; opacity: .55; }
+.pol-dir { display: inline-block; padding: 1px 8px; border-radius: 999px; border: 1px solid; font-size: .72rem; white-space: nowrap; }
+.pol-legend { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 8px 0; }
+.pol-card { padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; }
+.pol-card p { margin: 6px 0; }
+.pol-card-head, .pol-item-head { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pol-role { font-size: .8rem; }
+.pol-status { font-size: .7rem; padding: 1px 8px; border-radius: 999px; background: rgba(100,116,139,.18); }
+.pol-status.s-enacted { background: rgba(22,163,74,.2); }
+.pol-status.s-bill { background: rgba(234,179,8,.25); }
+.pol-src { display: block; font-size: .75rem; margin-top: 4px; word-break: break-all; }
+.pol-warn { display: block; color: #b45309; margin: 2px 0; }
+.pol-h { margin: 14px 0 2px; font-size: .95rem; }
+.pol-note, .pol-hint { font-size: .78rem; margin: 2px 0 8px; }
+.pol-list { list-style: none; padding: 0; margin: 0 0 8px; display: grid; gap: 8px; }
+.pol-item { padding: 8px 10px; border: 1px solid var(--line); border-radius: 12px; }
+.pol-item.mine { border-color: #2563eb; box-shadow: 0 0 0 1px rgba(37,99,235,.25); }
+.pol-item p { margin: 6px 0; font-size: .875rem; }
+.pol-badge { font-size: .7rem; padding: 1px 8px; border-radius: 999px; background: rgba(100,116,139,.18); white-space: nowrap; }
+.pol-badge.me { background: #2563eb; color: #fff; }
+.pol-badge.cross { background: rgba(124,58,237,.22); }
+.pol-badge.date { background: rgba(234,179,8,.22); }
+.pol-stages { font-size: .75rem; margin: 2px 0; }
+.pol-tl { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 10px; }
+.pol-tl-item { display: grid; grid-template-columns: 62px 1fr; gap: 8px; padding-bottom: 10px; border-bottom: 1px dashed var(--line); }
+.pol-tl-date { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pol-tl-item p { margin: 4px 0; font-size: .85rem; }

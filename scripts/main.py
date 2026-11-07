@@ -326,6 +326,14 @@ def main(argv: list[str] | None = None) -> int:
                           for k, s in sections.items()}, ensure_ascii=False, indent=1))
         return 0
 
+    # 이민 정책 추적: 정당·정부 이민 기사 누적 (AI 없음, 실패해도 브리핑에 영향 없음)
+    try:
+        from policy import update_policy_news
+
+        update_policy_news(out_dir, local_now.date(), brief)
+    except Exception as e:  # noqa: BLE001
+        log.warning("policy news failed: %s", e)
+
     set_output("generated", "true")
     set_output("date", brief["date"])
     from notify import notify

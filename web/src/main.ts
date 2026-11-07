@@ -7,6 +7,7 @@ import { loadIncidents, safetyAlert, safetySection } from "./crimemap";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
 import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, unfollow, type SeenIndex } from "./news-tools";
 import { trackerCard } from "./tracker";
+import type { PolicyData, PolicyNews } from "./policy";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
 // ── 탭/카테고리 정의 ───────────────────────────────────────
@@ -597,6 +598,12 @@ function renderMain(): void {
       if (fs) main.append(fs);
       const board = processingBoard();
       if (board) main.append(board);
+      // 정당 이민 정책 추적 (큐레이션 JSON + 자동 모은 기사, AI 없음)
+      const pslot = h("div", {});
+      main.append(pslot);
+      void loadPolicy().then(([d, n]) => {
+        if (d && pslot.isConnected) void import("./policy").then((m) => { if (pslot.isConnected) pslot.replaceChildren(m.policyPanel(h, d, n)); });
+      });
     }
     for (const k of visibleSections(tab)) {
       const block = sectionBlock(k, false);
@@ -614,6 +621,12 @@ function renderMain(): void {
 function fmtDateShort(iso: string): string {
   const d = new Date(iso);
   return Number.isNaN(d.getTime()) ? "" : d.toLocaleDateString("ko-KR", { month: "numeric", day: "numeric" });
+}
+
+let policyCache: Promise<[PolicyData | null, PolicyNews | null]> | null = null;
+function loadPolicy(): Promise<[PolicyData | null, PolicyNews | null]> {
+  policyCache ??= Promise.all([getJSON<PolicyData>("./data/policy.json").catch(() => null), getJSON<PolicyNews>("./data/policy-news.json").catch(() => null)]);
+  return policyCache;
 }
 
 // 이민 레이더 전광판: 비자별 처리 기간 (공식 페이지 기준, 매일 아침 갱신)
