@@ -65,6 +65,9 @@ const AUTO_REFRESH_MIN_AGE_MS = 50 * 1000; // 갱신 직후 타이머가 겹쳐�
 let watch = loadWatch();
 let newOnly = loadNewOnly(); // 새 소식만 보기 (지난 브리핑에 나온 기사·반복 기사·지난 소식 숨김)
 let eduFilter = "all"; // 교육 칩 주제 필터
+const HIGHER_KEY = "daily-brief:edu-higher";
+let eduHigher = (() => { try { return localStorage.getItem(HIGHER_KEY) === "1"; } catch { return false; } })(); // 대학·유학생 기사 보기 (기본 숨김)
+const eduHidden = (it: Item, key: SectionKey) => (key === "akl_education" || key === "nz_education") && !eduHigher && eduTopic(it).key === "higher";
 let seenIdx: SeenIndex | null = null; // 지금 보는 브리핑 이전 3일치 기사 (새 소식 판단용)
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -337,7 +340,8 @@ function sectionBlock(key: SectionKey, showHeading: boolean): HTMLElement | null
   if (sec.briefing) wrap.append(h("p", { class: "briefing" }, h("span", { class: "briefing-label" }, "오늘의 한 줄"), sec.briefing));
   if (!sec.items.length) wrap.append(h("p", { class: "empty" }, "새 소식이 없습니다."));
   const isEdu = key === "akl_education" || key === "nz_education";
-  const base = isEdu && eduFilter !== "all" ? sec.items.filter((it) => eduTopic(it).key === eduFilter) : sec.items;
+  const visible = isEdu ? sec.items.filter((it) => !eduHidden(it, key)) : sec.items;
+  const base = isEdu && eduFilter !== "all" ? visible.filter((it) => eduTopic(it).key === eduFilter) : visible;
   const shown = newOnly ? base.filter((it) => !isOld(it, seenIdx)) : base;
   const hidden = base.length - shown.length;
   if (newOnly && sec.items.length && !shown.length) wrap.append(h("p", { class: "empty" }, `오늘 처음 나온 소식이 없어요 (지난 소식 ${hidden}건 숨김).`));
@@ -412,7 +416,7 @@ function degradedBanner(): HTMLElement | null {
 function overview(keys: SectionKey[]): HTMLElement | null {
   if (!brief) return null;
   const ids = new Set<string>();
-  const items = keys.flatMap((k) => brief!.sections[k]?.items ?? []).filter((it) => (ids.has(it.id) ? false : (ids.add(it.id), true)));
+  const items = keys.flatMap((k) => (brief!.sections[k]?.items ?? []).filter((it) => !eduHidden(it, k))).filter((it) => (ids.has(it.id) ? false : (ids.add(it.id), true)));
   if (!items.length) return null;
   const fresh = items.filter((it) => !isOld(it, seenIdx)).length;
   const high = items.filter((it) => it.impact?.level === "high").length;
@@ -457,8 +461,10 @@ function followSection(): HTMLElement | null {
 // 교육 칩: 주제별 필터 (정책·교사·급식·학군·안전·대학) — 규칙 기반, AI 없음
 function eduTopicBar(keys: SectionKey[]): HTMLElement | null {
   if (!brief) return null;
-  const items = keys.flatMap((k) => brief!.sections[k]?.items ?? []);
-  if (!items.length) return null;
+  const all = keys.flatMap((k) => (brief!.sections[k]?.items ?? []).map((it) => ({ it, k })));
+  const higherN = all.filter(({ it }) => eduTopic(it).key === "higher").length;
+  const items = all.filter(({ it, k }) => !eduHidden(it, k)).map(({ it }) => it);
+  if (!all.length) return null;
   const count: Record<string, number> = {};
   for (const it of items) count[eduTopic(it).key] = (count[eduTopic(it).key] ?? 0) + 1;
   const tabs = [{ key: "all", label: "전체", icon: "", color: "var(--accent)" }, ...EDU_TOPICS, EDU_OTHER].filter((t) => t.key === "all" || count[t.key]);
@@ -472,7 +478,16 @@ function eduTopicBar(keys: SectionKey[]): HTMLElement | null {
     b.addEventListener("click", () => { eduFilter = t.key; renderMain(); });
     return b;
   }));
-  return h("section", { class: "edu-bar" }, dist, chips);
+  // 대학·유학생은 기본 숨김 — 켜면 보이고 주제 칩에도 나타남 (이 기기에 저장)
+  const hb = h("button", { type: "button", class: "chip edu-higher", "aria-pressed": String(eduHigher), style: "--c:#0d9488" },
+    `🎓 대학·유학생 ${eduHigher ? "보는 중" : `보기${higherN ? ` (${higherN}건 숨김)` : ""}`}`);
+  hb.addEventListener("click", () => {
+    eduHigher = !eduHigher;
+    try { localStorage.setItem(HIGHER_KEY, eduHigher ? "1" : "0"); } catch { /* 무시 */ }
+    if (!eduHigher && eduFilter === "higher") eduFilter = "all";
+    renderMain();
+  });
+  return h("section", { class: "edu-bar" }, dist, chips, hb);
 }
 
 function renderMain(): void {

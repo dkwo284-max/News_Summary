@@ -575,3 +575,5 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .edu-chips .chip[aria-pressed="true"] { background: var(--c, var(--accent)); border-color: var(--c, var(--accent)); color: #fff; }
 .edu-chips .chip { border-left: 3px solid var(--c, transparent); }
 .edu-badge { display: inline-block; padding: 0 8px; border-radius: 999px; font-size: .72rem; border: 1px solid var(--c); color: var(--c); }
+.edu-higher { justify-self: start; border-style: dashed; }
+.edu-higher[aria-pressed="true"] { background: #0d9488; border-style: solid; color: #fff; }
