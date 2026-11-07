@@ -518,7 +518,7 @@ feeds:
     reserve: true
     lookback_hours: 72
     # 교육 정책·교육과정·평가(교육부·ERO·장관)
-    url: "https://news.google.com/rss/search?q=("Ministry+of+Education"+OR+"Education+Review+Office"+OR+"Education+Minister"+OR+"Erica+Stanford"+OR+NCEA+OR+curriculum+OR+"structured+literacy"+OR+"maths+curriculum")+school+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    url: "https://news.google.com/rss/search?q=(%22Ministry+of+Education%22+OR+%22Education+Review+Office%22+OR+%22Education+Minister%22+OR+%22Erica+Stanford%22+OR+NCEA+OR+curriculum+OR+%22structured+literacy%22+OR+%22maths+curriculum%22)+school+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_nz_edu_teachers
     name: "Google News"
     section: nz_national
@@ -526,7 +526,7 @@ feeds:
     reserve: true
     lookback_hours: 72
     # 교사·노조·인력
-    url: "https://news.google.com/rss/search?q=(NZEI+OR+PPTA+OR+"teacher+strike"+OR+"teacher+shortage"+OR+"teachers+pay"+OR+"teacher+aides"+OR+"principals")+NZ+school+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    url: "https://news.google.com/rss/search?q=(NZEI+OR+PPTA+OR+%22teacher+strike%22+OR+%22teacher+shortage%22+OR+%22teachers+pay%22+OR+%22teacher+aides%22+OR+%22principals%22)+NZ+school+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_nz_edu_life
     name: "Google News"
     section: nz_national
@@ -534,7 +534,7 @@ feeds:
     reserve: true
     lookback_hours: 72
     # 급식·출결·안전·시설·학습지원
-    url: "https://news.google.com/rss/search?q=("Ka+Ora+Ka+Ako"+OR+"school+lunches"+OR+truancy+OR+"school+attendance"+OR+"school+bullying"+OR+"school+safety"+OR+"school+property"+OR+"school+buildings"+OR+"learning+support")+NZ+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    url: "https://news.google.com/rss/search?q=(%22Ka+Ora+Ka+Ako%22+OR+%22school+lunches%22+OR+truancy+OR+%22school+attendance%22+OR+%22school+bullying%22+OR+%22school+safety%22+OR+%22school+property%22+OR+%22school+buildings%22+OR+%22learning+support%22)+NZ+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_nz_edu_central
     name: "Google News"
     section: nz_national
@@ -550,7 +550,7 @@ feeds:
     reserve: true
     lookback_hours: 96
     # 영어 지원·학교 다양성·특수교육·입학
-    url: "https://news.google.com/rss/search?q=(ESOL+OR+"English+language+learners"+OR+"Korean+students"+OR+"Asian+students"+OR+"gifted+students"+OR+"special+education"+OR+"school+enrolment")+New+Zealand+school+when:4d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    url: "https://news.google.com/rss/search?q=(ESOL+OR+%22English+language+learners%22+OR+%22Korean+students%22+OR+%22Asian+students%22+OR+%22gifted+students%22+OR+%22special+education%22+OR+%22school+enrolment%22)+New+Zealand+school+when:4d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_nz_edu_higher
     name: "Google News"
     section: nz_national
@@ -558,7 +558,7 @@ feeds:
     reserve: true
     lookback_hours: 72
     # 대학·유학생·학자금 (화면에서는 기본으로 숨김, 켜면 보임)
-    url: "https://news.google.com/rss/search?q=("University+of+Auckland"+OR+AUT+OR+"international+students"+OR+"student+loan"+OR+"student+allowance"+OR+polytechnic+OR+"university+funding")+NZ+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    url: "https://news.google.com/rss/search?q=(%22University+of+Auckland%22+OR+AUT+OR+%22international+students%22+OR+%22student+loan%22+OR+%22student+allowance%22+OR+polytechnic+OR+%22university+funding%22)+NZ+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_nz_business
     name: "Google News"
     section: nz_national
@@ -645,7 +645,7 @@ feeds:
     reserve: true
     lookback_hours: 72
     # 지역 학교 소식(노스쇼어·동·서·남 오클랜드)
-    url: "https://news.google.com/rss/search?q=(Takapuna+OR+Albany+OR+"North+Shore"+OR+"Browns+Bay"+OR+Milford+OR+Devonport+OR+Botany+OR+Howick+OR+Pakuranga+OR+"West+Auckland"+OR+Manukau+OR+Henderson+OR+Pukekohe)+(school+OR+kindergarten+OR+principal+OR+pupils+OR+students)+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    url: "https://news.google.com/rss/search?q=(Takapuna+OR+Albany+OR+%22North+Shore%22+OR+%22Browns+Bay%22+OR+Milford+OR+Devonport+OR+Botany+OR+Howick+OR+Pakuranga+OR+%22West+Auckland%22+OR+Manukau+OR+Henderson+OR+Pukekohe)+(school+OR+kindergarten+OR+principal+OR+pupils+OR+students)+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_akl_edu_property
     name: "Google News"
     section: nz_auckland
@@ -653,7 +653,7 @@ feeds:
     reserve: true
     lookback_hours: 168
     # 학교 신설·통폐합·학군·학생 수·공사
-    url: "https://news.google.com/rss/search?q=Auckland+("new+school"+OR+"school+closure"+OR+"school+roll"+OR+"school+merger"+OR+"school+rebuild"+OR+"school+zone"+OR+"school+enrolment+scheme"+OR+"school+classrooms")+when:7d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    url: "https://news.google.com/rss/search?q=Auckland+(%22new+school%22+OR+%22school+closure%22+OR+%22school+roll%22+OR+%22school+merger%22+OR+%22school+rebuild%22+OR+%22school+zone%22+OR+%22school+enrolment+scheme%22+OR+%22school+classrooms%22)+when:7d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_akl_edu_safety
     name: "Google News"
     section: nz_auckland
@@ -661,7 +661,7 @@ feeds:
     reserve: true
     lookback_hours: 96
     # 학교 안전·통학·휴대폰 금지
-    url: "https://news.google.com/rss/search?q=Auckland+school+(bullying+OR+assault+OR+lockdown+OR+"school+bus"+OR+"school+crossing"+OR+"student+safety"+OR+vaping+OR+"cellphone+ban")+when:4d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    url: "https://news.google.com/rss/search?q=Auckland+school+(bullying+OR+assault+OR+lockdown+OR+%22school+bus%22+OR+%22school+crossing%22+OR+%22student+safety%22+OR+vaping+OR+%22cellphone+ban%22)+when:4d&hl=en-NZ&gl=NZ&ceid=NZ:en"
   - id: gn_akl_crime
     name: "Google News"
     section: nz_auckland
