@@ -31,17 +31,17 @@ const KEY = "daily-brief:areas";
 const UOA = "University of Auckland City Campus, Auckland";
 
 // 기본 관심 동네. 저장된 값이 이전 버전(v 없음)이면 한 번 이 기본값으로 바꾼다 (학교는 유지).
-const DEFAULT_SUBURBS = ["Pinehill", "Newmarket", "Milford"];
+const DEFAULT_SUBURBS = ["Hauraki", "Newmarket", "Milford"];
 const DEFAULT_SCHOOLS = ["Milford School"];
-const VERSION = 3;
+const VERSION = 4;
 
 export function loadWatch(): Watch {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY) || "{}");
     const schools = Array.isArray(raw.schools) ? raw.schools : [];
-    if (raw.v === 2 && Array.isArray(raw.suburbs)) {
-      // v2 → v3: 기본 동네 Parnell 을 Pinehill 로 (직접 고친 목록은 그대로 두고 Parnell 만 교체)
-      const w = { suburbs: (raw.suburbs as string[]).map((x) => (x === "Parnell" ? "Pinehill" : x)), schools };
+    if ((raw.v === 2 || raw.v === 3) && Array.isArray(raw.suburbs)) {
+      // v2/v3 → v4: 기본 동네 Parnell/Pinehill 을 Hauraki 로 (직접 고친 목록은 그대로 두고 해당 동네만 교체)
+      const w = { suburbs: [...new Set((raw.suburbs as string[]).map((x) => (x === "Parnell" || x === "Pinehill" ? "Hauraki" : x)))], schools };
       saveWatch(w);
       return w;
     }
