@@ -10,7 +10,7 @@ type H = <K extends keyof HTMLElementTagNameMap>(
   ...children: (Node | string | null | undefined)[]
 ) => HTMLElementTagNameMap[K];
 
-type Kind = "golf" | "sailing" | "kayak" | "fishing";
+type Kind = "golf" | "sailing" | "kayak" | "fishing" | "kids" | "swim";
 type SpotType = "ramp" | "pier" | "beach";
 interface Fee { label: string; kind: string; amount: number; period: string; quote?: string; source?: string }
 interface Rating { v: number; n?: number; asof?: string }
@@ -35,6 +35,8 @@ const KINDS: { key: Kind; label: string; icon: string; color: string; activity: 
   { key: "sailing", label: "요트·세일링", icon: "⛵", color: "#2563eb", activity: "sailing" },
   { key: "kayak", label: "카약·패들", icon: "🛶", color: "#0d9488", activity: "kayak" },
   { key: "fishing", label: "낚시", icon: "🎣", color: "#7c3aed", activity: "fishing" },
+  { key: "kids", label: "키즈카페·가족", icon: "🧸", color: "#ec4899", activity: "kids" },
+  { key: "swim", label: "수영·워터", icon: "🏊", color: "#0ea5e9", activity: "swim" },
 ];
 const SPOTS: { key: SpotType; label: string; icon: string; color: string; hint: string }[] = [
   { key: "ramp", label: "보트 램프", icon: "⚓", color: "#475569", hint: "보트·카약 출발 지점으로 쓰이는 경사로예요. 사용 가능 여부·주차·요금·조석은 현장 표지판이나 오클랜드 시의회 정보를 확인하세요." },
@@ -140,7 +142,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   root.append(h("section", { class: "hood-card" },
     h("h2", {}, "🏌️ 레저 — 골프·요트·카약·낚시"),
     h("p", { class: "board-note" },
-      "골프는 지도와 비교표를, 요트·카약·낚시는 지도에서 눌러 요금과 위치를 봅니다. 요금은 각 시설 공식 사이트의 값이고 ", h("b", {}, "확인일"),
+      "골프는 지도와 비교표를, 요트·카약·낚시·키즈카페·수영장은 지도에서 눌러 요금과 위치를 봅니다. 요금은 각 시설 공식 사이트의 값이고 ", h("b", {}, "확인일"),
       "을 함께 보여줘요(페이지가 바뀌었을 때만 새로 읽습니다). 금액은 NZD이며 클럽은 입회 심사·대기가 있을 수 있어 가입 전 공식 사이트나 전화로 꼭 확인하세요. 구글 평점은 약관상 자동 수집하지 않고, 직접 적은 값만 기준 시점과 함께 보여줘요.")));
 
   const today = h("section", { class: "hood-card leisure-today" }, h("h2", {}, "🌤️ 오늘·내일 가기 좋은가"), h("p", { class: "muted" }, "예보를 불러오는 중…"));
@@ -422,7 +424,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   // ── 나머지 목록·낚시 규칙·위치 미확인 ──
   function renderLists() {
     const others = facilities.filter((f) => f.kind !== "golf" && on.has(f.kind));
-    const order = ["adult", "couple", "family", "social", "joining", "tour", "berth", "hire", "student", "junior", "greenfee18", "greenfee9", "other"];
+    const order = ["adult", "couple", "family", "child", "family_pass", "adult_entry", "lesson", "social", "joining", "tour", "berth", "hire", "student", "junior", "greenfee18", "greenfee9", "other"];
     const rank = (x: Fee) => (order.includes(x.kind) ? order.indexOf(x.kind) : order.length);
     const cards = others.map((f) => {
       const d = dist(f.ll);
@@ -432,7 +434,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
       return h("li", {}, b, h("small", { class: "muted" }, ` ${f.area ?? ""}${d != null ? ` · ${d.toFixed(1)}km` : ""}`), h("div", {}, top || h("span", { class: "muted" }, "요금 미확인")));
     });
     listBox.replaceChildren(
-      others.length ? h("details", { class: "hood-card eth-mine" }, h("summary", {}, `⛵🛶🎣 요트·카약·낚시 목록 (${others.length}곳, 눌러서 펼치기)`), h("ul", { class: "leisure-fees leisure-list" }, ...cards)) : h("span", {}),
+      others.length ? h("details", { class: "hood-card eth-mine" }, h("summary", {}, `⛵🛶🎣🧸🏊 요트·카약·낚시·키즈·수영 목록 (${others.length}곳, 눌러서 펼치기)`), h("ul", { class: "leisure-fees leisure-list" }, ...cards)) : h("span", {}),
       on.has("fishing") ? fishingRules() : h("span", {}));
     const missing = facilities.filter((f) => on.has(f.kind) && !f.ll);
     missBox.replaceChildren(missing.length ? h("section", { class: "hood-card" }, h("h2", {}, "📍 지도 위치를 못 찾은 곳"),

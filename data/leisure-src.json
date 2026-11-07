@@ -1,38 +1,492 @@
 {
-  "_설명": "레저 시설 목록(손으로 관리). 가격·상태는 scripts/leisure.py 가 공식 페이지에서 해마다 한 번 읽어 web/public/data/leisure.json 으로 만듭니다. 시설을 추가하려면 아래에 한 줄을 더하세요. pages 는 요금이 나온 공식 페이지(없으면 home 에서 링크를 찾아봅니다).",
-  "facilities": [
-    {"id": "g-waitemata", "kind": "golf", "name": "Waitemata Golf Club", "area": "Devonport", "geo": "Waitemata Golf Club, Devonport, Auckland", "home": "https://waitemata2.cw.golf.co.nz"},
-    {"id": "g-takapuna", "geo2": "27 Northcote Road, Takapuna, Auckland", "kind": "golf", "name": "Takapuna Golf Club", "area": "Takapuna", "geo": "Takapuna Golf Club, Northcote Road, Auckland", "home": "https://takapuna.cw.golf.co.nz"},
-    {"id": "g-pupuke", "kind": "golf", "name": "Pupuke Golf Club", "area": "Campbells Bay", "geo": "Pupuke Golf Club, Auckland", "home": "https://www.pupuke.co.nz", "pages": ["https://www.pupuke.co.nz/membership"]},
-    {"id": "g-northshore", "geo2": "Appleby Road, Albany, Auckland", "kind": "golf", "name": "North Shore Golf Club", "area": "Albany", "geo": "North Shore Golf Club, Appleby Road, Albany, Auckland", "home": null},
-    {"id": "g-wainui", "geo2": "35 Windmill Drive, Wainui, Auckland", "kind": "golf", "name": "Wainui Golf Club", "area": "Silverdale", "geo": "Wainui Golf Club, Windmill Drive, Silverdale, Auckland", "home": "https://wainui.online", "pages": ["https://wainui.online/membership"]},
-    {"id": "g-whangaparaoa", "kind": "golf", "name": "Whangaparaoa Golf Club", "area": "Army Bay", "geo": "Whangaparaoa Golf Club, Whangaparaoa Road, Auckland", "home": "https://wgcgolf.net"},
-    {"id": "g-muriwai", "kind": "golf", "name": "Muriwai Golf Club", "area": "Muriwai", "geo": "Muriwai Golf Club, Auckland", "home": "https://muriwai.cw.golf.co.nz", "pages": ["https://muriwai.cw.golf.co.nz/categories-and-prices"]},
-    {"id": "g-huapai", "kind": "golf", "name": "Huapai Golf Club", "area": "Huapai", "geo": "Huapai Golf Club, Auckland", "home": "https://huapai.cw.golf.co.nz", "pages": ["https://huapai.cw.golf.co.nz/categories-and-fees"]},
-    {"id": "g-redwood", "kind": "golf", "name": "Redwood Park Golf Club", "area": "Swanson", "geo": "Redwood Park Golf Club, Swanson, Auckland", "home": "https://www.redwoodparkgolf.co.nz", "pages": ["https://www.redwoodparkgolf.co.nz/membership-types"]},
-    {"id": "g-titirangi", "geo2": "Links Road, New Lynn, Auckland", "kind": "golf", "name": "Titirangi Golf Club", "area": "New Lynn", "geo": "Titirangi Golf Club, Links Road, Auckland", "home": "https://titirangi.cw.golf.co.nz"},
-    {"id": "g-akarana", "kind": "golf", "name": "Akarana Golf Club", "area": "Auckland", "geo": "Akarana Golf Club, Auckland", "home": "https://akarana2.cw.golf.co.nz", "pages": ["https://akarana2.cw.golf.co.nz/membership-types"]},
-    {"id": "g-maungakiekie", "kind": "golf", "name": "Maungakiekie Golf Club", "area": "Auckland", "geo": "Maungakiekie Golf Club, Auckland", "home": "https://maungakiekie.cw.golf.co.nz", "pages": ["https://maungakiekie.cw.golf.co.nz/membership-categories-and-fees"]},
-    {"id": "g-remuera", "kind": "golf", "name": "Remuera Golf Club", "area": "Remuera", "geo": "Remuera Golf Club, Auckland", "home": "https://remueragolfclub.com", "pages": ["https://remueragolfclub.com/membership"]},
-    {"id": "g-raggc", "kind": "golf", "name": "Royal Auckland & Grange Golf Club", "area": "Otahuhu", "geo": "Royal Auckland Golf Club, Otahuhu, Auckland", "home": "https://royalauckland.cw.golf.co.nz"},
-    {"id": "g-pakuranga", "kind": "golf", "name": "Pakuranga Golf Club", "area": "Pakuranga", "geo": "Pakuranga Golf Club, Auckland", "home": "https://pakuranga2.cw.golf.co.nz", "pages": ["https://pakuranga2.cw.golf.co.nz/membership-packages"]},
-    {"id": "g-windross", "kind": "golf", "name": "Windross Farm Golf Club", "area": "Manurewa", "geo": "Windross Farm Golf Club, Auckland", "home": "https://windross.cw.golf.co.nz"},
-    {"id": "g-pukekohe", "kind": "golf", "name": "Pukekohe Golf Club", "area": "Pukekohe", "geo": "Pukekohe Golf Club, Auckland", "home": "https://pukekohe.cw.golf.co.nz", "pages": ["https://pukekohe.cw.golf.co.nz/memberships"]},
-    {"id": "g-waiheke", "geo2": "Onetangi Road, Waiheke Island, Auckland", "kind": "golf", "name": "Waiheke Golf Club", "area": "Waiheke", "geo": "Waiheke Golf Club, Onetangi Road, Waiheke Island", "home": "https://www.waihekegolfclub.co.nz"},
-    {"id": "g-chamberlain", "kind": "golf", "name": "Chamberlain Park (공공 코스)", "area": "Mt Albert", "geo": "Chamberlain Park Golf Course, Auckland", "home": "https://www.aucklandnz.com/explore/chamberlain-park-golf-course", "note": "오클랜드 시의회 공공 코스. 코스 규모·요금이 바뀌어 왔으니 방문 전 확인하세요."},
-
-    {"id": "s-wakatere", "kind": "sailing", "name": "Wakatere Boating Club", "area": "Milford", "geo": "Wakatere Boating Club, Auckland", "home": "https://www.wakatere.org.nz", "pages": ["https://www.wakatere.org.nz/membership"]},
-    {"id": "s-takapuna", "kind": "sailing", "name": "Takapuna Boating Club", "area": "Takapuna", "geo": "Takapuna Boating Club, Auckland", "home": "https://takapunaboating.org.nz", "pages": ["https://takapunaboating.org.nz/membership-options"]},
-    {"id": "s-torbay", "kind": "sailing", "name": "Torbay Sailing Club", "area": "Torbay", "geo": "Torbay Sailing Club, Auckland", "home": "https://torbaysailing.club", "pages": ["https://torbaysailing.club/membership.html"]},
-    {"id": "s-rayc", "kind": "sailing", "name": "Royal Akarana Yacht Club", "area": "Okahu Bay", "geo": "Royal Akarana Yacht Club, Auckland", "home": "https://rayc.co.nz", "pages": ["https://rayc.co.nz/join/", "https://rayc.co.nz/renew"]},
-    {"id": "s-bbyc", "kind": "sailing", "name": "Bucklands Beach Yacht Club", "area": "Half Moon Bay", "geo": "Bucklands Beach Yacht Club, Auckland", "home": "https://www.bbyc.org.nz"},
-    {"id": "s-westhaven", "kind": "sailing", "name": "Westhaven Marina (정박 요금)", "area": "Westhaven", "geo": "Westhaven Marina, Auckland", "home": "https://www.westhaven.co.nz", "pages": ["https://www.westhaven.co.nz/media/iaygoyt0/rental-rates-2026-2027.pdf"], "note": "요금은 보트 길이·정박 형태별로 다릅니다. 연회비가 아니라 일·월 요금표예요."},
-
-    {"id": "k-aucklandcanoe", "kind": "kayak", "name": "Auckland Canoe Club", "area": "Auckland", "geo": "Auckland Canoe Club, Auckland", "home": "https://aucklandcanoeclub.org.nz", "pages": ["https://aucklandcanoeclub.org.nz/join-the-club"]},
-    {"id": "k-aucklandseakayaks", "kind": "kayak", "name": "Auckland Sea Kayaks (렌탈·투어)", "area": "Auckland", "geo": "Auckland Sea Kayaks, Auckland", "home": "https://aucklandseakayaks.rezdy.com", "pages": ["https://aucklandseakayaks.rezdy.com/catalog/410663/gift-vouchers"]},
-    {"id": "k-fergs", "kind": "kayak", "name": "Fergs Kayaks (렌탈·투어)", "area": "Okahu Bay", "geo": "Fergs Kayaks, Auckland", "home": "https://bookme.co.nz", "pages": ["https://bookme.co.nz/things-to-do/auckland/activity/rangitoto-volcano-kayaking-adventure-fergs-kayaks/4384"]},
-
-    {"id": "f-redboats", "kind": "fishing", "name": "Red Boats (공개 낚시 보트)", "area": "Viaduct", "geo": "Auckland Viaduct Harbour, Auckland", "home": "https://bookme.co.nz", "pages": ["https://bookme.co.nz/things-to-do/auckland/activity/public-fishing-on-auckland-harbour-the-red-boats/777"]},
-    {"id": "f-safaris", "kind": "fishing", "name": "NZ Fishing Safaris (4시간 차터)", "area": "Auckland", "geo": "Westhaven Marina, Auckland", "home": "https://www.airnewzealand.co.nz", "pages": ["https://www.airnewzealand.co.nz/activity-deals/auckland/activity/nz-fishing-safaris-4-hour-charter/2842"]}
-  ]
+ "_설명": "레저 시설 목록(손으로 관리). 가격·상태는 scripts/leisure.py 가 공식 페이지에서 해마다 한 번 읽어 web/public/data/leisure.json 으로 만듭니다. 시설을 추가하려면 아래에 한 줄을 더하세요. pages 는 요금이 나온 공식 페이지(없으면 home 에서 링크를 찾아봅니다).",
+ "facilities": [
+  {
+   "id": "g-waitemata",
+   "kind": "golf",
+   "name": "Waitemata Golf Club",
+   "area": "Devonport",
+   "geo": "Waitemata Golf Club, Devonport, Auckland",
+   "home": "https://waitemata2.cw.golf.co.nz"
+  },
+  {
+   "id": "g-takapuna",
+   "geo2": "27 Northcote Road, Takapuna, Auckland",
+   "kind": "golf",
+   "name": "Takapuna Golf Club",
+   "area": "Takapuna",
+   "geo": "Takapuna Golf Club, Northcote Road, Auckland",
+   "home": "https://takapuna.cw.golf.co.nz"
+  },
+  {
+   "id": "g-pupuke",
+   "kind": "golf",
+   "name": "Pupuke Golf Club",
+   "area": "Campbells Bay",
+   "geo": "Pupuke Golf Club, Auckland",
+   "home": "https://www.pupuke.co.nz",
+   "pages": [
+    "https://www.pupuke.co.nz/membership"
+   ]
+  },
+  {
+   "id": "g-northshore",
+   "geo2": "Appleby Road, Albany, Auckland",
+   "kind": "golf",
+   "name": "North Shore Golf Club",
+   "area": "Albany",
+   "geo": "North Shore Golf Club, Appleby Road, Albany, Auckland",
+   "home": null
+  },
+  {
+   "id": "g-wainui",
+   "geo2": "35 Windmill Drive, Wainui, Auckland",
+   "kind": "golf",
+   "name": "Wainui Golf Club",
+   "area": "Silverdale",
+   "geo": "Wainui Golf Club, Windmill Drive, Silverdale, Auckland",
+   "home": "https://wainui.online",
+   "pages": [
+    "https://wainui.online/membership"
+   ]
+  },
+  {
+   "id": "g-whangaparaoa",
+   "kind": "golf",
+   "name": "Whangaparaoa Golf Club",
+   "area": "Army Bay",
+   "geo": "Whangaparaoa Golf Club, Whangaparaoa Road, Auckland",
+   "home": "https://wgcgolf.net"
+  },
+  {
+   "id": "g-muriwai",
+   "kind": "golf",
+   "name": "Muriwai Golf Club",
+   "area": "Muriwai",
+   "geo": "Muriwai Golf Club, Auckland",
+   "home": "https://muriwai.cw.golf.co.nz",
+   "pages": [
+    "https://muriwai.cw.golf.co.nz/categories-and-prices"
+   ]
+  },
+  {
+   "id": "g-huapai",
+   "kind": "golf",
+   "name": "Huapai Golf Club",
+   "area": "Huapai",
+   "geo": "Huapai Golf Club, Auckland",
+   "home": "https://huapai.cw.golf.co.nz",
+   "pages": [
+    "https://huapai.cw.golf.co.nz/categories-and-fees"
+   ]
+  },
+  {
+   "id": "g-redwood",
+   "kind": "golf",
+   "name": "Redwood Park Golf Club",
+   "area": "Swanson",
+   "geo": "Redwood Park Golf Club, Swanson, Auckland",
+   "home": "https://www.redwoodparkgolf.co.nz",
+   "pages": [
+    "https://www.redwoodparkgolf.co.nz/membership-types"
+   ]
+  },
+  {
+   "id": "g-titirangi",
+   "geo2": "Links Road, New Lynn, Auckland",
+   "kind": "golf",
+   "name": "Titirangi Golf Club",
+   "area": "New Lynn",
+   "geo": "Titirangi Golf Club, Links Road, Auckland",
+   "home": "https://titirangi.cw.golf.co.nz"
+  },
+  {
+   "id": "g-akarana",
+   "kind": "golf",
+   "name": "Akarana Golf Club",
+   "area": "Auckland",
+   "geo": "Akarana Golf Club, Auckland",
+   "home": "https://akarana2.cw.golf.co.nz",
+   "pages": [
+    "https://akarana2.cw.golf.co.nz/membership-types"
+   ]
+  },
+  {
+   "id": "g-maungakiekie",
+   "kind": "golf",
+   "name": "Maungakiekie Golf Club",
+   "area": "Auckland",
+   "geo": "Maungakiekie Golf Club, Auckland",
+   "home": "https://maungakiekie.cw.golf.co.nz",
+   "pages": [
+    "https://maungakiekie.cw.golf.co.nz/membership-categories-and-fees"
+   ]
+  },
+  {
+   "id": "g-remuera",
+   "kind": "golf",
+   "name": "Remuera Golf Club",
+   "area": "Remuera",
+   "geo": "Remuera Golf Club, Auckland",
+   "home": "https://remueragolfclub.com",
+   "pages": [
+    "https://remueragolfclub.com/membership"
+   ]
+  },
+  {
+   "id": "g-raggc",
+   "kind": "golf",
+   "name": "Royal Auckland & Grange Golf Club",
+   "area": "Otahuhu",
+   "geo": "Royal Auckland Golf Club, Otahuhu, Auckland",
+   "home": "https://royalauckland.cw.golf.co.nz"
+  },
+  {
+   "id": "g-pakuranga",
+   "kind": "golf",
+   "name": "Pakuranga Golf Club",
+   "area": "Pakuranga",
+   "geo": "Pakuranga Golf Club, Auckland",
+   "home": "https://pakuranga2.cw.golf.co.nz",
+   "pages": [
+    "https://pakuranga2.cw.golf.co.nz/membership-packages"
+   ]
+  },
+  {
+   "id": "g-windross",
+   "kind": "golf",
+   "name": "Windross Farm Golf Club",
+   "area": "Manurewa",
+   "geo": "Windross Farm Golf Club, Auckland",
+   "home": "https://windross.cw.golf.co.nz"
+  },
+  {
+   "id": "g-pukekohe",
+   "kind": "golf",
+   "name": "Pukekohe Golf Club",
+   "area": "Pukekohe",
+   "geo": "Pukekohe Golf Club, Auckland",
+   "home": "https://pukekohe.cw.golf.co.nz",
+   "pages": [
+    "https://pukekohe.cw.golf.co.nz/memberships"
+   ]
+  },
+  {
+   "id": "g-waiheke",
+   "geo2": "Onetangi Road, Waiheke Island, Auckland",
+   "kind": "golf",
+   "name": "Waiheke Golf Club",
+   "area": "Waiheke",
+   "geo": "Waiheke Golf Club, Onetangi Road, Waiheke Island",
+   "home": "https://www.waihekegolfclub.co.nz"
+  },
+  {
+   "id": "g-chamberlain",
+   "kind": "golf",
+   "name": "Chamberlain Park (공공 코스)",
+   "area": "Mt Albert",
+   "geo": "Chamberlain Park Golf Course, Auckland",
+   "home": "https://www.aucklandnz.com/explore/chamberlain-park-golf-course",
+   "note": "오클랜드 시의회 공공 코스. 코스 규모·요금이 바뀌어 왔으니 방문 전 확인하세요."
+  },
+  {
+   "id": "s-wakatere",
+   "kind": "sailing",
+   "name": "Wakatere Boating Club",
+   "area": "Milford",
+   "geo": "Wakatere Boating Club, Auckland",
+   "home": "https://www.wakatere.org.nz",
+   "pages": [
+    "https://www.wakatere.org.nz/membership"
+   ]
+  },
+  {
+   "id": "s-takapuna",
+   "kind": "sailing",
+   "name": "Takapuna Boating Club",
+   "area": "Takapuna",
+   "geo": "Takapuna Boating Club, Auckland",
+   "home": "https://takapunaboating.org.nz",
+   "pages": [
+    "https://takapunaboating.org.nz/membership-options"
+   ]
+  },
+  {
+   "id": "s-torbay",
+   "kind": "sailing",
+   "name": "Torbay Sailing Club",
+   "area": "Torbay",
+   "geo": "Torbay Sailing Club, Auckland",
+   "home": "https://torbaysailing.club",
+   "pages": [
+    "https://torbaysailing.club/membership.html"
+   ]
+  },
+  {
+   "id": "s-rayc",
+   "kind": "sailing",
+   "name": "Royal Akarana Yacht Club",
+   "area": "Okahu Bay",
+   "geo": "Royal Akarana Yacht Club, Auckland",
+   "home": "https://rayc.co.nz",
+   "pages": [
+    "https://rayc.co.nz/join/",
+    "https://rayc.co.nz/renew"
+   ]
+  },
+  {
+   "id": "s-bbyc",
+   "kind": "sailing",
+   "name": "Bucklands Beach Yacht Club",
+   "area": "Half Moon Bay",
+   "geo": "Bucklands Beach Yacht Club, Auckland",
+   "home": "https://www.bbyc.org.nz"
+  },
+  {
+   "id": "s-westhaven",
+   "kind": "sailing",
+   "name": "Westhaven Marina (정박 요금)",
+   "area": "Westhaven",
+   "geo": "Westhaven Marina, Auckland",
+   "home": "https://www.westhaven.co.nz",
+   "pages": [
+    "https://www.westhaven.co.nz/media/iaygoyt0/rental-rates-2026-2027.pdf"
+   ],
+   "note": "요금은 보트 길이·정박 형태별로 다릅니다. 연회비가 아니라 일·월 요금표예요."
+  },
+  {
+   "id": "k-aucklandcanoe",
+   "kind": "kayak",
+   "name": "Auckland Canoe Club",
+   "area": "Auckland",
+   "geo": "Auckland Canoe Club, Auckland",
+   "home": "https://aucklandcanoeclub.org.nz",
+   "pages": [
+    "https://aucklandcanoeclub.org.nz/join-the-club"
+   ]
+  },
+  {
+   "id": "k-aucklandseakayaks",
+   "kind": "kayak",
+   "name": "Auckland Sea Kayaks (렌탈·투어)",
+   "area": "Auckland",
+   "geo": "Auckland Sea Kayaks, Auckland",
+   "home": "https://aucklandseakayaks.rezdy.com",
+   "pages": [
+    "https://aucklandseakayaks.rezdy.com/catalog/410663/gift-vouchers"
+   ]
+  },
+  {
+   "id": "k-fergs",
+   "kind": "kayak",
+   "name": "Fergs Kayaks (렌탈·투어)",
+   "area": "Okahu Bay",
+   "geo": "Fergs Kayaks, Auckland",
+   "home": "https://bookme.co.nz",
+   "pages": [
+    "https://bookme.co.nz/things-to-do/auckland/activity/rangitoto-volcano-kayaking-adventure-fergs-kayaks/4384"
+   ]
+  },
+  {
+   "id": "f-redboats",
+   "kind": "fishing",
+   "name": "Red Boats (공개 낚시 보트)",
+   "area": "Viaduct",
+   "geo": "Auckland Viaduct Harbour, Auckland",
+   "home": "https://bookme.co.nz",
+   "pages": [
+    "https://bookme.co.nz/things-to-do/auckland/activity/public-fishing-on-auckland-harbour-the-red-boats/777"
+   ]
+  },
+  {
+   "id": "f-safaris",
+   "kind": "fishing",
+   "name": "NZ Fishing Safaris (4시간 차터)",
+   "area": "Auckland",
+   "geo": "Westhaven Marina, Auckland",
+   "home": "https://www.airnewzealand.co.nz",
+   "pages": [
+    "https://www.airnewzealand.co.nz/activity-deals/auckland/activity/nz-fishing-safaris-4-hour-charter/2842"
+   ]
+  },
+  {
+   "id": "c-mywonderland",
+   "kind": "kids",
+   "name": "My Wonderland (알바니 키즈카페)",
+   "area": "Albany",
+   "geo": "My Wonderland, Corinthian Drive, Albany, Auckland",
+   "geo2": "3/63 Corinthian Drive, Albany, Auckland",
+   "home": "https://www.aucklandnz.com",
+   "pages": [
+    "https://www.aucklandnz.com/explore/my-wonderland"
+   ],
+   "note": "실내 놀이터+카페, 입장 후 시간 제한 없이 놀기(양말 필수)."
+  },
+  {
+   "id": "c-magicloft",
+   "kind": "kids",
+   "name": "Magic Loft (브라운스베이 실내 놀이터)",
+   "area": "Browns Bay",
+   "geo": "Magic Loft, Browns Bay, Auckland",
+   "home": "https://www.airnewzealand.com",
+   "pages": [
+    "https://www.airnewzealand.com/activity-deals/auckland/activity/indoor-playground-magic-loft-browns-bay/125868"
+   ],
+   "note": "5세 미만 전용 구역이 있는 대형 실내 놀이터."
+  },
+  {
+   "id": "c-inflatable",
+   "kind": "kids",
+   "name": "Inflatable World Glenfield",
+   "area": "Wairau Valley",
+   "geo": "Inflatable World, View Road, Glenfield, Auckland",
+   "home": null,
+   "note": "대형 에어바운스 실내 놀이터(카페 여부는 확인 필요)."
+  },
+  {
+   "id": "c-fields",
+   "kind": "kids",
+   "name": "Fields Cafe (알바니 키즈 카페)",
+   "area": "Albany",
+   "geo": "Fields Cafe, Appian Way, Albany, Auckland",
+   "home": "https://www.aucklandforkids.co.nz",
+   "pages": [
+    "https://www.aucklandforkids.co.nz/playgrounds/fields-kid-friendly-cafe-in-albany/"
+   ],
+   "note": "울타리 놀이터가 있는 카페(입장료 없음, 이용 시 음료·식사)."
+  },
+  {
+   "id": "c-playzone",
+   "kind": "kids",
+   "name": "Auckland Adventure Park Kids Play Zone (실버데일)",
+   "area": "Silverdale",
+   "geo": "Auckland Adventure Park, Silverdale, Auckland",
+   "home": "https://www.bookme.co.nz",
+   "pages": [
+    "https://wyndham-remarkables.bookme.co.nz/things-to-do/auckland/activity/auckland-adventure-park-kids-playzone-pass/5377"
+   ]
+  },
+  {
+   "id": "c-jumpns",
+   "kind": "kids",
+   "name": "Jump Trampoline Park North Shore (로즈데일)",
+   "area": "Rosedale",
+   "geo": "Jump Trampoline Park, Rosedale, Auckland",
+   "home": "https://bookme.co.nz",
+   "pages": [
+    "https://bookme.co.nz/things-to-do/auckland/activity/jump-trampoline-park-north-shore/3700"
+   ]
+  },
+  {
+   "id": "c-flippin",
+   "kind": "kids",
+   "name": "Flippin' Fun Trampoline Park",
+   "area": "Auckland",
+   "geo": "Flippin Fun Trampoline Park, Auckland",
+   "home": "https://newzealand.com",
+   "pages": [
+    "https://newzealand.com/us/plan/business/flippin-fun-trampoline-park"
+   ]
+  },
+  {
+   "id": "c-wowsite",
+   "kind": "kids",
+   "name": "Wow Site Playground & Cafe",
+   "area": "Auckland",
+   "geo": "Wow Site Play Ground and Cafe, Auckland",
+   "home": "https://www.grabone.co.nz",
+   "pages": [
+    "https://www.grabone.co.nz/auckland/wow-site-play-ground-and-cafe-4"
+   ]
+  },
+  {
+   "id": "c-zoo",
+   "kind": "kids",
+   "name": "Auckland Zoo (오클랜드 주민 무료)",
+   "area": "Western Springs",
+   "geo": "Auckland Zoo, Motions Road, Western Springs, Auckland",
+   "home": "https://www.aucklandzoo.co.nz"
+  },
+  {
+   "id": "c-motat",
+   "kind": "kids",
+   "name": "MOTAT (교통·기술 박물관)",
+   "area": "Western Springs",
+   "geo": "MOTAT, Western Springs, Auckland",
+   "home": "https://www.motat.nz"
+  },
+  {
+   "id": "c-museum",
+   "kind": "kids",
+   "name": "Auckland Museum (뉴질랜드 거주자 무료)",
+   "area": "Domain",
+   "geo": "Auckland War Memorial Museum, Auckland Domain, Auckland",
+   "home": "https://www.aucklandmuseum.com"
+  },
+  {
+   "id": "c-kellys",
+   "kind": "kids",
+   "name": "Kelly Tarlton's Sea Life Aquarium",
+   "area": "Orakei",
+   "geo": "Kelly Tarlton's Sea Life Aquarium, Orakei, Auckland",
+   "home": "https://www.newzealand.com",
+   "pages": [
+    "https://www.newzealand.com/au/plan/business/kelly-tarltons-sea-life-aquarium/"
+   ]
+  },
+  {
+   "id": "w-albanypool",
+   "kind": "swim",
+   "name": "Albany Stadium Pool (시의회 수영장)",
+   "area": "Albany",
+   "geo": "Albany Stadium Pool, Albany, Auckland",
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/albany-stadium-pool"
+   ],
+   "note": "16세 미만 어린이 무료 수영 대상(시의회 무료 수영 정책) — 공식 페이지에서 확인."
+  },
+  {
+   "id": "w-takapunapool",
+   "kind": "swim",
+   "name": "Takapuna Pool and Leisure Centre",
+   "area": "Takapuna",
+   "geo": "Takapuna Pool and Leisure Centre, Auckland",
+   "home": "https://aucklandleisure.co.nz",
+   "pages": [
+    "https://aucklandleisure.co.nz/locations/takapuna-pool-and-leisure-centre"
+   ]
+  },
+  {
+   "id": "w-glenfieldpool",
+   "kind": "swim",
+   "name": "Glenfield Pool and Leisure Centre",
+   "area": "Glenfield",
+   "geo": "Glenfield Pool and Leisure Centre, Bentley Avenue, Glenfield, Auckland",
+   "home": "https://aucklandleisure.co.nz",
+   "pages": [
+    "https://aucklandleisure.co.nz/locations/glenfield-pool-and-leisure-centre"
+   ]
+  },
+  {
+   "id": "w-parakai",
+   "kind": "swim",
+   "name": "Parakai Springs (온천 풀·워터슬라이드)",
+   "area": "Parakai",
+   "geo": "Parakai Springs, Parkhurst Road, Parakai, Auckland",
+   "home": "https://www.bookme.co.nz",
+   "pages": [
+    "https://www.bookme.co.nz/things-to-do/new-zealand/tahekeroa/activity/hot-pool-entry-parakai-springs-hot-pools-general-entry/4372"
+   ]
+  },
+  {
+   "id": "w-autmillennium",
+   "kind": "swim",
+   "name": "AUT Millennium (수영장·수영 교실)",
+   "area": "Mairangi Bay",
+   "geo": "AUT Millennium, Mairangi Bay, Auckland",
+   "home": null,
+   "note": "올림픽 규격 풀과 어린이 수영 교실(요금은 공식 사이트 확인)."
+  }
+ ]
 }

@@ -10,7 +10,7 @@ export interface Hourly {
 }
 export interface DayStats { date: string; temp: number; rain: number; wind: number; gust: number; wave: number | null }
 export interface Verdict { level: Level; text: string }
-export type Activity = "golf" | "sailing" | "kayak" | "fishing";
+export type Activity = "golf" | "sailing" | "kayak" | "fishing" | "kids" | "swim";
 
 const avg = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
 const nums = (xs: (number | null | undefined)[]) => xs.filter((x): x is number => typeof x === "number" && Number.isFinite(x));
@@ -53,6 +53,16 @@ export function verdict(activity: Activity, d: DayStats): Verdict {
     if (d.wind > 15 || d.gust > 22 || wave > 0.9) return { level: "bad", text: `비추천 — ${facts}` };
     if (d.wind <= 10 && d.gust <= 16 && wave <= 0.5) return { level: "good", text: `잔잔함 — ${facts}` };
     return { level: "ok", text: `보통 — ${facts}` };
+  }
+  if (activity === "kids") {
+    // 키즈카페·실내 놀이터: 비 오거나 쌀쌀한 날 특히 좋음
+    if (d.rain >= 50 || d.temp < 14 || d.gust >= 30) return { level: "good", text: `실내 놀이 추천 — ${facts} · ${r(d.temp)}°C` };
+    return { level: "ok", text: `야외도 좋은 날 — ${facts} · ${r(d.temp)}°C` };
+  }
+  if (activity === "swim") {
+    // 실내 수영장은 날씨 무관, 해변·야외 풀은 기온·바람 영향
+    if (d.temp >= 21 && d.wind <= 14 && d.rain < 40) return { level: "good", text: `야외 수영도 좋음 — ${facts} · ${r(d.temp)}°C` };
+    return { level: "ok", text: `실내 수영장 추천 — ${facts} · ${r(d.temp)}°C` };
   }
   // fishing
   if (d.wind > 20 || wave > 1.5 || d.gust > 30) return { level: "bad", text: `비추천 — ${facts}` };

@@ -35,8 +35,8 @@ MANUAL = ROOT / "data" / "leisure-manual.json"
 OUT = ROOT / "web" / "public" / "data" / "leisure.json"
 NOMINATIM = "https://nominatim.openstreetmap.org/search"
 BBOX = (-37.45, -36.15, 174.20, 175.30)  # 오클랜드 광역시(위도 하한·상한, 경도 하한·상한)
-KINDS = ["golf", "sailing", "kayak", "fishing"]
-FEE_KINDS = ["adult", "couple", "family", "junior", "student", "social", "joining", "greenfee18", "greenfee9", "hire", "tour", "berth", "other"]
+KINDS = ["golf", "sailing", "kayak", "fishing", "kids", "swim"]
+FEE_KINDS = ["adult", "couple", "family", "junior", "student", "social", "joining", "greenfee18", "greenfee9", "hire", "tour", "berth", "child", "adult_entry", "family_pass", "lesson", "other"]
 PERIODS = ["year", "season", "month", "week", "day", "hour", "round", "once", "person"]
 STATUS = ["open", "waitlist", "closed", "unknown"]
 BATCH = 3             # AI 한 번에 보내는 시설 수(작게 보내야 과부하·한도에 덜 걸림)
@@ -89,6 +89,8 @@ SYSTEM = """당신은 뉴질랜드 레저 시설(골프장·요트클럽·카약
   family=가족 연회비, junior=주니어·청소년, student=학생, social=비플레이 사교 회원, joining=입회비(1회),
   greenfee18=비회원(방문자) 18홀 1인 성인 요금(여러 개면 평일·비제휴 방문자 기준), greenfee9=같은 조건 9홀,
   hire=장비 대여(시간 또는 일 단위), tour=가이드 투어, berth=정박료, other=그 밖의 요금.
+  (키즈카페·수영장·가족 시설) child=어린이 1인 입장·이용료(나이 구분은 label 에), adult_entry=성인 1인 입장료, family_pass=가족권(구성은 label 에),
+  lesson=어린이 수영·교실 수강료(period=season 은 학기). '무료'라고 적힌 항목은 금액을 만들지 말고 note 에 한국어로 적으세요.
 - period: year/season/month/week/day/hour/round(1라운드)/once(1회)/person(1인 1회).
 - label: 글에 나온 이름 그대로(영어 가능). quote: 그 금액이 적힌 원문을 80자 이내로 그대로 옮기세요.
 - 같은 종류가 여럿(예: 풀·위크데이·9홀)이면 각각 별도 항목으로, label 에 구분을 넣으세요. adult 는 가장 일반적인 한 개만.
