@@ -35,5 +35,79 @@
       }
     ],
     "note": "공식 사이트가 동적 페이지라 자동 수집이 안 됩니다. 값은 검색 결과에서 확인한 것이고 시점이 불명확해요."
+  },
+  "w-albanypool": {
+    "replace_fees": true,
+    "fees": [
+      {
+        "label": "성인 일반 수영 1회 (시의회 공지: 2025-04부터 $8, 사우나·스팀·스파 별도 — 공식 페이지에서 확인)",
+        "kind": "adult_entry",
+        "amount": 8,
+        "period": "once"
+      }
+    ],
+    "note": "16세 미만 어린이는 수영 무료(시의회 무료 수영 정책, 사우나·스팀룸 제외). 헬스장·그룹 운동 요금은 별도라 표에서 뺐어요."
+  },
+  "w-takapunapool": {
+    "replace_fees": true,
+    "fees": [
+      {
+        "label": "성인 일반 수영 1회 (시의회 공지: 2025-04부터 $8, 사우나·스팀·스파 별도 — 공식 페이지에서 확인)",
+        "kind": "adult_entry",
+        "amount": 8,
+        "period": "once"
+      }
+    ],
+    "note": "16세 미만 어린이는 수영 무료(시의회 무료 수영 정책, 사우나·스팀룸 제외). 헬스장·그룹 운동 요금은 별도라 표에서 뺐어요."
+  },
+  "w-glenfieldpool": {
+    "replace_fees": true,
+    "fees": [
+      {
+        "label": "성인 일반 수영 1회 (시의회 공지: 2025-04부터 $8, 사우나·스팀·스파 별도 — 공식 페이지에서 확인)",
+        "kind": "adult_entry",
+        "amount": 8,
+        "period": "once"
+      }
+    ],
+    "note": "16세 미만 어린이는 수영 무료(시의회 무료 수영 정책, 사우나·스팀룸 제외). 헬스장·그룹 운동 요금은 별도라 표에서 뺐어요."
+  },
+  "w-parakai": {
+    "replace_fees": true,
+    "fees": [
+      {
+        "label": "성인(16+) 일반 입장 (예약 사이트 기준, 연도 불명)",
+        "kind": "adult_entry",
+        "amount": 35,
+        "period": "once"
+      },
+      {
+        "label": "어린이(5~15세) (예약 사이트 기준)",
+        "kind": "child",
+        "amount": 18,
+        "period": "once"
+      },
+      {
+        "label": "유아(2~4세)",
+        "kind": "child",
+        "amount": 10,
+        "period": "once"
+      },
+      {
+        "label": "가족권 (성인 2 + 어린이 3~4)",
+        "kind": "family_pass",
+        "amount": 95,
+        "period": "once"
+      }
+    ],
+    "note": "온천 풀과 워터슬라이드(슬라이드는 8세 이상 단독 이용). 오클랜드 북서쪽 약 40분."
+  },
+  "c-museum": {
+    "replace_fees": true,
+    "fees": [],
+    "note": "뉴질랜드 거주자는 입장 무료(기부 환영). 멤버십은 별도라 표에서 뺐어요."
+  },
+  "c-zoo": {
+    "note": "오클랜드 주민은 무료로 알려져 있어요(공식 페이지에서 확인)."
   }
 }

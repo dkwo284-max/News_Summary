@@ -306,7 +306,13 @@ def merge_manual(fac: dict, manual: dict) -> dict:
         fac["note"] = m["note"]
     if m.get("status") in STATUS:
         fac["status"] = m["status"]
-    if m.get("fees"):
+    if m.get("fees") and m.get("replace_fees"):   # 자동 수집값이 엉뚱할 때(예: 수영장 페이지의 헬스장 요금) 수집한 요금을 모두 버리고 직접 넣은 값만 쓴다
+        fac["fees"] = [{**f, "source": "manual"} for f in m["fees"]]
+        fac["checked"] = m.get("checked", "")
+    elif m.get("replace_fees"):
+        fac["fees"] = []
+        fac["checked"] = m.get("checked", fac.get("checked", ""))
+    elif m.get("fees"):
         mine = {(f["kind"], f.get("label", "")) for f in m["fees"]}
         fac["fees"] = [f for f in fac.get("fees", []) if (f["kind"], f.get("label", "")) not in mine] + \
                       [{**f, "source": "manual"} for f in m["fees"]]
