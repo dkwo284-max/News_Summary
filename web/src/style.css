@@ -567,3 +567,11 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .trk-news-title { font-weight: 600; font-size: .8125rem; }
 .trk-news ul { margin: 4px 0 0; padding-left: 18px; }
 .trk-news .impact-badge { margin-left: 4px; }
+
+/* 교육 주제 */
+.edu-bar { margin: 6px 0 10px; display: grid; gap: 8px; }
+.edu-dist { display: flex; height: 8px; border-radius: 999px; overflow: hidden; gap: 2px; background: var(--line); }
+.edu-dist i { display: block; min-width: 6px; }
+.edu-chips .chip[aria-pressed="true"] { background: var(--c, var(--accent)); border-color: var(--c, var(--accent)); color: #fff; }
+.edu-chips .chip { border-left: 3px solid var(--c, transparent); }
+.edu-badge { display: inline-block; padding: 0 8px; border-radius: 999px; font-size: .72rem; border: 1px solid var(--c); color: var(--c); }

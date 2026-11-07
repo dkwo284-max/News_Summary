@@ -122,3 +122,21 @@ export function followUpdates(brief: Brief): { follow: Follow; items: { item: It
   }
   return out;
 }
+
+// ── 교육 주제 분류 (규칙 기반, AI 없음) ──
+export interface EduTopic { key: string; label: string; icon: string; color: string; words: RegExp }
+/** 위에서부터 먼저 맞는 주제 하나로 분류 (안전·징계처럼 학부모가 먼저 봐야 할 것을 앞에) */
+export const EDU_TOPICS: EduTopic[] = [
+  { key: "safety", label: "안전·징계", icon: "🛡️", color: "#dc2626", words: /안전|폭행|학대|괴롭힘|왕따|징계|재판소|체포|사고|위험|보안|사건|bully|assault|abuse|discipline|tribunal|safety|police|lockdown/i },
+  { key: "admission", label: "학군·입학", icon: "🏫", color: "#2563eb", words: /학군|입학|등록|전학|정원|학교 신설|통학|zone|enrol|roll|new school|intake|waitlist/i },
+  { key: "teacher", label: "교사·인력", icon: "👩‍🏫", color: "#7c3aed", words: /교사|교원|교직|파업|임금|노조|인력|채용|교장|보조 교사|teacher|principal|strike|pay|union|staff|nzeI|ppta/i },
+  { key: "life", label: "급식·시설·복지", icon: "🍎", color: "#16a34a", words: /급식|점심|건강|시설|건물|교실|예산|지원금|복지|결석|출석|지각|도서관|운동장|lunch|school meal|building|property|attendance|absence|funding|ka ora/i },
+  { key: "policy", label: "정책·교육과정", icon: "📘", color: "#d97706", words: /정책|교육과정|커리큘럼|개혁|평가|시험|문해|수학|읽기|ncea|ero|curriculum|reform|literacy|maths|assessment|review|ministry|minister|검토|법안|장관/i },
+  { key: "higher", label: "대학·유학생", icon: "🎓", color: "#0d9488", words: /대학|유학생|학위|연구|학자금|polytech|university|student loan|international student|tertiary|학부|대학원/i },
+];
+export const EDU_OTHER: EduTopic = { key: "other", label: "기타", icon: "📌", color: "#6b7280", words: /./ };
+
+export function eduTopic(item: Item): EduTopic {
+  const text = `${item.title_ko} ${(item.summary_ko ?? []).join(" ")} ${item.original_title ?? ""} ${(item.tags ?? []).join(" ")}`;
+  return EDU_TOPICS.find((t) => t.words.test(text)) ?? EDU_OTHER;
+}

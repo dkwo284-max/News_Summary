@@ -5,7 +5,7 @@ import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
 import { gpSection, loadGP } from "./gpmap";
 import { loadIncidents, safetyAlert, safetySection } from "./crimemap";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
-import { buildSeen, followUpdates, isFollowed, isOld, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, unfollow, type SeenIndex } from "./news-tools";
+import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, unfollow, type SeenIndex } from "./news-tools";
 import { trackerCard } from "./tracker";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
@@ -64,6 +64,7 @@ const AUTO_REFRESH_MS = 60 * 1000;
 const AUTO_REFRESH_MIN_AGE_MS = 50 * 1000; // 갱신 직후 타이머가 겹쳐도 한 번 건너뛰지 않도록 주기보다 조금 짧게
 let watch = loadWatch();
 let newOnly = loadNewOnly(); // 새 소식만 보기 (지난 브리핑에 나온 기사·반복 기사·지난 소식 숨김)
+let eduFilter = "all"; // 교육 칩 주제 필터
 let seenIdx: SeenIndex | null = null; // 지금 보는 브리핑 이전 3일치 기사 (새 소식 판단용)
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -272,6 +273,10 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
     meta.append(h("span", { class: "place", title: item.incident.location }, `📍 ${item.incident.suburb || item.incident.location}`));
   }
   if (item.carried_from) meta.append(h("span", { class: "carried", title: "오늘은 새 소식이 없어 최근 소식을 보여줍니다" }, `지난 소식 · ${fmtDateShort(item.carried_from)}`));
+  if (item.id && (brief?.sections.akl_education?.items.some((x) => x.id === item.id) || brief?.sections.nz_education?.items.some((x) => x.id === item.id))) {
+    const tp = eduTopic(item);
+    meta.append(h("span", { class: "edu-badge", style: `--c:${tp.color}` }, `${tp.icon} ${tp.label}`));
+  }
   const rt = relTime(item.published_at);
   if (rt) meta.append(h("span", {}, rt));
 
@@ -331,8 +336,10 @@ function sectionBlock(key: SectionKey, showHeading: boolean): HTMLElement | null
   wrap.append(h("h2", { id: `h-${key}`, class: showHeading ? "sec-title" : "sr-only" }, sec.label));
   if (sec.briefing) wrap.append(h("p", { class: "briefing" }, h("span", { class: "briefing-label" }, "오늘의 한 줄"), sec.briefing));
   if (!sec.items.length) wrap.append(h("p", { class: "empty" }, "새 소식이 없습니다."));
-  const shown = newOnly ? sec.items.filter((it) => !isOld(it, seenIdx)) : sec.items;
-  const hidden = sec.items.length - shown.length;
+  const isEdu = key === "akl_education" || key === "nz_education";
+  const base = isEdu && eduFilter !== "all" ? sec.items.filter((it) => eduTopic(it).key === eduFilter) : sec.items;
+  const shown = newOnly ? base.filter((it) => !isOld(it, seenIdx)) : base;
+  const hidden = base.length - shown.length;
   if (newOnly && sec.items.length && !shown.length) wrap.append(h("p", { class: "empty" }, `오늘 처음 나온 소식이 없어요 (지난 소식 ${hidden}건 숨김).`));
   // 이민 레이더는 최신 기사가 맨 위(발행 시각 내림차순, 시각이 없는 기사는 뒤로 — 같으면 선별 순서 유지)
   const items = key === "nz_immigration"
@@ -447,6 +454,27 @@ function followSection(): HTMLElement | null {
   return box;
 }
 
+// 교육 칩: 주제별 필터 (정책·교사·급식·학군·안전·대학) — 규칙 기반, AI 없음
+function eduTopicBar(keys: SectionKey[]): HTMLElement | null {
+  if (!brief) return null;
+  const items = keys.flatMap((k) => brief!.sections[k]?.items ?? []);
+  if (!items.length) return null;
+  const count: Record<string, number> = {};
+  for (const it of items) count[eduTopic(it).key] = (count[eduTopic(it).key] ?? 0) + 1;
+  const tabs = [{ key: "all", label: "전체", icon: "", color: "var(--accent)" }, ...EDU_TOPICS, EDU_OTHER].filter((t) => t.key === "all" || count[t.key]);
+  if (eduFilter !== "all" && !count[eduFilter]) eduFilter = "all";
+  const total = items.length;
+  const dist = h("div", { class: "edu-dist", role: "img", "aria-label": "교육 기사 주제 비율" },
+    ...tabs.filter((t) => t.key !== "all").map((t) => h("i", { style: `flex:${count[t.key]};background:${t.color}`, title: `${t.label} ${count[t.key]}건` })));
+  const chips = h("div", { class: "chips edu-chips", role: "group", "aria-label": "교육 주제" }, ...tabs.map((t) => {
+    const b = h("button", { type: "button", class: "chip", "aria-pressed": String(eduFilter === t.key), style: t.key === "all" ? "" : `--c:${t.color}` },
+      `${t.icon ? t.icon + " " : ""}${t.label} ${t.key === "all" ? total : count[t.key]}`);
+    b.addEventListener("click", () => { eduFilter = t.key; renderMain(); });
+    return b;
+  }));
+  return h("section", { class: "edu-bar" }, dist, chips);
+}
+
 function renderMain(): void {
   main.replaceChildren();
   if (!brief) {
@@ -528,6 +556,10 @@ function renderMain(): void {
       if (rates) main.append(rates);
     }
     const keys = (sel === "all" ? visibleSections(tab) : [sel as SectionKey]).filter((k) => brief!.sections[k]);
+    if (sel === "akl_education" || sel === "nz_education") {
+      const bar = eduTopicBar(keys);
+      if (bar) main.append(bar);
+    } else eduFilter = "all";
     for (const k of keys) {
       const block = sectionBlock(k, !!chips);
       if (block) main.append(block);
