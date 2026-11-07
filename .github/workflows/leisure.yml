@@ -1,6 +1,6 @@
 name: Leisure fees (golf, sailing, kayak, fishing)
 
-# 한 달에 한 번(15일) 또는 수동: 레저 시설 공식 페이지를 받아 web/public/data/leisure.json 을 갱신합니다.
+# 6개월에 한 번(1월·7월 10일) 또는 수동: 레저 시설 공식 페이지를 받아 web/public/data/leisure.json 을 갱신합니다.
 # 요금은 잘 안 바뀌므로 페이지 글의 "지문"이 이전과 같으면 AI 를 쓰지 않고(보통 AI 0회), 바뀐 시설만 Gemini 로 다시 읽은 뒤
 # 금액이 페이지 글에 실제로 있는지 검증합니다(시설 3곳당 AI 1회). 요금·가입 상태가 바뀌면 기록하고 알림(설정에서 켠 경우).
 # 매일 도는 실행에는 들어 있지 않습니다.
@@ -19,7 +19,7 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: "17 4 15 * *"
+    - cron: "17 4 10 1,7 *"
 
 permissions:
   contents: write
