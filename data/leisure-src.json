@@ -402,7 +402,7 @@
   {
    "id": "c-zoo",
    "kind": "kids",
-   "name": "Auckland Zoo (오클랜드 주민 무료)",
+   "name": "Auckland Zoo (오클랜드 주민 할인)",
    "area": "Western Springs",
    "geo": "Auckland Zoo, Motions Road, Western Springs, Auckland",
    "home": "https://www.aucklandzoo.co.nz"
@@ -418,7 +418,7 @@
   {
    "id": "c-museum",
    "kind": "kids",
-   "name": "Auckland Museum (뉴질랜드 거주자 무료)",
+   "name": "Auckland Museum (오클랜드 주민 무료)",
    "area": "Domain",
    "geo": "Auckland War Memorial Museum, Auckland Domain, Auckland",
    "home": "https://www.aucklandmuseum.com"
