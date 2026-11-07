@@ -1,0 +1,57 @@
+name: swim-probe
+on:
+  push:
+    branches: [swim-probe]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discover
+        run: |
+          python3 - <<'PY'
+          import json, re, time, urllib.request, urllib.parse, html
+          BBOX = "-37.45,174.20,-36.15,175.30"
+          EP = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://overpass.kumi.systems/api/interpreter"]
+          Q = {
+           "pool_named": f'nwr["leisure"="swimming_pool"]["name"]({BBOX});',
+           "sports_swim": f'nwr["leisure"="sports_centre"]["sport"~"swimming"]({BBOX});',
+           "water_park": f'nwr["leisure"="water_park"]({BBOX});',
+           "bath": f'nwr["amenity"="public_bath"]({BBOX});',
+           "hotspring": f'nwr["natural"="hot_spring"]({BBOX});',
+           "swim_area": f'nwr["leisure"="swimming_area"]({BBOX});',
+           "splash_tag": f'nwr["leisure"="playground"]["playground"~"splash|water"]({BBOX});',
+           "splash_name": f'nwr["name"~"splash|water ?play|paddling|aquatic|baths|pools?$|pool and|leisure centre",i]["leisure"]({BBOX});',
+          }
+          for k, body in Q.items():
+              q = f'[out:json][timeout:60];({body});out center tags qt;'
+              data = None
+              for ep in EP:
+                  for attempt in range(2):
+                      try:
+                          req = urllib.request.Request(ep, data=urllib.parse.urlencode({"data": q}).encode(), headers={"User-Agent": "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"})
+                          data = json.loads(urllib.request.urlopen(req, timeout=90).read()); break
+                      except Exception as e:
+                          err = str(e); time.sleep(8)
+                  if data: break
+              print("=" * 80); print("QUERY", k, "->", len(data["elements"]) if data else f"FAILED {err}")
+              if not data: continue
+              for el in data["elements"]:
+                  t = el.get("tags", {}); c = el.get("center") or el
+                  keys = ["name", "access", "operator", "fee", "website", "addr:suburb", "addr:city", "sport", "indoor", "leisure", "opening_hours"]
+                  print(f'{c.get("lat"):.4f},{c.get("lon"):.4f} | ' + " | ".join(f"{x}={t[x]}" for x in keys if x in t))
+          PY
+      - name: Council lists
+        run: |
+          python3 - <<'PY'
+          import re, urllib.request, html
+          for u in ["https://www.aucklandleisure.co.nz/locations", "https://www.aucklandleisure.co.nz/", "https://www.aucklandcouncil.govt.nz/parks-recreation/Pages/splash-pads.aspx", "https://www.aucklandcouncil.govt.nz/arts-culture-recreation/Pages/pools-and-leisure-centres.aspx"]:
+              print("=" * 80); print("URL", u)
+              try:
+                  raw = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0 (compatible; check)"}), timeout=40).read().decode("utf-8", "ignore")
+                  links = sorted(set(re.findall(r'href="([^"#]*(?:locations|pool|splash|leisure)[^"#]*)"', raw, re.I)))
+                  print("LINKS", len(links)); print("\n".join(links[:150]))
+                  t = html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", raw))); t = re.sub(r"\s+", " ", t)
+                  print("TEXT", t[:2500])
+              except Exception as e:
+                  print("ERR", e)
+          PY
