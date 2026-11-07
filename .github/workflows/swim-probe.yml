@@ -13,14 +13,11 @@ jobs:
           UA = "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"
           def text(raw):
               t = html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", raw))); return re.sub(r"\s+", " ", t)
-          for u in ["https://www.aucklandleisure.co.nz/prices-and-membership/", "https://www.aucklandleisure.co.nz/locations/grey-lynn-paddling-pool/", "https://www.aucklandleisure.co.nz/locations/karanga-plaza-harbour-pool/",
-                    "https://www.aucklandleisure.co.nz/locations/totara-park-pools/", "https://www.aucklandleisure.co.nz/locations/moana-nui-a-kiwa-pool-and-leisure-centre/", "https://www.aucklandleisure.co.nz/locations/the-olympic/",
-                    "https://www.aucklandleisure.co.nz/locations/west-wave-pool-and-leisure-centre/"]:
-              print("=" * 80); print("URL", u)
-              try:
-                  raw = urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": UA}), timeout=40).read().decode("utf-8", "ignore")
-                  print("HREFS", sorted(set(re.findall(r'href="([^"#?]*locations/[^"#?]*)"', raw)))[:80])
-                  t = text(raw); i = t.find("Is the information"); j = t.find("Search Auckland Council Pools and Leisure"); print("TEXT", t[max(j,0):max(j,0)+3200])
-              except Exception as e:
-                  print("ERR", e)
+          raw = urllib.request.urlopen(urllib.request.Request("https://www.aucklandleisure.co.nz/prices-and-membership/", headers={"User-Agent": UA}), timeout=40).read().decode("utf-8", "ignore")
+          t = text(raw)
+          print("LEN", len(t))
+          for m in re.finditer(r"Pool admission prices Pool admission prices", t):
+              pre = t[max(0, m.start() - 260):m.start()]
+              post = t[m.end():m.end() + 700]
+              print("-" * 60); print("PRE ...", pre[-200:]); print("POST", post)
           PY
