@@ -1551,7 +1551,7 @@
    "id": "w-splash-myers",
    "name": "Myers Park 스플래시 패드",
    "area": "Auckland CBD",
-   "geo": "Myers Park, Mount Street, Auckland",
+   "geo": "Myers Park, Auckland Central, New Zealand",
    "no_fees": true,
    "free": true,
    "note": "옛 어린이 물놀이장 터에 만든 스플래시 패드(시의회, 여름 한정). 야외 스플래시 패드 — 무료(시의회·가이드 안내), 보통 노동절 주말~부활절 사이. 운영 기간·시간은 현장 안내 확인.",
@@ -1562,7 +1562,8 @@
     "family"
    ],
    "indoor": false,
-   "kind": "swim"
+   "kind": "swim",
+   "geo2": "Myers Park Kindergarten, Auckland"
   },
   {
    "id": "w-splash-potters",
@@ -1691,7 +1692,7 @@
    "id": "w-sch-waterviewsch",
    "name": "Waterview Primary School 수영장",
    "area": "Waterview",
-   "geo": "Waterview Primary School, 16 Herdman Street, Waterview, Auckland",
+   "geo": "Waterview School, Auckland",
    "no_fees": true,
    "free": true,
    "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Albert-Eden 로컬보드 지원)",
@@ -1702,7 +1703,8 @@
     "family"
    ],
    "indoor": false,
-   "kind": "swim"
+   "kind": "swim",
+   "geo2": "Herdman Street, Waterview, Auckland"
   },
   {
    "id": "w-sch-gleneden",
@@ -1742,7 +1744,7 @@
    "id": "w-sch-blockhouse",
    "name": "Blockhouse Bay Primary School 수영장",
    "area": "Blockhouse Bay",
-   "geo": "Blockhouse Bay Primary School, 584 Blockhouse Bay Road, Auckland",
+   "geo": "Blockhouse Bay School, Auckland",
    "no_fees": true,
    "free": true,
    "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Whau 로컬보드 지원)",
@@ -1753,13 +1755,14 @@
     "family"
    ],
    "indoor": false,
-   "kind": "swim"
+   "kind": "swim",
+   "geo2": "584 Blockhouse Bay Road, Blockhouse Bay, Auckland"
   },
   {
    "id": "w-sch-greenbay",
    "name": "Green Bay Primary School 수영장",
    "area": "Green Bay",
-   "geo": "Green Bay Primary School, 131 Godley Road, Green Bay, Auckland",
+   "geo": "Green Bay School, Auckland",
    "no_fees": true,
    "free": true,
    "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Whau 로컬보드 지원)",
@@ -1770,7 +1773,8 @@
     "family"
    ],
    "indoor": false,
-   "kind": "swim"
+   "kind": "swim",
+   "geo2": "131 Godley Road, Green Bay, Auckland"
   },
   {
    "id": "w-palmsprings",

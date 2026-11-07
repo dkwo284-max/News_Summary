@@ -460,5 +460,24 @@
   ],
   "checked": "2026-11-07",
   "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-jubilee": {
+  "status": "unknown"
+ },
+ "w-masseypark": {
+  "status": "unknown"
+ },
+ "w-pterin": {
+  "status": "unknown"
+ },
+ "w-whiteside": {
+  "status": "unknown"
+ },
+ "w-totara": {
+  "status": "unknown",
+  "replace_fees": true,
+  "fees": [],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 2026-12 중 개장 예정(날짜 미정), 11:00~18:45, 물 온도 21~22℃(비가열). 어른 요금은 공식 페이지에서 확인."
  }
 }
