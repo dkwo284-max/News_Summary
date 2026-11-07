@@ -302,6 +302,10 @@ def merge_manual(fac: dict, manual: dict) -> dict:
         fac["hide"] = True
     if m.get("rating"):
         fac["rating"] = m["rating"]
+    if m.get("ages"):
+        fac["ages"] = m["ages"]      # 적합 연령 태그 직접 지정 (baby 0~4 · kid 5~12 · teen 13~17 · adult · family 가족 함께)
+    if m.get("indoor") is not None:
+        fac["indoor"] = m["indoor"]
     if m.get("note"):
         fac["note"] = m["note"]
     if m.get("status") in STATUS:
@@ -415,7 +419,7 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
                "home": s.get("home") or "", "gmaps": "https://www.google.com/maps/search/?api=1&query=" + quote_plus(f"{s['name']} Auckland"),
                "fees": prev.get("fees", []), "status": prev.get("status", "unknown"), "season": prev.get("season", ""),
                "note": s.get("note") or prev.get("note", ""), "checked": prev.get("checked", ""), "src": prev.get("src", []),
-               "text_hash": prev.get("text_hash", "")}
+               "text_hash": prev.get("text_hash", ""), "ages": s.get("ages"), "indoor": s.get("indoor")}
         if s.get("note"):
             fac["note"] = s["note"]
         facilities.append(fac)

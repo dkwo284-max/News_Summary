@@ -7,7 +7,12 @@
    "name": "Waitemata Golf Club",
    "area": "Devonport",
    "geo": "Waitemata Golf Club, Devonport, Auckland",
-   "home": "https://waitemata2.cw.golf.co.nz"
+   "home": "https://waitemata2.cw.golf.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-takapuna",
@@ -16,7 +21,12 @@
    "name": "Takapuna Golf Club",
    "area": "Takapuna",
    "geo": "Takapuna Golf Club, Northcote Road, Auckland",
-   "home": "https://takapuna.cw.golf.co.nz"
+   "home": "https://takapuna.cw.golf.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-pupuke",
@@ -27,7 +37,12 @@
    "home": "https://www.pupuke.co.nz",
    "pages": [
     "https://www.pupuke.co.nz/membership"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-northshore",
@@ -36,7 +51,12 @@
    "name": "North Shore Golf Club",
    "area": "Albany",
    "geo": "North Shore Golf Club, Appleby Road, Albany, Auckland",
-   "home": null
+   "home": null,
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-wainui",
@@ -48,7 +68,12 @@
    "home": "https://wainui.online",
    "pages": [
     "https://wainui.online/membership"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-whangaparaoa",
@@ -56,7 +81,12 @@
    "name": "Whangaparaoa Golf Club",
    "area": "Army Bay",
    "geo": "Whangaparaoa Golf Club, Whangaparaoa Road, Auckland",
-   "home": "https://wgcgolf.net"
+   "home": "https://wgcgolf.net",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-muriwai",
@@ -67,7 +97,12 @@
    "home": "https://muriwai.cw.golf.co.nz",
    "pages": [
     "https://muriwai.cw.golf.co.nz/categories-and-prices"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-huapai",
@@ -78,7 +113,12 @@
    "home": "https://huapai.cw.golf.co.nz",
    "pages": [
     "https://huapai.cw.golf.co.nz/categories-and-fees"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-redwood",
@@ -89,7 +129,12 @@
    "home": "https://www.redwoodparkgolf.co.nz",
    "pages": [
     "https://www.redwoodparkgolf.co.nz/membership-types"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-titirangi",
@@ -98,7 +143,12 @@
    "name": "Titirangi Golf Club",
    "area": "New Lynn",
    "geo": "Titirangi Golf Club, Links Road, Auckland",
-   "home": "https://titirangi.cw.golf.co.nz"
+   "home": "https://titirangi.cw.golf.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-akarana",
@@ -109,7 +159,12 @@
    "home": "https://akarana2.cw.golf.co.nz",
    "pages": [
     "https://akarana2.cw.golf.co.nz/membership-types"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-maungakiekie",
@@ -120,7 +175,12 @@
    "home": "https://maungakiekie.cw.golf.co.nz",
    "pages": [
     "https://maungakiekie.cw.golf.co.nz/membership-categories-and-fees"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-remuera",
@@ -131,7 +191,12 @@
    "home": "https://remueragolfclub.com",
    "pages": [
     "https://remueragolfclub.com/membership"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-raggc",
@@ -139,7 +204,12 @@
    "name": "Royal Auckland & Grange Golf Club",
    "area": "Otahuhu",
    "geo": "Royal Auckland Golf Club, Otahuhu, Auckland",
-   "home": "https://royalauckland.cw.golf.co.nz"
+   "home": "https://royalauckland.cw.golf.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-pakuranga",
@@ -150,7 +220,12 @@
    "home": "https://pakuranga2.cw.golf.co.nz",
    "pages": [
     "https://pakuranga2.cw.golf.co.nz/membership-packages"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-windross",
@@ -158,7 +233,12 @@
    "name": "Windross Farm Golf Club",
    "area": "Manurewa",
    "geo": "Windross Farm Golf Club, Auckland",
-   "home": "https://windross.cw.golf.co.nz"
+   "home": "https://windross.cw.golf.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-pukekohe",
@@ -169,7 +249,12 @@
    "home": "https://pukekohe.cw.golf.co.nz",
    "pages": [
     "https://pukekohe.cw.golf.co.nz/memberships"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-waiheke",
@@ -178,7 +263,12 @@
    "name": "Waiheke Golf Club",
    "area": "Waiheke",
    "geo": "Waiheke Golf Club, Onetangi Road, Waiheke Island",
-   "home": "https://www.waihekegolfclub.co.nz"
+   "home": "https://www.waihekegolfclub.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "g-chamberlain",
@@ -187,7 +277,12 @@
    "area": "Mt Albert",
    "geo": "Chamberlain Park Golf Course, Auckland",
    "home": "https://www.aucklandnz.com/explore/chamberlain-park-golf-course",
-   "note": "오클랜드 시의회 공공 코스. 코스 규모·요금이 바뀌어 왔으니 방문 전 확인하세요."
+   "note": "오클랜드 시의회 공공 코스. 코스 규모·요금이 바뀌어 왔으니 방문 전 확인하세요.",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "s-wakatere",
@@ -198,7 +293,14 @@
    "home": "https://www.wakatere.org.nz",
    "pages": [
     "https://www.wakatere.org.nz/membership"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "s-takapuna",
@@ -209,7 +311,14 @@
    "home": "https://takapunaboating.org.nz",
    "pages": [
     "https://takapunaboating.org.nz/membership-options"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "s-torbay",
@@ -220,7 +329,14 @@
    "home": "https://torbaysailing.club",
    "pages": [
     "https://torbaysailing.club/membership.html"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "s-rayc",
@@ -232,7 +348,14 @@
    "pages": [
     "https://rayc.co.nz/join/",
     "https://rayc.co.nz/renew"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "s-bbyc",
@@ -240,7 +363,14 @@
    "name": "Bucklands Beach Yacht Club",
    "area": "Half Moon Bay",
    "geo": "Bucklands Beach Yacht Club, Auckland",
-   "home": "https://www.bbyc.org.nz"
+   "home": "https://www.bbyc.org.nz",
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "s-westhaven",
@@ -252,7 +382,14 @@
    "pages": [
     "https://www.westhaven.co.nz/media/iaygoyt0/rental-rates-2026-2027.pdf"
    ],
-   "note": "요금은 보트 길이·정박 형태별로 다릅니다. 연회비가 아니라 일·월 요금표예요."
+   "note": "요금은 보트 길이·정박 형태별로 다릅니다. 연회비가 아니라 일·월 요금표예요.",
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "k-aucklandcanoe",
@@ -263,7 +400,12 @@
    "home": "https://aucklandcanoeclub.org.nz",
    "pages": [
     "https://aucklandcanoeclub.org.nz/join-the-club"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": false
   },
   {
    "id": "k-aucklandseakayaks",
@@ -274,7 +416,13 @@
    "home": "https://aucklandseakayaks.rezdy.com",
    "pages": [
     "https://aucklandseakayaks.rezdy.com/catalog/410663/gift-vouchers"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "k-fergs",
@@ -285,7 +433,13 @@
    "home": "https://bookme.co.nz",
    "pages": [
     "https://bookme.co.nz/things-to-do/auckland/activity/rangitoto-volcano-kayaking-adventure-fergs-kayaks/4384"
-   ]
+   ],
+   "ages": [
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "f-redboats",
@@ -296,7 +450,14 @@
    "home": "https://bookme.co.nz",
    "pages": [
     "https://bookme.co.nz/things-to-do/auckland/activity/public-fishing-on-auckland-harbour-the-red-boats/777"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "f-safaris",
@@ -307,7 +468,14 @@
    "home": "https://www.airnewzealand.co.nz",
    "pages": [
     "https://www.airnewzealand.co.nz/activity-deals/auckland/activity/nz-fishing-safaris-4-hour-charter/2842"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "c-mywonderland",
@@ -320,7 +488,13 @@
    "pages": [
     "https://www.aucklandnz.com/explore/my-wonderland"
    ],
-   "note": "실내 놀이터+카페, 입장 후 시간 제한 없이 놀기(양말 필수)."
+   "note": "실내 놀이터+카페, 입장 후 시간 제한 없이 놀기(양말 필수).",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-magicloft",
@@ -332,7 +506,13 @@
    "pages": [
     "https://www.airnewzealand.com/activity-deals/auckland/activity/indoor-playground-magic-loft-browns-bay/125868"
    ],
-   "note": "5세 미만 전용 구역이 있는 대형 실내 놀이터."
+   "note": "5세 미만 전용 구역이 있는 대형 실내 놀이터.",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-inflatable",
@@ -341,7 +521,13 @@
    "area": "Wairau Valley",
    "geo": "Inflatable World, View Road, Glenfield, Auckland",
    "home": null,
-   "note": "대형 에어바운스 실내 놀이터(카페 여부는 확인 필요)."
+   "note": "대형 에어바운스 실내 놀이터(카페 여부는 확인 필요).",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-fields",
@@ -353,7 +539,13 @@
    "pages": [
     "https://www.aucklandforkids.co.nz/playgrounds/fields-kid-friendly-cafe-in-albany/"
    ],
-   "note": "울타리 놀이터가 있는 카페(입장료 없음, 이용 시 음료·식사)."
+   "note": "울타리 놀이터가 있는 카페(입장료 없음, 이용 시 음료·식사).",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "c-playzone",
@@ -364,7 +556,13 @@
    "home": "https://www.bookme.co.nz",
    "pages": [
     "https://wyndham-remarkables.bookme.co.nz/things-to-do/auckland/activity/auckland-adventure-park-kids-playzone-pass/5377"
-   ]
+   ],
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-jumpns",
@@ -375,7 +573,13 @@
    "home": "https://bookme.co.nz",
    "pages": [
     "https://bookme.co.nz/things-to-do/auckland/activity/jump-trampoline-park-north-shore/3700"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-flippin",
@@ -386,7 +590,13 @@
    "home": "https://newzealand.com",
    "pages": [
     "https://newzealand.com/us/plan/business/flippin-fun-trampoline-park"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-wowsite",
@@ -397,7 +607,13 @@
    "home": "https://www.grabone.co.nz",
    "pages": [
     "https://www.grabone.co.nz/auckland/wow-site-play-ground-and-cafe-4"
-   ]
+   ],
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-zoo",
@@ -405,7 +621,15 @@
    "name": "Auckland Zoo (오클랜드 주민 할인)",
    "area": "Western Springs",
    "geo": "Auckland Zoo, Motions Road, Western Springs, Auckland",
-   "home": "https://www.aucklandzoo.co.nz"
+   "home": "https://www.aucklandzoo.co.nz",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "c-motat",
@@ -413,7 +637,15 @@
    "name": "MOTAT (교통·기술 박물관)",
    "area": "Western Springs",
    "geo": "MOTAT, Western Springs, Auckland",
-   "home": "https://www.motat.nz"
+   "home": "https://www.motat.nz",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-museum",
@@ -421,7 +653,14 @@
    "name": "Auckland Museum (오클랜드 주민 무료)",
    "area": "Domain",
    "geo": "Auckland War Memorial Museum, Auckland Domain, Auckland",
-   "home": "https://www.aucklandmuseum.com"
+   "home": "https://www.aucklandmuseum.com",
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "c-kellys",
@@ -432,7 +671,15 @@
    "home": "https://www.newzealand.com",
    "pages": [
     "https://www.newzealand.com/au/plan/business/kelly-tarltons-sea-life-aquarium/"
-   ]
+   ],
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "w-albanypool",
@@ -444,7 +691,15 @@
    "pages": [
     "https://www.aucklandleisure.co.nz/locations/albany-stadium-pool"
    ],
-   "note": "16세 미만 어린이 무료 수영 대상(시의회 무료 수영 정책) — 공식 페이지에서 확인."
+   "note": "16세 미만 어린이 무료 수영 대상(시의회 무료 수영 정책) — 공식 페이지에서 확인.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "w-takapunapool",
@@ -455,7 +710,15 @@
    "home": "https://aucklandleisure.co.nz",
    "pages": [
     "https://aucklandleisure.co.nz/locations/takapuna-pool-and-leisure-centre"
-   ]
+   ],
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "w-glenfieldpool",
@@ -466,7 +729,15 @@
    "home": "https://aucklandleisure.co.nz",
    "pages": [
     "https://aucklandleisure.co.nz/locations/glenfield-pool-and-leisure-centre"
-   ]
+   ],
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "w-parakai",
@@ -477,7 +748,15 @@
    "home": "https://www.bookme.co.nz",
    "pages": [
     "https://www.bookme.co.nz/things-to-do/new-zealand/tahekeroa/activity/hot-pool-entry-parakai-springs-hot-pools-general-entry/4372"
-   ]
+   ],
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "w-autmillennium",
@@ -486,7 +765,14 @@
    "area": "Mairangi Bay",
    "geo": "AUT Millennium, Mairangi Bay, Auckland",
    "home": null,
-   "note": "올림픽 규격 풀과 어린이 수영 교실(요금은 공식 사이트 확인)."
+   "note": "올림픽 규격 풀과 어린이 수영 교실(요금은 공식 사이트 확인).",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult"
+   ],
+   "indoor": true
   },
   {
    "id": "w-parnell",
@@ -498,7 +784,15 @@
    "pages": [
     "https://www.clmnz.co.nz/parnell-baths/pools/"
    ],
-   "note": "뉴질랜드에서 가장 큰 해수 야외 수영장 + 온수 라이도 풀, 가족 스파 풀, 아쿠아 놀이터, 유아 풀. 16세 이하 어린이 무료로 알려져 있어요(공식 확인)."
+   "note": "뉴질랜드에서 가장 큰 해수 야외 수영장 + 온수 라이도 풀, 가족 스파 풀, 아쿠아 놀이터, 유아 풀. 16세 이하 어린이 무료로 알려져 있어요(공식 확인).",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "w-tepid",
@@ -510,7 +804,13 @@
    "pages": [
     "https://aucklandleisure.co.nz/locations/tepid-baths"
    ],
-   "note": "시의회 무료 수영(16세 이하) 대상으로 안내되나 운영사 기준이 다르다는 자료도 있어 방문 전 확인하세요."
+   "note": "시의회 무료 수영(16세 이하) 대상으로 안내되나 운영사 기준이 다르다는 자료도 있어 방문 전 확인하세요.",
+   "ages": [
+    "kid",
+    "teen",
+    "adult"
+   ],
+   "indoor": true
   },
   {
    "id": "w-mtalbert",
@@ -522,7 +822,15 @@
    "pages": [
     "https://clmnz.co.nz/mount-albert-aquatic-centre/prices"
    ],
-   "note": "운영사(Belgravia)는 시의회 16세 이하 무료 수영 정책에 참여하지 않는다고 밝힌 자료가 있어 요금을 확인하세요."
+   "note": "운영사(Belgravia)는 시의회 16세 이하 무료 수영 정책에 참여하지 않는다고 밝힌 자료가 있어 요금을 확인하세요.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "w-stanmore",
@@ -534,7 +842,13 @@
    "pages": [
     "https://www.aucklandleisure.co.nz/locations/stanmore-bay-pool-and-leisure-centre"
    ],
-   "note": "약 300㎡ 해변 테마 스플래시 패드(분수·미스트·큰 물통) 보유."
+   "note": "약 300㎡ 해변 테마 스플래시 패드(분수·미스트·큰 물통) 보유.",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": true
   },
   {
    "id": "t-jungshin",
@@ -546,7 +860,13 @@
    "pages": [
     "https://members.itkd.co.nz/locations/auckland-north.php"
    ],
-   "note": "글렌필드 칼리지(60 Kaipatiki Rd) 월·수 어린이반 4:30~5:20pm, 입문·가족반 5:20~6:30pm. 무료 체험 수업 신청 가능(공식 사이트). 노스쇼어 전역(알바니·타카푸나·브라운스베이 등) 수강생 대상."
+   "note": "글렌필드 칼리지(60 Kaipatiki Rd) 월·수 어린이반 4:30~5:20pm, 입문·가족반 5:20~6:30pm. 무료 체험 수업 신청 가능(공식 사이트). 노스쇼어 전역(알바니·타카푸나·브라운스베이 등) 수강생 대상.",
+   "ages": [
+    "kid",
+    "teen",
+    "adult"
+   ],
+   "indoor": true
   },
   {
    "id": "t-sejong",
@@ -555,7 +875,13 @@
    "area": "Browns Bay",
    "geo": "Sejong Taekwondo, Browns Bay, Auckland",
    "home": null,
-   "note": "브라운스베이에서 25년째 운영(검색 정보) — 어린이 수강료는 도장에 직접 문의하세요."
+   "note": "브라운스베이에서 25년째 운영(검색 정보) — 어린이 수강료는 도장에 직접 문의하세요.",
+   "ages": [
+    "kid",
+    "teen",
+    "adult"
+   ],
+   "indoor": true
   },
   {
    "id": "t-tamaki",
@@ -564,7 +890,13 @@
    "area": "Takapuna",
    "geo": "Tamaki Taekwon-Do Academy, Takapuna, Auckland",
    "home": null,
-   "note": "타카푸나 도장(비영리 운영으로 소개) — 수강료·체험 여부는 도장에 직접 문의하세요."
+   "note": "타카푸나 도장(비영리 운영으로 소개) — 수강료·체험 여부는 도장에 직접 문의하세요.",
+   "ages": [
+    "kid",
+    "teen",
+    "adult"
+   ],
+   "indoor": true
   },
   {
    "id": "t-nsu",
@@ -576,7 +908,12 @@
    "pages": [
     "https://nsu.org.nz/register"
    ],
-   "note": "겨울 시즌 등록, 정원이 차면 대기 명단."
+   "note": "겨울 시즌 등록, 정원이 차면 대기 명단.",
+   "ages": [
+    "kid",
+    "teen"
+   ],
+   "indoor": false
   },
   {
    "id": "t-albanyunited",
@@ -588,7 +925,12 @@
    "pages": [
     "https://albanyunited.org/registration-and-info"
    ],
-   "note": "5~8세 First Kicks·Fun Football (토요일 오전)."
+   "note": "5~8세 First Kicks·Fun Football (토요일 오전).",
+   "ages": [
+    "baby",
+    "kid"
+   ],
+   "indoor": false
   },
   {
    "id": "t-bays",
@@ -600,7 +942,12 @@
    "pages": [
     "https://www.baysrugby.com/juniors/about"
    ],
-   "note": "2026 시즌 유소년 등록은 마감, 2027 시즌은 2월쯤 등록 시작(클럽 안내)."
+   "note": "2026 시즌 유소년 등록은 마감, 2027 시즌은 2월쯤 등록 시작(클럽 안내).",
+   "ages": [
+    "kid",
+    "teen"
+   ],
+   "indoor": false
   },
   {
    "id": "t-nsrugby",
@@ -611,7 +958,12 @@
    "home": "https://northshorerugby.co.nz",
    "pages": [
     "https://northshorerugby.co.nz/Junior-Club/Junior-Registration-1"
-   ]
+   ],
+   "ages": [
+    "kid",
+    "teen"
+   ],
+   "indoor": false
   },
   {
    "id": "x-tamakidrive",
@@ -621,7 +973,15 @@
    "geo": "Mission Bay, Auckland",
    "home": "https://ourauckland.aucklandcouncil.govt.nz/news/2023/12/three-shared-paths-that-can-be-enjoyed-by-everyone",
    "no_fees": true,
-   "note": "평탄해서 유모차·자전거에 좋은 대표 코스(자전거·롤러 이용자와 공유라 주의). 웨스트헤이븐~세인트 헬리어스 약 13km 자전거길 안내도 있어요."
+   "note": "평탄해서 유모차·자전거에 좋은 대표 코스(자전거·롤러 이용자와 공유라 주의). 웨스트헤이븐~세인트 헬리어스 약 13km 자전거길 안내도 있어요.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "x-devonport",
@@ -631,7 +991,15 @@
    "geo": "Narrow Neck Beach, Devonport, Auckland",
    "home": "https://ourauckland.aucklandcouncil.govt.nz/news/2023/12/three-shared-paths-that-can-be-enjoyed-by-everyone",
    "no_fees": true,
-   "note": "조용한 주택가 도로·해안 보드워크·전용 공유길로 이어져 유모차에 무난한 코스(공식 안내)."
+   "note": "조용한 주택가 도로·해안 보드워크·전용 공유길로 이어져 유모차에 무난한 코스(공식 안내).",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "x-takapunamilford",
@@ -641,7 +1009,14 @@
    "geo": "Takapuna Beach, Auckland",
    "home": "https://at.govt.nz/media/318824/AT-NSCC-Brochure-Map-TakapunaMilfordWalk.pdf",
    "no_fees": true,
-   "note": "해변과 바위를 따라 걷는 코스로 일부 구간은 썰물 때만 가능 — 유모차는 어렵고 조석 확인 필요(공식 안내)."
+   "note": "해변과 바위를 따라 걷는 코스로 일부 구간은 썰물 때만 가능 — 유모차는 어렵고 조석 확인 필요(공식 안내).",
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "x-coastalwalk",
@@ -651,7 +1026,14 @@
    "geo": "Long Bay Regional Park, Auckland",
    "home": "https://aucklandcouncil.govt.nz/en/parks-recreation/get-outdoors/find-a-walk.html",
    "no_fees": true,
-   "note": "롱 베이 리저널 파크에서 해변·주택가를 지나 데본포트까지 이어지는 장거리 코스 — 구간별로 나눠 걷기 좋아요. 구간 난이도는 시의회 안내에서 확인하세요."
+   "note": "롱 베이 리저널 파크에서 해변·주택가를 지나 데본포트까지 이어지는 장거리 코스 — 구간별로 나눠 걷기 좋아요. 구간 난이도는 시의회 안내에서 확인하세요.",
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   },
   {
    "id": "x-tamakipath",
@@ -661,7 +1043,14 @@
    "geo": "Tamaki Path, Glen Innes, Auckland",
    "home": "https://bikeauckland.org.nz/?p=40452",
    "no_fees": true,
-   "note": "전용 공유길 — 구간·난이도는 공식 안내에서 확인하세요."
+   "note": "전용 공유길 — 구간·난이도는 공식 안내에서 확인하세요.",
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
   }
  ]
 }

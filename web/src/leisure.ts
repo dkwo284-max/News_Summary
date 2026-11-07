@@ -17,6 +17,7 @@ interface Rating { v: number; n?: number; asof?: string }
 interface Facility {
   id: string; kind: Kind; name: string; area?: string; ll: [number, number] | null; home?: string; gmaps: string;
   fees: Fee[]; status?: string; season?: string; note?: string; checked?: string; rating?: Rating; src?: string[];
+  ages?: Age[]; indoor?: boolean;
 }
 interface Change { date: string; id: string; name: string; field: string; old: number | string; new: number | string }
 interface LeisureData { updated_at: string; source: string; facilities: Facility[]; changes?: Change[] }
@@ -47,6 +48,26 @@ const SPOTS: { key: SpotType; label: string; icon: string; color: string; hint: 
   { key: "playground", label: "놀이터", icon: "🛝", color: "#db2777", hint: "시의회·공원의 이름 있는 놀이터예요(대부분 무료). 설비·그늘·화장실은 현장 상황이 달라요." },
   { key: "splash", label: "스플래시·워터 플레이", icon: "💦", color: "#0891b2", hint: "물놀이 놀이터예요. 보통 여름철(11~3월)·날씨 좋은 날 운영하니 가기 전에 운영 여부를 확인하세요." },
 ];
+type Age = "baby" | "kid" | "teen" | "adult" | "family";
+const AGES: { key: Age | "all"; label: string; icon: string }[] = [
+  { key: "all", label: "전체", icon: "✨" },
+  { key: "baby", label: "영유아 0~4", icon: "👶" },
+  { key: "kid", label: "초등 5~12", icon: "🧒" },
+  { key: "teen", label: "청소년 13~17", icon: "🧑‍🎓" },
+  { key: "family", label: "가족 함께", icon: "👨‍👩‍👧" },
+  { key: "adult", label: "성인", icon: "🧑" },
+];
+const AGE_SHORT: Record<Age, string> = { baby: "👶영유아", kid: "🧒초등", teen: "🧑‍🎓청소년", adult: "🧑성인", family: "👨‍👩‍👧가족" };
+/** 카드 섹션 묶음 (종류를 활동 성격별로) */
+const GROUPS: { key: string; label: string; icon: string; kinds: Kind[] }[] = [
+  { key: "play", label: "실내 놀이·가족 나들이", icon: "🧸", kinds: ["kids"] },
+  { key: "water", label: "물놀이·수영", icon: "💦", kinds: ["swim"] },
+  { key: "sport", label: "어린이 스포츠·태권도", icon: "🥋", kinds: ["sports"] },
+  { key: "outdoor", label: "걷기·자전거 코스", icon: "🚶", kinds: ["walk"] },
+  { key: "sea", label: "요트·카약·낚시", icon: "⛵", kinds: ["sailing", "kayak", "fishing"] },
+];
+const FAV_KEY = "daily-brief:leisure-fav";
+const AGE_KEY = "daily-brief:leisure-age";
 const CBD: [number, number] = [-36.8485, 174.7633];
 const PERIOD: Record<string, string> = { year: "/년", season: "/시즌", month: "/월", week: "/주", day: "/일", hour: "/시간", round: "/라운드", once: " (1회)", person: "/인" };
 const STATUS: Record<string, string> = { open: "가입 가능", waitlist: "대기 명단", closed: "신규 마감", unknown: "미확인" };
@@ -88,6 +109,39 @@ const yearly = (f: Facility, kind: string): number | null => {
   return x && (x.period === "year" || x.period === "season") ? x.amount : null;
 };
 const kindInfo = (k: Kind) => KINDS.find((x) => x.key === k) ?? KINDS[0];
+const DEFAULT_AGES: Record<Kind, Age[]> = {
+  golf: ["teen", "adult"], sailing: ["kid", "teen", "adult", "family"], kayak: ["teen", "adult", "family"], fishing: ["kid", "teen", "adult", "family"],
+  kids: ["baby", "kid", "family"], swim: ["baby", "kid", "teen", "adult", "family"], sports: ["kid", "teen"], walk: ["baby", "kid", "teen", "adult", "family"],
+};
+const agesOf = (f: Facility): Age[] => (f.ages?.length ? f.ages : DEFAULT_AGES[f.kind]);
+const isIndoor = (f: Facility): boolean => f.indoor ?? (f.kind === "kids" || f.kind === "sports");
+const ENTRY_KINDS = new Set(["child", "adult_entry", "lesson", "family_pass", "tour", "hire", "berth", "social"]);
+/** 카드에 붙일 가격 배지: 무료 / $N~ (입장·수강 기준 최저가) / 연 $N (골프·클럽) / 요금 미확인 */
+export function priceBadge(f: Facility): { text: string; cls: string } {
+  if (f.kind === "walk") return { text: "무료", cls: "free" };
+  const note = f.note ?? "";
+  if (/(어린이|16세).{0,24}무료/.test(note) && !/않|참여하지|다르/.test(note)) return { text: "어린이 무료", cls: "free" };
+  const entry = f.fees.filter((x) => ENTRY_KINDS.has(x.kind) && x.period !== "year" && x.amount > 0).map((x) => x.amount);
+  if (entry.length) return { text: `$${num(Math.min(...entry))}~`, cls: Math.min(...entry) <= 10 ? "cheap" : "" };
+  const y = yearly(f, "adult") ?? yearly(f, "social") ?? yearly(f, "family");
+  if (y != null) return { text: `연 $${num(y)}`, cls: "" };
+  if (/무료/.test(note) && !/않|참여하지|다르/.test(note)) return { text: "무료/할인", cls: "free" };
+  return { text: "요금 미확인", cls: "na" };
+}
+export function loadFavs(): string[] {
+  try {
+    return JSON.parse(localStorage.getItem(FAV_KEY) || "[]") as string[];
+  } catch {
+    return [];
+  }
+}
+function saveFavs(v: string[]): void {
+  try {
+    localStorage.setItem(FAV_KEY, JSON.stringify(v));
+  } catch {
+    /* 무시 */
+  }
+}
 
 /** 골프 마커 색: 성인 연회비 구간(저·중·고) */
 export function golfTier(fee: number | null): { color: string; label: string } {
@@ -134,6 +188,29 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   let selected: { fac?: string; spot?: number } = {};
   let household: "adult" | "couple" | "family" = "adult";
   let years = 5;
+  let age: Age | "all" = (() => {
+    try {
+      const a = localStorage.getItem(AGE_KEY) as Age | "all" | null;
+      return a && AGES.some((x) => x.key === a) ? a : "all";
+    } catch {
+      return "all";
+    }
+  })();
+  let freeOnly = false, indoorOnly = false, nearOnly = false, viewOnly = true;
+  let favs = loadFavs();
+  const cmp = new Set<string>();
+  let rainy: boolean | null = null; // 오늘 비·쌀쌀한 날씨인지 (날씨 추천에 사용, 예보 로드 후 채움)
+  const visible = (f: Facility): boolean => {
+    if (!on.has(f.kind)) return false;
+    if (age !== "all" && !agesOf(f).includes(age)) return false;
+    if (freeOnly && !["free", "cheap"].includes(priceBadge(f).cls)) return false;
+    if (indoorOnly && !isIndoor(f)) return false;
+    if (nearOnly) {
+      const d = dist(f.ll);
+      if (d == null || d > 15) return false;
+    }
+    return true;
+  };
 
   const money = (amount: number, period = "") => {
     const nz = `$${num(amount)}${PERIOD[period] ?? ""}`;
@@ -164,11 +241,15 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   const sizeBtn = h("button", { type: "button", class: "chip", "aria-pressed": "false" }, "⤢ 지도 크게");
   const stage = h("div", { class: "eth-stage leisure-stage" }, mapEl, panel);
   const legend = h("p", { class: "gp-legend" });
+  const settingsBox = h("div", {});
+  const picksBox = h("div", {});
+  const favBox = h("div", {});
+  const cmpBox = h("div", {});
   const golfBox = h("div", {});
   const costBox = h("div", {});
   const listBox = h("div", {});
   const missBox = h("div", {});
-  root.append(controls, h("div", { class: "leisure-mapbar" }, sizeBtn), stage, legend, golfBox, costBox, listBox, missBox);
+  root.append(controls, picksBox, favBox, cmpBox, settingsBox, h("div", { class: "leisure-mapbar" }, sizeBtn), stage, legend, listBox, golfBox, costBox, missBox);
 
   // ── 지도 ──
   type Leaflet = typeof import("leaflet");
@@ -180,6 +261,11 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
 
   const facColor = (f: Facility) => (f.kind === "golf" ? golfTier(yearly(f, "adult")).color : kindInfo(f.kind).color);
 
+  function facIcon(f: Facility, sel: boolean) {
+    const fav = favs.includes(f.id) ? '<b class="lm-fav">★</b>' : "";
+    return L!.divIcon({ className: "lm-wrap", html: `<span class="lm${sel ? " sel" : ""}" style="background:${facColor(f)}">${kindInfo(f.kind).icon}</span>${fav}`, iconSize: [30, 30], iconAnchor: [15, 15] });
+  }
+
   function drawMap() {
     if (!L || !map) return;
     layer?.remove();
@@ -187,23 +273,39 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     const group = L.layerGroup();
     const pts: [number, number][] = [];
     for (const f of facilities) {
-      if (!on.has(f.kind) || !f.ll) continue;
+      if (!visible(f) || !f.ll) continue;
       const sel = selected.fac === f.id;
-      const m = L.circleMarker(f.ll, { radius: sel ? 11 : 8, color: sel ? "#111827" : "#ffffff", weight: sel ? 3 : 1.5, fillColor: facColor(f), fillOpacity: 0.95 });
-      m.bindTooltip(`${kindInfo(f.kind).icon} ${f.name}`, { sticky: true });
+      const m = L.marker(f.ll, { icon: facIcon(f, sel), zIndexOffset: sel ? 1000 : 0, keyboard: true, title: f.name });
+      m.bindTooltip(`${kindInfo(f.kind).icon} ${f.name} · ${priceBadge(f).text}`, { sticky: true });
       m.on("click", () => select({ fac: f.id }, false));
       m.addTo(group);
       pts.push(f.ll);
     }
-    spots.forEach((s, i) => {
-      if (!spotOn.has(s.t)) return;
-      const info = SPOTS.find((x) => x.key === s.t)!;
+    // 장소(놀이터·램프·해변 등)는 많아서 축소 상태에서는 칸으로 묶어 개수로 표시
+    const z = map.getZoom();
+    const cell = z >= 14 ? 0 : 360 / 2 ** z * 0.28;
+    const cells = new Map<string, { i: number; s: Spot }[]>();
+    spots.forEach((sp, i) => {
+      if (!spotOn.has(sp.t)) return;
+      const key = cell ? `${Math.floor(sp.ll[0] / cell)}:${Math.floor(sp.ll[1] / cell)}` : `u${i}`;
+      cells.set(key, [...(cells.get(key) ?? []), { i, s: sp }]);
+    });
+    for (const list of cells.values()) {
+      if (list.length > 1) {
+        const lat = list.reduce((a, x) => a + x.s.ll[0], 0) / list.length, lon = list.reduce((a, x) => a + x.s.ll[1], 0) / list.length;
+        const m = L.marker([lat, lon], { icon: L.divIcon({ className: "lm-wrap", html: `<span class="lm-cluster">${list.length}</span>`, iconSize: [28, 28], iconAnchor: [14, 14] }) });
+        m.on("click", () => map!.fitBounds(L!.latLngBounds(list.map((x) => x.s.ll)).pad(0.3), { maxZoom: 15 }));
+        m.addTo(group);
+        continue;
+      }
+      const { i, s: sp } = list[0];
+      const info = SPOTS.find((x) => x.key === sp.t)!;
       const sel = selected.spot === i;
-      const m = L!.circleMarker(s.ll, { radius: sel ? 9 : 5, color: sel ? "#111827" : "#ffffff", weight: sel ? 3 : 1, fillColor: info.color, fillOpacity: 0.85 });
-      m.bindTooltip(`${info.icon} ${s.n}`, { sticky: true });
+      const m = L.circleMarker(sp.ll, { radius: sel ? 9 : 6, color: sel ? "#111827" : "#ffffff", weight: sel ? 3 : 1.2, fillColor: info.color, fillOpacity: 0.9 });
+      m.bindTooltip(`${info.icon} ${sp.n}`, { sticky: true });
       m.on("click", () => select({ spot: i }, false));
       m.addTo(group);
-    });
+    }
     group.addTo(map);
     layer = group;
     if (radius > 0) ring = L.circle(origin(), { radius: radius * 1000, color: "#2563eb", weight: 1.5, fillOpacity: 0.05, dashArray: "6 6" }).addTo(map);
@@ -217,6 +319,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     selected = sel;
     renderPanel();
     renderGolf();
+    renderSections();
     drawMap();
     if (pan && map) {
       const ll = sel.fac ? facilities.find((f) => f.id === sel.fac)?.ll : sel.spot != null ? spots[sel.spot]?.ll : null;
@@ -345,14 +448,37 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     krwBox.checked = krw;
     krwBox.disabled = !o.fx;
     krwBox.addEventListener("change", () => { krw = krwBox.checked; renderAll(); });
+    const ageChips = AGES.map((a) => {
+      const n = facilities.filter((f) => (a.key === "all" || agesOf(f).includes(a.key)) && on.has(f.kind)).length;
+      const b = h("button", { type: "button", class: "chip age-chip", "aria-pressed": String(age === a.key) }, `${a.icon} ${a.label}`, h("small", {}, ` ${n}`));
+      b.addEventListener("click", () => {
+        age = a.key;
+        try { localStorage.setItem(AGE_KEY, age); } catch { /* 무시 */ }
+        renderAll();
+      });
+      return b;
+    });
+    const qf = (label: string, on_: boolean, set: (v: boolean) => void) => {
+      const b = h("button", { type: "button", class: "chip quick", "aria-pressed": String(on_) }, label);
+      b.addEventListener("click", () => { set(!on_); renderAll(); });
+      return b;
+    };
     controls.replaceChildren(
+      h("div", { class: "age-row", role: "group", "aria-label": "연령대" }, h("span", { class: "eth-rowlabel" }, "누가 가나요?"), ...ageChips),
+      h("div", { class: "chips", role: "group", "aria-label": "빠른 필터" },
+        qf("🆓 무료·저렴만", freeOnly, (v) => (freeOnly = v)), qf("☔ 실내만 (비 와도)", indoorOnly, (v) => (indoorOnly = v)),
+        qf("📍 15km 이내", nearOnly, (v) => (nearOnly = v)), qf("🗺️ 지도 영역만 목록에", viewOnly, (v) => (viewOnly = v))));
+    // 시설 종류·장소 레이어·거리 기준은 추천·즐겨찾기 아래 '지도 설정'으로 (펼쳐 둠)
+    const det = h("details", { class: "lset", open: "" }, h("summary", {}, "🗺️ 지도 설정 — 시설 종류 · 장소 레이어 · 거리 기준"),
       h("div", { class: "chips", role: "group", "aria-label": "표시할 시설" }, ...kindChips),
       h("div", { class: "chips", role: "group", "aria-label": "표시할 장소" }, h("span", { class: "eth-rowlabel" }, "장소"), ...spotChips,
         spots.length ? null : h("small", { class: "muted" }, " (장소 데이터는 Actions → Fishing / kayak / swim spots 실행 후 표시)")),
       h("div", { class: "leisure-row" }, baseSel, radSel, sortSel,
         h("label", { class: "leisure-krw", for: "leisure-krw" }, krwBox, o.fx ? ` 원화 환산 (1NZD≈${Math.round(o.fx).toLocaleString("ko-KR")}원)` : " 원화 환산(환율 없음)")));
+    det.open = settingsBox.querySelector("details")?.open ?? true;
+    settingsBox.replaceChildren(det);
     const items = [
-      ...KINDS.filter((k) => on.has(k.key) && k.key !== "golf").map((k) => `<i style="background:${k.color}"></i>${k.icon} ${k.label}`),
+      ...KINDS.filter((k) => on.has(k.key) && k.key !== "golf" && facilities.some((f) => f.kind === k.key && visible(f))).map((k) => `<i style="background:${k.color}"></i>${k.icon} ${k.label}`),
       ...SPOTS.filter((s) => spotOn.has(s.key)).map((s) => `<i style="background:${s.color}"></i>${s.icon} ${s.label}`),
     ];
     if (on.has("golf")) {
@@ -364,7 +490,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
 
   // ── 골프 표 ──
   const sortedGolf = (): Facility[] => {
-    const items = facilities.filter((f) => f.kind === "golf");
+    const items = facilities.filter((f) => f.kind === "golf" && visible(f));
     const val = (f: Facility): number => {
       if (sort === "fee") return yearly(f, "adult") ?? Number.POSITIVE_INFINITY;
       return dist(f.ll) ?? Number.POSITIVE_INFINITY;
@@ -373,7 +499,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   };
 
   function renderGolf() {
-    if (!on.has("golf") || !facilities.some((f) => f.kind === "golf")) { golfBox.replaceChildren(); return; }
+    if (!on.has("golf") || !facilities.some((f) => f.kind === "golf" && visible(f))) { golfBox.replaceChildren(); return; }
     const items = sortedGolf();
     const head = h("tr", {}, ...["클럽", "거리", "성인 1", "입회비", "사이트"].map((t) => h("th", { scope: "col" }, t)));
     const body = items.map((f) => {
@@ -398,7 +524,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   // ── 가입 비용 비교 ──
   function renderCost() {
     if (!facilities.length) { costBox.replaceChildren(); return; }
-    const pool = facilities.filter((f) => (f.kind === "golf" || f.kind === "sailing") && on.has(f.kind));
+    const pool = facilities.filter((f) => (f.kind === "golf" || f.kind === "sailing") && visible(f));
     const rows = pool.map((f) => ({ f, c: totalCost(f, household, years) })).filter((x): x is { f: Facility; c: NonNullable<ReturnType<typeof totalCost>> } => x.c != null)
       .sort((a, b) => a.c.total - b.c.total);
     const hsel = h("select", { "aria-label": "가입 유형" }, h("option", { value: "adult" }, "성인 1인"), h("option", { value: "couple" }, "커플(성인 2인)"), h("option", { value: "family" }, "가족"));
@@ -425,28 +551,140 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
       h("p", { class: "board-note" }, "총액 = 연회비 × 기간 + 입회비 1회(성인 1인 입회비 기준 — 커플·가족 입회비는 클럽마다 달라 문의가 필요해요). 물가·요금 인상, 카트·라운드·행사 비용은 빼고, 대기 명단이면 가입까지 시간이 걸려요.")));
   }
 
-  // ── 나머지 목록·낚시 규칙·위치 미확인 ──
-  function renderLists() {
-    const others = facilities.filter((f) => f.kind !== "golf" && on.has(f.kind));
-    const order = ["adult", "couple", "family", "lesson", "child", "family_pass", "adult_entry", "lesson", "social", "joining", "tour", "berth", "hire", "student", "junior", "greenfee18", "greenfee9", "other"];
-    const rank = (x: Fee) => (order.includes(x.kind) ? order.indexOf(x.kind) : order.length);
-    const cards = others.map((f) => {
-      const d = dist(f.ll);
-      const top = [...f.fees].sort((a, b) => rank(a) - rank(b)).slice(0, 3).map((x) => `${x.label} ${money(x.amount, x.period)}`).join(" · ");
-      const b = h("button", { type: "button", class: "leisure-name" }, `${kindInfo(f.kind).icon} ${f.name}`);
-      b.addEventListener("click", () => select({ fac: f.id }));
-      return h("li", {}, b, h("small", { class: "muted" }, ` ${f.area ?? ""}${d != null ? ` · ${d.toFixed(1)}km` : ""}`), h("div", {}, top || h("span", { class: "muted" }, "요금 미확인")));
-    });
-    listBox.replaceChildren(
-      others.length ? h("details", { class: "hood-card eth-mine" }, h("summary", {}, `⛵🛶🎣🧸🏊🥋🚶 요트·카약·낚시·키즈·수영·스포츠·걷기 목록 (${others.length}곳, 눌러서 펼치기)`), h("ul", { class: "leisure-fees leisure-list" }, ...cards)) : h("span", {}),
-      on.has("fishing") ? fishingRules() : h("span", {}));
-    const missing = facilities.filter((f) => on.has(f.kind) && !f.ll);
+  // ── 카드 ──
+  const feeOrder = ["adult", "couple", "family", "lesson", "child", "family_pass", "adult_entry", "social", "joining", "tour", "berth", "hire", "student", "junior", "greenfee18", "greenfee9", "other"];
+  const feeRank = (x: Fee) => (feeOrder.includes(x.kind) ? feeOrder.indexOf(x.kind) : feeOrder.length);
+  const changedRecently = (id: string) => (data?.changes ?? []).some((c) => c.id === id && Date.now() - new Date(c.date).getTime() < 120 * 86400000);
+
+  function toggleFav(id: string) {
+    favs = favs.includes(id) ? favs.filter((x) => x !== id) : [...favs, id];
+    saveFavs(favs);
+    renderAll();
+  }
+  function toggleCmp(id: string) {
+    if (cmp.has(id)) cmp.delete(id);
+    else if (cmp.size < 3) cmp.add(id);
+    renderCompare();
+    renderSections();
+    renderFavs();
+  }
+
+  function card(f: Facility): HTMLElement {
+    const d = dist(f.ll), pb = priceBadge(f), ki = kindInfo(f.kind);
+    const top = [...f.fees].sort((a, b) => feeRank(a) - feeRank(b)).slice(0, 2).map((x) => `${x.label.replace(/\s*\(.*?\)\s*/g, " ").trim().slice(0, 26)} ${money(x.amount, x.period)}`);
+    const name = h("button", { type: "button", class: "lc-name" }, f.name);
+    name.addEventListener("click", () => select({ fac: f.id }));
+    const star = h("button", { type: "button", class: "lc-star", "aria-pressed": String(favs.includes(f.id)), "aria-label": `${f.name} 즐겨찾기`, title: "즐겨찾기" }, favs.includes(f.id) ? "★" : "☆");
+    star.addEventListener("click", () => toggleFav(f.id));
+    const box = h("input", { type: "checkbox", "aria-label": `${f.name} 비교에 담기` });
+    box.checked = cmp.has(f.id);
+    box.disabled = !cmp.has(f.id) && cmp.size >= 3;
+    box.addEventListener("change", () => toggleCmp(f.id));
+    const ages = agesOf(f);
+    return h("article", { class: `lcard${selected.fac === f.id ? " sel" : ""}`, style: `--c:${ki.color}` },
+      h("div", { class: "lc-top" }, h("span", { class: "lc-ico", "aria-hidden": "true" }, ki.icon), name, star),
+      h("div", { class: "lc-meta" }, `${f.area ?? ""}${d != null ? ` · ${d.toFixed(1)}km` : ""}`),
+      h("div", { class: "lc-badges" }, h("span", { class: `pb ${pb.cls}` }, pb.text), h("span", { class: "pb io" }, isIndoor(f) ? "🏠 실내" : "🌳 야외"),
+        f.status && f.status !== "open" && f.status !== "unknown" ? h("span", { class: "pb warn" }, STATUS[f.status]) : null,
+        changedRecently(f.id) ? h("span", { class: "pb warn" }, "변경됨") : null),
+      h("div", { class: "lc-ages" }, ...ages.filter((a) => a !== "adult" || ages.length < 3).map((a) => h("span", { class: "age-b" }, AGE_SHORT[a]))),
+      top.length ? h("ul", { class: "lc-fees" }, ...top.map((t) => h("li", {}, t))) : null,
+      h("label", { class: "lc-cmp" }, box, " 비교"));
+  }
+
+  function inView(f: Facility): boolean {
+    if (!viewOnly || !map || !f.ll) return true;
+    return map.getBounds().contains(f.ll);
+  }
+
+  function renderSections() {
+    const blocks: Node[] = [];
+    for (const g of GROUPS) {
+      const all = facilities.filter((f) => g.kinds.includes(f.kind) && visible(f));
+      if (!all.length) continue;
+      const shown = all.filter(inView).sort((a, b) => (dist(a.ll) ?? 1e9) - (dist(b.ll) ?? 1e9));
+      blocks.push(h("details", { class: "lgroup", open: "" },
+        h("summary", {}, `${g.icon} ${g.label}`, h("small", {}, ` ${shown.length}${shown.length !== all.length ? `/${all.length}` : ""}곳`)),
+        shown.length ? h("div", { class: "lgrid" }, ...shown.map(card)) : h("p", { class: "muted" }, "지도에 보이는 영역에는 없어요. 지도를 움직이거나 “지도 영역만 목록에”를 꺼 보세요."),
+        g.kinds.includes("fishing") && on.has("fishing") ? fishingRules() : null));
+    }
+    // 가까운 놀이터·물놀이 (장소 데이터)
+    if (spots.length && (age === "all" || ["baby", "kid", "family"].includes(age))) {
+      const near = spots.map((sp, i) => ({ sp, i, d: dist(sp.ll) ?? 1e9 })).filter((x) => x.sp.t === "playground" || x.sp.t === "splash").sort((a, b) => a.d - b.d).slice(0, 6);
+      if (near.length) {
+        blocks.push(h("details", { class: "lgroup", open: "" }, h("summary", {}, "🛝 가까운 놀이터·물놀이 (무료)", h("small", {}, ` ${near.length}곳`)),
+          h("div", { class: "lgrid" }, ...near.map(({ sp, i, d }) => {
+            const info = SPOTS.find((x) => x.key === sp.t)!;
+            const b = h("button", { type: "button", class: "lc-name" }, sp.n);
+            b.addEventListener("click", () => { spotOn.add(sp.t); select({ spot: i }); renderControls(); });
+            return h("article", { class: "lcard", style: `--c:${info.color}` }, h("div", { class: "lc-top" }, h("span", { class: "lc-ico" }, info.icon), b),
+              h("div", { class: "lc-meta" }, `${info.label} · ${d.toFixed(1)}km`), h("div", { class: "lc-badges" }, h("span", { class: "pb free" }, "무료"), h("span", { class: "pb io" }, "🌳 야외")));
+          }))));
+      }
+    }
+    if (!blocks.length) blocks.push(h("section", { class: "hood-card" }, h("p", { class: "muted" }, "조건에 맞는 시설이 없어요. 연령대나 필터를 바꿔 보세요.")));
+    listBox.replaceChildren(...blocks);
+    const missing = facilities.filter((f) => visible(f) && !f.ll);
     missBox.replaceChildren(missing.length ? h("section", { class: "hood-card" }, h("h2", {}, "📍 지도 위치를 못 찾은 곳"),
       h("ul", { class: "leisure-fees" }, ...missing.map((f) => {
         const b = h("button", { type: "button", class: "leisure-name" }, `${kindInfo(f.kind).icon} ${f.name}`);
         b.addEventListener("click", () => select({ fac: f.id }, false));
         return h("li", {}, b, h("small", { class: "muted" }, ` ${f.area ?? ""}`), " ", o.link(f.gmaps, "지도에서 찾기"));
       }))) : h("span", {}));
+  }
+
+  // ── 오늘 추천 (날씨 기반) ──
+  function renderPicks() {
+    if (rainy == null) { picksBox.replaceChildren(); return; }
+    const pool = facilities.filter((f) => f.kind !== "golf" && visible(f) && f.status !== "closed");
+    const score = (f: Facility) => {
+      const fit = rainy ? (isIndoor(f) ? 0 : 5) : (f.kind === "walk" || f.kind === "swim" || f.kind === "kids" ? 0 : 1) + (isIndoor(f) ? 1 : 0);
+      const pb = priceBadge(f);
+      return fit * 100 + (dist(f.ll) ?? 40) + (pb.cls === "free" ? -8 : pb.cls === "cheap" ? -4 : 0);
+    };
+    const picks = pool.filter((f) => (rainy ? isIndoor(f) : true)).sort((a, b) => score(a) - score(b)).slice(0, 3);
+    if (!picks.length) { picksBox.replaceChildren(); return; }
+    const ageLabel = AGES.find((a) => a.key === age)?.label ?? "전체";
+    picksBox.replaceChildren(h("section", { class: "hood-card picks" },
+      h("h2", {}, rainy ? "☔ 오늘은 실내로 — 추천 3곳" : "☀️ 오늘 나가기 좋아요 — 추천 3곳"),
+      h("p", { class: "muted" }, `${ageLabel} 기준 · ${rainy ? "비 또는 쌀쌀한 날씨라 실내 시설 위주" : "날씨가 괜찮아 야외·물놀이 포함"} · ${base || "시내"}에서 가까운 순`),
+      h("div", { class: "lgrid" }, ...picks.map(card))));
+  }
+
+  // ── 즐겨찾기 · 비교 ──
+  function renderFavs() {
+    const list = favs.map((id) => facilities.find((f) => f.id === id)).filter((f): f is Facility => !!f);
+    favBox.replaceChildren(list.length ? h("section", { class: "hood-card" }, h("h2", {}, `⭐ 내 즐겨찾기 (${list.length})`),
+      h("div", { class: "lgrid" }, ...list.map(card)), h("p", { class: "muted" }, "이 기기에만 저장돼요. 카드의 “비교”를 2~3곳 체크하면 아래에 나란히 비교해 줘요.")) : h("span", {}));
+  }
+
+  function renderCompare() {
+    const list = [...cmp].map((id) => facilities.find((f) => f.id === id)).filter((f): f is Facility => !!f);
+    if (list.length < 2) {
+      cmpBox.replaceChildren(list.length === 1 ? h("p", { class: "muted lc-hint" }, "비교하려면 카드에서 한 곳 이상 더 “비교”를 체크하세요 (최대 3곳).") : h("span", {}));
+      return;
+    }
+    const row = (label: string, fn: (f: Facility) => string | Node) => h("tr", {}, h("th", { scope: "row" }, label), ...list.map((f) => h("td", {}, fn(f))));
+    const topFee = (f: Facility, kinds: string[]) => {
+      const x = f.fees.find((y) => kinds.includes(y.kind));
+      return x ? money(x.amount, x.period) : "—";
+    };
+    const clear = h("button", { type: "button", class: "link-btn" }, "비교 지우기");
+    clear.addEventListener("click", () => { cmp.clear(); renderCompare(); renderSections(); renderFavs(); });
+    cmpBox.replaceChildren(h("section", { class: "hood-card" }, h("h2", {}, "⚖️ 나란히 비교"),
+      h("div", { class: "table-wrap" }, h("table", { class: "hood-table leisure-table cmp-table" },
+        h("thead", {}, h("tr", {}, h("th", { scope: "col" }, ""), ...list.map((f) => h("th", { scope: "col" }, `${kindInfo(f.kind).icon} ${f.name.replace(/\s*\(.*?\)/, "")}`)))),
+        h("tbody", {},
+          row("가격", (f) => priceBadge(f).text),
+          row("어린이 요금", (f) => topFee(f, ["child", "lesson"])),
+          row("성인 요금", (f) => topFee(f, ["adult_entry", "adult"])),
+          row("가족권", (f) => topFee(f, ["family_pass", "family"])),
+          row("거리", (f) => { const d = dist(f.ll); return d != null ? `${d.toFixed(1)}km` : "—"; }),
+          row("연령", (f) => agesOf(f).map((a) => AGE_SHORT[a]).join(" ")),
+          row("실내/야외", (f) => (isIndoor(f) ? "🏠 실내" : "🌳 야외")),
+          row("상태", (f) => (f.status && f.status !== "unknown" ? STATUS[f.status] : "미확인")),
+          row("확인일", (f) => f.checked || "확인 전")))),
+      clear));
   }
 
   function fishingRules(): HTMLElement {
@@ -466,9 +704,12 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   function renderAll() {
     renderControls();
     renderPanel();
+    renderPicks();
+    renderFavs();
+    renderCompare();
+    renderSections();
     renderGolf();
     renderCost();
-    renderLists();
     drawMap();
   }
 
@@ -482,13 +723,24 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     setTimeout(() => map?.invalidateSize(), 50);
   });
   renderAll();
-  void forecast(h, today, origin());
+  void forecast(h, today, origin(), (days) => {
+    const d0 = days[0];
+    rainy = !!d0 && (d0.rain >= 50 || d0.temp < 14 || d0.gust >= 30);
+    renderPicks();
+  });
   void Promise.all([import("leaflet"), import("leaflet/dist/leaflet.css"), whenConnected(mapEl)]).then(([mod, , ok]) => {
     if (!ok) return;
     L = (mod as unknown as { default?: Leaflet }).default ?? (mod as unknown as Leaflet);
     map = L.map(mapEl, { scrollWheelZoom: false }).setView([-36.86, 174.77], 10);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap" }).addTo(map);
     drawMap();
+    // 지도를 움직이거나 확대하면 장소 묶음과 옆 목록(지도 영역만)이 따라 바뀜
+    let t: ReturnType<typeof setTimeout> | undefined;
+    map.on("moveend", () => {
+      clearTimeout(t);
+      t = setTimeout(() => { drawMap(); if (viewOnly) renderSections(); }, 120);
+    });
+    renderSections();
   }).catch(() => mapEl.replaceChildren(h("p", { class: "muted" }, "지도를 불러오지 못했어요 (오프라인).")));
   return root;
 }
@@ -518,21 +770,24 @@ async function cachedForecast(at: [number, number]): Promise<WxPair> {
   return v;
 }
 
-async function forecast(h: H, slot: HTMLElement, at: [number, number]): Promise<void> {
+async function forecast(h: H, slot: HTMLElement, at: [number, number], onDays?: (days: ReturnType<typeof dayStats>) => void): Promise<void> {
   const title = h("h2", {}, "🌤️ 오늘·내일 가기 좋은가");
   const note = h("p", { class: "board-note" }, "Open-Meteo 예보로 8~18시를 계산한 참고용 점수예요(30분 동안 저장해 다시 씀). 바다에 나가기 전에는 반드시 MetService 해상예보·조석을 확인하세요. 💨 풍속(돌풍) 노트 · ☔ 강수확률 · 🌊 파고");
   try {
     const { fc, mr } = await cachedForecast(at);
     const days = dayStats(fc.hourly, mr?.hourly ?? null);
     if (!days.length) throw new Error("no data");
+    onDays?.(days);
     const label = ["오늘", "내일"];
     const rows = KINDS.map((k) => h("tr", {}, h("th", { scope: "row" }, `${k.icon} ${k.label}`),
       ...days.slice(0, 2).map((d) => {
         const v = verdict(k.activity, d);
-        return h("td", {}, `${lvIcon[v.level]} `, h("small", {}, v.text));
+        return h("td", { title: v.text }, `${lvIcon[v.level]} `, h("small", {}, v.text.split(" — ")[0]));
       })));
-    slot.replaceChildren(title, h("div", { class: "table-wrap" }, h("table", { class: "hood-table leisure-weather" },
-      h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "활동"), ...days.slice(0, 2).map((d, i) => h("th", { scope: "col" }, `${label[i]} (${d.date.slice(5).replace("-", "/")})`)))),
+    const d0 = days[0];
+    const facts = `오늘 8~18시: 💨 ${Math.round(d0.wind)}(${Math.round(d0.gust)})kn · ☔ ${Math.round(d0.rain)}% · ${Math.round(d0.temp)}°C${d0.wave != null ? ` · 🌊 ${d0.wave.toFixed(1)}m` : ""}`;
+    slot.replaceChildren(title, h("p", { class: "lw-facts" }, facts), h("div", { class: "table-wrap" }, h("table", { class: "hood-table leisure-weather lw-compact" },
+      h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "활동"), ...days.slice(0, 2).map((d, i) => h("th", { scope: "col" }, `${label[i]} ${d.date.slice(5).replace("-", "/")}`)))),
       h("tbody", {}, ...rows))), note);
   } catch {
     slot.replaceChildren(title, h("p", { class: "muted" }, "예보를 불러오지 못했어요 (오프라인이거나 일시 오류)."), note);

@@ -1,5 +1,5 @@
 {
-  "_설명": "손으로 적는 값. 시설 id 별로 평점(rating)·직접 확인한 요금(fees)·메모(note)·상태(status)·숨김(hide)을 적으면 자동 수집값보다 우선합니다. 평점은 구글 지도에서 직접 보고 적고 기준 시점(asof)을 남기세요(분기에 한 번쯤 갱신). 요금 항목 kind: adult·couple·family·junior·student·social·joining·greenfee18·greenfee9·hire·tour·berth·other, period: year·season·month·week·day·hour·round·once·person.",
+  "_설명": "손으로 적는 값. 시설 id 별로 평점(rating)·직접 확인한 요금(fees)·메모(note)·상태(status)·숨김(hide)을 적으면 자동 수집값보다 우선합니다. 평점은 구글 지도에서 직접 보고 적고 기준 시점(asof)을 남기세요(분기에 한 번쯤 갱신). 요금 항목 kind: adult·couple·family·junior·student·social·joining·greenfee18·greenfee9·hire·tour·berth·other, period: year·season·month·week·day·hour·round·once·person. 연령 태그(ages: baby 0~4 · kid 5~12 · teen 13~17 · adult · family)와 실내 여부(indoor: true/false)도 시설별로 고칠 수 있어요.",
   "_예시": {
     "g-pupuke": {
       "rating": {
