@@ -17,7 +17,7 @@ interface Rating { v: number; n?: number; asof?: string }
 interface Facility {
   id: string; kind: Kind; name: string; area?: string; ll: [number, number] | null; home?: string; gmaps: string;
   fees: Fee[]; status?: string; season?: string; note?: string; checked?: string; rating?: Rating; src?: string[];
-  ages?: Age[]; indoor?: boolean;
+  ages?: Age[]; indoor?: boolean; free?: boolean;
 }
 interface Change { date: string; id: string; name: string; field: string; old: number | string; new: number | string }
 interface LeisureData { updated_at: string; source: string; facilities: Facility[]; changes?: Change[] }
@@ -66,6 +66,14 @@ const GROUPS: { key: string; label: string; icon: string; kinds: Kind[] }[] = [
   { key: "outdoor", label: "걷기·자전거 코스", icon: "🚶", kinds: ["walk"] },
   { key: "sea", label: "요트·카약·낚시", icon: "⛵", kinds: ["sailing", "kayak", "fishing"] },
 ];
+/** 물놀이·수영 묶음 안의 갈래 */
+const WATER_SUBS = [
+  { key: "pool", label: "🏊 수영장·레저센터 (실내·야외)" },
+  { key: "splash", label: "💦 무료 물놀이 — 스플래시 패드·항구 풀" },
+  { key: "school", label: "🏫 여름 학교 수영장 (1월 무료 개방)" },
+  { key: "lesson", label: "🎓 수영 교실 전문 풀" },
+];
+const waterSub = (f: Facility): string => (f.id.startsWith("w-sch-") ? "school" : /수영 교실 전문/.test(f.note ?? "") ? "lesson" : f.free ? "splash" : "pool");
 const FAV_KEY = "daily-brief:leisure-fav";
 const AGE_KEY = "daily-brief:leisure-age";
 const CBD: [number, number] = [-36.8485, 174.7633];
@@ -118,8 +126,9 @@ const isIndoor = (f: Facility): boolean => f.indoor ?? (f.kind === "kids" || f.k
 const ENTRY_KINDS = new Set(["child", "adult_entry", "lesson", "family_pass", "tour", "hire", "berth", "social"]);
 /** 카드에 붙일 가격 배지: 무료 / $N~ (입장·수강 기준 최저가) / 연 $N (골프·클럽) / 요금 미확인 */
 export function priceBadge(f: Facility): { text: string; cls: string } {
-  if (f.kind === "walk") return { text: "무료", cls: "free" };
+  if (f.kind === "walk" || f.free) return { text: "무료", cls: "free" };
   const note = f.note ?? "";
+  if (f.fees.some((x) => x.kind === "adult_entry" && x.amount === 0)) return { text: "전 연령 무료", cls: "free" };
   if (/(어린이|16세).{0,24}무료/.test(note) && !/않|참여하지|다르/.test(note)) return { text: "어린이 무료", cls: "free" };
   const entry = f.fees.filter((x) => ENTRY_KINDS.has(x.kind) && x.period !== "year" && x.amount > 0).map((x) => x.amount);
   if (entry.length) return { text: `$${num(Math.min(...entry))}~`, cls: Math.min(...entry) <= 10 ? "cheap" : "" };
@@ -585,6 +594,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
       h("div", { class: "lc-top" }, h("span", { class: "lc-ico", "aria-hidden": "true" }, ki.icon), name, star),
       h("div", { class: "lc-meta" }, `${f.area ?? ""}${d != null ? ` · ${d.toFixed(1)}km` : ""}`),
       h("div", { class: "lc-badges" }, h("span", { class: `pb ${pb.cls}` }, pb.text), h("span", { class: "pb io" }, isIndoor(f) ? "🏠 실내" : "🌳 야외"),
+        f.season ? h("span", { class: "pb io", title: f.season }, `🗓 ${f.season.replace(/\(.*?\)/g, "").trim().slice(0, 14)}`) : null,
         f.status && f.status !== "open" && f.status !== "unknown" ? h("span", { class: "pb warn" }, STATUS[f.status]) : null,
         changedRecently(f.id) ? h("span", { class: "pb warn" }, "변경됨") : null),
       h("div", { class: "lc-ages" }, ...ages.filter((a) => a !== "adult" || ages.length < 3).map((a) => h("span", { class: "age-b" }, AGE_SHORT[a]))),
@@ -603,9 +613,14 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
       const all = facilities.filter((f) => g.kinds.includes(f.kind) && visible(f));
       if (!all.length) continue;
       const shown = all.filter(inView).sort((a, b) => (dist(a.ll) ?? 1e9) - (dist(b.ll) ?? 1e9));
+      const water = g.key === "water";
+      const grid = !water ? (shown.length ? h("div", { class: "lgrid" }, ...shown.map(card)) : null) : h("div", {}, ...WATER_SUBS.flatMap((sub) => {
+        const part = shown.filter((f) => waterSub(f) === sub.key);
+        return part.length ? [h("h3", { class: "lsub" }, `${sub.label} `, h("small", {}, `${part.length}곳`)), h("div", { class: "lgrid" }, ...part.map(card))] : [];
+      }));
       blocks.push(h("details", { class: "lgroup", open: "" },
         h("summary", {}, `${g.icon} ${g.label}`, h("small", {}, ` ${shown.length}${shown.length !== all.length ? `/${all.length}` : ""}곳`)),
-        shown.length ? h("div", { class: "lgrid" }, ...shown.map(card)) : h("p", { class: "muted" }, "지도에 보이는 영역에는 없어요. 지도를 움직이거나 “지도 영역만 목록에”를 꺼 보세요."),
+        shown.length ? grid : h("p", { class: "muted" }, "지도에 보이는 영역에는 없어요. 지도를 움직이거나 “지도 영역만 목록에”를 꺼 보세요."),
         g.kinds.includes("fishing") && on.has("fishing") ? fishingRules() : null));
     }
     // 가까운 놀이터·물놀이 (장소 데이터)

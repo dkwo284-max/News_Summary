@@ -691,7 +691,7 @@
    "pages": [
     "https://www.aucklandleisure.co.nz/locations/albany-stadium-pool"
    ],
-   "note": "16세 미만 어린이 무료 수영 대상(시의회 무료 수영 정책) — 공식 페이지에서 확인.",
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 스플래시 패드(물놀이 시설) 있음. 오버 더 풀 클라이밍 월 별도 요금.",
    "ages": [
     "baby",
     "kid",
@@ -718,7 +718,8 @@
     "adult",
     "family"
    ],
-   "indoor": true
+   "indoor": true,
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). "
   },
   {
    "id": "w-glenfieldpool",
@@ -737,7 +738,8 @@
     "adult",
     "family"
    ],
-   "indoor": true
+   "indoor": true,
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). "
   },
   {
    "id": "w-parakai",
@@ -784,7 +786,7 @@
    "pages": [
     "https://www.clmnz.co.nz/parnell-baths/pools/"
    ],
-   "note": "뉴질랜드에서 가장 큰 해수 야외 수영장 + 온수 라이도 풀, 가족 스파 풀, 아쿠아 놀이터, 유아 풀. 16세 이하 어린이 무료로 알려져 있어요(공식 확인).",
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). (여름 시즌 개장) 해수 야외 풀, 온수 라이도 풀, 가족 스파 풀, 아쿠아 놀이터, 유아 풀.",
    "ages": [
     "baby",
     "kid",
@@ -804,7 +806,7 @@
    "pages": [
     "https://aucklandleisure.co.nz/locations/tepid-baths"
    ],
-   "note": "시의회 무료 수영(16세 이하) 대상으로 안내되나 운영사 기준이 다르다는 자료도 있어 방문 전 확인하세요.",
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 시내 역사 수영장.",
    "ages": [
     "kid",
     "teen",
@@ -822,7 +824,7 @@
    "pages": [
     "https://clmnz.co.nz/mount-albert-aquatic-centre/prices"
    ],
-   "note": "운영사(Belgravia)는 시의회 16세 이하 무료 수영 정책에 참여하지 않는다고 밝힌 자료가 있어 요금을 확인하세요.",
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). (공식 무료 수영 목록에 포함 — 이전에 있던 \"참여하지 않는다\"는 자료는 맞지 않았어요.)",
    "ages": [
     "baby",
     "kid",
@@ -842,7 +844,7 @@
    "pages": [
     "https://www.aucklandleisure.co.nz/locations/stanmore-bay-pool-and-leisure-centre"
    ],
-   "note": "약 300㎡ 해변 테마 스플래시 패드(분수·미스트·큰 물통) 보유.",
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 약 300㎡ 해변 테마 스플래시 패드(분수·미스트·큰 물통, 무료·매일 10~17시)를 보유.",
    "ages": [
     "baby",
     "kid",
@@ -1051,6 +1053,823 @@
     "family"
    ],
    "indoor": false
+  },
+  {
+   "id": "w-birkenhead",
+   "name": "Birkenhead Pool and Leisure Centre",
+   "area": "Birkenhead",
+   "ll": [
+    -36.8084,
+    174.7217
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/birkenhead-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 실내 풀과 여름 야외 풀. 카이파티키 지역 시니어 무료 수영 있음.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-cameron",
+   "name": "Cameron Pool and Leisure Centre",
+   "area": "Mt Roskill",
+   "ll": [
+    -36.9182,
+    174.7423
+   ],
+   "home": "https://www.clmnz.co.nz",
+   "pages": [
+    "https://www.clmnz.co.nz/cameron-pool-and-leisure-centre/",
+    "https://www.aucklandleisure.co.nz/locations/cameron-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). ",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-westwave",
+   "name": "West Wave Pool and Leisure Centre (파도풀·워터슬라이드)",
+   "area": "Henderson",
+   "ll": [
+    -36.8761,
+    174.6344
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/west-wave-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 파도풀·하이드로슬라이드·다이빙 풀·50m 레인 풀·온수 치료 풀 보유.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-lloydelsmore",
+   "name": "Lloyd Elsmore Park Pool and Leisure Centre (스플래시 패드)",
+   "area": "Pakuranga",
+   "ll": [
+    -36.9032,
+    174.9018
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/lloyd-elsmore-park-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 옆 놀이터에 무료 스플래시 패드(야외, 여름).",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-gleninnes",
+   "name": "Glen Innes Pool and Leisure Centre",
+   "area": "Glen Innes",
+   "ll": [
+    -36.88,
+    174.8668
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/glen-innes-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). ",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-lagoon",
+   "name": "Lagoon Pool and Leisure Centre (파누어)",
+   "area": "Panmure",
+   "ll": [
+    -36.9011,
+    174.8533
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/lagoon-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 실내 풀과 여름 야외 풀.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-manurewa",
+   "name": "Manurewa Pool and Leisure Centre",
+   "area": "Manurewa",
+   "ll": [
+    -37.0328,
+    174.8785
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/manurewa-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). ",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-moana",
+   "name": "Moana Nui-a-Kiwa Pool and Leisure Centre (스플래시 패드·워터슬라이드)",
+   "area": "Māngere",
+   "ll": [
+    -36.972,
+    174.8008
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/moana-nui-a-kiwa-pool-and-leisure-centre/"
+   ],
+   "note": "수영 입장은 전 연령 무료(공식 안내). 실내 풀 8개, 하이드로슬라이드, 폭탄 다이빙 풀, 모든 연령용 스플래시 패드(여름).",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-otara",
+   "name": "Ōtara Pool and Leisure Centre",
+   "area": "Ōtara",
+   "ll": [
+    -36.9595,
+    174.8722
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/otara-pool-and-leisure-centre/"
+   ],
+   "note": "수영 입장 무료(공식 요금표). 사우나·스파만 유료.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-papatoetoe",
+   "name": "Papatoetoe Centennial Pool and Leisure Centre",
+   "area": "Papatoetoe",
+   "ll": [
+    -36.9729,
+    174.86
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/papatoetoe-centennial-pool-and-leisure-centre/"
+   ],
+   "note": "수영 입장 무료(공식 요금표). 사우나·스파만 유료.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-otahuhu",
+   "name": "Tōia Ōtāhuhu Pool and Leisure Centre (대형 야외 스플래시 패드)",
+   "area": "Ōtāhuhu",
+   "ll": [
+    -36.9446,
+    174.8413
+   ],
+   "home": "https://www.clmnz.co.nz",
+   "pages": [
+    "https://www.clmnz.co.nz/otahuhu-pool-and-leisure-centre/",
+    "https://www.aucklandleisure.co.nz/locations/otahuhu-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 대형 야외 스플래시 패드(여름).",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-onehunga",
+   "name": "Onehunga War Memorial Pool and Leisure Centre",
+   "area": "Onehunga",
+   "ll": [
+    -36.9172,
+    174.7809
+   ],
+   "home": "https://www.ymcanorth.org.nz",
+   "pages": [
+    "https://www.ymcanorth.org.nz/find-your-local/onehunga-war-memorial-pool/",
+    "https://www.aucklandleisure.co.nz/locations/onehunga-war-memorial-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 실내·야외 풀.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-franklin",
+   "name": "Franklin Pool and Leisure Centre",
+   "area": "Pukekohe",
+   "ll": [
+    -37.1953,
+    174.9075
+   ],
+   "home": "https://www.franklinleisure.co.nz",
+   "pages": [
+    "https://www.franklinleisure.co.nz/",
+    "https://www.aucklandleisure.co.nz/locations/franklin-pool-and-leisure-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). ",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-jubilee",
+   "name": "Jubilee Swimming Pool and Aquatic Centre (여름 야외)",
+   "area": "Pukekohe",
+   "ll": [
+    -37.2078,
+    174.9019
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/jubilee-swimming-pool-and-aquatic-centre/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). ",
+   "season": "여름(보통 12월~2·3월)",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-masseypark",
+   "name": "Massey Park Pool (파푸라 야외 풀)",
+   "area": "Papakura",
+   "ll": [
+    -37.0632,
+    174.9475
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/massey-park-pool/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). ",
+   "season": "여름(보통 12월~2·3월)",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-totara",
+   "name": "Tōtara Park Pools (숲속 야외 풀)",
+   "area": "Manurewa",
+   "ll": [
+    -37.0023,
+    174.9123
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/totara-park-pools/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). 2026-12 중 개장 예정(날짜 미정). 11:00~18:45, 물 온도 21~22℃(비가열).",
+   "season": "여름(12월 중순~2월)",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-whiteside",
+   "name": "Whiteside Pool (와이쿠 야외 풀)",
+   "area": "Waiuku",
+   "ll": [
+    -37.2485,
+    174.7318
+   ],
+   "home": "https://www.clmnz.co.nz",
+   "pages": [
+    "https://www.clmnz.co.nz/whiteside-pool/",
+    "https://www.aucklandleisure.co.nz/locations/whiteside-pool/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). ",
+   "season": "여름(보통 12월~2·3월)",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-pterin",
+   "name": "Te Oka / Pt Erin Pool (바다 옆 야외 풀)",
+   "area": "Herne Bay",
+   "ll": [
+    -36.8388,
+    174.7407
+   ],
+   "home": "https://www.clmnz.co.nz",
+   "pages": [
+    "https://www.clmnz.co.nz/pt-erin-pool/",
+    "https://www.aucklandleisure.co.nz/locations/pt-erin-pool/"
+   ],
+   "note": "시의회 무료 수영 정책: 16세 이하 어린이 무료(사우나·스파 제외, 공식 안내). ",
+   "season": "여름(보통 12월~2·3월)",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-karanga",
+   "name": "Karanga Plaza Harbour Pool (항구 수영장·점프대)",
+   "area": "Wynyard Quarter",
+   "ll": [
+    -36.8414,
+    174.7593
+   ],
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/karanga-plaza-harbour-pool/"
+   ],
+   "no_fees": true,
+   "free": true,
+   "note": "무료. 항구에 만든 33m 레인과 점프대(조수에 따라 접근로 경사 달라짐). 해 뜰 때~질 때 개방, 성수기(12/8~2/20) 11:00~18:30 구조요원.",
+   "season": "연중(성수기 12~2월 구조요원)",
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-greylynn-paddling",
+   "name": "Grey Lynn Paddling Pool (유아 물놀이장)",
+   "area": "Grey Lynn",
+   "geo": "Grey Lynn Park, Grey Lynn, Auckland",
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/grey-lynn-paddling-pool/"
+   ],
+   "no_fees": true,
+   "free": true,
+   "note": "무료. 수심 최대 0.75m의 육각형 얕은 풀, 그늘막·구조요원, 바로 옆 놀이터. 수영 못 하는 유아용.",
+   "season": "여름",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-olympic",
+   "name": "The Olympic Pools & Fitness Centre (50m 실내풀·뉴마켓)",
+   "area": "Newmarket",
+   "ll": [
+    -36.8659,
+    174.7784
+   ],
+   "home": "https://www.theolympic.co.nz",
+   "pages": [
+    "https://www.theolympic.co.nz/"
+   ],
+   "note": "시의회 무료 수영(16세 이하) 대상이 아닌 별도 운영 시설. 요금·수영 교실(힐튼 브라운 운영)은 공식 사이트에서 확인.",
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-splash-myers",
+   "name": "Myers Park 스플래시 패드",
+   "area": "Auckland CBD",
+   "geo": "Myers Park, Mount Street, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "옛 어린이 물놀이장 터에 만든 스플래시 패드(시의회, 여름 한정). 야외 스플래시 패드 — 무료(시의회·가이드 안내), 보통 노동절 주말~부활절 사이. 운영 기간·시간은 현장 안내 확인.",
+   "season": "여름",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-splash-potters",
+   "name": "Potters Park 스플래시 패드",
+   "area": "Balmoral",
+   "geo": "Potters Park, Balmoral Road, Mount Eden, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "시의회 운영, 여름 한정(틸트 버킷·미스트·분수). 야외 스플래시 패드 — 무료(시의회·가이드 안내), 보통 노동절 주말~부활절 사이. 운영 기간·시간은 현장 안내 확인.",
+   "season": "여름",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-splash-waterview",
+   "name": "Waterview Reserve 놀이터 물놀이",
+   "area": "Waterview",
+   "geo": "Waterview Reserve, Waterview, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "놀이터 한가운데 여름 한정 물놀이 시설(시의회 안내).",
+   "season": "여름",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-splash-catalina",
+   "name": "Catalina Water Play Park",
+   "area": "Hobsonville",
+   "ll": [
+    -36.7938,
+    174.6673
+   ],
+   "home": null,
+   "no_fees": true,
+   "free": true,
+   "note": "OpenStreetMap에 올라 있는 워터 플레이 파크(공식 안내 미확인) — 방문 전 개방 여부 확인.",
+   "season": "여름",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-splash-onepoto",
+   "name": "Onepoto Domain 스플래시 패드",
+   "area": "Northcote",
+   "geo": "Onepoto Domain, Northcote, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "가이드 사이트(Auckland for kids 등)에서 무료 스플래시 패드로 소개 — 위치·운영 시간은 현장 확인.",
+   "season": "여름",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-splash-wynyard",
+   "name": "Wynyard Quarter 워터 플레이",
+   "area": "Wynyard Quarter",
+   "geo": "Wynyard Quarter, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "가이드 사이트에서 무료 물놀이 시설로 소개 — 정확한 위치는 현장 안내 확인 (옆 Karanga Plaza Harbour Pool과 함께 이용).",
+   "season": "여름",
+   "ages": [
+    "baby",
+    "kid",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-sch-anis",
+   "name": "Auckland Normal Intermediate School 수영장",
+   "area": "Mt Eden",
+   "geo": "Auckland Normal Intermediate School, Poronui Street, Mt Eden, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Albert-Eden 로컬보드 지원)",
+   "season": "1월(학교 수영장 개방)",
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-sch-edendale",
+   "name": "Edendale Primary School 수영장",
+   "area": "Sandringham",
+   "geo": "Edendale Primary School, 419 Sandringham Road, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Albert-Eden 로컬보드 지원)",
+   "season": "1월(학교 수영장 개방)",
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-sch-waterviewsch",
+   "name": "Waterview Primary School 수영장",
+   "area": "Waterview",
+   "geo": "Waterview Primary School, 16 Herdman Street, Waterview, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Albert-Eden 로컬보드 지원)",
+   "season": "1월(학교 수영장 개방)",
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-sch-gleneden",
+   "name": "Glen Eden Primary School 수영장",
+   "area": "Glen Eden",
+   "geo": "Glen Eden Primary School, 3 Glenview Road, Glen Eden, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Waitākere Ranges 로컬보드 지원)",
+   "season": "1월(학교 수영장 개방)",
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-sch-avondaleint",
+   "name": "Avondale Intermediate School 수영장",
+   "area": "Avondale",
+   "geo": "Avondale Intermediate School, 12 Holly Street, Avondale, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Whau 로컬보드 지원)",
+   "season": "1월(학교 수영장 개방)",
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-sch-blockhouse",
+   "name": "Blockhouse Bay Primary School 수영장",
+   "area": "Blockhouse Bay",
+   "geo": "Blockhouse Bay Primary School, 584 Blockhouse Bay Road, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Whau 로컬보드 지원)",
+   "season": "1월(학교 수영장 개방)",
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-sch-greenbay",
+   "name": "Green Bay Primary School 수영장",
+   "area": "Green Bay",
+   "geo": "Green Bay Primary School, 131 Godley Road, Green Bay, Auckland",
+   "no_fees": true,
+   "free": true,
+   "note": "시의회 지원 학교 수영장 무료 개방(2026년 1월 5일~24일 월~토 12~5시, 구조요원 상주, 일부 2월 토요일). 2027년 개방 학교 명단은 올해 말 공지 — aucklandleisure.co.nz/outdoor-pools 에서 확인. (Whau 로컬보드 지원)",
+   "season": "1월(학교 수영장 개방)",
+   "ages": [
+    "kid",
+    "teen",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-palmsprings",
+   "name": "Palm Springs Geothermal Pools (파라카이 온천 풀)",
+   "area": "Parakai",
+   "ll": [
+    -36.6603,
+    174.4321
+   ],
+   "home": "https://www.palmspringsparakai.co.nz",
+   "pages": [
+    "https://www.palmspringsparakai.co.nz/"
+   ],
+   "note": "파라카이 지열 온천 풀(유료). 같은 지역의 Parakai Springs와 비교해 보세요.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "kind": "swim"
+  },
+  {
+   "id": "w-hiltonbrown",
+   "name": "Hilton Brown Swim School (호브슨빌)",
+   "area": "Hobsonville",
+   "ll": [
+    -36.8054,
+    174.6309
+   ],
+   "home": "https://hiltonbrownswimming.co.nz",
+   "no_fees": true,
+   "note": "수영 교실 전문 풀 — 요금·시간표는 공식 사이트에서 확인.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-swimtastic",
+   "name": "Swimtastic (수영 교실)",
+   "area": "Panmure",
+   "ll": [
+    -36.8797,
+    174.8453
+   ],
+   "home": "https://www.swimtastic.co.nz",
+   "no_fees": true,
+   "note": "수영 교실 전문 풀 — 요금·시간표는 공식 사이트에서 확인.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-trentbray",
+   "name": "Trent Bray Swim School",
+   "area": "Mt Eden",
+   "ll": [
+    -36.873,
+    174.747
+   ],
+   "home": "https://tbss.co.nz",
+   "no_fees": true,
+   "note": "수영 교실 전문 풀 — 요금·시간표는 공식 사이트에서 확인.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen"
+   ],
+   "indoor": true,
+   "kind": "swim"
+  },
+  {
+   "id": "w-waterhole",
+   "name": "Waterhole Swimming Centre",
+   "area": "West Auckland",
+   "ll": [
+    -36.9045,
+    174.6303
+   ],
+   "home": "https://waterholeswimcentre.kiwi",
+   "no_fees": true,
+   "note": "수영 교실 전문 풀 — 요금·시간표는 공식 사이트에서 확인.",
+   "ages": [
+    "baby",
+    "kid",
+    "teen"
+   ],
+   "indoor": true,
+   "kind": "swim"
   }
  ]
 }

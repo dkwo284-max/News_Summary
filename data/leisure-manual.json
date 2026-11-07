@@ -1,163 +1,464 @@
 {
-  "_설명": "손으로 적는 값. 시설 id 별로 평점(rating)·직접 확인한 요금(fees)·메모(note)·상태(status)·숨김(hide)을 적으면 자동 수집값보다 우선합니다. 평점은 구글 지도에서 직접 보고 적고 기준 시점(asof)을 남기세요(분기에 한 번쯤 갱신). 요금 항목 kind: adult·couple·family·junior·student·social·joining·greenfee18·greenfee9·hire·tour·berth·other, period: year·season·month·week·day·hour·round·once·person. 연령 태그(ages: baby 0~4 · kid 5~12 · teen 13~17 · adult · family)와 실내 여부(indoor: true/false)도 시설별로 고칠 수 있어요.",
-  "_예시": {
-    "g-pupuke": {
-      "rating": {
-        "v": 4.4,
-        "n": 320,
-        "asof": "2026-11"
-      },
-      "fees": [
-        {
-          "label": "Full Playing (직접 확인)",
-          "kind": "adult",
-          "amount": 1885,
-          "period": "year"
-        }
-      ],
-      "checked": "2026-11-05",
-      "note": "입회비 별도"
-    }
-  },
+ "_설명": "손으로 적는 값. 시설 id 별로 평점(rating)·직접 확인한 요금(fees)·메모(note)·상태(status)·숨김(hide)을 적으면 자동 수집값보다 우선합니다. 평점은 구글 지도에서 직접 보고 적고 기준 시점(asof)을 남기세요(분기에 한 번쯤 갱신). 요금 항목 kind: adult·couple·family·junior·student·social·joining·greenfee18·greenfee9·hire·tour·berth·other, period: year·season·month·week·day·hour·round·once·person. 연령 태그(ages: baby 0~4 · kid 5~12 · teen 13~17 · adult · family)와 실내 여부(indoor: true/false)도 시설별로 고칠 수 있어요.",
+ "_예시": {
   "g-pupuke": {
-    "fees": [
-      {
-        "label": "Full Playing (구글 검색에 나온 클럽 회원 페이지 기준, 연도 불명 — 공식 사이트에서 확인)",
-        "kind": "adult",
-        "amount": 1885,
-        "period": "year"
-      },
-      {
-        "label": "Joining fee (같은 출처, 연도 불명)",
-        "kind": "joining",
-        "amount": 500,
-        "period": "once"
-      }
-    ],
-    "note": "공식 사이트가 동적 페이지라 자동 수집이 안 됩니다. 값은 검색 결과에서 확인한 것이고 시점이 불명확해요."
-  },
-  "w-albanypool": {
-    "replace_fees": true,
-    "fees": [
-      {
-        "label": "성인 일반 수영 1회 (시의회 공지: 2025-04부터 $8, 사우나·스팀·스파 별도 — 공식 페이지에서 확인)",
-        "kind": "adult_entry",
-        "amount": 8,
-        "period": "once"
-      }
-    ],
-    "note": "16세 미만 어린이는 수영 무료(시의회 무료 수영 정책, 사우나·스팀룸 제외). 헬스장·그룹 운동 요금은 별도라 표에서 뺐어요."
-  },
-  "w-takapunapool": {
-    "replace_fees": true,
-    "fees": [
-      {
-        "label": "성인 일반 수영 1회 (시의회 공지: 2025-04부터 $8, 사우나·스팀·스파 별도 — 공식 페이지에서 확인)",
-        "kind": "adult_entry",
-        "amount": 8,
-        "period": "once"
-      }
-    ],
-    "note": "16세 미만 어린이는 수영 무료(시의회 무료 수영 정책, 사우나·스팀룸 제외). 헬스장·그룹 운동 요금은 별도라 표에서 뺐어요."
-  },
-  "w-glenfieldpool": {
-    "replace_fees": true,
-    "fees": [
-      {
-        "label": "성인 일반 수영 1회 (시의회 공지: 2025-04부터 $8, 사우나·스팀·스파 별도 — 공식 페이지에서 확인)",
-        "kind": "adult_entry",
-        "amount": 8,
-        "period": "once"
-      }
-    ],
-    "note": "16세 미만 어린이는 수영 무료(시의회 무료 수영 정책, 사우나·스팀룸 제외). 헬스장·그룹 운동 요금은 별도라 표에서 뺐어요."
-  },
-  "w-parakai": {
-    "replace_fees": true,
-    "fees": [
-      {
-        "label": "성인(16+) 일반 입장 (예약 사이트 기준, 연도 불명)",
-        "kind": "adult_entry",
-        "amount": 35,
-        "period": "once"
-      },
-      {
-        "label": "어린이(5~15세) (예약 사이트 기준)",
-        "kind": "child",
-        "amount": 18,
-        "period": "once"
-      },
-      {
-        "label": "유아(2~4세)",
-        "kind": "child",
-        "amount": 10,
-        "period": "once"
-      },
-      {
-        "label": "가족권 (성인 2 + 어린이 3~4)",
-        "kind": "family_pass",
-        "amount": 95,
-        "period": "once"
-      }
-    ],
-    "note": "온천 풀과 워터슬라이드(슬라이드는 8세 이상 단독 이용). 오클랜드 북서쪽 약 40분."
-  },
-  "c-museum": {
-    "replace_fees": true,
-    "fees": [],
-    "note": "오클랜드 주민은 주소 증빙(도서관 카드 등)으로 무료, 다른 지역 뉴질랜드 거주자는 기부, 해외 방문객은 유료예요(공식 안내 검색 기준 — 갤러리 리모델링으로 일부 휴관 가능, 공식 사이트 확인)."
-  },
-  "c-zoo": {
-    "replace_fees": true,
-    "fees": [
-      {
-        "label": "오클랜드 주민 성인 — 성수기(주말·공휴일·방학) 사전 예매 (공식 안내를 검색으로 확인, 연도 불명)",
-        "kind": "adult_entry",
-        "amount": 24,
-        "period": "once"
-      },
-      {
-        "label": "오클랜드 주민 성인 — 비성수기 사전 예매",
-        "kind": "adult_entry",
-        "amount": 19,
-        "period": "once"
-      },
-      {
-        "label": "오클랜드 주민 어린이(4~14세) — 성수기",
-        "kind": "child",
-        "amount": 14,
-        "period": "once"
-      },
-      {
-        "label": "오클랜드 주민 어린이(4~14세) — 비성수기",
-        "kind": "child",
-        "amount": 11,
-        "period": "once"
-      },
-      {
-        "label": "다른 지역 뉴질랜드 거주자·해외 방문객 성인(성수기)",
-        "kind": "other",
-        "amount": 35,
-        "period": "once"
-      }
-    ],
-    "note": "무료가 아니에요. 오클랜드 주민 할인가(주소 증빙 필요, 3세 이하 무료)이고 날짜 지정·사전 예매가 가장 싸요. 5인 이상 단체 20% 할인. 금액은 공식 티켓 페이지에서 꼭 확인하세요."
-  },
-  "w-parnell": {
-    "replace_fees": true,
-    "fees": [
-      {
-        "label": "성인 수영 1회 (자료마다 $6.90~$8로 달라 공식 확인 필요, 연도 불명)",
-        "kind": "adult_entry",
-        "amount": 8,
-        "period": "once"
-      }
-    ],
-    "note": "16세 이하 어린이 무료(시의회 무료 수영 정책·Newstalk 안내). 해수 야외 풀, 온수 라이도 풀, 가족 스파 풀, 아쿠아 놀이터, 유아 풀이 요금에 포함돼요."
-  },
-  "w-tepid": {
-    "replace_fees": true,
-    "fees": [],
-    "note": "시의회 무료 수영(16세 이하) 대상으로 안내되나 운영사 기준이 다르다는 자료도 있어요. 요금은 공식 페이지에서 확인하세요."
+   "rating": {
+    "v": 4.4,
+    "n": 320,
+    "asof": "2026-11"
+   },
+   "fees": [
+    {
+     "label": "Full Playing (직접 확인)",
+     "kind": "adult",
+     "amount": 1885,
+     "period": "year"
+    }
+   ],
+   "checked": "2026-11-05",
+   "note": "입회비 별도"
   }
+ },
+ "g-pupuke": {
+  "fees": [
+   {
+    "label": "Full Playing (구글 검색에 나온 클럽 회원 페이지 기준, 연도 불명 — 공식 사이트에서 확인)",
+    "kind": "adult",
+    "amount": 1885,
+    "period": "year"
+   },
+   {
+    "label": "Joining fee (같은 출처, 연도 불명)",
+    "kind": "joining",
+    "amount": 500,
+    "period": "once"
+   }
+  ],
+  "note": "공식 사이트가 동적 페이지라 자동 수집이 안 됩니다. 값은 검색 결과에서 확인한 것이고 시점이 불명확해요."
+ },
+ "w-albanypool": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 8.5,
+    "period": "once"
+   },
+   {
+    "label": "성인 수영+사우나·스파 (Adult Swim Plus)",
+    "kind": "other",
+    "amount": 10.5,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.1,
+    "period": "once"
+   },
+   {
+    "label": "오버 더 풀 클라이밍 월 (스플래시 패스)",
+    "kind": "other",
+    "amount": 3.8,
+    "period": "once"
+   },
+   {
+    "label": "보호자(물 속 감독, 만 5세 미만 최대 2명)",
+    "kind": "other",
+    "amount": 1.0,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-takapunapool": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 8.5,
+    "period": "once"
+   },
+   {
+    "label": "성인 수영+사우나·스파 (Adult Swim Plus)",
+    "kind": "other",
+    "amount": 10.5,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.1,
+    "period": "once"
+   },
+   {
+    "label": "보호자(물 속 감독, 만 5세 미만 최대 2명)",
+    "kind": "other",
+    "amount": 1.0,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-glenfieldpool": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 8.5,
+    "period": "once"
+   },
+   {
+    "label": "성인 수영+사우나·스파 (Adult Swim Plus)",
+    "kind": "other",
+    "amount": 10.5,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.1,
+    "period": "once"
+   },
+   {
+    "label": "하이드로슬라이드·다이빙 풀 (입장료와 별도)",
+    "kind": "other",
+    "amount": 8.9,
+    "period": "once"
+   },
+   {
+    "label": "보호자(물 속 감독, 만 5세 미만 최대 2명)",
+    "kind": "other",
+    "amount": 1.0,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-parakai": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인(16+) 일반 입장 (예약 사이트 기준, 연도 불명)",
+    "kind": "adult_entry",
+    "amount": 35,
+    "period": "once"
+   },
+   {
+    "label": "어린이(5~15세) (예약 사이트 기준)",
+    "kind": "child",
+    "amount": 18,
+    "period": "once"
+   },
+   {
+    "label": "유아(2~4세)",
+    "kind": "child",
+    "amount": 10,
+    "period": "once"
+   },
+   {
+    "label": "가족권 (성인 2 + 어린이 3~4)",
+    "kind": "family_pass",
+    "amount": 95,
+    "period": "once"
+   }
+  ],
+  "note": "온천 풀과 워터슬라이드(슬라이드는 8세 이상 단독 이용). 오클랜드 북서쪽 약 40분."
+ },
+ "c-museum": {
+  "replace_fees": true,
+  "fees": [],
+  "note": "오클랜드 주민은 주소 증빙(도서관 카드 등)으로 무료, 다른 지역 뉴질랜드 거주자는 기부, 해외 방문객은 유료예요(공식 안내 검색 기준 — 갤러리 리모델링으로 일부 휴관 가능, 공식 사이트 확인)."
+ },
+ "c-zoo": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "오클랜드 주민 성인 — 성수기(주말·공휴일·방학) 사전 예매 (공식 안내를 검색으로 확인, 연도 불명)",
+    "kind": "adult_entry",
+    "amount": 24,
+    "period": "once"
+   },
+   {
+    "label": "오클랜드 주민 성인 — 비성수기 사전 예매",
+    "kind": "adult_entry",
+    "amount": 19,
+    "period": "once"
+   },
+   {
+    "label": "오클랜드 주민 어린이(4~14세) — 성수기",
+    "kind": "child",
+    "amount": 14,
+    "period": "once"
+   },
+   {
+    "label": "오클랜드 주민 어린이(4~14세) — 비성수기",
+    "kind": "child",
+    "amount": 11,
+    "period": "once"
+   },
+   {
+    "label": "다른 지역 뉴질랜드 거주자·해외 방문객 성인(성수기)",
+    "kind": "other",
+    "amount": 35,
+    "period": "once"
+   }
+  ],
+  "note": "무료가 아니에요. 오클랜드 주민 할인가(주소 증빙 필요, 3세 이하 무료)이고 날짜 지정·사전 예매가 가장 싸요. 5인 이상 단체 20% 할인. 금액은 공식 티켓 페이지에서 꼭 확인하세요."
+ },
+ "w-parnell": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (자료마다 $6.90~$8로 달라 공식 확인 필요, 연도 불명)",
+    "kind": "adult_entry",
+    "amount": 8,
+    "period": "once"
+   }
+  ],
+  "note": "16세 이하 무료(여름 시즌, 시의회 무료 수영 목록 포함). 해수 야외 풀, 온수 라이도 풀, 가족 스파 풀, 아쿠아 놀이터, 유아 풀이 요금에 포함돼요."
+ },
+ "w-tepid": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 9.5,
+    "period": "once"
+   },
+   {
+    "label": "성인 수영+사우나·스파 (Adult Swim Plus)",
+    "kind": "other",
+    "amount": 11.5,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.7,
+    "period": "once"
+   },
+   {
+    "label": "보호자(물 속 감독)",
+    "kind": "other",
+    "amount": 2.0,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외, 시의회 무료 수영 목록에 포함). 1~4세 보호자는 물 속에서 감독해야 해요(보호자 $2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-birkenhead": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 8.5,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.1,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-lloydelsmore": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 8.5,
+    "period": "once"
+   },
+   {
+    "label": "성인 수영+사우나·스파 (Adult Swim Plus)",
+    "kind": "other",
+    "amount": 10.5,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.1,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-stanmore": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 8.5,
+    "period": "once"
+   },
+   {
+    "label": "성인 수영+사우나·스파 (Adult Swim Plus)",
+    "kind": "other",
+    "amount": 10.5,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.1,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-manurewa": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 6.3,
+    "period": "once"
+   },
+   {
+    "label": "성인 수영+사우나·스파 (Adult Swim Plus)",
+    "kind": "other",
+    "amount": 7.8,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.1,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-westwave": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 수영 1회 (Adult Swim, 공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 8.5,
+    "period": "once"
+   },
+   {
+    "label": "성인 수영+사우나·스파 (Adult Swim Plus)",
+    "kind": "other",
+    "amount": 10.5,
+    "period": "once"
+   },
+   {
+    "label": "우대(학생·시니어·CSC) 수영 (Concession Swim)",
+    "kind": "other",
+    "amount": 5.1,
+    "period": "once"
+   },
+   {
+    "label": "하이드로슬라이드 (입장료와 별도)",
+    "kind": "other",
+    "amount": 5.6,
+    "period": "once"
+   },
+   {
+    "label": "보호자(물 속 감독, 만 5세 미만 최대 2명)",
+    "kind": "other",
+    "amount": 2.0,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-moana": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "수영 입장 — 전 연령 무료 (공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 0,
+    "period": "once"
+   },
+   {
+    "label": "사우나·스파 (Adult Plus Only)",
+    "kind": "other",
+    "amount": 7.4,
+    "period": "once"
+   },
+   {
+    "label": "사우나·스파 우대 (Concession Plus Only)",
+    "kind": "other",
+    "amount": 4.4,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-otara": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "수영 입장 — 전 연령 무료 (공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 0,
+    "period": "once"
+   },
+   {
+    "label": "사우나·스파 (Adult Plus Only)",
+    "kind": "other",
+    "amount": 7.4,
+    "period": "once"
+   },
+   {
+    "label": "사우나·스파 우대 (Concession Plus Only)",
+    "kind": "other",
+    "amount": 4.4,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ },
+ "w-papatoetoe": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "수영 입장 — 전 연령 무료 (공식 요금표)",
+    "kind": "adult_entry",
+    "amount": 0,
+    "period": "once"
+   },
+   {
+    "label": "사우나·스파 (Adult Plus Only)",
+    "kind": "other",
+    "amount": 7.4,
+    "period": "once"
+   },
+   {
+    "label": "사우나·스파 우대 (Concession Plus Only)",
+    "kind": "other",
+    "amount": 4.4,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-07",
+  "note": "16세 이하 무료(사우나·스파 제외). 1~4세 보호자는 물에 들어가 감독해야 하며 보호자 요금이 따로 있어요(최대 $1~2). aucklandleisure.co.nz 요금표 확인 2026-11-07"
+ }
 }

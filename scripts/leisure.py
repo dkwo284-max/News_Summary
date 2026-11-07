@@ -413,18 +413,25 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
         prev = old_by_id.get(s["id"], {})
         prevs[s["id"]] = prev
         geo = s.get("geo") or f"{s['name']}, Auckland"
-        if not geocache.get(geo):  # 못 찾은 곳(null)은 다음 실행에서 다시 시도
+        if s.get("ll"):           # 좌표를 직접 적은 곳(OSM 등에서 확인한 값)은 조회하지 않는다
+            geocache[geo] = list(s["ll"])
+        elif not geocache.get(geo):  # 못 찾은 곳(null)은 다음 실행에서 다시 시도
             geocache[geo] = locate(client, s)
         fac = {"id": s["id"], "kind": s["kind"], "name": s["name"], "area": s.get("area", ""), "ll": geocache.get(geo),
                "home": s.get("home") or "", "gmaps": "https://www.google.com/maps/search/?api=1&query=" + quote_plus(f"{s['name']} Auckland"),
                "fees": prev.get("fees", []), "status": prev.get("status", "unknown"), "season": prev.get("season", ""),
                "note": s.get("note") or prev.get("note", ""), "checked": prev.get("checked", ""), "src": prev.get("src", []),
-               "text_hash": prev.get("text_hash", ""), "ages": s.get("ages"), "indoor": s.get("indoor")}
+               "text_hash": prev.get("text_hash", ""), "ages": s.get("ages"), "indoor": s.get("indoor"),
+               "free": s.get("free") or None}
+        if s.get("season"):
+            fac["season"] = s["season"]   # 여름 한정 등 운영 기간 (손으로 적은 값)
         if s.get("note"):
             fac["note"] = s["note"]
         facilities.append(fac)
         if s.get("no_fees") or not (s.get("home") or s.get("pages")):
             continue          # 요금이 없는 곳(걷기 코스 등)과 공식 페이지가 없는 곳은 AI 로 읽지 않는다
+        if (manual.get(s["id"]) or {}).get("replace_fees"):
+            continue          # 요금을 직접 확인해 적어 둔 곳은 AI 로 읽을 필요가 없다
         text, used = collect_text(client, s)
         if not text:
             continue

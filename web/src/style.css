@@ -674,3 +674,5 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .pol-tl-item { display: grid; grid-template-columns: 62px 1fr; gap: 8px; padding-bottom: 10px; border-bottom: 1px dashed var(--line); }
 .pol-tl-date { font-size: .75rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .pol-tl-item p { margin: 4px 0; font-size: .85rem; }
+.lsub { margin: 12px 0 6px; font-size: .9rem; }
+.lsub small { color: var(--muted); font-weight: 400; }
