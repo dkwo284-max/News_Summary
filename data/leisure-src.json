@@ -487,6 +487,181 @@
    "geo": "AUT Millennium, Mairangi Bay, Auckland",
    "home": null,
    "note": "올림픽 규격 풀과 어린이 수영 교실(요금은 공식 사이트 확인)."
+  },
+  {
+   "id": "w-parnell",
+   "kind": "swim",
+   "name": "Parnell Baths (파넬 바스)",
+   "area": "Parnell",
+   "geo": "Parnell Baths, Judges Bay Road, Parnell, Auckland",
+   "home": "https://www.clmnz.co.nz",
+   "pages": [
+    "https://www.clmnz.co.nz/parnell-baths/pools/"
+   ],
+   "note": "뉴질랜드에서 가장 큰 해수 야외 수영장 + 온수 라이도 풀, 가족 스파 풀, 아쿠아 놀이터, 유아 풀. 16세 이하 어린이 무료로 알려져 있어요(공식 확인)."
+  },
+  {
+   "id": "w-tepid",
+   "kind": "swim",
+   "name": "Tepid Baths (시내 역사 수영장)",
+   "area": "Auckland CBD",
+   "geo": "Tepid Baths, Customs Street West, Auckland",
+   "home": "https://aucklandleisure.co.nz",
+   "pages": [
+    "https://aucklandleisure.co.nz/locations/tepid-baths"
+   ],
+   "note": "시의회 무료 수영(16세 이하) 대상으로 안내되나 운영사 기준이 다르다는 자료도 있어 방문 전 확인하세요."
+  },
+  {
+   "id": "w-mtalbert",
+   "kind": "swim",
+   "name": "Mt Albert Aquatic Centre",
+   "area": "Mt Albert",
+   "geo": "Mt Albert Aquatic Centre, Auckland",
+   "home": "https://www.clmnz.co.nz",
+   "pages": [
+    "https://clmnz.co.nz/mount-albert-aquatic-centre/prices"
+   ],
+   "note": "운영사(Belgravia)는 시의회 16세 이하 무료 수영 정책에 참여하지 않는다고 밝힌 자료가 있어 요금을 확인하세요."
+  },
+  {
+   "id": "w-stanmore",
+   "kind": "swim",
+   "name": "Stanmore Bay Pool & Leisure Centre (스플래시 패드)",
+   "area": "Whangaparaoa",
+   "geo": "Stanmore Bay Pool and Leisure Centre, Whangaparaoa, Auckland",
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/locations/stanmore-bay-pool-and-leisure-centre"
+   ],
+   "note": "약 300㎡ 해변 테마 스플래시 패드(분수·미스트·큰 물통) 보유."
+  },
+  {
+   "id": "t-jungshin",
+   "kind": "sports",
+   "name": "Jungshin Taekwon-Do (글렌필드 태권도)",
+   "area": "Glenfield",
+   "geo": "Glenfield College, Kaipatiki Road, Glenfield, Auckland",
+   "home": "https://members.itkd.co.nz",
+   "pages": [
+    "https://members.itkd.co.nz/locations/auckland-north.php"
+   ],
+   "note": "글렌필드 칼리지(60 Kaipatiki Rd) 월·수 어린이반 4:30~5:20pm, 입문·가족반 5:20~6:30pm. 무료 체험 수업 신청 가능(공식 사이트). 노스쇼어 전역(알바니·타카푸나·브라운스베이 등) 수강생 대상."
+  },
+  {
+   "id": "t-sejong",
+   "kind": "sports",
+   "name": "Sejong Taekwondo (브라운스베이)",
+   "area": "Browns Bay",
+   "geo": "Sejong Taekwondo, Browns Bay, Auckland",
+   "home": null,
+   "note": "브라운스베이에서 25년째 운영(검색 정보) — 어린이 수강료는 도장에 직접 문의하세요."
+  },
+  {
+   "id": "t-tamaki",
+   "kind": "sports",
+   "name": "Tamaki Taekwon-Do Academy (타카푸나)",
+   "area": "Takapuna",
+   "geo": "Tamaki Taekwon-Do Academy, Takapuna, Auckland",
+   "home": null,
+   "note": "타카푸나 도장(비영리 운영으로 소개) — 수강료·체험 여부는 도장에 직접 문의하세요."
+  },
+  {
+   "id": "t-nsu",
+   "kind": "sports",
+   "name": "North Shore United AFC (유소년 축구)",
+   "area": "Devonport",
+   "geo": "North Shore United AFC, Devonport, Auckland",
+   "home": "https://nsu.org.nz",
+   "pages": [
+    "https://nsu.org.nz/register"
+   ],
+   "note": "겨울 시즌 등록, 정원이 차면 대기 명단."
+  },
+  {
+   "id": "t-albanyunited",
+   "kind": "sports",
+   "name": "Albany United (유소년 축구)",
+   "area": "Albany",
+   "geo": "Albany United Football Club, Albany, Auckland",
+   "home": "https://albanyunited.org",
+   "pages": [
+    "https://albanyunited.org/registration-and-info"
+   ],
+   "note": "5~8세 First Kicks·Fun Football (토요일 오전)."
+  },
+  {
+   "id": "t-bays",
+   "kind": "sports",
+   "name": "East Coast Bays Rugby (유소년 럭비)",
+   "area": "Mairangi Bay",
+   "geo": "East Coast Bays Rugby Club, Mairangi Bay, Auckland",
+   "home": "https://www.baysrugby.com",
+   "pages": [
+    "https://www.baysrugby.com/juniors/about"
+   ],
+   "note": "2026 시즌 유소년 등록은 마감, 2027 시즌은 2월쯤 등록 시작(클럽 안내)."
+  },
+  {
+   "id": "t-nsrugby",
+   "kind": "sports",
+   "name": "North Shore Rugby Club (유소년 럭비)",
+   "area": "Takapuna",
+   "geo": "North Shore Rugby Club, Takapuna, Auckland",
+   "home": "https://northshorerugby.co.nz",
+   "pages": [
+    "https://northshorerugby.co.nz/Junior-Club/Junior-Registration-1"
+   ]
+  },
+  {
+   "id": "x-tamakidrive",
+   "kind": "walk",
+   "name": "Tāmaki Drive 해안 보행·자전거길 (미션 베이~세인트 헬리어스)",
+   "area": "Mission Bay",
+   "geo": "Mission Bay, Auckland",
+   "home": "https://ourauckland.aucklandcouncil.govt.nz/news/2023/12/three-shared-paths-that-can-be-enjoyed-by-everyone",
+   "no_fees": true,
+   "note": "평탄해서 유모차·자전거에 좋은 대표 코스(자전거·롤러 이용자와 공유라 주의). 웨스트헤이븐~세인트 헬리어스 약 13km 자전거길 안내도 있어요."
+  },
+  {
+   "id": "x-devonport",
+   "kind": "walk",
+   "name": "데본포트~타카푸나 공유 보행·자전거길",
+   "area": "Devonport",
+   "geo": "Narrow Neck Beach, Devonport, Auckland",
+   "home": "https://ourauckland.aucklandcouncil.govt.nz/news/2023/12/three-shared-paths-that-can-be-enjoyed-by-everyone",
+   "no_fees": true,
+   "note": "조용한 주택가 도로·해안 보드워크·전용 공유길로 이어져 유모차에 무난한 코스(공식 안내)."
+  },
+  {
+   "id": "x-takapunamilford",
+   "kind": "walk",
+   "name": "타카푸나~밀포드 해변 산책",
+   "area": "Takapuna",
+   "geo": "Takapuna Beach, Auckland",
+   "home": "https://at.govt.nz/media/318824/AT-NSCC-Brochure-Map-TakapunaMilfordWalk.pdf",
+   "no_fees": true,
+   "note": "해변과 바위를 따라 걷는 코스로 일부 구간은 썰물 때만 가능 — 유모차는 어렵고 조석 확인 필요(공식 안내)."
+  },
+  {
+   "id": "x-coastalwalk",
+   "kind": "walk",
+   "name": "North Shore Coastal Walk (롱 베이~데본포트)",
+   "area": "Long Bay",
+   "geo": "Long Bay Regional Park, Auckland",
+   "home": "https://aucklandcouncil.govt.nz/en/parks-recreation/get-outdoors/find-a-walk.html",
+   "no_fees": true,
+   "note": "롱 베이 리저널 파크에서 해변·주택가를 지나 데본포트까지 이어지는 장거리 코스 — 구간별로 나눠 걷기 좋아요. 구간 난이도는 시의회 안내에서 확인하세요."
+  },
+  {
+   "id": "x-tamakipath",
+   "kind": "walk",
+   "name": "Tāmaki Path (공유 보행·자전거길)",
+   "area": "Glen Innes",
+   "geo": "Tamaki Path, Glen Innes, Auckland",
+   "home": "https://bikeauckland.org.nz/?p=40452",
+   "no_fees": true,
+   "note": "전용 공유길 — 구간·난이도는 공식 안내에서 확인하세요."
   }
  ]
 }

@@ -35,7 +35,7 @@ MANUAL = ROOT / "data" / "leisure-manual.json"
 OUT = ROOT / "web" / "public" / "data" / "leisure.json"
 NOMINATIM = "https://nominatim.openstreetmap.org/search"
 BBOX = (-37.45, -36.15, 174.20, 175.30)  # 오클랜드 광역시(위도 하한·상한, 경도 하한·상한)
-KINDS = ["golf", "sailing", "kayak", "fishing", "kids", "swim"]
+KINDS = ["golf", "sailing", "kayak", "fishing", "kids", "swim", "sports", "walk"]
 FEE_KINDS = ["adult", "couple", "family", "junior", "student", "social", "joining", "greenfee18", "greenfee9", "hire", "tour", "berth", "child", "adult_entry", "family_pass", "lesson", "other"]
 PERIODS = ["year", "season", "month", "week", "day", "hour", "round", "once", "person"]
 STATUS = ["open", "waitlist", "closed", "unknown"]
@@ -419,8 +419,8 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
         if s.get("note"):
             fac["note"] = s["note"]
         facilities.append(fac)
-        if not (s.get("home") or s.get("pages")):
-            continue
+        if s.get("no_fees") or not (s.get("home") or s.get("pages")):
+            continue          # 요금이 없는 곳(걷기 코스 등)과 공식 페이지가 없는 곳은 AI 로 읽지 않는다
         text, used = collect_text(client, s)
         if not text:
             continue

@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import time
 from datetime import date
@@ -24,9 +25,12 @@ QUERIES = {
     "pier": [f'[out:json][timeout:30];way["man_made"="pier"]["name"]({BBOX});out center tags qt;',
              f'[out:json][timeout:30];nwr["leisure"="fishing"]["name"]({BBOX});out center tags qt;'],
     "beach": [f'[out:json][timeout:30];nwr["natural"="beach"]["name"]({BBOX});out center tags qt;'],
+    # 이름 있는 놀이터(스플래시 패드·워터 플레이는 이름 키워드로 따로 분류)
+    "playground": [f'[out:json][timeout:30];nwr["leisure"="playground"]["name"]({BBOX});out center tags qt;'],
 }
-LIMITS = {"ramp": 160, "pier": 120, "beach": 220}
-DEFAULT_NAME = {"ramp": "보트 램프", "pier": "부두", "beach": "해변"}
+LIMITS = {"ramp": 160, "pier": 120, "beach": 220, "playground": 450, "splash": 120}
+DEFAULT_NAME = {"ramp": "보트 램프", "pier": "부두", "beach": "해변", "playground": "놀이터", "splash": "스플래시 패드"}
+SPLASH = re.compile(r"splash|water ?play|aqua|water ?park|paddling", re.I)
 
 
 def classify(tags: dict, asked: str) -> str | None:
@@ -36,6 +40,10 @@ def classify(tags: dict, asked: str) -> str | None:
         return "ramp" if tags.get("leisure") == "slipway" else None
     if asked == "pier":
         return "pier" if (tags.get("man_made") == "pier" or tags.get("leisure") == "fishing") and tags.get("name") else None
+    if asked == "playground":
+        if tags.get("leisure") != "playground" or not tags.get("name"):
+            return None
+        return "splash" if SPLASH.search(tags["name"]) else "playground"
     return "beach" if tags.get("natural") == "beach" and tags.get("name") else None
 
 
@@ -57,7 +65,8 @@ def convert(responses: dict[str, dict]) -> list[dict]:
             kept.append({"t": t, "n": name, "ll": [lat, lon]})
         # 이름 있는 것을 먼저, 상한까지
         kept.sort(key=lambda k: (k["n"] == DEFAULT_NAME[k["t"]], k["n"]))
-        out += kept[:LIMITS[asked]]
+        for t in sorted({k["t"] for k in kept}):  # 질의 하나가 두 종류(놀이터·스플래시)로 나뉠 수 있어 종류별로 상한
+            out += [k for k in kept if k["t"] == t][:LIMITS[t]]
     return out
 
 
@@ -99,8 +108,10 @@ def main(argv: list[str] | None = None) -> int:
         print("spots: nothing fetched — not writing", file=sys.stderr)
         return 1
     fresh = convert(got)
-    spots = fresh + [sp for k in QUERIES if k not in got for sp in old.get(k, [])]  # 못 받았거나 이번에 안 묻은 종류는 이전 값 유지
-    counts = {t: sum(1 for sp in spots if sp["t"] == t) for t in QUERIES}
+    own = {"playground": ("playground", "splash")}
+    keep = [sp for sp in (s for v in old.values() for s in v) if not any(sp["t"] in own.get(k, (k,)) for k in got)]
+    spots = fresh + keep  # 못 받았거나 이번에 안 묻은 종류는 이전 값 유지
+    counts = {t: sum(1 for sp in spots if sp["t"] == t) for t in LIMITS}
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps({"updated_at": date.today().isoformat(), "source": "OpenStreetMap (Overpass)", "spots": spots},
                               ensure_ascii=False, separators=(",", ":")), encoding="utf-8")

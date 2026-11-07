@@ -23,3 +23,13 @@ def test_convert_filters_private_dedupes_and_names():
     by = {(s["t"], s["n"]) for s in out}
     assert by == {("ramp", "Sandspit Ramp"), ("ramp", "보트 램프"), ("pier", "Princes Wharf"), ("beach", "Milford Beach")}
     assert out[0]["t"] == "ramp" and out[0]["n"] == "Sandspit Ramp"   # 이름 있는 것이 먼저
+
+
+def test_playgrounds_split_into_plain_and_splash_and_unnamed_dropped():
+    got = {"playground": {"elements": [
+        {"type": "node", "lat": -36.79, "lon": 174.77, "tags": {"leisure": "playground", "name": "Takapuna Beach Reserve Playground"}},
+        {"type": "node", "lat": -36.80, "lon": 174.78, "tags": {"leisure": "playground", "name": "Devonport Splash Pad"}},
+        {"type": "node", "lat": -36.81, "lon": 174.79, "tags": {"leisure": "playground"}},                      # 이름 없음 → 제외
+    ]}}
+    out = spots.convert(got)
+    assert {(s["t"], s["n"]) for s in out} == {("playground", "Takapuna Beach Reserve Playground"), ("splash", "Devonport Splash Pad")}
