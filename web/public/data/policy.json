@@ -1,12 +1,13 @@
 {
-  "updated": "2026-11-07",
+  "updated": "2026-11-09",
   "note": "정당 공약·정부 정책을 사람이 공식 자료(정당 사이트·INZ·정부 보도자료)와 주요 언론 기사로 확인해 적은 기록입니다. 해석·평가는 넣지 않았고, 확인하지 못한 항목은 비워 두었습니다. 최종 판단은 반드시 원문 링크로 하세요.",
   "election": {
     "date": "2026-11-07",
-    "status": "투표일 (개표 진행 중) — 결과·연정 구성이 확정되기 전의 공약 기준입니다",
-    "detail": "선거관리위원회는 공식 결과를 11월 27일 발표할 예정입니다. 표시된 공약은 어느 정당이 정부에 참여하든 연정 협상을 거쳐야 정책이 됩니다.",
+    "status": "잠정 개표 결과 발표 — 연정 구성은 아직 확정되지 않았습니다",
+    "detail": "잠정 의석(131석 중): 국민 42 · 노동 36 · 녹색 16 · ACT 13 · 뉴질랜드 퍼스트 12 · 오퍼튜니티 7 · 테 파티 마오리 5. 초과 의석(overhang)이 있고 특별투표 집계가 남아 의석이 바뀔 수 있으며, 공식 결과는 11월 27일 발표 예정입니다. 아래 정당별 내용은 어느 정당이 정부를 맡을지 정해지기 전의 공약 기준이에요.",
     "sources": [
-      "elections",
+      "elprelim",
+      "rnz_results",
       "elresults"
     ]
   },
@@ -85,6 +86,16 @@
       "label": "INZ 뉴스센터",
       "url": "https://www.immigration.govt.nz/about-us/news-centre/",
       "type": "공식"
+    },
+    "elprelim": {
+      "label": "선거관리위원회 잠정 개표 결과",
+      "url": "https://elections.nz/media-and-news/2026/2026-general-election-preliminary-results",
+      "type": "공식"
+    },
+    "rnz_results": {
+      "label": "RNZ 2026 선거 결과",
+      "url": "https://www.rnz.co.nz/news/election-2026-results",
+      "type": "언론"
     }
   },
   "dirs": {
