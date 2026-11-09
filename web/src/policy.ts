@@ -188,6 +188,12 @@ export function policyPanel(h: H, d: PolicyData, news: PolicyNews | null): HTMLE
       return b;
     }));
     const list = news.items.filter((x) => newsFilter === "all" || x.parties.includes(newsFilter));
+    // 정당별 최근 30일 기사 수 (관심이 어디 쏠리는지)
+    const cut = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10);
+    const cnt = [...d.parties.map((p) => p.id), "gov"].map((id) => ({ id, n: news.items.filter((x) => x.date >= cut && x.parties.includes(id)).length }));
+    const mx = Math.max(1, ...cnt.map((c) => c.n));
+    wrap.append(h("div", { class: "pol-bars", role: "img", "aria-label": "정당별 최근 30일 관련 기사 수" }, ...cnt.map((c) => h("div", { class: "pol-bar" }, h("span", { class: "pb-l" }, partyName(c.id)),
+      h("span", { class: "pb-t" }, h("i", { style: `width:${(c.n / mx * 100).toFixed(0)}%` })), h("span", { class: "pb-n" }, String(c.n))))));
     wrap.append(chips, h("ul", { class: "pol-list" }, ...list.slice(0, 40).map((x) => h("li", { class: "pol-item" },
       h("div", { class: "pol-item-head" }, h("span", { class: "muted" }, fmtPolicyDate(x.date)), ...x.parties.map((p) => h("span", { class: "pol-badge" }, partyName(p))),
         x.change ? h("span", { class: "pol-badge cross" }, "정책 변화 신호") : null),

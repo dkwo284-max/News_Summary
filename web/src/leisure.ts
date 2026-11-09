@@ -514,7 +514,22 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
         qf("🆓 무료·저렴만", freeOnly, (v) => (freeOnly = v)), qf("☔ 실내만 (비 와도)", indoorOnly, (v) => (indoorOnly = v)),
         qf("📍 15km 이내", nearOnly, (v) => (nearOnly = v)), qf("🗺️ 지도 영역만 목록에", viewOnly, (v) => (viewOnly = v))));
     // 시설 종류·장소 레이어·거리 기준은 추천·즐겨찾기 아래 '지도 설정'으로 (펼쳐 둠)
-    const det = h("details", { class: "lset", open: "" }, h("summary", {}, "🗺️ 지도 설정 — 시설 종류 · 장소 레이어 · 거리 기준"),
+    // 묶음 프리셋: 시설 종류 12개를 한 번에 고르기
+    const PRESETS: { label: string; kinds: Kind[] | null }[] = [
+      { label: "✨ 전체", kinds: null },
+      { label: "👨‍👩‍👧 아이와", kinds: ["kids", "swim", "sports", "walk", "climb", "tennis"] },
+      { label: "🏋️ 운동", kinds: ["gym", "tennis", "climb", "studio", "sports", "golf"] },
+      { label: "💦 물놀이", kinds: ["swim", "kayak", "sailing", "fishing"] },
+      { label: "⛵ 바다·골프", kinds: ["sailing", "kayak", "fishing", "golf"] },
+    ];
+    const presetRow = h("div", { class: "chips", role: "group", "aria-label": "빠른 묶음" }, h("span", { class: "eth-rowlabel" }, "묶음"), ...PRESETS.map((pr) => {
+      const set = new Set<Kind>(pr.kinds ?? KINDS.map((k) => k.key));
+      const active = set.size === on.size && [...set].every((k) => on.has(k));
+      const b = h("button", { type: "button", class: "chip quick", "aria-pressed": String(active) }, pr.label);
+      b.addEventListener("click", () => { on.clear(); set.forEach((k) => on.add(k)); renderAll(); });
+      return b;
+    }));
+    const det = h("details", { class: "lset", open: "" }, h("summary", {}, "🗺️ 지도 설정 — 시설 종류 · 장소 레이어 · 거리 기준"), presetRow,
       h("div", { class: "chips", role: "group", "aria-label": "표시할 시설" }, ...kindChips),
       h("div", { class: "chips", role: "group", "aria-label": "표시할 장소" }, h("span", { class: "eth-rowlabel" }, "장소"), ...spotChips,
         spots.length ? null : h("small", { class: "muted" }, " (장소 데이터는 Actions → Fishing / kayak / swim spots 실행 후 표시)")),

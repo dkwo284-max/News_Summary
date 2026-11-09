@@ -335,6 +335,12 @@ def main(argv: list[str] | None = None) -> int:
         log.warning("policy news failed: %s", e)
 
     try:
+        from weekly import write_weekly
+
+        write_weekly(out_dir, local_now.date())
+    except Exception as e:  # noqa: BLE001
+        log.warning("weekly failed: %s", e)
+    try:
         from status import write_status
 
         write_status(out_dir, brief)

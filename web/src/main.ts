@@ -5,7 +5,8 @@ import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
 import { gpSection, loadGP } from "./gpmap";
 import { loadIncidents, safetyAlert, safetySection } from "./crimemap";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
-import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, unfollow, type SeenIndex } from "./news-tools";
+import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, isSaved, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, toggleSaved, unfollow, type SeenIndex } from "./news-tools";
+import { homeView, statusPanel } from "./home";
 import { trackerCard } from "./tracker";
 import type { PolicyData, PolicyNews } from "./policy";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
@@ -19,9 +20,11 @@ interface TabDef {
 }
 
 const TABS: TabDef[] = [
+  { id: "home", icon: "🏠", label: "홈", sections: [] },
   { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["akl_safety", "akl_life", "akl_property", "akl_health", "akl_education", "nz_auckland"] },
+  { id: "leisure", icon: "🏌️", label: "레저", sections: [] },
   { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_society", "nz_education", "nz_economy", "nz_politics", "nz_national"] },
-  { id: "imm", icon: "🛂", label: "이민 레이더", sections: ["nz_immigration"] },
+  { id: "imm", icon: "🛂", label: "이민", sections: ["nz_immigration"] },
   { id: "kr", icon: "🇰🇷", label: "한국", sections: ["kr_society", "kr_economy", "kr_entertainment", "kr_politics"] },
 ];
 const KR_CHIPS: { key: SectionKey | "all"; label: string }[] = [
@@ -50,7 +53,6 @@ const AKL_CHIPS: Chip[] = [
   { key: "akl_life", label: "생활" },
   { key: "hood", label: "📍 내 동네" },
   { key: "akl_property", label: "부동산" },
-  { key: "leisure", label: "🏌️ 레저" },
   { key: "akl_health", label: "의료" },
   { key: "akl_education", label: "교육" },
 ];
@@ -69,6 +71,10 @@ let eduFilter = "all"; // 교육 칩 주제 필터
 const HIGHER_KEY = "daily-brief:edu-higher";
 let eduHigher = (() => { try { return localStorage.getItem(HIGHER_KEY) === "1"; } catch { return false; } })(); // 대학·유학생 기사 보기 (기본 숨김)
 const eduHidden = (it: Item, key: SectionKey) => (key === "akl_education" || key === "nz_education") && !eduHigher && eduTopic(it).key === "higher";
+const CARD_MODE_KEY = "daily-brief:card-mode";
+let cardMode: "compact" | "full" = (() => { try { return localStorage.getItem(CARD_MODE_KEY) === "full" ? "full" : "compact"; } catch { return "compact"; } })(); // 기본은 간단히(제목·한 줄 요약)
+let searchPast = false; // 검색에 지난 30일 브리핑 포함
+let pastCache: Brief[] | null = null;
 let seenIdx: SeenIndex | null = null; // 지금 보는 브리핑 이전 3일치 기사 (새 소식 판단용)
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -233,6 +239,7 @@ function renderTabs(): void {
         class: "tab",
         role: "tab",
         id: `tab-${t.id}`,
+        title: t.id === "imm" ? "이민 레이더" : t.label,
         "aria-selected": String(selected),
         "aria-controls": "main",
         tabindex: selected ? "0" : "-1",
@@ -285,7 +292,9 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   if (rt) meta.append(h("span", {}, rt));
 
   const summary = h("ul", { class: "summary" }, ...item.summary_ko.map((s) => h("li", {}, s)));
-  const art = h("article", { class: `card${item.impact && item.impact.level !== "none" ? ` imp-${item.impact.level}` : ""}` }, meta, title, summary);
+  const compact = cardMode === "compact";
+  const art = h("article", { class: `card${item.impact && item.impact.level !== "none" ? ` imp-${item.impact.level}` : ""}${item.importance >= 9 ? " hero" : ""}${compact ? " compact" : ""}` }, meta, title, summary);
+  if (item.impact && item.impact.level !== "none") meta.append(h("span", { class: `impact-badge ${item.impact.level}` }, `영향 ${IMPACT_LABEL[item.impact.level]}`));
 
   const imp = item.impact;
   if (imp && imp.level !== "none") {
@@ -322,12 +331,27 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
     fol.setAttribute("aria-pressed", String(on));
     fol.textContent = on ? "📌 팔로우 중" : "📌 팔로우";
   });
+  const sv = h("button", { type: "button", class: "follow-btn", "aria-pressed": String(isSaved(item.id)) }, isSaved(item.id) ? "🔖 저장됨" : "🔖 저장");
+  sv.addEventListener("click", () => {
+    const on = toggleSaved(item, brief?.date ?? "", sectionLabel ?? "");
+    sv.setAttribute("aria-pressed", String(on));
+    sv.textContent = on ? "🔖 저장됨" : "🔖 저장";
+  });
   foot.append(
     h("div", { class: "sources" }, ...item.sources.map((s) =>
       h("a", { href: safeUrl(s.url), target: "_blank", rel: "noopener noreferrer" }, `${s.name} ↗`),
-    ), fol),
+    ), fol, sv),
   );
   art.append(foot);
+  if (compact) {
+    const more = h("button", { type: "button", class: "card-more", "aria-expanded": "false" }, "자세히 ▾");
+    more.addEventListener("click", () => {
+      const open = art.classList.toggle("compact");
+      more.setAttribute("aria-expanded", String(!open));
+      more.textContent = open ? "자세히 ▾" : "접기 ▴";
+    });
+    art.append(more);
+  }
   return art;
 }
 
@@ -392,7 +416,9 @@ function renderSearch(): void {
       }
     }
   }
-  main.append(h("p", { class: "result-count", role: "status" }, `‘${query}’ 검색 결과 ${hits.length}건`));
+  const pastBtn = h("button", { type: "button", class: "chip", "aria-pressed": String(searchPast) }, "🗂 지난 30일까지 검색");
+  pastBtn.addEventListener("click", () => { searchPast = !searchPast; renderMain(); });
+  main.append(h("div", { class: "chips" }, pastBtn), h("p", { class: "result-count", role: "status" }, `‘${query}’ 오늘 브리핑 검색 결과 ${hits.length}건`));
   for (const { item, key } of hits) {
     // 검색 결과에서는 '사회'처럼 같은 이름이 두 나라에 있으므로 나라를 붙여 표시
     const label = brief.sections[key].label;
@@ -400,6 +426,42 @@ function renderSearch(): void {
       : ["nz_auckland", "nz_immigration"].includes(key) ? label : `뉴질랜드 ${label}`;
     main.append(card(item, key.startsWith("kr_") ? "kr" : "nz", tagged));
   }
+  if (searchPast) {
+    const slot = h("section", { class: "past-hits" }, h("p", { class: "muted" }, "지난 브리핑을 불러오는 중…"));
+    main.append(slot);
+    void allBriefs().then((all) => {
+      if (!slot.isConnected) return;
+      const rows: { date: string; label: string; item: Item }[] = [];
+      for (const b of all) {
+        if (b.date === brief!.date) continue;
+        const done = new Set<string>();
+        for (const [k, sec] of Object.entries(b.sections)) {
+          if (k === "kr_politics" && !settings.showPolitics) continue;
+          for (const it of sec.items) {
+            const hay = [it.title_ko, it.original_title ?? "", ...it.summary_ko, ...it.tags].join(" ").toLowerCase();
+            if (hay.includes(q) && !done.has(it.id)) { done.add(it.id); rows.push({ date: b.date, label: sectionLabelOf(b, k as SectionKey), item: it }); }
+          }
+        }
+      }
+      rows.sort((a, c) => c.date.localeCompare(a.date));
+      slot.replaceChildren(h("h2", { class: "sec-title" }, `지난 브리핑 검색 결과 ${rows.length}건`),
+        rows.length ? h("ul", { class: "hm-list past-list" }, ...rows.slice(0, 80).map((r) => h("li", {}, h("small", { class: "muted" }, `${r.date.slice(5).replace("-", "/")} ${r.label} · `),
+          r.item.sources[0] ? h("a", { href: safeUrl(r.item.sources[0].url), target: "_blank", rel: "noopener noreferrer" }, r.item.title_ko) : r.item.title_ko))) : h("p", { class: "muted" }, "지난 30일에는 없어요."));
+    });
+  }
+}
+
+const sectionLabelOf = (b: Brief, key: SectionKey): string => {
+  const l = b.sections[key]?.label ?? "";
+  return key.startsWith("kr_") ? `한국 ${l}` : key.startsWith("akl_") ? `오클랜드 ${l}` : ["nz_auckland", "nz_immigration"].includes(key) ? l : `뉴질랜드 ${l}`;
+};
+
+async function allBriefs(): Promise<Brief[]> {
+  if (pastCache) return pastCache;
+  const dates = await loadIndex();
+  const got = await Promise.all(dates.map((d) => getJSON<Brief>(`./data/${d}.json`).catch(() => null)));
+  pastCache = got.filter((b): b is Brief => !!b);
+  return pastCache;
 }
 
 // AI 요약·선별이 실패한 날: 원문으로 보이는 이유와 자동 재시도 안내
@@ -507,6 +569,19 @@ function renderMain(): void {
   main.setAttribute("aria-labelledby", `tab-${tab.id}`);
   const banner = degradedBanner();
   if (banner) main.append(banner);
+  if (tab.id === "home") {
+    const al = alertBanner(brief.meta?.alerts ?? []);
+    if (al) main.append(al);
+    main.append(homeView(h, { brief, recent, tabs: TABS, sections: visibleSections, fresh: (it) => !isOld(it, seenIdx), hidden: eduHidden, goTab: selectTab, rerender: renderMain }));
+    const fs = followSection();
+    if (fs) main.append(fs);
+    if (!recent) { const cur = brief; void recentBriefs().then(() => { if (brief === cur && settings.tab === "home" && !query) renderMain(); }).catch(() => undefined); }
+    return;
+  }
+  if (tab.id === "leisure") {
+    void renderLeisure();
+    return;
+  }
   if (tab.id === "kr" || tab.id === "nz" || tab.id === "akl") {
     const chips = renderChips(tab.id);
     if (chips) main.append(chips);
@@ -529,10 +604,6 @@ function renderMain(): void {
     }
     if (tab.id === "akl" && sel === "hood") {
       renderHood();
-      return;
-    }
-    if (tab.id === "akl" && sel === "leisure") {
-      renderLeisure();
       return;
     }
     if (tab.id === "akl") {
@@ -637,7 +708,7 @@ function processingBoard(): HTMLElement | null {
     const has = !!(it.p90 || it.p50);
     const pct = it.pct ?? 90;
     const sub = !has ? "공식 페이지에서 확인" : it.p50 && it.p90 ? `절반은 ${it.p50} 이내` : it.sub || "";
-    const t = h("li", { class: `tile${has ? "" : " tile-missing"}` },
+    const t = h("li", { class: `tile${has ? "" : " tile-missing"}`, "data-key": it.key },
       h("span", { class: "tile-group" }, it.group),
       h("span", { class: "tile-name" }, it.name),
       h("span", { class: "tile-pct" }, has ? `${pct}% 처리` : ""),
@@ -658,13 +729,27 @@ function processingBoard(): HTMLElement | null {
     if (it.note) t.title = it.note;
     return t;
   };
-  return h("section", { class: "board", "aria-labelledby": "board-title" },
+  const board = h("section", { class: "board", "aria-labelledby": "board-title" },
     h("div", { class: "board-head" },
       h("h2", { id: "board-title" }, "⏱ 비자 처리 기간 전광판"),
       h("span", { class: "board-meta" }, `INZ·DIA 공식 안내 · ${fmtDateShort(pt.updated_at)} 확인`)),
     h("ul", { class: "tiles" }, ...pt.items.map(tile)),
     h("p", { class: "board-note" }, "‘80% 처리’는 신청의 80%가 결정된 기간이에요(INZ 기준, 근무일 계산). 서류 상태에 따라 달라질 수 있으니 신청 전 공식 페이지를 꼭 확인하세요."),
   );
+  // 비자별 처리 기간 추이 (기록이 3일 이상 쌓인 것만)
+  void getJSON<Record<string, { date: string; p50: string; p90: string }[]>>("./data/processing-history.json").then(async (hist) => {
+    const { sparkline } = await import("./home");
+    const { procDays } = await import("./tracker");
+    for (const li of board.querySelectorAll<HTMLElement>("li.tile[data-key]")) {
+      const rows = hist[li.dataset.key ?? ""] ?? [];
+      const vals = rows.map((r) => procDays(r.p90 || r.p50)).filter((v): v is number => v != null);
+      if (vals.length < 3) continue;
+      const first = li.querySelector(".tile-sub");
+      const wrap = h("span", { class: "tile-spark" }, sparkline(vals, { w: 110, h: 28, label: `처리 기간 ${vals.length}일 추이` }), h("small", {}, `${vals.length}일 추이`));
+      first?.after(wrap);
+    }
+  }).catch(() => undefined);
+  return board;
 }
 
 // 이민 알림: 처리 기간 급변·레이더 9점 이상 기사
@@ -802,10 +887,10 @@ async function renderLeisure(): Promise<void> {
   const holder = h("div", { "aria-busy": "true" }, h("p", { class: "muted" }, "레저 정보를 불러오는 중…"));
   main.append(holder);
   const [gp, mod] = await Promise.all([loadGP(), import("./leisure")]);
-  if (chipState.akl !== "leisure" || settings.tab !== "akl" || !holder.isConnected) return;
+  if (settings.tab !== "leisure" || !holder.isConnected) return;
   const fx = (viewingLatest && live?.fx) || brief?.extras.nzd_krw;
   const view = await mod.leisureView(h, { suburbs: watch.suburbs, gp, fx, link: extLink });
-  if (chipState.akl !== "leisure" || !holder.isConnected) return;
+  if (settings.tab !== "leisure" || !holder.isConnected) return;
   holder.replaceChildren(view);
   holder.removeAttribute("aria-busy");
 }
@@ -907,6 +992,38 @@ function initSettings(): void {
   }
 }
 
+// 카드 보기 전환(간단히/자세히) — 도구 줄 맨 뒤 버튼
+function initCardMode(): void {
+  const tools = document.querySelector(".tools");
+  if (!tools) return;
+  const btn = h("button", { type: "button", class: "icon-btn mode-btn", id: "card-mode", "aria-label": "카드 보기 방식 바꾸기" });
+  const paint = () => {
+    btn.textContent = cardMode === "compact" ? "☰ 간단히" : "▤ 자세히";
+    btn.title = cardMode === "compact" ? "지금은 제목·한 줄 요약만 보여요 (누르면 자세히)" : "지금은 모든 내용을 보여요 (누르면 간단히)";
+  };
+  paint();
+  btn.addEventListener("click", () => {
+    cardMode = cardMode === "compact" ? "full" : "compact";
+    try { localStorage.setItem(CARD_MODE_KEY, cardMode); } catch { /* 무시 */ }
+    paint();
+    renderMain();
+  });
+  tools.append(btn);
+}
+
+// 데이터 상태: 푸터의 접이식 패널 (열 때 status.json 을 읽는다)
+function initStatus(): void {
+  const foot = document.querySelector("footer.foot");
+  if (!foot) return;
+  const host = h("div", { class: "status-host" });
+  const det = h("details", { class: "data-status" }, h("summary", {}, "🩺 데이터 상태 (브리핑·피드·AI·갱신 시각)"), host);
+  let loaded = false;
+  det.addEventListener("toggle", () => {
+    if (det.open && !loaded) { loaded = true; host.append(h("p", { class: "muted" }, "불러오는 중…")); void statusPanel(h, host); }
+  });
+  foot.prepend(det);
+}
+
 function initOffline(): void {
   const banner = $<HTMLDivElement>("offline");
   const update = () => (banner.hidden = navigator.onLine);
@@ -930,6 +1047,8 @@ async function init(): Promise<void> {
   initSearch();
   initSettings();
   initOffline();
+  initCardMode();
+  initStatus();
   await loadBrief();
   await initDates();
   document.addEventListener("visibilitychange", autoRefreshLive);

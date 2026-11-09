@@ -140,3 +140,35 @@ export function eduTopic(item: Item): EduTopic {
   const text = `${item.title_ko} ${(item.summary_ko ?? []).join(" ")} ${item.original_title ?? ""} ${(item.tags ?? []).join(" ")}`;
   return EDU_TOPICS.find((t) => t.words.test(text)) ?? EDU_OTHER;
 }
+
+// ── 저장한 기사 (이 기기에만 저장) ──
+const SAVED_KEY = "daily-brief:saved";
+export interface Saved { id: string; title: string; url: string; date: string; section: string; at: string }
+export function loadSaved(): Saved[] {
+  try {
+    return JSON.parse(localStorage.getItem(SAVED_KEY) || "[]") as Saved[];
+  } catch {
+    return [];
+  }
+}
+function putSaved(v: Saved[]): void {
+  try {
+    localStorage.setItem(SAVED_KEY, JSON.stringify(v.slice(0, 200)));
+  } catch {
+    /* 무시 */
+  }
+}
+export const isSaved = (id: string): boolean => loadSaved().some((x) => x.id === id);
+export function removeSaved(id: string): void {
+  putSaved(loadSaved().filter((x) => x.id !== id));
+}
+/** 저장/해제 토글. 저장하면 true */
+export function toggleSaved(item: Item, date: string, section: string): boolean {
+  const list = loadSaved();
+  if (list.some((x) => x.id === item.id)) {
+    putSaved(list.filter((x) => x.id !== item.id));
+    return false;
+  }
+  putSaved([{ id: item.id, title: item.title_ko, url: item.sources[0]?.url ?? "", date, section, at: new Date().toISOString() }, ...list]);
+  return true;
+}

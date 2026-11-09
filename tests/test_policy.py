@@ -74,3 +74,19 @@ def test_notify_content_options():
     cfg = {"output": {"app_url": "u"}, "notify": {"content": {"sections": ["nz_immigration"], "high_impact": True, "weather_fx": False}}}
     t = compose(brief, cfg)
     assert "⚠️" in t and "🚨 이민 알림" in t and "🎯" in t and "큰 뉴스" in t and "b1" in t and "b2" not in t and "💱" not in t
+
+
+def test_weekly_groups_and_threads(tmp_path):
+    from datetime import date
+
+    from weekly import build_weekly
+
+    def brief(day, title, imp):
+        return {"date": day, "sections": {"nz_immigration": {"label": "이민", "items": [{"title_ko": title, "original_title": title, "importance": imp, "sources": [{"name": "RNZ", "url": "https://x/" + day}]}]}}, "extras": {"nzd_krw": 800 + int(day[-1])}}
+
+    for d, imp in (("2026-11-05", 6), ("2026-11-06", 9)):
+        (tmp_path / f"{d}.json").write_text(json.dumps(brief(d, "Skilled migrant residence changes announced by government", imp), ensure_ascii=False), encoding="utf-8")
+    w = build_weekly(tmp_path, date(2026, 11, 7))
+    imm = [g for g in w["groups"] if g["id"] == "imm"][0]["items"]
+    assert len(imm) == 1 and imm[0]["days"] == 2 and imm[0]["importance"] == 9
+    assert w["threads"] and w["fx"] == {"first": 805, "last": 806}
