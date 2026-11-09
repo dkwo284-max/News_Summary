@@ -10,7 +10,7 @@ export interface Hourly {
 }
 export interface DayStats { date: string; temp: number; rain: number; wind: number; gust: number; wave: number | null }
 export interface Verdict { level: Level; text: string }
-export type Activity = "golf" | "sailing" | "kayak" | "fishing" | "kids" | "swim" | "sports" | "walk";
+export type Activity = "golf" | "sailing" | "kayak" | "fishing" | "kids" | "swim" | "sports" | "walk" | "gym" | "tennis" | "climb" | "studio";
 
 const avg = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0);
 const nums = (xs: (number | null | undefined)[]) => xs.filter((x): x is number => typeof x === "number" && Number.isFinite(x));
@@ -58,6 +58,13 @@ export function verdict(activity: Activity, d: DayStats): Verdict {
     // 태권도·실내 스포츠 클럽은 날씨 영향이 적고, 야외 팀 스포츠(축구·럭비)는 비·강풍에 취소될 수 있음
     if (d.rain >= 60 || d.gust >= 35) return { level: "ok", text: `야외 경기는 취소될 수 있어요 — ${facts}` };
     return { level: "good", text: `정상 진행 예상 — ${facts} · ${r(d.temp)}°C` };
+  }
+  if (activity === "gym" || activity === "climb" || activity === "studio") return { level: "good", text: "실내 운동 — 날씨 영향 없음" };
+  if (activity === "tennis") {
+    // 야외 코트: 비·강풍이면 경기 불가, 더우면 이른 아침·저녁 추천
+    if (d.rain >= 40 || d.gust >= 30) return { level: "bad", text: `비·강풍 — ${facts}` };
+    if (d.rain >= 20 || d.gust >= 22 || d.temp < 11) return { level: "ok", text: `보통 — ${facts} · ${r(d.temp)}°C` };
+    return { level: "good", text: `테니스 좋음 — ${facts} · ${r(d.temp)}°C` };
   }
   if (activity === "walk") {
     if (d.rain >= 60 || d.gust >= 35) return { level: "bad", text: `비·강풍 — ${facts}` };

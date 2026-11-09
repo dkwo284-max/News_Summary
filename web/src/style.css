@@ -676,3 +676,4 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .pol-tl-item p { margin: 4px 0; font-size: .85rem; }
 .lsub { margin: 12px 0 6px; font-size: .9rem; }
 .lsub small { color: var(--muted); font-weight: 400; }
+.lspot { margin: 8px 0 0; }

@@ -10,18 +10,18 @@ type H = <K extends keyof HTMLElementTagNameMap>(
   ...children: (Node | string | null | undefined)[]
 ) => HTMLElementTagNameMap[K];
 
-type Kind = "golf" | "sailing" | "kayak" | "fishing" | "kids" | "swim" | "sports" | "walk";
-type SpotType = "ramp" | "pier" | "beach" | "playground" | "splash";
+type Kind = "golf" | "sailing" | "kayak" | "fishing" | "kids" | "swim" | "sports" | "walk" | "gym" | "tennis" | "climb" | "studio";
+type SpotType = "ramp" | "pier" | "beach" | "playground" | "splash" | "gym" | "studio" | "tennis" | "basketball" | "outgym" | "skate";
 interface Fee { label: string; kind: string; amount: number; period: string; quote?: string; source?: string }
 interface Rating { v: number; n?: number; asof?: string }
 interface Facility {
   id: string; kind: Kind; name: string; area?: string; ll: [number, number] | null; home?: string; gmaps: string;
   fees: Fee[]; status?: string; season?: string; note?: string; checked?: string; rating?: Rating; src?: string[];
-  ages?: Age[]; indoor?: boolean; free?: boolean;
+  ages?: Age[]; indoor?: boolean; free?: boolean; chain?: boolean; brand?: string | null;
 }
 interface Change { date: string; id: string; name: string; field: string; old: number | string; new: number | string }
 interface LeisureData { updated_at: string; source: string; facilities: Facility[]; changes?: Change[] }
-interface Spot { t: SpotType; n: string; ll: [number, number] }
+interface Spot { t: SpotType; n: string; ll: [number, number]; x?: string }
 interface SpotData { updated_at: string; spots: Spot[] }
 
 export interface LeisureOpts {
@@ -40,6 +40,10 @@ const KINDS: { key: Kind; label: string; icon: string; color: string; activity: 
   { key: "swim", label: "수영·워터", icon: "🏊", color: "#0ea5e9", activity: "swim" },
   { key: "sports", label: "어린이 스포츠·태권도", icon: "🥋", color: "#f59e0b", activity: "sports" },
   { key: "walk", label: "걷기·자전거 코스", icon: "🚶", color: "#65a30d", activity: "walk" },
+  { key: "gym", label: "헬스·피트니스", icon: "🏋️", color: "#ef4444", activity: "gym" },
+  { key: "tennis", label: "테니스·라켓 클럽", icon: "🎾", color: "#84cc16", activity: "tennis" },
+  { key: "climb", label: "클라이밍", icon: "🧗", color: "#f97316", activity: "climb" },
+  { key: "studio", label: "요가·필라테스", icon: "🧘", color: "#a78bfa", activity: "studio" },
 ];
 const SPOTS: { key: SpotType; label: string; icon: string; color: string; hint: string }[] = [
   { key: "ramp", label: "보트 램프", icon: "⚓", color: "#475569", hint: "보트·카약 출발 지점으로 쓰이는 경사로예요. 사용 가능 여부·주차·요금·조석은 현장 표지판이나 오클랜드 시의회 정보를 확인하세요." },
@@ -47,6 +51,12 @@ const SPOTS: { key: SpotType; label: string; icon: string; color: string; hint: 
   { key: "beach", label: "해변", icon: "🏖️", color: "#d97706", hint: "이름이 있는 해변이에요. 수영 전에는 Safeswim 에서 수질·안전 정보를 확인하세요." },
   { key: "playground", label: "놀이터", icon: "🛝", color: "#db2777", hint: "시의회·공원의 이름 있는 놀이터예요(대부분 무료). 설비·그늘·화장실은 현장 상황이 달라요." },
   { key: "splash", label: "스플래시·워터 플레이", icon: "💦", color: "#0891b2", hint: "물놀이 놀이터예요. 보통 여름철(11~3월)·날씨 좋은 날 운영하니 가기 전에 운영 여부를 확인하세요." },
+  { key: "gym", label: "헬스장(지점)", icon: "🏋️", color: "#ef4444", hint: "OpenStreetMap에 올라 있는 헬스장·피트니스 지점이에요. 요금·24시간 여부·체험 여부는 각 체인 공식 사이트에서 확인하세요(위 카드에 주요 체인 요금을 정리했어요)." },
+  { key: "studio", label: "요가·필라테스 스튜디오", icon: "🧘", color: "#a78bfa", hint: "요가·필라테스 스튜디오예요. 수업 시간·체험 가격은 각 스튜디오 사이트에서 확인하세요." },
+  { key: "tennis", label: "테니스 클럽·코트", icon: "🎾", color: "#84cc16", hint: "이름 있는 테니스 클럽과, 클럽 밖의 코트(가까운 코트는 한 점으로 묶고 면 수를 표시)예요. 학교·사유·클럽 전용 코트가 섞여 있을 수 있어서 이용 가능 여부와 예약 방법은 현장·시의회 안내를 확인하세요." },
+  { key: "basketball", label: "농구 코트", icon: "🏀", color: "#ea580c", hint: "공원·학교의 농구 코트예요(사유로 표시된 곳은 뺐어요). 개방 여부는 현장에서 확인하세요." },
+  { key: "outgym", label: "야외 운동기구", icon: "💪", color: "#0d9488", hint: "공원의 야외 운동기구(피트니스 스테이션)예요. 보통 무료로 쓸 수 있어요." },
+  { key: "skate", label: "스케이트 파크", icon: "🛹", color: "#64748b", hint: "스케이트·킥보드 파크예요. 보호장비를 챙기세요." },
 ];
 type Age = "baby" | "kid" | "teen" | "adult" | "family";
 const AGES: { key: Age | "all"; label: string; icon: string }[] = [
@@ -59,12 +69,16 @@ const AGES: { key: Age | "all"; label: string; icon: string }[] = [
 ];
 const AGE_SHORT: Record<Age, string> = { baby: "👶영유아", kid: "🧒초등", teen: "🧑‍🎓청소년", adult: "🧑성인", family: "👨‍👩‍👧가족" };
 /** 카드 섹션 묶음 (종류를 활동 성격별로) */
-const GROUPS: { key: string; label: string; icon: string; kinds: Kind[] }[] = [
+const GROUPS: { key: string; label: string; icon: string; kinds: Kind[]; spot?: SpotType }[] = [
   { key: "play", label: "실내 놀이·가족 나들이", icon: "🧸", kinds: ["kids"] },
   { key: "water", label: "물놀이·수영", icon: "💦", kinds: ["swim"] },
   { key: "sport", label: "어린이 스포츠·태권도", icon: "🥋", kinds: ["sports"] },
   { key: "outdoor", label: "걷기·자전거 코스", icon: "🚶", kinds: ["walk"] },
   { key: "sea", label: "요트·카약·낚시", icon: "⛵", kinds: ["sailing", "kayak", "fishing"] },
+  { key: "gym", label: "헬스·피트니스 (체인 비교)", icon: "🏋️", kinds: ["gym"], spot: "gym" },
+  { key: "tennis", label: "테니스·라켓 클럽", icon: "🎾", kinds: ["tennis"], spot: "tennis" },
+  { key: "climb", label: "클라이밍", icon: "🧗", kinds: ["climb"] },
+  { key: "studio", label: "요가·필라테스", icon: "🧘", kinds: ["studio"], spot: "studio" },
 ];
 /** 물놀이·수영 묶음 안의 갈래 */
 const WATER_SUBS = [
@@ -120,9 +134,11 @@ const kindInfo = (k: Kind) => KINDS.find((x) => x.key === k) ?? KINDS[0];
 const DEFAULT_AGES: Record<Kind, Age[]> = {
   golf: ["teen", "adult"], sailing: ["kid", "teen", "adult", "family"], kayak: ["teen", "adult", "family"], fishing: ["kid", "teen", "adult", "family"],
   kids: ["baby", "kid", "family"], swim: ["baby", "kid", "teen", "adult", "family"], sports: ["kid", "teen"], walk: ["baby", "kid", "teen", "adult", "family"],
+  gym: ["teen", "adult"], tennis: ["kid", "teen", "adult", "family"], climb: ["kid", "teen", "adult", "family"], studio: ["adult"],
 };
 const agesOf = (f: Facility): Age[] => (f.ages?.length ? f.ages : DEFAULT_AGES[f.kind]);
 const isIndoor = (f: Facility): boolean => f.indoor ?? (f.kind === "kids" || f.kind === "sports");
+const MEMBER_KINDS = new Set<Kind>(["gym", "tennis", "climb", "studio"]);
 const ENTRY_KINDS = new Set(["child", "adult_entry", "lesson", "family_pass", "tour", "hire", "berth", "social"]);
 /** 카드에 붙일 가격 배지: 무료 / $N~ (입장·수강 기준 최저가) / 연 $N (골프·클럽) / 요금 미확인 */
 export function priceBadge(f: Facility): { text: string; cls: string } {
@@ -130,6 +146,14 @@ export function priceBadge(f: Facility): { text: string; cls: string } {
   const note = f.note ?? "";
   if (f.fees.some((x) => x.kind === "adult_entry" && x.amount === 0)) return { text: "전 연령 무료", cls: "free" };
   if (/(어린이|16세).{0,24}무료/.test(note) && !/않|참여하지|다르/.test(note)) return { text: "어린이 무료", cls: "free" };
+  if (MEMBER_KINDS.has(f.kind)) {
+    const ms = f.fees.filter((x) => x.kind === "adult" && x.amount > 0 && (x.period === "week" || x.period === "month"));
+    if (ms.length) {
+      const per = (x: Fee) => (x.period === "week" ? x.amount * 4.33 : x.amount);
+      const best = ms.reduce((a, b) => (per(a) <= per(b) ? a : b));
+      return { text: `${best.period === "week" ? "주" : "월"} $${num(best.amount)}~`, cls: per(best) <= 45 ? "cheap" : "" };
+    }
+  }
   const entry = f.fees.filter((x) => ENTRY_KINDS.has(x.kind) && x.period !== "year" && x.amount > 0).map((x) => x.amount);
   if (entry.length) return { text: `$${num(Math.min(...entry))}~`, cls: Math.min(...entry) <= 10 ? "cheap" : "" };
   const y = yearly(f, "adult") ?? yearly(f, "social") ?? yearly(f, "family");
@@ -215,7 +239,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     if (freeOnly && !["free", "cheap"].includes(priceBadge(f).cls)) return false;
     if (indoorOnly && !isIndoor(f)) return false;
     if (nearOnly) {
-      const d = dist(f.ll);
+      const d = distF(f);
       if (d == null || d > 15) return false;
     }
     return true;
@@ -227,6 +251,18 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   };
   const origin = (): [number, number] => (base && o.gp?.suburbs[base]) || CBD;
   const dist = (ll: [number, number] | null) => (ll ? km(origin(), ll) : null);
+  /** 시설까지 거리. 지점이 여러 곳인 체인은 같은 이름의 가장 가까운 지점(장소 데이터)까지. */
+  const distF = (f: Facility): number | null => {
+    if (!f.chain || !f.brand) return dist(f.ll);
+    const key = f.brand.toLowerCase();
+    let best: number | null = null;
+    for (const sp of spots) {
+      if ((sp.t !== "gym" && sp.t !== "studio") || !sp.n.toLowerCase().includes(key)) continue;
+      const d = dist(sp.ll);
+      if (d != null && (best == null || d < best)) best = d;
+    }
+    return best;
+  };
   const ratingOf = (f: Facility): Rating | undefined => f.rating ?? mine[f.id];
 
   root.append(h("section", { class: "hood-card" },
@@ -382,7 +418,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
 
   function facilityDetail(f: Facility): HTMLElement {
     const d = h("div", { class: "gp-info leisure-detail" });
-    const ki = kindInfo(f.kind), dd = dist(f.ll), r = ratingOf(f);
+    const ki = kindInfo(f.kind), dd = distF(f), r = ratingOf(f);
     d.append(h("strong", {}, `${ki.icon} ${f.name}`),
       h("div", { class: "muted" }, `${f.area ?? ""}${dd != null ? ` · ${base || "시내"}에서 ${dd.toFixed(1)}km` : " · 지도 위치 미확인"}${r ? ` · ★${r.v.toFixed(1)}${r.n ? ` (${r.n.toLocaleString("ko-KR")}건)` : ""}${r.asof ? ` ${r.asof}` : ""}` : ""}`));
     const row = (x: Fee) => h("li", {}, h("strong", {}, money(x.amount, x.period)), ` ${x.label}`,
@@ -411,7 +447,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     const info = SPOTS.find((x) => x.key === s.t)!;
     const dd = dist(s.ll);
     const d = h("div", { class: "gp-info leisure-detail" }, h("strong", {}, `${info.icon} ${s.n}`),
-      h("div", { class: "muted" }, `${info.label}${dd != null ? ` · ${base || "시내"}에서 ${dd.toFixed(1)}km` : ""}`), h("p", {}, info.hint));
+      h("div", { class: "muted" }, `${info.label}${s.x ? ` · ${s.x}` : ""}${dd != null ? ` · ${base || "시내"}에서 ${dd.toFixed(1)}km` : ""}`), h("p", {}, info.hint));
     const links = h("div", { class: "hood-links" }, o.link(`https://www.google.com/maps/search/?api=1&query=${s.ll[0]},${s.ll[1]}`, "🗺️ 구글 지도"));
     if (s.t === "beach") links.append(o.link("https://www.safeswim.org.nz", "🏊 Safeswim 수질·안전"));
     if (s.t === "pier") links.append(o.link("https://www.mpi.govt.nz/fishing-aquaculture/recreational-fishing/fishing-rules/auckland-kermadec-fishing-rules", "📋 낚시 규칙"));
@@ -502,7 +538,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     const items = facilities.filter((f) => f.kind === "golf" && visible(f));
     const val = (f: Facility): number => {
       if (sort === "fee") return yearly(f, "adult") ?? Number.POSITIVE_INFINITY;
-      return dist(f.ll) ?? Number.POSITIVE_INFINITY;
+      return distF(f) ?? Number.POSITIVE_INFINITY;
     };
     return [...items].sort((a, b) => (sort === "name" ? a.name.localeCompare(b.name) : val(a) - val(b)));
   };
@@ -512,7 +548,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     const items = sortedGolf();
     const head = h("tr", {}, ...["클럽", "거리", "성인 1", "입회비", "사이트"].map((t) => h("th", { scope: "col" }, t)));
     const body = items.map((f) => {
-      const d = dist(f.ll);
+      const d = distF(f);
       const cell = (k: string) => {
         const x = feeOf(f, k);
         return x ? h("td", {}, money(x.amount, k === "joining" ? "" : x.period === "year" ? "" : x.period)) : h("td", { class: "muted" }, "—");
@@ -579,7 +615,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   }
 
   function card(f: Facility): HTMLElement {
-    const d = dist(f.ll), pb = priceBadge(f), ki = kindInfo(f.kind);
+    const d = distF(f), pb = priceBadge(f), ki = kindInfo(f.kind);
     const top = [...f.fees].sort((a, b) => feeRank(a) - feeRank(b)).slice(0, 2).map((x) => `${x.label.replace(/\s*\(.*?\)\s*/g, " ").trim().slice(0, 26)} ${money(x.amount, x.period)}`);
     const name = h("button", { type: "button", class: "lc-name" }, f.name);
     name.addEventListener("click", () => select({ fac: f.id }));
@@ -607,12 +643,21 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     return map.getBounds().contains(f.ll);
   }
 
+  /** 그룹 아래 "지도에 지점 표시" 버튼 (해당 장소 레이어 켜기·끄기) */
+  function spotToggle(t: SpotType): HTMLElement {
+    const info = SPOTS.find((x) => x.key === t)!;
+    const n = spots.filter((sp) => sp.t === t).length;
+    const b = h("button", { type: "button", class: "chip quick", "aria-pressed": String(spotOn.has(t)) }, `🗺️ 지도에 ${info.label} ${spotOn.has(t) ? "숨기기" : `보기${n ? ` (${n}곳)` : ""}`}`);
+    b.addEventListener("click", () => { spotOn.has(t) ? spotOn.delete(t) : spotOn.add(t); renderAll(); });
+    return h("p", { class: "lspot" }, b, n ? null : h("small", { class: "muted" }, " (장소 데이터는 Actions → spots 실행 후 표시)"));
+  }
+
   function renderSections() {
     const blocks: Node[] = [];
     for (const g of GROUPS) {
       const all = facilities.filter((f) => g.kinds.includes(f.kind) && visible(f));
       if (!all.length) continue;
-      const shown = all.filter(inView).sort((a, b) => (dist(a.ll) ?? 1e9) - (dist(b.ll) ?? 1e9));
+      const shown = all.filter(inView).sort((a, b) => (distF(a) ?? 1e9) - (distF(b) ?? 1e9));
       const water = g.key === "water";
       const grid = !water ? (shown.length ? h("div", { class: "lgrid" }, ...shown.map(card)) : null) : h("div", {}, ...WATER_SUBS.flatMap((sub) => {
         const part = shown.filter((f) => waterSub(f) === sub.key);
@@ -621,7 +666,8 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
       blocks.push(h("details", { class: "lgroup", open: "" },
         h("summary", {}, `${g.icon} ${g.label}`, h("small", {}, ` ${shown.length}${shown.length !== all.length ? `/${all.length}` : ""}곳`)),
         shown.length ? grid : h("p", { class: "muted" }, "지도에 보이는 영역에는 없어요. 지도를 움직이거나 “지도 영역만 목록에”를 꺼 보세요."),
-        g.kinds.includes("fishing") && on.has("fishing") ? fishingRules() : null));
+        g.kinds.includes("fishing") && on.has("fishing") ? fishingRules() : null,
+        g.spot ? spotToggle(g.spot) : null));
     }
     // 가까운 놀이터·물놀이 (장소 데이터)
     if (spots.length && (age === "all" || ["baby", "kid", "family"].includes(age))) {
@@ -639,7 +685,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     }
     if (!blocks.length) blocks.push(h("section", { class: "hood-card" }, h("p", { class: "muted" }, "조건에 맞는 시설이 없어요. 연령대나 필터를 바꿔 보세요.")));
     listBox.replaceChildren(...blocks);
-    const missing = facilities.filter((f) => visible(f) && !f.ll);
+    const missing = facilities.filter((f) => visible(f) && !f.ll && !f.chain);
     missBox.replaceChildren(missing.length ? h("section", { class: "hood-card" }, h("h2", {}, "📍 지도 위치를 못 찾은 곳"),
       h("ul", { class: "leisure-fees" }, ...missing.map((f) => {
         const b = h("button", { type: "button", class: "leisure-name" }, `${kindInfo(f.kind).icon} ${f.name}`);
@@ -655,7 +701,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     const score = (f: Facility) => {
       const fit = rainy ? (isIndoor(f) ? 0 : 5) : (f.kind === "walk" || f.kind === "swim" || f.kind === "kids" ? 0 : 1) + (isIndoor(f) ? 1 : 0);
       const pb = priceBadge(f);
-      return fit * 100 + (dist(f.ll) ?? 40) + (pb.cls === "free" ? -8 : pb.cls === "cheap" ? -4 : 0);
+      return fit * 100 + (distF(f) ?? 40) + (pb.cls === "free" ? -8 : pb.cls === "cheap" ? -4 : 0);
     };
     const picks = pool.filter((f) => (rainy ? isIndoor(f) : true)).sort((a, b) => score(a) - score(b)).slice(0, 3);
     if (!picks.length) { picksBox.replaceChildren(); return; }
@@ -694,7 +740,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
           row("어린이 요금", (f) => topFee(f, ["child", "lesson"])),
           row("성인 요금", (f) => topFee(f, ["adult_entry", "adult"])),
           row("가족권", (f) => topFee(f, ["family_pass", "family"])),
-          row("거리", (f) => { const d = dist(f.ll); return d != null ? `${d.toFixed(1)}km` : "—"; }),
+          row("거리", (f) => { const d = distF(f); return d != null ? `${d.toFixed(1)}km` : "—"; }),
           row("연령", (f) => agesOf(f).map((a) => AGE_SHORT[a]).join(" ")),
           row("실내/야외", (f) => (isIndoor(f) ? "🏠 실내" : "🌳 야외")),
           row("상태", (f) => (f.status && f.status !== "unknown" ? STATUS[f.status] : "미확인")),
@@ -794,7 +840,7 @@ async function forecast(h: H, slot: HTMLElement, at: [number, number], onDays?: 
     if (!days.length) throw new Error("no data");
     onDays?.(days);
     const label = ["오늘", "내일"];
-    const rows = KINDS.map((k) => h("tr", {}, h("th", { scope: "row" }, `${k.icon} ${k.label}`),
+    const rows = KINDS.filter((k) => !["gym", "climb", "studio"].includes(k.key)).map((k) => h("tr", {}, h("th", { scope: "row" }, `${k.icon} ${k.label}`),
       ...days.slice(0, 2).map((d) => {
         const v = verdict(k.activity, d);
         return h("td", { title: v.text }, `${lvIcon[v.level]} `, h("small", {}, v.text.split(" — ")[0]));

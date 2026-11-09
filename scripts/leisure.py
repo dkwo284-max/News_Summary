@@ -35,7 +35,7 @@ MANUAL = ROOT / "data" / "leisure-manual.json"
 OUT = ROOT / "web" / "public" / "data" / "leisure.json"
 NOMINATIM = "https://nominatim.openstreetmap.org/search"
 BBOX = (-37.45, -36.15, 174.20, 175.30)  # 오클랜드 광역시(위도 하한·상한, 경도 하한·상한)
-KINDS = ["golf", "sailing", "kayak", "fishing", "kids", "swim", "sports", "walk"]
+KINDS = ["golf", "sailing", "kayak", "fishing", "kids", "swim", "sports", "walk", "gym", "tennis", "climb", "studio"]
 FEE_KINDS = ["adult", "couple", "family", "junior", "student", "social", "joining", "greenfee18", "greenfee9", "hire", "tour", "berth", "child", "adult_entry", "family_pass", "lesson", "other"]
 PERIODS = ["year", "season", "month", "week", "day", "hour", "round", "once", "person"]
 STATUS = ["open", "waitlist", "closed", "unknown"]
@@ -415,6 +415,8 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
         geo = s.get("geo") or f"{s['name']}, Auckland"
         if s.get("ll"):           # 좌표를 직접 적은 곳(OSM 등에서 확인한 값)은 조회하지 않는다
             geocache[geo] = list(s["ll"])
+        elif s.get("chain"):      # 지점이 여러 곳인 체인은 한 점으로 찍지 않는다 (지도에는 장소 레이어로)
+            geocache.setdefault(geo, None)
         elif not geocache.get(geo):  # 못 찾은 곳(null)은 다음 실행에서 다시 시도
             geocache[geo] = locate(client, s)
         fac = {"id": s["id"], "kind": s["kind"], "name": s["name"], "area": s.get("area", ""), "ll": geocache.get(geo),
@@ -422,7 +424,7 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
                "fees": prev.get("fees", []), "status": prev.get("status", "unknown"), "season": prev.get("season", ""),
                "note": s.get("note") or prev.get("note", ""), "checked": prev.get("checked", ""), "src": prev.get("src", []),
                "text_hash": prev.get("text_hash", ""), "ages": s.get("ages"), "indoor": s.get("indoor"),
-               "free": s.get("free") or None}
+               "free": s.get("free") or None, "chain": s.get("chain") or None, "brand": s.get("brand")}
         if s.get("season"):
             fac["season"] = s["season"]   # 여름 한정 등 운영 기간 (손으로 적은 값)
         if s.get("note"):

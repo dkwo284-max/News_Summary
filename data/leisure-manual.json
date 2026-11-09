@@ -479,5 +479,203 @@
   "fees": [],
   "checked": "2026-11-07",
   "note": "16세 이하 무료(사우나·스파 제외). 2026-12 중 개장 예정(날짜 미정), 11:00~18:45, 물 온도 21~22℃(비가열). 어른 요금은 공식 페이지에서 확인."
+ },
+ "y-cityfitness": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "Basic 멤버십 (홈 클럽만, 24시간, 월 단위 해지 가능)",
+    "kind": "adult",
+    "amount": 9.99,
+    "period": "week"
+   },
+   {
+    "label": "Black Card (전 클럽 이용, 회복실)",
+    "kind": "adult",
+    "amount": 14.99,
+    "period": "week"
+   },
+   {
+    "label": "Premium (전 클럽·프리미엄 혜택)",
+    "kind": "adult",
+    "amount": 18.99,
+    "period": "week"
+   },
+   {
+    "label": "가입비",
+    "kind": "joining",
+    "amount": 29,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-09",
+  "note": "공식 멤버십 페이지(2026-11-09 확인). 요금은 주 단위이고 클럽·프로모션에 따라 달라질 수 있어요."
+ },
+ "y-lesmills": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "1일 이용권(단일 입장)",
+    "kind": "adult_entry",
+    "amount": 30,
+    "period": "once"
+   },
+   {
+    "label": "10회 이용권",
+    "kind": "other",
+    "amount": 250,
+    "period": "once"
+   },
+   {
+    "label": "리포머 예약 수수료(주 회원 포함 외 1회)",
+    "kind": "other",
+    "amount": 5,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-09",
+  "note": "공식 멤버십 페이지(2026-11-09 확인). 주 단위 회원 요금은 클럽별로 달라 페이지에 없어서 직접 확인이 필요해요."
+ },
+ "y-jetts": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "1회 이용(캐주얼)",
+    "kind": "adult_entry",
+    "amount": 15,
+    "period": "once"
+   },
+   {
+    "label": "입회·출입 카드 비용(1회)",
+    "kind": "joining",
+    "amount": 15,
+    "period": "once"
+   },
+   {
+    "label": "계정 서비스료(분기)",
+    "kind": "other",
+    "amount": 4.99,
+    "period": "season"
+   },
+   {
+    "label": "65세 이상 Active 65 Plus (3개월 약정)",
+    "kind": "other",
+    "amount": 182,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-09",
+  "note": "공식 멤버십 FAQ(2026-11-09 확인). 정기 회원 주 요금은 클럽·약정에 따라 달라 페이지에 없어요."
+ },
+ "y-anytime": {
+  "replace_fees": true,
+  "fees": [],
+  "checked": "2026-11-09",
+  "note": "요금은 클럽마다 달라 공식 사이트에서 가까운 클럽을 골라 확인해야 해요. 공식 사이트가 12·18개월 약정 가입 시 6주 무료·가입비 $0 프로모션을 안내해요(2026-11-09 확인, 약관 적용)."
+ },
+ "y-snap": {
+  "replace_fees": true,
+  "fees": [],
+  "checked": "2026-11-09",
+  "note": "요금은 클럽마다 달라 공식 사이트에서 가까운 클럽을 골라 확인해야 해요."
+ },
+ "y-f45": {
+  "replace_fees": true,
+  "fees": [],
+  "checked": "2026-11-09",
+  "note": "45분 그룹 운동 스튜디오. 요금은 스튜디오마다 달라 공식 사이트에서 체험(Start Your Trial)과 함께 확인하세요."
+ },
+ "y-flex": {
+  "replace_fees": true,
+  "fees": [],
+  "checked": "2026-11-09",
+  "note": "오클랜드에 지점이 많은 체인. 요금은 지점마다 달라 공식 사이트에서 확인하세요."
+ },
+ "y-councilgym": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "헬스장 1회(성인, Albany 요금표)",
+    "kind": "adult_entry",
+    "amount": 20,
+    "period": "once"
+   },
+   {
+    "label": "헬스장 1회(우대: 학생·시니어·CSC)",
+    "kind": "other",
+    "amount": 16,
+    "period": "once"
+   },
+   {
+    "label": "그룹 피트니스 수업(성인)",
+    "kind": "other",
+    "amount": 20,
+    "period": "once"
+   },
+   {
+    "label": "아쿠아 그룹 수업(성인)",
+    "kind": "other",
+    "amount": 12,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-09",
+  "note": "시의회 공식 요금표(Albany Stadium Pool 기준, 2026-11-07 확인). 센터마다 요금이 다르고 1회 입장권에 수영장 이용이 포함되는 곳도 있어요. 16세 이하 수영은 무료예요."
+ },
+ "y-hbrackets": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "성인 일반 회원 (테니스·스쿼시, 월)",
+    "kind": "adult",
+    "amount": 59,
+    "period": "month"
+   },
+   {
+    "label": "성인 일반 회원 (연간 결제)",
+    "kind": "adult",
+    "amount": 600,
+    "period": "year"
+   },
+   {
+    "label": "가족 회원 (월)",
+    "kind": "family",
+    "amount": 117,
+    "period": "month"
+   },
+   {
+    "label": "가족 회원 (연간)",
+    "kind": "family",
+    "amount": 1190,
+    "period": "year"
+   },
+   {
+    "label": "짐·사우나 회원 (연간)",
+    "kind": "other",
+    "amount": 450,
+    "period": "year"
+   },
+   {
+    "label": "성인 + 짐 (연간)",
+    "kind": "other",
+    "amount": 850,
+    "period": "year"
+   }
+  ],
+  "checked": "2026-11-09",
+  "note": "공식 사이트 회원 요금(2026-11-09 확인). 테니스·스쿼시·짐·사우나 구성이에요."
+ },
+ "y-studiopilates": {
+  "replace_fees": true,
+  "fees": [
+   {
+    "label": "입문 패키지 (수업 6회)",
+    "kind": "other",
+    "amount": 60,
+    "period": "once"
+   }
+  ],
+  "checked": "2026-11-09",
+  "note": "공식 사이트 입문 프로모션(2026-11-09 확인). 정규 수업 요금은 스튜디오마다 달라 공식 사이트에서 확인하세요."
  }
 }

@@ -1874,6 +1874,599 @@
    ],
    "indoor": true,
    "kind": "swim"
+  },
+  {
+   "id": "y-cityfitness",
+   "kind": "gym",
+   "chain": true,
+   "brand": "CityFitness",
+   "name": "CityFitness (체인 헬스장)",
+   "area": "오클랜드 여러 지점",
+   "home": "https://www.cityfitness.co.nz",
+   "pages": [
+    "https://www.cityfitness.co.nz/memberships/"
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-lesmills",
+   "kind": "gym",
+   "chain": true,
+   "brand": "Les Mills",
+   "name": "Les Mills (프리미엄 헬스·그룹 수업)",
+   "area": "Auckland City·Britomart·Howick·New Lynn·Newmarket·Takapuna",
+   "home": "https://www.lesmills.co.nz",
+   "pages": [
+    "https://www.lesmills.co.nz/memberships"
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-jetts",
+   "kind": "gym",
+   "chain": true,
+   "brand": "Jetts",
+   "name": "Jetts Fitness (24시간 체인)",
+   "area": "오클랜드 여러 지점",
+   "home": "https://www.jetts.co.nz",
+   "pages": [
+    "https://www.jetts.co.nz/memberships/"
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-anytime",
+   "kind": "gym",
+   "chain": true,
+   "brand": "Anytime Fitness",
+   "name": "Anytime Fitness (24시간 체인)",
+   "area": "오클랜드 여러 지점",
+   "home": "https://www.anytimefitness.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-snap",
+   "kind": "gym",
+   "chain": true,
+   "brand": "Snap Fitness",
+   "name": "Snap Fitness (24시간 체인)",
+   "area": "오클랜드 여러 지점",
+   "home": "https://www.snapfitness.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-f45",
+   "kind": "gym",
+   "chain": true,
+   "brand": "F45",
+   "name": "F45 Training (그룹 서킷 트레이닝)",
+   "area": "오클랜드 여러 스튜디오",
+   "home": "https://f45training.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-flex",
+   "kind": "gym",
+   "chain": true,
+   "brand": "Flex Fitness",
+   "name": "Flex Fitness (체인 헬스장)",
+   "area": "오클랜드 20여 지점",
+   "home": "https://flexfitness.co.nz",
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-councilgym",
+   "kind": "gym",
+   "chain": true,
+   "brand": null,
+   "name": "시의회 레저센터 헬스장·수업 (Albany 등 18곳)",
+   "area": "오클랜드 시의회 Pools and Leisure",
+   "home": "https://www.aucklandleisure.co.nz",
+   "pages": [
+    "https://www.aucklandleisure.co.nz/prices-and-membership/"
+   ],
+   "ages": [
+    "teen",
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-hbrackets",
+   "kind": "tennis",
+   "name": "Herne Bay Ponsonby Rackets Club (테니스·스쿼시·짐)",
+   "area": "Herne Bay",
+   "ll": [
+    -36.8499,
+    174.7305
+   ],
+   "home": "https://www.hernebayrackets.co.nz",
+   "pages": [
+    "https://www.hernebayrackets.co.nz/membership"
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false
+  },
+  {
+   "id": "y-gladstone",
+   "kind": "tennis",
+   "name": "Gladstone Tennis Club",
+   "area": "Parnell",
+   "ll": [
+    -36.8491,
+    174.7847
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요.",
+   "home": "https://www.gladstonetennis.co.nz"
+  },
+  {
+   "id": "y-parnellltc",
+   "kind": "tennis",
+   "name": "Parnell Lawn Tennis Club",
+   "area": "Parnell",
+   "ll": [
+    -36.8611,
+    174.7796
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요.",
+   "home": "https://www.parnelllawntennisclub.co.nz"
+  },
+  {
+   "id": "y-missionbay",
+   "kind": "tennis",
+   "name": "Mission Bay Tennis Club",
+   "area": "Mission Bay",
+   "ll": [
+    -36.8495,
+    174.8299
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요.",
+   "home": "https://missionbaytennis.co.nz"
+  },
+  {
+   "id": "y-howick",
+   "kind": "tennis",
+   "name": "Howick Tennis Club",
+   "area": "Howick",
+   "ll": [
+    -36.8976,
+    174.9284
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요."
+  },
+  {
+   "id": "y-cocklebay",
+   "kind": "tennis",
+   "name": "Cockle Bay Tennis Club",
+   "area": "Cockle Bay",
+   "ll": [
+    -36.9111,
+    174.936
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요.",
+   "home": "https://cocklebaytennis.co.nz"
+  },
+  {
+   "id": "y-westharbour",
+   "kind": "tennis",
+   "name": "West Harbour Tennis & Pickleball Club (피클볼 코트)",
+   "area": "West Harbour",
+   "ll": [
+    -36.8172,
+    174.6357
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요.",
+   "home": "https://clubspark.kiwi/WestHarbourTennisandPickleballClub"
+  },
+  {
+   "id": "y-pakuranga",
+   "kind": "tennis",
+   "name": "Pakuranga Tennis Club",
+   "area": "Pakuranga",
+   "ll": [
+    -36.8914,
+    174.9006
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요."
+  },
+  {
+   "id": "y-stheliers",
+   "kind": "tennis",
+   "name": "Saint Heliers Tennis Club",
+   "area": "St Heliers",
+   "ll": [
+    -36.8525,
+    174.8564
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요."
+  },
+  {
+   "id": "y-remuera",
+   "kind": "tennis",
+   "name": "Remuera Rackets Club (테니스·스쿼시)",
+   "area": "Remuera",
+   "ll": [
+    -36.8762,
+    174.782
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": false,
+   "note": "클럽 회원제가 기본이에요. 방문자 코트 이용·체험·레슨은 클럽에 문의하세요."
+  },
+  {
+   "id": "y-northernrocks",
+   "kind": "climb",
+   "name": "Northern Rocks (실내 클라이밍)",
+   "area": "North Shore",
+   "ll": [
+    -36.7759,
+    174.733
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "note": "실내 클라이밍. 초보 입문·장비 대여·어린이 수업 여부는 공식 사이트에서 확인하세요.",
+   "home": "https://www.northernrocks.co.nz"
+  },
+  {
+   "id": "y-extremeedge",
+   "kind": "climb",
+   "name": "Extreme Edge Climbing Centre",
+   "area": "Mt Wellington",
+   "ll": [
+    -36.8912,
+    174.8503
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "note": "실내 클라이밍. 초보 입문·장비 대여·어린이 수업 여부는 공식 사이트에서 확인하세요.",
+   "home": "https://www.extremeedge.co.nz"
+  },
+  {
+   "id": "y-clipnclimbns",
+   "kind": "climb",
+   "name": "Clip 'n Climb North Shore",
+   "area": "North Shore",
+   "ll": [
+    -36.7314,
+    174.7143
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "note": "실내 클라이밍. 초보 입문·장비 대여·어린이 수업 여부는 공식 사이트에서 확인하세요.",
+   "home": "https://clipnclimbnorthshore.co.nz"
+  },
+  {
+   "id": "y-clipnclimb",
+   "kind": "climb",
+   "name": "Clip 'n Climb (오클랜드 중부)",
+   "area": "Auckland 중부",
+   "ll": [
+    -36.8879,
+    174.7477
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "note": "실내 클라이밍. 초보 입문·장비 대여·어린이 수업 여부는 공식 사이트에서 확인하세요."
+  },
+  {
+   "id": "y-aucklandclimbing",
+   "kind": "climb",
+   "name": "Auckland Climbing Gym",
+   "area": "CBD 부근",
+   "ll": [
+    -36.8636,
+    174.7587
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "note": "실내 클라이밍. 초보 입문·장비 대여·어린이 수업 여부는 공식 사이트에서 확인하세요."
+  },
+  {
+   "id": "y-bouldercolodge",
+   "kind": "climb",
+   "name": "Boulder Co.",
+   "area": "West Auckland",
+   "ll": [
+    -36.8112,
+    174.604
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "note": "실내 클라이밍. 초보 입문·장비 대여·어린이 수업 여부는 공식 사이트에서 확인하세요."
+  },
+  {
+   "id": "y-rocketropes",
+   "kind": "climb",
+   "name": "Rocket Ropes",
+   "area": "Manukau",
+   "ll": [
+    -36.9996,
+    174.7936
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "note": "실내 클라이밍. 초보 입문·장비 대여·어린이 수업 여부는 공식 사이트에서 확인하세요."
+  },
+  {
+   "id": "y-verticaladv",
+   "kind": "climb",
+   "name": "Vertical Adventures (클라이밍 월)",
+   "area": "New Lynn",
+   "ll": [
+    -36.908,
+    174.6376
+   ],
+   "ages": [
+    "kid",
+    "teen",
+    "adult",
+    "family"
+   ],
+   "indoor": true,
+   "note": "실내 클라이밍. 초보 입문·장비 대여·어린이 수업 여부는 공식 사이트에서 확인하세요.",
+   "home": "https://verticaladventures.co.nz"
+  },
+  {
+   "id": "y-studiopilates",
+   "kind": "studio",
+   "chain": true,
+   "brand": "Studio Pilates",
+   "name": "Studio Pilates (리포머 필라테스 체인)",
+   "area": "Newmarket·Wynyard·Silverdale 등",
+   "home": "https://www.studiopilates.com",
+   "ages": [
+    "adult"
+   ],
+   "indoor": true
+  },
+  {
+   "id": "y-reformfitness",
+   "kind": "studio",
+   "chain": true,
+   "brand": "Reform",
+   "name": "Reform Fitness Pilates (리포머 스튜디오 모음)",
+   "area": "Parnell 등",
+   "home": "https://reformfitness.co.nz",
+   "ages": [
+    "adult"
+   ],
+   "indoor": true,
+   "note": "스튜디오마다 독립 운영돼 요금이 달라요. 공식 사이트에서 가까운 스튜디오를 찾으세요."
+  },
+  {
+   "id": "y-sweatyoga",
+   "kind": "studio",
+   "name": "Sweat Yoga (비크람·파워 요가·핫 필라테스)",
+   "area": "Newmarket",
+   "ll": [
+    -36.8645,
+    174.7766
+   ],
+   "ages": [
+    "adult"
+   ],
+   "indoor": true,
+   "home": "https://www.sweatyoga.co.nz",
+   "note": "공식 사이트가 2주 무제한 입문 프로모션을 안내해요."
+  },
+  {
+   "id": "y-hum",
+   "kind": "studio",
+   "name": "Basecamp Power Yoga (사이트명 HUM Yoga)",
+   "area": "Ponsonby·Herne Bay",
+   "ll": [
+    -36.8551,
+    174.7342
+   ],
+   "ages": [
+    "adult"
+   ],
+   "indoor": true,
+   "home": "https://www.basecamppoweryoga.co.nz",
+   "note": "공식 사이트가 2주 무제한 입문 프로모션을 안내해요."
+  },
+  {
+   "id": "y-flyingstudio",
+   "kind": "studio",
+   "name": "Flying Studio (에어리얼 요가)",
+   "area": "North Shore",
+   "ll": [
+    -36.7855,
+    174.7734
+   ],
+   "ages": [
+    "adult"
+   ],
+   "indoor": true,
+   "home": "https://www.flyingstudio.co.nz"
+  },
+  {
+   "id": "y-oyf",
+   "kind": "studio",
+   "name": "OYF Far Infrared Yoga & Fitness",
+   "area": "Remuera",
+   "ll": [
+    -36.8628,
+    174.8095
+   ],
+   "ages": [
+    "adult"
+   ],
+   "indoor": true,
+   "home": "https://oyf.fit/remuera/"
+  },
+  {
+   "id": "y-omyoga",
+   "kind": "studio",
+   "name": "Om Yoga Studio",
+   "area": "Stonefields",
+   "ll": [
+    -36.8871,
+    174.8445
+   ],
+   "ages": [
+    "adult"
+   ],
+   "indoor": true,
+   "home": "https://omyogastudio.co.nz"
+  },
+  {
+   "id": "y-habitat",
+   "kind": "studio",
+   "name": "Habitat for Fitness (요가·피트니스)",
+   "area": "Auckland 중부",
+   "ll": [
+    -36.8706,
+    174.7481
+   ],
+   "ages": [
+    "adult"
+   ],
+   "indoor": true,
+   "home": "https://habitatforfitness.co.nz"
+  },
+  {
+   "id": "y-annajane",
+   "kind": "studio",
+   "name": "Anna Jane Pilates",
+   "area": "Herne Bay",
+   "ll": [
+    -36.8455,
+    174.7366
+   ],
+   "ages": [
+    "adult"
+   ],
+   "indoor": true
   }
  ]
 }
