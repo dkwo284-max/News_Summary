@@ -1,12 +1,12 @@
 name: Fishing / kayak / swim spots
 
-# 1년에 한 번(또는 수동): OpenStreetMap 에서 보트 램프·부두·해변 위치를 받아 web/public/data/spots.json 으로 저장합니다.
+# 1년에 한 번(또는 수동): OpenStreetMap 에서 보트 램프·부두·해변·놀이터와 헬스장·요가·테니스 코트·농구 코트·야외 운동기구·스케이트 파크 위치를 받아 web/public/data/spots.json 으로 저장합니다.
 # 장소는 거의 안 바뀌고 AI 를 쓰지 않습니다. 매일 도는 실행에는 들어 있지 않습니다.
 on:
   workflow_dispatch:
     inputs:
       types:
-        description: "일부 종류만(쉼표: ramp,pier,beach). 비우면 전체 — 서버가 바쁠 때 못 받은 종류만 다시"
+        description: "일부 종류만(쉼표: ramp,pier,beach,playground,gym,tennis,basketball,outgym,skate). 비우면 전체 — 서버가 바쁠 때 못 받은 종류만 다시"
         default: ""
   schedule:
     - cron: "23 3 20 9 *"

@@ -28,8 +28,25 @@ QUERIES = {
     # 이름 있는 놀이터(스플래시 패드·워터 플레이는 이름 키워드로 따로 분류)
     "playground": [f'[out:json][timeout:30];nwr["leisure"="playground"]["name"]({BBOX});out center tags qt;'],
 }
-LIMITS = {"ramp": 160, "pier": 120, "beach": 220, "playground": 450, "splash": 120}
-DEFAULT_NAME = {"ramp": "보트 램프", "pier": "부두", "beach": "해변", "playground": "놀이터", "splash": "스플래시 패드"}
+QUERIES.update({
+    # 헬스장·요가·필라테스 스튜디오 (이름 있는 것만. 한 질의로 받고 이름·종목으로 gym/studio 로 나눈다)
+    "gym": [f'[out:json][timeout:60];nwr["leisure"="fitness_centre"]["name"]({BBOX});out center tags qt;',
+            f'[out:json][timeout:60];nwr["sport"~"yoga|pilates"]["name"]({BBOX});out center tags qt;'],
+    # 테니스: 이름 있는 클럽 + 클럽 밖 코트(가까운 코트는 하나로 묶어 '코트 N면')
+    "tennis": [f'[out:json][timeout:90];nwr["sport"~"tennis"]["club"="sport"]["name"]({BBOX});out center tags qt;',
+               f'[out:json][timeout:90];nwr["sport"="tennis"]["leisure"="pitch"]({BBOX});out center tags qt;'],
+    "basketball": [f'[out:json][timeout:90];nwr["leisure"="pitch"]["sport"="basketball"]({BBOX});out center tags qt;'],
+    "outgym": [f'[out:json][timeout:60];nwr["leisure"="fitness_station"]({BBOX});out center tags qt;'],
+    "skate": [f'[out:json][timeout:60];nwr["sport"="skateboard"]["leisure"~"pitch|sports_centre"]({BBOX});out center tags qt;'],
+})
+LIMITS = {"ramp": 160, "pier": 120, "beach": 220, "playground": 450, "splash": 120, "gym": 330, "studio": 90, "tennis": 460,
+          "basketball": 260, "outgym": 130, "skate": 90}
+DEFAULT_NAME = {"ramp": "보트 램프", "pier": "부두", "beach": "해변", "playground": "놀이터", "splash": "스플래시 패드",
+                "gym": "헬스장", "studio": "요가·필라테스", "tennis": "테니스 코트", "basketball": "농구 코트", "outgym": "야외 운동기구", "skate": "스케이트 파크"}
+YOGA = re.compile(r"yoga|pilates|reformer|barre", re.I)
+# 묶어서 보여줄 종류: (좌표 묶는 거리(도), 묶음 이름 형식)
+CLUSTER = {"basketball": (0.0012, "농구 코트 {n}면"), "outgym": (0.0015, "야외 운동기구"), "skate": (0.0015, None)}
+TENNIS_EPS, TENNIS_CLUB_NEAR = 0.0012, 0.0022
 SPLASH = re.compile(r"splash|water ?play|aqua|water ?park|paddling", re.I)
 
 
@@ -40,6 +57,12 @@ def classify(tags: dict, asked: str) -> str | None:
         return "ramp" if tags.get("leisure") == "slipway" else None
     if asked == "pier":
         return "pier" if (tags.get("man_made") == "pier" or tags.get("leisure") == "fishing") and tags.get("name") else None
+    if asked == "gym":
+        if tags.get("leisure") not in ("fitness_centre", "sports_centre") and not YOGA.search(tags.get("name", "")):
+            return None
+        return "studio" if (YOGA.search(tags.get("name", "")) or YOGA.search(tags.get("sport", ""))) and "climb" not in tags.get("sport", "") else "gym"
+    if asked in ("tennis", "basketball", "outgym", "skate"):
+        return asked
     if asked == "playground":
         if tags.get("leisure") != "playground" or not tags.get("name"):
             return None
@@ -51,6 +74,12 @@ def convert(responses: dict[str, dict]) -> list[dict]:
     """종류별 Overpass 응답 → [{t, n, ll}]. 같은 종류·같은 이름이 150m 안에 또 있으면 하나로. 이름 없는 램프는 '보트 램프'."""
     out: list[dict] = []
     for asked, osm in responses.items():
+        if asked == "tennis":
+            out += convert_tennis(osm)
+            continue
+        if asked in CLUSTER:
+            out += convert_clusters(asked, osm)
+            continue
         kept: list[dict] = []
         for el in osm.get("elements", []):
             tags = el.get("tags") or {}
@@ -68,6 +97,62 @@ def convert(responses: dict[str, dict]) -> list[dict]:
         for t in sorted({k["t"] for k in kept}):  # 질의 하나가 두 종류(놀이터·스플래시)로 나뉠 수 있어 종류별로 상한
             out += [k for k in kept if k["t"] == t][:LIMITS[t]]
     return out
+
+
+def _points(osm: dict, asked: str) -> list[tuple[float, float, dict]]:
+    pts = []
+    for el in osm.get("elements", []):
+        tags = el.get("tags") or {}
+        if classify(tags, asked) is None:
+            continue
+        c = el if "lat" in el else el.get("center")
+        if c and "lat" in c:
+            pts.append((round(c["lat"], 5), round(c["lon"], 5), tags))
+    return pts
+
+
+def _cluster(pts: list[tuple[float, float, dict]], eps: float) -> list[dict]:
+    """가까운 점을 하나로 (탐욕 방식). 반환: [{ll, n(개수), name}]"""
+    groups: list[dict] = []
+    for lat, lon, tags in pts:
+        for g in groups:
+            if abs(g["ll"][0] - lat) < eps and abs(g["ll"][1] - lon) < eps:
+                g["n"] += 1
+                g["name"] = g["name"] or tags.get("name", "")
+                break
+        else:
+            groups.append({"ll": [lat, lon], "n": 1, "name": tags.get("name", "")})
+    return groups
+
+
+def convert_tennis(osm: dict) -> list[dict]:
+    """이름 있는 클럽은 그대로, 클럽 밖 코트는 가까운 것끼리 '테니스 코트 N면'. 사유(access=private) 코트는 뺀다."""
+    clubs: list[dict] = []
+    courts: list[tuple[float, float, dict]] = []
+    for lat, lon, tags in _points(osm, "tennis"):
+        name = (tags.get("name") or "").strip()
+        if tags.get("club") == "sport" and name and "table" not in tags.get("sport", ""):
+            if not any(k["n"] == name and abs(k["ll"][0] - lat) < 0.0015 and abs(k["ll"][1] - lon) < 0.0015 for k in clubs):
+                clubs.append({"t": "tennis", "n": name, "ll": [lat, lon], "x": "클럽"})
+        elif tags.get("leisure") == "pitch":
+            courts.append((lat, lon, tags))
+    free = [c for c in courts if not any(abs(c[0] - k["ll"][0]) < TENNIS_CLUB_NEAR and abs(c[1] - k["ll"][1]) < TENNIS_CLUB_NEAR for k in clubs)]
+    groups = _cluster(free, TENNIS_EPS)
+    cl = [{"t": "tennis", "n": g["name"] or f"테니스 코트 {g['n']}면", "ll": g["ll"], "x": f"{g['n']}면"} for g in groups]
+    cl.sort(key=lambda k: -int(k["x"][:-1]))
+    clubs.sort(key=lambda k: k["n"])
+    return (clubs + cl)[:LIMITS["tennis"]]
+
+
+def convert_clusters(asked: str, osm: dict) -> list[dict]:
+    eps, fmt = CLUSTER[asked]
+    groups = _cluster(_points(osm, asked), eps)
+    out = []
+    for g in groups:
+        name = g["name"] or (fmt.format(n=g["n"]) if fmt else DEFAULT_NAME[asked])
+        out.append({"t": asked, "n": name, "ll": g["ll"], "x": f"{g['n']}개" if asked == "outgym" else (f"{g['n']}면" if asked == "basketball" else "")})
+    out.sort(key=lambda k: (k["n"] in (DEFAULT_NAME[asked],), k["n"]))
+    return out[:LIMITS[asked]]
 
 
 def fetch_one(client: httpx.Client, query: str) -> dict:
@@ -108,7 +193,7 @@ def main(argv: list[str] | None = None) -> int:
         print("spots: nothing fetched — not writing", file=sys.stderr)
         return 1
     fresh = convert(got)
-    own = {"playground": ("playground", "splash")}
+    own = {"playground": ("playground", "splash"), "gym": ("gym", "studio")}
     keep = [sp for sp in (s for v in old.values() for s in v) if not any(sp["t"] in own.get(k, (k,)) for k in got)]
     spots = fresh + keep  # 못 받았거나 이번에 안 묻은 종류는 이전 값 유지
     counts = {t: sum(1 for sp in spots if sp["t"] == t) for t in LIMITS}

@@ -33,3 +33,20 @@ def test_playgrounds_split_into_plain_and_splash_and_unnamed_dropped():
     ]}}
     out = spots.convert(got)
     assert {(s["t"], s["n"]) for s in out} == {("playground", "Takapuna Beach Reserve Playground"), ("splash", "Devonport Splash Pad")}
+
+
+def test_gym_studio_split_and_tennis_clusters():
+    g = {"elements": [{"lat": -36.8, "lon": 174.7, "tags": {"leisure": "fitness_centre", "name": "Anytime Fitness"}},
+                      {"lat": -36.81, "lon": 174.7, "tags": {"leisure": "fitness_centre", "name": "Studio Pilates"}},
+                      {"lat": -36.7, "lon": 174.7, "tags": {"sport": "yoga", "name": "Sweat Yoga", "leisure": "fitness_centre"}}]}
+    got = {s["n"]: s["t"] for s in spots.convert({"gym": g})}
+    assert got == {"Anytime Fitness": "gym", "Studio Pilates": "studio", "Sweat Yoga": "studio"}
+    t = {"elements": [
+        {"lat": -36.8, "lon": 174.7, "tags": {"sport": "tennis", "club": "sport", "name": "Test Tennis Club"}},
+        {"lat": -36.8001, "lon": 174.7001, "tags": {"sport": "tennis", "leisure": "pitch"}},   # 클럽 근처 → 클럽에 포함(따로 안 셈)
+        {"lat": -36.9, "lon": 174.8, "tags": {"sport": "tennis", "leisure": "pitch"}},
+        {"lat": -36.9002, "lon": 174.8002, "tags": {"sport": "tennis", "leisure": "pitch"}},
+        {"lat": -36.95, "lon": 174.8, "tags": {"sport": "tennis", "leisure": "pitch", "access": "private"}},
+        {"lat": -36.5, "lon": 174.5, "tags": {"sport": "table_tennis", "club": "sport", "name": "TT club"}}]}
+    names = [s["n"] for s in spots.convert({"tennis": t})]
+    assert names == ["Test Tennis Club", "테니스 코트 2면"]
