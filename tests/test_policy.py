@@ -54,3 +54,23 @@ def test_curated_policy_json_is_consistent():
     for t in d["timeline"] + d["govt"] + d["watch"]:
         assert set(t["src"]) <= set(d["sources"])
     assert all(g["type"] in ("done", "pending", "pledge") for g in d["govt"])
+
+
+def test_status_builds_from_brief(tmp_path):
+    from status import build_status
+
+    (tmp_path / "leisure.json").write_text('{"updated_at": "2026-11-09"}', encoding="utf-8")
+    b = {"date": "2026-11-09", "generated_at": "x", "meta": {"degraded": True, "degraded_reason": "요약 실패", "feeds_total": 3, "failed_feeds": [{"id": "a", "name": "A"}], "usage": {"requests": 4}}, "extras": {}}
+    st = build_status(tmp_path, b)
+    assert st["brief"]["degraded"] and st["feeds"]["failed"][0]["id"] == "a" and st["files"]["leisure"] == "2026-11-09"
+
+
+def test_notify_content_options():
+    from notify import compose
+
+    brief = {"date": "2026-11-09", "meta": {"degraded": True, "alerts": [{"text": "처리 기간 변화"}]}, "extras": {"nzd_krw": 800},
+             "sections": {"nz_immigration": {"label": "이민", "briefing": "b1", "items": [{"title_ko": "큰 뉴스", "impact": {"level": "high"}}]},
+                          "akl_life": {"label": "생활", "briefing": "b2", "items": [{"title_ko": "x"}]}}}
+    cfg = {"output": {"app_url": "u"}, "notify": {"content": {"sections": ["nz_immigration"], "high_impact": True, "weather_fx": False}}}
+    t = compose(brief, cfg)
+    assert "⚠️" in t and "🚨 이민 알림" in t and "🎯" in t and "큰 뉴스" in t and "b1" in t and "b2" not in t and "💱" not in t

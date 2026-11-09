@@ -252,7 +252,8 @@ llm:
     min_interval_seconds: 10     # 요청 간 최소 간격 (분당 한도 보호)
     retry_wait_seconds: 60       # 429(분당 한도 초과) 시 한 번만 재시도하기 전 대기
     overload_wait_seconds: 20    # 500/503(일시 과부하) 시 재시도 전 대기. 그래도 실패하면 다음 모델 후보로
-    timeout_seconds: 300         # 응답 대기 한도. 넘기면 재시도 후 다음 모델 후보로
+    timeout_seconds: 180         # 응답 대기 한도. 넘기면 재시도 후 다음 모델 후보로
+    run_deadline_seconds: 900    # 한 번 실행에서 AI 호출에 쓸 수 있는 전체 시간(15분). 넘으면 포기하고 원문 브리핑 + 자동 재시도
 
   # 유료(Claude API) 로 바꾸려면 provider: "anthropic" + Secret ANTHROPIC_API_KEY. 구독(Pro/Max)과 별도로 청구됩니다.
   anthropic:
@@ -413,6 +414,13 @@ processing_times:
 notify:
   telegram: { enabled: false }   # Secrets: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
   email:    { enabled: false }   # Secrets: SMTP_USER, SMTP_PASSWORD(Gmail 앱 비밀번호), EMAIL_TO
+  # 알림에 무엇을 넣을지 (생략하면 전체). 예) 이민 알림과 영향 큰 소식만 받으려면 sections: [nz_immigration]
+  content:
+    # sections: [nz_immigration, akl_safety]   # 넣을 섹션 키 (비우면 전체, 한국 정치 제외)
+    immigration_alerts: true    # 🚨 이민 알림(중요 뉴스·처리 기간 변화)
+    high_impact: true           # 🎯 내게 영향 큰 소식 제목 최대 3개
+    status_note: true           # ⚠️ AI 요약 실패로 원문 중심 브리핑일 때 안내 한 줄
+    weather_fx: true            # 💱 환율·🌤 날씨
 
 # ── 피드 ────────────────────────────────────────────────────
 # id: 고유 이름 / name: 화면에 표시할 출처명 / section: 위 sections 키

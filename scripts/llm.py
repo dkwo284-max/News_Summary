@@ -132,6 +132,12 @@ class GeminiLLM(BaseLLM):
             self.min_interval = max(self.min_interval, float(self.pcfg.get("production_min_interval_seconds", 13)))
         self._last = 0.0
         self._working: dict[str, list[str]] = {}
+        # 실행 전체 상한: 서버가 느려도 한 번 실행이 이 시간(초)을 넘기면 더 기다리지 않고 실패로 처리 → 원문 브리핑 + 자동 재시도로 넘어간다
+        self.deadline = float(self.pcfg.get("run_deadline_seconds", 0) or 0)
+        self._t0 = time.monotonic()
+
+    def _expired(self, extra: float = 0.0) -> bool:
+        return bool(self.deadline) and time.monotonic() - self._t0 + extra > self.deadline
 
     def _post(self, model: str, body: dict) -> httpx.Response:
         wait = self._last + self.min_interval - time.monotonic()
@@ -172,10 +178,14 @@ class GeminiLLM(BaseLLM):
         for rnd in range(rounds):
             transient = False
             for model in candidates:
+                if self._expired():
+                    raise LLMError(f"gemini run deadline ({int(self.deadline)}s) reached — {last_err or 'no response'}")
                 r = self._post(model, body)
                 if r.status_code in (429, 500, 503):
                     wait = float(self.pcfg.get("retry_wait_seconds", 60) if r.status_code == 429 else self.pcfg.get("overload_wait_seconds", 20))
                     log.warning("gemini %s HTTP %s — retrying once in %ss", model, r.status_code, wait)
+                    if self._expired(wait):
+                        raise LLMError(f"gemini run deadline ({int(self.deadline)}s) reached — HTTP {r.status_code}")
                     self.sleep(wait)
                     r = self._post(model, body)
                 if r.status_code in (404, 429, 500, 503):
@@ -192,6 +202,8 @@ class GeminiLLM(BaseLLM):
             if not transient or rnd == rounds - 1:
                 break
             cool = float(self.pcfg.get("cooldown_seconds", 120))
+            if self._expired(cool):
+                break
             log.warning("gemini: all candidates busy — cooling down %ss before round %d/%d", cool, rnd + 2, rounds)
             self.sleep(cool)
         raise LLMError(last_err or "no gemini model candidates")

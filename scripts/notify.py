@@ -11,24 +11,39 @@ from common import log
 
 
 def compose(brief: dict, cfg: dict) -> str:
+    """알림 본문. 구성은 config.yaml 의 notify.content 로 고른다(기본값은 이전과 같은 전체 구성).
+    sections: 알림에 넣을 섹션 키 목록(없으면 전체, 한국 정치 제외) / immigration_alerts / high_impact(영향 큰 기사 제목) / status_note(품질 저하 안내) / weather_fx"""
+    c = (cfg.get("notify") or {}).get("content") or {}
+    want = c.get("sections")
     lines = [f"☀️ Daily Brief {brief['date']}"]
-    alerts = (brief.get("meta") or {}).get("alerts") or []
-    if alerts:
+    meta = brief.get("meta") or {}
+    if c.get("status_note", True) and meta.get("degraded"):
+        lines.append("⚠️ AI 요약이 일부 실패해 원문 중심으로 나갔어요 (자동 재시도 예정)")
+    alerts = meta.get("alerts") or []
+    if alerts and c.get("immigration_alerts", True):
         lines.append("🚨 이민 알림")
         lines.extend(f"  - {a['text']}" for a in alerts[:5])
+    if c.get("high_impact", False):
+        high = [it for sec in brief["sections"].values() for it in sec["items"] if (it.get("impact") or {}).get("level") == "high"][:3]
+        if high:
+            lines.append("🎯 내게 영향 큰 소식")
+            lines.extend(f"  - {it['title_ko']}" for it in high)
     for key, sec in brief["sections"].items():
-        if key == "kr_politics":  # 정치는 앱에서 켠 사람만 보도록 알림에서도 제외
+        if key == "kr_politics" and not want:  # 정치는 앱에서 켠 사람만 보도록 알림에서도 제외
+            continue
+        if want and key not in want:
             continue
         if sec["items"]:
             country = ("한국 " if key.startswith("kr_") else "오클랜드 " if key.startswith("akl_")
                        else "" if key in ("nz_auckland", "nz_immigration") else "뉴질랜드 ")
             lines.append(f"• {country}{sec['label']}: {sec['briefing']}")
     ex = brief.get("extras") or {}
-    if ex.get("nzd_krw"):
-        lines.append(f"💱 1 NZD = {ex['nzd_krw']:,}원")
-    w = ex.get("auckland_weather")
-    if w:
-        lines.append(f"🌤 오클랜드 {w['min']}~{w['max']}°C {w['desc']}")
+    if c.get("weather_fx", True):
+        if ex.get("nzd_krw"):
+            lines.append(f"💱 1 NZD = {ex['nzd_krw']:,}원")
+        w = ex.get("auckland_weather")
+        if w:
+            lines.append(f"🌤 오클랜드 {w['min']}~{w['max']}°C {w['desc']}")
     lines.append(cfg["output"]["app_url"])
     return "\n".join(lines)
 

@@ -536,6 +536,11 @@ def main(argv: list[str] | None = None) -> int:
             day = nz_today()
             left, info = allowance("daily-brief", used_today(data_dir, day), int(cfg["llm"].get("guaranteed", 7)), day)
             log.info("%s", describe("daily-brief", left, info))
+            # 데일리 브리프 몫 보호: 오늘 브리핑이 아직 정상으로 나오지 않았으면 레저는 AI 를 쓰지 않는다 (--ignore-cap 은 예외)
+            brief = load_json(data_dir / f"{day}.json", None)
+            if not args.ignore_cap and (not brief or (brief.get("meta") or {}).get("degraded")):
+                log.warning("오늘(%s) 브리핑이 아직 정상 생성 전이라 레저 AI 읽기를 미룹니다 (브리핑 몫 보호)", day)
+                return None
             if left < batches and not args.ignore_cap:
                 log.warning("AI 예산 부족(남은 %d회, 필요 %d회) — 바뀐 페이지 읽기는 다음 실행으로 미룸 (--ignore-cap 으로 무시)", left, batches)
                 return None

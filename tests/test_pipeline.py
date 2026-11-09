@@ -905,3 +905,19 @@ def test_failed_calls_do_not_count_against_the_request_budget(cfg):
         assert not isinstance(e.value, RequestCapReached)
     with pytest.raises(RequestCapReached, match="max attempts"):
         llm.json_call(task="rank", system="s", user="u", schema={})
+
+
+def test_gemini_run_deadline_stops_waiting(cfg):
+    """서버가 계속 503 이어도 실행 전체 상한을 넘기면 더 기다리지 않고 바로 실패한다."""
+    cfg["llm"]["gemini"]["run_deadline_seconds"] = 100
+    calls, sleeps = [], []
+
+    def handler(req):
+        calls.append(1)
+        return httpx.Response(503, json={})
+
+    llm = _gemini(cfg, handler, sleeps)
+    llm._t0 -= 1000  # 이미 상한을 넘긴 상태
+    with pytest.raises(LLMError, match="deadline"):
+        llm.json_call(task="rank", system="s", user="u", schema={})
+    assert calls == [] and sleeps == []

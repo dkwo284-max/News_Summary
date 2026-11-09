@@ -334,6 +334,13 @@ def main(argv: list[str] | None = None) -> int:
     except Exception as e:  # noqa: BLE001
         log.warning("policy news failed: %s", e)
 
+    try:
+        from status import write_status
+
+        write_status(out_dir, brief)
+    except Exception as e:  # noqa: BLE001
+        log.warning("status failed: %s", e)
+
     set_output("generated", "true")
     set_output("date", brief["date"])
     from notify import notify
