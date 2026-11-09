@@ -1,0 +1,16 @@
+name: swim-probe
+on:
+  push:
+    branches: [swim-probe]
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          python3 - <<'PY'
+          import re, html, urllib.request
+          UA = "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"
+          raw = urllib.request.urlopen(urllib.request.Request("https://clipnclimbnorthshore.co.nz/general-pricing", headers={"User-Agent": UA}), timeout=40).read().decode("utf-8", "ignore")
+          t = html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", raw))); t = re.sub(r"\s+", " ", t)
+          i = t.find("General"); print(t[max(i-800,0):i+2500])
+          PY
