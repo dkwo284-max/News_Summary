@@ -135,6 +135,11 @@ cron-job.org 06:00 (NZ) → GitHub Actions  (보조: GitHub 예약 06:05 / 06:20
 - 시의회 공식 요금표(2026-11-07 확인, 센터마다 다름)는 `data/leisure-manual.json`의 `replace_fees`로 직접 넣어 AI가 다시 읽지 않습니다. 16세 이하 무료, 전 연령 무료인 곳(Moana·Ōtara·Papatoetoe)은 배지로 구분됩니다.
 - 시설 항목의 `free: true`(무료 시설), `season`(여름 한정 등), `ll: [위도, 경도]`(좌표 직접 입력)을 쓸 수 있습니다. 2027년 1월 학교 수영장 명단은 올해 말 공지되므로 `w-sch-*` 항목을 그때 고치세요.
 
+### 🏋️ 헬스·테니스·클라이밍·요가·필라테스 (레저 탭)
+- **헬스·피트니스**: CityFitness·Les Mills·Jetts·Anytime·Snap·F45·Flex 체인과 시의회 레저센터 헬스장을 요금 카드로 비교합니다. 지점이 여러 곳인 체인은 `data/leisure-src.json`에 `chain: true`, `brand`(지점 이름에 들어가는 글자)를 적으면 카드에 **가장 가까운 지점까지 거리**가 나옵니다. 확인한 요금은 `data/leisure-manual.json`에 직접 넣었고(주 단위 회원비는 `period: week`), 체인 요금이 클럽마다 달라 공개되지 않은 곳은 "요금 미확인"으로 둡니다.
+- **지도 레이어**(OpenStreetMap, AI 없음, `scripts/spots.py`): 헬스장 지점, 요가·필라테스 스튜디오, 테니스 클럽과 클럽 밖 코트(가까운 코트는 "코트 N면"으로 묶음), 농구 코트, 야외 운동기구, 스케이트 파크. 각 그룹 아래 "🗺️ 지도에 … 보기" 버튼으로 켭니다. 갱신: Actions → "Fishing / kayak / swim spots" → types 에 `gym,tennis,basketball,outgym,skate`.
+- **테니스 클럽·클라이밍·요가·필라테스**: 요금이 공식 사이트에 있으면 바뀐 페이지만 AI로 읽습니다(레저 요금과 같은 방식). 자동 판독이 어긋난 곳은 `leisure-manual.json`의 `replace_fees`로 정리하세요. 한인 운영 시설은 `note`에 적거나 시설을 `leisure-src.json`에 추가하면 됩니다.
+
 ## 🏛️ 이민 정책 추적 (이민 레이더 탭)
 
 주요 정당(국민·노동·뉴질랜드 퍼스트·ACT·녹색)의 이민 정책 입장을 기록하고, 정부 정책에 어떻게 반영되는지 추적합니다. **AI 요청 0회.**

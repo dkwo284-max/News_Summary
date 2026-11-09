@@ -158,7 +158,7 @@ export function priceBadge(f: Facility): { text: string; cls: string } {
   if (entry.length) return { text: `$${num(Math.min(...entry))}~`, cls: Math.min(...entry) <= 10 ? "cheap" : "" };
   const y = yearly(f, "adult") ?? yearly(f, "social") ?? yearly(f, "family");
   if (y != null) return { text: `연 $${num(y)}`, cls: "" };
-  if (/무료/.test(note) && !/않|참여하지|다르/.test(note)) return { text: "무료/할인", cls: "free" };
+  if (!MEMBER_KINDS.has(f.kind) && /무료/.test(note) && !/않|참여하지|다르/.test(note)) return { text: "무료/할인", cls: "free" };
   return { text: "요금 미확인", cls: "na" };
 }
 export function loadFavs(): string[] {
