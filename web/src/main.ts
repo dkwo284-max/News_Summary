@@ -277,6 +277,7 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   const meta = h("div", { class: "card-meta" });
   if (sectionLabel) meta.append(h("span", { class: "sec-label" }, sectionLabel));
   if (item.importance >= 8) meta.append(h("span", { class: "hot", title: `중요도 ${item.importance}/10` }, `중요 ${item.importance}`));
+  if (item.sources.length >= 2) meta.append(h("span", { class: "press", title: item.sources.map((s) => s.name).join(", ") }, `📰 ${item.sources.length}곳 보도`));
   const near = mentions(item, [...watch.suburbs, ...watch.schools]);
   if (near.length) meta.append(h("span", { class: "near" }, `📍 ${near.join(", ")}`));
   // 치안 기사: 사건이 난 지역을 한눈에 (주택 침입·강도는 특히 지역이 중요)
@@ -572,7 +573,8 @@ function renderMain(): void {
   if (tab.id === "home") {
     const al = alertBanner(brief.meta?.alerts ?? []);
     if (al) main.append(al);
-    main.append(homeView(h, { brief, recent, tabs: TABS, sections: visibleSections, fresh: (it) => !isOld(it, seenIdx), hidden: eduHidden, goTab: selectTab, rerender: renderMain }));
+    main.append(homeView(h, { brief, recent, tabs: TABS, sections: visibleSections, fresh: (it) => !isOld(it, seenIdx), hidden: eduHidden, goTab: selectTab, rerender: renderMain, suburbs: watch.suburbs,
+      goSafety: () => { chipState.akl = "akl_safety"; selectTab("akl"); } }));
     const fs = followSection();
     if (fs) main.append(fs);
     if (!recent) { const cur = brief; void recentBriefs().then(() => { if (brief === cur && settings.tab === "home" && !query) renderMain(); }).catch(() => undefined); }

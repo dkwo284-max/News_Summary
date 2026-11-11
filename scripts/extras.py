@@ -46,13 +46,15 @@ def fetch_weather(client: httpx.Client, w: dict) -> dict | None:
             params={
                 "latitude": w["latitude"],
                 "longitude": w["longitude"],
-                "daily": "temperature_2m_max,temperature_2m_min,weather_code,precipitation_probability_max",
+                "daily": "temperature_2m_max,temperature_2m_min,weather_code,precipitation_probability_max,uv_index_max,wind_speed_10m_max",
+                "hourly": "precipitation_probability",
                 "timezone": w["timezone"],
-                "forecast_days": 1,
+                "forecast_days": 7,
             },
         )
         r.raise_for_status()
-        d = r.json()["daily"]
+        body = r.json()
+        d = body["daily"]
         code = int(d["weather_code"][0])
         out = {
             "max": round(d["temperature_2m_max"][0]),
@@ -63,6 +65,17 @@ def fetch_weather(client: httpx.Client, w: dict) -> dict | None:
         pop = (d.get("precipitation_probability_max") or [None])[0]
         if pop is not None:
             out["rain_chance"] = pop
+        try:  # 주간 예보·자외선·바람·비 오는 시간대 (없어도 오늘 날씨는 그대로 쓴다)
+            col = lambda k, i: (d.get(k) or [None] * 7)[i]  # noqa: E731
+            out["days"] = [{"date": d["time"][i], "max": round(d["temperature_2m_max"][i]), "min": round(d["temperature_2m_min"][i]),
+                            "code": int(d["weather_code"][i]), "desc": WMO_KO.get(int(d["weather_code"][i]), ""),
+                            "rain_chance": col("precipitation_probability_max", i), "uv": col("uv_index_max", i), "wind": col("wind_speed_10m_max", i)}
+                           for i in range(len(d["time"]))]
+            out["uv"], out["wind"] = col("uv_index_max", 0), col("wind_speed_10m_max", 0)
+            hp = (body.get("hourly") or {}).get("precipitation_probability") or []
+            out["rain_hours"] = [i for i, p in enumerate(hp[:24]) if p is not None and p >= 50]
+        except Exception as e:  # noqa: BLE001
+            log.warning("weather week failed: %s", e)
         return out
     except Exception as e:  # noqa: BLE001
         log.warning("weather failed: %s", e)

@@ -38,8 +38,10 @@ SUMMARY_SCHEMA = {
                     "summary_ko": {"type": "array", "items": {"type": "string"}},
                     "why_it_matters": {"type": "string"},
                     "tags": {"type": "array", "items": {"type": "string"}},
+                    "number": {"type": "string"},
+                    "number_label": {"type": "string"},
                 },
-                "required": ["id", "title_ko", "summary_ko", "why_it_matters", "tags"],
+                "required": ["id", "title_ko", "summary_ko", "why_it_matters", "tags", "number", "number_label"],
                 "additionalProperties": False,
             },
         },
@@ -75,6 +77,8 @@ def _system_prompt(region: str, sections: dict[str, str], profile: str = "") -> 
 {why}
 {place}
 - tags: 1~3개. 가능하면 다음 중에서: {TAG_VOCAB}
+- number / number_label: 기사에서 가장 중요한 수치 하나(단위 포함, 12자 이내. 예: "2.25%", "주 650달러", "3만 2천 명")와
+  그 수치가 무엇인지(14자 이내. 예: "기준금리", "오클랜드 중위 렌트"). 기사에 뚜렷한 수치가 없으면 둘 다 빈 문자열("")로 두세요.
 그리고 각 섹션마다 그 섹션 기사들을 아우르는 '오늘의 한 줄 브리핑'을 60자 이내 한 문장으로 쓰세요
 (briefings 배열에 section 키와 함께, 기사가 있는 섹션만).
 규칙: 주어진 제목·설명·본문 발췌에 있는 사실만 사용하고, 없는 수치나 인용을 만들지 마세요.
@@ -120,7 +124,7 @@ def _split_sentences(text: str) -> list[str]:
     return [p.strip() for p in parts if p and p.strip()]
 
 
-def _item_dict(a: Article, *, title_ko: str, summary: list[str], why: str, tags: list[str], region: str) -> dict:
+def _item_dict(a: Article, *, title_ko: str, summary: list[str], why: str, tags: list[str], region: str, figure: tuple[str, str] = ("", "")) -> dict:
     lines = [clamp_line(s) for s in summary if s and s.strip()][:3] or [clamp_line(a.title)]
     item = {
         "id": a.id,
@@ -134,6 +138,9 @@ def _item_dict(a: Article, *, title_ko: str, summary: list[str], why: str, tags:
     }
     if region == "nz":
         item["why_it_matters"] = clamp_line(why or "", 120)
+    num, label = (str(x or "").strip() for x in figure)
+    if num and label and re.search(r"\d", num) and len(num) <= 16:  # 오늘의 숫자: 숫자가 들어 있고 짧을 때만
+        item["figure"] = {"v": num, "l": clamp_line(label, 20)}
     if a.radar_score:
         item["radar"] = int(a.radar_score)  # 이민 레이더 관련도 (중요 알림 판단용)
     return item
@@ -218,7 +225,8 @@ def summarize_region(region: str, keys: list[str], chosen: dict[str, list[Articl
                 items.append(offline_item(a, sec_region, cfg))
                 continue
             items.append(_item_dict(a, title_ko=row.get("title_ko", ""), summary=row.get("summary_ko", []),
-                                    why=row.get("why_it_matters", ""), tags=row.get("tags", []), region=sec_region))
+                                    why=row.get("why_it_matters", ""), tags=row.get("tags", []), region=sec_region,
+                                    figure=(row.get("number", ""), row.get("number_label", ""))))
         briefing = clamp_line(briefings.get(k, ""), 100) if items else "오늘은 이 섹션에 새 소식이 없습니다."
         result[k] = {"label": labels[k], "briefing": briefing, "items": items}
     return result

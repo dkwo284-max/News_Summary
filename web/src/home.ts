@@ -1,4 +1,5 @@
 // 홈 화면: 오늘 핵심 3 · 내게 영향 큰 소식 · 탭별 새 소식 · 추이 그래프 · 최근 7일 정리 · 저장한 기사. AI 없음 (이미 만들어진 브리핑·데이터 파일만 읽는다).
+import { costsCard, numbersCard, pairsCard, quickRead, safetyCard, threadsCard, topicsHeat, weatherCard, type Topics, type WeekThread } from "./home-extra";
 import { loadSaved, removeSaved } from "./news-tools";
 import { procDays } from "./tracker";
 import type { Brief, Item, SectionKey } from "./types";
@@ -13,6 +14,8 @@ export interface HomeCtx {
   fresh: (it: Item) => boolean;
   hidden: (it: Item, key: SectionKey) => boolean;
   goTab: (id: string) => void;
+  goSafety: () => void;
+  suburbs: string[];
   rerender: () => void;
 }
 
@@ -59,6 +62,8 @@ const sectionLabel = (b: Brief, key: SectionKey) => {
   return key.startsWith("kr_") ? `한국 ${l}` : key.startsWith("akl_") ? `오클랜드 ${l}` : ["nz_auckland", "nz_immigration"].includes(key) ? l : `뉴질랜드 ${l}`;
 };
 
+let onWeekly: ((w: Weekly) => void) | null = null;
+
 export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   const { brief } = ctx;
   const root = h("div", { class: "home" });
@@ -75,9 +80,24 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   }
   const link = (it: Item, text: string) => (it.sources[0] ? h("a", { href: safe(it.sources[0].url), target: "_blank", rel: "noopener noreferrer" }, text) : text);
 
+  // 0) 3분 읽기 전환 + 오늘의 숫자
+  let quick = false;
+  try { quick = localStorage.getItem("daily-brief:quick") === "1"; } catch { /* 무시 */ }
+  const qb = h("button", { type: "button", class: "quick-btn", "aria-pressed": String(quick) }, quick ? "📖 전체 보기" : "⚡ 3분 읽기");
+  qb.addEventListener("click", () => { try { localStorage.setItem("daily-brief:quick", quick ? "0" : "1"); } catch { /* 무시 */ } ctx.rerender(); });
+  root.append(h("div", { class: "quick-bar" }, qb, h("small", { class: "muted" }, quick ? "핵심만 모은 요약이에요." : "바쁜 날엔 핵심만 3분 안에.")));
+
   // 1) 오늘 핵심 3
   const score = (x: { it: Item }) => x.it.importance * 10 + (x.it.impact?.level === "high" ? 18 : x.it.impact?.level === "medium" ? 6 : 0) + (ctx.fresh(x.it) ? 4 : 0);
   const top = [...all].filter((x) => !x.it.carried_from).sort((a, b) => score(b) - score(a)).slice(0, 3);
+  if (quick) {
+    root.append(quickRead(h, brief, all, top));
+    return root;
+  }
+  const nums = numbersCard(h, all);
+  if (nums) root.append(nums);
+  const todo = (it: Item) => (it.impact?.actions?.[0] ? h("p", { class: "todo" }, `👉 ${it.impact.actions[0]}`) : null);
+  const press = (it: Item) => (it.sources.length >= 2 ? h("span", { class: "press", title: it.sources.map((s) => s.name).join(", ") }, `📰 ${it.sources.length}곳 보도`) : null);
   if (top.length) {
     root.append(h("section", { class: "home-card", "aria-labelledby": "hm-top" }, h("h2", { id: "hm-top" }, "⭐ 오늘 핵심 3"),
       h("ol", { class: "hm-top" }, ...top.map(({ it, key, tab }, i) => {
@@ -85,8 +105,8 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
         go.addEventListener("click", () => ctx.goTab(tab));
         return h("li", {}, h("span", { class: "hm-rank", "aria-hidden": "true" }, String(i + 1)),
           h("div", {}, h("div", { class: "hm-meta" }, h("span", { class: "sec-label" }, sectionLabel(brief, key)),
-            it.impact && it.impact.level !== "none" ? h("span", { class: `impact-badge ${it.impact.level}` }, IMPACT[it.impact.level]) : null),
-            h("strong", {}, link(it, it.title_ko)), h("p", {}, it.summary_ko[0] ?? ""), go));
+            it.impact && it.impact.level !== "none" ? h("span", { class: `impact-badge ${it.impact.level}` }, IMPACT[it.impact.level]) : null, press(it)),
+            h("strong", {}, link(it, it.title_ko)), h("p", {}, it.summary_ko[0] ?? ""), todo(it), go));
       }))));
   }
 
@@ -95,8 +115,19 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   if (high.length) {
     root.append(h("section", { class: "home-card", "aria-labelledby": "hm-high" }, h("h2", { id: "hm-high" }, "🎯 내게 영향 큰 소식"),
       h("ul", { class: "hm-list" }, ...high.map(({ it, key }) => h("li", {}, h("span", { class: "sec-label" }, sectionLabel(brief, key)), " ", h("strong", {}, link(it, it.title_ko)),
-        it.impact?.reason ? h("small", { class: "muted" }, ` — ${it.impact.reason}`) : null)))));
+        it.impact?.reason ? h("small", { class: "muted" }, ` — ${it.impact.reason}`) : null, todo(it))))));
   }
+
+  // 2-1) 이어지는 이슈 · 주간 날씨 · 생활비 · 두 나라 같은 주제 · 오늘 치안
+  const thrSlot = h("div", { class: "home-slot" });
+  const thr0 = threadsCard(h, brief, all);
+  if (thr0) thrSlot.append(thr0);
+  root.append(thrSlot);
+  onWeekly = (w) => { const c = threadsCard(h, brief, all, w.threads); if (c) thrSlot.replaceChildren(c); };
+  for (const c of [weatherCard(h, brief), costsCard(h, brief, ctx.recent), pairsCard(h, all)]) if (c) root.append(c);
+  const safeSlot = h("div", { class: "home-slot" });
+  root.append(safeSlot);
+  void safetyCard(h, brief, ctx.suburbs, ctx.goSafety).then((c) => { if (c) safeSlot.append(c); }).catch(() => undefined);
 
   // 3) 탭별 새 소식 타일
   root.append(h("section", { class: "home-card", "aria-labelledby": "hm-tabs" }, h("h2", { id: "hm-tabs" }, "📚 탭별 오늘 소식"),
@@ -164,9 +195,10 @@ async function fillTrend(h: H, box: HTMLElement, ctx: HomeCtx): Promise<void> {
 interface Weekly {
   from: string; to: string; days: number;
   groups: { id: string; label: string; items: { title_ko: string; url: string; source: string; date: string; section: string; importance: number; impact: string; days: number }[] }[];
-  threads: { title_ko: string; days: number }[];
+  threads: WeekThread[];
   alerts: { date: string; text: string; url?: string }[];
   processing: { name: string; from: string; to: string; delta_days: number }[];
+  topics?: Topics;
   fx: { first: number; last: number } | null;
 }
 
@@ -176,6 +208,7 @@ async function fillWeekly(h: H, box: HTMLElement): Promise<void> {
     box.replaceChildren(h("h2", { id: "hm-week" }, "📅 최근 7일 정리"), h("p", { class: "muted" }, "아직 정리가 없어요 (내일 브리핑부터 만들어져요)."));
     return;
   }
+  onWeekly?.(w);
   const md = (d: string) => d.slice(5).replace("-", "/");
   const parts: (Node | null)[] = [h("p", { class: "muted" }, `${md(w.from)} ~ ${md(w.to)} (${w.days}일치 브리핑)`)];
   if (w.processing.length) parts.push(h("p", {}, h("strong", {}, "⏱ 처리 기간 변화 "), w.processing.map((p) => `${p.name.replace(/\s*\(.*\)/, "")} ${p.from}→${p.to}`).join(" · ")));
@@ -189,7 +222,8 @@ async function fillWeekly(h: H, box: HTMLElement): Promise<void> {
       h("ul", { class: "hm-list" }, ...g.items.map((i) => h("li", {}, h("small", { class: "muted" }, `${md(i.date)} · `), h("a", { href: safe(i.url), target: "_blank", rel: "noopener noreferrer" }, i.title_ko),
         i.days > 1 ? h("small", { class: "muted" }, ` · ${i.days}일 보도`) : null, i.impact === "high" ? h("span", { class: "impact-badge high" }, "영향 높음") : null)))));
   }
-  box.replaceChildren(h("h2", { id: "hm-week" }, "📅 최근 7일 정리"), ...parts.filter((x): x is Node => x != null));
+  const heat = topicsHeat(h, w.topics);
+  box.replaceChildren(h("h2", { id: "hm-week" }, "📅 최근 7일 정리"), ...parts.filter((x): x is Node => x != null), ...(heat ? [heat] : []));
 }
 
 // ── 데이터 상태 ──

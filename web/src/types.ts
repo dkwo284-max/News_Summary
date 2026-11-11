@@ -18,6 +18,7 @@ export interface Item {
   impact?: { level: "high" | "medium" | "low" | "none"; reason: string; actions: string[]; watch: string }; // 내게 미치는 영향
   timeline?: { date: string; title_ko: string; url: string; id?: string }[]; // 이 이슈의 지난 보도 (오래된 순)
   changed?: string; // 지난 보도와 달라진 점
+  figure?: { v: string; l: string }; // 오늘의 숫자: 기사 핵심 수치와 그 뜻
   carried_from?: string; // 그날 새 소식이 없어 최근 브리핑에서 이어 온 기사
 }
 
@@ -52,7 +53,10 @@ export interface Brief {
   sections: Record<SectionKey, Section>;
   extras: {
     nzd_krw: number | null;
-    auckland_weather: { max: number; min: number; desc: string; rain_chance?: number } | null;
+    auckland_weather: {
+      max: number; min: number; desc: string; code?: number; rain_chance?: number; uv?: number | null; wind?: number | null; rain_hours?: number[];
+      days?: { date: string; max: number; min: number; code: number; desc: string; rain_chance?: number | null; uv?: number | null; wind?: number | null }[];
+    } | null;
     processing_times?: { updated_at: string; items: ProcessingItem[] };
     living_costs?: LivingCosts;
     usd_krw?: number | null;
