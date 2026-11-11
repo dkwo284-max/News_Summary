@@ -84,3 +84,25 @@ def test_crime_stats_summarize():
 
 def test_type_ko():
     assert type_ko("Illicit Drug Offences") == "마약" and type_ko("Robbery, Extortion and Related Offences") == "강도"
+
+
+def test_vague_places_are_not_pinned_to_the_city_centre():
+    from incidents import geo_queries, vague_place
+    for q in ("Auckland", "South Auckland", "East Auckland", "Auckland City", "Counties Manukau, Auckland", "Auckland street, Auckland Central",
+              "Auckland school area, Auckland", "East Auckland shopping centre, Auckland", "BurgerFuel, South Auckland", ""):
+        assert vague_place(q), q
+    for q in ("Myers Park, Auckland Central", "Auckland CBD, Auckland", "Wakefield Street, Auckland Central", "Auckland Airport, Auckland",
+              "Alfriston College, South Auckland", "Manukau Harbour, Auckland", "Great South Road, Takanini, Auckland"):
+        assert not vague_place(q), q
+    assert geo_queries("Auckland", "Auckland Central") == []                # 도심은 추측일 가능성이 커서 쓰지 않는다
+    assert geo_queries("Auckland", "Manurewa") == ["Manurewa"]
+    assert geo_queries("Myers Park", "Auckland Central") == ["Myers Park"]
+
+
+def test_update_incidents_clears_old_centre_pins(cfg, tmp_path):
+    (tmp_path / "incidents.json").write_text(json.dumps({"incidents": [
+        {"id": "v", "date": "2026-10-20", "title_ko": "위치 모름", "url": "", "severity": "2", "crime": "", "location": "Auckland",
+         "suburb": "Auckland Central", "latlon": [-36.85209, 174.76318]}], "geocache": {"Auckland": [-36.85209, 174.76318]}}), encoding="utf-8")
+    update_incidents({}, cfg, tmp_path, "2026-10-28", None, client=_geo_client([]))
+    e = json.loads((tmp_path / "incidents.json").read_text())["incidents"][0]
+    assert "latlon" not in e and e["suburb"] == ""

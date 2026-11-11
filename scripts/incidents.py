@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -41,7 +42,40 @@ BACKFILL_SYSTEM = """오클랜드 뉴스 목록에서 실제로 일어난 범죄
 - severity: "1"(살인·살인미수, 흉기·총기 공격, 성범죄, 납치, 마약 제조·밀수·거래·대량 압수) / "2"(강도, 폭행, 램레이드, 차량 탈취, 방화) /
   "3"(절도, 침입 절도, 기물 파손, 사기) / "accident"(교통사고·화재·실종 등 범죄 아닌 사고). 사건이 아니거나 위치를 모르면 "".
 - crime: 사건 종류를 한국어로 짧게. location: 가장 구체적인 장소(영어). suburb: 오클랜드 동네 이름 하나(영어). 아니면 "".
-주어진 정보에 없는 위치는 지어내지 마세요. 모든 id 에 대해 한 번씩 반환하세요."""
+주어진 정보에 없는 위치는 지어내지 마세요. 구체적 장소가 없으면 "Auckland" 같은 넓은 지역 대신 location·suburb 를 "" 로 두세요. 모든 id 에 대해 한 번씩 반환하세요."""
+
+
+# 지도에 찍을 수 없는 '넓은 지역' 표기: 기사에 구체적 장소가 없을 때 AI 가 "Auckland" 같은 말만 채우면
+# 지오코더가 도심 좌표를 돌려줘서 모든 사건이 Auckland Central 에 몰려 보였다 → 이런 표기는 위치 없음으로 둔다.
+_VAGUE_WORDS = {"auckland", "city", "region", "greater", "central", "north", "south", "east", "west", "northern", "southern", "eastern", "western",
+                "counties", "tamaki", "makaurau", "nz", "new", "zealand", "the", "street", "road", "school", "area", "shopping", "centre", "center",
+                "container", "terminal", "suburb", "town", "local", "near", "a", "an", "unknown", "somewhere", "region"}
+_CHAINS = {"burgerfuel", "mcdonald", "mcdonalds", "kfc", "countdown", "woolworths", "paknsave", "pak", "new", "world", "warehouse", "bunnings", "subway"}
+_REGION_TAIL = re.compile(r"^(?:(?:north|south|east|west|central|greater) )?auckland(?: city| region)?$|^counties manukau$")
+
+
+def vague_place(q: str) -> bool:
+    """위치 문구가 '오클랜드 어딘가' 수준이라 좌표를 찍으면 안 되는가 (예: "Auckland", "South Auckland", "East Auckland shopping centre")."""
+    parts = [p.strip() for p in (q or "").lower().split(",") if p.strip()]
+    if not parts:
+        return True
+    head = re.findall(r"[a-zāēīōū']+", parts[0].replace("'", ""))
+    if not head or all(w in _VAGUE_WORDS for w in head) or parts[0] == "counties manukau":
+        return True
+    # 체인 매장 이름 + 넓은 지역("BurgerFuel, South Auckland")은 어느 지점인지 알 수 없다
+    return len(parts) >= 2 and bool(_REGION_TAIL.match(parts[-1])) and all(w in _CHAINS | _VAGUE_WORDS for w in head)
+
+
+def geo_queries(location: str, suburb: str) -> list[str]:
+    """지오코딩에 쓸 수 있는 검색어(구체적인 것만). 위치가 넓은 지역뿐이면 동네 이름도 추측일 수 있어 도심("Auckland Central")은 쓰지 않는다."""
+    loc = (location or "").strip()
+    sub = (suburb or "").strip()
+    qs = []
+    if loc and not vague_place(loc):
+        qs.append(loc)
+    if sub and not vague_place(sub) and (qs or sub.lower() != "auckland central"):
+        qs.append(sub)
+    return qs
 
 
 def _load(path: Path) -> dict:
@@ -134,11 +168,17 @@ def update_incidents(sections: dict, cfg: dict, data_dir: Path, today: str, llm=
     client = client or httpx.Client(timeout=30, follow_redirects=True, headers={"User-Agent": cfg["fetch"]["user_agent"]})
     try:
         for e in entries.values():
+            qs = geo_queries(e["location"], e["suburb"])
+            if not qs:  # 구체적인 장소가 없다 → 예전에 도심 좌표로 잘못 찍힌 것도 지운다
+                e.pop("latlon", None)
+                if vague_place(e["location"]) and e.get("suburb", "").lower() in ("auckland central", "auckland"):
+                    e["suburb"] = ""
+                continue
+            if e.get("latlon") and vague_place(e["location"]):
+                e.pop("latlon")  # 예전에 넓은 지역 문구로 찍힌 좌표 — 동네 이름으로 다시 찾는다
             if e.get("latlon"):
                 continue
-            for q in (e["location"], e["suburb"]):
-                if not q:
-                    continue
+            for q in qs:
                 if q not in cache:
                     try:
                         cache[q] = geocode(client, f"{q}, Auckland, New Zealand")

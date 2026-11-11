@@ -73,8 +73,9 @@ def _system(cfg: dict) -> str:
   "2"(강도, 폭행, 램레이드·차량 돌진 절도, 차량 탈취, 방화) / "3"(절도, 침입 절도, 기물 파손, 사기) /
   "accident"(범죄가 아닌 교통사고·화재·실종·익사 등). 사건이 아니거나(정책·통계·재판 일정만) 위치를 알 수 없으면 "".
 - crime: 사건 종류를 한국어로 짧게(예: "흉기 피습", "마약 압수", "램레이드"). 아니면 "".
-- location: 기사에 나온 가장 구체적인 장소를 영어로(예: "Myers Park, Auckland Central", "Lake Road, Devonport"). 아니면 "".
-- suburb: 그 장소의 오클랜드 동네 이름 하나를 영어로(예: "Auckland Central", "Devonport", "Manurewa"). 아니면 "".
+- location: 기사에 나온 가장 구체적인 장소(동네·거리·건물·공원 이름)를 영어로(예: "Myers Park, Auckland Central", "Lake Road, Devonport"). 기사에 구체적 장소가
+  없으면 "Auckland"·"South Auckland" 같은 넓은 지역을 채우지 말고 location·suburb 를 모두 ""로 두세요(지도에 엉뚱한 곳이 찍힙니다).
+- suburb: 기사에 근거해 그 장소의 오클랜드 동네 이름 하나를 영어로(예: "Auckland Central", "Devonport", "Manurewa"). 기사에 없으면 추측하지 말고 "".
 그 외 기사는 severity·crime·location·suburb 모두 "".
 
 사실은 주어진 기사 정보 안에서만. 날짜·수치를 지어내지 말고, 법률·투자 조언을 단정하지 마세요. 모든 id 에 대해 한 번씩 반환하세요."""

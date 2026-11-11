@@ -123,6 +123,15 @@ export function sameIncident(a: Incident, b: Incident): boolean {
   return samePlace(a.location, b.location) || titleSim(a.title_ko, b.title_ko) >= 0.6;
 }
 
+/** 위치 문구가 "오클랜드 어딘가" 수준인가 (scripts/incidents.py 의 vague_place 와 같은 규칙) — 카드·지도에서 동네로 표시하지 않는다 */
+export function vaguePlace(q: string | undefined): boolean {
+  const parts = (q ?? "").toLowerCase().split(",").map((p) => p.trim()).filter(Boolean);
+  if (!parts.length) return true;
+  const words = new Set("auckland city region greater central north south east west northern southern eastern western counties tamaki makaurau nz new zealand the street road school area shopping centre center container terminal suburb town local near a an unknown somewhere".split(" "));
+  const head = (parts[0].replace(/'/g, "").match(/[a-zāēīōū']+/g) ?? []);
+  return !head.length || head.every((w) => words.has(w)) || parts[0] === "counties manukau";
+}
+
 /** 후속 보도를 합치고(가장 먼저 보도된 기사를 남김), 동네 이름이 없거나 "Auckland" 뿐이면 가장 가까운 동네(3km 이내)로 채운다 */
 function tidy(list: Incident[], suburbs: Record<string, [number, number]>): Incident[] {
   const out: Incident[] = [];

@@ -3,7 +3,7 @@ import { applySettings, loadSettings, saveSettings, type Settings } from "./sett
 import { fetchLive, loadLive, type LiveData } from "./live";
 import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
 import { gpSection, loadGP } from "./gpmap";
-import { loadIncidents, safetyAlert, safetySection } from "./crimemap";
+import { loadIncidents, safetyAlert, safetySection, vaguePlace } from "./crimemap";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
 import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, isSaved, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, toggleSaved, unfollow, type SeenIndex } from "./news-tools";
 import { homeView, statusPanel } from "./home";
@@ -282,7 +282,11 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   if (near.length) meta.append(h("span", { class: "near" }, `📍 ${near.join(", ")}`));
   // 치안 기사: 사건이 난 지역을 한눈에 (주택 침입·강도는 특히 지역이 중요)
   if (item.incident && (item.incident.suburb || item.incident.location)) {
-    meta.append(h("span", { class: "place", title: item.incident.location }, `📍 ${item.incident.suburb || item.incident.location}`));
+    // 구체적인 장소가 없는 기사는 "Auckland Central" 처럼 추측한 동네를 보여 주지 않는다
+    const vague = vaguePlace(item.incident.location);
+    if (!vague) meta.append(h("span", { class: "place", title: item.incident.location }, `📍 ${item.incident.suburb || item.incident.location}`));
+    else if (!/^(auckland( central)?)?$/i.test(item.incident.suburb)) meta.append(h("span", { class: "place", title: item.incident.location }, `📍 ${item.incident.suburb}`));
+    else meta.append(h("span", { class: "place muted", title: "기사에 구체적인 장소가 없어요" }, "📍 위치 미공개"));
   }
   if (item.carried_from) meta.append(h("span", { class: "carried", title: "오늘은 새 소식이 없어 최근 소식을 보여줍니다" }, `지난 소식 · ${fmtDateShort(item.carried_from)}`));
   if (item.id && (brief?.sections.akl_education?.items.some((x) => x.id === item.id) || brief?.sections.nz_education?.items.some((x) => x.id === item.id))) {
