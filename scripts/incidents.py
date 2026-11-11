@@ -78,6 +78,111 @@ def geo_queries(location: str, suburb: str) -> list[str]:
     return qs
 
 
+# ── 위치 검증: AI 가 뽑은 장소가 기사 원문에 실제로 있는지 글자로 대조한다 ──
+# "Auckland street" 를 "Auckland CBD" 로 옮기는 식의 추측을 막기 위해서다. 원문에 없으면 그 장소는 버린다.
+REGIONS = {  # 넓은 권역: (원문에서 찾을 표현, 한국어 이름, 요약문에서 찾을 한국어 표현)
+    "central": (r"\bcbd\b|central city|city cent(?:re|er)|downtown|central auckland|inner[- ]city|auckland central|queen street|karangahape|\bk[' ]?road\b|britomart|viaduct|wynyard|myers park|aotea|albert park|sky ?tower|skycity", "도심", "도심"),
+    "west": (r"\bwest(?:ern)? auckland\b|\bwaitakere\b", "서부", "서부"),
+    "south": (r"\bsouth(?:ern)? auckland\b|counties manukau", "남부", "남부"),
+    "east": (r"\beast(?:ern)? auckland\b", "동부", "동부"),
+    "north": (r"north shore|\bnorth(?:ern)? auckland\b", "북부", "북부|노스쇼어"),
+}
+_PLACE_TYPES = {"street", "st", "road", "rd", "avenue", "ave", "drive", "dr", "lane", "place", "pl", "crescent", "terrace", "way", "highway", "motorway",
+                "park", "reserve", "beach", "bay", "mall", "plaza", "station", "school", "college", "university", "court", "bridge", "airport", "hospital",
+                "terminal", "wharf", "centre", "center", "harbour", "hotel", "island", "library", "stadium", "domain", "square", "market", "cbd"}
+PRECISION = ("exact", "suburb", "region", "none")
+
+
+def _norm(s: str) -> str:
+    import unicodedata
+
+    return "".join(c for c in unicodedata.normalize("NFKD", (s or "").lower()) if not unicodedata.combining(c)).replace("’", "'")
+
+
+def grounded(name: str, src: str) -> bool:
+    """장소 이름의 고유한 낱말이 모두 원문(제목·설명·본문 발췌)에 있는가. 고유 낱말이 없으면("Auckland Airport") 이름 전체가 있어야 한다."""
+    head, text = _norm(name).split(",")[0].strip(), _norm(src)
+    if not head or not text:
+        return False
+    toks = [w for w in re.findall(r"[a-z']+", head.replace("'", "")) if len(w) >= 3 and w not in _VAGUE_WORDS and w not in _PLACE_TYPES]
+    flat = text.replace("'", "")
+    if toks:
+        return all(re.search(rf"\b{re.escape(w)}", flat) for w in toks)
+    return head in text or (head.endswith("cbd") and bool(re.search(REGIONS["central"][0], text)))
+
+
+def region_of(src: str) -> str:
+    text = _norm(src)
+    return next((k for k, (pat, _, _) in REGIONS.items() if re.search(pat, text)), "")
+
+
+def verify_place(inc: dict, src: str) -> dict:
+    """AI 가 뽑은 위치를 원문과 대조해 확실도를 붙인다.
+    exact = 거리·건물·공원까지 원문에 있음 / suburb = 동네 이름만 원문에 있음 / region = 서부·남부 같은 권역만 / none = 원문에 장소 없음."""
+    loc, sub = (inc.get("location") or "").strip(), (inc.get("suburb") or "").strip()
+    head = loc.split(",")[0].strip()
+    out = {**inc, "region": region_of(src)}
+    if loc and not vague_place(loc) and grounded(head, src):
+        specific = bool(re.search(r"\d", head)) or any(w in _PLACE_TYPES - {"cbd"} for w in re.findall(r"[a-z]+", _norm(head)))
+        return {**out, "precision": "exact" if specific else "suburb"}
+    if sub and not vague_place(sub) and grounded(sub, src):
+        return {**out, "location": sub, "precision": "suburb"}
+    return {**out, "location": "", "suburb": "", "precision": "region" if out["region"] else "none"}
+
+
+def fix_region_words(item: dict, src: str) -> bool:
+    """요약·제목의 '오클랜드 도심/서부/남부…'가 원문에 근거가 없으면 '오클랜드'로 되돌린다 (원문은 "Auckland street" 인데 요약이 "도심 거리"가 되는 것 방지)."""
+    if not (src or "").strip():
+        return False
+    text = _norm(src)
+    bad = [ko for pat, _, ko in REGIONS.values() if not re.search(pat, text)]
+    if not bad:
+        return False
+    rx = re.compile(rf"오클랜드\s*(?:{'|'.join(bad)})(?=\s|의|에|에서|$)")
+    changed = False
+    def fix(s: str) -> str:
+        nonlocal changed
+        t = rx.sub("오클랜드", s)
+        changed = changed or t != s
+        return t
+    item["title_ko"] = fix(item.get("title_ko", ""))
+    item["summary_ko"] = [fix(x) for x in item.get("summary_ko", [])]
+    return changed
+
+
+def legacy_precision(e: dict) -> str:
+    """원문 대조 없이 쌓인 예전 기록의 확실도 (문구 모양으로만 판단)."""
+    loc = e.get("location") or ""
+    if not geo_queries(loc, e.get("suburb") or ""):
+        return "region" if region_of(loc) else "none"
+    if vague_place(loc):
+        return "suburb"
+    head = _norm(loc).split(",")[0]
+    return "exact" if re.search(r"\d", head) or any(w in _PLACE_TYPES - {"cbd"} for w in re.findall(r"[a-z]+", head)) else "suburb"
+
+
+def follow_up_places(entries: dict[str, dict], days: int = 7) -> int:
+    """위치를 모르던 사건의 후속 보도에 구체적 장소가 나오면 그 장소로 채운다 (같은 등급, days 일 안, 제목 핵심어 3개 이상 겹침)."""
+    from weekly import _keys
+
+    known = [e for e in entries.values() if e.get("precision") in ("exact", "suburb")]
+    n = 0
+    for e in entries.values():
+        if e.get("precision") in ("exact", "suburb"):
+            continue
+        ke = _keys(e.get("title_ko", ""))
+        for o in sorted(known, key=lambda o: o.get("precision") != "exact"):
+            gap = abs((date.fromisoformat(o["date"]) - date.fromisoformat(e["date"])).days)
+            if o["severity"] == e["severity"] and gap <= days and len(ke & _keys(o.get("title_ko", ""))) >= 3:
+                e.update({k: o[k] for k in ("location", "suburb", "precision") if k in o})
+                if o.get("latlon"):
+                    e["latlon"] = o["latlon"]
+                e["place_from"] = o["id"]
+                n += 1
+                break
+    return n
+
+
 def _load(path: Path) -> dict:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -90,7 +195,8 @@ def _entry(it: dict, day: str, inc: dict) -> dict:
             "url": (it.get("sources") or [{}])[0].get("url", ""),
             "summary": (it.get("summary_ko") or [""])[0][:120],
             "severity": inc["severity"], "crime": inc.get("crime", ""),
-            "location": inc["location"], "suburb": inc.get("suburb", "")}
+            "location": inc.get("location", ""), "suburb": inc.get("suburb", ""),
+            **({"precision": inc["precision"], "region": inc.get("region", "")} if inc.get("precision") in PRECISION else {})}
 
 
 def _past_akl_items(data_dir: Path, today: str, days: int) -> list[tuple[str, dict]]:
@@ -163,12 +269,17 @@ def update_incidents(sections: dict, cfg: dict, data_dir: Path, today: str, llm=
             it = next((x for sec in b.get("sections", {}).values() for x in sec.get("items", []) if x["id"] == e["id"]), None)
             if it:
                 e["summary"] = (it.get("summary_ko") or [""])[0][:120]
+    for e in entries.values():  # 예전 기록에는 확실도가 없다 → 문구로 추정해 채운다
+        if e.get("precision") not in PRECISION:
+            e["precision"] = legacy_precision(e)
+            e.setdefault("region", region_of(e.get("location") or ""))
+    follow_up_places(entries)
     cache: dict[str, list[float] | None] = dict(old.get("geocache", {}))
     own = client is None
     client = client or httpx.Client(timeout=30, follow_redirects=True, headers={"User-Agent": cfg["fetch"]["user_agent"]})
     try:
         for e in entries.values():
-            qs = geo_queries(e["location"], e["suburb"])
+            qs = geo_queries(e["location"], e["suburb"]) if e.get("precision") in ("exact", "suburb") else []
             if not qs:  # 구체적인 장소가 없다 → 예전에 도심 좌표로 잘못 찍힌 것도 지운다
                 e.pop("latlon", None)
                 if vague_place(e["location"]) and e.get("suburb", "").lower() in ("auckland central", "auckland"):

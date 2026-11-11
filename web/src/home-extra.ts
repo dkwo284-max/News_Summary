@@ -1,6 +1,6 @@
 // 홈 화면 추가 카드: 오늘의 숫자 · 이어지는 이슈 타임라인 · 주간 날씨 · 생활비 대시보드 · 한국↔뉴질랜드 같은 주제 · 오늘 치안과 내 동네 거리 ·
 // 주제 흐름 히트맵 · 3분 읽기. 모두 이미 만들어진 브리핑·데이터 파일만 읽는다 (AI 요청 없음).
-import { loadIncidents } from "./crimemap";
+import { loadIncidents, pinned, placeLabel } from "./crimemap";
 import { km, loadGP } from "./gpmap";
 import type { Brief, Item, SectionKey } from "./types";
 
@@ -155,8 +155,10 @@ export function pairsCard(h: H, rows: Row[]): HTMLElement | null {
 export async function safetyCard(h: H, brief: Brief, suburbs: string[], goTab: () => void): Promise<HTMLElement | null> {
   const [inc, gp] = await Promise.all([loadIncidents(), loadGP()]);
   if (!inc) return null;
-  const today = inc.incidents.filter((e) => e.date === brief.date && e.latlon);
-  if (!today.length) return null;
+  const all = inc.incidents.filter((e) => e.date === brief.date);
+  const today = all.filter(pinned);  // 거리 계산은 장소가 확인된 사건만
+  const loose = all.filter((e) => !pinned(e));
+  if (!all.length) return null;
   const homes = suburbs.filter((s) => gp?.suburbs[s]).map((s) => [s, gp!.suburbs[s]] as const);
   const rows = today.map((e) => {
     const near = homes.map(([s, ll]) => ({ s, d: km(ll, e.latlon as [number, number]) })).sort((x, y) => x.d - y.d)[0];
@@ -164,14 +166,16 @@ export async function safetyCard(h: H, brief: Brief, suburbs: string[], goTab: (
   }).sort((x, y) => (x.near?.d ?? 999) - (y.near?.d ?? 999));
   const go = h("button", { type: "button", class: "link-btn" }, "지도에서 보기");
   go.addEventListener("click", goTab);
-  const closest = rows[0].near;
+  const closest = rows[0]?.near;
   return card(h, "hm-safe", "🚓 오늘 치안 소식과 내 동네",
-    h("p", {}, `오늘 위치가 확인된 사건 ${rows.length}건`, closest ? ` · 가장 가까운 곳은 ${closest.s}에서 약 ${closest.d.toFixed(closest.d < 10 ? 1 : 0)}km` : ""),
+    h("p", {}, `오늘 장소가 확인된 사건 ${rows.length}건`, closest ? ` · 가장 가까운 곳은 ${closest.s}에서 약 ${closest.d.toFixed(closest.d < 10 ? 1 : 0)}km` : "",
+      loose.length ? ` · 위치가 불확실한 사건 ${loose.length}건은 거리 계산에서 제외` : ""),
     h("ul", { class: "safe-list" }, ...rows.slice(0, 5).map(({ e, near }) => {
       const pct = near ? Math.max(4, Math.min(100, 100 - (near.d / 30) * 100)) : 0;
       return h("li", {}, h("span", { class: `sev sev-${e.severity}` }, e.crime || "사건"), h("span", { class: "safe-t" }, a(h, e.url, e.title_ko), h("small", { class: "muted" }, ` ${e.suburb || ""}`)),
         near ? h("span", { class: "safe-d", title: `${near.s} 기준 직선 거리` }, h("i", { "aria-hidden": "true" }, h("b", { style: `width:${pct.toFixed(0)}%` })), `${near.d.toFixed(near.d < 10 ? 1 : 0)}km`) : null);
-    })), go,
+    }), ...loose.slice(0, 4).map((e) => h("li", {}, h("span", { class: `sev sev-${e.severity}` }, e.crime || "사건"), h("span", { class: "safe-t" }, a(h, e.url, e.title_ko)),
+      h("span", { class: "safe-d muted" }, placeLabel(e))))), go,
     h("p", { class: "board-note" }, "거리는 관심 동네 중심에서 사건 위치까지의 직선 거리예요(막대가 길수록 가까움). 위치는 기사에 나온 지명 기준입니다."));
 }
 
@@ -212,4 +216,26 @@ export function quickRead(h: H, brief: Brief, rows: Row[], top: Row[]): HTMLElem
   const chars = (body.textContent ?? "").length;
   const mins = Math.max(1, Math.round(chars / 500));
   return h("section", { class: "home-card quick-card", "aria-labelledby": "hm-quick" }, h("h2", { id: "hm-quick" }, `⚡ 3분 읽기 `, h("small", { class: "muted" }, `약 ${mins}분 · ${chars.toLocaleString("ko-KR")}자`)), body);
+}
+
+// ── 한 달 변화: 내 상황 기준 ──
+export interface Monthly {
+  from: string; to: string; days: number; good: number; bad: number;
+  rows: { key: string; label: string; from: string; to: string; verdict: "good" | "bad" | "flat" | "info"; note: string }[];
+  immigration: { high: { date: string; title_ko: string; url: string; reason: string }[]; n_high: number; n_alerts: number };
+}
+const VERDICT = { good: "유리해짐", bad: "불리해짐", flat: "변동 없음", info: "참고" } as const;
+export function monthlyCard(h: H, m: Monthly | null | undefined): HTMLElement | null {
+  if (!m?.rows?.length) return null;
+  const head = m.good > m.bad ? "전체적으로 조금 나아진 한 달" : m.bad > m.good ? "전체적으로 부담이 늘어난 한 달" : "좋아진 것과 나빠진 것이 비슷한 한 달";
+  const order = { bad: 0, good: 1, info: 2, flat: 3 } as const;
+  return card(h, "hm-month", "🗓 한 달 변화 — 우리 가족 기준",
+    h("p", {}, h("strong", {}, head), h("span", { class: "muted" }, ` · 유리해진 항목 ${m.good} · 불리해진 항목 ${m.bad} (${md(m.from)} ~ ${md(m.to)}, ${m.days}일치)`)),
+    h("ul", { class: "mon-list" }, ...[...m.rows].sort((x, y) => order[x.verdict] - order[y.verdict]).map((r) =>
+      h("li", {}, h("span", { class: `mon-v ${r.verdict}` }, VERDICT[r.verdict]), h("span", { class: "mon-l" }, r.label),
+        h("span", { class: "mon-c" }, r.from ? `${r.from} → ` : "", h("b", {}, r.to)), r.note ? h("small", { class: "muted" }, r.note) : null))),
+    m.immigration.n_high || m.immigration.n_alerts ? h("details", {}, h("summary", {}, `🛂 이민 정책: 영향 높은 소식 ${m.immigration.n_high}건 · 알림 ${m.immigration.n_alerts}건`),
+      h("ul", { class: "hm-list" }, ...m.immigration.high.map((x) => h("li", {}, h("small", { class: "muted" }, `${md(x.date)} `), x.url ? a(h, x.url, x.title_ko) : x.title_ko,
+        x.reason ? h("small", { class: "muted" }, ` — ${x.reason}`) : null)))) : null,
+    h("p", { class: "board-note" }, "판정 기준: 비자 처리 기간은 짧아지면 유리, 환율은 원화를 뉴질랜드달러로 바꿔 쓰는 입장에서 내려가면 유리, 렌트·유가는 내려가면 유리. 규칙으로 계산한 값이며 AI 를 쓰지 않습니다."));
 }

@@ -106,3 +106,37 @@ def test_update_incidents_clears_old_centre_pins(cfg, tmp_path):
     update_incidents({}, cfg, tmp_path, "2026-10-28", None, client=_geo_client([]))
     e = json.loads((tmp_path / "incidents.json").read_text())["incidents"][0]
     assert "latlon" not in e and e["suburb"] == ""
+
+
+def test_place_must_be_in_the_source_text():
+    from incidents import fix_region_words, verify_place
+    inc = {"severity": "1", "crime": "변사체", "location": "Auckland CBD, Auckland", "suburb": "Auckland Central"}
+    v = verify_place(inc, "Witness describes covered body as police swarm Auckland street")
+    assert v["precision"] == "none" and v["location"] == "" and v["suburb"] == ""          # 원문에 도심이라는 말이 없다
+    v = verify_place(inc, "Police swarm a West Auckland street after body found")
+    assert v["precision"] == "region" and v["region"] == "west"
+    v = verify_place({**inc, "location": "Myers Park, Auckland Central"}, "A child was attacked at Myers Park playground in the central city")
+    assert v["precision"] == "exact" and v["suburb"] == "Auckland Central" and v["region"] == "central"
+    v = verify_place({**inc, "location": "Lake Road, Devonport", "suburb": "Devonport"}, "Armed police were called to Devonport on Tuesday")
+    assert v["precision"] == "suburb" and v["location"] == "Devonport"                        # 거리는 원문에 없고 동네만 있다
+    v = verify_place({**inc, "location": "Māngere Town Centre", "suburb": "Mangere"}, "Shots fired near Mangere town centre")
+    assert v["precision"] == "exact"                                                            # 장음 부호·대소문자 무시
+    it = {"title_ko": "오클랜드 도심 거리 출동한 경찰", "summary_ko": ["이른 아침 오클랜드 도심 거리로 경찰이 출동했습니다.", "오클랜드 서부에서도 신고가 있었습니다."]}
+    assert fix_region_words(it, "police swarm Auckland street in West Auckland")
+    assert it["title_ko"] == "오클랜드 거리 출동한 경찰" and "오클랜드 서부" in it["summary_ko"][1] and "도심" not in it["summary_ko"][0]
+
+
+def test_follow_up_report_fills_unknown_place_and_precision_gates_geocoding(cfg, tmp_path, monkeypatch):
+    import korean_gp
+    monkeypatch.setattr(korean_gp.time, "sleep", lambda s: None)
+    sections = {"akl_safety": {"label": "치안", "items": [
+        _brief_item("a", "오클랜드 거리에서 시신 발견 경찰 수사", incident={"severity": "1", "crime": "변사", "location": "", "suburb": "", "precision": "none", "region": ""}),
+        _brief_item("b", "헨더슨 거리 시신 발견 경찰 수사 살인 전환", incident={"severity": "1", "crime": "살인", "location": "Great North Road, Henderson", "suburb": "Henderson", "precision": "exact", "region": "west"}),
+        _brief_item("c", "서부 어딘가 절도", incident={"severity": "3", "crime": "절도", "location": "", "suburb": "", "precision": "region", "region": "west"})]}}
+    calls = []
+    with _geo_client(calls) as c:
+        update_incidents(sections, cfg, tmp_path, "2026-11-12", None, client=c)
+    ids = {e["id"]: e for e in json.loads((tmp_path / "incidents.json").read_text())["incidents"]}
+    assert ids["a"]["precision"] == "exact" and ids["a"]["place_from"] == "b" and ids["a"]["latlon"]   # 후속 보도의 장소로 채움
+    assert "latlon" not in ids["c"] and ids["c"]["region"] == "west"
+    assert calls == ["Great North Road, Henderson, Auckland, New Zealand"]

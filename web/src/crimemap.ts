@@ -17,6 +17,19 @@ export interface Incident {
   suburb: string;
   summary?: string; // 한 줄 설명 (지도 팝업)
   latlon?: [number, number];
+  precision?: "exact" | "suburb" | "region" | "none"; // 위치 확실도: 거리·건물까지 / 동네까지 / 권역만 / 모름 (원문 대조 결과)
+  region?: string; // central · west · south · east · north
+  place_from?: string; // 후속 보도에서 위치를 채웠을 때 그 기사 id
+}
+export const REGION_KO: Record<string, string> = { central: "도심", west: "서부", south: "남부", east: "동부", north: "북부(노스쇼어)" };
+/** 지도에 점으로 찍어도 되는가 (거리·건물까지 확인된 사건). 예전 기록(확실도 없음)은 좌표가 있으면 점으로 본다 */
+export const pinned = (e: Incident) => !!e.latlon && (e.precision ?? "exact") === "exact";
+/** 사건 위치를 한 줄로: 확실도에 맞춰 표현을 달리한다 */
+export function placeLabel(e: { location: string; suburb: string; precision?: string; region?: string }): string {
+  if (e.precision === "suburb") return `${e.suburb || e.location} 일대 (동네까지만 확인)`;
+  if (e.precision === "region") return `오클랜드 ${REGION_KO[e.region ?? ""] ?? ""} (구체 위치 미공개)`;
+  if (e.precision === "none") return "위치 미공개";
+  return e.suburb || e.location;
 }
 interface IncidentData { updated_at: string; keep_days: number; incidents: Incident[] }
 interface AreaStat { total: number; prev_total: number | null; by_type: Record<string, number>; monthly: number[] }
@@ -157,9 +170,9 @@ function tidy(list: Incident[], suburbs: Record<string, [number, number]>): Inci
 export function nearbySerious(data: IncidentData | null, homes: Record<string, [number, number]>, days = 7): { e: Incident; s: string; d: number }[] {
   const out: { e: Incident; s: string; d: number }[] = [];
   for (const e of inDays(tidy(data?.incidents ?? [], {}), days)) {
-    if (e.severity !== "1" || !e.latlon) continue;
+    if (e.severity !== "1" || !pinned(e)) continue;  // 동네·권역까지만 아는 사건은 거리 계산에 쓰지 않는다
     for (const [s, at] of Object.entries(homes)) {
-      const d = km(at, e.latlon);
+      const d = km(at, e.latlon!);
       if (d <= RADIUS_KM) {
         out.push({ e, s, d });
         break;
@@ -201,10 +214,23 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
   chips.append(mk("7일", states[0], () => (period = 7)), mk("30일", states[1], () => (period = 30)),
     mk("90일", states[2], () => (period = 90)), mk("1급만", states[3], () => (onlySerious = !onlySerious)));
   const summary = h("p", { class: "board-note" });
+  // 위치가 권역까지만 알려졌거나 아예 공개되지 않은 사건: 지도에 찍지 않고 권역별 목록으로
+  const vagueBox = h("details", { class: "inc-vague" });
+  const drawVague = (list: Incident[]) => {
+    vagueBox.hidden = !list.length;
+    if (!list.length) return;
+    const by = new Map<string, Incident[]>();
+    for (const e of list) { const k = e.precision === "region" && e.region ? e.region : ""; by.set(k, [...(by.get(k) ?? []), e]); }
+    const order = ["central", "north", "west", "south", "east", ""].filter((k) => by.has(k));
+    vagueBox.replaceChildren(h("summary", {}, `📭 지도에 찍지 않은 사건 ${list.length}건 `, h("span", { class: "muted" }, order.map((k) => `${k ? REGION_KO[k] : "위치 미공개"} ${by.get(k)!.length}`).join(" · "))),
+      ...order.map((k) => h("div", {}, h("p", { class: "hood-news" }, k ? `오클랜드 ${REGION_KO[k]} 어딘가 (기사에 권역만 나옴)` : "기사에 장소가 나오지 않음"),
+        h("ul", { class: "inc-list" }, ...by.get(k)!.sort((a, b) => b.date.localeCompare(a.date)).map((e) => incBrief(h, e))))));
+  };
   const legend = h("p", { class: "gp-legend" }, ...(["1", "2", "3", "accident"] as Sev[]).flatMap((s) =>
     [h("span", { class: "dot", style: `background:${SEV_COLOR[s]}` }), `${SEV_LABEL[s]} ${SEV_DESC[s]} `]),
-    Object.keys(homes).length ? h("span", { class: "dot home" }) : null, Object.keys(homes).length ? `관심 동네(반경 ${RADIUS_KM}km)` : null);
-  root.append(h("section", { class: "hood-card" }, h("h2", {}, "🗺️ 오클랜드 사건 지도"), chips, mapEl, legend, summary,
+    Object.keys(homes).length ? h("span", { class: "dot home" }) : null, Object.keys(homes).length ? `관심 동네(반경 ${RADIUS_KM}km) ` : null,
+    h("span", { class: "dot", style: "background:transparent;border:1.5px dashed #6b7280" }), "점선 원 = 동네까지만 확인된 사건(정확한 지점 아님)");
+  root.append(h("section", { class: "hood-card" }, h("h2", {}, "🗺️ 오클랜드 사건 지도"), chips, mapEl, legend, summary, vagueBox,
     h("p", { class: "board-note" }, "뉴스에 보도된 사건만 표시해요. 큰 사건은 많이, 흔한 절도는 적게 보도되므로 실제 범죄 빈도는 아래 경찰 공식 통계와 함께 보세요. 지도 © OpenStreetMap")));
 
   type Leaflet = typeof import("leaflet");
@@ -216,7 +242,8 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
     const list = shown();
     const n = (s: Sev) => list.filter((e) => e.severity === s).length;
     summary.textContent = `최근 ${period}일 보도 ${list.length}건 · 1급 ${n("1")} · 2급 ${n("2")} · 3급 ${n("3")} · 사고 ${n("accident")}` +
-      (list.some((e) => !e.latlon) ? ` (위치 못 찾은 ${list.filter((e) => !e.latlon).length}건 제외)` : "");
+      ` · 지도: 점 ${list.filter(pinned).length}건(장소 확인) · 옅은 원 ${list.filter((e) => e.latlon && !pinned(e)).length}건(동네까지만) · 아래 목록 ${list.filter((e) => !e.latlon).length}건(위치 미상)`;
+    drawVague(list.filter((e) => !e.latlon));
     if (!L || !map || !layer) return;
     layer.clearLayers();
     // 관심 동네 원은 먼저 그리고 클릭을 통과시킨다 (위에 그리면 도심 사건 점을 가려 눌리지 않음)
@@ -224,8 +251,19 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
       L.circle(at, { radius: RADIUS_KM * 1000, color: "#1d4ed8", weight: 1, dashArray: "4 4", fillOpacity: 0.04, interactive: false }).addTo(layer);
       L.circleMarker(at, { radius: 5, weight: 2, color: "#1d4ed8", fillColor: "#93c5fd", fillOpacity: 0.9 }).bindTooltip(s, { direction: "top" }).addTo(layer);
     }
+    // 동네까지만 확인된 사건: 정확한 지점이 아니므로 점 대신 반경 1km 의 옅은 원으로 "이 일대"임을 보여 준다
+    const areaGroups = new Map<string, Incident[]>();
+    for (const e of list) if (e.latlon && !pinned(e)) areaGroups.set(e.latlon.join(","), [...(areaGroups.get(e.latlon.join(",")) ?? []), e]);
+    for (const g of areaGroups.values()) {
+      const worst = (["1", "2", "3", "accident"] as Sev[]).find((s) => g.some((e) => e.severity === s))!;
+      L.circle(g[0].latlon!, { radius: 1000, weight: 1.5, dashArray: "5 5", color: SEV_COLOR[worst], fillColor: SEV_COLOR[worst], fillOpacity: 0.12 })
+        .bindPopup(h("div", { class: "gp-info" }, h("div", { class: "inc-place" }, `📍 ${g[0].suburb || g[0].location} 일대 · 정확한 지점 미공개${g.length > 1 ? ` · ${g.length}건` : ""}`),
+          h("ul", { class: "inc-list" }, ...g.sort((a, b) => b.date.localeCompare(a.date)).map((e) => incBrief(h, e)))), { maxWidth: 260 })
+        .bindTooltip(`${g[0].suburb || g[0].location} 일대 ${g.length}건 (동네까지만 확인)`, { direction: "top" })
+        .addTo(layer);
+    }
     const groups = new Map<string, Incident[]>();
-    for (const e of list) if (e.latlon) groups.set(e.latlon.join(","), [...(groups.get(e.latlon.join(",")) ?? []), e]);
+    for (const e of list) if (pinned(e)) groups.set(e.latlon!.join(","), [...(groups.get(e.latlon!.join(",")) ?? []), e]);
     for (const g of groups.values()) {
       const worst = (["1", "2", "3", "accident"] as Sev[]).find((s) => g.some((e) => e.severity === s))!;
       L.circleMarker(g[0].latlon!, { radius: 6 + 3 * Math.sqrt(g.length), weight: 2, color: "#fff", fillColor: SEV_COLOR[worst], fillOpacity: 0.85 })
@@ -252,7 +290,7 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
   const bySub = new Map<string, Incident[]>();
   for (const e of recent) if (e.suburb) bySub.set(e.suburb, [...(bySub.get(e.suburb) ?? []), e]);
   const top = [...bySub.entries()].map(([s, l]) => ({ s, l, sc: score(l) })).filter((x) => x.sc > 0).sort((a, b) => b.sc - a.sc).slice(0, 5);
-  const radius = (at: [number, number], l: Incident[]) => l.filter((e) => e.latlon && km(at, e.latlon) <= RADIUS_KM);
+  const radius = (at: [number, number], l: Incident[]) => l.filter((e) => pinned(e) && km(at, e.latlon!) <= RADIUS_KM);
   const centres = Object.values(allSuburbs);
   const avg = centres.length ? centres.reduce((s, at) => s + score(radius(at, recent)), 0) / centres.length : 0;
   const card = h("section", { class: "hood-card" }, h("h2", {}, "⚖️ 동네별 위험 요약 (최근 30일 보도)"));

@@ -89,7 +89,95 @@ def build_weekly(data_dir: Path, today: date, span: int = 7) -> dict | None:
         pass
     fx = [(b["date"], (b.get("extras") or {}).get("nzd_krw")) for b in briefs if (b.get("extras") or {}).get("nzd_krw")]
     return {"updated": today.isoformat(), "from": briefs[0]["date"], "to": briefs[-1]["date"], "days": len(briefs), "groups": groups, "threads": threads,
-            "alerts": alerts[-8:], "processing": proc, "topics": topic_heat(data_dir, today), "fx": {"first": fx[0][1], "last": fx[-1][1]} if len(fx) >= 2 else None}
+            "alerts": alerts[-8:], "processing": proc, "topics": topic_heat(data_dir, today), "monthly": build_monthly(data_dir, today), "fx": {"first": fx[0][1], "last": fx[-1][1]} if len(fx) >= 2 else None}
+
+
+def build_monthly(data_dir: Path, today: date, span: int = 30) -> dict | None:
+    """한 달 변화 — 이 가족(유학→취업비자→영주권 준비, 오클랜드 렌트) 기준으로 좋아졌나 나빠졌나. 규칙으로만 만든다 (AI 0회).
+    verdict: good(유리해짐) / bad(불리해짐) / flat(변동 없음) / info(방향을 말하기 어려움)."""
+    briefs = []
+    for i in range(span, -1, -1):
+        try:
+            briefs.append(json.loads((data_dir / f"{(today - timedelta(days=i)).isoformat()}.json").read_text(encoding="utf-8")))
+        except Exception:  # noqa: BLE001
+            continue
+    if len(briefs) < 7:
+        return None
+    first, last = briefs[0], briefs[-1]
+    ex = lambda b: b.get("extras") or {}  # noqa: E731
+    rows: list[dict] = []
+    def ends(get):  # 기간 안에서 값이 있는 가장 이른 날과 가장 늦은 날 (수집이 늦게 시작된 항목 대응)
+        vals = [v for v in (get(ex(b)) for b in briefs) if v is not None]
+        return (vals[0], vals[-1]) if len(vals) >= 2 else (None, None)
+    def add(key, label, frm, to, verdict, note=""):
+        rows.append({"key": key, "label": label, "from": frm, "to": to, "verdict": verdict, "note": note})
+    # 비자 처리 기간: 짧아지면 유리
+    try:
+        hist = json.loads((data_dir / "processing-history.json").read_text(encoding="utf-8"))
+        names = {i["key"]: i["name"] for i in (ex(last).get("processing_times") or {}).get("items", [])}
+        for key, hs in hist.items():
+            hs = [r for r in hs if first["date"] <= r["date"] <= last["date"]]
+            if len(hs) < 2 or key not in names:
+                continue
+            a, z = hs[0].get("p90") or hs[0].get("p50"), hs[-1].get("p90") or hs[-1].get("p50")
+            da, dz = _days(a), _days(z)
+            if da is None or dz is None or da == dz:
+                continue
+            add(f"proc:{key}", f"🛂 {re.sub(r'\s*\(.*\)', '', names[key])} 처리 기간", a, z, "good" if dz < da else "bad", f"{abs(dz - da)}일 {'단축' if dz < da else '지연'}")
+    except Exception:  # noqa: BLE001
+        pass
+    # 환율: 원화를 뉴질랜드달러로 바꿔 쓰는 가족 → 내려가면 유리
+    fa, fz = ends(lambda e: e.get("nzd_krw"))
+    if fa and fz:
+        d = fz - fa
+        add("fx", "💱 NZD/KRW 환율", f"{fa:,.1f}원", f"{fz:,.1f}원", "flat" if abs(d) < fa * 0.005 else "good" if d < 0 else "bad",
+            f"1만 달러 환전 시 {abs(d) * 10000:,.0f}원 {'덜' if d < 0 else '더'} 듦" if abs(d) >= fa * 0.005 else "0.5% 안쪽 변동")
+    # 렌트·유가: 내려가면 유리
+    ra, rz = ends(lambda e: (e.get("living_costs") or {}).get("rent") or None)
+    ra, rz = ra or {}, rz or {}
+    if rz.get("median"):
+        if ra.get("median") and ra.get("month") != rz.get("month"):
+            d = rz["median"] - ra["median"]
+            add("rent", "🏠 오클랜드 중위 렌트", f"주 ${ra['median']:.0f} ({ra['month']})", f"주 ${rz['median']:.0f} ({rz['month']})", "flat" if d == 0 else "good" if d < 0 else "bad",
+                f"한 달 약 ${abs(d) * 52 / 12:,.0f} {'감소' if d < 0 else '증가'}" if d else "")
+        else:
+            y = rz.get("yoy_pct")
+            add("rent", "🏠 오클랜드 중위 렌트", "", f"주 ${rz['median']:.0f} ({rz.get('month', '')})", "flat" if not y else "good" if y < 0 else "bad",
+                f"이번 달 새 통계 없음 · 1년 전보다 {y:+.1f}%" if y is not None else "이번 달 새 통계 없음")
+    pa, pz = ends(lambda e: (((e.get("living_costs") or {}).get("fuel") or {}).get("petrol91") or {}).get("nzd_per_l"))
+    if pa and pz:
+        c = round((pz - pa) * 100)
+        add("fuel", "⛽ 휘발유 91", f"${pa:.2f}/L", f"${pz:.2f}/L", "flat" if abs(c) < 2 else "good" if c < 0 else "bad", f"50L 주유 시 ${abs(c) * 0.5:.1f} {'절약' if c < 0 else '추가'}" if abs(c) >= 2 else "")
+    # 기준금리: 방향만 (렌트·환율에 간접 영향이라 좋고 나쁨을 단정하지 않는다)
+    na, nz = ends(lambda e: (((e.get("policy_rates") or {}).get("rates") or {}).get("NZ") or {}).get("value"))
+    if na is not None and nz is not None:
+        add("ocr", "🏦 NZ 기준금리", f"{na}%", f"{nz}%", "flat" if na == nz else "info", "" if na == nz else "인하는 대출·렌트 부담 완화 쪽, 환율에는 약세 요인")
+    # 이민 정책: 영향 높은 소식과 알림 건수
+    seen, high = set(), []
+    for b in briefs:
+        for it in (b["sections"].get("nz_immigration") or {}).get("items", []):
+            if it.get("id") in seen or it.get("carried_from") or (it.get("impact") or {}).get("level") != "high":
+                continue
+            seen.add(it.get("id"))
+            high.append({"date": b["date"], "title_ko": it["title_ko"], "url": ((it.get("sources") or [{}])[0]).get("url", ""), "reason": (it.get("impact") or {}).get("reason", "")})
+    n_alert = sum(len((b.get("meta") or {}).get("alerts", [])) for b in briefs)
+    # 치안: 1급 사건 보도 건수 (이번 30일 vs 이전 30일)
+    crime = None
+    try:
+        inc = json.loads((data_dir / "incidents.json").read_text(encoding="utf-8"))["incidents"]
+        cut, cut2 = (today - timedelta(days=span)).isoformat(), (today - timedelta(days=span * 2)).isoformat()
+        now_n = sum(1 for e in inc if e["severity"] == "1" and e["date"] > cut)
+        prev = [e for e in inc if e["severity"] == "1" and cut2 < e["date"] <= cut]
+        oldest = min((e["date"] for e in inc), default=today.isoformat())
+        crime = {"now": now_n, "prev": len(prev) if oldest <= cut2 else None}
+        add("crime", "🚓 오클랜드 1급 사건 보도", f"{len(prev)}건" if crime["prev"] is not None else "", f"{now_n}건",
+            "info" if crime["prev"] is None else "flat" if now_n == len(prev) else "good" if now_n < len(prev) else "bad",
+            "비교할 이전 30일 기록이 아직 부족해요" if crime["prev"] is None else "보도 건수 기준이라 실제 범죄 증감과 다를 수 있어요")
+    except Exception:  # noqa: BLE001
+        pass
+    good, bad = sum(r["verdict"] == "good" for r in rows), sum(r["verdict"] == "bad" for r in rows)
+    return {"from": first["date"], "to": last["date"], "days": len(briefs), "rows": rows, "good": good, "bad": bad,
+            "immigration": {"high": high[-5:][::-1], "n_high": len(high), "n_alerts": n_alert}}
 
 
 def topic_heat(data_dir: Path, today: date, span: int = 30, top: int = 8) -> dict:

@@ -90,3 +90,21 @@ def test_weekly_groups_and_threads(tmp_path):
     imm = [g for g in w["groups"] if g["id"] == "imm"][0]["items"]
     assert len(imm) == 1 and imm[0]["days"] == 2 and imm[0]["importance"] == 9
     assert w["threads"] and w["fx"] == {"first": 805, "last": 806}
+
+
+def test_monthly_summary_judges_from_the_family_view(tmp_path):
+    import json
+    from datetime import date, timedelta
+    from weekly import build_monthly
+    t = date(2026, 11, 12)
+    for i in range(10):
+        d = (t - timedelta(days=9 - i)).isoformat()
+        (tmp_path / f"{d}.json").write_text(json.dumps({"date": d, "extras": {"nzd_krw": 760 - i * 2,
+            "living_costs": {"fuel": {"petrol91": {"nzd_per_l": 3.40 + i * 0.01}}}, "policy_rates": {"rates": {"NZ": {"value": 2.75}}}},
+            "meta": {"alerts": [{"kind": "radar", "text": "x", "url": ""}] if i == 3 else []},
+            "sections": {"nz_immigration": {"label": "이민", "items": [{"id": f"n{i}", "title_ko": f"정책 {i}", "sources": [], "impact": {"level": "high" if i % 4 == 0 else "low", "reason": "r"}}]}}}), encoding="utf-8")
+    m = build_monthly(tmp_path, t)
+    by = {r["key"]: r for r in m["rows"]}
+    assert by["fx"]["verdict"] == "good" and by["fuel"]["verdict"] == "bad" and by["ocr"]["verdict"] == "flat"   # 환율 하락은 유리, 유가 상승은 불리
+    assert m["good"] == 1 and m["bad"] == 1 and m["immigration"]["n_high"] == 3 and m["immigration"]["n_alerts"] == 1
+    assert build_monthly(tmp_path, date(2026, 1, 1)) is None

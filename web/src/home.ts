@@ -1,5 +1,5 @@
 // 홈 화면: 오늘 핵심 3 · 내게 영향 큰 소식 · 탭별 새 소식 · 추이 그래프 · 최근 7일 정리 · 저장한 기사. AI 없음 (이미 만들어진 브리핑·데이터 파일만 읽는다).
-import { costsCard, numbersCard, pairsCard, quickRead, safetyCard, threadsCard, topicsHeat, weatherCard, type Topics, type WeekThread } from "./home-extra";
+import { costsCard, numbersCard, pairsCard, quickRead, safetyCard, threadsCard, topicsHeat, weatherCard, monthlyCard, type Monthly, type Topics, type WeekThread } from "./home-extra";
 import { loadSaved, removeSaved } from "./news-tools";
 import { procDays } from "./tracker";
 import type { Brief, Item, SectionKey } from "./types";
@@ -123,10 +123,16 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   const thr0 = threadsCard(h, brief, all);
   if (thr0) thrSlot.append(thr0);
   root.append(thrSlot);
-  onWeekly = (w) => { const c = threadsCard(h, brief, all, w.threads); if (c) thrSlot.replaceChildren(c); };
+  const monSlot = h("div", { class: "home-slot" });
+  onWeekly = (w) => {
+    const c = threadsCard(h, brief, all, w.threads);
+    if (c) thrSlot.replaceChildren(c);
+    const mc = monthlyCard(h, w.monthly);
+    if (mc) monSlot.replaceChildren(mc);
+  };
   for (const c of [weatherCard(h, brief), costsCard(h, brief, ctx.recent), pairsCard(h, all)]) if (c) root.append(c);
   const safeSlot = h("div", { class: "home-slot" });
-  root.append(safeSlot);
+  root.append(monSlot, safeSlot);
   void safetyCard(h, brief, ctx.suburbs, ctx.goSafety).then((c) => { if (c) safeSlot.append(c); }).catch(() => undefined);
 
   // 3) 탭별 새 소식 타일
@@ -199,6 +205,7 @@ interface Weekly {
   alerts: { date: string; text: string; url?: string }[];
   processing: { name: string; from: string; to: string; delta_days: number }[];
   topics?: Topics;
+  monthly?: Monthly | null;
   fx: { first: number; last: number } | null;
 }
 

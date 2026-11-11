@@ -13,6 +13,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 from common import Article, log
+from incidents import fix_region_words, verify_place
 from rank import _keys
 
 LEVELS = ("high", "medium", "low", "none")
@@ -213,9 +214,15 @@ def attach_insights(sections: dict, chosen: dict[str, list[Article]], cfg: dict,
                 }
                 n_imp += 1
             sev = (row.get("severity") or "").strip().lower()
-            if it["id"] in akl_ids and sev in SEVERITIES and row.get("location", "").strip():
-                it["incident"] = {"severity": sev, "crime": row.get("crime", "").strip()[:30],
-                                  "location": row["location"].strip()[:100], "suburb": row.get("suburb", "").strip()[:40]}
+            if it["id"] in akl_ids:
+                # 원문(제목·설명·본문 발췌)과 글자로 대조: 원문에 없는 장소·지역 표현은 버린다 (본문을 못 읽은 기사는 제목·설명만으로 판단)
+                a = arts.get(it["id"])
+                src = " ".join(x for x in (it.get("original_title", ""), a.title if a else "", a.description if a else "", a.excerpt if a else "") if x)
+                if fix_region_words(it, src):
+                    log.info("region wording not in source, reverted: %s", it["id"])
+                if sev in SEVERITIES:
+                    it["incident"] = verify_place({"severity": sev, "crime": row.get("crime", "").strip()[:30],
+                                                   "location": (row.get("location") or "").strip()[:100], "suburb": (row.get("suburb") or "").strip()[:40]}, src)
             ok = {c["id"] for c in cands}
             confirmed = [c for c in cands if c["id"] in set(row.get("same_issue", [])) & ok]
             if confirmed:
