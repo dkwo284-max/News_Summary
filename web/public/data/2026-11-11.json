@@ -2068,16 +2068,103 @@
   }
  },
  "extras": {
-  "nzd_krw": 752.32,
-  "usd_krw": 1341.79,
-  "jpy100_krw": 845.18,
-  "btc_usd": 73715,
+  "nzd_krw": 744.44,
+  "usd_krw": 1333.76,
+  "jpy100_krw": 838.76,
+  "btc_usd": 73622,
   "auckland_weather": {
-   "max": 21,
+   "max": 22,
    "min": 16,
-   "desc": "뇌우",
-   "code": 95,
-   "rain_chance": 100
+   "desc": "소나기",
+   "code": 81,
+   "rain_chance": 100,
+   "days": [
+    {
+     "date": "2026-11-11",
+     "max": 22,
+     "min": 16,
+     "code": 81,
+     "desc": "소나기",
+     "rain_chance": 100,
+     "uv": 8.45,
+     "wind": 19.4
+    },
+    {
+     "date": "2026-11-12",
+     "max": 21,
+     "min": 15,
+     "code": 53,
+     "desc": "이슬비",
+     "rain_chance": 73,
+     "uv": 8.2,
+     "wind": 13.7
+    },
+    {
+     "date": "2026-11-13",
+     "max": 21,
+     "min": 13,
+     "code": 45,
+     "desc": "안개",
+     "rain_chance": 16,
+     "uv": 8.6,
+     "wind": 16.3
+    },
+    {
+     "date": "2026-11-14",
+     "max": 21,
+     "min": 13,
+     "code": 3,
+     "desc": "흐림",
+     "rain_chance": 0,
+     "uv": 8.6,
+     "wind": 17.8
+    },
+    {
+     "date": "2026-11-15",
+     "max": 22,
+     "min": 13,
+     "code": 3,
+     "desc": "흐림",
+     "rain_chance": 6,
+     "uv": 8.65,
+     "wind": 12.7
+    },
+    {
+     "date": "2026-11-16",
+     "max": 21,
+     "min": 13,
+     "code": 45,
+     "desc": "안개",
+     "rain_chance": 12,
+     "uv": 8.8,
+     "wind": 17.6
+    },
+    {
+     "date": "2026-11-17",
+     "max": 21,
+     "min": 16,
+     "code": 51,
+     "desc": "약한 이슬비",
+     "rain_chance": 38,
+     "uv": 1.15,
+     "wind": 21.5
+    }
+   ],
+   "uv": 8.45,
+   "wind": 19.4,
+   "rain_hours": [
+    0,
+    1,
+    2,
+    3,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
   },
   "policy_rates": {
    "updated_at": "2026-11-11",
@@ -2119,7 +2206,7 @@
    }
   },
   "processing_times": {
-   "updated_at": "2026-11-11T00:06+00:00",
+   "updated_at": "2026-11-11T09:54+00:00",
    "items": [
     {
      "key": "pswv",
