@@ -239,7 +239,9 @@ interface Status {
   feeds: { total: number | null; failed: { id: string; name?: string }[] };
   ai: { today: number; cap: number | null };
   files: Record<string, string | null>;
+  week?: { days: number; degraded: number; repaired: number; retries: number; bad_items: number; items: number; redone: number; requests: number; by: Record<string, number> };
 }
+const KIND_KO: Record<string, string> = { scheduled: "정기", retry: "복구", manual: "수동", side: "부가 작업" };
 
 const FILE_LABEL: Record<string, string> = { processing: "비자 처리 기간", leisure: "레저 요금", spots: "지도 장소", areas: "동네 시세", stores: "매장", policy: "정당 정책", incidents: "치안 사건" };
 
@@ -267,6 +269,12 @@ export async function statusPanel(h: H, host: HTMLElement): Promise<void> {
     const v = st.files[k];
     const days = v ? (Date.now() - new Date(v.length === 10 ? v + "T00:00:00" : v).getTime()) / 86400000 : 999;
     rows.push(h("li", {}, dot(days < 3, days < 14), h("span", {}, label), h("small", {}, ago(v))));
+  }
+  const wk = st.week;
+  if (wk && wk.days) {
+    const by = Object.entries(wk.by ?? {}).filter(([, v]) => v > 0).map(([k, v]) => `${KIND_KO[k] ?? k} ${v}`).join(" · ");
+    rows.push(h("li", {}, dot(wk.degraded === 0, wk.degraded <= 1), h("span", {}, "지난 7일 품질"),
+      h("small", {}, `요약 실패로 끝난 날 ${wk.degraded}/${wk.days}일 · 자동 복구 ${wk.repaired}일 · 재시도 ${wk.retries}회${wk.items ? ` · 기준 미달 기사 ${wk.bad_items}/${wk.items}건` : ""}${wk.redone ? ` · 품질 재요약 ${wk.redone}회` : ""} · AI ${wk.requests}회${by ? ` (${by})` : ""}`)));
   }
   host.replaceChildren(h("ul", { class: "st-list" }, ...rows),
     h("p", { class: "board-note" }, "초록: 최신 · 노랑: 며칠 지남 · 빨강: 오래됨/문제. 레저·장소·동네·매장은 일부러 드물게(연 몇 회) 갱신해요."));

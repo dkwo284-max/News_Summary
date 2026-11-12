@@ -40,7 +40,37 @@ def build_status(data_dir: Path, brief: dict, usage: dict | None = None) -> dict
         "feeds": {"total": meta.get("feeds_total"), "failed": [{"id": f.get("id"), "name": f.get("name")} for f in meta.get("failed_feeds", [])]},
         "ai": {"today": (ai.get("days", {}).get(day) or {}).get("requests", 0), "cap": ai.get("cap")},
         "files": files,
+        "week": week_quality(data_dir, day, ai),
     }
+
+
+def week_quality(data_dir: Path, day: str | None, ai: dict, span: int = 7) -> dict:
+    """지난 7일 품질 요약: 품질 저하로 끝난 날·복구된 날·재시도 횟수·품질 미달 기사·AI 요청(종류별)."""
+    from datetime import date, timedelta
+
+    if not day:
+        return {}
+    d0 = date.fromisoformat(day)
+    days = [(d0 - timedelta(days=i)).isoformat() for i in range(span)]
+    out = {"days": 0, "degraded": 0, "repaired": 0, "retries": 0, "bad_items": 0, "items": 0, "redone": 0, "requests": 0, "by": {}}
+    for d in days:
+        b = _load(data_dir / f"{d}.json")
+        u = (ai.get("days", {}) or {}).get(d) or {}
+        out["requests"] += int(u.get("requests", 0))
+        for k, v in (u.get("by") or {}).items():
+            out["by"][k] = out["by"].get(k, 0) + int(v)
+        if not isinstance(b, dict):
+            continue
+        m = b.get("meta") or {}
+        q = m.get("quality") or {}
+        out["days"] += 1
+        out["degraded"] += 1 if m.get("degraded") else 0
+        out["repaired"] += 1 if m.get("repaired") and not m.get("degraded") else 0
+        out["retries"] += int(m.get("retries", 0))
+        out["bad_items"] += int(q.get("bad", 0))
+        out["items"] += int(q.get("items", 0))
+        out["redone"] += len(q.get("redone") or [])
+    return out
 
 
 def write_status(data_dir: Path, brief: dict) -> None:

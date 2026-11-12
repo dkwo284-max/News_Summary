@@ -595,7 +595,7 @@ def main(argv: list[str] | None = None) -> int:
         from budget import nz_today
         from usage import record
 
-        record(ROOT / cfg["output"]["data_dir"], nz_today(), llm.requests, cfg)
+        record(ROOT / cfg["output"]["data_dir"], nz_today(), llm.requests, cfg, kind="side")
     if new_changes:
         try:
             from notify import notify_text

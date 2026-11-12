@@ -10,7 +10,7 @@ def test_record_accumulates_per_day(cfg, tmp_path):
     record(tmp_path, "2026-10-30", 5, cfg)
     assert used_today(tmp_path, "2026-10-29") == 8 and used_today(tmp_path, "2026-10-30") == 5
     d = json.loads((tmp_path / "ai-usage.json").read_text())
-    assert d["days"]["2026-10-29"] == {"requests": 8, "runs": 2} and d["cap"] == cfg["llm"]["guaranteed"] == 7
+    assert d["days"]["2026-10-29"] == {"requests": 8, "runs": 2, "by": {"manual": 8}} and d["cap"] == cfg["llm"]["guaranteed"] == 7
 
 
 def test_forced_rerun_skipped_when_no_budget_left(cfg, tmp_path, monkeypatch):

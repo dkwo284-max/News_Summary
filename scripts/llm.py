@@ -181,7 +181,10 @@ class GeminiLLM(BaseLLM):
                 if self._expired():
                     raise LLMError(f"gemini run deadline ({int(self.deadline)}s) reached — {last_err or 'no response'}")
                 r = self._post(model, body)
-                if r.status_code in (429, 500, 503):
+                # 빠른 전환: 첫 라운드에서 과부하·한도 오류가 나면 같은 모델을 기다리지 않고 바로 다음 후보로 넘어간다
+                # (모델마다 한도·부하가 따로라 대개 다음 모델은 바로 된다). 기다렸다 다시 하는 것은 둘째 라운드부터.
+                fast = bool(self.pcfg.get("fast_fallback", True)) and rnd == 0 and len(candidates) > 1
+                if r.status_code in (429, 500, 503) and not fast:
                     wait = float(self.pcfg.get("retry_wait_seconds", 60) if r.status_code == 429 else self.pcfg.get("overload_wait_seconds", 20))
                     log.warning("gemini %s HTTP %s — retrying once in %ss", model, r.status_code, wait)
                     if self._expired(wait):

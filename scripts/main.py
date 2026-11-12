@@ -114,6 +114,77 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
     return 0
 
 
+MAX_RETRIES = 4   # 하루 자동 복구 시도 상한 (실패한 단계만 고치므로 한 번에 AI 1~3회)
+
+
+def repair_only(cfg: dict, data_dir: Path, cur: dict, local_now, retries: int, args) -> int | None:
+    """오늘 브리핑의 실패한 단계만 고쳐 저장한다. 전체 재생성이 필요하면(선별 실패) None 을 돌려준다."""
+    import repair
+    from llm import LLMError, make_llm
+
+    todo = repair.needs(cur, cfg)
+    if todo["rank"] or not (todo["summary"] or todo["insight"]):
+        return None
+    today = local_now.date().isoformat()
+    try:
+        llm = make_llm(cfg)
+    except LLMError as e:
+        log.error("%s", e)
+        return 1
+    if not args.ignore_cap:
+        from budget import allowance, describe
+        from usage import used_today
+        left, binfo = allowance("daily-brief", used_today(data_dir, today), int(cfg.get("llm", {}).get("guaranteed", 7)), today)
+        log.info("%s", describe("daily-brief", left, binfo))
+        if left <= 0:
+            log.warning("skip repair: 오늘 AI 몫이 남지 않음")
+            return 0
+        llm.max_requests = min(llm.max_requests, left)
+    done = repair.repair(cur, cfg, llm, data_dir, today)
+    usage = llm.log_report()
+    from usage import record
+    record(data_dir, today, usage.get("requests", 0), cfg, kind="retry")
+    import quality
+    left_over = repair.needs(cur, cfg)
+    reason = "; ".join(filter(None, ["요약 실패: " + ", ".join(left_over["summary"]) if left_over["summary"] else "",
+                                     "영향 분석 실패" if left_over["insight"] and not left_over["summary"] else ""]))
+    q = quality.check(cur["sections"], cfg)
+    m = cur.setdefault("meta", {})
+    m.update({"degraded": bool(reason), "degraded_reason": reason, "retries": retries, "repaired": {"summary": done["summary"], "insight": done["insight"], "requests": done["requests"]},
+              "quality": {"items": q["items"], "bad": q["bad"], "redone": [], "bad_ids": q["bad_ids"]}, "alerts": build_alerts(cur["sections"], cur.get("extras", {}), cfg)})
+    if not (done["summary"] or done["insight"]):
+        log.warning("repair: 고친 것이 없음 (AI 가 여전히 실패) — 다음 시도에서 다시")
+        from status import write_status
+        write_status(data_dir, cur)
+        (data_dir / f"{today}.json").write_text(json.dumps(finite(cur), ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
+        (data_dir / "latest.json").write_text(json.dumps(finite(cur), ensure_ascii=False, indent=1, allow_nan=False), encoding="utf-8")
+        set_output("generated", "true")
+        set_output("date", f"{today} (repair pending)")
+        return 0
+    cur["generated_at"] = datetime.now(timezone.utc).astimezone(tz(cfg)).isoformat(timespec="seconds")
+    try:
+        from incidents import update_incidents
+        update_incidents(cur["sections"], cfg, data_dir, today, None)
+    except Exception as e:  # noqa: BLE001
+        log.warning("incidents failed: %s", e)
+    body = json.dumps(finite(cur), ensure_ascii=False, indent=1, allow_nan=False)
+    (data_dir / f"{today}.json").write_text(body, encoding="utf-8")
+    (data_dir / "latest.json").write_text(body, encoding="utf-8")
+    for mod, call in (("policy", lambda m: m.update_policy_news(data_dir, local_now.date(), cur)), ("weekly", lambda m: m.write_weekly(data_dir, local_now.date())),
+                      ("status", lambda m: m.write_status(data_dir, cur))):
+        try:
+            call(__import__(mod))
+        except Exception as e:  # noqa: BLE001
+            log.warning("%s failed: %s", mod, e)
+    set_output("generated", "true")
+    set_output("date", f"{today} (repaired)")
+    log.info("repaired %s: %s", today, reason or "모두 복구")
+    if not reason:  # 처음 알림은 원문 상태로 나갔으니, 복구되면 한 번 다시 알린다
+        from notify import notify
+        notify(cur, cfg)
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--config", default=str(ROOT / "config.yaml"))
@@ -159,12 +230,18 @@ def main(argv: list[str] | None = None) -> int:
         if not m.get("degraded"):
             log.info("skip: today's brief is fine (--retry-degraded)")
             return 0
-        if retries >= 2:
+        if retries >= MAX_RETRIES:
             log.warning("skip: already retried %d times today (--retry-degraded)", retries)
             return 0
         log.info("retrying degraded brief (%s), attempt %d", m.get("degraded_reason", ""), retries + 1)
         retries += 1
         args.force = True
+
+    # 실패한 단계만 다시: 선별은 멀쩡하고 요약·영향 분석만 실패했으면 처음부터 다시 만들지 않는다 (AI 1~3회)
+    if args.retry_degraded and not args.dry_run:
+        rc = repair_only(cfg, data_dir, cur, local_now, retries, args)
+        if rc is not None:
+            return rc
 
     if args.skip_existing and not args.dry_run and (data_dir / f"{local_now.date().isoformat()}.json").exists():
         log.info("skip: brief for %s already exists (--skip-existing)", local_now.date())
@@ -219,6 +296,27 @@ def main(argv: list[str] | None = None) -> int:
     if llm is not None and args.fixtures is None:
         attach_excerpts(chosen, cfg)
     sections = summarize_all(chosen, cfg, llm)
+    # 품질 점검: 응답은 왔지만 한국어가 아니거나 요약이 빈약한 지역은 한 번만 다시 요약한다 (하루 1회 상한은 실행당 1회로 지킨다)
+    import quality as _quality
+    qrep = _quality.check(sections, cfg)
+    qrep["redone"] = []
+    if llm is not None and qrep["redo"]:
+        from summarize import summarize_region
+        for region in qrep["redo"][:1]:
+            keys = [k for k in sections if cfg["sections"][k]["region"] == region and not sections[k].get("error")]
+            try:
+                again = summarize_region(region, keys, chosen, cfg, llm)
+            except Exception as e:  # noqa: BLE001
+                log.warning("quality redo failed for %s: %s", region, e)
+                continue
+            trial = {**sections, **{k: v for k, v in again.items() if not v.get("error")}}
+            after = _quality.check(trial, cfg)
+            if after["by_region"].get(region, {}).get("bad", 99) < qrep["by_region"][region]["bad"]:
+                sections = trial
+                qrep["redone"].append(region)
+                log.info("quality: %s re-summarized (%d → %d below standard)", region, qrep["by_region"][region]["bad"], after["by_region"][region]["bad"])
+        final = _quality.check(sections, cfg)
+        qrep.update({k: final[k] for k in ("bad", "by_region", "bad_ids")})
     # 인사이트: 나에게 미치는 영향·할 일 + 이 이슈의 흐름(지난 30일) (AI 요청 2~3회, 실패해도 계속)
     from insight import attach_insights
     attach_insights(sections, chosen, cfg, llm, data_dir, local_now.date().isoformat())
@@ -280,12 +378,16 @@ def main(argv: list[str] | None = None) -> int:
     # AI 가 있었는데 요약·선별이 실패해 원문·휴리스틱으로 나간 섹션이 있으면 '품질 저하' 표시 → 화면 안내 + 같은 날 자동 재시도
     import rank as _rank
     failed_secs = [k for k, sec in sections.items() if sec.get("error")]
-    degraded_reason = "; ".join(filter(None, ["요약 실패: " + ", ".join(failed_secs) if failed_secs else "", "선별 실패" if _rank.FAILED else ""]))
+    import repair as _repair
+    insight_missing = llm is not None and _repair.needs({"sections": sections, "meta": {}}, cfg)["insight"]
+    degraded_reason = "; ".join(filter(None, ["요약 실패: " + ", ".join(failed_secs) if failed_secs else "", "선별 실패" if _rank.FAILED else "",
+                                              "영향 분석 실패" if insight_missing and not failed_secs else ""]))
     degraded = llm is not None and bool(degraded_reason)
     usage = llm.log_report() if llm else {"provider": None, "requests": 0, "models": {}, "total_cost_usd": 0}
     if llm is not None and not args.dry_run:
         from usage import record
-        record(data_dir, local_now.date().isoformat(), usage.get("requests", 0), cfg)
+        from usage import run_kind
+        record(data_dir, local_now.date().isoformat(), usage.get("requests", 0), cfg, kind="retry" if args.retry_degraded else run_kind())
     brief = {
         "date": local_now.date().isoformat(),
         "generated_at": datetime.now(timezone.utc).astimezone(tz(cfg)).isoformat(timespec="seconds"),
@@ -302,6 +404,7 @@ def main(argv: list[str] | None = None) -> int:
             "degraded": degraded,
             "degraded_reason": degraded_reason,
             "retries": retries,
+            "quality": {k: qrep[k] for k in ("items", "bad", "redone", "bad_ids")},
         },
     }
 

@@ -18,7 +18,8 @@ fetch:
   timeout_seconds: 20
   user_agent: "Mozilla/5.0 (compatible; DailyBriefBot/1.0; +https://github.com/dkwo284-max/News_Summary)"
   extract_body: true          # 상위 기사 본문 일부를 요약 입력으로만 사용 (저장하지 않음)
-  body_chars: 1500
+  body_chars: 1500            # 뉴질랜드 기사 본문 발췌 길이 (영향 분석·사건 위치 대조에 씀)
+  body_chars_kr: 800          # 한국 기사는 요약만 하므로 짧게 (AI 입력 절감)
 
 dedupe:
   title_similarity: 85        # rapidfuzz token_set_ratio 임계값
@@ -246,6 +247,7 @@ llm:
     rank_model_production: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
     summary_model_production: ["gemini-3.8-flash", "gemini-flash-latest", "gemini-flash-lite-latest"]
     production_min_interval_seconds: 13   # Flash 분당 5회 한도 보호
+    fast_fallback: true          # 첫 시도에서 과부하(503)·한도(429)면 같은 모델을 기다리지 않고 바로 다음 모델로
     rounds: 2                    # 모든 모델이 과부하(503)·한도(429)면 잠시 쉬었다 후보 전체를 한 번 더 시도
     cooldown_seconds: 120        # 라운드 사이 쉬는 시간
     # thinking_budget: 0         # Gemini 2.5 계열에서만 사용 (사고 끔). Gemini 3 계열에서는 넣지 마세요

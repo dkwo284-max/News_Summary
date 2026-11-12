@@ -108,7 +108,9 @@ def attach_excerpts(chosen: dict[str, list[Article]], cfg: dict) -> None:
     articles = [a for items in chosen.values() for a in items]
     with httpx.Client(timeout=fcfg["timeout_seconds"], headers={"User-Agent": fcfg["user_agent"]}, follow_redirects=True) as client:
         with ThreadPoolExecutor(max_workers=8) as pool:
-            list(pool.map(lambda a: _extract_one(client, a, fcfg.get("body_chars", 1500)), articles))
+            # 한국 기사는 영향 분석·위치 추출을 하지 않아 짧은 발췌로 충분하다 (입력 글자 수 절감)
+            kr = {a.id for k, items in chosen.items() if cfg["sections"].get(k, {}).get("region") == "kr" for a in items}
+            list(pool.map(lambda a: _extract_one(client, a, fcfg.get("body_chars_kr", 800) if a.id in kr else fcfg.get("body_chars", 1500)), articles))
     log.info("excerpts: %d/%d articles", sum(1 for a in articles if a.excerpt), len(articles))
 
 

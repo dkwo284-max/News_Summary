@@ -187,7 +187,7 @@ def test_gemini_503_moves_to_next_model(cfg):
 
     llm = _gemini(cfg, handler, sleeps)
     assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 3}
-    assert len(urls) == 3 and "gemini-3.8-flash:" in urls[2] and 20.0 in sleeps
+    assert len(urls) == 2 and "gemini-3.8-flash:" in urls[1] and 20.0 not in sleeps   # 빠른 전환: 같은 모델을 기다리지 않고 바로 다음 모델
 
 
 def test_gemini_429_retries_once_then_errors(cfg):
@@ -202,7 +202,12 @@ def test_gemini_429_retries_once_then_errors(cfg):
     with pytest.raises(LLMError, match="429"):
         llm.json_call(task="rank", system="s", user="u", schema={})
     n = len(cfg["llm"]["gemini"]["rank_model"])
-    assert len(calls) == 2 * n and 60.0 in sleeps  # 모델마다 1회 재시도 후 다음 후보
+    assert len(calls) == n and 60.0 not in sleeps  # 첫 라운드는 기다리지 않고 후보를 한 번씩 (재시도는 둘째 라운드부터)
+    cfg["llm"]["gemini"]["fast_fallback"] = False
+    calls.clear()
+    with pytest.raises(LLMError, match="429"):
+        _gemini(cfg, handler, sleeps).json_call(task="rank", system="s", user="u", schema={})
+    assert len(calls) == 2 * n and 60.0 in sleeps  # 끄면 예전처럼 모델마다 1회 재시도
 
 
 def test_gemini_429_then_success(cfg):
@@ -640,7 +645,7 @@ def test_gemini_timeout_moves_to_next_model(cfg):
 
     llm = _gemini(cfg, handler)
     assert llm.json_call(task="summary", system="s", user="u", schema={}) == {"ok": 4}
-    assert sum("gemini-flash-lite-latest:" in u for u in urls) == 2 and "gemini-3.8-flash:" in urls[-1]
+    assert sum("gemini-flash-lite-latest:" in u for u in urls) == 1 and "gemini-3.8-flash:" in urls[-1]
 
 
 # ── 뉴질랜드 사회·교육·경제·정치 ──

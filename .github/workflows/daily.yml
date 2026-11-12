@@ -12,6 +12,9 @@ on:
     #   NZ 서머타임 기준 10:10 / 14:10 (표준시에는 09:10 / 13:10)
     - cron: "10 21 * * *"
     - cron: "10 1 * * *"
+    # 아침 안에 복구: 실패한 단계만 다시 (06:25 / 06:45 / 07:15 NZ — 서머타임 기준, 표준시에는 한 시간 뒤 묶음이 해당). 브리핑이 멀쩡하면 바로 끝난다(AI 0회)
+    - cron: "25,45 17,18 * * *"
+    - cron: "15 18,19 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -73,7 +76,7 @@ jobs:
           ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.processing_only && '--update-processing' || '' }}
           SKIP: ${{ github.event_name == 'workflow_dispatch' && !inputs.overwrite && '--skip-existing' || '' }}  # 수동·외부 호출이 겹쳐도 하루 한 번만 AI 소모
           CAP: ${{ github.event_name == 'workflow_dispatch' && inputs.ignore_cap && '--ignore-cap' || '' }}
-          RETRY: ${{ (github.event.schedule == '10 21 * * *' || github.event.schedule == '10 1 * * *') && '--retry-degraded' || '' }}
+          RETRY: ${{ (github.event.schedule == '10 21 * * *' || github.event.schedule == '10 1 * * *' || github.event.schedule == '25,45 17,18 * * *' || github.event.schedule == '15 18,19 * * *') && '--retry-degraded' || '' }}
         run: python scripts/main.py $FORCE $ONLY $SKIP $CAP $RETRY
 
       - name: Commit data
