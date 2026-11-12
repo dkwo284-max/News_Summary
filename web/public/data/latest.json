@@ -1,6 +1,6 @@
 {
  "date": "2026-11-13",
- "generated_at": "2026-11-13T08:24:25+13:00",
+ "generated_at": "2026-11-13T11:54:11+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -585,7 +585,15 @@
      "original_title": "'Life-ruining': Fears over immigration change announced by caretaker government",
      "published_at": "2026-11-11T22:52+00:00",
      "why_it_matters": "졸업 후 취업비자와 영주권을 준비하는 유학생들에게는 이민 정책 변화가 향후 체류 자격에 직접적인 영향을 줍니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "high",
+      "reason": "정부 교체기와 이민 정책 변경 예고는 졸업 후 취업비자 및 영주권 준비에 직접적인 타격을 줄 수 있습니다.",
+      "actions": [
+       "이민성 공식 사이트의 비자 규정 변경 공지 수시 확인"
+      ],
+      "watch": "새 정부 출범 후 발표될 이민 정책 수정안"
+     }
     },
     {
      "id": "917ae19e7e31",
@@ -613,7 +621,15 @@
      ],
      "original_title": "Slugs, mould & cold: Family living in garage awarded thousands in compensation",
      "published_at": "2026-11-12T18:12+00:00",
-     "why_it_matters": "오클랜드에서 렌트를 구하는 유학생들에게 주거지의 위생 및 단열 상태 점검이 얼마나 중요한지 보여줍니다."
+     "why_it_matters": "오클랜드에서 렌트를 구하는 유학생들에게 주거지의 위생 및 단열 상태 점검이 얼마나 중요한지 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 임대 주택의 단열 및 곰팡이 문제는 거주 중인 아파트의 주거 환경 점검의 필요성을 일깨워줍니다.",
+      "actions": [
+       "현재 거주 중인 아파트의 곰팡이 및 단열 상태 점검"
+      ],
+      "watch": "임대차 분쟁 조정기관의 주거 기준 강화 조치"
+     }
     },
     {
      "id": "31914966e139",
@@ -640,6 +656,12 @@
      "figure": {
       "v": "5000건",
       "l": "수술 감소"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "공공병원 수술 지연은 학생비자 소지자 가족이 이용할 수 있는 공공 의료 서비스 대기 시간에 영향을 줍니다.",
+      "actions": [],
+      "watch": "보건당국의 겨울철 의료 체계 대기 시간 단축 대책"
      }
     },
     {
@@ -667,6 +689,14 @@
      "figure": {
       "v": "5억 달러",
       "l": "연간 사기 피해액"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 정착 생활 중 빈발하는 피싱 및 금융 사기 피해는 가계 경제에 직접적인 손실을 줄 수 있습니다.",
+      "actions": [
+       "출처가 불분명한 문자나 이메일 링크 클릭 주의"
+      ],
+      "watch": "경찰 및 소비자보호원의 최신 사기 수법 경고 공지"
      }
     },
     {
@@ -694,6 +724,12 @@
      "figure": {
       "v": "19%",
       "l": "사망 위험 감소"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "특정 항암제 지원 정책은 학생비자 소지자의 민간 의료보험 보장 범위를 점검할 때 참고할 수 있습니다.",
+      "actions": [],
+      "watch": "정부의 PHARMAC 약물 지원 목록 확대 발표"
      }
     }
    ]
@@ -747,6 +783,12 @@
      "figure": {
       "v": "1시간",
       "l": "시스템 장애 시간"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "초등 입학 예정 자녀를 둔 학부모로서 뉴질랜드 교육 평가 시스템의 안정성과 학교 혼란은 관심사입니다.",
+      "actions": [],
+      "watch": "교육부의 NCEA 및 디지털 시험 시스템 개선 대책 발표"
      }
     },
     {
@@ -774,7 +816,15 @@
      ],
      "original_title": "'I've got a class on a hall stage': Concerns over ministry's response to school roll growth",
      "published_at": "2026-11-11T20:57+00:00",
-     "why_it_matters": "오클랜드 지역 학교들의 학생 수 변화와 교육 환경은 자녀를 둔 이민 예정자들에게 중요한 요소입니다."
+     "why_it_matters": "오클랜드 지역 학교들의 학생 수 변화와 교육 환경은 자녀를 둔 이민 예정자들에게 중요한 요소입니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "초등 입학 예정 자녀가 있어 오클랜드 지역 학교들의 학급 수 증가와 교육 환경 변화는 직접적인 영향권입니다.",
+      "actions": [
+       "거주지 인근 오클랜드 초등학교 학급 배정 상황 확인"
+      ],
+      "watch": "교육부의 오클랜드 지역 학교 인프라 예산 집행 계획"
+     }
     },
     {
      "id": "9887e81b1a8d",
@@ -801,6 +851,12 @@
      "figure": {
       "v": "20년",
       "l": "프로그램 운영 기간"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "말보로 지역 학교 프로그램으로 오클랜드 거주 유학생 자녀의 학교생활에 직접 적용되지는 않습니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -828,6 +884,12 @@
      "figure": {
       "v": "3천만 달러",
       "l": "전국 프로그램 예산"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "타이라휘티 지역 학교 대상 사업으로 오클랜드 자녀 학교의 시설과는 무관합니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -855,6 +917,12 @@
      "figure": {
       "v": "873명",
       "l": "학생 수"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "다른 지역 학교의 정부 관리 체계 진입 사례로 오클랜드 학교 선택 시 참고용입니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -878,7 +946,13 @@
      ],
      "original_title": "Inside the Govt’s decision to strip te Tiriti obligations from school boards",
      "published_at": "2026-11-12T16:00+00:00",
-     "why_it_matters": "뉴질랜드 교육 정책의 기조 변화를 나타내며, 학교 운영 거버넌스 전반에 영향을 미치는 사안입니다."
+     "why_it_matters": "뉴질랜드 교육 정책의 기조 변화를 나타내며, 학교 운영 거버넌스 전반에 영향을 미치는 사안입니다.",
+     "impact": {
+      "level": "low",
+      "reason": "학교 이사회 규정 변경은 교육 정책 전반에 해당하나 당장 자녀 입학에 미치는 영향은 제한적입니다.",
+      "actions": [],
+      "watch": "학교 이사회 운영 지침 변경에 따른 후속 가이드라인"
+     }
     }
    ]
   },
@@ -915,6 +989,12 @@
      "figure": {
       "v": "5,840건",
       "l": "10월 전국 주택 거래"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "부동산 시장 거래량 감소는 향후 졸업 후 취업 시 정착하며 집을 매수할 때의 시장 동향을 보여줍니다.",
+      "actions": [],
+      "watch": "부동산연구소(REINZ)의 월간 주택 시장 보고서"
      }
     },
     {
@@ -942,7 +1022,13 @@
      ],
      "original_title": "Major bank launches discounted four-year and five-year mortgage rates",
      "published_at": "2026-11-12T03:24+00:00",
-     "why_it_matters": "주택지금리 추이는 장기적으로 부동산 시장 안정과 주거비 부담에 직접적인 영향을 미칩니다."
+     "why_it_matters": "주택지금리 추이는 장기적으로 부동산 시장 안정과 주거비 부담에 직접적인 영향을 미칩니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "모기지 금리 상품 변화는 장기적으로 오클랜드에서 주택을 구입할 때의 대출 상환 계획에 간접적인 영향을 줍니다.",
+      "actions": [],
+      "watch": "시중 주요 은행들의 추가 고정금리 인하 움직임"
+     }
     },
     {
      "id": "cd20d3313046",
@@ -966,7 +1052,13 @@
      ],
      "original_title": "How a flight attendant on an average salary bought a first home beside the water",
      "published_at": "2026-11-11T20:20+00:00",
-     "why_it_matters": "오클랜드에서 취업 후 자산을 형성하고 주거를 안정화하려는 구직자들에게 실질적인 영감을 줍니다."
+     "why_it_matters": "오클랜드에서 취업 후 자산을 형성하고 주거를 안정화하려는 구직자들에게 실질적인 영감을 줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "개인의 내집 마련 성공 사례로 오클랜드 취업 후 장기적 자산 형성을 구상할 때 참고할 수 있습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "3ac9025d8718",
@@ -993,6 +1085,14 @@
      "figure": {
       "v": "1-3%",
       "l": "식료품 가격 하락"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "식료품 가격 인하 폭이 미미해 오클랜드 아파트에서 생활하며 지출하는 매달 식비 부담이 지속됩니다.",
+      "actions": [
+       "대형마트 자체 브랜드(PB) 상품 활용 등 식비 절감 예산 조정"
+      ],
+      "watch": "정부의 추가 식료품 시장 경쟁 촉진 정책"
      }
     },
     {
@@ -1021,6 +1121,12 @@
      "figure": {
       "v": "10년",
       "l": "최저 가격 격차 기간"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "오타고 지역의 부동산 시장 동향으로 오클랜드 거주자에게는 직접적인 영향이 적습니다.",
+      "actions": [],
+      "watch": ""
      }
     }
    ]
@@ -1050,7 +1156,15 @@
      ],
      "original_title": "Election live: Gerry Brownlee's biggest frustration from 30 years in Parliament",
      "published_at": "2026-11-12T18:18+00:00",
-     "why_it_matters": "새 정부의 이민 및 노동 정책 방향은 졸업 후 취업과 영주권 취득을 앞둔 유학생들의 진로에 결정적입니다."
+     "why_it_matters": "새 정부의 이민 및 노동 정책 방향은 졸업 후 취업과 영주권 취득을 앞둔 유학생들의 진로에 결정적입니다.",
+     "impact": {
+      "level": "high",
+      "reason": "초박빙 총선 이후 연정 구성 결과에 따라 졸업생 취업비자와 영주권 정책 기조가 크게 바뀔 수 있습니다.",
+      "actions": [
+       "각 정당의 연정 협상 과정에서 발표되는 이민 공약 변화 주시"
+      ],
+      "watch": "차기 정부 구성 완료 및 새 연정의 이민 정책 발표"
+     }
     },
     {
      "id": "daa17f5afaa5",
@@ -1073,7 +1187,13 @@
      ],
      "original_title": "Explainer: What is a hung Parliament and could it actually lead to a new election?",
      "published_at": "2026-11-12T17:17+00:00",
-     "why_it_matters": "정국 불안정이 이민 법안이나 비자 관련 제도 개편 시점에 영향을 미칠 수 있습니다."
+     "why_it_matters": "정국 불안정이 이민 법안이나 비자 관련 제도 개편 시점에 영향을 미칠 수 있습니다.",
+     "impact": {
+      "level": "high",
+      "reason": "정국 불안정과 재선거 가능성은 이민 법안 및 비자 제도 개편 일정을 지연시키거나 혼선을 줄 수 있습니다.",
+      "actions": [],
+      "watch": "연정 협상 타결 여부 및 의회 소집 일정"
+     }
     },
     {
      "id": "68839f57b31c",
@@ -1100,6 +1220,12 @@
      "figure": {
       "v": "5개",
       "l": "핵심 협상 조건"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "연정 협상 과정에서의 정책 쟁점 타협은 노동 시장 및 이민 관련 정책에도 간접적인 파장을 미칩니다.",
+      "actions": [],
+      "watch": "연정 협상 당사자 간 핵심 정책 합의문 발표"
      }
     },
     {
@@ -1169,6 +1295,20 @@
      "figure": {
       "v": "150km/h",
       "l": "추정 주행 속도"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 남부 도로에서 발생한 대형 교통사고로 차량 이동 시 안전에 각별한 주의가 요구됩니다.",
+      "actions": [],
+      "watch": "경찰의 남부 지역 과속 단속 및 도로 안전 강화 대책"
+     },
+     "incident": {
+      "severity": "2",
+      "crime": "차량 돌진 사고",
+      "location": "",
+      "suburb": "",
+      "region": "",
+      "precision": "none"
      }
     },
     {
@@ -1217,13 +1357,29 @@
      "figure": {
       "v": "20세",
       "l": "기소된 용의자 연령"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 도심 공원에서 발생한 흉기 피습 사건으로 도심 생활 및 외출 시 안전 유의가 필요합니다.",
+      "actions": [
+       "오클랜드 도심(Auckland Central) 공원 방문 시 야간 시간대 이동 자제"
+      ],
+      "watch": "경찰의 도심 공원 순찰 강화 및 후속 수사 결과"
+     },
+     "incident": {
+      "severity": "1",
+      "crime": "흉기 피습",
+      "location": "Myers Park, Auckland Central",
+      "suburb": "Auckland Central",
+      "region": "central",
+      "precision": "exact"
      }
     },
     {
      "id": "c00f01b46a38",
      "title_ko": "오클랜드 아본데일 주택 단지 내 의문의 남성 사망 사건 수사",
      "summary_ko": [
-      "오클랜드 서부 아본데일의 한 주택 단지에서 남성이 숨진 채 발견되어 경찰이 수사에 착수했습니다.",
+      "오클랜드 아본데일의 한 주택 단지에서 남성이 숨진 채 발견되어 경찰이 수사에 착수했습니다.",
       "응급구조대가 출동했으나 현장에서 사망이 확인되었으며 주변 지역에 경찰 인력이 배치되었습니다.",
       "경찰은 일반 시민에 대한 위험은 없다고 밝히며 정확한 사망 원인을 조사하고 있습니다."
      ],
@@ -1252,6 +1408,20 @@
      "figure": {
       "v": "6시 3분",
       "l": "구조대 출동 시각"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 서부 주거 단지 내 사망 사건으로 인근 지역 거주 시 치안 상황을 점검하게 합니다.",
+      "actions": [],
+      "watch": "경찰의 아본데일 사망 사건 수사 브리핑"
+     },
+     "incident": {
+      "severity": "1",
+      "crime": "의문의 사망",
+      "location": "Avondale, Auckland",
+      "suburb": "Avondale",
+      "region": "",
+      "precision": "suburb"
      }
     },
     {
@@ -1284,6 +1454,22 @@
      "figure": {
       "v": "2명",
       "l": "부상자 수"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 노스쇼어에서 발생한 가스 폭발 사고로 가정 내 가스 및 난방 시설 점검의 중요성을 환기합니다.",
+      "actions": [
+       "거주 중인 아파트의 가스 밸브와 난방 시설 안전 점검"
+      ],
+      "watch": "소방당국의 가스 폭발 사고 원인 조사 결과 발표"
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "가스 폭발",
+      "location": "North Shore, Auckland",
+      "suburb": "",
+      "region": "north",
+      "precision": "suburb"
      }
     }
    ]
@@ -1318,6 +1504,14 @@
      "figure": {
       "v": "12월 11일",
       "l": "의견 수렴 마감일"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 시내 통근 시 비용 부담을 줄 수 있는 혼잡통행료 반대 움직임은 출퇴근 계획에 간접 영향이 있습니다.",
+      "actions": [
+       "오클랜드 시의회 혼잡통행료 설문조사 반대 의견 참여 검토"
+      ],
+      "watch": "시의회의 혼잡통행료 의견 수렴 마감 및 정책 추진 여부"
      }
     },
     {
@@ -1341,7 +1535,15 @@
      ],
      "original_title": "Get ready to start paying to use Auckland’s motorways",
      "published_at": "2026-11-12T18:41+00:00",
-     "why_it_matters": "오클랜드에서 차량으로 통학하거나 출퇴근하는 학생들의 교통비 지출에 직접적인 부담이 됩니다."
+     "why_it_matters": "오클랜드에서 차량으로 통학하거나 출퇴근하는 학생들의 교통비 지출에 직접적인 부담이 됩니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 고속도로 통행료 부과가 임박함에 따라 향후 차량으로 이동할 때의 교통비 지출이 늘어납니다.",
+      "actions": [
+       "고속도로 통행료 부과 시 예상되는 출퇴근·통학 비용 예산 반영"
+      ],
+      "watch": "정부 및 시의회의 고속도로 통행료 구체적 부과 시점과 요금 발표"
+     }
     },
     {
      "id": "956ba3315ab3",
@@ -1365,7 +1567,13 @@
      ],
      "original_title": "'It's been very hard': Auckland Airport emergency staff threaten strike action over pay and training",
      "published_at": "2026-11-11T03:53+00:00",
-     "why_it_matters": "공항의 필수 안전 서비스 운영에 차질이 생길 경우 향후 출입국 및 여행 일정에 영향을 줄 수 있습니다."
+     "why_it_matters": "공항의 필수 안전 서비스 운영에 차질이 생길 경우 향후 출입국 및 여행 일정에 영향을 줄 수 있습니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 공항 비상 인력의 파업 예고는 향후 한국 방문이나 가족 초청 등 공항 이용 시 일정에 차질을 줄 수 있습니다.",
+      "actions": [],
+      "watch": "오클랜드 공항 노사 협상 타결 여부 및 파업 강행 일자"
+     }
     },
     {
      "id": "9e44811daff4",
@@ -1397,6 +1605,12 @@
      "figure": {
       "v": "19개",
       "l": "폐쇄 점포 수"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 뉴마켓 백화점 폐쇄 등 유통업계 구조조정은 졸업 후 취업 시장의 고용 분위기에 간접 영향을 줍니다.",
+      "actions": [],
+      "watch": "뉴마켓 상권 내 추가 구조조정 및 소매업 고용 동향"
      }
     },
     {
@@ -1424,7 +1638,23 @@
      ],
      "original_title": "Auckland trains delayed, cancelled after incident at Newmarket",
      "published_at": "2026-11-12T02:08+00:00",
-     "why_it_matters": "오클랜드 대중교통의 돌발 중단 상황으로, 대중교통으로 통학하는 학생들의 일정에 차질을 줍니다."
+     "why_it_matters": "오클랜드 대중교통의 돌발 중단 상황으로, 대중교통으로 통학하는 학생들의 일정에 차질을 줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 철도망 사고로 인한 열차 지연은 대중교통으로 이동하는 일상적인 일정에 불편을 줍니다.",
+      "actions": [
+       "대중교통 이용 시 AT(Auckland Transport) 앱을 통한 운행 정보 사전 확인"
+      ],
+      "watch": "오클랜드 철도 네트워크 복구 및 정상화 발표"
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "열차 운행 지연 사고",
+      "location": "Newmarket Station, Auckland",
+      "suburb": "Newmarket",
+      "region": "",
+      "precision": "exact"
+     }
     }
    ]
   },
@@ -1461,6 +1691,12 @@
      "figure": {
       "v": "25%",
       "l": "손실 매각 비중"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 주택 시장의 손실 매각 비율 증가세는 향후 주택 구입 시 시장 가치를 신중히 평가하게 만듭니다.",
+      "actions": [],
+      "watch": "분기별 오클랜드 부동산 시장 가격 지수 발표"
      }
     },
     {
@@ -1489,6 +1725,14 @@
      "figure": {
       "v": "$660",
       "l": "오클랜드 주당 렌트"
+     },
+     "impact": {
+      "level": "high",
+      "reason": "오클랜드 중간 렌트비가 주당 660달러에 달해 아파트 렌트로 거주하는 유학생 가족의 가계 생활비 부담을 직접 높입니다.",
+      "actions": [
+       "임대차 계약 갱신 시 주변 렌트비 시세 비교 및 예산 재조정"
+      ],
+      "watch": "오클랜드 지역 렌트비 및 임대 매물 수급 추이"
      }
     },
     {
@@ -1513,7 +1757,15 @@
      ],
      "original_title": "Less choice for renters in Auckland and Wellington as number of rentals drops",
      "published_at": "2026-11-10T20:56+00:00",
-     "why_it_matters": "임대 구하기가 더욱 어려워짐에 따라 오클랜드 유학생들이 거주지 계약 시 겪는 어려움이 가중됩니다."
+     "why_it_matters": "임대 구하기가 더욱 어려워짐에 따라 오클랜드 유학생들이 거주지 계약 시 겪는 어려움이 가중됩니다.",
+     "impact": {
+      "level": "high",
+      "reason": "오클랜드 임대 매물 감소와 경쟁 심화는 렌트 연장이나 이사 시 주거지 확보를 어렵게 만듭니다.",
+      "actions": [
+       "현재 렌트 계약 만기일 확인 및 집주인과의 재계약 여부 조기 협의"
+      ],
+      "watch": "오클랜드 임대 주택 가용 매물 수 증감 추이"
+     }
     }
    ]
   },
@@ -1613,7 +1865,13 @@
      ],
      "original_title": "New principal appointed at prestigious girls’ school",
      "published_at": "2026-11-09T22:02+00:00",
-     "why_it_matters": "지역 명문 학교의 운영 체계 변화로, 오클랜드 교육계의 전반적인 동향을 보여줍니다."
+     "why_it_matters": "지역 명문 학교의 운영 체계 변화로, 오클랜드 교육계의 전반적인 동향을 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 명문 여학교의 교장 임명 소식으로 지역 교육계 동향 파악에 참고됩니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "e556a3e11b29",
@@ -1640,7 +1898,13 @@
      ],
      "original_title": "Indian-origin student Tanya Gupta named Dux of Avondale College",
      "published_at": "2026-11-12T06:30+00:00",
-     "why_it_matters": "오클랜드 지역 고등학교의 학업 성취 사례로, 현지 교육 환경의 다양성과 성과를 나타냅니다."
+     "why_it_matters": "오클랜드 지역 고등학교의 학업 성취 사례로, 현지 교육 환경의 다양성과 성과를 나타냅니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 고등학교의 성취 사례로 현지 교육 환경의 다양성을 보여줍니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "6e4680291fbf",
@@ -1664,7 +1928,13 @@
      ],
      "original_title": "Understanding diabetes, one heart cell at a time",
      "published_at": "2026-11-12T06:10+00:00",
-     "why_it_matters": "오클랜드대학교의 최신 연구 역량을 보여주며 재학생과 졸업생들에게 학문적 자긍심을 줍니다."
+     "why_it_matters": "오클랜드대학교의 최신 연구 역량을 보여주며 재학생과 졸업생들에게 학문적 자긍심을 줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드대학교의 의학 연구 성과는 재학생과 졸업생의 학문적 자긍심을 높여줍니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "9f38d3e25a6c",
@@ -1691,6 +1961,12 @@
      "figure": {
       "v": "70년",
       "l": "경과 시간"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드대학교의 역사적 일화로 대학 생활의 소속감을 더해줍니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -1715,7 +1991,13 @@
      ],
      "original_title": "Reviving the shellfish industry",
      "published_at": "2026-11-11T09:01+00:00",
-     "why_it_matters": "대학의 연구가 뉴질랜드 환경 및 지역 경제에 미치는 실질적인 기여도를 보여줍니다."
+     "why_it_matters": "대학의 연구가 뉴질랜드 환경 및 지역 경제에 미치는 실질적인 기여도를 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드대학교가 주도하는 환경 연구로 대학의 지역 사회 기여도를 보여줍니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "4b8893390509",
@@ -1738,7 +2020,13 @@
      ],
      "original_title": "The Photon Factory effect",
      "published_at": "2026-11-11T09:01+00:00",
-     "why_it_matters": "오클랜드대학교의 첨단 과학 기술 연구 역량과 졸업생들의 진로 연계 가능성을 보여줍니다."
+     "why_it_matters": "오클랜드대학교의 첨단 과학 기술 연구 역량과 졸업생들의 진로 연계 가능성을 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드대학교의 첨단 광학 연구 성과로 재학생들의 진로 연계 가능성을 보여줍니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
    ]
   },
@@ -1773,7 +2061,24 @@
       "v": "600명",
       "l": "영향받은 신청자"
      },
-     "radar": 9
+     "radar": 9,
+     "impact": {
+      "level": "low",
+      "reason": "가족 초청 이민 제도 개편과 전산 오류로 부모님 초청 일정에 간접적인 차질이 생길 수 있습니다.",
+      "actions": [
+       "이민성 공식 웹사이트에서 부모 영주권 추첨 시스템 복구 공지 확인"
+      ],
+      "watch": "이민성의 부모 영주권 추첨 재개 일정 발표"
+     },
+     "timeline": [
+      {
+       "date": "2026-11-12",
+       "title_ko": "부모 초청 이민 카테고리 11월 추첨에서 기술적 문제 발생",
+       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNaktfR244a2d3YUduTmMwMENtV1l3UW1KQmRxQ1pkNl9rVEV0bVFxZ1NGLXBRVEN1TVpEV1g3LUptXzM2T29uRUczSWpoQ1RFOVRpcE92V1l3WWpZZ0RVR2tCZDY0R0JHb3d1dWpXSjRBMW4temZFREFmNVZNb2UxcE82NGtVbEEyZnE4S3d0VWV6aEZZQ1FEOU5SZGd1OVhueDA1bktDdkNjanIxamc?oc=5",
+       "id": "72933332d7f3"
+      }
+     ],
+     "changed": "기술적 오류로 약 600명의 신청자가 초청장을 받지 못하는 혼선이 새롭게 발생했습니다."
     },
     {
      "id": "4eb8036ca39f",
@@ -1802,7 +2107,13 @@
       "v": "2027년 3월",
       "l": "시행 시기"
      },
-     "radar": 9
+     "radar": 9,
+     "impact": {
+      "level": "low",
+      "reason": "자동차 정비 직종에 한정된 영주권 경로 신설이라 직접 대상은 아니지만 전반적인 이민 정책 기조를 파악하는 데 참고됩니다.",
+      "actions": [],
+      "watch": "2027년 3월 영주권 경로 시행 전 그린리스트 개편 추이 확인"
+     }
     },
     {
      "id": "863264273d57",
@@ -1827,7 +2138,15 @@
      "original_title": "Changes for resident visa applications if dependent children are unlawfully in New Zealand",
      "published_at": "2026-11-10T04:39+00:00",
      "why_it_matters": "가족 비자 및 영주권 신청 과정에서 자녀의 법적 체류 신분이 결정적인 변수가 됨을 경고합니다.",
-     "radar": 9
+     "radar": 9,
+     "impact": {
+      "level": "high",
+      "reason": "자녀와 함께 거주비자 및 영주권을 준비 중이므로 부양 자녀의 합법 체류 여부가 심사에 직접적인 영향을 줍니다.",
+      "actions": [
+       "자녀의 비자 유효기간과 체류 상태를 다시 한번 점검하세요."
+      ],
+      "watch": "이민성의 거주비자 내 부양 자녀 심사 지침 강화 세부 내용"
+     }
     },
     {
      "id": "72933332d7f3",
@@ -1852,7 +2171,13 @@
      "original_title": "Technical issue affecting Parent Category November draw",
      "published_at": "2026-11-11T08:50+00:00",
      "why_it_matters": "부모 초청 이민을 진행하는 가정의 수속 일정에 직접적인 지연 요인으로 작용합니다.",
-     "radar": 9
+     "radar": 9,
+     "impact": {
+      "level": "low",
+      "reason": "부모 초청 이민 카테고리의 시스템 오류이므로 직접적인 비자 신청 대상이 아니라면 참고용에 그칩니다.",
+      "actions": [],
+      "watch": "이민성 안내에 따른 부모 카테고리 추첨 재개 여부"
+     }
     },
     {
      "id": "aa1cc9f4d15e",
@@ -1876,7 +2201,13 @@
      "original_title": "Visa waiver travel suspended for Kuwait nationals",
      "published_at": "2026-11-11T23:22+00:00",
      "why_it_matters": "뉴질랜드의 국가별 비자 면제 정책 변경 기조를 보여주는 이민 행정 조치입니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "none",
+      "reason": "쿠웨이트 국적자 대상 조치로 한국 국적의 유학생 가족과는 관련이 없습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "26a1d0080a14",
@@ -1900,7 +2231,15 @@
      "original_title": "Greens raise concern about immigration rule change",
      "published_at": "2026-11-11T20:44+00:00",
      "why_it_matters": "정치권의 이민 정책 공방은 향후 비자 및 영주권 제도의 추가 개편 가능성에 영향을 줍니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "medium",
+      "reason": "정당 간 이민 정책 공방은 향후 졸업생 취업비자와 영주권 규정 변화에 간접적인 신호가 됩니다.",
+      "actions": [
+       "녹색당 등 주요 정당의 이민 정책 관련 성명과 의회 논의 주시"
+      ],
+      "watch": "향후 의회에서 논의될 이민 규정 개정안 관련 정당별 입장"
+     }
     }
    ]
   }
@@ -2234,9 +2573,9 @@
     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNaktfR244a2d3YUduTmMwMENtV1l3UW1KQmRxQ1pkNl9rVEV0bVFxZ1NGLXBRVEN1TVpEV1g3LUptXzM2T29uRUczSWpoQ1RFOVRpcE92V1l3WWpZZ0RVR2tCZDY0R0JHb3d1dWpXSjRBMW4temZFREFmNVZNb2UxcE82NGtVbEEyZnE4S3d0VWV6aEZZQ1FEOU5SZGd1OVhueDA1bktDdkNjanIxamc?oc=5"
    }
   ],
-  "degraded": true,
-  "degraded_reason": "영향 분석 실패",
-  "retries": 1,
+  "degraded": false,
+  "degraded_reason": "",
+  "retries": 2,
   "quality": {
    "items": 64,
    "bad": 0,
@@ -2245,8 +2584,8 @@
   },
   "repaired": {
    "summary": [],
-   "insight": false,
-   "requests": 0
+   "insight": true,
+   "requests": 1
   }
  }
 }
