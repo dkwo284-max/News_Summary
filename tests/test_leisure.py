@@ -228,3 +228,19 @@ def test_changed_page_reads_with_ai_and_records_price_change():
 def test_first_reading_is_not_reported_as_a_change():
     fac = {"id": "x", "name": "X", "fees": [{"label": "F", "kind": "adult", "amount": 100.0, "period": "year"}], "status": "open"}
     assert leisure.detect_changes({"checked": "", "fees": []}, fac, "2026-11-05") == []
+
+
+def test_osm_match_needs_similar_name_nearby_and_details_are_cleaned():
+    import leisure
+    import leisure_osm as lo
+    fac = {"id": "w-glenfield", "name": "Glenfield Pool and Leisure Centre", "ll": [-36.78, 174.72]}
+    named = [{"lat": -36.7801, "lon": 174.7201, "tags": {"name": "Glenfield Leisure Centre", "opening_hours": "Mo-Fr 05:30-21:00; Sa,Su 07:00-19:00", "phone": "+64 9 1"}},
+             {"lat": -36.7802, "lon": 174.7202, "tags": {"name": "Glenfield Library", "opening_hours": "Mo-Fr 09:00-17:00"}},
+             {"lat": -36.90, "lon": 174.72, "tags": {"name": "Glenfield Pool and Leisure Centre", "opening_hours": "24/7"}}]
+    out = lo.build([fac, {"id": "x", "name": "No Coords", "ll": None}], named, [{"lat": -36.7805, "lon": 174.7203}, {"lat": -36.70, "lon": 174.72}])
+    assert out == {"w-glenfield": {"hours": "Mo-Fr 05:30-21:00; Sa,Su 07:00-19:00", "phone": "+64 9 1", "parking_near": 1}}   # 도서관·멀리 있는 같은 이름은 제외
+    assert lo.similar("Albany Stadium Pool", "Albany Tennis Park") < 0.6
+    text = "Open Mon-Fri 6am-9pm. Free parking on site. Grip socks required."
+    d = leisure.clean_details({"booking": "walkin", "parking": "무료 주차 있음", "bring": "", "busy": "", "hours": "Mon-Fri 6am-9pm"}, text)
+    assert d == {"booking": "walkin", "parking": "무료 주차 있음", "hours": "Mon-Fri 6am-9pm"}
+    assert "hours" not in leisure.clean_details({"hours": "Mon-Fri 5am-11pm", "booking": "maybe"}, text)      # 원문에 없는 시간·잘못된 값은 버린다

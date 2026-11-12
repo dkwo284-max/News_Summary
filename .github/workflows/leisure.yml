@@ -14,6 +14,10 @@ on:
         description: "이미 읽어 둔 값의 페이지 지문만 기록 (AI 없음, 처음 한 번)"
         type: boolean
         default: false
+      details:
+        description: "방문 정보(예약·주차·준비물·운영 시간)를 아직 안 읽은 시설을 다시 읽기 (AI 사용, 한 번만)"
+        type: boolean
+        default: false
       ignore_cap:
         description: "AI 공용 예산 무시 (예산이 모자라 건너뛰었을 때 한 번만)"
         type: boolean
@@ -46,12 +50,16 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           CAP: ${{ github.event.inputs.ignore_cap == 'true' && '--ignore-cap' || '' }}
-        run: python scripts/leisure.py $SEED $CAP ${ONLY:+--only "$ONLY"}
+          DETAILS: ${{ github.event.inputs.details == 'true' && '--details' || '' }}
+        run: python scripts/leisure.py $SEED $CAP $DETAILS ${ONLY:+--only "$ONLY"}
+      - name: Opening hours from OpenStreetMap (no AI)
+        continue-on-error: true
+        run: python scripts/leisure_osm.py
       - name: Commit
         run: |
           git config user.name "daily-brief-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add web/public/data/leisure.json web/public/data/ai-usage.json
+          git add web/public/data/leisure.json web/public/data/leisure-osm.json web/public/data/ai-usage.json
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "data: leisure fees"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done

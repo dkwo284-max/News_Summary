@@ -42,7 +42,9 @@ STATUS = ["open", "waitlist", "closed", "unknown"]
 BATCH = 3             # AI 한 번에 보내는 시설 수(작게 보내야 과부하·한도에 덜 걸림)
 PAGE_CHARS = 5000     # 페이지당 AI 에 보내는 최대 글자
 FACILITY_CHARS = 8000
-LINK_WORDS = re.compile(r"member|subscri|fee|rate|green|price|pricing|join|categor|cost", re.I)
+LINK_WORDS = re.compile(r"member|subscri|fee|rate|green|price|pricing|join|categor|cost|admission|entry|ticket|casual|visit|hours|opening|book|timetable|plan", re.I)
+DETAIL_KEYS = ("booking", "parking", "bring", "busy", "hours")
+BOOKING = ["required", "recommended", "walkin", ""]
 SKIP_LINKS = re.compile(r"login|log-in|signin|sign-in|members?-?area|member-?portal|cart|checkout|wp-admin", re.I)
 
 SCHEMA = {
@@ -57,6 +59,13 @@ SCHEMA = {
                     "status": {"type": "string", "enum": STATUS},
                     "season": {"type": "string"},
                     "note": {"type": "string"},
+                    "details": {
+                        "type": "object",
+                        "properties": {"booking": {"type": "string", "enum": BOOKING}, "parking": {"type": "string"}, "bring": {"type": "string"},
+                                       "busy": {"type": "string"}, "hours": {"type": "string"}},
+                        "required": ["booking", "parking", "bring", "busy", "hours"],
+                        "additionalProperties": False,
+                    },
                     "fees": {
                         "type": "array",
                         "items": {
@@ -73,7 +82,7 @@ SCHEMA = {
                         },
                     },
                 },
-                "required": ["id", "status", "season", "note", "fees"],
+                "required": ["id", "status", "season", "note", "details", "fees"],
                 "additionalProperties": False,
             },
         }
@@ -97,6 +106,10 @@ SYSTEM = """당신은 뉴질랜드 레저 시설(골프장·요트클럽·카약
 - status: 글에 신규 가입 마감(full/closed/waitlist 대기 명단)이면 waitlist 또는 closed, 가입 가능하면 open, 알 수 없으면 unknown.
 - season: 요금이 적용되는 시즌·연도 표기(예: "2026", "1 Sept 2026 – 31 Aug 2027")를 글 그대로. 없으면 "".
 - note: 입회 심사·대기·참고 조건을 한국어 한 줄(40자 이내)로. 없으면 "".
+- details: 방문에 필요한 정보. 글에 분명히 적힌 것만 쓰고, 없으면 빈 문자열("")로 두세요(추측 금지).
+  booking: 예약이 필수면 "required", 권장이면 "recommended", 예약 없이 바로 이용이면 "walkin", 글에 없으면 "".
+  parking: 주차 안내를 한국어 20자 이내로(예: "무료 주차 있음", "유료 주차 2시간 $4"). bring: 준비물·복장 규정을 한국어 30자 이내로(예: "미끄럼 방지 양말 필수").
+  busy: 붐비는 시간·한가한 시간 안내를 한국어 30자 이내로. hours: 운영 시간을 글에 적힌 그대로 70자 이내로(예: "Mon–Fri 6am–9pm, Sat–Sun 7am–7pm").
 모든 id 를 한 번씩 반환하세요. 요금을 못 찾은 시설은 fees 를 빈 배열로."""
 
 
@@ -395,8 +408,23 @@ def detect_changes(prev: dict, fac: dict, today: str) -> list[dict]:
     return out
 
 
+def clean_details(d: dict | None, text: str) -> dict:
+    """AI 가 뽑은 방문 정보에서 빈 값을 빼고 길이를 맞춘다. 운영 시간은 원문에 숫자가 실제로 있을 때만 남긴다."""
+    out = {}
+    for k in DETAIL_KEYS:
+        v = str((d or {}).get(k) or "").strip()
+        if not v or (k == "booking" and v not in BOOKING):
+            continue
+        if k == "hours":
+            nums = re.findall(r"\d{1,2}(?:[:.]\d{2})?", v)
+            if not nums or sum(1 for n in nums if n in text) < min(2, len(nums)):
+                continue
+        out[k] = v[:80]
+    return out
+
+
 def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, today: str, only: set[str] | None = None,
-          seed_hashes: bool = False) -> dict:
+          seed_hashes: bool = False, refresh_details: bool = False) -> dict:
     """get_llm(batches) → AI 클라이언트 또는 None(예산·키 없음). 바뀐 페이지가 있을 때만 호출한다.
     흐름: 페이지 글 받기(AI 없음) → 지문이 이전과 같으면 건너뜀 → 바뀐 시설만 AI 로 읽기."""
     old_by_id = {f["id"]: f for f in old.get("facilities", [])}
@@ -438,7 +466,7 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
         if not text:
             continue
         h = text_hash(text)
-        if prev.get("text_hash") == h and prev.get("fees"):
+        if prev.get("text_hash") == h and prev.get("fees") and not (refresh_details and "details" not in prev):
             fac["checked"] = today        # 페이지가 그대로라 이전에 읽은 값이 여전히 유효
             unchanged += 1
         elif seed_hashes and prev.get("fees") and not prev.get("text_hash"):
@@ -477,6 +505,7 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
                 fac["season"] = str(row.get("season", ""))[:60]
                 if row.get("note") and not fac.get("note"):
                     fac["note"] = str(row["note"])[:80]
+                fac["details"] = clean_details(row.get("details"), text)   # 빈 dict 라도 남겨 '이미 읽음'을 표시
                 fac["checked"] = today
                 fac["src"] = used
                 fac["text_hash"] = h      # 요금이 없어도 지문은 남겨, 같은 페이지를 또 AI 로 읽지 않게
@@ -512,6 +541,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--only", default="")
     ap.add_argument("--ignore-cap", action="store_true", help="AI 공용 예산 무시")
     ap.add_argument("--seed-hashes", action="store_true", help="이미 읽어 둔 값의 페이지 지문만 기록(AI 없음)")
+    ap.add_argument("--details", action="store_true", help="방문 정보(예약·주차·준비물·운영 시간)를 아직 안 읽은 시설을 한 번 더 AI 로 읽는다")
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s", datefmt="%H:%M:%S")
     for noisy in ("httpx", "httpcore", "trafilatura"):
@@ -553,7 +583,7 @@ def main(argv: list[str] | None = None) -> int:
 
     ua = cfg["fetch"]["user_agent"]
     with httpx.Client(timeout=30, follow_redirects=True, headers={"User-Agent": ua}) as client:
-        out = build(src, manual, old, client, get_llm, today, only, args.seed_hashes)
+        out = build(src, manual, old, client, get_llm, today, only, args.seed_hashes, args.details)
     new_changes = out.pop("new_changes", [])
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
