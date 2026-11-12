@@ -2236,12 +2236,17 @@
   ],
   "degraded": true,
   "degraded_reason": "영향 분석 실패",
-  "retries": 0,
+  "retries": 1,
   "quality": {
    "items": 64,
    "bad": 0,
    "redone": [],
    "bad_ids": []
+  },
+  "repaired": {
+   "summary": [],
+   "insight": false,
+   "requests": 0
   }
  }
 }
