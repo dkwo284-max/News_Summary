@@ -14,7 +14,21 @@ from datetime import date
 import httpx
 
 from common import ROOT, load_config
-from spots import fetch_one
+from spots import ENDPOINTS
+
+
+def fetch_one(client: httpx.Client, query: str) -> dict:
+    """Overpass 서버 후보를 한 바퀴만 돈다 (오래 기다리지 않는다 — 전체 작업이 시간 제한에 걸리지 않게)."""
+    last = None
+    for url in ENDPOINTS:
+        try:
+            r = client.post(url, data={"data": query})
+            if r.status_code == 200:
+                return r.json()
+            last = f"{url.split('/')[2]}: HTTP {r.status_code} {r.text[:120]!r}"
+        except (httpx.HTTPError, ValueError) as e:
+            last = f"{url.split('/')[2]}: {type(e).__name__}"
+    raise RuntimeError(last or "overpass failed")
 
 SRC = ROOT / "web" / "public" / "data" / "leisure.json"
 OUT = ROOT / "web" / "public" / "data" / "leisure-osm.json"
@@ -83,7 +97,7 @@ def main() -> int:
     old = json.loads(OUT.read_text(encoding="utf-8")).get("facilities", {}) if OUT.exists() else {}
     ua = load_config()["fetch"]["user_agent"]
     named, parking, failed = [], [], 0
-    with httpx.Client(timeout=90, headers={"User-Agent": ua}) as client:
+    with httpx.Client(timeout=40, headers={"User-Agent": ua, "Accept": "application/json"}) as client:
         for k in range(0, len(facs), CHUNK):
             part = facs[k:k + CHUNK]
             q = "".join(f'nwr["name"]["opening_hours"](around:300,{f["ll"][0]},{f["ll"][1]});' for f in part)
@@ -93,7 +107,10 @@ def main() -> int:
                 parking += fetch_one(client, f"[out:json][timeout:60];({pk});out center;")["elements"]
             except Exception as e:  # noqa: BLE001 — 한 묶음이 실패해도 나머지는 계속, 실패한 시설은 이전 값을 둔다
                 failed += len(part)
-                print("leisure-osm: chunk failed:", str(e)[:120], file=sys.stderr)
+                print("leisure-osm: chunk failed:", str(e)[:200], file=sys.stderr)
+                if failed >= 3 * CHUNK and not named:   # 처음 세 묶음이 모두 실패 → 서버가 막힌 것, 더 두드리지 않는다
+                    failed = len(facs)
+                    break
     rows = build(facs, named, parking)
     rows = {**{k: v for k, v in old.items() if k not in rows}, **rows} if failed else rows
     OUT.write_text(json.dumps({"updated_at": date.today().isoformat(), "source": "OpenStreetMap", "facilities": rows}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
