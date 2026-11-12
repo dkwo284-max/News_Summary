@@ -34,6 +34,7 @@ export function parseHours(oh: string): [number, number][][] | null {
   if (/^24\/7$/.test(text)) return week.map(() => [[0, 1440]] as [number, number][]);
   let any = false;
   for (const rule of text.split(";").map((r) => r.trim()).filter(Boolean)) {
+    if (/^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/.test(rule)) continue;  // 특정 날짜 예외(예: "Dec 25 off")는 평소 영업에 영향 없음
     const m = rule.match(/^((?:(?:Mo|Tu|We|Th|Fr|Sa|Su|PH|SH)(?:\s*-\s*(?:Mo|Tu|We|Th|Fr|Sa|Su))?\s*,?\s*)*)\s*(.*)$/);
     if (!m) return null;
     const onlyHoliday = /^(PH|SH)(\s*,\s*(PH|SH))*$/i.test(m[1].trim());
