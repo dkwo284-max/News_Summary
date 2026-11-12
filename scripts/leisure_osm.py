@@ -89,7 +89,7 @@ def build(facilities: list[dict], named: list[dict], parking: list[dict]) -> dic
 
 
 BUDGET_S = 540   # 작업 전체 시간 예산(9분) — 서버가 느린 날에도 워크플로 제한 안에 끝내고, 그때까지 얻은 것은 저장한다
-CHUNK = 20   # 한 번에 묻는 시설 수 (오클랜드 전체를 한 번에 물으면 Overpass 가 시간 초과를 낸다)
+CHUNK = 6   # 한 번에 묻는 시설 수 (오클랜드 전체를 한 번에 물으면 Overpass 가 시간 초과를 낸다)
 
 
 def main() -> int:
@@ -103,7 +103,7 @@ def main() -> int:
     with httpx.Client(timeout=35, headers={"User-Agent": ua}) as client:
         for k in range(0, len(facs), CHUNK):
             part = facs[k:k + CHUNK]
-            if time.monotonic() - t0 > BUDGET_S or streak >= 2:   # 시간이 다 됐거나 두 묶음 연속 실패 → 남은 시설은 다음 달에
+            if time.monotonic() - t0 > BUDGET_S or streak >= 3:   # 시간이 다 됐거나 두 묶음 연속 실패 → 남은 시설은 다음 달에
                 failed += len(facs) - k
                 print(f"leisure-osm: stopping early at {k}/{len(facs)} (time {int(time.monotonic() - t0)}s, failures in a row {streak})", file=sys.stderr)
                 break
