@@ -415,6 +415,8 @@ def clean_details(d: dict | None, text: str) -> dict:
         v = str((d or {}).get(k) or "").strip()
         if not v or (k == "booking" and (v not in BOOKING or v == "unknown")):
             continue
+        if k in ("parking", "bring", "busy") and not re.search(r"[가-힣]", v):
+            continue  # 한국어로 정리되지 않은 원문 문장은 카드에 그대로 싣지 않는다
         if k == "hours":
             nums = re.findall(r"\d{1,2}(?:[:.]\d{2})?", v)
             if not nums or sum(1 for n in nums if n in text) < min(2, len(nums)):
@@ -576,6 +578,9 @@ def main(argv: list[str] | None = None) -> int:
                 return None
             state["llm"] = make_llm(cfg)
             state["llm"].max_requests = batches * 2  # 실패한 묶음 재시도 여유
+            # 브리프용 실행 제한(15분)을 그대로 쓰면 묶음이 많은 날 몇 개만 읽고 멈춘다 → 레저는 따로 40분
+            if hasattr(state["llm"], "deadline"):
+                state["llm"].deadline = float(cfg.get("leisure", {}).get("run_deadline_seconds", 2400))
             return state["llm"]
         except Exception as e:  # noqa: BLE001
             log.warning("AI 를 쓸 수 없어 바뀐 페이지 읽기를 건너뜁니다: %s", e)
