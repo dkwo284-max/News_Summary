@@ -96,6 +96,8 @@ def main() -> int:
     data = json.loads(SRC.read_text(encoding="utf-8"))
     facs = [f for f in data["facilities"] if f.get("ll")]
     old = json.loads(OUT.read_text(encoding="utf-8")).get("facilities", {}) if OUT.exists() else {}
+    tried = set(json.loads(OUT.read_text(encoding="utf-8")).get("tried", [])) if OUT.exists() else set()
+    facs.sort(key=lambda f: (f["id"] in tried, f["id"] in old))   # 아직 묻지 않은 시설부터 (시간 예산 안에 못 끝내도 다음 실행이 이어서)
     ua = "DailyBriefBot/1.0 (+https://github.com/dkwo284-max/News_Summary)"
     import time
 
@@ -120,9 +122,11 @@ def main() -> int:
                 failed += len(part)
                 streak += 1
                 print("leisure-osm: chunk failed:", str(e)[:200], file=sys.stderr)
+    asked = facs[: len(facs) - failed] if failed < len(facs) else []
+    tried = (tried | {f["id"] for f in asked}) if len(tried | {f["id"] for f in asked}) < len(facs) else {f["id"] for f in asked}  # 한 바퀴 돌면 다시 처음부터
     rows = build(facs, named, parking)
     rows = {**{k: v for k, v in old.items() if k not in rows}, **rows} if failed else rows
-    OUT.write_text(json.dumps({"updated_at": date.today().isoformat(), "source": "OpenStreetMap", "facilities": rows}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    OUT.write_text(json.dumps({"updated_at": date.today().isoformat(), "source": "OpenStreetMap", "facilities": rows, "tried": sorted(tried)}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"leisure-osm: {len(rows)} of {len(facs)} matched ({sum(1 for r in rows.values() if r.get('hours'))} with hours), candidates {len(named)}, failed facilities {failed}")
     return 0
 

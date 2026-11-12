@@ -5,7 +5,7 @@ name: Leisure opening hours (OpenStreetMap)
 on:
   workflow_dispatch:
   schedule:
-    - cron: "41 3 3 * *"   # 매달 3일
+    - cron: "41 3 * * 3"   # 매주 수요일 (Overpass 가 느려 한 번에 30~40곳씩, 아직 안 본 시설부터 이어서)
 
 permissions:
   contents: write
