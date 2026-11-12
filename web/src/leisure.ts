@@ -3,6 +3,7 @@
 // 요금은 "확인일"과 공식 링크를 함께 보여주고, 평점은 직접 적은 값(data) 또는 이 기기에서 입력한 값(localStorage)만 씁니다.
 import { km, type GPData } from "./gpmap";
 import { dayStats, verdict, type Activity, type Hourly, type Level } from "./leisure-score";
+import { familyCost, openStatus, todayHours, visitBits, weekendDays, type Details, type OsmInfo, type WeekDay } from "./leisure-plus";
 
 type H = <K extends keyof HTMLElementTagNameMap>(
   tag: K,
@@ -17,8 +18,9 @@ interface Rating { v: number; n?: number; asof?: string }
 interface Facility {
   id: string; kind: Kind; name: string; area?: string; ll: [number, number] | null; home?: string; gmaps: string;
   fees: Fee[]; status?: string; season?: string; note?: string; checked?: string; rating?: Rating; src?: string[];
-  ages?: Age[]; indoor?: boolean; free?: boolean; chain?: boolean; brand?: string | null;
+  ages?: Age[]; indoor?: boolean; free?: boolean; chain?: boolean; brand?: string | null; details?: Details;
 }
+interface OsmData { updated_at: string; facilities: Record<string, OsmInfo> }
 interface Change { date: string; id: string; name: string; field: string; old: number | string; new: number | string }
 interface LeisureData { updated_at: string; source: string; facilities: Facility[]; changes?: Change[] }
 interface Spot { t: SpotType; n: string; ll: [number, number]; x?: string }
@@ -29,6 +31,7 @@ export interface LeisureOpts {
   gp: GPData | null;
   fx: number | null | undefined;
   link: (url: string, label: string) => HTMLElement;
+  week?: WeekDay[]; // 오늘 브리핑의 7일 예보 (주말 코스 추천용)
 }
 
 const KINDS: { key: Kind; label: string; icon: string; color: string; activity: Activity }[] = [
@@ -208,7 +211,21 @@ function whenConnected(el: HTMLElement): Promise<boolean> {
 
 export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   const root = h("div", { class: "leisure" });
-  const [data, spotData] = await Promise.all([loadJson<LeisureData>("data/leisure.json"), loadJson<SpotData>("data/spots.json")]);
+  const [data, spotData, osmData] = await Promise.all([loadJson<LeisureData>("data/leisure.json"), loadJson<SpotData>("data/spots.json"), loadJson<OsmData>("data/leisure-osm.json")]);
+  const osm = osmData?.facilities ?? {};
+  // 화면을 네 갈래로: 오늘 뭐 하지(기본) · 지도·전체 목록 · 회원권·비용 · 낚시·안전 규칙
+  type View = "today" | "map" | "member" | "rules";
+  const VIEWS: { key: View; label: string }[] = [{ key: "today", label: "✨ 오늘 뭐 하지" }, { key: "map", label: "🗺️ 지도·전체 목록" }, { key: "member", label: "💳 회원권·비용" }, { key: "rules", label: "🎣 낚시·안전 규칙" }];
+  const views = Object.fromEntries(VIEWS.map((v) => [v.key, h("div", { class: "lview" })])) as unknown as Record<View, HTMLElement>;
+  const viewBar = h("div", { class: "lview-bar", role: "tablist", "aria-label": "레저 화면" });
+  let view: View = (() => { try { const v = localStorage.getItem("daily-brief:leisure-view") as View | null; return v && VIEWS.some((x) => x.key === v) ? v : "today"; } catch { return "today"; } })();
+  const pickerBox = h("div", {});
+  const weekendBox = h("div", {});
+  const pref = <T extends string>(key: string, def: T, ok: readonly T[]): T => { try { const v = localStorage.getItem(`daily-brief:leisure-${key}`) as T | null; return v && ok.includes(v) ? v : def; } catch { return def; } };
+  const savePref = (key: string, v: string) => { try { localStorage.setItem(`daily-brief:leisure-${key}`, v); } catch { /* 무시 */ } };
+  let who = pref("who", "kids", ["kids", "couple", "solo"] as const);
+  let budget = pref("budget", "any", ["free", "20", "any"] as const);
+  let far = pref("far", "10", ["5", "10", "20", "0"] as const);
   const mine = localRatings();
   const facilities = data?.facilities ?? [];
   const spots = spotData?.spots ?? [];
@@ -217,7 +234,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   let sort = "dist";
   let krw = false;
   let radius = 0;
-  let base = ""; // 거리 기준 기본값은 시내(CBD)
+  let base = o.suburbs.find((x) => o.gp?.suburbs[x]) ?? ""; // 거리 기준: 관심 동네 첫 번째(좌표를 아는 곳), 없으면 시내(CBD)
   let selected: { fac?: string; spot?: number } = {};
   let household: "adult" | "couple" | "family" = "adult";
   let years = 5;
@@ -265,18 +282,17 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   };
   const ratingOf = (f: Facility): Rating | undefined => f.rating ?? mine[f.id];
 
-  root.append(h("section", { class: "hood-card" },
-    h("h2", {}, "🏌️ 레저 — 골프·요트·카약·낚시"),
+  views.map.append(h("section", { class: "hood-card" },
+    h("h2", {}, "🗺️ 지도·전체 목록"),
     h("p", { class: "board-note" },
       "골프는 지도와 비교표를, 요트·카약·낚시·키즈카페·수영장·어린이 스포츠(태권도)·걷기 코스는 지도에서 눌러 요금과 위치를 봅니다. 요금은 각 시설 공식 사이트의 값이고 ", h("b", {}, "확인일"),
       "을 함께 보여줘요(페이지가 바뀌었을 때만 새로 읽습니다). 금액은 NZD이며 클럽은 입회 심사·대기가 있을 수 있어 가입 전 공식 사이트나 전화로 꼭 확인하세요. 구글 평점은 약관상 자동 수집하지 않고, 직접 적은 값만 기준 시점과 함께 보여줘요.")));
 
   const today = h("section", { class: "hood-card leisure-today" }, h("h2", {}, "🌤️ 오늘·내일 가기 좋은가"), h("p", { class: "muted" }, "예보를 불러오는 중…"));
-  root.append(today);
 
   const recent = (data?.changes ?? []).filter((c) => Date.now() - new Date(c.date).getTime() < 120 * 86400000).reverse();
   if (recent.length) {
-    root.append(h("section", { class: "hood-card" }, h("h2", {}, "🔔 최근 요금·가입 상태 변경"),
+    views.member.append(h("section", { class: "hood-card" }, h("h2", {}, "🔔 최근 요금·가입 상태 변경"),
       h("ul", { class: "leisure-fees" }, ...recent.slice(0, 8).map((c) => h("li", {}, describeChange(c), h("small", { class: "muted" }, ` (${c.date})`))))));
   }
 
@@ -294,7 +310,13 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   const costBox = h("div", {});
   const listBox = h("div", {});
   const missBox = h("div", {});
-  root.append(controls, picksBox, favBox, cmpBox, settingsBox, h("div", { class: "leisure-mapbar" }, sizeBtn), stage, legend, listBox, golfBox, costBox, missBox);
+  void picksBox;
+  views.today.append(pickerBox, weekendBox, today, favBox);
+  views.map.append(controls, settingsBox, h("div", { class: "leisure-mapbar" }, sizeBtn), stage, legend, cmpBox, listBox, missBox);
+  views.member.append(golfBox, costBox);
+  root.append(h("section", { class: "hood-card lhead" }, h("h2", {}, "🏖️ 레저·운동 — 오늘 뭐 하지?"),
+    h("p", { class: "board-note" }, `시설 ${facilities.length}곳 · 요금 확인 ${facilities.filter((f) => f.fees.length || f.free).length}곳 · 운영 시간 확인 ${facilities.filter((f) => osm[f.id]?.hours || f.details?.hours).length}곳. 요금은 공식 페이지에서 읽은 값과 확인일을, 운영 시간은 OpenStreetMap 등록 값을 씁니다. 가기 전에 공식 사이트로 한 번 더 확인하세요.`),
+    viewBar), views.today, views.map, views.member, views.rules);
 
   // ── 지도 ──
   type Leaflet = typeof import("leaflet");
@@ -648,9 +670,102 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
         f.season ? h("span", { class: "pb io", title: f.season }, `🗓 ${f.season.replace(/\(.*?\)/g, "").trim().slice(0, 14)}`) : null,
         f.status && f.status !== "open" && f.status !== "unknown" ? h("span", { class: "pb warn" }, STATUS[f.status]) : null,
         changedRecently(f.id) ? h("span", { class: "pb warn" }, "변경됨") : null),
+      hoursLine(f),
+      extraLine(f),
       h("div", { class: "lc-ages" }, ...ages.filter((a) => a !== "adult" || ages.length < 3).map((a) => h("span", { class: "age-b" }, AGE_SHORT[a]))),
       top.length ? h("ul", { class: "lc-fees" }, ...top.map((t) => h("li", {}, t))) : null,
       h("label", { class: "lc-cmp" }, box, " 비교"));
+  }
+
+  /** 운영 시간 한 줄: OSM 값이 있으면 "지금 영업 중 · 21:00 마감", 없으면 공식 페이지에 적힌 글 그대로, 둘 다 없으면 표시 안 함 */
+  function hoursLine(f: Facility): HTMLElement | null {
+    const st = openStatus(osm[f.id]?.hours);
+    if (st.open != null) return h("div", { class: `lc-hours ${st.open ? "open" : "shut"}`, title: osm[f.id]?.hours ?? "" }, `${st.open ? "🟢" : "🔴"} ${st.text}`, h("small", {}, ` · ${todayHours(osm[f.id]?.hours)}`));
+    return f.details?.hours ? h("div", { class: "lc-hours", title: "공식 페이지에 적힌 운영 시간" }, `🕒 ${f.details.hours}`) : null;
+  }
+  /** 4인 가족 1회 비용 + 방문 정보(예약·주차·준비물·붐비는 시간) — 확인된 것만 */
+  function extraLine(f: Facility): HTMLElement | null {
+    const fam = ["kids", "swim", "climb", "sports", "kayak"].includes(f.kind) ? familyCost(f.fees) : null;
+    const bits = visitBits(f.details, osm[f.id]);
+    if (!fam && !bits.length) return null;
+    return h("div", { class: "lc-extra" }, fam ? h("span", { class: "pb fam", title: fam.how }, `👨‍👩‍👧‍👦 4인 1회 ${money(fam.total)}`) : null, ...bits.map((b) => h("span", {}, b)));
+  }
+
+  // ── 오늘 뭐 하지: 누구와·예산·거리만 고르면 날씨·운영 시간까지 반영해 5곳 ──
+  const fitsWho = (f: Facility): boolean => {
+    const ages = agesOf(f);
+    if (who === "kids") return ages.some((a) => a === "baby" || a === "kid" || a === "family");
+    return ages.includes("adult") && f.kind !== "kids" && f.kind !== "sports";
+  };
+  const entryMin = (f: Facility): number | null => {
+    const xs = f.fees.filter((x) => ENTRY_KINDS.has(x.kind) && x.amount > 0 && !["year", "season", "month"].includes(x.period)).map((x) => x.amount);
+    return xs.length ? Math.min(...xs) : null;
+  };
+  function renderPicker() {
+    const chip = (label: string, on: boolean, act: () => void) => { const b = h("button", { type: "button", class: "chip", "aria-pressed": String(on) }, label); b.addEventListener("click", () => { act(); renderPicker(); renderWeekend(); }); return b; };
+    const rowOf = (label: string, ...chips: HTMLElement[]) => h("div", { class: "chips", role: "group", "aria-label": label }, h("span", { class: "eth-rowlabel" }, label), ...chips);
+    const maxKm = +far;
+    const pool = facilities.filter((f) => f.status !== "closed" && !["golf", "sailing", "fishing"].includes(f.kind) && fitsWho(f)).map((f) => {
+      const d = distF(f), pb = priceBadge(f), st = openStatus(osm[f.id]?.hours), em = entryMin(f), indoor = isIndoor(f);
+      const okBudget = budget === "any" || pb.cls === "free" || (budget === "20" && (pb.cls === "cheap" || (em != null && em <= 20)));
+      const okFar = !maxKm || (d != null && d <= maxKm);
+      const okWx = rainy ? indoor : true;
+      const why: string[] = [];
+      if (st.open) why.push(st.text);
+      if (pb.cls === "free") why.push("무료");
+      else if (em != null) why.push(`1인 $${num(em)}~`);
+      if (d != null) why.push(`${d.toFixed(1)}km`);
+      if (rainy && indoor) why.push("비 와도 가능");
+      if (!rainy && !indoor && (f.kind === "swim" || f.kind === "walk")) why.push("오늘 날씨에 맞음");
+      const score = (d ?? 30) + (st.open ? -4 : st.open === false ? 25 : 0) + (pb.cls === "free" ? -4 : pb.cls === "cheap" ? -2 : pb.cls === "na" ? 6 : 0)
+        + (!rainy && !indoor && (f.kind === "swim" || f.kind === "walk") ? -3 : 0) + (favs.includes(f.id) ? -3 : 0);
+      return { f, ok: okBudget && okFar && okWx, score, why, shut: st.open === false };
+    });
+    const picks = pool.filter((x) => x.ok).sort((a, b) => a.score - b.score).slice(0, 5);
+    const wx = rainy == null ? "날씨 확인 중" : rainy ? "☔ 비·쌀쌀 → 실내 위주" : "☀️ 날씨 괜찮음 → 야외 포함";
+    pickerBox.replaceChildren(h("section", { class: "hood-card picks" },
+      h("h2", {}, "✨ 오늘 뭐 하지?"),
+      rowOf("누구와", chip("🧒 아이와", who === "kids", () => { who = "kids"; savePref("who", who); }), chip("👫 둘이", who === "couple", () => { who = "couple"; savePref("who", who); }), chip("🧑 혼자", who === "solo", () => { who = "solo"; savePref("who", who); })),
+      rowOf("예산", chip("무료만", budget === "free", () => { budget = "free"; savePref("budget", budget); }), chip("1인 $20 이하", budget === "20", () => { budget = "20"; savePref("budget", budget); }), chip("상관없음", budget === "any", () => { budget = "any"; savePref("budget", budget); })),
+      rowOf("거리", ...(["5", "10", "20", "0"] as const).map((k) => chip(k === "0" ? "상관없음" : `${k}km 안`, far === k, () => { far = k; savePref("far", far); }))),
+      h("p", { class: "muted" }, `${base || "시내"} 기준 · ${wx} · 지금 닫힌 곳은 뒤로 미뤄요`),
+      picks.length ? h("div", { class: "lgrid" }, ...picks.map((x) => h("div", { class: "pick" }, card(x.f), h("p", { class: `pick-why${x.shut ? " shut" : ""}` }, x.why.join(" · ")))))
+        : h("p", { class: "muted" }, "조건에 맞는 곳이 없어요. 예산이나 거리를 넓혀 보세요.")));
+  }
+
+  // ── 이번 주말 코스: 토·일 날씨에 맞춰 반나절 코스 (시설 + 가까운 무료 장소) ──
+  function renderWeekend() {
+    const days = weekendDays(o.week);
+    if (!days.length) { weekendBox.replaceChildren(); return; }
+    const MOOD = { wet: ["☔ 비 예보 — 실내 코스", (f: Facility) => isIndoor(f)], hot: ["🏖️ 더운 날 — 물놀이 코스", (f: Facility) => f.kind === "swim" || f.kind === "kayak"],
+      mild: ["🌤️ 선선한 날 — 걷기·놀이 코스", (f: Facility) => f.kind === "walk" || f.kind === "climb" || (f.kind === "kids" && !isIndoor(f)) || f.kind === "swim"] } as const;
+    const used = new Set<string>();
+    const blocks = days.map((d) => {
+      const [title, fit] = MOOD[d.mood];
+      const mains = facilities.filter((f) => f.status !== "closed" && f.ll && fitsWho(f) && fit(f) && !used.has(f.id) && !["golf", "sailing", "fishing"].includes(f.kind))
+        .sort((a, b) => (distF(a) ?? 99) - (distF(b) ?? 99) + (priceBadge(a).cls === "free" ? -3 : 0) - (priceBadge(b).cls === "free" ? -3 : 0)).slice(0, 2);
+      mains.forEach((f) => used.add(f.id));
+      const items = mains.map((f, i) => {
+        const near = d.mood === "wet" || !f.ll ? null : spots.map((sp) => ({ sp, d: km(f.ll!, sp.ll) })).filter((x) => (x.sp.t === "playground" || x.sp.t === "beach" || x.sp.t === "splash") && x.d <= 2.5).sort((a, b) => a.d - b.d)[0];
+        const b = h("button", { type: "button", class: "leisure-name" }, `${kindInfo(f.kind).icon} ${f.name}`);
+        b.addEventListener("click", () => { showView("map"); select({ fac: f.id }); });
+        const pb = priceBadge(f), dd = distF(f);
+        return h("li", {}, h("b", {}, i === 0 ? "오전 " : "오후 "), b, h("small", { class: "muted" }, ` ${pb.text}${dd != null ? ` · ${dd.toFixed(1)}km` : ""}`),
+          near ? h("span", {}, ` → ${SPOTS.find((x) => x.key === near.sp.t)!.icon} ${near.sp.n} `, h("small", { class: "muted" }, `(${near.d < 1 ? "걸어서" : "차로"} ${near.d.toFixed(1)}km · 무료)`)) : null);
+      });
+      return h("div", { class: "wk-day" }, h("h3", {}, `${d.label} `, h("small", {}, `${d.date.slice(5).replace("-", "/")} · ${d.text}`)), h("p", { class: "wk-mood" }, title),
+        items.length ? h("ol", { class: "wk-course" }, ...items) : h("p", { class: "muted" }, "조건에 맞는 곳을 찾지 못했어요."));
+    });
+    weekendBox.replaceChildren(h("section", { class: "hood-card" }, h("h2", {}, "🗓️ 이번 주말 코스"), h("div", { class: "wk-grid" }, ...blocks),
+      h("p", { class: "board-note" }, "주말 예보(오늘 브리핑 기준)와 위에서 고른 ‘누구와’에 맞춰 가까운 순으로 골랐어요. 화살표 뒤는 그 근처의 무료 놀이터·해변이에요. 이름을 누르면 지도에서 볼 수 있어요.")));
+  }
+
+  function showView(v: View) {
+    view = v;
+    try { localStorage.setItem("daily-brief:leisure-view", v); } catch { /* 무시 */ }
+    for (const x of VIEWS) views[x.key].hidden = x.key !== v;
+    viewBar.replaceChildren(...VIEWS.map((x) => { const b = h("button", { type: "button", class: "chip", role: "tab", "aria-selected": String(x.key === v), "aria-pressed": String(x.key === v) }, x.label); b.addEventListener("click", () => showView(x.key)); return b; }));
+    if (v === "map") setTimeout(() => { map?.invalidateSize(); drawMap(); }, 60);
   }
 
   function inView(f: Facility): boolean {
@@ -778,6 +893,8 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   }
 
   function renderAll() {
+    renderPicker();
+    renderWeekend();
     renderControls();
     renderPanel();
     renderPicks();
@@ -798,11 +915,16 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     sizeBtn.textContent = big ? "⤡ 지도 작게" : "⤢ 지도 크게";
     setTimeout(() => map?.invalidateSize(), 50);
   });
+  views.rules.append(fishingRules(), h("section", { class: "hood-card" }, h("h2", {}, "🏊 물놀이 전에"),
+    h("ul", { class: "leisure-fees" }, h("li", {}, "해변·항구 풀은 Safeswim 에서 수질과 안전 깃발을 먼저 확인하세요."), h("li", {}, "스플래시 패드·학교 수영장은 여름철(보통 11~3월)과 날씨 좋은 날에만 열어요."),
+      h("li", {}, "자외선 지수가 6 이상이면 선크림·모자·래시가드를 챙기세요(뉴질랜드 여름은 한국보다 훨씬 강해요).")),
+    h("div", { class: "hood-links" }, o.link("https://safeswim.org.nz", "🌊 Safeswim 수질·안전"), o.link("https://www.metservice.com/towns-cities/locations/auckland", "🌤️ MetService 오클랜드"))));
+  showView(view);
   renderAll();
   void forecast(h, today, origin(), (days) => {
     const d0 = days[0];
     rainy = !!d0 && (d0.rain >= 50 || d0.temp < 14 || d0.gust >= 30);
-    renderPicks();
+    renderPicker();
   });
   void Promise.all([import("leaflet"), import("leaflet/dist/leaflet.css"), whenConnected(mapEl)]).then(([mod, , ok]) => {
     if (!ok) return;

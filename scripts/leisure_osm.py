@@ -74,24 +74,30 @@ def build(facilities: list[dict], named: list[dict], parking: list[dict]) -> dic
     return out
 
 
+CHUNK = 20   # 한 번에 묻는 시설 수 (오클랜드 전체를 한 번에 물으면 Overpass 가 시간 초과를 낸다)
+
+
 def main() -> int:
     data = json.loads(SRC.read_text(encoding="utf-8"))
     facs = [f for f in data["facilities"] if f.get("ll")]
-    lats, lons = [f["ll"][0] for f in facs], [f["ll"][1] for f in facs]
-    bbox = f"{min(lats) - 0.01},{min(lons) - 0.01},{max(lats) + 0.01},{max(lons) + 0.01}"
+    old = json.loads(OUT.read_text(encoding="utf-8")).get("facilities", {}) if OUT.exists() else {}
     ua = load_config()["fetch"]["user_agent"]
-    with httpx.Client(timeout=180, headers={"User-Agent": ua}) as client:
-        named = fetch_one(client, f'[out:json][timeout:150];(nwr["name"]["opening_hours"]["leisure"]({bbox});nwr["name"]["opening_hours"]["sport"]({bbox});'
-                                  f'nwr["name"]["opening_hours"]["amenity"~"swimming_pool|community_centre|public_bath|dojo"]({bbox});nwr["name"]["opening_hours"]["tourism"]({bbox}););out center tags;')["elements"]
-        around = "".join(f'nwr["amenity"="parking"]["access"!="private"](around:150,{f["ll"][0]},{f["ll"][1]});' for f in facs)
-        try:
-            parking = fetch_one(client, f"[out:json][timeout:150];({around});out center;")["elements"]
-        except Exception as e:  # noqa: BLE001 — 주차장 조회 실패는 운영 시간 저장을 막지 않는다
-            print("leisure-osm: parking failed:", e, file=sys.stderr)
-            parking = []
+    named, parking, failed = [], [], 0
+    with httpx.Client(timeout=90, headers={"User-Agent": ua}) as client:
+        for k in range(0, len(facs), CHUNK):
+            part = facs[k:k + CHUNK]
+            q = "".join(f'nwr["name"]["opening_hours"](around:300,{f["ll"][0]},{f["ll"][1]});' for f in part)
+            pk = "".join(f'nwr["amenity"="parking"]["access"!="private"](around:150,{f["ll"][0]},{f["ll"][1]});' for f in part)
+            try:
+                named += fetch_one(client, f"[out:json][timeout:60];({q});out center tags;")["elements"]
+                parking += fetch_one(client, f"[out:json][timeout:60];({pk});out center;")["elements"]
+            except Exception as e:  # noqa: BLE001 — 한 묶음이 실패해도 나머지는 계속, 실패한 시설은 이전 값을 둔다
+                failed += len(part)
+                print("leisure-osm: chunk failed:", str(e)[:120], file=sys.stderr)
     rows = build(facs, named, parking)
+    rows = {**{k: v for k, v in old.items() if k not in rows}, **rows} if failed else rows
     OUT.write_text(json.dumps({"updated_at": date.today().isoformat(), "source": "OpenStreetMap", "facilities": rows}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"leisure-osm: {len(rows)} of {len(facs)} matched ({sum(1 for r in rows.values() if r.get('hours'))} with hours), named candidates {len(named)}")
+    print(f"leisure-osm: {len(rows)} of {len(facs)} matched ({sum(1 for r in rows.values() if r.get('hours'))} with hours), candidates {len(named)}, failed facilities {failed}")
     return 0
 
 

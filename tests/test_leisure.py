@@ -243,4 +243,4 @@ def test_osm_match_needs_similar_name_nearby_and_details_are_cleaned():
     text = "Open Mon-Fri 6am-9pm. Free parking on site. Grip socks required."
     d = leisure.clean_details({"booking": "walkin", "parking": "무료 주차 있음", "bring": "", "busy": "", "hours": "Mon-Fri 6am-9pm"}, text)
     assert d == {"booking": "walkin", "parking": "무료 주차 있음", "hours": "Mon-Fri 6am-9pm"}
-    assert "hours" not in leisure.clean_details({"hours": "Mon-Fri 5am-11pm", "booking": "maybe"}, text)      # 원문에 없는 시간·잘못된 값은 버린다
+    assert "hours" not in leisure.clean_details({"hours": "Mon-Fri 5am-11pm", "booking": "unknown"}, text)      # 원문에 없는 시간·잘못된 값은 버린다

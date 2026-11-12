@@ -797,3 +797,16 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .mon-v.good { background: #16a34a; } .mon-v.bad { background: #dc2626; } .mon-v.flat { background: #6b7280; } .mon-v.info { background: #2563eb; }
 .mon-c { font-variant-numeric: tabular-nums; white-space: nowrap; font-size: .8125rem; }
 @media (max-width: 480px) { .mon-list li { grid-template-columns: 5.2em minmax(0, 1fr); } .mon-c { grid-column: 2; } }
+
+/* 레저 재구성: 하위 화면 · 오늘 뭐 하지 · 운영 시간 · 방문 정보 · 주말 코스 */
+.lview-bar { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0; scrollbar-width: none; } .lview-bar::-webkit-scrollbar { display: none; }
+.lview-bar .chip { flex: none; }
+.lview { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); } .lview[hidden] { display: none; } .lview > * { min-width: 0; }
+.leisure { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+.lc-hours { font-size: .78rem; font-weight: 600; } .lc-hours.open { color: #16a34a; } .lc-hours.shut { color: #dc2626; } .lc-hours small { font-weight: 400; color: var(--muted); }
+.lc-extra { display: flex; flex-wrap: wrap; gap: 4px 8px; font-size: .74rem; color: var(--muted); align-items: center; }
+.pb.fam { background: var(--accent-soft); color: var(--text); }
+.pick { display: grid; gap: 2px; min-width: 0; } .pick-why { margin: 0 2px; font-size: .75rem; color: var(--muted); } .pick-why.shut { color: #dc2626; }
+.wk-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.wk-day { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; min-width: 0; } .wk-day h3 { margin: 0; font-size: .95rem; } .wk-day h3 small { font-weight: 400; color: var(--muted); font-size: .76rem; }
+.wk-mood { margin: 2px 0 6px; font-size: .82rem; font-weight: 600; } .wk-course { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: .86rem; }

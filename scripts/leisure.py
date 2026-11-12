@@ -44,7 +44,7 @@ PAGE_CHARS = 5000     # 페이지당 AI 에 보내는 최대 글자
 FACILITY_CHARS = 8000
 LINK_WORDS = re.compile(r"member|subscri|fee|rate|green|price|pricing|join|categor|cost|admission|entry|ticket|casual|visit|hours|opening|book|timetable|plan", re.I)
 DETAIL_KEYS = ("booking", "parking", "bring", "busy", "hours")
-BOOKING = ["required", "recommended", "walkin", ""]
+BOOKING = ["required", "recommended", "walkin", "unknown"]  # Gemini 스키마는 빈 문자열 enum 을 받지 않는다
 SKIP_LINKS = re.compile(r"login|log-in|signin|sign-in|members?-?area|member-?portal|cart|checkout|wp-admin", re.I)
 
 SCHEMA = {
@@ -107,7 +107,7 @@ SYSTEM = """당신은 뉴질랜드 레저 시설(골프장·요트클럽·카약
 - season: 요금이 적용되는 시즌·연도 표기(예: "2026", "1 Sept 2026 – 31 Aug 2027")를 글 그대로. 없으면 "".
 - note: 입회 심사·대기·참고 조건을 한국어 한 줄(40자 이내)로. 없으면 "".
 - details: 방문에 필요한 정보. 글에 분명히 적힌 것만 쓰고, 없으면 빈 문자열("")로 두세요(추측 금지).
-  booking: 예약이 필수면 "required", 권장이면 "recommended", 예약 없이 바로 이용이면 "walkin", 글에 없으면 "".
+  booking: 예약이 필수면 "required", 권장이면 "recommended", 예약 없이 바로 이용이면 "walkin", 글에 없으면 "unknown".
   parking: 주차 안내를 한국어 20자 이내로(예: "무료 주차 있음", "유료 주차 2시간 $4"). bring: 준비물·복장 규정을 한국어 30자 이내로(예: "미끄럼 방지 양말 필수").
   busy: 붐비는 시간·한가한 시간 안내를 한국어 30자 이내로. hours: 운영 시간을 글에 적힌 그대로 70자 이내로(예: "Mon–Fri 6am–9pm, Sat–Sun 7am–7pm").
 모든 id 를 한 번씩 반환하세요. 요금을 못 찾은 시설은 fees 를 빈 배열로."""
@@ -413,7 +413,7 @@ def clean_details(d: dict | None, text: str) -> dict:
     out = {}
     for k in DETAIL_KEYS:
         v = str((d or {}).get(k) or "").strip()
-        if not v or (k == "booking" and v not in BOOKING):
+        if not v or (k == "booking" and (v not in BOOKING or v == "unknown")):
             continue
         if k == "hours":
             nums = re.findall(r"\d{1,2}(?:[:.]\d{2})?", v)
