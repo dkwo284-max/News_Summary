@@ -206,16 +206,36 @@ def summarize_region(region: str, keys: list[str], chosen: dict[str, list[Articl
         return _offline_sections(keys, chosen, cfg, "")
 
     labels = {k: cfg["sections"][k]["label"] for k in keys}
-    user = "\n\n---\n\n".join(_input_block(a, ks) for a, ks in unique.values())
-    try:
-        out = llm.json_call(task="summary", system=_system_prompt(region, labels, cfg.get("profile", {}).get("summary", "")), user=user,
-                            schema=SUMMARY_SCHEMA, max_tokens=32000)
-    except Exception as e:  # noqa: BLE001 — 실패해도 원문 정보로 페이지는 생성
-        log.error("summary AI failed for %s: %s", region, e)
-        return _offline_sections(keys, chosen, cfg, "요약 생성에 실패해 원문 정보를 표시합니다.", str(e)[:300])
+    # 기사가 많으면 묶음으로 나눠 요청한다: 응답이 짧아져 과부하(503)·시간 초과에 덜 걸리고,
+    # 한 묶음이 실패해도 나머지 기사는 요약된 채로 남는다(실패한 섹션만 복구 대상).
+    pairs = list(unique.values())
+    size = max(1, int(cfg.get("llm", {}).get("summary_chunk", 24)))
+    n = -(-len(pairs) // size)
+    per = -(-len(pairs) // n)
+    chunks = [pairs[i:i + per] for i in range(0, len(pairs), per)]
+    rows: dict = {}
+    briefings: dict[str, str] = {}
+    failed_ids: set[str] = set()
+    last_err = ""
+    for chunk in chunks:
+        ks = [k for k in keys if any(k in sec_keys for _, sec_keys in chunk)]
+        user = "\n\n---\n\n".join(_input_block(a, sk) for a, sk in chunk)
+        try:
+            out = llm.json_call(task="summary", system=_system_prompt(region, {k: labels[k] for k in ks}, cfg.get("profile", {}).get("summary", "")), user=user,
+                                schema=SUMMARY_SCHEMA, max_tokens=32000)
+        except Exception as e:  # noqa: BLE001 — 실패해도 원문 정보로 페이지는 생성
+            log.error("summary AI failed for %s (%d/%d articles): %s", region, len(chunk), len(pairs), e)
+            failed_ids.update(a.id for a, _ in chunk)
+            last_err = str(e)[:300]
+            continue
+        rows.update({row.get("id"): row for row in out.get("items", [])})
+        for bq in out.get("briefings", []):
+            sec, text = bq.get("section"), bq.get("briefing", "")
+            if text and not briefings.get(sec):
+                briefings[sec] = text
+    if len(failed_ids) == len(pairs):
+        return _offline_sections(keys, chosen, cfg, "요약 생성에 실패해 원문 정보를 표시합니다.", last_err)
 
-    rows = {row.get("id"): row for row in out.get("items", [])}
-    briefings = {b.get("section"): b.get("briefing", "") for b in out.get("briefings", [])}
     result = {}
     for k in keys:
         sec_region = cfg["sections"][k]["region"]
@@ -231,6 +251,10 @@ def summarize_region(region: str, keys: list[str], chosen: dict[str, list[Articl
                                     figure=(row.get("number", ""), row.get("number_label", ""))))
         briefing = clamp_line(briefings.get(k, ""), 100) if items else "오늘은 이 섹션에 새 소식이 없습니다."
         result[k] = {"label": labels[k], "briefing": briefing, "items": items}
+        if any(a.id in failed_ids for a in chosen.get(k, [])):  # 일부 기사만 실패: 요약된 기사는 그대로 두고 섹션을 복구 대상으로 표시
+            result[k]["error"] = last_err
+            if not result[k]["briefing"]:
+                result[k]["briefing"] = "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다."
     return result
 
 

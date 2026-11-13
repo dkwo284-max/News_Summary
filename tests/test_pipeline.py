@@ -113,6 +113,34 @@ def test_summarize_all_uses_two_requests(cfg):
     assert out["kr_society"]["items"] == []
 
 
+def test_summarize_region_chunks_and_keeps_partial_success(cfg):
+    """기사가 많으면 묶음으로 나눠 요청하고, 한 묶음이 실패해도 나머지 요약은 남는다."""
+    cfg = {**cfg, "llm": {**cfg.get("llm", {}), "summary_chunk": 2}}
+    a = [art(i, f"Story {i}") for i in range(1, 4)]
+    b = [art(i, f"Akl {i}", section="nz_auckland") for i in range(4, 6)]
+
+    class Flaky(FakeLLM):
+        def json_call(self, **kw):
+            if "[id] 5" in kw["user"]:
+                self.calls.append(kw)
+                raise LLMError("503")
+            return super().json_call(**kw)
+    llm = Flaky()
+    out = summarize_region("nz", ["nz_national", "nz_auckland"], {"nz_national": a, "nz_auckland": b}, cfg, llm)
+    assert len(llm.calls) == 3  # 5건 → 2·2·1
+    assert "error" not in out["nz_national"] and out["nz_national"]["items"][0]["title_ko"] == "번역 제목 1"
+    assert out["nz_national"]["briefing"] == "nz_national 한 줄"
+    bad = out["nz_auckland"]
+    titles = {it["id"]: it["title_ko"] for it in bad["items"]}
+    assert bad["error"] == "503" and titles["4"] == "번역 제목 4" and titles["5"] != "번역 제목 5"
+    # 전부 실패하면 예전과 같이 원문 대체 + error
+    class Boom:
+        def json_call(self, **kw):
+            raise LLMError("down")
+    allbad = summarize_region("nz", ["nz_national"], {"nz_national": a}, cfg, Boom())
+    assert allbad["nz_national"]["error"] == "down"
+
+
 def test_summarize_failure_falls_back(cfg):
     class Boom:
         def json_call(self, **kw):

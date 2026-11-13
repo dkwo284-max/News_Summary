@@ -51,7 +51,7 @@ concurrency:
 jobs:
   brief:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 55
     outputs:
       generated: ${{ steps.run.outputs.generated }}
     steps:
@@ -92,6 +92,39 @@ jobs:
           git add web/public/data
           if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
           git commit -m "brief: ${{ steps.run.outputs.date }}"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
+
+      # 빠른 복구: 방금 만든 브리핑이 AI 과부하로 원문 대체(degraded)면, 몇 분 쉬었다가 같은 실행 안에서 실패한 단계만 한 번 더.
+      # (GitHub 예약 복구는 자주 늦거나 빠져서, 예약에 기대지 않고 바로 다시 시도한다. 브리핑이 멀쩡하면 몇 초 만에 끝남)
+      - name: Quick repair if degraded
+        id: fix
+        if: steps.run.outputs.generated == 'true' && !(github.event_name == 'workflow_dispatch' && inputs.processing_only)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AI_PROFILE: production
+        run: |
+          deg=$(python - <<'PY'
+          import json, glob
+          f = sorted(glob.glob("web/public/data/20??-??-??.json"))[-1]
+          print("yes" if (json.load(open(f, encoding="utf-8")).get("meta") or {}).get("degraded") else "no")
+          PY
+          )
+          if [ "$deg" != "yes" ]; then echo "brief is fine"; exit 0; fi
+          echo "degraded — retrying failed steps in 4 minutes"
+          sleep 240
+          python scripts/main.py --retry-degraded || true
+
+      - name: Commit repair
+        if: steps.fix.outcome == 'success'
+        run: |
+          git add web/public/data
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -m "brief: quick repair"
           for i in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
             sleep $((i * 5))
