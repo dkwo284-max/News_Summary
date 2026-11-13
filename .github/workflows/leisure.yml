@@ -3,7 +3,7 @@ name: Leisure fees (golf, sailing, kayak, fishing)
 # 1월·7월·9월 10일(9월은 요트·보트 클럽 새 시즌 직후) 또는 수동: 레저 시설 공식 페이지를 받아 web/public/data/leisure.json 을 갱신합니다.
 # 요금은 잘 안 바뀌므로 페이지 글의 "지문"이 이전과 같으면 AI 를 쓰지 않고(보통 AI 0회), 바뀐 시설만 Gemini 로 다시 읽은 뒤
 # 금액이 페이지 글에 실제로 있는지 검증합니다(시설 3곳당 AI 1회). 요금·가입 상태가 바뀌면 기록하고 알림(설정에서 켠 경우).
-# 매일 도는 실행에는 들어 있지 않습니다.
+# 매일 10:47(NZ)에는 방문 정보·운영 시간이 빈 시설만 소량 다시 읽습니다(--fill 12).
 on:
   workflow_dispatch:
     inputs:
@@ -22,8 +22,14 @@ on:
         description: "AI 공용 예산 무시 (예산이 모자라 건너뛰었을 때 한 번만)"
         type: boolean
         default: false
+      fill:
+        description: "방문 정보·운영 시간이 빈 시설 N곳만 다시 읽기 (0이면 끔)"
+        default: "0"
   schedule:
     - cron: "17 4 10 1,7,9 *"
+    # 매일 10:47(NZ 여름 기준, 브리프·자동 재시도 뒤): 방문 정보·운영 시간이 빈 시설 12곳만 다시 읽기.
+    # 브리프가 정상일 때만, 공용 예산이 남을 때만 AI 를 쓰고(보통 4회), 다시 읽을 곳이 없으면 AI 0회
+    - cron: "47 21 * * *"
 
 permissions:
   contents: write
@@ -51,7 +57,8 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           CAP: ${{ github.event.inputs.ignore_cap == 'true' && '--ignore-cap' || '' }}
           DETAILS: ${{ github.event.inputs.details == 'true' && '--details' || '' }}
-        run: python scripts/leisure.py $SEED $CAP $DETAILS ${ONLY:+--only "$ONLY"}
+          FILL: ${{ github.event.schedule == '47 21 * * *' && '12' || github.event.inputs.fill || '0' }}
+        run: python scripts/leisure.py $SEED $CAP $DETAILS --fill "$FILL" ${ONLY:+--only "$ONLY"}
       - name: Commit
         run: |
           git config user.name "daily-brief-bot"

@@ -1,7 +1,7 @@
 // 레저 탭 보강 (AI 없음): 운영 시간 해석("지금 영업 중"), 4인 가족 1회 비용, 방문 정보 한 줄, 주말 날씨 판정.
 
 export interface OsmInfo { hours?: string; phone?: string; wheelchair?: string; parking_near?: number }
-export interface Details { booking?: "required" | "recommended" | "walkin"; parking?: string; bring?: string; busy?: string; hours?: string }
+export interface Details { booking?: "required" | "recommended" | "walkin"; parking?: string; bring?: string; busy?: string; hours?: string; hours_osm?: string }
 interface FeeLike { kind: string; amount: number; period: string }
 
 const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];

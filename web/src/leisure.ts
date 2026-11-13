@@ -213,6 +213,8 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   const root = h("div", { class: "leisure" });
   const [data, spotData, osmData] = await Promise.all([loadJson<LeisureData>("data/leisure.json"), loadJson<SpotData>("data/spots.json"), loadJson<OsmData>("data/leisure-osm.json")]);
   const osm = osmData?.facilities ?? {};
+  /** 운영 시간(opening_hours 형식): OpenStreetMap 값 우선, 없으면 공식 페이지에서 읽어 검증한 값 */
+  const hoursOf = (f: Facility) => osm[f.id]?.hours || f.details?.hours_osm || undefined;
   // 화면을 네 갈래로: 오늘 뭐 하지(기본) · 지도·전체 목록 · 회원권·비용 · 낚시·안전 규칙
   type View = "today" | "map" | "member" | "rules";
   const VIEWS: { key: View; label: string }[] = [{ key: "today", label: "✨ 오늘 뭐 하지" }, { key: "map", label: "🗺️ 지도·전체 목록" }, { key: "member", label: "💳 회원권·비용" }, { key: "rules", label: "🎣 낚시·안전 규칙" }];
@@ -315,7 +317,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   views.map.append(controls, settingsBox, h("div", { class: "leisure-mapbar" }, sizeBtn), stage, legend, cmpBox, listBox, missBox);
   views.member.append(golfBox, costBox);
   root.append(h("section", { class: "hood-card lhead" }, h("h2", {}, "🏖️ 레저·운동 — 오늘 뭐 하지?"),
-    h("p", { class: "board-note" }, `시설 ${facilities.length}곳 · 요금 확인 ${facilities.filter((f) => f.fees.length || f.free).length}곳 · 운영 시간 확인 ${facilities.filter((f) => osm[f.id]?.hours || f.details?.hours).length}곳. 요금은 공식 페이지에서 읽은 값과 확인일을, 운영 시간은 OpenStreetMap 등록 값을 씁니다. 가기 전에 공식 사이트로 한 번 더 확인하세요.`),
+    h("p", { class: "board-note" }, `시설 ${facilities.length}곳 · 요금 확인 ${facilities.filter((f) => f.fees.length || f.free).length}곳 · 운영 시간 확인 ${facilities.filter((f) => hoursOf(f) || f.details?.hours).length}곳. 요금은 공식 페이지에서 읽은 값과 확인일을, 운영 시간은 OpenStreetMap 등록 값(없으면 공식 페이지에 적힌 시간)을 씁니다. 가기 전에 공식 사이트로 한 번 더 확인하세요.`),
     viewBar), views.today, views.map, views.member, views.rules);
 
   // ── 지도 ──
@@ -679,8 +681,8 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
 
   /** 운영 시간 한 줄: OSM 값이 있으면 "지금 영업 중 · 21:00 마감", 없으면 공식 페이지에 적힌 글 그대로, 둘 다 없으면 표시 안 함 */
   function hoursLine(f: Facility): HTMLElement | null {
-    const st = openStatus(osm[f.id]?.hours);
-    if (st.open != null) return h("div", { class: `lc-hours ${st.open ? "open" : "shut"}`, title: osm[f.id]?.hours ?? "" }, `${st.open ? "🟢" : "🔴"} ${st.text}`, h("small", {}, ` · ${todayHours(osm[f.id]?.hours)}`));
+    const st = openStatus(hoursOf(f));
+    if (st.open != null) return h("div", { class: `lc-hours ${st.open ? "open" : "shut"}`, title: `${hoursOf(f)}${osm[f.id]?.hours ? " (OpenStreetMap)" : " (공식 페이지)"}` }, `${st.open ? "🟢" : "🔴"} ${st.text}`, h("small", {}, ` · ${todayHours(hoursOf(f))}`));
     return f.details?.hours ? h("div", { class: "lc-hours", title: "공식 페이지에 적힌 운영 시간" }, `🕒 ${f.details.hours}`) : null;
   }
   /** 4인 가족 1회 비용 + 방문 정보(예약·주차·준비물·붐비는 시간) — 확인된 것만 */
@@ -706,7 +708,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
     const rowOf = (label: string, ...chips: HTMLElement[]) => h("div", { class: "chips", role: "group", "aria-label": label }, h("span", { class: "eth-rowlabel" }, label), ...chips);
     const maxKm = +far;
     const pool = facilities.filter((f) => f.status !== "closed" && !["golf", "sailing", "fishing"].includes(f.kind) && fitsWho(f)).map((f) => {
-      const d = distF(f), pb = priceBadge(f), st = openStatus(osm[f.id]?.hours), em = entryMin(f), indoor = isIndoor(f);
+      const d = distF(f), pb = priceBadge(f), st = openStatus(hoursOf(f)), em = entryMin(f), indoor = isIndoor(f);
       const okBudget = budget === "any" || pb.cls === "free" || (budget === "20" && (pb.cls === "cheap" || (em != null && em <= 20)));
       const okFar = !maxKm || (d != null && d <= maxKm);
       const okWx = rainy ? indoor : true;

@@ -43,7 +43,8 @@ BATCH = 3             # AI 한 번에 보내는 시설 수(작게 보내야 과�
 PAGE_CHARS = 5000     # 페이지당 AI 에 보내는 최대 글자
 FACILITY_CHARS = 8000
 LINK_WORDS = re.compile(r"member|subscri|fee|rate|green|price|pricing|join|categor|cost|admission|entry|ticket|casual|visit|hours|opening|book|timetable|plan", re.I)
-DETAIL_KEYS = ("booking", "parking", "bring", "busy", "hours")
+DETAIL_KEYS = ("booking", "parking", "bring", "busy", "hours", "hours_osm")
+FILL_RETRY_DAYS = 30  # 읽었는데 운영 시간이 없던 곳은 30일 뒤에 한 번 더 시도
 BOOKING = ["required", "recommended", "walkin", "unknown"]  # Gemini 스키마는 빈 문자열 enum 을 받지 않는다
 SKIP_LINKS = re.compile(r"login|log-in|signin|sign-in|members?-?area|member-?portal|cart|checkout|wp-admin", re.I)
 
@@ -62,8 +63,9 @@ SCHEMA = {
                     "details": {
                         "type": "object",
                         "properties": {"booking": {"type": "string", "enum": BOOKING}, "parking": {"type": "string"}, "bring": {"type": "string"},
-                                       "busy": {"type": "string"}, "hours": {"type": "string"}},
-                        "required": ["booking", "parking", "bring", "busy", "hours"],
+                                       "busy": {"type": "string"}, "hours": {"type": "string"},
+                                       "hours_osm": {"type": "string"}},
+                        "required": ["booking", "parking", "bring", "busy", "hours", "hours_osm"],
                         "additionalProperties": False,
                     },
                     "fees": {
@@ -110,6 +112,8 @@ SYSTEM = """당신은 뉴질랜드 레저 시설(골프장·요트클럽·카약
   booking: 예약이 필수면 "required", 권장이면 "recommended", 예약 없이 바로 이용이면 "walkin", 글에 없으면 "unknown".
   parking: 주차 안내를 한국어 20자 이내로(예: "무료 주차 있음", "유료 주차 2시간 $4"). bring: 준비물·복장 규정을 한국어 30자 이내로(예: "미끄럼 방지 양말 필수").
   busy: 붐비는 시간·한가한 시간 안내를 한국어 30자 이내로. hours: 운영 시간을 글에 적힌 그대로 70자 이내로(예: "Mon–Fri 6am–9pm, Sat–Sun 7am–7pm").
+  hours_osm: 같은 운영 시간을 OpenStreetMap opening_hours 형식으로(예: "Mo-Fr 06:00-21:00; Sa,Su 07:00-19:00"). 요일 Mo Tu We Th Fr Sa Su, 24시간제 HH:MM.
+  글에 요일별 시간이 분명할 때만 쓰고, 공휴일·방학·시즌별로 달라 하나로 정리할 수 없거나 확실하지 않으면 "".
 모든 id 를 한 번씩 반환하세요. 요금을 못 찾은 시설은 fees 를 빈 배열로."""
 
 
@@ -408,6 +412,40 @@ def detect_changes(prev: dict, fac: dict, today: str) -> list[dict]:
     return out
 
 
+OSM_RULE = re.compile(r"^(?:(?:Mo|Tu|We|Th|Fr|Sa|Su|PH)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?(?:,(?:Mo|Tu|We|Th|Fr|Sa|Su|PH)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?)* )?"
+                      r"(?:off|closed|\d{2}:\d{2}-\d{2}:\d{2}(?:,\d{2}:\d{2}-\d{2}:\d{2})*)$")
+
+
+def valid_osm_hours(v: str, text: str) -> bool:
+    """AI 가 만든 opening_hours 가 형식에 맞고, 그 안의 시각이 원문에 실제로 있는지(6:00 ↔ 6am 등 표기 차이 허용) 확인한다."""
+    rules = [r.strip() for r in v.split(";") if r.strip()]
+    if not rules or not all(OSM_RULE.match(r) for r in rules):
+        return False
+    low = text.lower()
+    for hh, mm in set(re.findall(r"(\d{2}):(\d{2})", v)):
+        h, m = int(hh), int(mm)
+        if h in (0, 24) and m == 0:
+            continue  # 자정은 'midnight' 등으로 적혀 숫자가 없을 수 있다
+        h12 = h % 12 or 12
+        forms = [f"{h}:{mm}", f"{h}.{mm}", f"{hh}:{mm}", f"{h12}:{mm}", f"{h12}.{mm}"] + ([f"{h12}am", f"{h12} am", f"{h12}pm", f"{h12} pm", f"{h12}a.m", f"{h12}p.m"] if m == 0 else [])
+        if not any(f in low for f in forms):
+            return False
+    return True
+
+
+def needs_fill(prev: dict, osm_hours: set[str], today: str) -> int:
+    """방문 정보를 다시 읽을 우선순위: 2=아직 못 읽음, 1=운영 시간이 없어 30일 만에 재시도, 0=필요 없음."""
+    if "details" not in prev:
+        return 2
+    d = prev.get("details") or {}
+    if d.get("hours_osm") or prev["id"] in osm_hours:
+        return 0
+    tried = prev.get("details_tried") or prev.get("checked") or ""
+    if tried and date.fromisoformat(today).toordinal() - date.fromisoformat(tried).toordinal() < FILL_RETRY_DAYS:
+        return 0
+    return 1
+
+
 def clean_details(d: dict | None, text: str) -> dict:
     """AI 가 뽑은 방문 정보에서 빈 값을 빼고 길이를 맞춘다. 운영 시간은 원문에 숫자가 실제로 있을 때만 남긴다."""
     out = {}
@@ -421,12 +459,14 @@ def clean_details(d: dict | None, text: str) -> dict:
             nums = re.findall(r"\d{1,2}(?:[:.]\d{2})?", v)
             if not nums or sum(1 for n in nums if n in text) < min(2, len(nums)):
                 continue
+        if k == "hours_osm" and not valid_osm_hours(v, text):
+            continue
         out[k] = v[:80]
     return out
 
 
 def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, today: str, only: set[str] | None = None,
-          seed_hashes: bool = False, refresh_details: bool = False) -> dict:
+          seed_hashes: bool = False, refresh_details: bool = False, fill: int = 0, osm_hours: set[str] | None = None) -> dict:
     """get_llm(batches) → AI 클라이언트 또는 None(예산·키 없음). 바뀐 페이지가 있을 때만 호출한다.
     흐름: 페이지 글 받기(AI 없음) → 지문이 이전과 같으면 건너뜀 → 바뀐 시설만 AI 로 읽기."""
     old_by_id = {f["id"]: f for f in old.get("facilities", [])}
@@ -435,6 +475,15 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
     todo: list[tuple[dict, str, list[str], str]] = []
     prevs: dict[str, dict] = {}
     unchanged = 0
+    # --fill N: 방문 정보를 아직 못 읽었거나 운영 시간이 없는 곳 N곳만 다시 읽는다(우선순위 높은 곳부터)
+    fill_ids: set[str] = set()
+    if fill:
+        ranked = sorted(((needs_fill(old_by_id[s["id"]], osm_hours or set(), today), s["id"]) for s in src["facilities"]
+                         if s["id"] in old_by_id and not s.get("no_fees") and (s.get("home") or s.get("pages"))
+                         and not (manual.get(s["id"]) or {}).get("replace_fees")), reverse=True)
+        fill_ids = {i for p, i in ranked[:fill] if p > 0}
+        log.info("leisure fill: %d place(s) to (re)read for visit info / hours", len(fill_ids))
+        only = fill_ids or {"__none__"}  # 다시 읽을 곳이 없으면 페이지도 받지 않는다(AI 0회)
     for s in src["facilities"]:
         if only and s["id"] not in only:
             if s["id"] in old_by_id:
@@ -455,6 +504,9 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
                "note": s.get("note") or prev.get("note", ""), "checked": prev.get("checked", ""), "src": prev.get("src", []),
                "text_hash": prev.get("text_hash", ""), "ages": s.get("ages"), "indoor": s.get("indoor"),
                "free": s.get("free") or None, "chain": s.get("chain") or None, "brand": s.get("brand")}
+        for k in ("details", "details_tried"):
+            if k in prev:
+                fac[k] = prev[k]
         if s.get("season"):
             fac["season"] = s["season"]   # 여름 한정 등 운영 기간 (손으로 적은 값)
         if s.get("note"):
@@ -468,7 +520,7 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
         if not text:
             continue
         h = text_hash(text)
-        if prev.get("text_hash") == h and prev.get("fees") and not (refresh_details and "details" not in prev):
+        if prev.get("text_hash") == h and prev.get("fees") and not (refresh_details and "details" not in prev) and s["id"] not in fill_ids:
             fac["checked"] = today        # 페이지가 그대로라 이전에 읽은 값이 여전히 유효
             unchanged += 1
         elif seed_hashes and prev.get("fees") and not prev.get("text_hash"):
@@ -508,6 +560,7 @@ def build(src: dict, manual: dict, old: dict, client: httpx.Client, get_llm, tod
                 if row.get("note") and not fac.get("note"):
                     fac["note"] = str(row["note"])[:80]
                 fac["details"] = clean_details(row.get("details"), text)   # 빈 dict 라도 남겨 '이미 읽음'을 표시
+                fac["details_tried"] = today
                 fac["checked"] = today
                 fac["src"] = used
                 fac["text_hash"] = h      # 요금이 없어도 지문은 남겨, 같은 페이지를 또 AI 로 읽지 않게
@@ -543,6 +596,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--only", default="")
     ap.add_argument("--ignore-cap", action="store_true", help="AI 공용 예산 무시")
     ap.add_argument("--seed-hashes", action="store_true", help="이미 읽어 둔 값의 페이지 지문만 기록(AI 없음)")
+    ap.add_argument("--fill", type=int, default=0, help="방문 정보·운영 시간이 빈 시설 N곳만 다시 읽기(매일 소량 자동 재시도)")
     ap.add_argument("--details", action="store_true", help="방문 정보(예약·주차·준비물·운영 시간)를 아직 안 읽은 시설을 한 번 더 AI 로 읽는다")
     args = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)-7s %(message)s", datefmt="%H:%M:%S")
@@ -588,7 +642,9 @@ def main(argv: list[str] | None = None) -> int:
 
     ua = cfg["fetch"]["user_agent"]
     with httpx.Client(timeout=30, follow_redirects=True, headers={"User-Agent": ua}) as client:
-        out = build(src, manual, old, client, get_llm, today, only, args.seed_hashes, args.details)
+        osm = load_json(OUT.parent / "leisure-osm.json", {}).get("facilities", {})
+        osm_hours = {k for k, v in osm.items() if isinstance(v, dict) and v.get("hours")}
+        out = build(src, manual, old, client, get_llm, today, only, args.seed_hashes, args.details, args.fill, osm_hours)
     new_changes = out.pop("new_changes", [])
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
