@@ -213,6 +213,24 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
   const states: (() => boolean)[] = [() => period === 7, () => period === 30, () => period === 90, () => onlySerious];
   chips.append(mk("7일", states[0], () => (period = 7)), mk("30일", states[1], () => (period = 30)),
     mk("90일", states[2], () => (period = 90)), mk("1급만", states[3], () => (onlySerious = !onlySerious)));
+  // 위치 정확도 필터: 장소 확인(점) / 동네까지만(점선 원) / 위치 미상(아래 목록). 기본은 모두 켬
+  type Prec = "exact" | "area" | "none";
+  const precOf = (e: Incident): Prec => (pinned(e) ? "exact" : e.latlon ? "area" : "none");
+  const precOn: Record<Prec, boolean> = { exact: true, area: true, none: true };
+  const PREC_LABEL: Record<Prec, string> = { exact: "📍 장소 확인", area: "◌ 동네까지만", none: "📭 위치 미상" };
+  const precChips = h("div", { class: "gp-tools gp-prec", role: "group", "aria-label": "위치 정확도로 거르기" },
+    h("span", { class: "muted" }, "정확도"));
+  const precBtns = (Object.keys(PREC_LABEL) as Prec[]).map((k) => {
+    const b = h("button", { type: "button", class: "chip", "aria-pressed": "true", title: k === "exact" ? "기사에 거리·건물까지 나온 사건" : k === "area" ? "동네 이름까지만 나온 사건 (정확한 지점 아님)" : "권역만 나오거나 장소가 없는 사건" }, PREC_LABEL[k]);
+    b.addEventListener("click", () => {
+      precOn[k] = !precOn[k];
+      if (!Object.values(precOn).some(Boolean)) precOn[k] = true;  // 다 끄면 아무것도 안 보이므로 마지막 하나는 유지
+      b.setAttribute("aria-pressed", String(precOn[k]));
+      draw();
+    });
+    precChips.append(b);
+    return [k, b] as const;
+  });
   const summary = h("p", { class: "board-note" });
   // 위치가 권역까지만 알려졌거나 아예 공개되지 않은 사건: 지도에 찍지 않고 권역별 목록으로
   const vagueBox = h("details", { class: "inc-vague" });
@@ -230,15 +248,18 @@ export function safetySection(h: H, data: IncidentData | null, homes: Record<str
     [h("span", { class: "dot", style: `background:${SEV_COLOR[s]}` }), `${SEV_LABEL[s]} ${SEV_DESC[s]} `]),
     Object.keys(homes).length ? h("span", { class: "dot home" }) : null, Object.keys(homes).length ? `관심 동네(반경 ${RADIUS_KM}km) ` : null,
     h("span", { class: "dot", style: "background:transparent;border:1.5px dashed #6b7280" }), "점선 원 = 동네까지만 확인된 사건(정확한 지점 아님)");
-  root.append(h("section", { class: "hood-card" }, h("h2", {}, "🗺️ 오클랜드 사건 지도"), chips, mapEl, legend, summary, vagueBox,
+  root.append(h("section", { class: "hood-card" }, h("h2", {}, "🗺️ 오클랜드 사건 지도"), chips, precChips, mapEl, legend, summary, vagueBox,
     h("p", { class: "board-note" }, "뉴스에 보도된 사건만 표시해요. 큰 사건은 많이, 흔한 절도는 적게 보도되므로 실제 범죄 빈도는 아래 경찰 공식 통계와 함께 보세요. 지도 © OpenStreetMap")));
 
   type Leaflet = typeof import("leaflet");
   let L: Leaflet | null = null;
   let map: import("leaflet").Map | null = null;
   let layer: import("leaflet").LayerGroup | null = null;
-  const shown = () => inDays(all, period).filter((e) => !onlySerious || e.severity === "1");
+  const base = () => inDays(all, period).filter((e) => !onlySerious || e.severity === "1");
+  const shown = () => base().filter((e) => precOn[precOf(e)]);
   function draw() {
+    const pool = base();
+    for (const [k, b] of precBtns) b.textContent = `${PREC_LABEL[k]} ${pool.filter((e) => precOf(e) === k).length}`;
     const list = shown();
     const n = (s: Sev) => list.filter((e) => e.severity === s).length;
     summary.textContent = `최근 ${period}일 보도 ${list.length}건 · 1급 ${n("1")} · 2급 ${n("2")} · 3급 ${n("3")} · 사고 ${n("accident")}` +

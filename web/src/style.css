@@ -358,6 +358,9 @@ legend { font-weight: 700; margin-bottom: 6px; }
 
 /* ── 한인 GP 지도 ── */
 .gp-tools { display: flex; gap: 8px; margin-bottom: 8px; }
+.gp-tools.gp-prec { flex-wrap: wrap; align-items: center; gap: 6px; }
+.gp-tools.gp-prec > span { white-space: nowrap; font-size: .8rem; }
+.gp-tools.gp-prec .chip { padding: 4px 10px; font-size: .8rem; white-space: nowrap; }
 .gp-map { height: 340px; border-radius: 12px; border: 1px solid var(--line); overflow: hidden; z-index: 0; background: var(--bg); }
 .gp-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 8px 0 4px; font-size: 0.75rem; color: var(--muted); }
 .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-left: 4px; }
