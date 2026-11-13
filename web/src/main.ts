@@ -8,6 +8,7 @@ import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbou
 import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, isSaved, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, toggleSaved, unfollow, type SeenIndex } from "./news-tools";
 import { homeView, statusPanel } from "./home";
 import { trackerCard } from "./tracker";
+import { compareCard, loadHoodSchools } from "./hood-compare";
 import type { PolicyData, PolicyNews } from "./policy";
 import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
 
@@ -906,7 +907,7 @@ async function renderHood(): Promise<void> {
   const holder = h("div", { "aria-busy": "true" }, h("p", { class: "muted" }, "내 동네 정보를 불러오는 중…"));
   main.append(holder);
   const names = [...watch.suburbs, ...watch.schools];
-  const [areas, briefs, gp] = await Promise.all([loadAreas(), names.length ? recentBriefs() : Promise.resolve([] as Brief[]), loadGP()]);
+  const [areas, briefs, gp, inc, schools] = await Promise.all([loadAreas(), names.length ? recentBriefs() : Promise.resolve([] as Brief[]), loadGP(), loadIncidents(), loadHoodSchools()]);
   if (chipState.akl !== "hood" || settings.tab !== "akl" || !holder.isConnected) return;
   const hits: Hit[] = names.length ? findHits(briefs, names) : [];
   const fx = (viewingLatest && live?.fx) || brief?.extras.nzd_krw;
@@ -915,7 +916,9 @@ async function renderHood(): Promise<void> {
     renderMain();
     window.scrollTo({ top: 0 });
   };
-  holder.replaceChildren(neighbourhoodView(h, watch, areas, hits, fx, extLink, openSettings, gp, showGPMap));
+  holder.replaceChildren(
+    compareCard(h, { watch: watch.suburbs, areas: areas as never, schools, incidents: inc?.incidents ?? [], coords: gp?.suburbs ?? {}, link: extLink }),
+    neighbourhoodView(h, watch, areas, hits, fx, extLink, openSettings, gp, showGPMap));
   holder.removeAttribute("aria-busy");
 }
 

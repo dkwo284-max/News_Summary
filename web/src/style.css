@@ -813,3 +813,16 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .wk-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .wk-day { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; min-width: 0; } .wk-day h3 { margin: 0; font-size: .95rem; } .wk-day h3 small { font-weight: 400; color: var(--muted); font-size: .76rem; }
 .wk-mood { margin: 2px 0 6px; font-size: .82rem; font-weight: 600; } .wk-course { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: .86rem; }
+
+/* 동네 비교 */
+.hood-cmp-add input { width: 100%; max-width: 320px; font: inherit; padding: 7px 10px; border-radius: 10px; border: 1px solid var(--line, #d0d7de); background: var(--card, transparent); color: inherit; }
+.tbl-scroll { overflow-x: auto; margin-top: 8px; }
+.hood-cmp-table { border-collapse: collapse; width: 100%; font-size: .9rem; min-width: 420px; }
+.hood-cmp-table th, .hood-cmp-table td { padding: 8px 8px; border-bottom: 1px solid var(--line, #e5e7eb); text-align: left; vertical-align: top; }
+.hood-cmp-table thead th { font-size: .86rem; white-space: nowrap; }
+.hood-cmp-table th[scope="row"] { font-weight: 600; white-space: nowrap; }
+.hood-cmp-table small { display: block; font-size: .74rem; color: var(--muted, #6b7280); font-weight: 400; }
+.hood-cmp-table td { font-variant-numeric: tabular-nums; }
+.hood-cmp-table td.best { background: color-mix(in srgb, #16a34a 14%, transparent); }
+.hood-cmp-table .chip.small { padding: 0 6px; font-size: .72rem; min-height: 0; }
+.hood-cmp-notes { margin: 10px 0 0; padding-left: 18px; font-size: .78rem; color: var(--muted, #6b7280); display: grid; gap: 3px; }
