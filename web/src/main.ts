@@ -39,7 +39,7 @@ const KR_CHIPS: { key: SectionKey | "all"; label: string }[] = [
 // ── 상태 ──────────────────────────────────────────────────
 const settings: Settings = loadSettings();
 let brief: Brief | null = null;
-type ChipKey = SectionKey | "all" | "hood" | "leisure";
+type ChipKey = SectionKey | "all" | "hood" | "leisure" | "car";
 type Chip = { key: ChipKey; label: string };
 const NZ_CHIPS: Chip[] = [
   { key: "all", label: "전체" },
@@ -55,6 +55,7 @@ const AKL_CHIPS: Chip[] = [
   { key: "hood", label: "📍 내 동네" },
   { key: "akl_property", label: "부동산" },
   { key: "akl_health", label: "의료" },
+  { key: "car", label: "🚗 자동차" },
   { key: "akl_education", label: "교육" },
 ];
 // 탭별로 선택한 카테고리 칩
@@ -594,7 +595,7 @@ function renderMain(): void {
     const chips = renderChips(tab.id);
     if (chips) main.append(chips);
     const sel = chipState[tab.id];
-    if (sel !== "hood" && sel !== "leisure") {
+    if (sel !== "hood" && sel !== "leisure" && sel !== "car") {
       const ov = overview((sel === "all" ? visibleSections(tab) : [sel as SectionKey]).filter((k) => brief!.sections[k]));
       if (ov) main.append(ov);
       const fs = followSection();
@@ -612,6 +613,16 @@ function renderMain(): void {
     }
     if (tab.id === "akl" && sel === "hood") {
       renderHood();
+      return;
+    }
+    if (tab.id === "akl" && sel === "car") {
+      const slot = h("div", {}, h("p", { class: "muted" }, "불러오는 중…"));
+      main.append(slot);
+      void Promise.all([import("./carmap"), loadGP()]).then(async ([m, gp]) => {
+        const data = await m.loadCar();
+        const homes = watch.suburbs.filter((x) => gp?.suburbs[x]).map((x) => ({ s: x, at: gp!.suburbs[x] as [number, number] }));
+        if (slot.isConnected) slot.replaceChildren(m.carSection(h, data, homes));
+      });
       return;
     }
     if (tab.id === "akl") {
@@ -869,7 +880,7 @@ const GUIDES: Partial<Record<SectionKey, Guide>> = {
 };
 
 function topicGuide(sel: ChipKey): HTMLElement | null {
-  const g = sel === "all" || sel === "hood" || sel === "leisure" ? undefined : GUIDES[sel];
+  const g = sel === "all" || sel === "hood" || sel === "leisure" || sel === "car" ? undefined : GUIDES[sel];
   if (!g) return null;
   const empty = !(brief?.sections[sel as SectionKey]?.items.length);
   return h("details", { class: "guide", ...(empty ? { open: "" } : {}) },

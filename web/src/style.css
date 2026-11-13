@@ -826,3 +826,14 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .hood-cmp-table td.best { background: color-mix(in srgb, #16a34a 14%, transparent); }
 .hood-cmp-table .chip.small { padding: 0 6px; font-size: .72rem; min-height: 0; }
 .hood-cmp-notes { margin: 10px 0 0; padding-left: 18px; font-size: .78rem; color: var(--muted, #6b7280); display: grid; gap: 3px; }
+
+/* 자동차 칩 */
+.car-root { display: grid; gap: 14px; }
+.car-kind { display: inline-block; font-size: .7rem; font-weight: 600; padding: 1px 6px; border-radius: 6px; margin-left: 4px; color: var(--kc, #2563eb); background: color-mix(in oklab, var(--kc, #2563eb) 12%, transparent); }
+.car-kind.ko { --kc: #111827; border: 1px solid currentColor; }
+.car-links { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 8px 0; font-size: .85rem; }
+.car-steps { margin: 8px 0; padding-left: 0; list-style: none; display: grid; gap: 6px; font-size: .9rem; line-height: 1.5; }
+.car-count { margin: 6px 0 2px; font-size: .8rem; }
+.car-ins h3 { font-size: .95rem; margin: 14px 0 4px; }
+.car-cover td, .car-cover th { text-align: center; }
+.car-cover th[scope="row"] { text-align: left; }

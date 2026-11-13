@@ -1,0 +1,31 @@
+name: Car services (repair shops, Korean-run shops)
+
+# 매달 1일 + 수동: OpenStreetMap 에서 오클랜드 정비소·판금·WoF·타이어·유리·토요타 서비스 위치를, hanin.nz 에서 한인 정비 목록(있으면)을 받아
+# web/public/data/car.json 으로 저장합니다. 자동 실행은 파일이 30일 안이면 건너뜁니다. AI 호출 없음·키 없음.
+on:
+  schedule:
+    - cron: "17 14 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  car:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -q httpx
+      - run: python scripts/car.py ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+      - name: Commit
+        run: |
+          git config user.name "daily-brief-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add web/public/data/car.json
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "data: car services (OSM + hanin.nz)"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done
