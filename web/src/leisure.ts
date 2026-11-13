@@ -32,6 +32,7 @@ export interface LeisureOpts {
   fx: number | null | undefined;
   link: (url: string, label: string) => HTMLElement;
   week?: WeekDay[]; // 오늘 브리핑의 7일 예보 (주말 코스 추천용)
+  compact?: boolean; // 브리프 안의 요약판: 누구와·주말 코스·오늘 날씨만 + '주말 나들이' 앱 링크
 }
 
 const KINDS: { key: Kind; label: string; icon: string; color: string; activity: Activity }[] = [
@@ -316,7 +317,10 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
   views.today.append(pickerBox, weekendBox, today, favBox);
   views.map.append(controls, settingsBox, h("div", { class: "leisure-mapbar" }, sizeBtn), stage, legend, cmpBox, listBox, missBox);
   views.member.append(golfBox, costBox);
-  root.append(h("section", { class: "hood-card lhead" }, h("h2", {}, "🏖️ 레저·운동 — 오늘 뭐 하지?"),
+  if (o.compact) root.append(h("section", { class: "hood-card lhead" }, h("h2", {}, "🏖️ 이번 주말 뭐 하지?"),
+    h("p", { class: "board-note" }, "주말 코스와 오늘 날씨만 보여 드려요. 지도·요금·회원권 비교·낚시 규칙은 '주말 나들이' 앱에 있어요."),
+    h("a", { class: "chip", href: "./leisure.html", style: "display:inline-block;margin-top:6px;text-decoration:none" }, "🗺️ 주말 나들이 전체 보기 →")), pickerBox, weekendBox, today);
+  else root.append(h("section", { class: "hood-card lhead" }, h("h2", {}, "🏖️ 레저·운동 — 오늘 뭐 하지?"),
     h("p", { class: "board-note" }, `시설 ${facilities.length}곳 · 요금 확인 ${facilities.filter((f) => f.fees.length || f.free).length}곳 · 운영 시간 확인 ${facilities.filter((f) => hoursOf(f) || f.details?.hours).length}곳. 요금은 공식 페이지에서 읽은 값과 확인일을, 운영 시간은 OpenStreetMap 등록 값(없으면 공식 페이지에 적힌 시간)을 씁니다. 가기 전에 공식 사이트로 한 번 더 확인하세요.`),
     viewBar), views.today, views.map, views.member, views.rules);
 
@@ -750,7 +754,7 @@ export async function leisureView(h: H, o: LeisureOpts): Promise<HTMLElement> {
       const items = mains.map((f, i) => {
         const near = d.mood === "wet" || !f.ll ? null : spots.map((sp) => ({ sp, d: km(f.ll!, sp.ll) })).filter((x) => (x.sp.t === "playground" || x.sp.t === "beach" || x.sp.t === "splash") && x.d <= 2.5).sort((a, b) => a.d - b.d)[0];
         const b = h("button", { type: "button", class: "leisure-name" }, `${kindInfo(f.kind).icon} ${f.name}`);
-        b.addEventListener("click", () => { showView("map"); select({ fac: f.id }); });
+        b.addEventListener("click", () => { if (o.compact) { location.href = "./leisure.html"; return; } showView("map"); select({ fac: f.id }); });
         const pb = priceBadge(f), dd = distF(f);
         return h("li", {}, h("b", {}, i === 0 ? "오전 " : "오후 "), b, h("small", { class: "muted" }, ` ${pb.text}${dd != null ? ` · ${dd.toFixed(1)}km` : ""}`),
           near ? h("span", {}, ` → ${SPOTS.find((x) => x.key === near.sp.t)!.icon} ${near.sp.n} `, h("small", { class: "muted" }, `(${near.d < 1 ? "걸어서" : "차로"} ${near.d.toFixed(1)}km · 무료)`)) : null);

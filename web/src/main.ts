@@ -896,7 +896,7 @@ async function renderLeisure(): Promise<void> {
   const [gp, mod] = await Promise.all([loadGP(), import("./leisure")]);
   if (settings.tab !== "leisure" || !holder.isConnected) return;
   const fx = (viewingLatest && live?.fx) || brief?.extras.nzd_krw;
-  const view = await mod.leisureView(h, { suburbs: watch.suburbs, gp, fx, link: extLink, week: brief?.extras.auckland_weather?.days });
+  const view = await mod.leisureView(h, { suburbs: watch.suburbs, gp, fx, link: extLink, week: brief?.extras.auckland_weather?.days, compact: true });
   if (settings.tab !== "leisure" || !holder.isConnected) return;
   holder.replaceChildren(view);
   holder.removeAttribute("aria-busy");
