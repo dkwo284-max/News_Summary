@@ -148,7 +148,7 @@ def fetch_hanin(client: httpx.Client, cache: dict) -> dict:
                           "maps": s.get("maps_url", ""), "note": s.get("doctors", ""), "ll": cache.get(key), "src": u})
         if shops:
             return {"status": "ok", "source": u, "shops": shops}
-    return {"status": "정비 페이지는 있으나 목록 형식을 읽지 못함", "source": pages[0], "shops": []}
+    return {"status": "정비 관련 글은 있지만 업체 목록 형식이 아님 — 원문에서 직접 확인", "source": pages[0], "shops": []}
 
 
 def fresh() -> bool:

@@ -128,7 +128,9 @@ function koreanSection(h: H, data: CarData, homes: { s: string; at: LL }[]): HTM
           s.note ? h("div", { class: "gp-doctors" }, s.note) : null, s.a ? h("div", { class: "muted" }, s.a) : null,
           h("span", { class: "gp-links" }, s.p ? h("a", { href: `tel:${s.p.replace(/[^\d+]/g, "")}` }, `📞 ${s.p}`) : null, safe(s.w) ? ext(h, s.w, "웹사이트 ↗") : null, safe(s.maps) ? ext(h, s.maps, "지도 ↗") : null))); })));
   } else {
-    sec.append(h("p", { class: "muted" }, `한인.nz 정비 목록: ${data.hanin.status}. 매달 다시 확인해 목록이 생기면 여기에 자동으로 나옵니다.`));
+    const src = data.hanin.source && data.hanin.source !== "https://hanin.nz/" ? data.hanin.source : "";
+    sec.append(h("p", { class: "muted" }, `한인.nz: ${data.hanin.status}. `, src ? ext(h, src, "한인.nz 정비 관련 글 ↗") : null,
+      " 매달 다시 확인해 업체 목록이 생기면 여기에 자동으로 나옵니다."));
   }
   const guess = data.shops.filter((s) => s.ko_guess);
   sec.append(h("p", {}, guess.length ? `지도 데이터에서 이름에 한글·Korea 가 들어간 곳 ${guess.length}곳 — 위 지도에서 '🇰🇷 한글·Korea 이름만'을 누르면 모아 볼 수 있어요(한인 운영 여부는 확인 필요).` : "지도 데이터에는 이름에 한글·Korea 가 들어간 정비소가 아직 없어요."));
