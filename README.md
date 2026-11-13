@@ -25,7 +25,7 @@
 ## 동작 방식
 
 ```
-cron-job.org 06:10 (NZ) → GitHub Actions  (보조: GitHub 예약 06:10 / 06:25 / 06:40)
+cron-job.org 06:00 (NZ) → GitHub Actions  (보조: GitHub 예약 06:05 / 06:20 / 06:35)
   └─ scripts/main.py
        ├─ 시각 확인: config.yaml 의 timezone 기준 06~07시대가 아니거나 오늘 파일이 이미 있으면 종료
        ├─ fetch.py      RSS 수집 (최근 24시간, 피드당 30건, 피드별 실패 격리, 대체 피드 자동 시도)
@@ -76,8 +76,8 @@ cron-job.org 06:10 (NZ) → GitHub Actions  (보조: GitHub 예약 06:10 / 06:25
 
 ## 실행 시각 / 타임존
 
-- 기본값은 **뉴질랜드 시간(`Pacific/Auckland`) 매일 아침 06:10**입니다. cron-job.org 가 06:10 에 실행을 요청하고, 생성에 5~15분 걸려 7시 전에 사이트가 갱신됩니다.
-- GitHub 자체 예약(06:10 / 06:25 / 06:40)은 보조입니다. 그날 브리핑이 없을 때만 생성하고, 이미 있으면 몇 초 만에 끝납니다. 06:00~07:59 사이에 시작된 실행만 생성해요.
+- 기본값은 **뉴질랜드 시간(`Pacific/Auckland`) 매일 아침 06:00**입니다. cron-job.org 가 06:00 에 실행을 요청하고, 생성에 5~15분 걸려 7시 전에 사이트가 갱신됩니다.
+- GitHub 자체 예약(06:05 / 06:20 / 06:35)은 보조입니다. 그날 브리핑이 없을 때만 생성하고, 이미 있으면 몇 초 만에 끝납니다. 06:00~07:59 사이에 시작된 실행만 생성해요.
 - 뉴질랜드 서머타임(9월 말~4월 초, UTC+13)과 표준시(UTC+12)는 자동으로 처리합니다(cron-job.org 는 타임존 설정으로, GitHub 예약은 17시·18시 UTC 를 모두 걸어서).
 - 시각을 바꾸려면 `config.yaml` 의 `run_hour`, cron-job.org 실행 시각, `daily.yml` 의 cron 을 함께 바꾸세요.
 
@@ -244,16 +244,16 @@ cron-job.org 06:10 (NZ) → GitHub Actions  (보조: GitHub 예약 06:10 / 06:25
   - 시민권: DIA *Application timeframes* ("within 6 months … 90% of applicants are granted citizenship")
   - 페이지 형식이 바뀌어 읽지 못하면 AI 가 본문에서 한 번 더 추출하고, 그래도 안 되면 이전 값을 "MM/DD 기준" 표시와 함께 보여줍니다. 항목·주소는 `config.yaml` 의 `processing_times` 에서 바꿉니다. **Actions → Check processing times** 로 지금 바로 점검할 수 있어요(결과는 `processing-check` 브랜치).
 
-## 매일 06:10 정확히 실행하기 (cron-job.org)
+## 매일 06:00 정확히 실행하기 (cron-job.org)
 
-GitHub 예약 실행(schedule)은 부하가 크면 누락될 수 있어서, 외부 무료 예약 서비스가 매일 06:10(NZ)에 실행 요청을 보내게 합니다. GitHub 예약은 보조로 그대로 둡니다. 이미 그날 브리핑이 있으면 실행은 몇 초 만에 끝나므로 둘 다 돌아도 문제없어요.
+GitHub 예약 실행(schedule)은 부하가 크면 누락될 수 있어서, 외부 무료 예약 서비스가 매일 06:00(NZ)에 실행 요청을 보내게 합니다. GitHub 예약은 보조로 그대로 둡니다. 이미 그날 브리핑이 있으면 실행은 몇 초 만에 끝나므로 둘 다 돌아도 문제없어요.
 
 1. **GitHub 토큰**: Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token
    - Repository access: *Only select repositories* → `News_Summary`
    - Repository permissions → **Actions: Read and write** (나머지는 그대로)
 2. **cron-job.org** → Create cronjob
    - URL: `https://api.github.com/repos/dkwo284-max/News_Summary/actions/workflows/daily.yml/dispatches`
-   - 실행 시각: 매일 06:10, 타임존 `Pacific/Auckland`
+   - 실행 시각: 매일 06:00, 타임존 `Pacific/Auckland`
    - Advanced → Request method `POST`, 헤더 `Accept: application/vnd.github+json`, `Authorization: Bearer <토큰>`, `X-GitHub-Api-Version: 2022-11-28`, `Content-Type: application/json`
    - Request body: `{"ref":"main","inputs":{"force":"false","processing_only":"false"}}`
    - Test run 결과가 **204** 면 성공 (Actions 탭에 Daily Brief 실행이 생김)

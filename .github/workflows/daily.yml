@@ -2,18 +2,18 @@ name: Daily Brief
 
 on:
   schedule:
-    # 주 실행은 cron-job.org 가 06:10(NZ)에 보내는 workflow_dispatch. 아래는 GitHub 예약(보조, 가끔 누락됨).
-    # 뉴질랜드 시간 06:10 / 06:25 / 06:40 (cron 은 UTC 기준)
-    #   서머타임 NZDT(UTC+13, 9월 말~4월 초): 17:10/17:25/17:40 UTC
-    #   표준시   NZST(UTC+12, 4월 초~9월 말): 18:10/18:25/18:40 UTC
+    # 주 실행은 cron-job.org 가 06:00(NZ)에 보내는 workflow_dispatch. 아래는 GitHub 예약(보조, 가끔 누락됨).
+    # 뉴질랜드 시간 06:05 / 06:20 / 06:35 (cron 은 UTC 기준)
+    #   서머타임 NZDT(UTC+13, 9월 말~4월 초): 17:05/17:20/17:35 UTC
+    #   표준시   NZST(UTC+12, 4월 초~9월 말): 18:05/18:20/18:35 UTC
     # 두 시간대를 모두 걸어두고, scripts/main.py 가 현지 06~07시대이고 오늘 브리핑이 없을 때만 생성한다.
-    - cron: "10,25,40 17,18 * * *"
+    - cron: "5,20,35 17,18 * * *"
     # AI 실패 자동 복구: 아침 브리핑이 Gemini 오류로 원문·휴리스틱으로 나갔으면(meta.degraded) 다시 생성 (하루 최대 2번, AI 를 쓰는 건 실패한 날만)
     #   NZ 서머타임 기준 10:10 / 14:10 (표준시에는 09:10 / 13:10)
     - cron: "10 21 * * *"
     - cron: "10 1 * * *"
-    # 아침 안에 복구: 실패한 단계만 다시 (06:30 / 06:50 / 07:15 NZ — 서머타임 기준, 표준시에는 한 시간 뒤 묶음이 해당). 브리핑이 멀쩡하면 바로 끝난다(AI 0회)
-    - cron: "30,50 17,18 * * *"
+    # 아침 안에 복구: 실패한 단계만 다시 (06:25 / 06:45 / 07:15 NZ — 서머타임 기준, 표준시에는 한 시간 뒤 묶음이 해당). 브리핑이 멀쩡하면 바로 끝난다(AI 0회)
+    - cron: "25,45 17,18 * * *"
     - cron: "15 18,19 * * *"
   workflow_dispatch:
     inputs:
@@ -81,7 +81,7 @@ jobs:
           SKIP: ${{ github.event_name == 'workflow_dispatch' && !inputs.overwrite && '--skip-existing' || '' }}  # 수동·외부 호출이 겹쳐도 하루 한 번만 AI 소모
           CAP: ${{ github.event_name == 'workflow_dispatch' && inputs.ignore_cap && '--ignore-cap' || '' }}
           REPAIR: ${{ github.event_name == 'workflow_dispatch' && inputs.repair && '--retry-degraded' || '' }}
-          RETRY: ${{ (github.event.schedule == '10 21 * * *' || github.event.schedule == '10 1 * * *' || github.event.schedule == '30,50 17,18 * * *' || github.event.schedule == '15 18,19 * * *') && '--retry-degraded' || '' }}
+          RETRY: ${{ (github.event.schedule == '10 21 * * *' || github.event.schedule == '10 1 * * *' || github.event.schedule == '25,45 17,18 * * *' || github.event.schedule == '15 18,19 * * *') && '--retry-degraded' || '' }}
         run: python scripts/main.py $FORCE $ONLY $SKIP $CAP $RETRY $REPAIR
 
       - name: Commit data
