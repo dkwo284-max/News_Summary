@@ -1707,7 +1707,7 @@
   ],
   "degraded": true,
   "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_health, akl_education, nz_immigration",
-  "retries": 0,
+  "retries": 1,
   "quality": {
    "items": 62,
    "bad": 58,
@@ -1744,6 +1744,11 @@
     "7c924a29482e",
     "acda32082529"
    ]
+  },
+  "repaired": {
+   "summary": [],
+   "insight": false,
+   "requests": 0
   }
  }
 }
