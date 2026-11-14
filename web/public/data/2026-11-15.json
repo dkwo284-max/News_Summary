@@ -1,6 +1,6 @@
 {
  "date": "2026-11-15",
- "generated_at": "2026-11-15T06:18:50+13:00",
+ "generated_at": "2026-11-15T06:26:39+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -557,6 +557,12 @@
      "figure": {
       "v": "1990년대",
       "l": "시스템 기반 기술"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 생활 중 긴급 상황 시 사용하는 111 시스템의 안정성 논란이므로 참고만 하면 됩니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -596,6 +602,14 @@
      "figure": {
       "v": "5명",
       "l": "사고 인원"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 인근 해변에서 발생한 물놀이 사고이므로 주말 야외 활동 시 안전에 유의해야 합니다.",
+      "actions": [
+       "해변 방문 시 안전 수칙 및 기상 상태를 미리 확인하세요."
+      ],
+      "watch": "해당 해변 수색 및 안전 경보 현황"
      }
     },
     {
@@ -623,7 +637,13 @@
      ],
      "original_title": "Microsoft ‘deeply sorry’ about outage as services start coming back online",
      "published_at": "2026-11-14T01:08+00:00",
-     "why_it_matters": "졸업을 앞둔 유학생의 취업 및 행정 업무에 영향을 줄 수 있는 글로벌 IT 인프라 상황을 점검하게 합니다."
+     "why_it_matters": "졸업을 앞둔 유학생의 취업 및 행정 업무에 영향을 줄 수 있는 글로벌 IT 인프라 상황을 점검하게 합니다.",
+     "impact": {
+      "level": "low",
+      "reason": "글로벌 IT 장애로 인한 일시적인 업무 지연 사항으로 현재는 복구 중이어서 영향이 적습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "b4917a4cd19c",
@@ -650,6 +670,12 @@
      "figure": {
       "v": "400mm",
       "l": "예상 강수량"
+     },
+     "impact": {
+      "level": "none",
+      "reason": "남섬 서해안 지역의 폭우 경보는 오클랜드에 거주하며 이동하지 않는 독자 가족에게 직접 영향이 없습니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -673,7 +699,15 @@
      ],
      "original_title": "Armed gang member stole Range Rover with owner's child inside",
      "published_at": "2026-11-14T02:49+00:00",
-     "why_it_matters": "오클랜드 생활권 내 심각한 범죄 발생 소식으로 일상적인 안전과 치안 수준에 주의를 기울여야 합니다."
+     "why_it_matters": "오클랜드 생활권 내 심각한 범죄 발생 소식으로 일상적인 안전과 치안 수준에 주의를 기울여야 합니다.",
+     "impact": {
+      "level": "high",
+      "reason": "오클랜드 지역에서 어린이 탑승 차량 대상 무장 강도 사건이 발생해 가족 안전에 주의가 필요합니다.",
+      "actions": [
+       "차량 승하차 시 문을 잠그고 주변 치안 상황을 수시로 확인하세요."
+      ],
+      "watch": "경찰의 용의자 검거 및 오클랜드 도심 치안 강화 대책"
+     }
     }
    ]
   },
@@ -731,7 +765,13 @@
       "v": "4만 명",
       "l": "영향 학생 수"
      },
-     "radar": 6
+     "radar": 6,
+     "impact": {
+      "level": "medium",
+      "reason": "초등 입학 예정 자녀를 둔 가족으로서 현지 학교 시스템과 시험 운영 혼선 소식을 미리 파악해 두는 것이 좋습니다.",
+      "actions": [],
+      "watch": "NZQA의 NCEA 온라인 시험 시스템 안정화 대책 발표"
+     }
     },
     {
      "id": "e65fff076f98",
@@ -754,7 +794,13 @@
      ],
      "original_title": "School for children with complex needs has to close despite families' pleas",
      "published_at": "2026-11-12T04:01+00:00",
-     "why_it_matters": "뉴질랜드 사회복지 및 특수교육 시스템의 현주소를 보여주는 사례입니다."
+     "why_it_matters": "뉴질랜드 사회복지 및 특수교육 시스템의 현주소를 보여주는 사례입니다.",
+     "impact": {
+      "level": "low",
+      "reason": "특수학교 폐교 소식은 일반 학교 입학을 앞둔 자녀를 둔 독자에게 직접적인 영향은 적습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "152209f8ee2a",
@@ -778,7 +824,13 @@
      "original_title": "Classroom adjustments for ADHD may not be effective – Expert Reaction",
      "published_at": "2026-11-13T16:00+00:00",
      "why_it_matters": "현지 학교 시스템의 특수 교육 및 학생 지원 방식을 이해하는 데 참고가 됩니다.",
-     "radar": 4
+     "radar": 4,
+     "impact": {
+      "level": "low",
+      "reason": "학교 내 ADHD 지원 제도에 대한 전문가 진단으로 현지 교육 환경을 이해하는 참고 자료가 됩니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "2cdeb8ab30ef",
@@ -801,7 +853,13 @@
      ],
      "original_title": "Waikato school seeks Government intervention after highly critical review",
      "published_at": "2026-11-13T02:31+00:00",
-     "why_it_matters": "뉴질랜드 공교육 기관의 품질 관리 및 정부 감독 체계를 보여줍니다."
+     "why_it_matters": "뉴질랜드 공교육 기관의 품질 관리 및 정부 감독 체계를 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "와이카토 지역 학교의 정부 개입 요청 건으로 오클랜드 거주 독자에게는 간접적인 교육 행정 참고 사항입니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "fbf7565193d1",
@@ -824,7 +882,13 @@
      ],
      "original_title": "Second Rotorua primary school gets ministry-appointed manager",
      "published_at": "2026-11-12T07:14+00:00",
-     "why_it_matters": "지역 교육 행정의 부실 대응 사례를 통해 공교육의 변화 방향을 엿볼 수 있습니다."
+     "why_it_matters": "지역 교육 행정의 부실 대응 사례를 통해 공교육의 변화 방향을 엿볼 수 있습니다.",
+     "impact": {
+      "level": "low",
+      "reason": "로토루아 지역 초등학교 관리자 파견 건으로 오클랜드 공교육 상황과는 거리가 있습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "52d941f7bc3d",
@@ -851,6 +915,12 @@
      "figure": {
       "v": "4시간",
       "l": "봉쇄 지속 시간"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "타 지역 학교의 봉쇄 조치 소식으로 오클랜드 학교 안전과 직접 연결되지는 않습니다.",
+      "actions": [],
+      "watch": ""
      }
     }
    ]
@@ -888,6 +958,14 @@
      "figure": {
       "v": "23.5%",
       "l": "연간 주택 판매 감소율"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "주택 시장 침체와 거래량 감소는 향후 오클랜드 아파트 렌트 및 주거비 안정화에 간접적인 영향을 줍니다.",
+      "actions": [
+       "렌트 계약 갱신 시 주변 시세를 비교해 임대료 인상을 협의하세요."
+      ],
+      "watch": "향후 몇 달간 오클랜드 렌트비 및 주택 가격 추이"
      }
     },
     {
@@ -911,7 +989,13 @@
      ],
      "original_title": "NZ property market slams on brakes in October",
      "published_at": "2026-11-12T18:39+00:00",
-     "why_it_matters": "부동산 경기 변동은 전반적인 거시경제 지표와 고용 시장에도 영향을 미칩니다."
+     "why_it_matters": "부동산 경기 변동은 전반적인 거시경제 지표와 고용 시장에도 영향을 미칩니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "부동산 시장 제동과 거래 둔화는 간접적으로 거시경제 및 고용 환경에 영향을 미칩니다.",
+      "actions": [],
+      "watch": "기준금리 및 부동산 시장 지표 변동"
+     }
     },
     {
      "id": "b91336fa8d3d",
@@ -938,7 +1022,13 @@
      ],
      "original_title": "NZ 'deeply disappointed' at US advancing investigation into lamb imports",
      "published_at": "2026-11-14T08:03+00:00",
-     "why_it_matters": "국가 경제의 큰 축인 수출 산업의 대외 불확실성이 노동시장과 경제 전반에 미칠 파장을 주시해야 합니다."
+     "why_it_matters": "국가 경제의 큰 축인 수출 산업의 대외 불확실성이 노동시장과 경제 전반에 미칠 파장을 주시해야 합니다.",
+     "impact": {
+      "level": "low",
+      "reason": "대미 양고기 수출 조사 소식은 국가 경제 전반에 영향을 미치나 유학생의 취업 비자 준비에 직접 영향은 없습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "1200115962bc",
@@ -965,7 +1055,16 @@
      ],
      "original_title": "Slugs, mould & cold: Family living in garage awarded thousands in compensation",
      "published_at": "2026-11-12T23:47+00:00",
-     "why_it_matters": "오클랜드에서 방을 구할 때 렌트 주택의 주거 품질과 임대차 권리를 꼼꼼히 확인해야 합니다."
+     "why_it_matters": "오클랜드에서 방을 구할 때 렌트 주택의 주거 품질과 임대차 권리를 꼼꼼히 확인해야 합니다.",
+     "impact": {
+      "level": "high",
+      "reason": "오클랜드 렌트 주택의 주거 불량 문제와 배상 판정 소식은 현재 아파트에 거주하는 독자 가족의 주거 권리 점검에 직결됩니다.",
+      "actions": [
+       "현재 거주 중인 렌트 하우스에 곰팡이 등 결함이 없는지 점검하세요.",
+       "주거 문제 발생 시 Tenancy Services 공식 규정을 확인하세요."
+      ],
+      "watch": "임대차 분쟁 조정 위원회의 주거 기준 강화 조치"
+     }
     },
     {
      "id": "d7e4fe794a19",
@@ -992,6 +1091,12 @@
      "figure": {
       "v": "50만 달러",
       "l": "연간 추가 재산세"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "웰링턴 시의회의 재산세 개편 추진 소식으로 오클랜드 거주 독자 가족의 생활비에 직접 영향은 없습니다.",
+      "actions": [],
+      "watch": ""
      }
     }
    ]
@@ -1025,6 +1130,12 @@
      "figure": {
       "v": "29%",
       "l": "국민당 득표율"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "총선 후 정치 리더십과 연정 구상은 향후 이민 및 취업비자 정책 방향에 간접적인 영향을 줍니다.",
+      "actions": [],
+      "watch": "연립정부 공식 출범 및 이민 관련 공약 실현 일정"
      }
     },
     {
@@ -1052,6 +1163,14 @@
      "figure": {
       "v": "19%",
       "l": "행동당 정부 내 비중"
+     },
+     "impact": {
+      "level": "high",
+      "reason": "연립정부 협상 과정에서 이민 정책과 취업비자 규정이 논의되므로 졸업 후 비자를 준비하는 독자에게 매우 중요합니다.",
+      "actions": [
+       "새 정부의 이민·취업비자 관련 연정 합의문 내용을 확인하세요."
+      ],
+      "watch": "새 정부 구성 완료 및 이민 정책 소관 장관 발표"
      }
     },
     {
@@ -1079,6 +1198,12 @@
      "figure": {
       "v": "3십 년",
       "l": "의정 활동 기간"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "국민당 중진 의원들의 퇴임 소식으로 정치권 인맥 변화를 가늠하는 참고 사항입니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -1106,22 +1231,31 @@
      "figure": {
       "v": "40만 건",
       "l": "미집계 특수 투표"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "선거 집계 방식 개선 제안으로 행정 시스템에 대한 논의일 뿐 독자의 영주권 준비에는 영향이 없습니다.",
+      "actions": [],
+      "watch": ""
      }
     }
    ]
   },
   "akl_safety": {
    "label": "치안",
-   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드 지역에서 마약 제조시설 적발, 쇼핑몰 화재, 폭행 사건 등이 이어졌습니다.",
    "items": [
     {
      "id": "554aa7f7f29b",
-     "title_ko": "Police uncover meth lab, firearms and ammunition in north Auckland drug bust",
+     "title_ko": "오클랜드 북부 마약 단속에서 메스 암페타민 실험실과 총기 적발",
      "summary_ko": [
-      "Police uncover meth lab, firearms and ammunition in north Auckland drug bust"
+      "지역 미공개 북부 오클랜드 지역에서 경찰이 대규모 마약 단속을 벌였습니다.",
+      "수색 과정에서 메스 암페타민 제조 실험실과 함께 여러 자루의 총기와 탄약이 발견되었습니다.",
+      "이번 단속은 지역 사회의 불법 약물 유통과 조직 범죄 차단에 기여할 것으로 보입니다."
      ],
      "tags": [
-      "치안"
+      "치안",
+      "사건사고"
      ],
      "importance": 7,
      "sources": [
@@ -1132,15 +1266,36 @@
      ],
      "original_title": "Police uncover meth lab, firearms and ammunition in north Auckland drug bust",
      "published_at": "2026-11-12T20:31+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 거주 지역의 치안 안전을 점검하고 범죄 동향을 파악하는 데 참고할 소식입니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 북부 지역의 마약 제조실 및 총기 적발 사건으로 거주 지역 치안 동향을 파악하는 데 유용합니다.",
+      "actions": [
+       "경찰의 범죄 예방 및 치안 관련 지역 뉴스를 확인하세요."
+      ],
+      "watch": "오클랜드 경찰의 조직범죄 소탕 및 치안 강화 브리핑"
+     },
+     "incident": {
+      "severity": "1",
+      "crime": "마약 제조실 및 총기 적발",
+      "location": "",
+      "suburb": "",
+      "region": "north",
+      "precision": "region"
+     }
     },
     {
      "id": "8a7eef2b7af5",
-     "title_ko": "Auckland man who fractured baby’s skull and caused bilateral haemorrhage jailed",
+     "title_ko": "영유아 두개골 골절시킨 오클랜드 남성 징역형 선고",
      "summary_ko": [
-      "Auckland man who fractured baby’s skull and caused bilateral haemorrhage jailed"
+      "지역 미공개 오클랜드에서 아기의 두개골을 골절시키고 출혈을 일으킨 남성이 실형을 선고받았습니다.",
+      "법원은 피고인의 아동 학대 범죄에 대해 엄중한 책임을 물어 징역형을 내렸습니다.",
+      "이번 판결은 아동 대상 범죄에 대한 사법부의 엄정한 처벌 기조를 보여줍니다."
      ],
-     "tags": [],
+     "tags": [
+      "치안",
+      "사건사고"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -1150,15 +1305,34 @@
      ],
      "original_title": "Auckland man who fractured baby’s skull and caused bilateral haemorrhage jailed",
      "published_at": "2026-11-13T05:06+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 지역의 심각한 아동 학대 범죄와 법원의 처벌 결과를 전하는 사건입니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드에서 발생한 영유아 대상 중대 범죄 판정 소식으로 지역 사회 아동 안전에 경각심을 줍니다.",
+      "actions": [],
+      "watch": ""
+     },
+     "incident": {
+      "severity": "1",
+      "crime": "아동 학대 중상해",
+      "location": "",
+      "suburb": "",
+      "region": "",
+      "precision": "none"
+     }
     },
     {
      "id": "9ce50a4188b3",
-     "title_ko": "West Auckland mall evacuated after battery fire",
+     "title_ko": "웨스트 오클랜드 쇼핑몰서 배터리 화재로 대피 소동",
      "summary_ko": [
-      "Fire and Emergency says it was called to the NorthWest Shopping Centre about 11…"
+      "웨스트 오클랜드의 노스웨스트 쇼핑센터 내 상점에서 리튬 배터리 화재가 발생했습니다.",
+      "소방당국은 오전 11시 30분경 신고를 받고 출동해 6개 소방대를 투입하여 화재를 진압했습니다.",
+      "연기로 인해 건물 내 사람들이 대피했으며 현재 환기 작업과 안전 조치가 진행 중입니다."
      ],
-     "tags": [],
+     "tags": [
+      "치안",
+      "사건사고"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1176,16 +1350,39 @@
      ],
      "original_title": "West Auckland mall evacuated after battery fire",
      "published_at": "2026-11-14T05:57+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 서부 쇼핑몰 방문 시 리튬 배터리 관련 안전사고와 대피 상황을 유의해야 합니다.",
+     "figure": {
+      "v": "6개",
+      "l": "출동 소방대"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 서부 쇼핑몰 리튬 배터리 화재 및 대피 소동으로 주말 쇼핑몰 방문 시 안전에 유의해야 합니다.",
+      "actions": [
+       "대형 쇼핑몰 방문 시 비상구 위치를 미리 확인하세요."
+      ],
+      "watch": "소방당국의 리튬 배터리 안전 점검 결과"
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "리튬 배터리 화재 대피 소동",
+      "location": "NorthWest Shopping Centre, West Auckland",
+      "suburb": "Westgate",
+      "region": "west",
+      "precision": "exact"
+     }
     },
     {
      "id": "e3042353a075",
-     "title_ko": "Police still seeking key witness in Myers Park attack",
+     "title_ko": "경찰, 마이어스 파크 폭행 사건 핵심 목격자 공개 수배",
      "summary_ko": [
-      "Police still seeking key witness in Myers Park attack"
+      "오클랜드 마이어스 파크에서 발생한 폭행 사건과 관련해 경찰이 목격자를 찾고 있습니다.",
+      "사건 해결의 실종을 쥐고 있는 핵심 증인의 제보를 확보하기 위한 수사가 진행 중입니다.",
+      "경찰의 지속적인 수사를 통해 사건의 실체적 진실이 밝혀질 것으로 기대됩니다."
      ],
      "tags": [
-      "치안"
+      "치안",
+      "사건사고"
      ],
      "importance": 6,
      "sources": [
@@ -1196,22 +1393,87 @@
      ],
      "original_title": "Police still seeking key witness in Myers Park attack",
      "published_at": "2026-11-13T00:35+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 도심 공원 주변의 치안 상황과 경찰 수사 진행 상황을 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 도심 공원에서 발생한 폭행 사건의 목격자 수배로 도심 이동 시 치안에 주의해야 합니다.",
+      "actions": [
+       "야간이나 인적이 드문 도심 공원 방문을 자제하세요."
+      ],
+      "watch": "경찰의 마이어스 파크 사건 수사 및 용의자 검거 소식"
+     },
+     "incident": {
+      "severity": "2",
+      "crime": "폭행 사건 목격자 수배",
+      "location": "Myers Park, Auckland Central",
+      "suburb": "Auckland Central",
+      "region": "central",
+      "precision": "exact"
+     },
+     "timeline": [
+      {
+       "date": "2026-10-26",
+       "title_ko": "오클랜드 도심 마이어스 공원서 흉기 피습… 아동 등 2명 중상",
+       "url": "https://www.1news.co.nz/2026/10/25/person-critical-after-assault-near-playground-at-aucklands-myers-park/",
+       "id": "343ee42eef35"
+      },
+      {
+       "date": "2026-10-27",
+       "title_ko": "오클랜드 도심 공원 어린이 피습 사건, 20대 남성 살인미수 기소",
+       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQQVpBVk03NGRza19pTHRGTERrN2xQbHdXVXFUaXItdVBzaHlUc29jbmNoanNkRGlWeFZRTEJxcFVFTzNIY3NtUnYzWndsYVkxeFF1N2RpdnU1UHhZMWlyNFZuTWJ2OGVWMVNJdjd0VHBYQkprU3I2VTlNNVlxZ3lOOTE4NUNUSTFkWEZydXJGd3BXZVk2YnhGbVE2WHlGN0pfbWV3?oc=5",
+       "id": "6da5f2660529"
+      },
+      {
+       "date": "2026-10-29",
+       "title_ko": "오클랜드 마이어스 파크 어린이 피습 사건 후 경찰 순찰 강화",
+       "url": "https://www.nzherald.co.nz/nz/auckland/police-stepping-up-foot-patrols-after-alleged-attack-on-child-in-aucklands-myers-park/UHBLTHLO55CDHMUWMRZVJKQHVM/",
+       "id": "37973b45dad1"
+      },
+      {
+       "date": "2026-11-11",
+       "title_ko": "마이어스 파크 놀이터 피습 피해 아동 가족, 심리적 고통 호소",
+       "url": "https://www.rnz.co.nz/news/crime-and-justice/2532962/family-struggling-with-aftermath-of-myers-park-playground-attack-father-says",
+       "id": "fe1cfd4435a0"
+      },
+      {
+       "date": "2026-11-12",
+       "title_ko": "마이어스 파크 놀이터 피습 피해 여아, 병원에서 긍정적 소식 전해",
+       "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxNTy1OcWJfNEJuT0FQOVNzRWZSazRQZ3FvWDQwLU1QaGJXYURxMkZ6Q1hHcXZ3THZadUVpMnJhZTdQdXlwbU05YU5JbkZxbHZ6dWlPbjhGWlRQdHFpdWFyYTFEckFJVGo0bjdTdkZGMzhtTFNrX3UzWkJRYnBLdVpReWxSOUdvdkU5OVlXVWJDeGFmYlFaR2JjSWJRamgxbVl6LVpiQlFmN0w1UldZbnhUbXkxVEsyR2duM21tS2NuZjBZczduVmd6ZF9wQ1I3SFBuYnNvb214cUhHX1BwOURUSC1jZS1XM1h0TzRqamtKZkg?oc=5",
+       "id": "f17d1cc31a1d"
+      },
+      {
+       "date": "2026-11-13",
+       "title_ko": "마이어스 파크 어린이 흉기 피습 사건: 경찰, 핵심 목격자 공개 수배",
+       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNU1VIdFhUXzY3ZHlIeUZZUmFMQU9IVnZIajk5cFg3bE1BdUhwUktBTE1vRFFydFZjSFloN29EdUM4em5PTDBXaWJUQ2RPZ2hlU0NwTlcza0VieUJ6VXJkYnF2NGFiUkdJNnV0aDBpRzBWRGJCQkt5LUtzb0hTRWxHSi16ek9OMG41T2c2OTdYNmdGYVl4ZHpsTTZTcVNCTmRBSVpobGJZcUtKVzA4?oc=5",
+       "id": "02aa0b81f78c"
+      },
+      {
+       "date": "2026-11-14",
+       "title_ko": "오클랜드 마이어스 파크 아동 피습 사건 핵심 목격자 수배",
+       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNaFg1UHRJN3FOVUFMYVRDNzE4eTVWRW9qMTZSYVhDSFZ6bEdBcGJldjBnMVZPbi1DS3hFWGsxblBIaHNmTmR2NHliU3ZFRlE3aTlZZTVGQjV0NkN2cGJHY1FHSFlFc0xlVW1UUTY1NTlPZDliSGR2YXNLMGpFX2pVVEpHeXRjUzk2aFYzZ2ZSVk04SUIzOHZMelNWdFRFcGVzVnE5RG1n?oc=5",
+       "id": "5697f6880f77"
+      }
+     ],
+     "changed": "핵심 목격자 공개 수배가 새롭게 진행됨."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: client ReadTimeout"
+   ]
   },
   "akl_life": {
    "label": "생활",
-   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드에서 교통 혼잡세 논의와 꿀벌 군체 증가 등 다양한 생활 이슈가 전해졌습니다.",
    "items": [
     {
      "id": "e6b7e1b78815",
-     "title_ko": "Auckland congestion charge consultation has no 'no' option",
+     "title_ko": "오클랜드 혼잡통행료 의견 수렴에 '반대' 선택지 없어 논란",
      "summary_ko": [
-      "Auckland congestion charge consultation has no 'no' option"
+      "오클랜드 교통 혼잡통행료 도입을 위한 협의 과정에 반대 의견을 고를 항목이 빠져 있습니다.",
+      "이번 정책 추진 방식에 대해 시민들과 관련 업계의 다양한 의견이 제기되고 있습니다.",
+      "향후 교통 정책 결정 과정에서 시민 참여와 의견 수렴 방식에 영향을 줄 수 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "교통",
+      "경제"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -1221,15 +1483,37 @@
      ],
      "original_title": "Auckland congestion charge consultation has no 'no' option",
      "published_at": "2026-11-12T20:45+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 이동 시 추가적인 교통 비용 부담과 직결되는 혼잡통행료 정책 논의입니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 혼잡통행료 도입 논란은 향후 차량 이용 시 추가 교통 비용 부담으로 이어질 수 있습니다.",
+      "actions": [
+       "오클랜드시의회의 교통 정책 의견 수렴 공고를 확인하세요."
+      ],
+      "watch": "혼잡통행료 의견 수렴 결과 및 최종 도입 방안 발표"
+     },
+     "timeline": [
+      {
+       "date": "2026-11-11",
+       "title_ko": "오클랜드 혼잡 통행료 도입 방안에 대한 시민 의견 수렴 개시",
+       "url": "https://www.nzherald.co.nz/nz/time-of-use-charging-in-auckland-feedback-opens-on-city-fringe-and-motorway-plans/TD2IXMBRD5FJBIQ2MGRSRRLV6U/",
+       "id": "f1d494b1019e"
+      }
+     ],
+     "changed": "의견 수렴 양식에 반대 선택지가 누락되어 논란이 가중됨."
     },
     {
      "id": "5df8178d9864",
-     "title_ko": "US billionaire's $300m superyacht spotted in Auckland",
+     "title_ko": "미국 억만장자의 3억 달러 초호화 요트 오클랜드 항구 입항",
      "summary_ko": [
-      "Described as a 'floating palace', the award-winning luxury vessel arrived this…"
+      "수상 경력이 있는 미국 억만장자의 3억 달러짜리 초호화 슈퍼요트가 오클랜드에 도착했습니다.",
+      "떠다니는 궁전으로 불리는 이 대형 선박은 항구에 정박해 큰 주목을 받고 있습니다.",
+      "오클랜드를 찾는 세계적인 고가 자산과 관광 관련 소식으로 지역 경제에 이목을 끕니다."
      ],
-     "tags": [],
+     "tags": [
+      "경제",
+      "사회"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1243,15 +1527,30 @@
      ],
      "original_title": "US billionaire's $300m superyacht spotted in Auckland",
      "published_at": "2026-11-14T08:04+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 항구에 정박한 초대형 선박 소식으로 지역 내 이색적인 볼거리를 전합니다.",
+     "figure": {
+      "v": "3억 달러",
+      "l": "슈퍼요트 가치"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "초호화 요트의 오클랜드 항구 입항 소식으로 가벼운 지역 생활 정보에 해당합니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "01506b29e187",
-     "title_ko": "Bee swarms double in Auckland after mild winter",
+     "title_ko": "온화한 겨울 영향으로 오클랜드 꿀벌 군체 두 배로 급증",
      "summary_ko": [
-      "Beekeepers are fielding 10 calls for help a day."
+      "오클랜드에서 평년보다 온화한 겨울 날씨 덕분에 꿀벌 군체 현상이 두 배로 늘어났습니다.",
+      "양봉가들은 하루 최대 10건의 지원 요청을 받고 있으며 벌떼가 주택가에도 나타나고 있습니다.",
+      "전문가들은 이것이 자연스러운 번식 과정이지만 봄과 여름철까지 이어질 수 있다고 경고합니다."
      ],
-     "tags": [],
+     "tags": [
+      "날씨",
+      "사회"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1261,15 +1560,32 @@
      ],
      "original_title": "Bee swarms double in Auckland after mild winter",
      "published_at": "2026-11-14T05:33+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 주택가나 야외 활동 시 늘어난 꿀벌 떼에 유의해야 함을 보여줍니다.",
+     "figure": {
+      "v": "10건",
+      "l": "일일 양봉 지원"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "온화한 겨울로 오클랜드 주택가에 벌떼가 급증했으므로 야외 활동이나 주거지 주변 관리 시 주의가 필요합니다.",
+      "actions": [
+       "집 주변 정원에 벌집이 생기지 않았는지 점검하세요."
+      ],
+      "watch": "봄·여름철 양봉가의 벌떼 구조 요청 동향"
+     }
     },
     {
      "id": "017e204f0490",
-     "title_ko": "Watch: Hundreds spot orcas passing close to swimmers at popular Auckland beach",
+     "title_ko": "오클랜드 인기 해변 수영객 근처에 나타난 범고래 무리 포착",
      "summary_ko": [
-      "Watch: Hundreds spot orcas passing close to swimmers at popular Auckland beach"
+      "오클랜드의 한 인기 해변 근처에서 수백 명의 사람들이 수영객 가까이 접근한 범고래를 목격했습니다.",
+      "야생 범고래 무리가 해변가 얕은 곳까지 헤엄쳐 들어와 장관을 연출했습니다.",
+      "시민들은 가까운 거리에서 해양 포유류를 관찰하며 놀라움과 관심을 나타냈습니다."
      ],
-     "tags": [],
+     "tags": [
+      "사회",
+      "날씨"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1279,15 +1595,26 @@
      ],
      "original_title": "Watch: Hundreds spot orcas passing close to swimmers at popular Auckland beach",
      "published_at": "2026-11-14T03:28+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 해변의 자연환경과 야생동물 출현 소식을 가볍게 전합니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 해변 근처 범고래 출현 소식으로 가벼운 지역 자연 소식입니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "4a9248835404",
-     "title_ko": "Traffic delays warning after serious crash near Auckland Airport",
+     "title_ko": "오클랜드 공항 인근 심각한 교통사고로 지연 경고",
      "summary_ko": [
-      "Traffic delays warning after serious crash near Auckland Airport"
+      "오클랜드 공항 인근 도로에서 심각한 교통사고가 발생해 차량 통행에 차질이 빚어졌습니다.",
+      "당국은 사고 수습과 현장 조치로 인해 일대 교통 정체와 지연이 발생할 수 있다고 경고했습니다.",
+      "공항을 방문하는 여행객과 인근 운전자들의 주의와 우회 경로 확인이 요구됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "교통",
+      "사건사고"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1297,10 +1624,34 @@
      ],
      "original_title": "Traffic delays warning after serious crash near Auckland Airport",
      "published_at": "2026-11-13T01:52+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 공항 이동 경로의 교통 지연 가능성을 알려 이동 계획에 참고가 됩니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 공항 인근 교통사고로 인한 지연 경고는 공항 방문이나 인근 이동 시 일정을 조정하는 데 필요합니다.",
+      "actions": [
+       "공항 방문 시 실시간 교통 정보를 확인하고 여유 있게 출발하세요."
+      ],
+      "watch": "공항 인근 도로 사고 수습 및 교통 정체 해소 여부"
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "교통사고",
+      "location": "Auckland Airport",
+      "suburb": "Mangere",
+      "region": "",
+      "precision": "exact"
+     },
+     "timeline": [
+      {
+       "date": "2026-11-14",
+       "title_ko": "오클랜드 공항 인근 SH20 고속도로 교통사고로 중상자 발생",
+       "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOc3pKc1RJQWJOQ3lIN1JhdjlpSW1paUVkbi11ejEweU1ibklCYi1KREdVOWlyaGF2OUVxQXIyWVQ4RU9BenROZmlFQS1VYVJVcmM1R1B5VzJaeDR5czVmdFpTRXhWSTQ0dWJKNGhCUnd1Q2R1V0x4eXZMN3NaRzlWNF9MdlZ0ajRhcXdwUVRzTXhtME16cFZZR0YtS2N3cm9XWERjQlQ1RUZ5QzZ0QTVDY0lQQi14NXRibjVWTEJaWGYzZHRPMXNLRXhMeU41WHZFX2VxN0lXV21fWDhH?oc=5",
+       "id": "e834a72cec02"
+      }
+     ],
+     "changed": "심각한 교통사고로 인한 구체적인 지연 경고가 발령됨."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: client ReadTimeout"
+   ]
   },
   "akl_property": {
    "label": "부동산",
@@ -1345,15 +1696,20 @@
   },
   "akl_health": {
    "label": "의료",
-   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드 연구진이 인공지능을 활용한 간질 및 당뇨병 연구를 진행 중입니다.",
    "items": [
     {
      "id": "95dbdfcd0285",
-     "title_ko": "Can AI spot the signs of epilepsy? Auckland researchers think so",
+     "title_ko": "오클랜드 연구진, 인공지능으로 간질 신호 포착 가능성 연구",
      "summary_ko": [
-      "Can AI spot the signs of epilepsy? Auckland researchers think so"
+      "오클랜드 연구진이 인공지능 기술을 활용해 간질의 초기 징후를 감지할 수 있는지 연구하고 있습니다.",
+      "AI 알고리즘을 통해 뇌전증 관련 의료 데이터를 분석하여 조기 진단 가능성을 타진 중입니다.",
+      "향후 신경학 질환 진단 정확도를 높이고 환자 치료에 도움을 줄 것으로 기대됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "의료",
+      "기술"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1363,15 +1719,26 @@
      ],
      "original_title": "Can AI spot the signs of epilepsy? Auckland researchers think so",
      "published_at": "2026-11-14T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 대학가의 첨단 의료 AI 연구 동향을 보여주는 긍정적 소식입니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 연구진의 의료 AI 연구 소식으로 전공 및 취업비자 준비에 직접 영향은 없습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "8da1abebaebe",
-     "title_ko": "Researchers trial AI coach for diabetes",
+     "title_ko": "오클랜드 대학교 연구진, 당뇨병 관리 위한 AI 코치 임상 시험",
      "summary_ko": [
-      "Researchers trial AI coach for diabetes"
+      "오클랜드 대학교 연구팀이 당뇨병 환자를 돕기 위한 인공지능 코치 프로그램 임상 시험에 착수했습니다.",
+      "디지털 기술을 접목해 환자들의 혈당 관리와 생활 습관 개선을 지원하는 방식입니다.",
+      "만성질환 관리 분야에서 AI 기반 솔루션의 실효성을 검증하는 계기가 될 전망입니다."
      ],
-     "tags": [],
+     "tags": [
+      "의료",
+      "기술"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1381,15 +1748,26 @@
      ],
      "original_title": "Researchers trial AI coach for diabetes",
      "published_at": "2026-11-12T23:57+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 내 의료보건 분야의 AI 혁신 연구와 건강 관리 트렌드를 전합니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 대학교의 당뇨병 관리 AI 연구 소식으로 대학가 연구 동향을 보여줍니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "6e4680291fbf",
-     "title_ko": "Understanding diabetes, one heart cell at a time",
+     "title_ko": "심장 세포 단위에서 당뇨병 이해하기",
      "summary_ko": [
-      "Understanding diabetes, one heart cell at a time"
+      "오클랜드 대학교 연구진이 심장 세포 수준에서 당뇨병이 미치는 영향에 대한 연구를 수행했습니다.",
+      "세포 구조의 변화를 분석하여 대사 질환과 심장 질환 간의 연관성을 파악하고자 했습니다.",
+      "향후 당뇨병 관련 심혈관 합병증 치료법 개발의 기초 자료로 활용될 수 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "의료",
+      "교육"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1399,23 +1777,31 @@
      ],
      "original_title": "Understanding diabetes, one heart cell at a time",
      "published_at": "2026-11-12T06:10+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 연구소의 기초 의과학 연구 성과로 의료 분야 지식을 넓혀줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 대학교의 기초 의과학 연구 성과로 일상 생활에 직접적인 변화를 주지는 않습니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
-   ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: client ReadTimeout"
+   ]
   },
   "akl_education": {
    "label": "교육",
-   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "학교 학생 수 증가 대응 요구와 대학 관련 행사 소식이 전해졌습니다.",
    "items": [
     {
      "id": "cab66171d969",
-     "title_ko": "'80 unknown students turning up': PPTA calls for Government to support school roll growth",
+     "title_ko": "학교 등록 학생 급증에 정부 지원 촉구하는 PPTA",
      "summary_ko": [
-      "'80 unknown students turning up': PPTA calls for Government to support school r…"
+      "예상치 못한 많은 학생들의 등교로 인해 교원 단체인 PPTA가 정부에 학교 등록 학생 증가 지원을 요구했습니다.",
+      "각급 학교 현장에서 급격한 학급 규모 확대와 자원 부족 문제가 제기되고 있습니다.",
+      "정부의 예산 배정과 교육 정책 변화가 학교 운영에 직접적인 영향을 미칠 것으로 보입니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -1430,17 +1816,30 @@
      ],
      "original_title": "'80 unknown students turning up': PPTA calls for Government to support school roll growth",
      "published_at": "2026-11-11T20:57+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
-     "radar": 5
+     "why_it_matters": "뉴질랜드 전반의 교육 현장 여건과 정부 지원 정책의 변화를 파악할 수 있습니다.",
+     "figure": {
+      "v": "80명",
+      "l": "미등록 학생 수"
+     },
+     "radar": 5,
+     "impact": {
+      "level": "medium",
+      "reason": "학교 등록 학생 급증에 따른 정부 지원 요구 소식으로 자녀의 초등학교 입학을 앞둔 가족에게 교육 환경 변화를 시사합니다.",
+      "actions": [],
+      "watch": "교육부의 학교 정원 및 예산 지원 대책 발표"
+     }
     },
     {
      "id": "5e92bf0eafab",
-     "title_ko": "Clayton Park School celebrates growth at recent Children’s University graduation in Auckland",
+     "title_ko": "클레이턴 파크 학교, 오클랜드 어린이 대학 졸업식 개최",
      "summary_ko": [
-      "Clayton Park School celebrates growth at recent Children’s University graduatio…"
+      "매시대학교가 참여한 가운데 클레이턴 파크 학교 학생들이 오클랜드 어린이 대학 졸업식을 가졌습니다.",
+      "어린 학생들의 학업 성취와 지역 사회 교육 프로그램의 성장을 축하하는 행사가 열렸습니다.",
+      "지역 교육 기관과 연계된 다양한 학습 프로그램이 학생들에게 동기를 부여하고 있습니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "사회"
      ],
      "importance": 6,
      "sources": [
@@ -1451,15 +1850,26 @@
      ],
      "original_title": "Clayton Park School celebrates growth at recent Children’s University graduation in Auckland",
      "published_at": "2026-11-13T10:47+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 지역 교육 프로그램과 대학 연계 활동 소식을 전합니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 초등학교의 어린이 대학 졸업식 소식으로 지역 교육 행사를 가볍게 전합니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "9f38d3e25a6c",
-     "title_ko": "ClockTower apprentice returns nearly 70 years after memorable mishap",
+     "title_ko": "클락타워 도제공, 70년 만에 기억에 남는 해프닝 장소 방문",
      "summary_ko": [
-      "ClockTower apprentice returns nearly 70 years after memorable mishap"
+      "오클랜드 대학교 클락타워의 도제공이었던 인물이 70년 만에 과거의 추억이 담긴 장소를 찾았습니다.",
+      "오래 전 대학 건물에서 일어났던 기억에 남는 일화를 되새기는 뜻깊은 방문이 이루어졌습니다.",
+      "대학의 역사와 오랜 동문들의 인연을 보여주는 따뜻한 소식입니다."
      ],
-     "tags": [],
+     "tags": [
+      "교육",
+      "사회"
+     ],
      "importance": 4,
      "sources": [
       {
@@ -1469,23 +1879,35 @@
      ],
      "original_title": "ClockTower apprentice returns nearly 70 years after memorable mishap",
      "published_at": "2026-11-11T20:07+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 대학교의 역사적 배경과 캠퍼스 관련 추억을 전하는 소식입니다.",
+     "figure": {
+      "v": "70년",
+      "l": "경과 기간"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 대학교 클락타워의 역사적 방문 소식으로 UoA 석사 졸업을 앞둔 독자에게 친숙한 캠퍼스 이야기입니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
-   ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: client ReadTimeout"
+   ]
   },
   "nz_immigration": {
    "label": "이민 레이더",
-   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "쿠웨이트 국적자 비자 면제 중단과 새로운 이민 규정 변경 사항이 발표되었습니다.",
    "items": [
     {
      "id": "aa1cc9f4d15e",
-     "title_ko": "Visa waiver travel suspended for Kuwait nationals",
+     "title_ko": "쿠웨이트 국적자 대상 뉴질랜드 무비자 입국 일시 중단",
      "summary_ko": [
-      "Visa waiver travel suspended for Kuwait nationals"
+      "뉴질랜드 이민성은 쿠웨이트 국적자에 대한 비자 면제(Visa waiver) 여행을 중단한다고 발표했습니다.",
+      "이번 조치로 쿠웨이트 여권 소지자는 뉴질랜드 입국 전 별도의 비자를 발급받아야 합니다.",
+      "국가별 입국 규정 및 비자 심사 정책이 강화되는 흐름을 보여줍니다."
      ],
      "tags": [
-      "이민"
+      "이민",
+      "비자"
      ],
      "importance": 9,
      "sources": [
@@ -1496,16 +1918,27 @@
      ],
      "original_title": "Visa waiver travel suspended for Kuwait nationals",
      "published_at": "2026-11-11T23:22+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
-     "radar": 9
+     "why_it_matters": "뉴질랜드의 국가별 비자 면제 정책 변경 기조를 확인하는 이민 행정 소식입니다.",
+     "radar": 9,
+     "impact": {
+      "level": "none",
+      "reason": "쿠웨이트 국적자 대상 비자 면제 중단 소식은 한국 국적 유학생인 독자 가족의 비자 자격과 무관합니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "5ce94c351d7e",
-     "title_ko": "Amendment Circular 2026-34",
+     "title_ko": "뉴질랜드 이민성, 2026년 제34호 수정 회람 발표",
      "summary_ko": [
-      "Amendment Circular 2026-34"
+      "뉴질랜드 이민성이 비자 및 이민 관련 규정을 담은 2026년 제34호 수정 회람을 공지했습니다.",
+      "세부적인 이민 지침과 절차에 일부 변경 사항이 포함되어 관련 업무에 적용됩니다.",
+      "이민 신청자들과 고용주들은 최신 규정 변화를 주의 깊게 살펴봐야 합니다."
      ],
-     "tags": [],
+     "tags": [
+      "이민",
+      "비자"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -1515,17 +1948,30 @@
      ],
      "original_title": "Amendment Circular 2026-34",
      "published_at": "2026-11-12T08:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
-     "radar": 9
+     "why_it_matters": "향후 취업비자나 영주권 신청 시 적용될 이민성 지침 변동 사항을 예의주시해야 합니다.",
+     "figure": {
+      "v": "2026-34",
+      "l": "수정 회람 번호"
+     },
+     "radar": 9,
+     "impact": {
+      "level": "none",
+      "reason": "이민성 회람 공지 일반론으로 독자 가족의 비자나 영주권 준비에 직접적인 지침 변화가 명시되지 않았습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "629895abc18c",
-     "title_ko": "Pacific families face deportation risk under new immigration rule",
+     "title_ko": "새로운 이민 규정으로 추방 위험에 직면한 태평양 섬나라 가정들",
      "summary_ko": [
-      "Pacific families face deportation risk under new immigration rule"
+      "변경된 새로운 이민 규정으로 인해 일부 태평양 출신 가족들이 추방 위험에 처했습니다.",
+      "강화된 비자 및 거주 요건으로 인해 오랜 기간 거주해 온 이주민들이 어려움을 겪고 있습니다.",
+      "지역 사회에서는 이민 정책의 인도적 측면과 규정 적용에 대한 논란이 이어지고 있습니다."
      ],
      "tags": [
-      "이민"
+      "이민",
+      "비자"
      ],
      "importance": 8,
      "sources": [
@@ -1536,16 +1982,27 @@
      ],
      "original_title": "Pacific families face deportation risk under new immigration rule",
      "published_at": "2026-11-13T09:54+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
-     "radar": 9
+     "why_it_matters": "뉴질랜드 정부의 이민 규정 강화가 이주민 체류에 미치는 파장을 보여줍니다.",
+     "radar": 9,
+     "impact": {
+      "level": "none",
+      "reason": "태평양 섬나라 가정의 추방 위기 소식은 한국인 유학생인 독자 가족의 이민 상황과 직접 관련이 없습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "630d2b48830c",
-     "title_ko": "Impact of Microsoft outage",
+     "title_ko": "마이크로소프트 시스템 장애가 이민 업무에 미친 영향",
      "summary_ko": [
-      "Impact of Microsoft outage"
+      "마이크로소프트의 전산 시스템 장애로 인해 뉴질랜드 이민성 서비스에도 차질이 빚어졌습니다.",
+      "일시적인 IT 인프라 마비로 일부 비자 접수 및 온라인 처리 업무가 지연되었습니다.",
+      "이민 당국은 시스템 복구 작업과 함께 영향받은 신청자들의 절차를 정상화하고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "이민",
+      "기술"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -1555,16 +2012,27 @@
      ],
      "original_title": "Impact of Microsoft outage",
      "published_at": "2026-11-13T02:12+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
-     "radar": 8
+     "why_it_matters": "비자 신청 및 처리 기간에 전산 시스템 장애가 미치는 영향을 확인할 수 있습니다.",
+     "radar": 8,
+     "impact": {
+      "level": "none",
+      "reason": "마이크로소프트 전산 장애에 따른 이민성 서비스 지연은 이미 해소 단계인 과거의 임시 사안입니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "25a3aff2c956",
-     "title_ko": "Air New Zealand boss has a message for those waiting for direct flights to India",
+     "title_ko": "에어 뉴질랜드 최고경영자, 인도 직항 노선 대기 승객에게 전한 메시지",
      "summary_ko": [
-      "Air New Zealand boss has a message for those waiting for direct flights to India"
+      "에어 뉴질랜드 최고경영자가 인도 직항 노선 개설을 기다리는 사람들에게 입장을 밝혔습니다.",
+      "항공사 운영 상황과 수요 분석을 바탕으로 향후 노선 신설 가능성에 대한 설명이 이루어졌습니다.",
+      "양국 간 항공 연결성 확대 여부는 향후 시장 상황과 항공사 전략에 따라 결정될 전망입니다."
      ],
-     "tags": [],
+     "tags": [
+      "교통",
+      "경제"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1574,11 +2042,16 @@
      ],
      "original_title": "Air New Zealand boss has a message for those waiting for direct flights to India",
      "published_at": "2026-11-13T01:38+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
-     "radar": 5
+     "why_it_matters": "한국인 유학생의 본국 왕래나 국제선 항공편 동향을 가늠하는 참고 소식입니다.",
+     "radar": 5,
+     "impact": {
+      "level": "none",
+      "reason": "인도 직항 노선 관련 항공사 입장은 한국 출신인 독자 가족의 본국 왕래에 직접적인 영향이 없습니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
-   ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: client ReadTimeout"
+   ]
   }
  },
  "extras": {
@@ -1891,49 +2364,39 @@
   "alerts": [
    {
     "kind": "radar",
-    "text": "Visa waiver travel suspended for Kuwait nationals",
+    "text": "쿠웨이트 국적자 대상 뉴질랜드 무비자 입국 일시 중단",
     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPV2NNVUFRcmNSUU40Z1daU2oxRjVMQlA3MjdYaDU0YWE0WkRtYnVOd1YyWEFTWUJhODJiVkwyTHMxUlRxamFhMV9WNUdNakEwUEIta2o4T3N5S2hsN0RENVJQTVlTb013ZnhlQlkzVEg2T0I1cDhDN1hjelVrcGZiZGlGeXk1SFVkVlpGbWtHeWZtUjdqMjlQamx1MGp6TThZQzY0?oc=5"
    },
    {
     "kind": "radar",
-    "text": "Amendment Circular 2026-34",
+    "text": "뉴질랜드 이민성, 2026년 제34호 수정 회람 발표",
     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPeGR1OEhGcUdNSHVUWEMwb1FSVUktMGp0a0ppNUFVOHlKZDU4TDFSUmVjWVp5Y19pM3BjemlMZXIxMWU2bTVkVTRGNmJmN3FfMlFkbmZHMkR6Y0dxTHRielJGNnVrSEZPdTgwY0JRTUNDQktiWHFTdExUd1J0SHBaLTRWV3hqbzkwMDNrUm5UaHUxbkF4ZWxic3FhUzYySmRuTVBMN0Fn?oc=5"
    },
    {
     "kind": "radar",
-    "text": "Pacific families face deportation risk under new immigration rule",
+    "text": "새로운 이민 규정으로 추방 위험에 직면한 태평양 섬나라 가정들",
     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPb0o0c2M5eVVFR0FRLUR5NUQtT3hrSEZhUVlRZ21pWVo5YUNaRVhmNFVzcGlHeWRkNThEeUZoeE9QQ21BQzZTTVp2MUJobm1VcnY1OHFHWUd4alowVWUxV2JHRnZCNE9wcU15RExRTGNsUTRLbUlEbEVnTVdjd2FYNWhPOVZJSC00bzliNmF6ejlPY1l3c1lwZjRPcmJEdURnRDFJ?oc=5"
    }
   ],
-  "degraded": true,
-  "degraded_reason": "요약 실패: akl_safety, akl_life, akl_health, akl_education, nz_immigration",
-  "retries": 0,
+  "degraded": false,
+  "degraded_reason": "",
+  "retries": 1,
   "quality": {
    "items": 60,
-   "bad": 20,
+   "bad": 0,
    "redone": [],
-   "bad_ids": [
-    "554aa7f7f29b",
-    "8a7eef2b7af5",
-    "9ce50a4188b3",
-    "e3042353a075",
-    "e6b7e1b78815",
-    "5df8178d9864",
-    "01506b29e187",
-    "017e204f0490",
-    "4a9248835404",
-    "95dbdfcd0285",
-    "8da1abebaebe",
-    "6e4680291fbf",
-    "cab66171d969",
-    "5e92bf0eafab",
-    "9f38d3e25a6c",
-    "aa1cc9f4d15e",
-    "5ce94c351d7e",
-    "629895abc18c",
-    "630d2b48830c",
-    "25a3aff2c956"
-   ]
+   "bad_ids": []
+  },
+  "repaired": {
+   "summary": [
+    "akl_safety",
+    "akl_life",
+    "akl_health",
+    "akl_education",
+    "nz_immigration"
+   ],
+   "insight": true,
+   "requests": 2
   }
  }
 }
