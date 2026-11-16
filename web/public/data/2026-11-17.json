@@ -1,0 +1,1727 @@
+{
+ "date": "2026-11-17",
+ "generated_at": "2026-11-17T06:19:35+13:00",
+ "timezone": "Pacific/Auckland",
+ "sections": {
+  "kr_society": {
+   "label": "사회",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "2830224ff750",
+     "title_ko": "김포 메추리 농장서 AI 항원 확인…고병원성 여부 검사",
+     "summary_ko": [
+      "농림축산식품부는 16일 경기도 김포시에 있는 한 메추리 농장에서 H5형 조류인플루엔자(AI) 항원이 확인됐다고..."
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261116180000030"
+      },
+      {
+       "name": "연합뉴스TV",
+       "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFBBNjh6ZjlmdTRUZGRCVjhCZjRJMkw4QW5NNnFZLU5CdEt1V3p5REw1SnhiQTdYeHBzQWpMLTRkeFBrZmtkZDhjQ3R6d21iNE9WRm5tVnFmMzRhQVNWOWUxNUFfWXVpajQ?oc=5"
+      }
+     ],
+     "original_title": "김포 메추리 농장서 AI 항원 확인…고병원성 여부 검사",
+     "published_at": "2026-11-16T14:27+00:00"
+    },
+    {
+     "id": "dc8693b8b4c7",
+     "title_ko": "구속만료 하루 앞두고 … 대법, 19일 한덕수 선고",
+     "summary_ko": [
+      "대법원 전원합의체가 오는 19일 한덕수 전 국무총리의 내란 사건을 최종 판단한다.",
+      "12·3 비상계엄 관련 내란죄에 대해 대법원이 내놓는 첫 판단이다.",
+      "한 전 총리가 20일 구속기간.."
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/society/12210191"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261116054152004"
+      }
+     ],
+     "original_title": "구속만료 하루 앞두고 … 대법, 19일 한덕수 선고",
+     "published_at": "2026-11-16T09:24+00:00"
+    },
+    {
+     "id": "03cc503f8ccc",
+     "title_ko": "수능 이틀앞, AI 커닝 답 없는 정부",
+     "summary_ko": [
+      "수능 이틀앞, AI 커닝 답 없는 정부"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/education/2026/11/17/C6GKPOVP5JGZLLNFP6VVYQYRNE/"
+      }
+     ],
+     "original_title": "수능 이틀앞, AI 커닝 답 없는 정부",
+     "published_at": "2026-11-16T15:56+00:00"
+    },
+    {
+     "id": "bf9510616611",
+     "title_ko": "법학, 의·치의학 시험도? 이례적 점수에 AI 커닝 의혹 확산",
+     "summary_ko": [
+      "법학, 의·치의학 시험도? 이례적 점수에 AI 커닝 의혹 확산"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/national_general/2026/11/17/NGFZSIT5CNBS5GLZUFNZ7VLFHE/"
+      }
+     ],
+     "original_title": "법학, 의·치의학 시험도? 이례적 점수에 AI 커닝 의혹 확산",
+     "published_at": "2026-11-16T15:52+00:00"
+    },
+    {
+     "id": "daac14596b0c",
+     "title_ko": "[오늘의 날씨] 2026년 11월 17일",
+     "summary_ko": [
+      "[오늘의 날씨] 2026년 11월 17일"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/national/national_general/2026/11/17/B2O5CFOV3JEZDKXM6O4ZWGXV7I/"
+      }
+     ],
+     "original_title": "[오늘의 날씨] 2026년 11월 17일",
+     "published_at": "2026-11-16T15:50+00:00"
+    }
+   ],
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "kr_economy": {
+   "label": "경제",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "dd47afc6acfb",
+     "title_ko": "블룸버그 “한국 반도체 생산 빠르게 늘면 내년 성장률 4% 가능”",
+     "summary_ko": [
+      "반도체 슈퍼사이클이 내년 한국 경제성장률을 4% 이상으로 끌어올릴 수 있다는 전망이 나왔다.",
+      "반도체 가격 급등으로 국내총생산(GDP)에서 반도체 산업이 차지하는 비중이 크게 높아진.."
+     ],
+     "tags": [],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/economy/12210238"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261116154500008"
+      },
+      {
+       "name": "한국무역협회-KITA.NET",
+       "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPOHFVVWlmV2o2LTg5ZW1JN19tYXV4blN0b3d5QkRQRkE4cnNSb1B4eXRCbW9GODhSOFFPbVNoYUk4czY3S2l5UEtDcExNTEs5M2RaZ0xTeDNBMXZjWnhLMXhYbldKN3gwTl85Q3c1bUdVdkJRa1FLQVVVQU5tUi16cTN2Z2dBUi1hcHVFNEJ4ZmJsbHduM0RwQ0VHSGl3Y21yaDBMYlNDSVVXSVFaZFBEYUVyUVlKYTlzZEdNdmx6UWc3cGdjU1drOWF0U0JwS3VTTHZ6cVRB?oc=5"
+      }
+     ],
+     "original_title": "블룸버그 “한국 반도체 생산 빠르게 늘면 내년 성장률 4% 가능”",
+     "published_at": "2026-11-16T09:26+00:00"
+    },
+    {
+     "id": "51421a7517db",
+     "title_ko": "반도체 초호황인데 내 지갑은 그대로",
+     "summary_ko": [
+      "반도체 초호황인데 내 지갑은 그대로"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/economy_general/2026/11/17/WTERT5WXBNFUXNZELXNVHTLDJA/"
+      }
+     ],
+     "original_title": "반도체 초호황인데 내 지갑은 그대로",
+     "published_at": "2026-11-16T15:55+00:00"
+    },
+    {
+     "id": "0800c5d147a2",
+     "title_ko": "AI 안경 탐지·무선통신 차단… 세계는 AI 커닝과 전쟁중",
+     "summary_ko": [
+      "AI 안경 탐지·무선통신 차단… 세계는 AI 커닝과 전쟁중"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/science/2026/11/17/OTEXYRVMKVBFJEDVJMXB5IQYD4/"
+      }
+     ],
+     "original_title": "AI 안경 탐지·무선통신 차단… 세계는 AI 커닝과 전쟁중",
+     "published_at": "2026-11-16T15:52+00:00"
+    },
+    {
+     "id": "8c582beff834",
+     "title_ko": "삼성 AI 안경이 삼성 반도체를 훔쳐본다",
+     "summary_ko": [
+      "삼성 AI 안경이 삼성 반도체를 훔쳐본다"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/industry-company/2026/11/17/5MB6OLJXABBRHF6UZR46HSFJOE/"
+      }
+     ],
+     "original_title": "삼성 AI 안경이 삼성 반도체를 훔쳐본다",
+     "published_at": "2026-11-16T15:51+00:00"
+    },
+    {
+     "id": "62b820d5932f",
+     "title_ko": "젠슨 황, ‘워 룸’서 복귀 논의… 美 재무는 “회사 밖에서 CEO 찾아야”",
+     "summary_ko": [
+      "젠슨 황, ‘워 룸’서 복귀 논의… 美 재무는 “회사 밖에서 CEO 찾아야”"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/tech_it/2026/11/17/BKBXDDBOXRD7PBPBB37NWICZXA/"
+      }
+     ],
+     "original_title": "젠슨 황, ‘워 룸’서 복귀 논의… 美 재무는 “회사 밖에서 CEO 찾아야”",
+     "published_at": "2026-11-16T15:47+00:00"
+    }
+   ],
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "kr_entertainment": {
+   "label": "연예",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "a24fd8b6d134",
+     "title_ko": "블핑 제니, 美 그래미 본상 '올해의 레코드' 포함 2개 부문 후보(종합)",
+     "summary_ko": [
+      "걸그룹 블랙핑크의 제니가 미국 대중음악 시상식인 제69회 '그래미 어워즈'(Grammy Awards·이..."
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261116180251005"
+      },
+      {
+       "name": "KBC광주방송",
+       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1SSFNpV3M2RDRiX0lybWlVUUlKV2ExNUM1VUhHTzM4a1ZvdmtuZk5ObXZVa2o1MWs0ZklGdjhNc0t3NDRXYkhsQldhRV9lLW5oNDhCS3M5bGhJZk1XdlVpVVNR?oc=5"
+      }
+     ],
+     "original_title": "블핑 제니, 美 그래미 본상 '올해의 레코드' 포함 2개 부문 후보(종합)",
+     "published_at": "2026-11-16T14:39+00:00"
+    },
+    {
+     "id": "772badad1f21",
+     "title_ko": "화사. 유죄눈빛 ♥박정민과 결국 일냈다…'굿 굿바이' MV 2억 뷰 돌파",
+     "summary_ko": [
+      "가수 화사가 배우 박정민과 호흡을 맞춘 '굿 굿바이(Good Goodbye)' 뮤직비디오로 또 하나의 기록을 세웠다.",
+      "화사는 최근 자신의 SNS를 통해 '굿 굿바이' 뮤직비디오의 유튜브 조회수 2억 회 돌파를 알리며 \"감사합니다\"라는 인사를 전했다.",
+      "공개된 사진에는 'Good Goodbye'라는 문구와 함께 'YouTube views"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/broadcast/2026/11/17/MQ4WMZDGMFSGKZRWGMZTKNLGG4/"
+      }
+     ],
+     "original_title": "화사. 유죄눈빛 ♥박정민과 결국 일냈다…'굿 굿바이' MV 2억 뷰 돌파",
+     "published_at": "2026-11-16T16:31+00:00"
+    },
+    {
+     "id": "0eb678ce0c74",
+     "title_ko": "기은세, 평창동 집이 이 정도였어?…5성급 호텔 뺨치는 럭셔리 일상",
+     "summary_ko": [
+      "배우 기은세가 5성급 호텔을 연상케 하는 럭셔리한 일상을 공개했다.",
+      "기은세는 16일 자신의 SNS를 통해 여러 장의 사진을 공개하며 근황을 전했다.",
+      "공개된 사진에는 기은세 특유의 감각적인 취향이 묻어나는 공간이 담겼다."
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/broadcast/2026/11/17/MRSTMZTEGY3WENRZMFSWENBQMY/"
+      }
+     ],
+     "original_title": "기은세, 평창동 집이 이 정도였어?…5성급 호텔 뺨치는 럭셔리 일상",
+     "published_at": "2026-11-16T16:17+00:00"
+    },
+    {
+     "id": "544ecc721fbb",
+     "title_ko": "\"소리지르고 삼단봉으로 때리려고 해\" 신기루, 中 입국하다 공안에 붙잡혀",
+     "summary_ko": [
+      "코미디언 신기루와 풍자가 상하이 여행 중 겪은 일을 털어놓았다.",
+      "16일 유튜브 채널 '풍자테레비'에는 '신기루&풍자 특대 왕홍 1박2일 상해 맛집여행'이라는 제목의 영상이 게재됐다.",
+      "이날 풍자와 신기루는 상하이를 찾았다."
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/broadcast/2026/11/17/GZTDGODDMIYDGZDGGBQTKMZXGI/"
+      }
+     ],
+     "original_title": "\"소리지르고 삼단봉으로 때리려고 해\" 신기루, 中 입국하다 공안에 붙잡혀",
+     "published_at": "2026-11-16T16:16+00:00"
+    },
+    {
+     "id": "224d99f4a6c9",
+     "title_ko": "英가수 레이, 그래미 11개 부문서 후보…과거 비욘세와 동률기록",
+     "summary_ko": [
+      "김경윤 특파원 = 영국 싱어송라이터 레이(Raye)가 그래미 시상식 11개 부문 후보에 올랐다."
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261117001000075"
+      }
+     ],
+     "original_title": "英가수 레이, 그래미 11개 부문서 후보…과거 비욘세와 동률기록",
+     "published_at": "2026-11-16T16:13+00:00"
+    }
+   ],
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "kr_politics": {
+   "label": "정치",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "b359dbb11b1a",
+     "title_ko": "李대통령 \"한-아세안, AI·문화창조산업 이니셔티브 제안\"(종합)",
+     "summary_ko": [
+      "필리핀을 방문 중인 이재명 대통령은 16일(현지시간) 한국과 아세안(ASEAN·동남아시아국가연합)이 ..."
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261116124751001"
+      },
+      {
+       "name": "한국일보",
+       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBoQVFkS1JDNkp3TzJNczJYSWZsc3J0WlZXVGtBcGZieVVjbGZYQWQ4QnhPeUt3dUZXcEFXZGt2R0FGQVQ4TGJCaGdab2tVRlNjLWhaYkNWLVh2MjVUU3hIdkRNcXBzVWw4c3hUSE9R0gFzQVVfeXFMUE5jODYtX0JfN3hLNGtTSHBkYUFxbEpKMU8yQjFMS3loQVFRbGxMYmRKTmJKaVFqSHpDQjZoZzI4V3NOTnZTemtfNl9HS1JIXzBGYlNaNVRsTWd2N3oyR0ZjU2F6ZXhQWHFleno1bWNCT3NlWQ?oc=5"
+      }
+     ],
+     "original_title": "李대통령 \"한-아세안, AI·문화창조산업 이니셔티브 제안\"(종합)",
+     "published_at": "2026-11-16T11:30+00:00"
+    },
+    {
+     "id": "27c67ce80c9c",
+     "title_ko": "종교와 정치의 경계는 어디인가 [세상읽기]",
+     "summary_ko": [
+      "종교와 정치의 경계는 어디인가 [세상읽기]"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "한겨레",
+       "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9uTnUzZWl5QW0wRUJ6SkJsZU5HVEJmVFMycGU2M3Q3Z0Q3cnNDS1RHX3RyUUhIZ2xsYjBtX0pXT2kzVUNYUEo5SUdMWG5CRjA5Nm1ZU29IZ2lvVm1kazJLeDNaQk9yUQ?oc=5"
+      }
+     ],
+     "original_title": "종교와 정치의 경계는 어디인가 [세상읽기]",
+     "published_at": "2026-11-16T16:25+00:00"
+    },
+    {
+     "id": "b1ddae6cfe57",
+     "title_ko": "“AI 커닝 잡을 수 있나” 정치권까지 번진 ‘세무냥이’ 논란",
+     "summary_ko": [
+      "“AI 커닝 잡을 수 있나” 정치권까지 번진 ‘세무냥이’ 논란"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "시사저널",
+       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1wSjZ6RktRUlZmNzk0cEtYX3pVRXJselZmVDZsM08ybWYzRlhDQkwycVFJeThxQzFrdVY3b2cxbm8wa0ZPbGRGSUw4bTU0MEszdXNWN0hIRFhfNjJ3MEY4ckJHT1ZwTHlfMWNLVVhCd9IBc0FVX3lxTE5oazU1YVVOc0haNVQwVzBNdTJaVk84Zk5tU1lHQVlrTWp4d1o5b0ZUOXBwd2FoeHVYTDN2MkQ3dURnLUpjVHV5aU5RdzBta2RxNVJzT01OMlYybVU5b04yam9Fc0JtUE9VUTRaMkIwTWhXSkk?oc=5"
+      }
+     ],
+     "original_title": "“AI 커닝 잡을 수 있나” 정치권까지 번진 ‘세무냥이’ 논란",
+     "published_at": "2026-11-16T16:20+00:00"
+    },
+    {
+     "id": "dba092bedf09",
+     "title_ko": "트럼프 “중국서 김정은 만날 수도 있다”",
+     "summary_ko": [
+      "트럼프 “중국서 김정은 만날 수도 있다”"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/politics_general/2026/11/17/2OQRYZ3A5NGT7GHBULTSVZPQR4/"
+      }
+     ],
+     "original_title": "트럼프 “중국서 김정은 만날 수도 있다”",
+     "published_at": "2026-11-16T15:53+00:00"
+    },
+    {
+     "id": "522121bf2bd0",
+     "title_ko": "최민희, 90도 사과했지만… 김민석 “당헌 따라 처리”",
+     "summary_ko": [
+      "최민희, 90도 사과했지만… 김민석 “당헌 따라 처리”"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/assembly/2026/11/17/KODF6IQ5QRA33JFYDAIPNRWRV4/"
+      }
+     ],
+     "original_title": "최민희, 90도 사과했지만… 김민석 “당헌 따라 처리”",
+     "published_at": "2026-11-16T15:48+00:00"
+    }
+   ],
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "nz_society": {
+   "label": "사회",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "470c2a18c749",
+     "title_ko": "Survey finds GP practices embracing AI amid safety, privacy concerns",
+     "summary_ko": [
+      "Survey finds GP practices embracing AI amid safety, privacy concerns"
+     ],
+     "tags": [
+      "의료",
+      "치안"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQMDJvdS1ZbUFjYmdhamFwR2ZjNlI3cEZQQVhfcENOTEVYVW5oeFNkSmdMZkk4SUlHWVJLRGhuOVhoY3ZLSWQtTGV2ZktuWklVMElDMnpCMWp4b0ladFZyc0hiRmwtODJpWFlheWROVUhsRUdxMmhOTWU0cW9sMW42blJBR1A5NGVySjhIVlZqcC10NElMbDUtdGlLQjBhNTFzeXRkNGVmN2pfYzBIalE?oc=5"
+      }
+     ],
+     "original_title": "Survey finds GP practices embracing AI amid safety, privacy concerns",
+     "published_at": "2026-11-15T17:28+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "55019c2d3c67",
+     "title_ko": "Person taken to hospital, woman charged after Dunedin assault",
+     "summary_ko": [
+      "Person taken to hospital, woman charged after Dunedin assault"
+     ],
+     "tags": [
+      "의료",
+      "치안"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOeVJFcnVsRm5PU1hQcXR5b1V6aE80Nm8tcXktOUsyY2VwRFAxaTdhZ3NkdndVd3RzZlpUVXZ1dGIyS1QwLXktRGVZTjhMbEdpejVqZ0JUeV9PcFhBajV1S3NXS0lib0lJTXNOUTcxZ2FEMklsZy11S0FaRGswQU16MENyaDB0NEZwems4ZUxLOG02SDBEYjN3eUYxNnpPX0lQelpCZUhiRTYzVXBiWUFXNElCRURsREFJclZLdDlad3FfcW1MelZlRzBxN2hPWFZw?oc=5"
+      }
+     ],
+     "original_title": "Person taken to hospital, woman charged after Dunedin assault",
+     "published_at": "2026-11-15T18:04+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "62283c183003",
+     "title_ko": "Education Ministry’s consultant spend more than doubles over five years to $12m",
+     "summary_ko": [
+      "Education Ministry’s consultant spend more than doubles over five years to $12m"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "Waikato Times",
+       "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxORnhkRUduMjdQT19rY0dLdWRJeWVRX2RxNkRRSEZMVkhObWhONmI4VmkwT0ZLbzdBTmgycUdHNGdwV1VzN0QtYmF2Rmh1VXRCYWljMHF0U0RhVHJmbUVxS0pjSXFJUkJ3RUpHTVNTYmtxckVrcGRiMkV2eU1oYko2WERLUHJkUHNra2RmRzFEUTVCMy1PZ0pRY2t2ZVZUbDVtY2M4TmRwSE1uNUVOcDVpdHdkcGJjNFZmZHc?oc=5"
+      },
+      {
+       "name": "Stuff.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPZXhJZ1VkY2k3LWdVVHB3Nms1cDZZS1o4X1JaQlVEeEFmdTY4cE5SR1p6MTlhdjlCUDNPTjgtU0pSV2tHNTRRb2JoQ0k3emNMVTZwSnB0ODNIMWFZWnFTUFl5aFB3NGhpWlNXODJzSDdRM2RxSUFYQmZfRko4OFNxMVJWQzZ0U1VGRWotc3Byc1h3UTRFdDMyc2RZNXdhREp3c201cktqbzFIRnpaUVRzWVlLaw?oc=5"
+      }
+     ],
+     "original_title": "Education Ministry’s consultant spend more than doubles over five years to $12m",
+     "published_at": "2026-11-16T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "eea2657fedcf",
+     "title_ko": "Police responding to water-related incident at Owharoa Falls",
+     "summary_ko": [
+      "A police spokesperson said they received reports of an incident in the Karangah…"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/emergencies_local/2631659/police-responding-to-water-related-incident-at-owharoa-falls"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/police-at-scene-of-water-related-incident-at-owharoa-falls-scenic-reserve/HIK53HYGQZCGVKF4XZEUUPSUVI/"
+      }
+     ],
+     "original_title": "Police responding to water-related incident at Owharoa Falls",
+     "published_at": "2026-11-16T06:39+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 2
+    },
+    {
+     "id": "c3945e77d991",
+     "title_ko": "Tropical Cyclone Xavier to bring damaging winds to Northern Cook Islands",
+     "summary_ko": [
+      "The Cook Islands Meteorological Service says a storm warning is in force for Ma…"
+     ],
+     "tags": [
+      "기상재해"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/pacific/2620097/tropical-cyclone-xavier-to-bring-damaging-winds-to-northern-cook-islands"
+      }
+     ],
+     "original_title": "Tropical Cyclone Xavier to bring damaging winds to Northern Cook Islands",
+     "published_at": "2026-11-16T11:53+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 2
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "nz_education": {
+   "label": "교육",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "82e6a3abf0c3",
+     "title_ko": "In brief: Teenager linked to high school lockdown, tele health comes to Taranaki and the Oakura Christmas market",
+     "summary_ko": [
+      "In brief: Teenager linked to high school lockdown, tele health comes to Taranak…"
+     ],
+     "tags": [
+      "교육",
+      "의료"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "Stuff.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOTlBpX2IybGh1NG9famVxQ3FTTkdXT1J5WTNhU1ZPZThreXp0QTVFT1prX2JJZEpRQzk2NG1wc3hwMnROVTN4VDdncVFIVmNpNVhCSzBJeVlMM1FsWVFHUFg5TGNhc1RWa1RXYmpJN0xQTE5ycGFGWkg1LXJqV2lrSUlWUnE2LTlpRkhtSGEyT2IybGJRWTUxWndPOGkzSmFQVjFzXzdGQ1J6MWxXeERNUVV2R0xva2JxZjg2LVNxOWlpUWE5YjM3R2ZDa3U4RXpJdjE1a3JfcXk?oc=5"
+      }
+     ],
+     "original_title": "In brief: Teenager linked to high school lockdown, tele health comes to Taranaki and the Oakura Christmas market",
+     "published_at": "2026-11-16T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "580720554aa9",
+     "title_ko": "'Bit of a disaster': Principals brace for more NCEA glitches",
+     "summary_ko": [
+      "'Bit of a disaster': Principals brace for more NCEA glitches"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "ODT",
+       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOclRUVF9WY2JwS2VTd0Q2bHRidWwxT2tPU2xmd042QmJNdVVZSmp3UERTN3FwdWlsekt1RTM3dGpVVXo4eHFJSXRvZHUzTlFBVVpDMUFtNFRQS290QXdKSnFRYnQ5RWd0N2ZybkpMblVES2hqdlZKaGZFT2tpOGFyOWoxQTNPazVPdWFUUE5nMEV1NUxyWXpoWHhsc2ROS0h0N2xENQ?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOYTI1NzdwU2g0cWoySGpBc0FDaUxjbHZ0R1p1R05vaTRHSzVjRnFpbXFiUFNGZndDV21qaFczZGFlVTd6ZUYxODBocjFjYXpURzE5WmNsWEpJU21wOGxaY0VjZmJ3cmVyRHliNVdjeFdZRzdrQ1hweGdrVGR2TWoxdE01a2NhR2hNbTVmSC1wM3NxaGIxYjVZMFhtZ3FGMEdfdDlmag?oc=5"
+      }
+     ],
+     "original_title": "'Bit of a disaster': Principals brace for more NCEA glitches",
+     "published_at": "2026-11-15T20:48+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "46265e1ba929",
+     "title_ko": "Seven-year-old boy forced to empty clogged school toilet without gloves, parents say",
+     "summary_ko": [
+      "The parents have removed the boy from the school after a heated confrontation w…"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/education/2631613/seven-year-old-boy-forced-to-empty-clogged-school-toilet-without-gloves-parents-say"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOVkJZSlEwY1JxOGpudzdIUkg0NGpJTW5tZXdpNjVScE5Ea3RLVnVTLWhvcDdLTm02ZDZXd0c4bGo3WWh5TWM5VEVKNkVkc3VmaEJVbnJzZW16YXhuOFZ2VFN4ZUVFZEVTWHFaYkRvcnM0dHNyN3NaM3dVajdBYVpuZkhQQVFyRUNTWHFZanI3a1VWd1hxM3NxMWFCLXhFeW0tSjZUUDVjSG9lamFrMWVMdHBmd28zbEpULUpVWnBMbzIyWElGcndmcmRYX1VJSmdHTVJiNA?oc=5"
+      }
+     ],
+     "original_title": "Seven-year-old boy forced to empty clogged school toilet without gloves, parents say",
+     "published_at": "2026-11-16T05:52+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "94890cafc84b",
+     "title_ko": "Schools spend $208m on relievers – but where are the teachers?",
+     "summary_ko": [
+      "Only a handful of principals across 169 schools told the PPTA they had enough r…"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMG1WRXBJdE5WXzgyZlJ2aEpfeEI4Q0hpYWw0WjlLTW5Bb1JoQTBETzVjNXJ3QjAyT1FKN3FmSUlidkVxdUk4RE9yOTlDU0hRamlJbkNlaXA0RzFDSUM1d05iV09tWjRVVTg5ZXlKMVBoRTJwWlBySVRvN1k3UVN6a3NUZFRxRjN4akV0RV9qdUhEaVl6d1JqanRCM3JtTkdhSFc2NWZvTTNOd2tsTFZxck55aFNKSUpW?oc=5"
+      }
+     ],
+     "original_title": "Schools spend $208m on relievers – but where are the teachers?",
+     "published_at": "2026-11-16T16:18+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "20192cef64a0",
+     "title_ko": "More Christchurch schools shrink zones as new residents swell classrooms",
+     "summary_ko": [
+      "More Christchurch schools shrink zones as new residents swell classrooms"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "The Press",
+       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNZUo2VXpwanhUUmZObjdnaW9XTVQwVjg3b245eXdsMFlvTjRRODU4bnE2WjE4My03SXJCTW5Td0FWUHJuNzB4RjB2OE9KNlcyYnJGZjJmM3g0SkN1ZkpmYjRjbWgwU1hEeHFaZGJ1X1p3dVZCeVdJcFpiTE1mQ1FvWlRiLU5lazUyWjJfRnFMNTBfY3dsRzltY19OWktpZVcwdUJxc1hLbkp3Rlk4WjNDUFQ0Y2Q?oc=5"
+      }
+     ],
+     "original_title": "More Christchurch schools shrink zones as new residents swell classrooms",
+     "published_at": "2026-11-16T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "2bb795cf4ac9",
+     "title_ko": "Victoria University lecturers steer students away from AI use in education",
+     "summary_ko": [
+      "Academics are bringing back in-person testing and oral exams as they rethink wh…"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/education/2618219/victoria-university-lecturers-steer-students-away-from-ai-use-in-education"
+      }
+     ],
+     "original_title": "Victoria University lecturers steer students away from AI use in education",
+     "published_at": "2026-11-16T01:36+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "nz_economy": {
+   "label": "경제",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "c0c4579343c7",
+     "title_ko": "RBNZ “go slow” on interest rate hikes is just making the inflation control job harder",
+     "summary_ko": [
+      "RBNZ “go slow” on interest rate hikes is just making the inflation control job…"
+     ],
+     "tags": [
+      "주거",
+      "생활비"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "Interest.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOSjYtTERvN2VmUllNcFFCT3pWWElJTXktVE5GZUJsSGZ2a2tDVVNFRlk3OXF0bGh3YVQ3TnYtbmZXNWpPS1VUWDZPeG9LRU1HVXVpOE1iNGNtQ1VEUmhMSnBOTVpjNTRnWHpLV1dCeEd4MVlkOWFtb21zVHRRcEprMGRMQy1xWW0tSlVleG92MXRscjJOWFczcVU4eWxTczFZMkthTF9rMW1BaWY4Vzg0czhwOEM2UVkwRW50cWNqRQ?oc=5"
+      }
+     ],
+     "original_title": "RBNZ “go slow” on interest rate hikes is just making the inflation control job harder",
+     "published_at": "2026-11-15T19:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "097c3b7332e0",
+     "title_ko": "Will political uncertainty affect next OCR call?",
+     "summary_ko": [
+      "The Reserve Bank is due to review the OCR at the start of next month, in the la…"
+     ],
+     "tags": [
+      "주거"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/business/2633255/will-political-uncertainty-affect-next-ocr-call"
+      }
+     ],
+     "original_title": "Will political uncertainty affect next OCR call?",
+     "published_at": "2026-11-16T15:44+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "6de8e01ecc68",
+     "title_ko": "No job for life: the new world of work and unemployment",
+     "summary_ko": [
+      "Fewer jobs, more freelancers and AI coming for the workplace - Kiwis need to ge…"
+     ],
+     "tags": [
+      "고용"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/business/2619074/no-job-for-life-the-new-world-of-work-and-unemployment"
+      }
+     ],
+     "original_title": "No job for life: the new world of work and unemployment",
+     "published_at": "2026-11-16T01:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "2e5ab28ff5a1",
+     "title_ko": "No good news for vendors or their agents in the latest housing market figures",
+     "summary_ko": [
+      "No good news for vendors or their agents in the latest housing market figures"
+     ],
+     "tags": [
+      "주거"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Interest.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNU3kyaGxfTzNFbXJBb3JiNzJNMXRGNFpiRWctVExJdkk2d2tVMXBITGJLdUFTMk11UE5VV2dDckFMcVFlR244Z1ZvUWphSHNZZUgtb1FQb0ViaWVfQUVsVUNYUnV6UnU4UDVtbU1OcWEtMWc3cXp3R3B6VEtUejV3S2psRjhPMERhOEhYaHBGRU9vX0dWMzlvUFBsM0o2Snh5YlRWTUx4TkVfdm5SLXlCdkdQZmdpa3duSUN6aFZHZXNXV1E?oc=5"
+      }
+     ],
+     "original_title": "No good news for vendors or their agents in the latest housing market figures",
+     "published_at": "2026-11-15T22:29+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "fd2b83eb4635",
+     "title_ko": "Our politicians are thinking about KiwiSaver in the wrong way",
+     "summary_ko": [
+      "Mark White-Robinson believes that the focus on discipline misses an important p…"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://www.stuff.co.nz/money/361059788/our-politicians-are-thinking-about-kiwisaver-wrong-way"
+      }
+     ],
+     "original_title": "Our politicians are thinking about KiwiSaver in the wrong way",
+     "published_at": "2026-11-16T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "nz_politics": {
+   "label": "정치",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "154aa3ea3620",
+     "title_ko": "Australian MP badly hurt in vehicle attack leaves hospital",
+     "summary_ko": [
+      "Independent MP Helen Haines has been discharged from hospital, a month after lo…"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/11/16/australian-mp-badly-hurt-in-attack-leaves-hospital/"
+      }
+     ],
+     "original_title": "Australian MP badly hurt in vehicle attack leaves hospital",
+     "published_at": "2026-11-16T01:53+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "6137320adaf4",
+     "title_ko": "Whitianga Indian restaurant owners liable for $113,000 unpaid wages bill",
+     "summary_ko": [
+      "Whitianga Indian restaurant owners liable for $113,000 unpaid wages bill"
+     ],
+     "tags": [
+      "고용"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Waikato Times",
+       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNcXpLWTc2STk2cXNMYXA0U2U4aGJiSHpXejYwTWJuUF9qMjlMd0VaQnZjWkxha2Nhb2VmZnlVeG84LV83MWlNcTlpcEFGdzBJRlllVWNPZVVybHlOVXdkb0N2THVGV050ZEprQmJpUTN3OTd2TXdhSnRlNGU5akZ2YTR2VzM4WHJKbFpkX1RwaFdvMXotR0FmUmFhdDFKcUp1dGtzQ2UtWm5ibGM0Rm5GNThGVmZiQQ?oc=5"
+      }
+     ],
+     "original_title": "Whitianga Indian restaurant owners liable for $113,000 unpaid wages bill",
+     "published_at": "2026-11-16T00:35+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "86d5a2911516",
+     "title_ko": "The Everest explorer, the death metal drummer, the Buddhist, and the prime minister: The journey back to Sir Ed's first Nepal hospital",
+     "summary_ko": [
+      "The Everest explorer, the death metal drummer, the Buddhist, and the prime mini…"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Stuff.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOdkZ5dktvWVRhN3FOWGp6bEkyRnBlcHdtbEpsYmkxRUVMcWg3T091bWdzT1VPdXdPQV9rd2FoY2J6dHlOX05PZGptaDZBdUFERW5pUHZ3QXJlbngtNV9XRXgwbjcyay1oalVvX05pNjJHbkFFRzVwdTRSQzVHdm1CVGJUNUFSU25TLW1qS1RMOUFHdmxxdGlrUXdnQWtFZmNkaGhYV2h1Y3dGeEg4OGRoSW9Jd2NiUmxxYWkyUTduS3FkbDNpRzBsUGJXNWZZRnN3X1RVRDhJTVo?oc=5"
+      }
+     ],
+     "original_title": "The Everest explorer, the death metal drummer, the Buddhist, and the prime minister: The journey back to Sir Ed's first Nepal hospital",
+     "published_at": "2026-11-14T18:04+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "7c6a4949cf17",
+     "title_ko": "NZ First keeps quiet on status of Michael Laws as Winston Peters leaves country for summit",
+     "summary_ko": [
+      "Michael Laws has not come to Parliament."
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/politics/nz-first-keeps-quiet-on-status-of-michael-laws-as-winston-peters-leaves-country-for-summit/XOUEGNXWZJFEZG575W57YSUWMY/"
+      }
+     ],
+     "original_title": "NZ First keeps quiet on status of Michael Laws as Winston Peters leaves country for summit",
+     "published_at": "2026-11-16T16:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "akl_safety": {
+   "label": "치안",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "ddb7adab9de8",
+     "title_ko": "Four Swans players won't face charges over alleged sexual assault",
+     "summary_ko": [
+      "Four Swans players won't face charges over alleged sexual assault"
+     ],
+     "tags": [
+      "환율",
+      "치안"
+     ],
+     "importance": 10,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQMmxfMkVFRklNN3BqY1M3eUczbTdVUEhzamJSUVhOcU1PTE1qZVBmdGUtVW5LTnVrMG4zeXF1SU9LQmJHZWdVNGZtR2p5T1VrYkk1XzZKa2dUYXFtbGNPWXlLeW9rOVBPME1qd1k5dWdXbjJUbzk1dDJDd0oxRHNmaFZVX0Rad1F6LWk3aU0yNGY5MUNYb05sdURUb3NMU2NqZ0M0d2hZLWdMMzRoRlZmX0ViUjZpQkF0aEx6bVh4eEJMbEEwNHdxUkdvcjZFaF93V2hIbjlaMlY?oc=5"
+      }
+     ],
+     "original_title": "Four Swans players won't face charges over alleged sexual assault",
+     "published_at": "2026-11-13T01:46+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "2e6c97222d5b",
+     "title_ko": "Well-known sportsman admits taxi driver assault over $36 fare",
+     "summary_ko": [
+      "Well-known sportsman admits taxi driver assault over $36 fare"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOS1loRzlwdlBEOHpRemFYTW1wZ3gwU3c2YlFfa1cxd21kWXFGcE9ob2x3VGZEX21fb1puUzlkQTZQa1lwZUxYUUluSjU3LUhyVUVuTHRBRUxnRjdhS0Z0NVIyclRaTWo0aW9rTG1LME0xQUtQWWgxSEFXSXlSME1RU01JYWc3THFSZVYwb25nbjh4cDdKc1ItamFXc3N4bDdRU3JodFQtc1UyeDQyb0RzdDJpVjRMR1Naa0haZjZJR3lsemRSckdEcmU3dmRGSl9Wd1JYTzVJMA?oc=5"
+      },
+      {
+       "name": "Newstalk ZB",
+       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNazh0WndyOVZ1RkRxeHVlNjBMNE9Pa0J2WmhpTVlGVFRzY2F2NklOUmxPTGxpMkNsVVkwejItZnRwWm1wekVBeGp3YnE5U1FkTmF1Y0VPR0psMjFCTWJGNHo3SzkzVERieU4yU0hJUHp3R1M0NWl4bGpfeVYyY002MmoyYnI4MkxQdnBoampuQklGZm52NjdvUzYwR19KUWtXVGZz?oc=5"
+      }
+     ],
+     "original_title": "Well-known sportsman admits taxi driver assault over $36 fare",
+     "published_at": "2026-11-16T00:36+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "596f0c05764e",
+     "title_ko": "'Justice has spoken': Depardieu drops sexual assault appeal, apologises",
+     "summary_ko": [
+      "'Justice has spoken': Depardieu drops sexual assault appeal, apologises"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPcDBhZkoxdVlVRHZOS1I2RC1HYVBLSzNmcWFEOUxfTWJvQ0Nrc1N1cWxacVZlUGpOWDMtSzZ6ZzNqSUllZ3FDRGJaLUVTOHVxNnVudzNtVGt4NUZncU9jX1FpdGRlUjU0c2xHS21nV1M2RjFNWjlTaUNMVWxqbk9KN3dsd0M4UGViN0tiampXOUthb0pHS2xfekc5SVZ5UTEtSjd2UFFtTVZkNWltbVhTY3p5dmZJT0ppMmZxaG5sbGNXQUc4WExDQ2NZUlhjUQ?oc=5"
+      }
+     ],
+     "original_title": "'Justice has spoken': Depardieu drops sexual assault appeal, apologises",
+     "published_at": "2026-11-16T15:43+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "6b6d7ed8dd39",
+     "title_ko": "Russell Brand jailed for 10 years over rape, sex assault",
+     "summary_ko": [
+      "Russell Brand jailed for 10 years over rape, sex assault"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPZkFaRmNxWGFaQlVQZkMzZXRwMmRHQTJjS0hRdHFTRW9iSE43cHh4WUxzS1V1dlZtQlVQNUZ3RUYwaTZuUU14YVFONklWOHpsMGdfY3g2ckZtT3NYSDdWaTFaT3JycE5qcHJBcHJnVDVBeDVUcjFFWE1pLXJzYzZYVmV3dkNJUV9WeVA1NDdlc3k1UnpFTUx3V01BdWFONWcwQkkxTXYxcHVlOFFISkFvMW9YRVhwS1NvRXVxY2hnWDBXZw?oc=5"
+      }
+     ],
+     "original_title": "Russell Brand jailed for 10 years over rape, sex assault",
+     "published_at": "2026-11-16T05:53+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "akl_life": {
+   "label": "생활",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "336cc02aa61a",
+     "title_ko": "University of Auckland researchers trial AI diabetes coach",
+     "summary_ko": [
+      "University of Auckland researchers trial AI diabetes coach"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Inside Government NZ",
+       "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQdmxtdVJWcXQ5OUFCdDBaXzZIcjFjSWp1QjRHT1QxcEpCMEFiZm9KWWo1UGN0MENZV1pydmVrMXdyMS13b21ZZlVNLWVWRkE0UXNNWG9wOU5RNnpIRGdEaWg0YngwLVFGZEFlcFdOTzR4LVByYTV0S0tKMHAzdTNhSklhS3VXNk9DVnV5endrZWlzeVQw?oc=5"
+      }
+     ],
+     "original_title": "University of Auckland researchers trial AI diabetes coach",
+     "published_at": "2026-11-16T03:22+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "1b52eb08f237",
+     "title_ko": "Kayaker with no lifejacket rescued after two hours in water",
+     "summary_ko": [
+      "The kayaker was spotted in distress off east Auckland's Beachlands on Thursday."
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPbzJzd0Y5VFBCU1ZLVnpLZHBkNzBFZ212RG52bGJXSzRGeHU0S2w3dG9FM1hlaEZGQ1RhY3pJNHE0YWc2YUN0WDZWRTNlU3hwdFZBMXpTZkVzMXpiTkdSQXNoWkctWjdqQkg4SUUwNW4zekFJZFBXN2Iyc3IxcGxxcXl2WDlyZ0xkVVJwRDk5bGtEMWdra0h1THRjaw?oc=5"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOWWJ2RUN0TjJOS0VWc3NtV1ByQU5qemdsUFBwYTloYlppWkd6eU54N01OcUVPU2V5bjNYXzZ1N2pmb3g3eG9lWVBmYU53bGlkMk4xOC1PT1RaMEQ2dHhtTDVGV1JXNUVsSTFPc2dLX2ZsdDR0ckwzeUJXcWFuc05CYWpZTXhEeVdTZktkRWlKSXgzVWNtQVdJa1lfc2pNZzZJWmlKck5MSmVXZ3pKQXNiN2pJell4VlBUTk1ybXJOczk?oc=5"
+      }
+     ],
+     "original_title": "Kayaker with no lifejacket rescued after two hours in water",
+     "published_at": "2026-11-16T14:04+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "90000afb4cb6",
+     "title_ko": "Appreciating bus drivers for keeping city moving",
+     "summary_ko": [
+      "Appreciating bus drivers for keeping city moving"
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "https://franklintimes.co.nz/",
+       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxORXFTYWpBU1ZvcnpTNkhzOUlxdDZDcmVVd2JPNU5SbjdLUjlnbHNwNzBMS3RMcjdRUDhyQXB6ZWpHeHlMTDJRaWZqWnZrRlZ2dFM4Szd1T2VPdG9aRjVScTM0R2ZuUXE5SzB4VndGUXZBeXpIMlRTc0tIaFpSSXhQR0k2bw?oc=5"
+      },
+      {
+       "name": "Times.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNZ3ZBMWs2b3ZEQ2VSU3RJeDlLaXZ1MXVycUhlX3k2ZS1MQ3I2d29pR2FRcTVKalRWek03VXp4SUc4bDJlYlpKMDNYcUd2ZVpxM0Zua1VXdGU5U25MbW1wa19yaGZpdEEyNUctVkhwaG1TY2ZqSktXN1pmd2VZOWE1cV91OEFhOTlvNXZvYWllSlh2SGZjSFViNnZB?oc=5"
+      }
+     ],
+     "original_title": "Appreciating bus drivers for keeping city moving",
+     "published_at": "2026-11-16T12:29+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "6136ff419ecc",
+     "title_ko": "North Shore Aero Club wants noise covenants on 400 homes",
+     "summary_ko": [
+      "North Shore Aero Club wants noise covenants on 400 homes"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "B2B News",
+       "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQc3BVNWYtNFFpM213dXdQNV91Qk9BMHNwOGNoaTJBZlVITFlod2V4MmZEd3FiNGhWOUd0TktYUllqLWM1WGFoUFZRVEMwNFVBNGs0SWZBYlVPV3c0SGFHa005QVNwOXlLUXNBTU1mV29kZ0hXLWItVUM4TkMxeTFpSVhHa01JRnZWLVJOdg?oc=5"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQdDJabmx4Qmt3UUE2VVhBSVVEYTdkby1fZm1IenhPRU1iSDNjVkNLeTBqZ01NcU5lMVBNakQ2REQ0eG9uQjNtSHdUSl8tb0Z5R1BRLVM5VW40ZUYxVWhJdWFTZ0ktcE1uZlhqUkd2LUNSbU9EWmFaMnNKaVFFT3ZPQk9aT3FfanBDOVR5dDFXOEdNVE10R3VXUnAwRTU1dzhKZWtqX3k3Nm04N1FHdlo2U3BxQlNCRUdzT0ZtU2czOFVWODNTX0F3ZkoxWUw2TGZNT3RfYlhXQUZZaVFkSWsxX3RXaVo?oc=5"
+      }
+     ],
+     "original_title": "North Shore Aero Club wants noise covenants on 400 homes",
+     "published_at": "2026-11-16T01:40+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "e49b9848c380",
+     "title_ko": "Why burnout happens",
+     "summary_ko": [
+      "Why burnout happens"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "OurAuckland",
+       "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQSHFaT0FXMUFDbURrVjV3b0RybXdkeWFiVkFFd2xVSkZUcUlfZlhUZGo1aVRQZVFIZEVoQU1oXzE1NmRqYUNtWHNTc1NQcDdXN3o3bnZxVkg2REM3anh2UzgyeURHMGdra1lnSjRYOTVEbmdiak5ZVWcyQmk2dEJVRVk3ajRsZw?oc=5"
+      }
+     ],
+     "original_title": "Why burnout happens",
+     "published_at": "2026-11-16T16:46+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "akl_property": {
+   "label": "부동산",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "6157bbe46400",
+     "title_ko": "Auckland rental demand drops in October as Barfoot & Thompson lettings fall 12%",
+     "summary_ko": [
+      "Auckland central west rents rose 2.4% annually to $756 a week."
+     ],
+     "tags": [
+      "주거"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/property/auckland-rental-demand-drops-in-october-as-barfoot-thompson-lettings-fall-12/premium/O25BJBAG7RHJHKKQ6XHLZ346GA/"
+      }
+     ],
+     "original_title": "Auckland rental demand drops in October as Barfoot & Thompson lettings fall 12%",
+     "published_at": "2026-11-16T04:06+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "akl_health": {
+   "label": "의료",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "37e965b4c888",
+     "title_ko": "Newborn dies from pneumonia after discharge from hospital at six hours old",
+     "summary_ko": [
+      "Newborn dies from pneumonia after discharge from hospital at six hours old"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQRTl2QmVZb2JGZGFfYTVoSlotSTM5VTBSMFBqeVRjOUJuM1RWWnFmUV9kNHdQaDdseXZJY1BIUDhoVDJpblhYUGg2dUcxd19UY0pMMXViTWh6bVNhd0VsNzJwLUJqaS1qWl9JTnJ0ampPeGw3TzdOSWNGX0FuRnNxek5kYjhVdmQ0VEM5RmsxUlZ2ZXdRYUhUWnlBVU9pclA3U3hVMWtvd2lBcTkyZ1c0TjBZZnpkQTA?oc=5"
+      },
+      {
+       "name": "1News",
+       "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPUkYyWTZXZjd2V1lUaURBdGJHMHlpajNBZHczTGZvcUhFX3ZfWnV5cTdvaXNRUnV3dEFja1lGc2pjdzU2ckI5eHdUNzhvWG9CZ1NyZkx1WkVuM3ZDakE4T2ROaWdTOFk1ZEJaS2MwazRJTGhLejRHNF9Ic0JOTmlDV19Mc3BrSzQ1Mi1fcVZlYW9OVTdsejR3bmlJSkVOS2IxYWhLOU96eHhuOHdB?oc=5"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOSlRPTlZMazVSRXh2QU1RZnVKdWtjaENzLVBITXRkZzVTdXM4YUtJd1ltLWEzTHhKOVY4YjF4dmN3TzB5OVpPVldIaUhMTGxOQUdwanhseTlyeENQeDBrRF9aQVpjeEd1NnVYUENkTk5ncWRYRnFubVNUVUJBLXZQbmxiX1FrZHdxSms4Tkktbk8xODlGNUNkRllGX08?oc=5"
+      }
+     ],
+     "original_title": "Newborn dies from pneumonia after discharge from hospital at six hours old",
+     "published_at": "2026-11-16T13:59+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "c0d780cc4e1c",
+     "title_ko": "Baby ‘very likely’ would have survived if he stayed in hospital, Coroner says",
+     "summary_ko": [
+      "Baby ‘very likely’ would have survived if he stayed in hospital, Coroner says"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Waikato Times",
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNM2lvMlRubV8yVzhReUpQbXl4Ny1sZVBuVzU2NF9HN2ZZejNRaGpVellLai04WWd2cjJncFo2QVlFQVFhUTFHbWRzNW9TajBpM1FoWUZpWEJyWExuUEZSeHNTakdidm5nMm1aeWJSMThjMUxRUkNuSi1XbmUxSm12VUxkWnkwSjNESnpXaWZ4UTBwZ0xQYWlOakkyLUtYNFd2ZHNBckVFWXZsN1U5RzhCX0NXRQ?oc=5"
+      }
+     ],
+     "original_title": "Baby ‘very likely’ would have survived if he stayed in hospital, Coroner says",
+     "published_at": "2026-11-15T20:13+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "5961fecc6326",
+     "title_ko": "NZ Nurses Organisation claims Auckland hospital patients unable to vote",
+     "summary_ko": [
+      "NZ Nurses Organisation claims Auckland hospital patients unable to vote"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQUFVWWHV5VnVjQXpZU2cwTldxNW1RRExaTUI2dlR2Y3Jfb0J0c25vbEY5TlpkS1gxYTJBNWlMWUl0UFZNMXlVeElSU3lvZF9wSjBEQzgzbHpJMTlHV0dXMkJqazNuSXd3bVlZTkRnYm9wVmphUERYY1hfS1dORXFVX1ZHb3puQl9SaUZwRlhCNzROMjMzWW9MaE5kM3FVckxaZEVBNVI2R2tqaGxDRi01d2xJOA?oc=5"
+      }
+     ],
+     "original_title": "NZ Nurses Organisation claims Auckland hospital patients unable to vote",
+     "published_at": "2026-11-15T07:27+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "6d771c33c236",
+     "title_ko": "SpaceX Starship's first-ever landing 'capture'",
+     "summary_ko": [
+      "SpaceX Starship's first-ever landing 'capture'"
+     ],
+     "tags": [],
+     "importance": 4,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOVzRNN0ZYNlFqckx2aHNUOUMxQ25hcndPeVNVc04tYmxvbkJydS1kdmtiRTlPRExpbXJUd3FNYVBZY2NsdFpfTmdZUUx5R1JuUUFtVVJ1RW0yamFqZU5vanVGcGpfV1A4Q1NUeXFfMWN0MHVZNzliZ2t5eXBZYkhYaTctcUc0YzBxcEc0ZVB2TkhFV2pVQjB3MDZsbXNpcVo4c1pzUzBCdw?oc=5"
+      }
+     ],
+     "original_title": "SpaceX Starship's first-ever landing 'capture'",
+     "published_at": "2026-11-14T22:07+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "akl_education": {
+   "label": "교육",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "cab66171d969",
+     "title_ko": "'80 unknown students turning up': PPTA calls for Government to support school roll growth",
+     "summary_ko": [
+      "'80 unknown students turning up': PPTA calls for Government to support school r…"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "Newstalk ZB",
+       "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxNVm10OXMwMGtfb2hEY2JGQ1FUUlR4YzZUTTloZHg4ejE1aTFHaExJWjFDLWUxX3o3WjVWSG0wVXBVLTcxUDNWa3JyTE9PdW1hNU9WTm5vVkV6dlJDWnBaU0M2TmhmN1U2eEJuWTZQX05ZUGdNN19pT29NV29Kd2dHNjR1Z2hBQ1BRSTMwakg5TDZHY2NuZnNmSWVkN0l6bXVSbXZfd3FWNEZsSkh6MHhiM3JTeDZrN0pVTVh1SzFia2xlTkZlZFBEUDNaLTNmd3NwR1VvaGNvTW1STTZhbTd6UWtYLTdzNElqQnEyUHRzQjA5LWNiV290SlpDdU1iUQ?oc=5"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOcE81T1NMYWJjSlZ0ZWliUzRkenptTjJoemUyV2pNSTdaVklnYmlkY0E5VUtjZ2R6Y1BaaHBIZzR5UHM5VjJtMDZMaXZFQUtWUzE2NFV0dm13Q1czYkRqVFp4SDFORHMxM1M5M2YwcVhEWm5DcV9laTVOWUhieklLLU9tNFVPQVAyeEN6eEpjLU1CTTUweWRWcnplRG42eHp3LWxpUG1DdzJoSWNXNkF3TDBYRkJ2ZU9w?oc=5"
+      }
+     ],
+     "original_title": "'80 unknown students turning up': PPTA calls for Government to support school roll growth",
+     "published_at": "2026-11-11T20:57+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "e65fff076f98",
+     "title_ko": "School for children with complex needs has to close despite families' pleas",
+     "summary_ko": [
+      "School for children with complex needs has to close despite families' pleas"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxNQTFvUEhFVWM1ejlHRk1SZ0xsRUNqM0hFVWVGMC05LXdmOXNleFhEeHowV1hnLXl2NGJfR0lCZW5CS1ozcDY4Yk9pdWt2WG9MdnJla2ZyblJ3Y0xmUUVodFhjVEdKNzYzTUFrbno2cEtJRmNVTjlaSVYxMUN2UjF0LWNNYWZFTzY1X0s4eUFFaG5NUHliQXFTLVJ2azRGeEtDV2VhY3NUSU93MDNWaDQ3ZTBCMGV4b2hSclRLWXEyeERNdXFnQ0x4T05SRWstS1NLWFFCQ2FLQ1NLZDd5eW15OHJvZjQ?oc=5"
+      }
+     ],
+     "original_title": "School for children with complex needs has to close despite families' pleas",
+     "published_at": "2026-11-12T04:01+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "adb044413eb2",
+     "title_ko": "Luxon says wait for votes could have taken 5 weeks without enrolment changes",
+     "summary_ko": [
+      "Luxon says wait for votes could have taken 5 weeks without enrolment changes"
+     ],
+     "tags": [],
+     "importance": 4,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOQ3F2YlhsalFlRlY2QzdEcVhFY1JXOUtpRWFMV296Ni0yQUZnZzZfQTNFNnVsYTdqYlNZbGNVZHpYV3d5Vjc5N0VKcV9MM1NLRzd4ei1ucGFVSWJxemY3dUtSNS04QTNOYVpSdUFTQXQ0Wnp3eXgtZGhTbEZaZXlXZ0pkUUFaZC1MY3pNVHVsdXZPaXZWYlhTb1JWTEptWG5tM2F0NjByWld6LTNBUjI1TFFoalRhU1BYMjhvaA?oc=5"
+      }
+     ],
+     "original_title": "Luxon says wait for votes could have taken 5 weeks without enrolment changes",
+     "published_at": "2026-11-15T21:57+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "nz_immigration": {
+   "label": "이민 레이더",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "73ecb2f5a67e",
+     "title_ko": "IPL founder Lalit Modi announces British citizenship after 16 years in UK",
+     "summary_ko": [
+      "IPL founder Lalit Modi announces British citizenship after 16 years in UK"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "Indianweekender",
+       "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPbHQxanZ4TURMUTBTcW83TndHTUhwVGxwVHJtaTkxYzZMX3psMURFQ1ljSzVvcGtEZjAxeXoxdV9MQUstRHN1T1pJaDF4eVFYc0NyTmVmMWNoVDZWOGRsQjJYOXlpcTlFVDFhZmc4VnRYVUotRnFUYUxFUTByMnZqd3YxcWpzbnI2LUlxVzZoV0pFNV9iVGJlWENNNkVkZENRRWkteVF5U0xLbklYSG9lU1dR0gHCAUFVX3lxTE1JR0ZBMklRd3RQb1poR2lMVnBrelgwQVlYMWFkb3kxWENKZHZ5SFJGSmQ0bzRWSVprOHR4YkJQOEUtMWVPejlPX0dvR0FDaHdra3ppTnZ6V3IyNHl1NGctUHd3NXFwRDVNZXp5ZVFxRTNHNEhub1RlZWlPQzFRTzgzV05KTTBjaWY1eU5GdERCZ2QzSVFoRXZaaElmOThzWm5TamQwMGVXcDltMkZaa3Npa0l2WVFhanlzcXhpNmczdUR3?oc=5"
+      },
+      {
+       "name": "Hindustan Times",
+       "url": "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNaXhlTGtXWjFmbnd2ZHo1UDVjLTNGZHA0b1lSbjBaRlNSUlBOenpXbWlaT1BLLWdQekxHblBpbmwwWDJGNUdMdHBCRkVFNFNHTlVLRWt5a01Fb3p6eG1TTHNNMm1QR0daOEs3UC1PNlVjMEZFbFJlWkE5czhKanl3QURnbHV4SEFRTFBYVVY1N3E5aEtvV29ENHR6dmFEeE5Cel9EU2N5Uld0R2ZpWWYwMlJzTXRvOXJTbUVCUmtrb1FUdnJRYmZmS2tpaDVnaUt6OWxUT1l3NHM1amNyYUFXVC1iOUpfcFFZT2dRLWlnLVpuRXEwNWfSAfsBQVVfeXFMTXcyc1MzYWl2WURKaElmbklWcGVFdUxqMDd6MVpmMnhxSDVEbzcxY3dTZi02eTBrT3dLVnRiRUxyQVdOMHphUVJXX1RhUjFrVjhJY1MxVkVzekVBNHFoNk91UjdGT0hEaWxNaFF2RlFZcnpaRGdiNWstem02MWg5VTZ6UGdlNmtxVERJVWZkSEZMOFNKbl9PYmxMT3kxTklWcGlXSXhybXhFd1QtYk1hcEtvSFV5bjVlbkRwV182U1JwTW95eUQyTVhoWU9SYmVueFZGa0pwY2xyUzlXUzVDTTBYOHF4Z3k0QTdrV2NmSzdxR2p2XzlRVGxTZ3c?oc=5"
+      }
+     ],
+     "original_title": "IPL founder Lalit Modi announces British citizenship after 16 years in UK",
+     "published_at": "2026-11-15T12:49+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 8
+    },
+    {
+     "id": "9515c0b704ce",
+     "title_ko": "Family of five wins residence appeal after INZ mishandles disabled daughter’s care needs",
+     "summary_ko": [
+      "Family of five wins residence appeal after INZ mishandles disabled daughter’s c…"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "https://awaaz.co.nz/",
+       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOc2VMSjVGd1FDdmZORDd3YzBlTlZOM3d2OFRkQUpMYm16Njg3aVRvWmdwUU05Rm0wV3BQRnViRUFnY2xac3BQNVk2LTRYNWJUcGZKY1YxbmYtdkFaMnF1RHNDdnBhTXVIRzBZNGJxSUlsZDZNcmxrdFNYS0RITzNvT1VITy1wc2tqZ0dvUFRoNlVYX2ExUEdGeVUxcEhrT0ZOOGtaLS1INDJOUUhpX0w2YlQyaHJaeVVvN3NHS3lMZU9FdHdtaG8yRw?oc=5"
+      }
+     ],
+     "original_title": "Family of five wins residence appeal after INZ mishandles disabled daughter’s care needs",
+     "published_at": "2026-11-16T03:55+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 8
+    },
+    {
+     "id": "9de6c07fec69",
+     "title_ko": "Auckland fake visa claims: Immigration NZ investigates unlicensed adviser",
+     "summary_ko": [
+      "Lawyer Alastair McClymont has seen an increase in complaints about fake adviser…"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/auckland-fake-visa-claims-immigration-nz-investigates-unlicensed-adviser/OJGT7VLQOZGDND7V2UM6GDWLJE/"
+      }
+     ],
+     "original_title": "Auckland fake visa claims: Immigration NZ investigates unlicensed adviser",
+     "published_at": "2026-11-16T16:25+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 5
+    },
+    {
+     "id": "6755eeeca25e",
+     "title_ko": "Guidelines on customary adoptions of overseas children issued by Immigration NZ",
+     "summary_ko": [
+      "Customary adoptions are supposed to be extended family living in the same count…"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/community/2631361/guidelines-on-customary-adoptions-of-overseas-children-issued-by-immigration-nz"
+      }
+     ],
+     "original_title": "Guidelines on customary adoptions of overseas children issued by Immigration NZ",
+     "published_at": "2026-11-16T03:29+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 5
+    },
+    {
+     "id": "92fc113c393b",
+     "title_ko": "New Zealand Golden Visa Billions at Risk From Banking Gap",
+     "summary_ko": [
+      "New Zealand Golden Visa Billions at Risk From Banking Gap"
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Impact PR - Public Relations",
+       "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBoWHA4U3FoWFpSeWxvU1pNMkpLb1pNZEdRRWRLNFpLYWhTM3BGNzRrN2gyRVNsYWVjYVVUelVPNFBvR2l3OHFmcmJYN1FuWURqWHNQN2RkUjcyR0E3TVFGcFU4WnlfZ0pZclhMNmo0WWdtdURCU1pj?oc=5"
+      }
+     ],
+     "original_title": "New Zealand Golden Visa Billions at Risk From Banking Gap",
+     "published_at": "2026-11-15T18:15+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 5
+    },
+    {
+     "id": "d7dabb0794c3",
+     "title_ko": "Indian film stars on Auckland's radar as Diwali cinema showcase eyes expansion",
+     "summary_ko": [
+      "Indian film stars on Auckland's radar as Diwali cinema showcase eyes expansion"
+     ],
+     "tags": [],
+     "importance": 4,
+     "sources": [
+      {
+       "name": "https://awaaz.co.nz/",
+       "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNeU0ycjBxLUJuS01oS2dNRjBaN2xleUpJYS1TS29pMTdLMVBmM056aDZuOU5zWm5nZk9SaFFFSkxqSDlqYWpSdXREeGZRcXRQNlVVdm5oZ3U4YlkwaWhzLTZUeEFUNDJUYUdiaDhKY2t3SEtIeUlNUEJGMVlGYkdlVlcyQlhkdE9JZXFmWVJVakI2dko2cmVTQlM4enJTblhIZWVtVjVWYXhCbm1panZET2lBT0E?oc=5"
+      }
+     ],
+     "original_title": "Indian film stars on Auckland's radar as Diwali cinema showcase eyes expansion",
+     "published_at": "2026-11-16T01:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 5
+    }
+   ],
+   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  }
+ },
+ "extras": {
+  "nzd_krw": 735.84,
+  "usd_krw": 1335.7,
+  "jpy100_krw": 836.92,
+  "btc_usd": 64935,
+  "auckland_weather": {
+   "max": 23,
+   "min": 16,
+   "desc": "이슬비",
+   "code": 53,
+   "rain_chance": 59,
+   "days": [
+    {
+     "date": "2026-11-17",
+     "max": 23,
+     "min": 16,
+     "code": 53,
+     "desc": "이슬비",
+     "rain_chance": 59,
+     "uv": 5.4,
+     "wind": 20.7
+    },
+    {
+     "date": "2026-11-18",
+     "max": 22,
+     "min": 15,
+     "code": 95,
+     "desc": "뇌우",
+     "rain_chance": 99,
+     "uv": 2.5,
+     "wind": 32.4
+    },
+    {
+     "date": "2026-11-19",
+     "max": 17,
+     "min": 14,
+     "code": 53,
+     "desc": "이슬비",
+     "rain_chance": 27,
+     "uv": 8.65,
+     "wind": 26.6
+    },
+    {
+     "date": "2026-11-20",
+     "max": 18,
+     "min": 13,
+     "code": 51,
+     "desc": "약한 이슬비",
+     "rain_chance": 34,
+     "uv": 5.75,
+     "wind": 14.8
+    },
+    {
+     "date": "2026-11-21",
+     "max": 19,
+     "min": 13,
+     "code": 3,
+     "desc": "흐림",
+     "rain_chance": 17,
+     "uv": 8.75,
+     "wind": 13.0
+    },
+    {
+     "date": "2026-11-22",
+     "max": 20,
+     "min": 11,
+     "code": 45,
+     "desc": "안개",
+     "rain_chance": 18,
+     "uv": 9.0,
+     "wind": 12.1
+    },
+    {
+     "date": "2026-11-23",
+     "max": 20,
+     "min": 12,
+     "code": 45,
+     "desc": "안개",
+     "rain_chance": 16,
+     "uv": 7.6,
+     "wind": 14.7
+    }
+   ],
+   "uv": 5.4,
+   "wind": 20.7,
+   "rain_hours": [
+    15,
+    16,
+    17
+   ]
+  },
+  "policy_rates": {
+   "updated_at": "2026-11-16",
+   "rates": {
+    "NZ": {
+     "name": "뉴질랜드",
+     "label": "OCR",
+     "value": 2.75,
+     "as_of": "2026-11-06",
+     "changed_on": "2026-09-03",
+     "previous": 2.5,
+     "year_ago": 2.5,
+     "source": "BIS"
+    },
+    "KR": {
+     "name": "한국",
+     "label": "기준금리",
+     "value": 3.0,
+     "as_of": "2026-11-02",
+     "changed_on": "2026-08-27",
+     "previous": 2.75,
+     "year_ago": 2.5,
+     "source": "BIS"
+    },
+    "US": {
+     "name": "미국",
+     "label": "연방기금 목표",
+     "value": 3.875,
+     "as_of": "2026-11-16",
+     "changed_on": "2026-09-17",
+     "previous": 3.625,
+     "year_ago": 3.875,
+     "source": "FRED",
+     "range": [
+      3.75,
+      4.0
+     ]
+    }
+   }
+  },
+  "processing_times": {
+   "updated_at": "2026-11-16T17:17+00:00",
+   "items": [
+    {
+     "key": "pswv",
+     "name": "졸업 후 취업비자 (PSWV)",
+     "group": "졸업 후",
+     "p50": "",
+     "p90": "3.5주",
+     "pct": 80,
+     "sub": "",
+     "note": "80% within 3.5 weeks",
+     "url": "https://www.immigration.govt.nz/visas/post-study-work-visa/",
+     "as_of": "2026-11-16",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-11",
+      "prev_p90": "3.5주",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "aewv",
+     "name": "고용주 인증 취업비자 (AEWV)",
+     "group": "취업비자",
+     "p50": "2주",
+     "p90": "5주",
+     "pct": 80,
+     "sub": "",
+     "note": "Accredited Employer Work Visa (AEWV) | 2 weeks | 5 weeks",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/work-visa-wait-times/",
+     "as_of": "2026-11-16",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-11",
+      "prev_p90": "5주",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "smc",
+     "name": "숙련 이민 영주권 (SMC)",
+     "group": "영주권",
+     "p50": "3개월",
+     "p90": "5개월",
+     "pct": 80,
+     "sub": "",
+     "note": "Skilled Migrant Category Resident Visa | 3 months | 5 months",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
+     "as_of": "2026-11-16",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-11",
+      "prev_p90": "5개월",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "gl_str",
+     "name": "Green List 즉시 영주권 (Straight to Residence)",
+     "group": "영주권",
+     "p50": "8.5주",
+     "p90": "4개월",
+     "pct": 80,
+     "sub": "",
+     "note": "Straight to Residence Visa | 8.5 weeks | 4 months",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
+     "as_of": "2026-11-16",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-11",
+      "prev_p90": "4개월",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "wtr",
+     "name": "취업 후 영주권 (Work to Residence)",
+     "group": "영주권",
+     "p50": "9주",
+     "p90": "3개월",
+     "pct": 80,
+     "sub": "",
+     "note": "Work to Residence Visa | 9 weeks | 3 months",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
+     "as_of": "2026-11-16",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-11",
+      "prev_p90": "3개월",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "pr",
+     "name": "영구 영주권 (Permanent Resident Visa)",
+     "group": "영주권",
+     "p50": "1.5주",
+     "p90": "2주",
+     "pct": 80,
+     "sub": "",
+     "note": "Permanent Resident Visa | 1.5 weeks | 2 weeks",
+     "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/",
+     "as_of": "2026-11-16",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-11",
+      "prev_p90": "2주",
+      "delta_days": 0
+     }
+    },
+    {
+     "key": "citizenship",
+     "name": "시민권 (Grant of Citizenship)",
+     "group": "시민권",
+     "p50": "",
+     "p90": "6개월",
+     "pct": 85,
+     "sub": "94%가 5개월 안에 결과 통보",
+     "note": "within 6 months of submitting their application, 85% of applicants are granted",
+     "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/how-to-apply-for-nz-citizenship/application-timeframes/",
+     "as_of": "2026-11-16",
+     "status": "ok",
+     "trend": {
+      "since": "2026-11-11",
+      "prev_p90": "6개월",
+      "delta_days": 0
+     }
+    }
+   ]
+  },
+  "living_costs": {
+   "updated_at": "2026-11-16",
+   "rent": {
+    "month": "2026-09",
+    "median": 640.0,
+    "lower": 530.0,
+    "upper": 750.0,
+    "source": "Tenancy Services (신규 임대차 보증금 기준)",
+    "url": "https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/",
+    "yoy_pct": -1.5
+   },
+   "fuel": {
+    "source": "MBIE 주간 유가 모니터링 (전국 평균 게시 가격)",
+    "url": "https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring",
+    "petrol91": {
+     "date": "2026-11-06",
+     "nzd_per_l": 3.52,
+     "wow_cents": -4.7
+    },
+    "petrol95": {
+     "date": "2026-11-06",
+     "nzd_per_l": 3.72,
+     "wow_cents": -4.6
+    },
+    "diesel": {
+     "date": "2026-11-06",
+     "nzd_per_l": 3.19,
+     "wow_cents": -3.6
+    }
+   }
+  }
+ },
+ "meta": {
+  "mode": "gemini",
+  "failed_feeds": [],
+  "feeds_total": 49,
+  "stories_after_dedupe": 840,
+  "usage": {
+   "provider": "gemini",
+   "requests": 0,
+   "models": {},
+   "total_cost_usd": 0.0
+  },
+  "alerts": [],
+  "degraded": true,
+  "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_health, akl_education, nz_immigration; 선별 실패",
+  "retries": 0,
+  "quality": {
+   "items": 63,
+   "bad": 58,
+   "redone": [],
+   "bad_ids": [
+    "2830224ff750",
+    "03cc503f8ccc",
+    "bf9510616611",
+    "daac14596b0c",
+    "51421a7517db",
+    "0800c5d147a2",
+    "8c582beff834",
+    "62b820d5932f",
+    "a24fd8b6d134",
+    "224d99f4a6c9",
+    "b359dbb11b1a",
+    "27c67ce80c9c",
+    "b1ddae6cfe57",
+    "dba092bedf09",
+    "522121bf2bd0",
+    "470c2a18c749",
+    "55019c2d3c67",
+    "62283c183003",
+    "eea2657fedcf",
+    "c3945e77d991",
+    "82e6a3abf0c3",
+    "580720554aa9",
+    "46265e1ba929",
+    "94890cafc84b",
+    "20192cef64a0",
+    "2bb795cf4ac9",
+    "c0c4579343c7",
+    "097c3b7332e0",
+    "6de8e01ecc68",
+    "2e5ab28ff5a1"
+   ]
+  }
+ }
+}
