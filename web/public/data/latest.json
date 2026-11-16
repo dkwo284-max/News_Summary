@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "generated_at": "2026-11-17T06:19:35+13:00",
+ "generated_at": "2026-11-17T06:39:15+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -334,6 +334,23 @@
      "published_at": "2026-11-16T11:30+00:00"
     },
     {
+     "id": "f903c547d895",
+     "title_ko": "추미애 지사, 정부·국회에 지방세제 개편 응답 촉구",
+     "summary_ko": [
+      "추미애 지사, 정부·국회에 지방세제 개편 응답 촉구"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "기호일보",
+       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1WbllPTHpFNGxqUFF1REhlMV83Z0w0SXZTM2ZHQjRHN0NZVWN4RnJ2eFlnekczbFl2cjBMbmJHMld3V3NuTFNpY0UzelFLeTFteDBfcXM4UkJaYnd3TG82YW83UWhOODROaDV3Y1ViSQ?oc=5"
+      }
+     ],
+     "original_title": "추미애 지사, 정부·국회에 지방세제 개편 응답 촉구",
+     "published_at": "2026-11-16T17:17+00:00"
+    },
+    {
      "id": "27c67ce80c9c",
      "title_ko": "종교와 정치의 경계는 어디인가 [세상읽기]",
      "summary_ko": [
@@ -383,23 +400,6 @@
      ],
      "original_title": "트럼프 “중국서 김정은 만날 수도 있다”",
      "published_at": "2026-11-16T15:53+00:00"
-    },
-    {
-     "id": "522121bf2bd0",
-     "title_ko": "최민희, 90도 사과했지만… 김민석 “당헌 따라 처리”",
-     "summary_ko": [
-      "최민희, 90도 사과했지만… 김민석 “당헌 따라 처리”"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/politics/assembly/2026/11/17/KODF6IQ5QRA33JFYDAIPNRWRV4/"
-      }
-     ],
-     "original_title": "최민희, 90도 사과했지만… 김민석 “당헌 따라 처리”",
-     "published_at": "2026-11-16T15:48+00:00"
     }
    ],
    "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
@@ -451,55 +451,6 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
-     "id": "62283c183003",
-     "title_ko": "Education Ministry’s consultant spend more than doubles over five years to $12m",
-     "summary_ko": [
-      "Education Ministry’s consultant spend more than doubles over five years to $12m"
-     ],
-     "tags": [
-      "교육"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "Waikato Times",
-       "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxORnhkRUduMjdQT19rY0dLdWRJeWVRX2RxNkRRSEZMVkhObWhONmI4VmkwT0ZLbzdBTmgycUdHNGdwV1VzN0QtYmF2Rmh1VXRCYWljMHF0U0RhVHJmbUVxS0pjSXFJUkJ3RUpHTVNTYmtxckVrcGRiMkV2eU1oYko2WERLUHJkUHNra2RmRzFEUTVCMy1PZ0pRY2t2ZVZUbDVtY2M4TmRwSE1uNUVOcDVpdHdkcGJjNFZmZHc?oc=5"
-      },
-      {
-       "name": "Stuff.co.nz",
-       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPZXhJZ1VkY2k3LWdVVHB3Nms1cDZZS1o4X1JaQlVEeEFmdTY4cE5SR1p6MTlhdjlCUDNPTjgtU0pSV2tHNTRRb2JoQ0k3emNMVTZwSnB0ODNIMWFZWnFTUFl5aFB3NGhpWlNXODJzSDdRM2RxSUFYQmZfRko4OFNxMVJWQzZ0U1VGRWotc3Byc1h3UTRFdDMyc2RZNXdhREp3c201cktqbzFIRnpaUVRzWVlLaw?oc=5"
-      }
-     ],
-     "original_title": "Education Ministry’s consultant spend more than doubles over five years to $12m",
-     "published_at": "2026-11-16T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "eea2657fedcf",
-     "title_ko": "Police responding to water-related incident at Owharoa Falls",
-     "summary_ko": [
-      "A police spokesperson said they received reports of an incident in the Karangah…"
-     ],
-     "tags": [
-      "치안"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://www.rnz.co.nz/news/emergencies_local/2631659/police-responding-to-water-related-incident-at-owharoa-falls"
-      },
-      {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/nz/police-at-scene-of-water-related-incident-at-owharoa-falls-scenic-reserve/HIK53HYGQZCGVKF4XZEUUPSUVI/"
-      }
-     ],
-     "original_title": "Police responding to water-related incident at Owharoa Falls",
-     "published_at": "2026-11-16T06:39+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
-     "radar": 2
-    },
-    {
      "id": "c3945e77d991",
      "title_ko": "Tropical Cyclone Xavier to bring damaging winds to Northern Cook Islands",
      "summary_ko": [
@@ -519,9 +470,73 @@
      "published_at": "2026-11-16T11:53+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
      "radar": 2
+    },
+    {
+     "id": "86fe8d9f29df",
+     "title_ko": "Police continue search for missing Karioitahi swimmer",
+     "summary_ko": [
+      "The police helicopter, maritime unit, surf life saving and coastguard will cont…"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/11/16/police-continue-search-for-missing-karioitahi-swimmer/"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/emergencies_local/2626497/search-continues-for-missing-swimmer-at-kariotahi-beach"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNYlJjQTAzTkFJTXVFaXlXbjhwcUY3VTJPaGNvN1phOUtsTnJ0b0hUNEhnaGN6V0V6NmY2TXB0RXZ0R1dLRjJqaEllaUx6YUJfSWUyQndMT0ZPLTFvWW9YdEhoaVFQb1JsVjJzTllNdi1sZDJkN0RicVRiZ1E2VGZEbFNoZFo4aVZyeXZzNU1IaWU3dHh2dXE4cWtKc2t1MkhKR1FtZHJR?oc=5"
+      },
+      {
+       "name": "https://franklintimes.co.nz/",
+       "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQR0liOTZnLThNZUZHX29BTG1MZmFxUUZNVjdDUXAteHFuTW1Tcy10cmJsQ08wVXE1UC1SMk1UX3ZlSW9keUlzWVpBal9GOXMzVk5IQ3l3czFMT1JXSGVLTXJhZWFpdk5BU2Mxbnc0M1dEOVhHNllkMFVyblVoaDdHMGFxVTFSYmxMeXI1YzlR?oc=5"
+      },
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQTGdEM085Ri1ZeGlWNEpkZWowZjU1TEh4aFVGTF93OFk3ak5yejhtOUFhUUZkT01jR1I0OWNlekpEdlNOV2RhbjBoeWZQQkF5cXQteEdaMi1FNl9VblVabHFTWlN5MXRFZ1hGejhTUkxWSFdOcXdMeS1jdlFBb3ZrZU1zSElPd1ZMSWpRZl8ySnJwQU1rYnRQWk1VWEZGZUtCbzRwSHN6bkE0c0k0UzRpbjgzV2ZNMTh0bmNuMXpjN1FHLVc3WDVrOEVJb2ZBczUyRGNvR3Z3?oc=5"
+      },
+      {
+       "name": "Times.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPUHZkbkxMTDZVampiaUxpU0ZyaXJIaEJnMTliejcwU1hVX1VGLXlwb0dmXzFfWUxVQzdqMDduMndyajg0djZ1dzNmRm9aR0Z3M0lqYkZWalQ5NER6dmRWalR4QjVhZEVGc3FsbmI1SGNhbmpvcG1Qb3h5ZERSTmVlemlFNFhSbEZYOTBn?oc=5"
+      }
+     ],
+     "original_title": "Police continue search for missing Karioitahi swimmer",
+     "published_at": "2026-11-16T10:40+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "5911ca9f80ad",
+     "title_ko": "'Had plans for the future': Diary of dead Kiwi monk Justin Evans at centre of police probe",
+     "summary_ko": [
+      "Diary entries showed no indication Justin Evans wanted to leave the remote Scot…"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/world/2629427/had-plans-for-the-future-diary-of-dead-kiwi-monk-justin-evans-at-centre-of-police-probe"
+      },
+      {
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/11/16/plans-for-the-future-diary-of-dead-kiwi-monk-in-police-probe/"
+      }
+     ],
+     "original_title": "'Had plans for the future': Diary of dead Kiwi monk Justin Evans at centre of police probe",
+     "published_at": "2026-11-16T03:09+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_education": {
    "label": "교육",
@@ -657,7 +672,7 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_economy": {
    "label": "경제",
@@ -745,25 +760,29 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
-     "id": "fd2b83eb4635",
-     "title_ko": "Our politicians are thinking about KiwiSaver in the wrong way",
+     "id": "3ac837872bc5",
+     "title_ko": "KiwiSaver hardship withdrawals are spiking – are there better ways to deal with debt?",
      "summary_ko": [
-      "Mark White-Robinson believes that the focus on discipline misses an important p…"
+      "In the year to March 31 2025, withdrawals had risen to more than $440 million."
      ],
      "tags": [],
      "importance": 5,
      "sources": [
       {
-       "name": "Stuff",
-       "url": "https://www.stuff.co.nz/money/361059788/our-politicians-are-thinking-about-kiwisaver-wrong-way"
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/11/17/kiwisaver-hardship-withdrawals-are-spiking-are-there-better-ways-to-deal-with-debt/"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNSHZtWHRvRzYtVEstNTlGeDM2aV83Rm9wb2pfbFRHdEVsSS1yc0l0WE1aQzZSX2VEbkpfYXJPQUQxQVAtT1drMlAxSlhXSmc3OHd0V2xfY09pZUZwbXlZNFRFS3VRb2pSRmVCR0xjNFBudFB5NWU3Q05zVHhRaHAtOWRERU5TbXN1NVgzLTZwREVLZFhIZGUtOFh1TC1jeVhtREw2cEx4R2ZURkVYQmRpT0Q5NXgzdm1SR1RjNkNNQlI5VlFT?oc=5"
       }
      ],
-     "original_title": "Our politicians are thinking about KiwiSaver in the wrong way",
-     "published_at": "2026-11-16T15:00+00:00",
+     "original_title": "KiwiSaver hardship withdrawals are spiking – are there better ways to deal with debt?",
+     "published_at": "2026-11-16T17:00+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_politics": {
    "label": "정치",
@@ -830,25 +849,25 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
-     "id": "7c6a4949cf17",
-     "title_ko": "NZ First keeps quiet on status of Michael Laws as Winston Peters leaves country for summit",
+     "id": "7d912d431999",
+     "title_ko": "Self-driving taxis, robots await Luxon, APEC leaders in China’s tech city",
      "summary_ko": [
-      "Michael Laws has not come to Parliament."
+      "The Chinese city has grown from a fishing village into a technology hub home to…"
      ],
      "tags": [],
      "importance": 5,
      "sources": [
       {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/nz/politics/nz-first-keeps-quiet-on-status-of-michael-laws-as-winston-peters-leaves-country-for-summit/XOUEGNXWZJFEZG575W57YSUWMY/"
+       "name": "1News",
+       "url": "https://www.1news.co.nz/2026/11/17/self-driving-taxis-robots-await-luxon-apec-leaders-in-chinas-tech-city/"
       }
      ],
-     "original_title": "NZ First keeps quiet on status of Michael Laws as Winston Peters leaves country for summit",
-     "published_at": "2026-11-16T16:00+00:00",
+     "original_title": "Self-driving taxis, robots await Luxon, APEC leaders in China’s tech city",
+     "published_at": "2026-11-16T17:00+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_safety": {
    "label": "치안",
@@ -876,34 +895,10 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
-     "id": "2e6c97222d5b",
-     "title_ko": "Well-known sportsman admits taxi driver assault over $36 fare",
-     "summary_ko": [
-      "Well-known sportsman admits taxi driver assault over $36 fare"
-     ],
-     "tags": [
-      "치안"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOS1loRzlwdlBEOHpRemFYTW1wZ3gwU3c2YlFfa1cxd21kWXFGcE9ob2x3VGZEX21fb1puUzlkQTZQa1lwZUxYUUluSjU3LUhyVUVuTHRBRUxnRjdhS0Z0NVIyclRaTWo0aW9rTG1LME0xQUtQWWgxSEFXSXlSME1RU01JYWc3THFSZVYwb25nbjh4cDdKc1ItamFXc3N4bDdRU3JodFQtc1UyeDQyb0RzdDJpVjRMR1Naa0haZjZJR3lsemRSckdEcmU3dmRGSl9Wd1JYTzVJMA?oc=5"
-      },
-      {
-       "name": "Newstalk ZB",
-       "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNazh0WndyOVZ1RkRxeHVlNjBMNE9Pa0J2WmhpTVlGVFRzY2F2NklOUmxPTGxpMkNsVVkwejItZnRwWm1wekVBeGp3YnE5U1FkTmF1Y0VPR0psMjFCTWJGNHo3SzkzVERieU4yU0hJUHp3R1M0NWl4bGpfeVYyY002MmoyYnI4MkxQdnBoampuQklGZm52NjdvUzYwR19KUWtXVGZz?oc=5"
-      }
-     ],
-     "original_title": "Well-known sportsman admits taxi driver assault over $36 fare",
-     "published_at": "2026-11-16T00:36+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
      "id": "596f0c05764e",
-     "title_ko": "'Justice has spoken': Depardieu drops sexual assault appeal, apologises",
+     "title_ko": "'Justice has spoken': Depardieu drops appeal for sexual assault conviction",
      "summary_ko": [
-      "'Justice has spoken': Depardieu drops sexual assault appeal, apologises"
+      "'Justice has spoken': Depardieu drops appeal for sexual assault conviction"
      ],
      "tags": [
       "치안"
@@ -915,8 +910,8 @@
        "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPcDBhZkoxdVlVRHZOS1I2RC1HYVBLSzNmcWFEOUxfTWJvQ0Nrc1N1cWxacVZlUGpOWDMtSzZ6ZzNqSUllZ3FDRGJaLUVTOHVxNnVudzNtVGt4NUZncU9jX1FpdGRlUjU0c2xHS21nV1M2RjFNWjlTaUNMVWxqbk9KN3dsd0M4UGViN0tiampXOUthb0pHS2xfekc5SVZ5UTEtSjd2UFFtTVZkNWltbVhTY3p5dmZJT0ppMmZxaG5sbGNXQUc4WExDQ2NZUlhjUQ?oc=5"
       }
      ],
-     "original_title": "'Justice has spoken': Depardieu drops sexual assault appeal, apologises",
-     "published_at": "2026-11-16T15:43+00:00",
+     "original_title": "'Justice has spoken': Depardieu drops appeal for sexual assault conviction",
+     "published_at": "2026-11-16T09:44+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
@@ -938,14 +933,54 @@
      "original_title": "Russell Brand jailed for 10 years over rape, sex assault",
      "published_at": "2026-11-16T05:53+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "0ba798d1b702",
+     "title_ko": "Person seriously injured and 'shaken' after early morning Ponsonby assault",
+     "summary_ko": [
+      "Person seriously injured and 'shaken' after early morning Ponsonby assault"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQY3ZTYVgwcWt4dHdyUlZVVmlsX2NKdzBjdmN1OTluaWdta3ZYaVVCSVRZVGJWX2hlX0QwcE0yM3lNOUxYbDVaUzE4cTRCNVdTRFdJelVyQWhiQkVMVFNfUmczNkhUdFpobUVWQ1JxQTVBaEk1OFR0MkJfNXFMRVNyYkE4emtDV1Qwd1c0TEJTSmN0dHVWTXV2NW4wZGtDRGlSb3ExN0tUbjQ4M19JQk1aOUo5eWFzNDMxZFoybFlYRmhaNkxMX2c?oc=5"
+      }
+     ],
+     "original_title": "Person seriously injured and 'shaken' after early morning Ponsonby assault",
+     "published_at": "2026-11-14T21:15+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_life": {
    "label": "생활",
    "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
+    {
+     "id": "ab4ed24787eb",
+     "title_ko": "Flood risk for hundreds of Auckland homes drops, council hopes",
+     "summary_ko": [
+      "In early 2023, this neighbourhood was left underwater after debris like picnic…"
+     ],
+     "tags": [
+      "기상재해"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "RNZ",
+       "url": "https://www.rnz.co.nz/news/environment_climate/2633478/flood-risk-for-hundreds-of-auckland-homes-drops-council-hopes"
+      }
+     ],
+     "original_title": "Flood risk for hundreds of Auckland homes drops, council hopes",
+     "published_at": "2026-11-16T17:03+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
     {
      "id": "336cc02aa61a",
      "title_ko": "University of Auckland researchers trial AI diabetes coach",
@@ -985,29 +1020,7 @@
       }
      ],
      "original_title": "Kayaker with no lifejacket rescued after two hours in water",
-     "published_at": "2026-11-16T14:04+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "90000afb4cb6",
-     "title_ko": "Appreciating bus drivers for keeping city moving",
-     "summary_ko": [
-      "Appreciating bus drivers for keeping city moving"
-     ],
-     "tags": [],
-     "importance": 6,
-     "sources": [
-      {
-       "name": "https://franklintimes.co.nz/",
-       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxORXFTYWpBU1ZvcnpTNkhzOUlxdDZDcmVVd2JPNU5SbjdLUjlnbHNwNzBMS3RMcjdRUDhyQXB6ZWpHeHlMTDJRaWZqWnZrRlZ2dFM4Szd1T2VPdG9aRjVScTM0R2ZuUXE5SzB4VndGUXZBeXpIMlRTc0tIaFpSSXhQR0k2bw?oc=5"
-      },
-      {
-       "name": "Times.co.nz",
-       "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNZ3ZBMWs2b3ZEQ2VSU3RJeDlLaXZ1MXVycUhlX3k2ZS1MQ3I2d29pR2FRcTVKalRWek03VXp4SUc4bDJlYlpKMDNYcUd2ZVpxM0Zua1VXdGU5U25MbW1wa19yaGZpdEEyNUctVkhwaG1TY2ZqSktXN1pmd2VZOWE1cV91OEFhOTlvNXZvYWllSlh2SGZjSFViNnZB?oc=5"
-      }
-     ],
-     "original_title": "Appreciating bus drivers for keeping city moving",
-     "published_at": "2026-11-16T12:29+00:00",
+     "published_at": "2026-11-16T17:15+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
@@ -1051,7 +1064,7 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_property": {
    "label": "부동산",
@@ -1078,7 +1091,7 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_health": {
    "label": "의료",
@@ -1171,7 +1184,7 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_education": {
    "label": "교육",
@@ -1220,27 +1233,9 @@
      "original_title": "School for children with complex needs has to close despite families' pleas",
      "published_at": "2026-11-12T04:01+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "adb044413eb2",
-     "title_ko": "Luxon says wait for votes could have taken 5 weeks without enrolment changes",
-     "summary_ko": [
-      "Luxon says wait for votes could have taken 5 weeks without enrolment changes"
-     ],
-     "tags": [],
-     "importance": 4,
-     "sources": [
-      {
-       "name": "RNZ",
-       "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOQ3F2YlhsalFlRlY2QzdEcVhFY1JXOUtpRWFMV296Ni0yQUZnZzZfQTNFNnVsYTdqYlNZbGNVZHpYV3d5Vjc5N0VKcV9MM1NLRzd4ei1ucGFVSWJxemY3dUtSNS04QTNOYVpSdUFTQXQ0Wnp3eXgtZGhTbEZaZXlXZ0pkUUFaZC1MY3pNVHVsdXZPaXZWYlhTb1JWTEptWG5tM2F0NjByWld6LTNBUjI1TFFoalRhU1BYMjhvaA?oc=5"
-      }
-     ],
-     "original_title": "Luxon says wait for votes could have taken 5 weeks without enrolment changes",
-     "published_at": "2026-11-15T21:57+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_immigration": {
    "label": "이민 레이더",
@@ -1375,14 +1370,14 @@
      "radar": 5
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-3.8-flash: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   }
  },
  "extras": {
-  "nzd_krw": 735.84,
-  "usd_krw": 1335.7,
-  "jpy100_krw": 836.92,
-  "btc_usd": 64935,
+  "nzd_krw": 735.43,
+  "usd_krw": 1335.05,
+  "jpy100_krw": 837.04,
+  "btc_usd": 64920,
   "auckland_weather": {
    "max": 23,
    "min": 16,
@@ -1397,7 +1392,7 @@
      "code": 53,
      "desc": "이슬비",
      "rain_chance": 59,
-     "uv": 5.4,
+     "uv": 7.65,
      "wind": 20.7
     },
     {
@@ -1407,7 +1402,7 @@
      "code": 95,
      "desc": "뇌우",
      "rain_chance": 99,
-     "uv": 2.5,
+     "uv": 7.5,
      "wind": 32.4
     },
     {
@@ -1417,7 +1412,7 @@
      "code": 53,
      "desc": "이슬비",
      "rain_chance": 27,
-     "uv": 8.65,
+     "uv": 7.25,
      "wind": 26.6
     },
     {
@@ -1427,7 +1422,7 @@
      "code": 51,
      "desc": "약한 이슬비",
      "rain_chance": 34,
-     "uv": 5.75,
+     "uv": 7.85,
      "wind": 14.8
     },
     {
@@ -1447,7 +1442,7 @@
      "code": 45,
      "desc": "안개",
      "rain_chance": 18,
-     "uv": 9.0,
+     "uv": 8.45,
      "wind": 12.1
     },
     {
@@ -1461,7 +1456,7 @@
      "wind": 14.7
     }
    ],
-   "uv": 5.4,
+   "uv": 7.65,
    "wind": 20.7,
    "rain_hours": [
     15,
@@ -1509,7 +1504,7 @@
    }
   },
   "processing_times": {
-   "updated_at": "2026-11-16T17:17+00:00",
+   "updated_at": "2026-11-16T17:39+00:00",
    "items": [
     {
      "key": "pswv",
@@ -1685,10 +1680,10 @@
   "alerts": [],
   "degraded": true,
   "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_health, akl_education, nz_immigration; 선별 실패",
-  "retries": 0,
+  "retries": 1,
   "quality": {
-   "items": 63,
-   "bad": 58,
+   "items": 62,
+   "bad": 57,
    "redone": [],
    "bad_ids": [
     "2830224ff750",
@@ -1702,15 +1697,15 @@
     "a24fd8b6d134",
     "224d99f4a6c9",
     "b359dbb11b1a",
+    "f903c547d895",
     "27c67ce80c9c",
     "b1ddae6cfe57",
     "dba092bedf09",
-    "522121bf2bd0",
     "470c2a18c749",
     "55019c2d3c67",
-    "62283c183003",
-    "eea2657fedcf",
     "c3945e77d991",
+    "86fe8d9f29df",
+    "5911ca9f80ad",
     "82e6a3abf0c3",
     "580720554aa9",
     "46265e1ba929",
