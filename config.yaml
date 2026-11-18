@@ -6,8 +6,8 @@
 # GitHub 예약 실행은 가끔 누락되므로 3번 깨우는 것이고, 이미 생성됐으면 나머지는 몇 초 만에 끝납니다.
 # 한국 시간으로 돌리려면 timezone 을 "Asia/Seoul" 로 바꾸고 .github/workflows/daily.yml 의 cron 시각도 바꾸세요.
 timezone: "Pacific/Auckland"
-run_hour: 4
-catchup_until_hour: 9    # 04:00~08:59 사이에는 브리핑이 없으면 생성, 있으면(실패한 부분만) 복구. 주 실행은 cron-job.org 04:55
+run_hour: 3
+catchup_until_hour: 9    # 03:00~08:59 사이에는 브리핑이 없으면 생성, 있으면(실패한 부분만) 복구. 주 실행은 cron-job.org 03:00
 
 # ── 수집 ────────────────────────────────────────────────────
 fetch:
