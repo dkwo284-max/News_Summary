@@ -11,15 +11,13 @@ on:
     # DST 전환을 고려해 두 UTC 시간대를 모두 등록.
     # scripts/main.py에서 현지 시간 및 오늘 브리핑 생성 여부를 확인해야 함.
     - cron: "5,20,35 16,17 * * *"
-    # AI 실패 자동 복구: 아침 브리핑이 Gemini 오류로 원문·휴리스틱으로 나갔으면(meta.degraded) 다시 생성 (하루 최대 2번, AI 를 쓰는 건 실패한 날만)
-    #   NZ 서머타임 기준 10:10 / 14:10 (표준시에는 09:10 / 13:10)
+    # 아침 안에 완성 보장: 30분마다(05:25~08:55 NZDT) 복구 실행. 브리핑이 아직 없으면 생성하고, 있으면 실패한 단계만 다시,
+    # 멀쩡하면 몇 초 만에 종료. 두 UTC 대역(16~20시)을 등록해 서머타임/표준시 모두 04:00~09:00 NZ 를 덮는다.
+    # (GitHub 예약은 자주 10~30분 늦어지므로 간격을 촘촘히 둔다. 시각 창 밖이면 main.py 가 건너뜀)
+    - cron: "25,55 16-20 * * *"
+    # 마지막 안전망: NZDT 10:10 / 14:10 (표준시 09:10 / 13:10) — 실패한 단계만 다시
     - cron: "10 21 * * *"
     - cron: "10 1 * * *"
-    # 아침 안에 복구: 실패한 단계만 다시.
-    # NZDT 기준 05:25 / 05:45 / 06:15 이후 복구 기회를 제공.
-    # NZST는 UTC 기준 한 시간 차이가 발생하므로 두 시간대를 모두 등록.
-    - cron: "25,45 16,17 * * *"
-    - cron: "15 17,18 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -86,7 +84,7 @@ jobs:
           SKIP: ${{ github.event_name == 'workflow_dispatch' && !inputs.overwrite && '--skip-existing' || '' }}  # 수동·외부 호출이 겹쳐도 하루 한 번만 AI 소모
           CAP: ${{ github.event_name == 'workflow_dispatch' && inputs.ignore_cap && '--ignore-cap' || '' }}
           REPAIR: ${{ github.event_name == 'workflow_dispatch' && inputs.repair && '--retry-degraded' || '' }}
-          RETRY: ${{ (github.event.schedule == '10 21 * * *' || github.event.schedule == '10 1 * * *' || github.event.schedule == '25,45 16,17 * * *' || github.event.schedule == '15 17,18 * * *') && '--retry-degraded' || '' }}
+          RETRY: ${{ (github.event.schedule == '25,55 16-20 * * *' || github.event.schedule == '10 21 * * *' || github.event.schedule == '10 1 * * *') && '--retry-degraded' || '' }}
         run: python scripts/main.py $FORCE $ONLY $SKIP $CAP $RETRY $REPAIR
 
       - name: Commit data

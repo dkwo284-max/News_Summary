@@ -397,7 +397,20 @@ def test_write_prune_index(cfg, tmp_path):
 ])
 def test_should_run_gate(cfg, tmp_path, tzname, utc_iso, expected):
     cfg["timezone"] = tzname
+    cfg["run_hour"], cfg["catchup_until_hour"] = 6, 7
     local = datetime.fromisoformat(utc_iso).astimezone(ZoneInfo(tzname))
+    assert should_run(cfg, local, tmp_path)[0] is expected
+
+
+@pytest.mark.parametrize("utc_iso,expected", [
+    ("2026-11-18T15:55:00+00:00", True),   # 04:55 NZDT — cron-job.org 주 실행
+    ("2026-11-18T19:59:00+00:00", True),   # 08:59 NZDT — 복구 창 마지막
+    ("2026-11-18T20:00:00+00:00", False),  # 09:00 NZDT — 창 밖
+    ("2026-11-18T14:55:00+00:00", False),  # 03:55 NZDT — 너무 이름
+])
+def test_should_run_morning_window(cfg, tmp_path, utc_iso, expected):
+    assert (cfg["run_hour"], cfg["catchup_until_hour"]) == (4, 9)
+    local = datetime.fromisoformat(utc_iso).astimezone(ZoneInfo("Pacific/Auckland"))
     assert should_run(cfg, local, tmp_path)[0] is expected
 
 

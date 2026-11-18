@@ -114,7 +114,7 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
     return 0
 
 
-MAX_RETRIES = 4   # 하루 자동 복구 시도 상한 (실패한 단계만 고치므로 한 번에 AI 1~3회)
+MAX_RETRIES = 8   # 하루 자동 복구 시도 상한 (04:55 생성 후 09:00까지 30분 간격 복구 + 빠른 복구) (실패한 단계만 고치므로 한 번에 AI 1~3회)
 
 
 def repair_only(cfg: dict, data_dir: Path, cur: dict, local_now, retries: int, args) -> int | None:
@@ -223,19 +223,23 @@ def main(argv: list[str] | None = None) -> int:
         try:
             cur = json.loads((data_dir / f"{local_now.date().isoformat()}.json").read_text(encoding="utf-8"))
         except Exception:  # noqa: BLE001
-            log.info("skip: no brief for %s yet (--retry-degraded)", local_now.date())
-            return 0
-        m = cur.get("meta") or {}
-        retries = int(m.get("retries", 0))
-        if not m.get("degraded"):
-            log.info("skip: today's brief is fine (--retry-degraded)")
-            return 0
-        if retries >= MAX_RETRIES:
-            log.warning("skip: already retried %d times today (--retry-degraded)", retries)
-            return 0
-        log.info("retrying degraded brief (%s), attempt %d", m.get("degraded_reason", ""), retries + 1)
-        retries += 1
-        args.force = True
+            cur = None
+        if cur is None:
+            # 오늘 브리핑이 아직 없음(주 실행이 빠졌거나 실패): 복구 시각에도 시각 창(run_hour~catchup_until_hour) 안이면 새로 생성
+            log.info("no brief for %s yet — generating if inside the run window (--retry-degraded)", local_now.date())
+            args.retry_degraded = False
+        else:
+            m = cur.get("meta") or {}
+            retries = int(m.get("retries", 0))
+            if not m.get("degraded"):
+                log.info("skip: today's brief is fine (--retry-degraded)")
+                return 0
+            if retries >= MAX_RETRIES:
+                log.warning("skip: already retried %d times today (--retry-degraded)", retries)
+                return 0
+            log.info("retrying degraded brief (%s), attempt %d", m.get("degraded_reason", ""), retries + 1)
+            retries += 1
+            args.force = True
 
     # 실패한 단계만 다시: 선별은 멀쩡하고 요약·영향 분석만 실패했으면 처음부터 다시 만들지 않는다 (AI 1~3회)
     if args.retry_degraded and not args.dry_run:

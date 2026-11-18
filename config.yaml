@@ -7,7 +7,7 @@
 # 한국 시간으로 돌리려면 timezone 을 "Asia/Seoul" 로 바꾸고 .github/workflows/daily.yml 의 cron 시각도 바꾸세요.
 timezone: "Pacific/Auckland"
 run_hour: 4
-catchup_until_hour: 6    
+catchup_until_hour: 9    # 04:00~08:59 사이에는 브리핑이 없으면 생성, 있으면(실패한 부분만) 복구. 주 실행은 cron-job.org 04:55
 
 # ── 수집 ────────────────────────────────────────────────────
 fetch:
