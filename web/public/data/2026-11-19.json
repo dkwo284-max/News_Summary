@@ -1,6 +1,6 @@
 {
  "date": "2026-11-19",
- "generated_at": "2026-11-19T05:12:02+13:00",
+ "generated_at": "2026-11-19T05:31:32+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -27,6 +27,27 @@
      ],
      "original_title": "특검, 선관위 직원 8명 구속영장 청구",
      "published_at": "2026-11-18T15:47+00:00"
+    },
+    {
+     "id": "adf6a910dc80",
+     "title_ko": "[날씨] 수능 당일 전국 곳곳 눈·비…아침 최저 영하 4도",
+     "summary_ko": [
+      "대학수학능력시험(수능)이 치러지는 19일 목요일에는 전국 곳곳에 눈이나 비 소식이 있겠다."
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261118159500004"
+      },
+      {
+       "name": "MBC 뉴스",
+       "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1zdkR4QW5Dd1ZCMWRLNkc1S05hNXZLX1RBMWx1WGx2SDNMRURNR2d3SzJXaEwxeG40NzFqLTZaekVYTktVUlhUNDBsMHpMaEhkTE9rX3NUOGdZZDlsZVVZS2x1VWE0ZFYtWlBfRW9wZmt4WXNudHU40gF3QVVfeXFMTno0WFVIam5aX2dER3ROODlVd1pvdmtfbnR4alFIdExIN0dULThlV3FsYnRZR1dEQ0RmbXRjcXY0cVdwalhpVGxHQ1Z0WTlkVHU1YXJvMlNpS0JQN0Z4SmxQYjlFU2x4Wm9KQ0tya3YwbWZaOGF0Y2M?oc=5"
+      }
+     ],
+     "original_title": "[날씨] 수능 당일 전국 곳곳 눈·비…아침 최저 영하 4도",
+     "published_at": "2026-11-18T15:04+00:00"
     },
     {
      "id": "23ab3aa03139",
@@ -73,38 +94,21 @@
      "published_at": "2026-11-18T10:43+00:00"
     },
     {
-     "id": "4e01f4ec34af",
-     "title_ko": "추경호, 1심 무죄… 법원 “내란 가담 증명 안돼”",
+     "id": "00fec04d78c6",
+     "title_ko": "불안한 수능, 그래도 노력을 믿습니다",
      "summary_ko": [
-      "추경호, 1심 무죄… 법원 “내란 가담 증명 안돼”"
+      "불안한 수능, 그래도 노력을 믿습니다"
      ],
      "tags": [],
      "importance": 5,
      "sources": [
       {
        "name": "조선일보",
-       "url": "https://www.chosun.com/national/court_law/2026/11/19/SV6OHUFO4ZEKZBIOE4IVXKRIOA/"
+       "url": "https://www.chosun.com/national/education/2026/11/19/5SX3M5ILDNHMPEZJPFE5LUCJUY/"
       }
      ],
-     "original_title": "추경호, 1심 무죄… 법원 “내란 가담 증명 안돼”",
-     "published_at": "2026-11-18T15:55+00:00"
-    },
-    {
-     "id": "59d59eeb2a79",
-     "title_ko": "MZ 변호사들, ‘커닝 의혹’ 리트 만점자 고발",
-     "summary_ko": [
-      "MZ 변호사들, ‘커닝 의혹’ 리트 만점자 고발"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/national/national_general/2026/11/19/VC7NUJBLRZHP3LAVEFGSMLUZ7U/"
-      }
-     ],
-     "original_title": "MZ 변호사들, ‘커닝 의혹’ 리트 만점자 고발",
-     "published_at": "2026-11-18T15:53+00:00"
+     "original_title": "불안한 수능, 그래도 노력을 믿습니다",
+     "published_at": "2026-11-18T15:57+00:00"
     }
    ],
    "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
@@ -134,6 +138,25 @@
      ],
      "original_title": "이자도 못 갚는 기업 늘었다…4대 은행 ‘깡통 대출’ 5조원 돌파",
      "published_at": "2026-11-18T15:31+00:00"
+    },
+    {
+     "id": "9c222332d015",
+     "title_ko": "[오리진] 호모 에렉투스, 아시아 본토서 18만년 전까지 살았다",
+     "summary_ko": [
+      "1891년 인도네시아 자바에서 처음으로 두 발로 선 고인류 화석이 발굴됐다.",
+      "바로 자바 원인(原人)이다.",
+      "나중에 ‘똑바로 선 사람’이란 뜻의 라틴어로 호모 에렉투스로 명명됐다."
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/science/2026/11/19/HBRGENBVGRTDAOLGG4YDCZJTHA/"
+      }
+     ],
+     "original_title": "[오리진] 호모 에렉투스, 아시아 본토서 18만년 전까지 살았다",
+     "published_at": "2026-11-18T16:00+00:00"
     },
     {
      "id": "3d51ffb0a5bb",
@@ -185,23 +208,6 @@
      ],
      "original_title": "1光日 간 보이저, 태양계 비밀 열고 인류 대사 되다",
      "published_at": "2026-11-18T15:36+00:00"
-    },
-    {
-     "id": "39884eb03b9e",
-     "title_ko": "AI가 엑스레이 분석, 충치 진단 속도 높인다",
-     "summary_ko": [
-      "AI가 엑스레이 분석, 충치 진단 속도 높인다"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/economy/tech_it/2026/11/19/SUWKNABNOJCUPDLJIFWEYXKL7M/"
-      }
-     ],
-     "original_title": "AI가 엑스레이 분석, 충치 진단 속도 높인다",
-     "published_at": "2026-11-18T15:36+00:00"
     }
    ],
    "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
@@ -211,27 +217,67 @@
    "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
     {
-     "id": "277a00cdcd61",
-     "title_ko": "\"언제 이렇게 컸지?\"…KCM, 영어로 수업 듣는 둘째 딸 서연이 보더니 결국 '눈물' ('슈퍼맨이')",
+     "id": "0d99d9c86ba8",
+     "title_ko": "배우 김명민, 데뷔 첫 예능 출연 \"유퀴즈 관계자 여러분 감사\" 수상 소감 같은 인사('유퀴즈')",
      "summary_ko": [
-      "‘슈퍼맨이 돌아왔다’ KCM이 훌쩍 성장한 둘째 딸 서연이의 모습을 보며 눈물을 흘렸다.",
-      "18일 전파를 탄 KBS 2TV ‘슈퍼맨이 돌아왔다’에서는 ‘자, 이제 떠나요!",
-      "행복으로’ 편으로, 필리핀으로 허니문을 떠난 KCM 가족의 모습이 공개됐다."
+      "‘유퀴즈 온 더 블럭’ 배우 김명민이 중후한 외모로 범상치 않은 예능 캐릭터를 선보였다.",
+      "18일 방영된 tvN ‘유퀴즈 온 더 블럭’(이하 ‘유퀴즈’)에서는 배우 김명민이 데뷔 30년 만에 첫 예능에 출연햇다.",
+      "영화 감독 박훈정의 부탁으로 나오게 됐다는 김명민은 이번 영화 '슬픈 대야'에서 '사부' 역을 맡아 이색적인 누아르 캐릭터를"
      ],
      "tags": [],
      "importance": 6,
      "sources": [
       {
        "name": "조선일보",
-       "url": "https://www.chosun.com/entertainments/broadcast/2026/11/18/HEYGCNZSHFSTOOJYHA4TGZRVGU/"
+       "url": "https://www.chosun.com/entertainments/broadcast/2026/11/18/MFQWKNLDHEYGMNDCGUYGGMDEME/"
       },
       {
-       "name": "Chosunbiz",
-       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNVXE3V3lqMnVodGJGOTl6V0p4R2ZqbEhZQ2E1OFUyNm05dVpUdy1YMW5RVFV6MkNhVElSazE4bHVjZ3Z6M0I5eW5Hd0JsbFdVN1ptSUFaNHdnZ0hmYjRhNmVfSmpnbUxOMGZUQkhxMDllVjVQZ3A4MDBaZ0JpOFFiVldsazU5bHdGWkNXSTFDTnNjLTjSAacBQVVfeXFMUGRBNnhpbFB5R1E2X2lieXhTV3V2cFZzUEZEZGFoVnpwMnF6VXJIWWxsTlhjWERfWV9OaDYxOWlsX1RLcGZsbTdQdjIzV185VXIxUnlWZ0Vkc2I4c0E0bzRMYzFpZ2M3dXhXSnpYeGpOeWI3c04wY1dLckxUelFoQUFyMWV0eE8tOGdyMk1VRXRIeWNwcHdDTlB5YWxGWk80Wm9oN1BTUUk?oc=5"
+       "name": "미주중앙일보",
+       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE1tVllWdFhMblV5c0VGUXdWYi1KV193cXZpTElWTGo0Zk5JaDlWT1d2MzZaQnE2bU5LTnVmazlVR0hNLUNaWktUZmEtSHFrQS1hbjAyZ0dnblZnaDBNaWNQZUVB?oc=5"
       }
      ],
-     "original_title": "\"언제 이렇게 컸지?\"…KCM, 영어로 수업 듣는 둘째 딸 서연이 보더니 결국 '눈물' ('슈퍼맨이')",
-     "published_at": "2026-11-18T13:20+00:00"
+     "original_title": "배우 김명민, 데뷔 첫 예능 출연 \"유퀴즈 관계자 여러분 감사\" 수상 소감 같은 인사('유퀴즈')",
+     "published_at": "2026-11-18T13:05+00:00"
+    },
+    {
+     "id": "c74c8e689b88",
+     "title_ko": "최동석, 상간 소송 일부 승소 이유…法 \"박지윤, 男지인과 여행 중 같은 방에 머물러\"",
+     "summary_ko": [
+      "최동석, 상간 소송 일부 승소 이유…法 \"박지윤, 男지인과 여행 중 같은 방에 머물러\""
+     ],
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/2026/11/18/SP6NAMZ4Q5GUDK74EWR24QYEGM/"
+      },
+      {
+       "name": "뉴스1",
+       "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTFB2N1RRV2Z3aGYxc09IWnVYbHZIdTJuVjJuRTAyb0huYktkcGVhYmsyTlJzNnBWNnN0ZFFyYm9fdE00MGcwdjV6UFlqM2hNQ2pFSzI2VG1EZUlWOThqbHU0SENB?oc=5"
+      }
+     ],
+     "original_title": "최동석, 상간 소송 일부 승소 이유…法 \"박지윤, 男지인과 여행 중 같은 방에 머물러\"",
+     "published_at": "2026-11-18T12:32+00:00"
+    },
+    {
+     "id": "46d1c2df1c0c",
+     "title_ko": "아옳이, '♥한의사 김형배'와 떠나는 유럽 여행 \"진짜 잘 맞는지 보려면\"",
+     "summary_ko": [
+      "사업가이자 인플루언서 아옳이가 연인인 김형배 씨와 유럽 여행을 떠났다.",
+      "지난 18일 아옳이는 자신의 소셜 계정에 여러 장의 사진을 공개했다.",
+      "편안한 느낌의, 포근한 소재가 분명한 아이보리 컬러의 트레이닝 복을 입은 아옳이는 공항에 앉아 설레는 표정을 감추지 못했다."
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/entertainments/broadcast/2026/11/19/G4ZGIMZTGBRDEZDEGEZTGNBVGY/"
+      }
+     ],
+     "original_title": "아옳이, '♥한의사 김형배'와 떠나는 유럽 여행 \"진짜 잘 맞는지 보려면\"",
+     "published_at": "2026-11-18T15:50+00:00"
     },
     {
      "id": "233449344e40",
@@ -266,42 +312,6 @@
      ],
      "original_title": "[TV조선] 트로트 디바들의 대결",
      "published_at": "2026-11-18T15:39+00:00"
-    },
-    {
-     "id": "c48a6ccc1ae2",
-     "title_ko": "[오늘의 운세] 2026년 11월 19일 오행별 행운의 컬러",
-     "summary_ko": [
-      "[오늘의 운세] 2026년 11월 19일 오행별 행운의 컬러"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "한국경제",
-       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5YUmhYOTBuZk9ZV3FpbWowUWgwUEg3cjBoZTJiSjhtT29EWlR5UGs1aTdFMDA0aHJ0X3VucUgwZEdTWW1EUjlpcDY3ci0zQ2NkNEY1dThOMEpUdw?oc=5"
-      }
-     ],
-     "original_title": "[오늘의 운세] 2026년 11월 19일 오행별 행운의 컬러",
-     "published_at": "2026-11-18T15:00+00:00"
-    },
-    {
-     "id": "0e5bf102fe10",
-     "title_ko": "한채영, 원조 바비 인형의 차분한 가을 패션···오윤아까지 인정한 청순함",
-     "summary_ko": [
-      "배우 한채영이 차분한 가을 코디로 시선을 사로잡았다.",
-      "18일 한채영은 자신의 소셜 계정에 여러 장의 사진을 공개했다.",
-      "한채영은 지난번 화려한 차림새로 주목을 끌었던 게시물과 영 반대의 게시물을 올렸는데, 차분한 컬러조차 그의 화려한 이목구비가 압도적으로 빛을…"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/entertainments/broadcast/2026/11/18/GJSTOMLCMFSWIZDCME3DENTEHE/"
-      }
-     ],
-     "original_title": "한채영, 원조 바비 인형의 차분한 가을 패션···오윤아까지 인정한 청순함",
-     "published_at": "2026-11-18T14:59+00:00"
     }
    ],
    "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
@@ -310,6 +320,57 @@
    "label": "정치",
    "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
+    {
+     "id": "cccc0c4df29e",
+     "title_ko": "한중 FTA 서비스·투자 타결… 영화·관광 ‘한한령’ 해제되나",
+     "summary_ko": [
+      "한중 FTA 서비스·투자 타결… 영화·관광 ‘한한령’ 해제되나"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/politics_general/2026/11/19/635OEHJRQFA6FNHBUYWQXJOJG4/"
+      }
+     ],
+     "original_title": "한중 FTA 서비스·투자 타결… 영화·관광 ‘한한령’ 해제되나",
+     "published_at": "2026-11-18T15:56+00:00"
+    },
+    {
+     "id": "cf0e6c54dc20",
+     "title_ko": "이름 지워진 육사·해사·공사",
+     "summary_ko": [
+      "이름 지워진 육사·해사·공사"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/diplomacy-defense/2026/11/19/3UWDF3662JB2HOJ3UAENDIJUMI/"
+      }
+     ],
+     "original_title": "이름 지워진 육사·해사·공사",
+     "published_at": "2026-11-18T15:54+00:00"
+    },
+    {
+     "id": "47a9be40d31a",
+     "title_ko": "국힘 “내란몰이 실체 드러나, 이런게 조작기소” 민주 “법원의 역사적 반역… 조희대 탄핵해야”",
+     "summary_ko": [
+      "국힘 “내란몰이 실체 드러나, 이런게 조작기소” 민주 “법원의 역사적 반역… 조희대 탄핵해야”"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/politics/assembly/2026/11/19/M44Y7UQFE5BLTF5VEUK4X3NJGU/"
+      }
+     ],
+     "original_title": "국힘 “내란몰이 실체 드러나, 이런게 조작기소” 민주 “법원의 역사적 반역… 조희대 탄핵해야”",
+     "published_at": "2026-11-18T15:51+00:00"
+    },
     {
      "id": "73734152814c",
      "title_ko": "정청래 “신천지가 더 큰 해당행위… 최민희 징계 반대”",
@@ -343,57 +404,6 @@
      ],
      "original_title": "“다리 설계비 70억”… 대놓고 ‘쪽지 예산’이라 적어 넣어",
      "published_at": "2026-11-18T15:49+00:00"
-    },
-    {
-     "id": "5ab34f1bbc8a",
-     "title_ko": "[정치프리즘]지구촌을 흔드는 정치적 위협의 진앙: 이민",
-     "summary_ko": [
-      "[정치프리즘]지구촌을 흔드는 정치적 위협의 진앙: 이민"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "강원일보",
-       "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE14TzVQaFFSeW5JU1JSX0RVY0o2ekpCRVdWWVJyNFItaGJfQ0ZLSnhTTmtBMWJYaXRFS3lCQnd1Z19ZMFhxODVvbmdiUEhXWThEdEJOVFQyYmR2akk?oc=5"
-      }
-     ],
-     "original_title": "[정치프리즘]지구촌을 흔드는 정치적 위협의 진앙: 이민",
-     "published_at": "2026-11-18T15:00+00:00"
-    },
-    {
-     "id": "78775a20d544",
-     "title_ko": "추미애, 수능 앞두고 도로·인파 밀집 현장 점검 강화 지시",
-     "summary_ko": [
-      "추미애, 수능 앞두고 도로·인파 밀집 현장 점검 강화 지시"
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "기호일보",
-       "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1TZDk2OE00ZTZmOGFtbktxVXBmYlB1WnNuejRmTTBwRC1ZQjU0dDVkYzNoMHJZR1pjMnlraHBadzRYYUpnVHdPTWp4WWMtVUVnN1gxRXBRVHdNWF9iLW5JODJzcHAxTVhPTWZpRDM1Yw?oc=5"
-      }
-     ],
-     "original_title": "추미애, 수능 앞두고 도로·인파 밀집 현장 점검 강화 지시",
-     "published_at": "2026-11-18T14:59+00:00"
-    },
-    {
-     "id": "1bec4dad2d83",
-     "title_ko": "日, 조국 입국 거부에 \"전과가 이유…독도 방문과 무관\" 해명(종합2보)",
-     "summary_ko": [
-      "조국 혁신정책연구원 원장이 17일 일본 공항에 도착했다가 출입국 당국에 의해 입국이..."
-     ],
-     "tags": [],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261118099352073"
-      }
-     ],
-     "original_title": "日, 조국 입국 거부에 \"전과가 이유…독도 방문과 무관\" 해명(종합2보)",
-     "published_at": "2026-11-18T14:42+00:00"
     }
    ],
    "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
@@ -465,27 +475,6 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
-     "id": "fe94062795a5",
-     "title_ko": "Extent of killer’s mental illness missed by GP, left untreated and led to death, lawyer says",
-     "summary_ko": [
-      "Police arrived and found her and her husband lying together under a blanket."
-     ],
-     "tags": [
-      "의료",
-      "치안"
-     ],
-     "importance": 10,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/nz/extent-of-killers-mental-illness-missed-by-gp-left-untreated-led-to-death/M4RD544YBVABBHEJA3MSGPDJW4/"
-      }
-     ],
-     "original_title": "Extent of killer’s mental illness missed by GP, left untreated and led to death, lawyer says",
-     "published_at": "2026-11-18T05:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
      "id": "b64de1e33cef",
      "title_ko": "Cyclone Xavier at category 5 as it batters northern Cook Islands",
      "summary_ko": [
@@ -533,9 +522,33 @@
      "original_title": "Napier Port net profit swells to $35.5 million",
      "published_at": "2026-11-18T01:24+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "62283c183003",
+     "title_ko": "Education Ministry’s consultant spend more than doubles over five years to $12m",
+     "summary_ko": [
+      "Education Ministry’s consultant spend more than doubles over five years to $12m"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "Waikato Times",
+       "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxORnhkRUduMjdQT19rY0dLdWRJeWVRX2RxNkRRSEZMVkhObWhONmI4VmkwT0ZLbzdBTmgycUdHNGdwV1VzN0QtYmF2Rmh1VXRCYWljMHF0U0RhVHJmbUVxS0pjSXFJUkJ3RUpHTVNTYmtxckVrcGRiMkV2eU1oYko2WERLUHJkUHNra2RmRzFEUTVCMy1PZ0pRY2t2ZVZUbDVtY2M4TmRwSE1uNUVOcDVpdHdkcGJjNFZmZHc?oc=5"
+      },
+      {
+       "name": "Stuff.co.nz",
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPZXhJZ1VkY2k3LWdVVHB3Nms1cDZZS1o4X1JaQlVEeEFmdTY4cE5SR1p6MTlhdjlCUDNPTjgtU0pSV2tHNTRRb2JoQ0k3emNMVTZwSnB0ODNIMWFZWnFTUFl5aFB3NGhpWlNXODJzSDdRM2RxSUFYQmZfRko4OFNxMVJWQzZ0U1VGRWotc3Byc1h3UTRFdDMyc2RZNXdhREp3c201cktqbzFIRnpaUVRzWVlLaw?oc=5"
+      }
+     ],
+     "original_title": "Education Ministry’s consultant spend more than doubles over five years to $12m",
+     "published_at": "2026-11-16T15:00+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_education": {
    "label": "교육",
@@ -589,26 +602,6 @@
      ],
      "original_title": "In brief: Teenager linked to high school lockdown, tele health comes to Taranaki and the Oakura Christmas market",
      "published_at": "2026-11-16T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "71603b166d22",
-     "title_ko": "More students offered NCEA derived grades after power cut shuts high school",
-     "summary_ko": [
-      "Senior Rosehill College students were sent to a neighbouring high school to sit…"
-     ],
-     "tags": [
-      "교육"
-     ],
-     "importance": 9,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxNMGxPTFJ6YVBoRU1KMXNWa3pEa3VsLXJkMnJtaVZMVWxHbDZvcGhUYmZvNUg0RGpqVk9CX3NkZTloZC1hSFRraG9VcDhyaFBpQnlLNm5rV0dmTkxtNG1CbHlBMmk4ejlWNUFsbEM0UEtiNGxBSVNNWEFrSXRGbC1RLUZweURBX2xnMk5XUS1ZUWNyZ0lJVnJUNG1jNktiaFc3WTJzUGF0YnJKR3JuSERzVktFcktVdVhCTXV4T1VIRmJVZVNqdTlKbE00Q2pEQXhYNHBUU0d1SnpWbkQ5d1Etem1tb1JiLS1CVTNOQnRTNmhTaEU?oc=5"
-      }
-     ],
-     "original_title": "More students offered NCEA derived grades after power cut shuts high school",
-     "published_at": "2026-11-18T07:02+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
@@ -674,9 +667,33 @@
      "original_title": "Victoria University lecturers steer students away from AI use in education",
      "published_at": "2026-11-16T01:16+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "22f90ad77557",
+     "title_ko": "Stanford demands independent inquiry after another NCEA exam failure",
+     "summary_ko": [
+      "Stanford demands independent inquiry after another NCEA exam failure"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOYWVXazNLZm5DeEZTbWlHd3hXclRzZWJTMVZJR205ZXVxYlUtMWN2Q1dMVWp3aGVrbW9VX3h4WkZxT2VxeFJtWlppQkVjd3Q0QzB2QVlRcDFuWGtqeDAtM0kzbl9VMGxZWEFhVjNRaHZBYV85dk81Uk9wODN2MVFmMzIwOXVTUzNFbjZhQkI5RVFxQWMxNWpqNDBaVElDb21tSllUZjBjc2dsQVhJWFZR?oc=5"
+      },
+      {
+       "name": "RNZ",
+       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNM3ZtM2w5MTR2RVJrVjhnWFJIQ1FJQkFuMTR6WVE3RThVWVNscGdDN01PS0FySE0ydkRyZG1OVER3RjNZOHFpSzZaTFBtRm1KMHNvaHVrWVNaZHlmdGxXQzBQU3lZR0lrQmp4TkN2d3lUTlFGRTR1M2NzbTBVZnpWRlRzRXZwc0Y4LTd0TVhJaXp5T093QmRoWHQtalZSWnB6bWp5NmtR?oc=5"
+      }
+     ],
+     "original_title": "Stanford demands independent inquiry after another NCEA exam failure",
+     "published_at": "2026-11-17T20:46+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_economy": {
    "label": "경제",
@@ -780,7 +797,7 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_politics": {
    "label": "정치",
@@ -875,33 +892,12 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_safety": {
    "label": "치안",
    "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
-    {
-     "id": "988710c0fc72",
-     "title_ko": "Auckland woman says police should do ‘better job’ after aggressive boarder refuses to leave property",
-     "summary_ko": [
-      "The woman described barricading herself in her bedroom and breaking down in tea…"
-     ],
-     "tags": [
-      "주거",
-      "치안"
-     ],
-     "importance": 10,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://www.nzherald.co.nz/nz/auckland/auckland-woman-says-police-should-better-prevent-and-protect-after-aggressive-boarder-refuses-to-leave-property/2UQ7JY56O5CPPL4J65S4HB525M/"
-      }
-     ],
-     "original_title": "Auckland woman says police should do ‘better job’ after aggressive boarder refuses to leave property",
-     "published_at": "2026-11-17T16:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
     {
      "id": "11bd3b96af97",
      "title_ko": "Three police officers face assault charges after Auckland pursuit",
@@ -961,34 +957,34 @@
      "original_title": "Man injured in late-night aggravated robbery, police appeal in place",
      "published_at": "2026-11-17T23:18+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "871185de3554",
+     "title_ko": "Trapped in her own home: Woman makes five 111 calls before police remove boarder",
+     "summary_ko": [
+      "Trapped in her own home: Woman makes five 111 calls before police remove boarder"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMiigJBVV95cUxPUUFyQUltejZiLXNXbExlV3F6U3NZV0g4bUNMa2VndU92c21GWi1rM1gwVFFLVU5Ed2xraUtvYnFhMDZldjRaMkdnMmNHZkFYeXRLMXNLZHpkNkVReGhvc2p6ZkpjWDgyZDJMcy1scEcwNlpKSlJsa3kxa0owLXMzZEdlMGtXajJSMHRWa2xwd1lXNTlzQkJDTHY1Tnl1RXFWQm1PeEZPV3hnRm1ZaTNLQlpPMmxRNWI0SmUtWlFESGtHREhGT3JWVV9TTUotTHpYUHJxSkpXZTlRb25XTUpzS1ZsdU12MzMta3pxZlNrS2RIUGNWSlNvNWRzY1JrdXBMXzBiaVp1eTQ2dw?oc=5"
+      }
+     ],
+     "original_title": "Trapped in her own home: Woman makes five 111 calls before police remove boarder",
+     "published_at": "2026-11-17T19:08+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_life": {
    "label": "생활",
    "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
-    {
-     "id": "fa5743c7b874",
-     "title_ko": "Health Hub: Diabetes Awareness Month",
-     "summary_ko": [
-      "Health Hub: Diabetes Awareness Month"
-     ],
-     "tags": [
-      "의료"
-     ],
-     "importance": 8,
-     "sources": [
-      {
-       "name": "OurAuckland",
-       "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPUzZ6ZHU3MWc4YVc2SkRGVFlXZlZuRmxHR1N1c1Btd1VtNmdPN044V190XzRoSy1zOHpWaTctZWtBZ0pqc3JoVE1PZWxoX3EzZTVtMHMtYTFkd1VOcjVhV1o2VC1qYkcxZlQzc0dnR2JjQnNxcHIyM1pTaXJZT2gxcTEzb2hQUV85RzdFWnREZndkZlQ3Sm85ZXR6dw?oc=5"
-      }
-     ],
-     "original_title": "Health Hub: Diabetes Awareness Month",
-     "published_at": "2026-11-18T09:45+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
     {
      "id": "336cc02aa61a",
      "title_ko": "University of Auckland researchers trial AI diabetes coach",
@@ -1007,6 +1003,26 @@
      ],
      "original_title": "University of Auckland researchers trial AI diabetes coach",
      "published_at": "2026-11-16T03:22+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "d78ca51b1642",
+     "title_ko": "NZ health trends: what’s getting better and worse? – Expert Reaction",
+     "summary_ko": [
+      "NZ health trends: what’s getting better and worse? – Expert Reaction"
+     ],
+     "tags": [
+      "의료"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "Science Media Centre",
+       "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNWkJabFpjOHgwSDIzdVg0bHhjelVCcEhPOUJSd3Y0MHc3WEplM1I1eWpna2dWb3FVcjk4VjJ1NFRnVmt2MnBhYUZZT181X21iWkZsTk5xLXgxTUZxWlJybHJic0p6NElGMUQxYzA2YmtMSUVOQmtnNkNfQVVtN3UzVjJWNTI3SndEeDMzbG94SE04QlZibUxFZHF3M1p3WTBTSEN3ZXUxUmF6QnJ2R3JVNkJB?oc=5"
+      }
+     ],
+     "original_title": "NZ health trends: what’s getting better and worse? – Expert Reaction",
+     "published_at": "2026-11-18T03:34+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
@@ -1047,7 +1063,7 @@
       }
      ],
      "original_title": "'I had to keep going for them': Marton woman's 523km gumboot run for youth mental health",
-     "published_at": "2026-11-17T22:29+00:00",
+     "published_at": "2026-11-17T22:03+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     },
     {
@@ -1071,7 +1087,7 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_property": {
    "label": "부동산",
@@ -1120,7 +1136,7 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_health": {
    "label": "의료",
@@ -1147,12 +1163,32 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "akl_education": {
    "label": "교육",
    "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
+    {
+     "id": "627938dabce0",
+     "title_ko": "Rosehill College power cut: NCEA students offered derived grades",
+     "summary_ko": [
+      "Senior Rosehill College students were sent to a neighbouring high school to sit…"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 9,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/rosehill-college-sends-pupils-to-papakura-high-school-to-sit-afternoon-exams-after-unexpected-power-cut/3527FZM5JNFVDJVGAPXUSXNJTQ/"
+      }
+     ],
+     "original_title": "Rosehill College power cut: NCEA students offered derived grades",
+     "published_at": "2026-11-18T06:34+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
     {
      "id": "900e8f756719",
      "title_ko": "Locals’ frustration with Waingaro School closure reignites after docs show it was fast-tracked",
@@ -1240,32 +1276,39 @@
      "original_title": "School for children with complex needs has to close despite families' pleas",
      "published_at": "2026-11-12T04:01+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "ac357385d1e6",
-     "title_ko": "Slip slop slap: Teacher under investigation over 'rough handling' while applying sunscreen",
-     "summary_ko": [
-      "Slip slop slap: Teacher under investigation over 'rough handling' while applyin…"
-     ],
-     "tags": [],
-     "importance": 4,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQdmtXRjhRNmRWMnlVTkpWNEdCZ0NONmV5UE9Fa0VybWdTZ3cxbnUwbGp5S21DQUlWQnpFd196S2JObU9XVm1KTVJKTnQxWUdvUy1qT3RmSndQV3NCMUFRM0tUOW9BbTR5dVFSZFhiTEkzNHUzcVJwZExrR1NLeW0xUTRHME92Y2V1STVwT1RDVWlTN194d1d2cFo5QzIzdi1zXzNINXU4QTViOWpna1lad2lMMExhb3lIY1ZsT3BLN0x6Qm9iMFMxaUdBbnNRZHNBVjZoUlBBVlVlMVU4VVE4U0FZZEE5cktFUi11bG5B?oc=5"
-      }
-     ],
-     "original_title": "Slip slop slap: Teacher under investigation over 'rough handling' while applying sunscreen",
-     "published_at": "2026-11-16T02:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_immigration": {
    "label": "이민 레이더",
    "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
+    {
+     "id": "e49de8994e05",
+     "title_ko": "Sukhdeep Kaur accused of supplying Auckland migrants with fake visas and English test results",
+     "summary_ko": [
+      "At least 30 workers claim Sukhdeep Kaur duped them over visa paperwork."
+     ],
+     "tags": [
+      "이민"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://www.nzherald.co.nz/nz/sukhdeep-kaur-accused-of-supplying-auckland-migrants-with-fake-visas-and-english-test-results/E3AHMROWHVC2HHKHEWIC7IDZOQ/"
+      },
+      {
+       "name": "Stuff",
+       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPeFd2ZDZTelozdWZTV2p4dVVJQWVXV2pHZ1I5Qk9FazduV2lWWElyV0hScnFsQUxrZkNEZTZZaG9RanRfd1ZvS3pBUHhZNi13YkM3N0NCRmd6MHBjY05Mc2hYR2Z0LWVJeW1vRFh2RnV4NGN4d1FmUU5vcDhMMWl1M0U3ZE01RWZSNW5oVjVJM1lhOEJ3YlBHVEZQUFBrYlUxeUh5b244bjdFdjBNRDZaLVRwaw?oc=5"
+      }
+     ],
+     "original_title": "Sukhdeep Kaur accused of supplying Auckland migrants with fake visas and English test results",
+     "published_at": "2026-11-18T16:01+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "radar": 8
+    },
     {
      "id": "9fffaaac1ec5",
      "title_ko": "Immigration NZ review finds AEWV officers missed risk signs",
@@ -1309,31 +1352,6 @@
      ],
      "original_title": "Migrant worker to be deported after fruit-picking breached visa conditions",
      "published_at": "2026-11-17T16:15+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
-     "radar": 8
-    },
-    {
-     "id": "4803aca8842e",
-     "title_ko": "Migrant workers allege director demanded $40,000 cash premiums for work visas",
-     "summary_ko": [
-      "Migrant workers allege director demanded $40,000 cash premiums for work visas"
-     ],
-     "tags": [
-      "이민"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "Stuff",
-       "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPeFd2ZDZTelozdWZTV2p4dVVJQWVXV2pHZ1I5Qk9FazduV2lWWElyV0hScnFsQUxrZkNEZTZZaG9RanRfd1ZvS3pBUHhZNi13YkM3N0NCRmd6MHBjY05Mc2hYR2Z0LWVJeW1vRFh2RnV4NGN4d1FmUU5vcDhMMWl1M0U3ZE01RWZSNW5oVjVJM1lhOEJ3YlBHVEZQUFBrYlUxeUh5b244bjdFdjBNRDZaLVRwaw?oc=5"
-      },
-      {
-       "name": "NZ Herald",
-       "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQYkhrV0t6M04yUnRDYTJ5dnhvVXFFQnYzSlA5cXFhcTZhNkFKZkluRmZGTUx0YnBweWxzcjI2V2RMNVRPQ3ZTTGJGMU1rdWVKOTBnOUZDYjNoUDBBam5QQkZaYzZISVBVTXpNRERNdEJjNWYwWXNsWEk2RlFpRmVERENsNDVhUkZpcnpTNFpMMmhES2F1T2FUSWM4Vm52WVBjZF9yNlNKTUM2eURLb3V4RmwwcGQ2Smd2UDY2bHpPM3JTal9PN0I2WEpn?oc=5"
-      }
-     ],
-     "original_title": "Migrant workers allege director demanded $40,000 cash premiums for work visas",
-     "published_at": "2026-11-18T02:02+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
      "radar": 8
     },
@@ -1402,14 +1420,14 @@
      "radar": 5
     }
    ],
-   "error": "gemini run deadline (900s) reached — gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   }
  },
  "extras": {
-  "nzd_krw": 731.63,
-  "usd_krw": 1332.91,
-  "jpy100_krw": 836.61,
-  "btc_usd": 62979,
+  "nzd_krw": 731.08,
+  "usd_krw": 1332.51,
+  "jpy100_krw": 836.63,
+  "btc_usd": 62444,
   "auckland_weather": {
    "max": 19,
    "min": 14,
@@ -1544,7 +1562,7 @@
    }
   },
   "processing_times": {
-   "updated_at": "2026-11-18T16:11+00:00",
+   "updated_at": "2026-11-18T16:31+00:00",
    "items": [
     {
      "key": "pswv",
@@ -1708,9 +1726,20 @@
  },
  "meta": {
   "mode": "gemini",
-  "failed_feeds": [],
+  "failed_feeds": [
+   {
+    "id": "gn_kr_politics",
+    "name": "Google 뉴스",
+    "error": "https://news.google.com/rss/search?q=%EC%A0%95%EC%B9%98+when:1d&hl=ko&gl=KR&ceid=KR:ko: HTTPStatusError: Client error '429 Too Many Requests' for url 'https://news.google.com/rss/search?q=%EC%A0%95%EC%B9%98+when:1d&hl=ko&gl=KR&ceid=KR:ko'\nFor more information check: https://developer.mozilla.org/en-"
+   },
+   {
+    "id": "gn_nz_residence",
+    "name": "Google News",
+    "error": "https://news.google.com/rss/search?q=%22New+Zealand%22+(%22skilled+migrant%22+OR+%22residence+visa%22+OR+%22resident+visa%22+OR+residency+OR+citizenship+OR+%22Immigration+New+Zealand%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en: HTTPStatusError: Client error '429 Too Many Requests' for url 'https://news.go"
+   }
+  ],
   "feeds_total": 49,
-  "stories_after_dedupe": 863,
+  "stories_after_dedupe": 816,
   "usage": {
    "provider": "gemini",
    "requests": 0,
@@ -1720,42 +1749,42 @@
   "alerts": [],
   "degraded": true,
   "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_health, akl_education, nz_immigration; 선별 실패",
-  "retries": 0,
+  "retries": 1,
   "quality": {
    "items": 63,
-   "bad": 58,
+   "bad": 57,
    "redone": [],
    "bad_ids": [
     "35dd504ed8ab",
-    "4e01f4ec34af",
-    "59d59eeb2a79",
+    "adf6a910dc80",
+    "00fec04d78c6",
     "3d51ffb0a5bb",
     "7d7d2b597622",
     "bc8baf0ec113",
-    "39884eb03b9e",
+    "c74c8e689b88",
     "233449344e40",
     "44ffb7162037",
-    "c48a6ccc1ae2",
+    "cccc0c4df29e",
+    "cf0e6c54dc20",
+    "47a9be40d31a",
     "73734152814c",
     "82f42d645ecb",
-    "5ab34f1bbc8a",
-    "78775a20d544",
-    "1bec4dad2d83",
     "55019c2d3c67",
     "353371e00d55",
-    "fe94062795a5",
     "b64de1e33cef",
     "d7325459842f",
+    "62283c183003",
     "ae1433ee8841",
     "82e6a3abf0c3",
-    "71603b166d22",
     "0c8d361253b7",
     "2d00ef6d1128",
     "b57474e6d95e",
+    "22f90ad77557",
     "2092eed87cf2",
     "a827e5fc67d6",
     "56e8ddaf94c8",
-    "ff9d4e75eeee"
+    "ff9d4e75eeee",
+    "2191ff85288b"
    ]
   }
  }
