@@ -1,24 +1,45 @@
 {
  "date": "2026-11-19",
- "generated_at": "2026-11-19T08:36:18+13:00",
+ "generated_at": "2026-11-19T08:55:47+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
    "label": "사회",
-   "briefing": "수능 한파와 눈·비 소식이 겹친 가운데 성북 살인범 자백과 강남 학원장 긴급체포 등 사건사고가 이어졌습니다.",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
+    {
+     "id": "23ab3aa03139",
+     "title_ko": "“채팅앱서 만난 초등생 술 먹이고 성폭행”…강남 학원장 긴급체포",
+     "summary_ko": [
+      "서울 강남 소재 학원장이 채팅 애플리케이션(앱)에서 만난 초등학생을 숙박업소로 유인해 술을 먹이고 성폭행한 혐의로 경찰에 긴급체포됐다.",
+      "서울 서초경찰서는 18일 간음목적유인, 미성.."
+     ],
+     "tags": [],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/society/12212943"
+      },
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261118181800004"
+      },
+      {
+       "name": "조선일보",
+       "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNTkw1MnFHeUx3QVU4LXRFbGJMNFd4RllKd0ZvQnlubDlLbjkyd0NwVklPUUppRnZoQjN5RkFORExOd2VnUDB0MlZZVlZaOG9MZmxvTzM1c0NvM3NJQmpkNjNvc0FfdW5CVUMyaE4xLXVUaWV4MmgwRjZfLVFvOFRhNlhOYWEzM0hnUGd5LTV2b0Y?oc=5"
+      }
+     ],
+     "original_title": "“채팅앱서 만난 초등생 술 먹이고 성폭행”…강남 학원장 긴급체포",
+     "published_at": "2026-11-18T12:15+00:00"
+    },
     {
      "id": "35dd504ed8ab",
      "title_ko": "특검, 선관위 직원 8명 구속영장 청구",
      "summary_ko": [
-      "특검이 선관위 직원 8명을 상대로 구속영장을 청구했습니다.",
-      "관련 수사와 재판 과정에서 구체적인 혐의 입증을 위한 공방이 이어지고 있습니다.",
-      "향후 법원의 영장실질심사 결과에 따라 파장이 예상됩니다."
+      "특검, 선관위 직원 8명 구속영장 청구"
      ],
-     "tags": [
-      "정치",
-      "사회"
-     ],
+     "tags": [],
      "importance": 6,
      "sources": [
       {
@@ -31,25 +52,15 @@
       }
      ],
      "original_title": "특검, 선관위 직원 8명 구속영장 청구",
-     "published_at": "2026-11-18T15:47+00:00",
-     "figure": {
-      "v": "8명",
-      "l": "구속영장 청구 인원"
-     }
+     "published_at": "2026-11-18T15:47+00:00"
     },
     {
      "id": "adf6a910dc80",
      "title_ko": "[날씨] 수능 당일 전국 곳곳 눈·비…아침 최저 영하 4도",
      "summary_ko": [
-      "대학수학능력시험일인 19일 전국 곳곳에 눈이나 비가 내릴 전망입니다.",
-      "아침 최저기온이 영하 4도에서 7도 사이를 기록하며 수능 한파가 찾아오겠습니다.",
-      "도로 살얼음이 예상되므로 수험생과 시민들의 안전 운전과 주의가 요구됩니다."
+      "대학수학능력시험(수능)이 치러지는 19일 목요일에는 전국 곳곳에 눈이나 비 소식이 있겠다."
      ],
-     "tags": [
-      "날씨",
-      "재난",
-      "교통"
-     ],
+     "tags": [],
      "importance": 6,
      "sources": [
       {
@@ -62,54 +73,16 @@
       }
      ],
      "original_title": "[날씨] 수능 당일 전국 곳곳 눈·비…아침 최저 영하 4도",
-     "published_at": "2026-11-18T15:04+00:00",
-     "figure": {
-      "v": "-4도",
-      "l": "아침 최저기온"
-     }
-    },
-    {
-     "id": "23ab3aa03139",
-     "title_ko": "채팅앱으로 초등생 유인해 성폭행한 강남 학원장 긴급체포",
-     "summary_ko": [
-      "채팅앱으로 만난 초등학생을 숙박업소로 유인해 술을 먹이고 성폭행한 30대 학원장이 긴급체포되었습니다.",
-      "경찰은 실종신고를 접수하고 위치를 추적해 피의자를 검거한 뒤 구속영장을 신청했습니다.",
-      "피의자가 혐의를 부인하는 가운데 추가 조사가 진행 중입니다."
-     ],
-     "tags": [
-      "사건사고",
-      "사회"
-     ],
-     "importance": 6,
-     "sources": [
-      {
-       "name": "매일경제",
-       "url": "https://www.mk.co.kr/news/society/12212943"
-      },
-      {
-       "name": "연합뉴스",
-       "url": "https://www.yna.co.kr/view/AKR20261118181800004"
-      }
-     ],
-     "original_title": "“채팅앱서 만난 초등생 술 먹이고 성폭행”…강남 학원장 긴급체포",
-     "published_at": "2026-11-18T12:15+00:00",
-     "figure": {
-      "v": "30대",
-      "l": "피의자 연령대"
-     }
+     "published_at": "2026-11-18T15:04+00:00"
     },
     {
      "id": "7a5d1ad9930c",
      "title_ko": "성북 10대 살인범 “아들 성범죄 처벌불원 요구하다 화나 범행”",
      "summary_ko": [
-      "서울 성북구 숙박업소에서 10대 여성을 살해한 50대 남성이 체포 일주일 만에 혐의를 인정했습니다.",
-      "피의자는 숨진 피해자에게 아들의 성범죄 처벌 불원서를 요구하다 우발적으로 범행을 저질렀다고 진술했습니다.",
-      "경찰은 공범 의혹을 받는 인물과 함께 정확한 사건 경위를 수사하고 있습니다."
+      "서울 성북구의 한 숙박업소에서 10대 여성을 살해한 혐의를 받는 50대 남성이 진술을 거부하다 체포된 지 7일 만에 살인 혐의를 인정하고 범행…",
+      "서울 성북경찰서는 .."
      ],
-     "tags": [
-      "사건사고",
-      "사회"
-     ],
+     "tags": [],
      "importance": 6,
      "sources": [
       {
@@ -122,52 +95,41 @@
       }
      ],
      "original_title": "성북 10대 살인범 “아들 성범죄 처벌불원 요구하다 화나 범행”",
-     "published_at": "2026-11-18T10:43+00:00",
-     "figure": {
-      "v": "7일",
-      "l": "자백까지 소요 기간"
-     }
+     "published_at": "2026-11-18T10:43+00:00"
     },
     {
-     "id": "f067e17b98c1",
-     "title_ko": "법원에서 무너진 특검의 내란 혐의 주장",
+     "id": "81757cede172",
+     "title_ko": "“10년간 11배 수익” … 39년 베테랑 펀드매니저의 성장株 투자법",
      "summary_ko": [
-      "법원 심리 과정에서 특검 측의 내란 관련 주장이 법리적 한계에 부딪혔습니다.",
-      "관련 사건들의 법적 타당성을 두고 공방이 치열하게 전개되고 있습니다.",
-      "향후 재판부의 최종 판단에 법조계의 이목이 집중되고 있습니다."
+      "김영민 토러스자산운용 대표 1편바야흐로 국내 펀드 시장의 대세는 상장지수펀드(ETF)다.",
+      "펀드매니저가 유망 종목을 발굴하고 투자 비중을 높여 초과수익을 내는 액티브 펀드는 시장에.."
      ],
-     "tags": [
-      "정치",
-      "사회"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/national/court_law/2026/11/19/CTKLYAU7K5GXFHZCCBBRQRGWGA/"
+       "name": "매일경제",
+       "url": "https://www.mk.co.kr/news/stock/12212634"
       }
      ],
-     "original_title": "‘우왕좌왕’을 내란으로… 법원서 무너진 특검 주장",
-     "published_at": "2026-11-18T18:00+00:00"
+     "original_title": "“10년간 11배 수익” … 39년 베테랑 펀드매니저의 성장株 투자법",
+     "published_at": "2026-11-18T19:30+00:00"
     }
-   ]
+   ],
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "kr_economy": {
    "label": "경제",
-   "briefing": "4대 은행의 깡통 대출이 5조원을 돌파하며 한계 기업들의 부실 위험이 가중되고 있습니다.",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
     {
      "id": "44a734245cf6",
      "title_ko": "이자도 못 갚는 기업 늘었다…4대 은행 ‘깡통 대출’ 5조원 돌파",
      "summary_ko": [
-      "주요 시중은행에서 이자조차 감당하지 못하는 무수익여신 규모가 사상 처음으로 5조원을 넘어섰습니다.",
-      "올해 3분기 말 기준 4대 은행의 무수익여신 잔액은 총 5조 873억원을 기록했습니다.",
-      "가계보다 중소기업 대출을 중심으로 부실 위험이 빠르게 커지는 양상입니다."
+      "주요 시중은행에서 돈을 빌리고 이자조차 감당하지 못하는 이른바 ‘깡통 대출’ 규모가 사상 처음으로 5조원을 돌파했다.",
+      "일부 수출 대기업은 여유 자금이 넘치는 반면 한계 상황에 직면.."
      ],
-     "tags": [
-      "경제",
-      "부동산"
-     ],
+     "tags": [],
      "importance": 6,
      "sources": [
       {
@@ -180,50 +142,32 @@
       }
      ],
      "original_title": "이자도 못 갚는 기업 늘었다…4대 은행 ‘깡통 대출’ 5조원 돌파",
-     "published_at": "2026-11-18T15:31+00:00",
-     "figure": {
-      "v": "5조 873억원",
-      "l": "무수익여신 잔액"
-     }
+     "published_at": "2026-11-18T15:31+00:00"
     },
     {
-     "id": "359fd1da46d5",
-     "title_ko": "중국이란 호랑이를 키운 미 빅테크… 부메랑 된 기술 협력",
+     "id": "30ccb24e812b",
+     "title_ko": "MEDI:GATE NEWS : 의료 AI 보상 도입 여부보다 어떤 효과 냈나…기업·투자업계 보상 예측 가능해야",
      "summary_ko": [
-      "미국 빅테크 기업들이 수십 년간 공들여 키운 중국 시장과 기술 생태계가 이제는 경쟁 부메랑으로 돌아오고 있습니다.",
-      "중국의 급격한 기술 자립과 첨단 산업 성장으로 글로벌 공급망의 지형도가 흔들리고 있습니다.",
-      "향후 미중 간 기술 패권 경쟁은 더욱 심화될 것으로 전망됩니다."
+      "MEDI:GATE NEWS : 의료 AI 보상 도입 여부보다 어떤 효과 냈나…기업·투자업계 보상 예측 가능해야"
      ],
-     "tags": [
-      "경제",
-      "기술"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
-       "name": "조선일보",
-       "url": "https://www.chosun.com/economy/int_economy/2026/11/19/PHZL6WOLZNHMHHXNFBLGFK4IHA/"
+       "name": "MEDI:GATE NEWS",
+       "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE44cUM0UW5MSTYyN2g2YXB0Wm13b2tlZTJVUXN0RUp5VElZM0x6N1k4YjBaWG1LcFNtbkU5dGVKejVEbjR5eXR0bUczTTg2Y2g0OUE3T2lhbw?oc=5"
       }
      ],
-     "original_title": "중국이란 호랑이를 30년 키운 미 빅테크… 이젠 부메랑 됐다",
-     "published_at": "2026-11-18T18:00+00:00",
-     "figure": {
-      "v": "30년",
-      "l": "협력 기간"
-     }
+     "original_title": "MEDI:GATE NEWS : 의료 AI 보상 도입 여부보다 어떤 효과 냈나…기업·투자업계 보상 예측 가능해야",
+     "published_at": "2026-11-18T19:07+00:00"
     },
     {
      "id": "e674882842df",
-     "title_ko": "프랑스·미국·일본은 배우자 상속세가 없는데… 한국은?",
+     "title_ko": "프랑스·미국·일본은 배우자 상속세가 없는데… 우리는?",
      "summary_ko": [
-      "주요 선진국인 프랑스, 미국, 일본 등은 배우자 상속세가 없는 반면 한국은 과세 체계를 유지하고 있습니다.",
-      "상속세 개편과 혼인 페널티 해소를 요구하는 목소리가 학계와 사회적으로 커지고 있습니다.",
-      "향후 조세 제도 개편 논의에 영향을 미칠지 주목됩니다."
+      "프랑스·미국·일본은 배우자 상속세가 없는데… 우리는?"
      ],
-     "tags": [
-      "경제",
-      "사회"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
@@ -235,17 +179,29 @@
      "published_at": "2026-11-18T18:00+00:00"
     },
     {
+     "id": "359fd1da46d5",
+     "title_ko": "중국이란 호랑이를 30년 키운 미 빅테크… 이젠 부메랑 됐다",
+     "summary_ko": [
+      "중국이란 호랑이를 30년 키운 미 빅테크… 이젠 부메랑 됐다"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "조선일보",
+       "url": "https://www.chosun.com/economy/int_economy/2026/11/19/PHZL6WOLZNHMHHXNFBLGFK4IHA/"
+      }
+     ],
+     "original_title": "중국이란 호랑이를 30년 키운 미 빅테크… 이젠 부메랑 됐다",
+     "published_at": "2026-11-18T18:00+00:00"
+    },
+    {
      "id": "2eba5032de62",
      "title_ko": "80석 레스토랑 닫고 8석 가게… 일흔 하나에 꿈 펼치는 ‘요리의 신’",
      "summary_ko": [
-      "대형 레스토랑을 운영하던 셰프가 규모를 대폭 줄여 새로운 콘셉트의 소규모 식당을 열었습니다.",
-      "일흔이 넘은 나이에도 새로운 도전에 나선 그의 행보는 많은 이들에게 영감을 주고 있습니다.",
-      "소수예약제 형태로 운영되는 가게는 독창적인 요리로 주목받고 있습니다."
+      "80석 레스토랑 닫고 8석 가게… 일흔 하나에 꿈 펼치는 ‘요리의 신’"
      ],
-     "tags": [
-      "경제",
-      "사회"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
@@ -254,53 +210,45 @@
       }
      ],
      "original_title": "80석 레스토랑 닫고 8석 가게… 일흔 하나에 꿈 펼치는 ‘요리의 신’",
-     "published_at": "2026-11-18T18:00+00:00",
-     "figure": {
-      "v": "8석",
-      "l": "새 가게 좌석 수"
-     }
-    },
-    {
-     "id": "5a66546c01e3",
-     "title_ko": "[단독] 수험생 시선으로 AI 커닝 판단… 수능 감독관들은 막막",
-     "summary_ko": [
-      "수능 현장에서 인공지능을 활용해 수험생의 부정행위를 적발하겠다는 대책이 나왔습니다.",
-      "수험생의 미세한 시선 처리를 기준으로 삼는 방식에 대해 현장 감독관들은 혼란을 호소하고 있습니다.",
-      "제도의 실효성과 현장 안착 여부를 두고 우려가 이어지고 있습니다."
-     ],
-     "tags": [
-      "사회",
-      "교육",
-      "기술"
-     ],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "머니투데이",
-       "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBnYk14aVltSXh5WXpOdXBxcTExdlVrdTdYR3Z2OEJsd19QT2VjZzlaSHV1bmlrc09YOFpKQUZUNE9fcDhBQ3l4QUQ4RFZvREJkWjRWel9hRmdKeHFQWHpqVVZ2Yi1jakV2NlHSAW9BVV95cUxPTmZZbXg3RUJwek80dTV0d2hwb3NtYmIwQlhudTJjYzZESVpua0VrNmx3Q2IwSW03SFhETUpPekdLR29aSUFHeXdYcGREMlFsWTh0c1ZSZWNCeXpUR25TczZhMFJQTkdRSHJ2cndZVDQ?oc=5"
-      }
-     ],
-     "original_title": "[단독]\"수험생 '시선' 보세요\" 이걸로 AI 커닝 판단?…수능 감독관들 '막막' - 머니투데이",
-     "published_at": "2026-11-18T16:49+00:00"
+     "published_at": "2026-11-18T18:00+00:00"
     }
-   ]
+   ],
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "kr_entertainment": {
    "label": "연예",
-   "briefing": "스타들의 진솔한 가족 이야기와 새로운 여행 근황이 대중의 관심을 끌고 있습니다.",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
     {
-     "id": "277a00cdcd61",
-     "title_ko": "KCM, 영어 수업 듣는 둘째 딸 서연이 모습에 눈물",
+     "id": "ad576223b4e0",
+     "title_ko": "제니, 美 빌보드 메인 싱글차트 3위…피원하모니, 앨범 4위 진입",
      "summary_ko": [
-      "방송을 통해 KCM 가족이 필리핀으로 허니문을 떠난 일상이 공개되었습니다.",
-      "둘째 딸 서연이가 낯선 외국 친구들 사이에서 영어 쿠킹 클래스에 참여하는 모습이 그려졌습니다.",
-      "훌쩍 성장한 딸의 대견한 모습을 본 KCM은 참았던 눈물을 흘렸습니다."
+      "그룹 블랙핑크 제니와 피원하모니 등 K팝 가수들이 미국 빌보드 메인 차트에서 호성적을 거뒀다."
      ],
-     "tags": [
-      "연예",
-      "방송"
+     "tags": [],
+     "importance": 6,
+     "sources": [
+      {
+       "name": "연합뉴스",
+       "url": "https://www.yna.co.kr/view/AKR20261118050600005"
+      },
+      {
+       "name": "KBS WORLD Radio",
+       "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPRmFfMFM4Sjc5b2ZCT2E2S20wcnNvblNhektrMnlRVkk4elZLdTZxUU4tVWdTanM1QkZNZmdBM05MaHlkTklHdlNfQVVNa1BjSmNEQVpGVjVtNUgxcDRwTFpSOGtxRHQwY0c4MUtWdGFkdDEydUREYUpHM2ZvMEFNZVNhSFF4LVZiMTZxaHVuUlp6RUQ1VWFYWWlQNU5DQQ?oc=5"
+      }
      ],
+     "original_title": "제니, 美 빌보드 메인 싱글차트 3위…피원하모니, 앨범 4위 진입",
+     "published_at": "2026-11-18T15:11+00:00"
+    },
+    {
+     "id": "277a00cdcd61",
+     "title_ko": "\"언제 이렇게 컸지?\"…KCM, 영어로 수업 듣는 둘째 딸 서연이 보더니 결국 '눈물' ('슈퍼맨이')",
+     "summary_ko": [
+      "‘슈퍼맨이 돌아왔다’ KCM이 훌쩍 성장한 둘째 딸 서연이의 모습을 보며 눈물을 흘렸다.",
+      "18일 전파를 탄 KBS 2TV ‘슈퍼맨이 돌아왔다’에서는 ‘자, 이제 떠나요!",
+      "행복으로’ 편으로, 필리핀으로 허니문을 떠난 KCM 가족의 모습이 공개됐다."
+     ],
+     "tags": [],
      "importance": 6,
      "sources": [
       {
@@ -316,16 +264,31 @@
      "published_at": "2026-11-18T13:20+00:00"
     },
     {
-     "id": "46d1c2df1c0c",
-     "title_ko": "아옳이, 한의사 연인과 유럽 여행 출발",
+     "id": "136c98c7ac3e",
+     "title_ko": "‘문무(文武)’ 넷플릭스 대한민국 TOP 10·웨이브 1위",
      "summary_ko": [
-      "인플루언서 아옳이가 연인인 한의사 김형배 씨와 함께 유럽 여행을 떠났습니다.",
-      "출국 전 공항에서 포착된 편안하고 다정한 차림의 모습이 소셜 계정을 통해 공개되었습니다.",
-      "두 사람의 여행 근황은 팬들의 큰 관심을 모으고 있습니다."
+      "‘문무(文武)’ 넷플릭스 대한민국 TOP 10·웨이브 1위"
      ],
-     "tags": [
-      "연예"
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "스포츠경향",
+       "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE0tMEx1ZE5pSVlsNGk4dW13SVhzT2JwM0U4UUxRdzQzcE5kcVlvbUJGOUY1d3oydEsyUHNSMlJTa2pZRVdBMzdSeXFBdGxmVXN1REtRN0pMenFma09rUWfSAWNBVV95cUxPX1cySmdpcE4wWEoyOUhYc3JRRDJtRUVhWmFmVHNYeDZTdTU0eXZvVUlmOWJSSjMzM2FpRExHLXY2a3huNl9XZndmenlncjBzTG02enk0V0JqNWZVOUIzTnJKaWs?oc=5"
+      }
      ],
+     "original_title": "‘문무(文武)’ 넷플릭스 대한민국 TOP 10·웨이브 1위",
+     "published_at": "2026-11-18T15:54+00:00"
+    },
+    {
+     "id": "46d1c2df1c0c",
+     "title_ko": "아옳이, '♥한의사 김형배'와 떠나는 유럽 여행 \"진짜 잘 맞는지 보려면\"",
+     "summary_ko": [
+      "사업가이자 인플루언서 아옳이가 연인인 김형배 씨와 유럽 여행을 떠났다.",
+      "지난 18일 아옳이는 자신의 소셜 계정에 여러 장의 사진을 공개했다.",
+      "편안한 느낌의, 포근한 소재가 분명한 아이보리 컬러의 트레이닝 복을 입은 아옳이는 공항에 앉아 설레는 표정을 감추지 못했다."
+     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
@@ -338,16 +301,11 @@
     },
     {
      "id": "233449344e40",
-     "title_ko": "‘재즈 디바’ 30년… 국악 품고 찾은 진짜 내 소리",
+     "title_ko": "‘재즈 디바’ 30년… 국악 품고 나서야 내 소리 찾았죠",
      "summary_ko": [
-      "재즈 디바로서 30년간 활동해온 아티스트가 국악과 접목한 새로운 음악 세계를 선보였습니다.",
-      "다양한 장르를 탐구하는 과정에서 자신만의 독창적인 음악적 정체성을 구축했습니다.",
-      "앞으로도 전통과 재즈를 잇는 활발한 활동이 기대됩니다."
+      "‘재즈 디바’ 30년… 국악 품고 나서야 내 소리 찾았죠"
      ],
-     "tags": [
-      "연예",
-      "방송"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
@@ -356,73 +314,56 @@
       }
      ],
      "original_title": "‘재즈 디바’ 30년… 국악 품고 나서야 내 소리 찾았죠",
-     "published_at": "2026-11-18T15:43+00:00",
-     "figure": {
-      "v": "30년",
-      "l": "활동 연수"
-     }
+     "published_at": "2026-11-18T15:43+00:00"
+    }
+   ],
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+  },
+  "kr_politics": {
+   "label": "정치",
+   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "items": [
+    {
+     "id": "f1c27133e681",
+     "title_ko": "정국 블랙홀 된 특검법... 국민의힘, 예산 '보이콧' 본회의 '필버'",
+     "summary_ko": [
+      "정국 블랙홀 된 특검법... 국민의힘, 예산 '보이콧' 본회의 '필버'"
+     ],
+     "tags": [],
+     "importance": 5,
+     "sources": [
+      {
+       "name": "한국일보",
+       "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE1sMkFIbnpaT2UyZzBsdjlDS1U0RDJTNTNxaWhkZjlJcWtjTHRINWt3Z0xFMkFkanNjWVhkTW4xXzNXdFlRZUk1bXVpRDRTWkxyOW1Qa182bEJzSWFPVV9Zc1RVbWJJbnBqUGRmb3lB0gFzQVVfeXFMTXVrWUNIS3dzcWhyN1R4RklrT0pLejl2VndtcEJ1SXdwMWh0aG9IQmxYblZzaDVma3liQXM0MFJBclZUTmR5TXFSZ25acTg2dlNrQUgxUmliWW1Vbk9SNTUwc01kT0kwNDN5X1JhUUhPOEdwQQ?oc=5"
+      }
+     ],
+     "original_title": "정국 블랙홀 된 특검법... 국민의힘, 예산 '보이콧' 본회의 '필버'",
+     "published_at": "2026-11-18T19:30+00:00"
     },
     {
-     "id": "44ffb7162037",
-     "title_ko": "[TV조선] 트로트 디바들의 치열한 대결",
+     "id": "8fc6715ccf53",
+     "title_ko": "ICC 문제에 유탄 맞은 北인권… 美, 유엔 결의안 21년 만에 기권",
      "summary_ko": [
-      "트로트 장르를 대표하는 여성 가수들이 무대에서 정면 승부를 펼칩니다.",
-      "개성 넘치는 가창력과 화려한 무대 매너로 시청자들의 눈과 귀를 사로잡을 예정입니다.",
-      "경쟁을 넘어 감동을 선사하는 무대들이 시청률 상승으로 이어질지 주목됩니다."
+      "ICC 문제에 유탄 맞은 北인권… 美, 유엔 결의안 21년 만에 기권"
      ],
-     "tags": [
-      "연예",
-      "방송"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
        "name": "조선일보",
-       "url": "https://www.chosun.com/entertainments/broadcast/2026/11/19/GQKZYI73XJBP3MJ5TYEFIIOBHY/"
+       "url": "https://www.chosun.com/international/us/2026/11/19/3RY6WSBE2JH5BENQ2WMD2SNXEI/"
       }
      ],
-     "original_title": "[TV조선] 트로트 디바들의 대결",
-     "published_at": "2026-11-18T15:39+00:00"
+     "original_title": "ICC 문제에 유탄 맞은 北인권… 美, 유엔 결의안 21년 만에 기권",
+     "published_at": "2026-11-18T19:15+00:00"
     },
     {
-     "id": "c48a6ccc1ae2",
-     "title_ko": "[오늘의 운세] 2026년 11월 19일 오행별 행운의 컬러",
-     "summary_ko": [
-      "11월 19일 오늘의 운세와 오행에 따른 행운의 색상이 공개되었습니다.",
-      "각 별자리와 띠별 특성에 맞춘 하루 지침이 제시되었습니다.",
-      "독자들이 일상을 시작하며 참고할 수 있는 조언을 담고 있습니다."
-     ],
-     "tags": [
-      "연예"
-     ],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "한국경제",
-       "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5YUmhYOTBuZk9ZV3FpbWowUWgwUEg3cjBoZTJiSjhtT29EWlR5UGs1aTdFMDA0aHJ0X3VucUgwZEdTWW1EUjlpcDY3ci0zQ2NkNEY1dThOMEpUdw?oc=5"
-      }
-     ],
-     "original_title": "[오늘의 운세] 2026년 11월 19일 오행별 행운의 컬러",
-     "published_at": "2026-11-18T15:00+00:00"
-    }
-   ]
-  },
-  "kr_politics": {
-   "label": "정치",
-   "briefing": "전북지사 선거법 위반 조사와 한중 FTA 2단계 타결 등 주요 정치·외교 현안이 이어졌습니다.",
-   "items": [
-    {
      "id": "1dac5ce28720",
-     "title_ko": "미 의회 자문기구 “한국 선박 활용해 태평양 해저 케이블 보호” 권고",
+     "title_ko": "美의회 자문 기구 “한국 선박 활용해 태평양 해저 케이블 보호” 권고",
      "summary_ko": [
-      "미국 의회 자문 기구가 태평양 해저 케이블 보호를 위해 한국 선박을 활용할 것을 권고했습니다.",
-      "주요 통신망의 안보 중요성이 커지면서 동맹국 간 협력 필요성이 대두되었습니다.",
-      "향후 양국 간 해양 안보 및 인프라 협력 확대에 긍정적인 영향을 미칠 것으로 보입니다."
+      "美의회 자문 기구 “한국 선박 활용해 태평양 해저 케이블 보호” 권고"
      ],
-     "tags": [
-      "정치",
-      "기술"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
@@ -435,15 +376,11 @@
     },
     {
      "id": "1b1f2c34ee67",
-     "title_ko": "전주공소청, 이원택 전북지사 선거법 위반 혐의 15시간 조사",
+     "title_ko": "전주공소청, 이원택 전북지사 선거법 위반 15시간 조사(종합)",
      "summary_ko": [
-      "공소청이 지방선거 당시 불거진 식비 대납 의혹과 관련해 이원택 전북지사를 소환 조사했습니다.",
-      "이 지사는 식사 자리 밥값을 직접 냈다고 해명했으나 경찰은 허위 사실 공표로 판단해 사건을 넘겼습니다.",
-      "다음 달 3일 공소시효 만료를 앞두고 기소 여부가 곧 결정될 예정입니다."
+      "공소청이 지난 6·3지방선거 과정에서 불거진 이원택 전북특별자치도지사의 '식비 대납' 의혹과 관련한 허위 사실..."
      ],
-     "tags": [
-      "정치"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
@@ -452,24 +389,15 @@
       }
      ],
      "original_title": "전주공소청, 이원택 전북지사 선거법 위반 15시간 조사(종합)",
-     "published_at": "2026-11-18T17:03+00:00",
-     "figure": {
-      "v": "15시간 30분",
-      "l": "조사 소요 시간"
-     }
+     "published_at": "2026-11-18T17:03+00:00"
     },
     {
      "id": "5d8e37634cd3",
-     "title_ko": "중 “한중 2단계 FTA 타결…문화·인터넷 협력 계획 마련”",
+     "title_ko": "中 \"한중 2단계 FTA 타결…문화·인터넷 협력 실행계획 마련\"",
      "summary_ko": [
-      "중국 상무부가 한중 자유무역협정 서비스·투자 2단계 협상의 실질적 타결을 공식 발표했습니다.",
-      "이번 협상으로 투자와 서비스 무역 개방이 확대되고 전통의학과 인터넷 협력 실행 계획이 마련되었습니다.",
-      "보호주의에 대응하고 양국 경제 협력의 새로운 동력이 될 것으로 기대됩니다."
+      "정성조 특파원 = 중국은 한중 자유무역협정(FTA) 서비스·투자(2단계) 협상의 실질적인 타결로 양국의 투자와 서비스 무역 ..."
      ],
-     "tags": [
-      "정치",
-      "경제"
-     ],
+     "tags": [],
      "importance": 5,
      "sources": [
       {
@@ -478,75 +406,27 @@
       }
      ],
      "original_title": "中 \"한중 2단계 FTA 타결…문화·인터넷 협력 실행계획 마련\"",
-     "published_at": "2026-11-18T16:51+00:00",
-     "figure": {
-      "v": "2단계",
-      "l": "FTA 협상 단계"
-     }
-    },
-    {
-     "id": "46167f7fedf7",
-     "title_ko": "경남도, 원전 수출부터 기술창업까지 지역경제 성장판 넓힌다",
-     "summary_ko": [
-      "경상남도가 원전 산업 수출과 기술창업 지원을 통해 지역 경제 활성화에 나섭니다.",
-      "다양한 산업 인프라를 확충하고 기업 지원 정책을 강화해 성장 동력을 확보할 방침입니다.",
-      "지역 기업들의 판로 개척과 고용 창출에 긍정적인 파급효과가 예상됩니다."
-     ],
-     "tags": [
-      "정치",
-      "경제"
-     ],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "인더스트리뉴스",
-       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1YeS1XcjZMbjRGanEyUGxXNTBqalNQLU1xRmhSUk5yQVladVdxVjZLWVB5YXNEeXB5ZXRYVEMzYm03Z0hnQmFmQ002VXVZSUJxMFVLRnYxZFBqVWxWbXhpNERXN1JtUm55cXlXaTNmN3ZMQQ?oc=5"
-      }
-     ],
-     "original_title": "경남도, 원전 수출부터 기술창업까지…지역경제 성장판 넓힌다",
-     "published_at": "2026-11-18T16:34+00:00"
-    },
-    {
-     "id": "70d27136ab38",
-     "title_ko": "창원시, 4조 6259억 예산 편성…민생·안전·원전 집중 지원",
-     "summary_ko": [
-      "창원시가 민생 경제 안정과 안전 확보, 원전 산업 육성을 위해 대규모 예산을 편성했습니다.",
-      "총예산 규모는 4조 6259억원으로 지역 현안 해결에 집중 투입될 예정입니다.",
-      "효율적인 재정 집행을 통해 경기 회복과 도시 경쟁력을 높일 것으로 기대됩니다."
-     ],
-     "tags": [
-      "정치",
-      "경제"
-     ],
-     "importance": 5,
-     "sources": [
-      {
-       "name": "인더스트리뉴스",
-       "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE1RTjJ5WERHMDZZeTdEdGNBWDQ4cklkUW5RV1pXVWt0UzR2YldMTDFoYkRtdE5kQ3hsTF9ySUtEZ1p5TWNpejFyam5BYkNhWHp3bnhGWHo4R2lTZUlTNzVyZTR1bFZJRnd3amtmczZHYjRZZw?oc=5"
-      }
-     ],
-     "original_title": "창원시, 4조 6259억 예산 승부수…민생·안전·원전 잡는다",
-     "published_at": "2026-11-18T16:33+00:00",
-     "figure": {
-      "v": "4조 6259억",
-      "l": "창원시 예산 규모"
-     }
+     "published_at": "2026-11-18T16:51+00:00"
     }
-   ]
+   ],
+   "error": "gemini HTTP 503 for gemini-flash-lite-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
   },
   "nz_society": {
    "label": "사회",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "사회 분야에서는 던단 사건 재판, 주택 개보수 팁 및 열대성 사이클론 피해 소식이 전해졌습니다.",
    "items": [
     {
      "id": "55019c2d3c67",
-     "title_ko": "Person taken to hospital, woman charged after Dunedin assault",
+     "title_ko": "하프문 베이 등 오클랜드 및 각지에서 교통사고와 폭행 사건 발생",
      "summary_ko": [
-      "The Serious Crash Unit will remain at the scene in Half Moon Bay for several ho…"
+      "하프문 베이 등 여러 지역에서 중대 충돌 사고와 폭행 사건이 발생해 부상자들이 병원으로 긴급 이송되었습니다.",
+      "중대사고조사단이 하프문 베이 현장에 수 시간 동안 머무는 등 긴급 대응이 이어졌습니다.",
+      "경찰의 후속 조사와 도로 통제 조치에 따라 해당 지역 교통 혼잡과 치안 주의가 당부됩니다."
      ],
      "tags": [
-      "의료",
-      "치안"
+      "사건사고",
+      "치안",
+      "교통"
      ],
      "importance": 10,
      "sources": [
@@ -577,17 +457,20 @@
      ],
      "original_title": "Person taken to hospital, woman charged after Dunedin assault",
      "published_at": "2026-11-18T04:46+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 내 이동과 안전에 직접 영향을 미치는 사건이므로 통근 및 외출 시 교통 상황을 유의해야 합니다."
     },
     {
      "id": "c7d4cc185b85",
-     "title_ko": "Extent of killer’s mental illness missed by GP, left untreated and led to death, lawyer says",
+     "title_ko": "남편 살해한 여성의 정신 질환 치료 기회를 놓쳤다는 변호인 주장",
      "summary_ko": [
-      "Police arrived and found her and her husband lying together under a blanket."
+      "남편을 흉기로 살해한 48세 여성이 범행 전 여러 차례 GP를 찾아갔으나 정신 질환의 심각성을 진단받지 못했습니다.",
+      "법정에서 변호인은 피고인의 정신 질환이 치료되지 못한 채 방치된 점이 비극으로 이어졌다고 밝혔습니다.",
+      "재판부는 심신상실 무죄 판결 이후 피고인을 정신건강 시설에 특별 환자로 수감할지 여부를 심리하고 있습니다."
      ],
      "tags": [
+      "사회",
       "의료",
-      "치안"
+      "사건사고"
      ],
      "importance": 10,
      "sources": [
@@ -598,17 +481,24 @@
      ],
      "original_title": "Extent of killer’s mental illness missed by GP, left untreated and led to death, lawyer says",
      "published_at": "2026-11-18T17:40+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "뉴질랜드의 의료 체계와 정신건강 관리의 중요성을 보여주는 사례로, 일상적인 의료 서비스 이용에 참고가 됩니다.",
+     "figure": {
+      "v": "48세",
+      "l": "피고인 연령"
+     }
     },
     {
      "id": "353371e00d55",
-     "title_ko": "Forget double glazing and marble benchtops: The cheap fixes that actually sell homes",
+     "title_ko": "주택 매매 촉진을 위한 저렴한 리노베이션 요령",
      "summary_ko": [
-      "With property prices plateauing, real estate agents advise homeowners to focus…"
+      "주택 시장 가격이 정체됨에 따라 부동산 전문가들은 고비용 공사 대신 저렴한 미관 개선을 권장하고 있습니다.",
+      "이중창이나 대리석 상판 설치 같은 큰 공사보다는 가시성과 방재 요건에 집중해야 한다고 조언합니다.",
+      "주택 매물 공급이 많은 현 상황에서 매수자의 관심을 끌기 위한 현실적인 대안으로 제시되고 있습니다."
      ],
      "tags": [
+      "부동산",
       "주거",
-      "생활비"
+      "경제"
      ],
      "importance": 10,
      "sources": [
@@ -619,17 +509,19 @@
      ],
      "original_title": "Forget double glazing and marble benchtops: The cheap fixes that actually sell homes",
      "published_at": "2026-11-18T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "향후 오클랜드에서 주거를 마련하거나 부동산 시장 동향을 파악하려는 유학생에게 실질적인 주택 정보를 제공합니다."
     },
     {
      "id": "8339a5ce32ff",
-     "title_ko": "Eagle helicopter back in Canterbury for months – but police won’t say why",
+     "title_ko": "캔터베리 지역에 수개월간 배치된 이글 헬리콥터",
      "summary_ko": [
-      "Eagle helicopter back in Canterbury for months – but police won’t say why"
+      "경찰 이글 헬리콥터가 캔터베리 지역에 수개월 동안 배치되어 운용되고 있습니다.",
+      "현지 주민들의 관심에도 불구하고 경찰 당국은 구체적인 배치 사유를 밝히지 않고 있습니다.",
+      "지역 치안 강화 목적의 조치로 추정되나 정확한 배경은 공개되지 않은 상태입니다."
      ],
      "tags": [
-      "환율",
-      "치안"
+      "치안",
+      "사회"
      ],
      "importance": 10,
      "sources": [
@@ -640,16 +532,20 @@
      ],
      "original_title": "Eagle helicopter back in Canterbury for months – but police won’t say why",
      "published_at": "2026-11-17T23:09+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "지역별 치안 유지 방식과 경찰력 운영에 대한 사회적 관심을 보여줍니다."
     },
     {
      "id": "b64de1e33cef",
-     "title_ko": "Cyclone Xavier at category 5 as it batters northern Cook Islands",
+     "title_ko": "북쿡제도를 강타한 5등급 사이클론 자비에",
      "summary_ko": [
-      "Damaging gale-force winds, heavy rainfall, dangerous seas and coastal inundatio…"
+      "심각한 열대성 사이클론 자비에가 최고 등급인 5등급으로 북쿡제도를 통과하고 있습니다.",
+      "푸카푸카와 나사우 지역을 중심으로 파괴적인 돌풍, 폭우, 해일 경보가 발령되었습니다.",
+      "주민들은 안전한 대피소에 머물며 당국의 재난 지침을 따를 것을 강력히 권고받고 있습니다."
      ],
      "tags": [
-      "기상재해"
+      "재난",
+      "날씨",
+      "사회"
      ],
      "importance": 8,
      "sources": [
@@ -664,25 +560,31 @@
      ],
      "original_title": "Cyclone Xavier at category 5 as it batters northern Cook Islands",
      "published_at": "2026-11-18T03:47+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "태평양 지역의 급격한 기상 악화 상황을 보여주며 남반구 재난 대응의 중요성을 환기합니다.",
+     "figure": {
+      "v": "5등급",
+      "l": "사이클론 강도"
+     },
      "radar": 2
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "nz_education": {
    "label": "교육",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "교육 분야에서는 대체 교사 비용 증가, 학교 휴대전화 금지 효과 및 NCEA 시험 장애 소식이 다뤄졌습니다.",
    "items": [
     {
      "id": "ae1433ee8841",
-     "title_ko": "Schools having to cut back as cost of hiring relief teachers soars - PPTA",
+     "title_ko": "대체 교사 비용 급증으로 학교 예산 감축 불가피",
      "summary_ko": [
-      "Schools having to cut back as cost of hiring relief teachers soars - PPTA"
+      "교사 부족과 대체 교사 고용 비용 급증으로 인해 뉴질랜드 각급 학교들이 재정적 압박을 겪고 있습니다.",
+      "전국적으로 대체 교사 비용이 2억 8천만 달러에 달하며 학교들은 예산을 줄이고 있습니다.",
+      "스포츠 활동과 현장 학습 등이 축소되면서 학생들의 교육 환경에 부정적인 영향을 미치고 있습니다."
      ],
      "tags": [
-      "고용",
-      "교육"
+      "교육",
+      "사회",
+      "경제"
      ],
      "importance": 10,
      "sources": [
@@ -701,15 +603,22 @@
      ],
      "original_title": "Schools having to cut back as cost of hiring relief teachers soars - PPTA",
      "published_at": "2026-11-17T05:30+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "교육계 전반의 예산난과 교사 부족 현상을 보여주며 학업 환경 변화에 영향을 미칩니다.",
+     "figure": {
+      "v": "2억 8천만 달러",
+      "l": "대체 교사 비용"
+     }
     },
     {
      "id": "82e6a3abf0c3",
-     "title_ko": "In brief: Teenager linked to high school lockdown, tele health comes to Taranaki and the Oakura Christmas market",
+     "title_ko": "고등학교 봉쇄 조치 및 헬스케어 관련 단신",
      "summary_ko": [
-      "In brief: Teenager linked to high school lockdown, tele health comes to Taranak…"
+      "고등학교 봉쇄와 연관된 십대 청소년 관련 소식과 타라나키 지역의 원격 의료 도입 소식이 전해졌습니다.",
+      "지역 사회의 소규모 행사와 보건 서비스 개선 사항이 함께 다뤄졌습니다.",
+      "주민들의 생활 편의와 안전에 관련된 다양한 지역 소식이 요약되었습니다."
      ],
      "tags": [
+      "사회",
       "교육",
       "의료"
      ],
@@ -722,16 +631,19 @@
      ],
      "original_title": "In brief: Teenager linked to high school lockdown, tele health comes to Taranaki and the Oakura Christmas market",
      "published_at": "2026-11-16T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "지역 사회의 일상적인 안전 및 보건 서비스 변화를 파악하는 데 참고가 됩니다."
     },
     {
      "id": "35500f22c29d",
-     "title_ko": "Do school phone bans help students learn? In the US, gains are 'modest'",
+     "title_ko": "학교 휴대전화 금지의 학습 효과는 제한적이라는 연구 결과",
      "summary_ko": [
-      "Schools can lock phones away in pouches or banish them to backpacks, but they c…"
+      "학교 내 휴대전화 사용을 엄격히 제한하는 정책이 학생들의 학업 성취도에 미치는 영향이 분석되었습니다.",
+      "미국 내 4,600개 학교를 대상으로 한 대규모 연구 결과, 엄격한 제한 조치는 '소폭'의 학업 향상으로 이어졌습니다.",
+      "전자기기 차단만으로는 디지털 세상의 모든 영향을 차단할 수 없지만 지속적인 효과는 기대할 수 있습니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "사회"
      ],
      "importance": 9,
      "sources": [
@@ -742,16 +654,24 @@
      ],
      "original_title": "Do school phone bans help students learn? In the US, gains are 'modest'",
      "published_at": "2026-11-18T17:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "학교 교육 정책의 변화 방향과 학생들의 집중도 향상 방안을 가늠해 볼 수 있습니다.",
+     "figure": {
+      "v": "4,600개",
+      "l": "조사 대상 학교"
+     }
     },
     {
      "id": "900e8f756719",
-     "title_ko": "Locals’ frustration with Waingaro School closure reignites after docs show it was fast-tracked",
+     "title_ko": "와인가로 학교 폐쇄 절차의 패스트트랙 추진에 따른 지역사회 반발",
      "summary_ko": [
-      "Locals’ frustration with Waingaro School closure reignites after docs show it w…"
+      "와인가로 학교 폐쇄 결정이 신속 처리 절차를 통해 진행된 사실이 문서로 밝혀졌습니다.",
+      "이로 인해 학교 폐쇄를 둘러싼 지역 주민들의 불만과 좌절감이 다시 고조되고 있습니다.",
+      "교육 당국의 의사결정 투명성에 대한 논란이 지역 사회에서 지속될 전망입니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "정치",
+      "사회"
      ],
      "importance": 8,
      "sources": [
@@ -766,16 +686,19 @@
      ],
      "original_title": "Locals’ frustration with Waingaro School closure reignites after docs show it was fast-tracked",
      "published_at": "2026-11-16T20:52+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "교육 시설 통폐합 과정에서의 행정 절차와 지역 사회 소통의 중요성을 보여줍니다."
     },
     {
      "id": "d60e93f641a9",
-     "title_ko": "Primary school excited to stage debut Gala",
+     "title_ko": "첫 번째 갈라 행사를 앞두고 기대감에 찬 초등학교",
      "summary_ko": [
-      "Primary school excited to stage debut Gala"
+      "어느 초등학교가 역사적인 첫 번째 갈라(Gala) 행사를 개최하며 큰 기대를 모으고 있습니다.",
+      "학생, 교사, 학부모가 모두 참여하여 학교 공동체의 화합을 다지는 프로그램이 준비되었습니다.",
+      "성공적인 행사를 통해 지역 사회와의 연대감이 더욱 강화될 것으로 보입니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "사회"
      ],
      "importance": 8,
      "sources": [
@@ -786,16 +709,19 @@
      ],
      "original_title": "Primary school excited to stage debut Gala",
      "published_at": "2026-11-18T18:07+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "지역 초등학교의 활기찬 커뮤니티 활동을 보여주는 긍정적인 소식입니다."
     },
     {
      "id": "71603b166d22",
-     "title_ko": "More students offered NCEA derived grades after power cut shuts high school",
+     "title_ko": "정전 사고로 시험 치르지 못한 로즈힐 칼리지 학생들에게 대체 성적 부여",
      "summary_ko": [
-      "Senior Rosehill College students were sent to a neighbouring high school to sit…"
+      "로즈힐 칼리지에서 발생한 갑작스러운 정전으로 인해 고등학교 시험이 중단되는 사태가 발생했습니다.",
+      "피해를 입은 시니어 학생들이 인근 학교로 이동해 시험을 치르거나 산출 성적을 부여받았습니다.",
+      "학교 측의 신속한 조치로 학생들의 NCEA 시험 평가에는 차질이 최소화되었습니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "사회"
      ],
      "importance": 8,
      "sources": [
@@ -806,24 +732,26 @@
      ],
      "original_title": "More students offered NCEA derived grades after power cut shuts high school",
      "published_at": "2026-11-18T06:34+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "NCEA 시험을 앞둔 수험생들에게 발생할 수 있는 돌발 상황과 교육 당국의 대처 방식을 보여줍니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "nz_economy": {
    "label": "경제",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "경제 분야에서는 주택 가격 하락 전망, 16개 지역 경제 동향, 제로의 인력 구조조정 및 환율 영향이 보도되었습니다.",
    "items": [
     {
      "id": "2092eed87cf2",
-     "title_ko": "When will house prices stop falling?",
+     "title_ko": "내년 하반기 회복이 점쳐지는 뉴질랜드 주택 가격 하락세",
      "summary_ko": [
-      "Economic forecasters all agree that house prices should start to rise again at…"
+      "뉴질랜드 주택 가격이 10월에도 하락세를 보이며 7개월 연속 감소 기록을 이어갔습니다.",
+      "인포메트릭스 등 경제 전문가들은 내년 중반 이후에야 월별 주택 가격이 안정될 것으로 전망했습니다.",
+      "높은 매물 재고와 취약한 고용 및 거시경제 여건이 가격 하락을 압박하는 요인으로 작용하고 있습니다."
      ],
      "tags": [
-      "주거",
-      "생활비"
+      "부동산",
+      "경제",
+      "주거"
      ],
      "importance": 10,
      "sources": [
@@ -834,16 +762,23 @@
      ],
      "original_title": "When will house prices stop falling?",
      "published_at": "2026-11-18T06:54+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "졸업 후 뉴질랜드 정착과 주거 마련을 계획하는 유학생의 장기적인 경제적 부담 예측에 중요합니다.",
+     "figure": {
+      "v": "0.4%",
+      "l": "10월 주택가격 하락률"
+     }
     },
     {
      "id": "0c3596f926d6",
-     "title_ko": "Petrol and diesel prices continue to surge according to new numbers",
+     "title_ko": "계속되는 휘발유 및 디젤 가격 상승세",
      "summary_ko": [
-      "Petrol and diesel prices continue to surge according to new numbers"
+      "최신 통계 자료에 따르면 뉴질랜드의 휘발유와 디젤 가격이 계속해서 가파른 상승세를 보이고 있습니다.",
+      "국제 유가 변동과 환율 요인이 겹치면서 연료비 부담이 커지고 있습니다.",
+      "가계 생활비와 물류비 전반에 부정적인 영향을 미칠 것으로 예상됩니다."
      ],
      "tags": [
-      "생활비"
+      "물가",
+      "경제"
      ],
      "importance": 9,
      "sources": [
@@ -854,16 +789,20 @@
      ],
      "original_title": "Petrol and diesel prices continue to surge according to new numbers",
      "published_at": "2026-11-18T18:41+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "물가 상승과 생활비 압박으로 이어져 오클랜드에서의 생활비 예산 관리에 직접적인 영향을 줍니다."
     },
     {
      "id": "3b8c7d69ca9d",
-     "title_ko": "Housing market sitting out economic recovery - Infometrics",
+     "title_ko": "주택 시장 침체 속에서도 완만한 회복세를 보이는 뉴질랜드 경제",
      "summary_ko": [
-      "Infometrics says the recovery will be harder without a housing market boost, bu…"
+      "인포메트릭스의 분기 경제 모니터에 따르면 9월 분기 경제 활동이 연율 2.4퍼센트 증가했습니다.",
+      "대부분의 지역 경제가 성장세를 보였으나 주택 시장은 회복세에 동참하지 못하고 있습니다.",
+      "공공 부문 중심의 고용 증가는 나타났으나 민간 부문의 일자리 회복은 다소 지연되고 있습니다."
      ],
      "tags": [
-      "주거"
+      "경제",
+      "고용",
+      "부동산"
      ],
      "importance": 8,
      "sources": [
@@ -874,16 +813,24 @@
      ],
      "original_title": "Housing market sitting out economic recovery - Infometrics",
      "published_at": "2026-11-18T16:51+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "졸업을 앞둔 유학생에게 전체적인 고용 시장과 경제 회복 속도를 가늠하는 지표가 됩니다.",
+     "figure": {
+      "v": "2.4%",
+      "l": "연간 경제활동 증가율"
+     }
     },
     {
      "id": "a827e5fc67d6",
-     "title_ko": "Xero remains tight-lipped over cuts to New Zealand and Australian jobs",
+     "title_ko": "뉴질랜드 및 호주 법인 인력 감축에 함구하는 제로",
      "summary_ko": [
-      "The NZ Herald reported an insider saying New Zealand software engineers and som…"
+      "회계 소프트웨어 기업 제로가 뉴질랜드와 호주 직원들을 대상으로 한 구조조정 및 감원설에 답변을 거부했습니다.",
+      "내부 소식통에 따르면 소프트웨어 엔지니어 등이 회의에 소집되어 구조조정 통보를 받은 것으로 알려졌습니다.",
+      "과거 대규모 감원 이후 해외 시장 확장을 우선시하는 경영 전략의 연장선으로 풀이됩니다."
      ],
      "tags": [
-      "고용"
+      "고용",
+      "경제",
+      "기술"
      ],
      "importance": 7,
      "sources": [
@@ -894,16 +841,24 @@
      ],
      "original_title": "Xero remains tight-lipped over cuts to New Zealand and Australian jobs",
      "published_at": "2026-11-18T06:11+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "IT 및 소프트웨어 분야 취업을 준비하는 졸업생들에게 주요 고용주의 채용 동향에 경각심을 줍니다.",
+     "figure": {
+      "v": "800명",
+      "l": "과거 글로벌 감원 규모"
+     }
     },
     {
      "id": "56e8ddaf94c8",
-     "title_ko": "Why the low Kiwi dollar is both hurting and helping us – The Economy of Everything",
+     "title_ko": "양날의 검으로 작용하는 뉴질랜드 달러의 17년 만의 최저치",
      "summary_ko": [
-      "The Kiwi has hit a 17-year low against a basket of currencies from major tradin…"
+      "뉴질랜드 달러 가치가 주요 교역국 통화 바스켓 대비 17년 만에 최저 수준으로 하락했습니다.",
+      "환율 하락으로 중국인 관광객 증가와 수출업체 등은 수혜를 입는 반면 수입 물가는 상승했습니다.",
+      "소비자들에게는 수입품 가격 부담이 커지지만 전반적인 경제 회복을 위한 조정 역할을 하고 있습니다."
      ],
      "tags": [
-      "환율"
+      "환율",
+      "물가",
+      "경제"
      ],
      "importance": 7,
      "sources": [
@@ -914,23 +869,29 @@
      ],
      "original_title": "Why the low Kiwi dollar is both hurting and helping us – The Economy of Everything",
      "published_at": "2026-11-18T03:56+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "환율 변동이 수입 물가와 생활비 전반에 영향을 미쳐 유학생의 체감 물가에 부담을 줍니다.",
+     "figure": {
+      "v": "17년",
+      "l": "최저치 경과 기간"
+     }
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "nz_politics": {
    "label": "정치",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "정치 분야에서는 마이클 로스의 급여 논란과 NZQA 시험 오류에 대한 교육부 장관의 비판이 이어졌습니다.",
    "items": [
     {
      "id": "6a477d994389",
-     "title_ko": "Michael Laws might not make it as an MP, but he’s still getting paid",
+     "title_ko": "특수 투표 집계를 기다리는 동안에도 급여를 받는 마이클 로스",
      "summary_ko": [
-      "One candidate, Michael Laws, is holding down three jobs while he waits for the…"
+      "총선 특수 투표 결과 최종 확정을 기다리는 후보 마이클 로스가 세 가지 직업을 유지하고 있습니다.",
+      "당선 여부가 불투명한 상황에서도 정치인 및 관련 직무를 통해 급여를 계속 받고 있습니다.",
+      "선거 결과에 따라 그의 정치적 거취와 급여 지급 여부가 최종 결정될 예정입니다."
      ],
      "tags": [
-      "고용"
+      "정치",
+      "사회"
      ],
      "importance": 8,
      "sources": [
@@ -941,16 +902,23 @@
      ],
      "original_title": "Michael Laws might not make it as an MP, but he’s still getting paid",
      "published_at": "2026-11-18T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "정치권의 선거 후속 절차와 후보자들의 동향을 보여주는 흥미로운 정계 소식입니다.",
+     "figure": {
+      "v": "3개",
+      "l": "보유 직업 수"
+     }
     },
     {
      "id": "82046cad1300",
-     "title_ko": "Taranaki hospital worker wins national award for child MRI care",
+     "title_ko": "어린이 MRI 관리 부문에서 전국 상을 수상한 타라나키 병원 직원",
      "summary_ko": [
-      "Taranaki hospital worker wins national award for child MRI care"
+      "타라나키 병원의 한 의료 종사자가 어린이 환자 대상 MRI 검사 우수성으로 전국 상을 수상했습니다.",
+      "어린이 환자의 불안을 줄이고 검사의 정확도를 높인 공로를 인정받았습니다.",
+      "지역 의료 서비스의 질적 향상과 보건 의료인의 전문성을 보여주는 사례입니다."
      ],
      "tags": [
-      "의료"
+      "의료",
+      "사회"
      ],
      "importance": 8,
      "sources": [
@@ -961,16 +929,20 @@
      ],
      "original_title": "Taranaki hospital worker wins national award for child MRI care",
      "published_at": "2026-11-18T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "뉴질랜드 보건 의료 분야의 우수 사례를 보여주며 의료 직종의 기여도를 시사합니다."
     },
     {
      "id": "84710eeb3850",
-     "title_ko": "Education Minister deeply disappointed after disruption to level 1 English exam",
+     "title_ko": "NCEA 영어 시험 시스템 오류 사태에 대해 사과하고 독립 조사 착수한 NZQA",
      "summary_ko": [
-      "Education Minister deeply disappointed after disruption to level 1 English exam"
+      "NCEA 레벨 1 영어 시험에서 또다시 IT 시스템 결함이 발생해 수험생들이 큰 혼란을 겪었습니다.",
+      "교육부 장관이 깊은 실망감을 표명한 가운데, NZQA는 공식 사과와 함께 독립적인 진상 조사를 명령했습니다.",
+      "반복되는 시험 시스템 장애로 인해 교육 당국과 IT 제공업체에 대한 엄격한 책임 추궁이 예상됩니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "정치",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -1001,15 +973,18 @@
      ],
      "original_title": "Education Minister deeply disappointed after disruption to level 1 English exam",
      "published_at": "2026-11-18T10:59+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "국가 공인 시험 관리의 신뢰도 문제를 다루며 교육 행정의 투명성과 시스템 안정성을 보여줍니다."
     },
     {
      "id": "ad1bcd5dc223",
-     "title_ko": "NZ Education at Risk: Erica Stanford on Labour, Hipkins, and Education Reforms",
+     "title_ko": "노동당과 교육 개혁을 비판하며 뉴질랜드 교육의 위기를 진단한 에리카 스탠퍼드",
      "summary_ko": [
-      "NZ Education at Risk: Erica Stanford on Labour, Hipkins, and Education Reforms"
+      "에리카 스탠퍼드가 크리스 힙킨스와 노동당의 과거 교육 정책 및 개혁안을 강도 높게 비판했습니다.",
+      "현재 뉴질랜드 교육 시스템이 직면한 위험성을 지적하며 근본적인 변화의 필요성을 강조했습니다.",
+      "향후 교육 정책의 방향성과 정당 간 개혁 주도권 싸움에 영향을 미칠 것으로 보입니다."
      ],
      "tags": [
+      "정치",
       "교육"
      ],
      "importance": 7,
@@ -1021,23 +996,26 @@
      ],
      "original_title": "NZ Education at Risk: Erica Stanford on Labour, Hipkins, and Education Reforms",
      "published_at": "2026-11-17T05:20+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "정치권의 교육 정책 공방을 통해 향후 교육계 및 비자·이민과 연계된 정책 기조 변화를 짐작하게 합니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "akl_safety": {
    "label": "치안",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드 치안 분야에서는 경찰 추격전 관련 기소와 심야 무장 강도 사건이 발생했습니다.",
    "items": [
     {
      "id": "11bd3b96af97",
-     "title_ko": "Three police officers face assault charges after Auckland pursuit",
+     "title_ko": "오클랜드 경찰 추격전 이후 폭행 혐의로 기소된 경찰관 3명",
      "summary_ko": [
-      "Three police officers face assault charges after Auckland pursuit"
+      "오클랜드에서 벌어진 차량 추격전 과정과 연루되어 현직 경찰관 3명이 폭행 혐의로 기소되었습니다.",
+      "경찰의 강경 진압 및 공권력 행사 절차의 적법성을 두고 내부 감찰과 사법 절차가 진행 중입니다.",
+      "공권력 집행의 투명성과 책임성에 대한 사회적 논증이 거세질 것으로 보입니다."
      ],
      "tags": [
-      "치안"
+      "치안",
+      "사건사고",
+      "사회"
      ],
      "importance": 8,
      "sources": [
@@ -1048,16 +1026,24 @@
      ],
      "original_title": "Three police officers face assault charges after Auckland pursuit",
      "published_at": "2026-11-17T06:32+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 지역의 치안과 공권력 집행 관련 사건으로 도심 안전 및 법 집행 신뢰도에 영향을 줍니다.",
+     "figure": {
+      "v": "3명",
+      "l": "기소된 경찰관 수"
+     }
     },
     {
      "id": "bff0a0511ace",
-     "title_ko": "Man injured in late-night aggravated robbery, police appeal in place",
+     "title_ko": "오클랜드 심야 무장 강도 사건으로 부상자 발생 및 경찰 수배",
      "summary_ko": [
-      "Man injured in late-night aggravated robbery, police appeal in place"
+      "오클랜드에서 심야 시간에 무장 강도 사건이 발생해 남성 한 명이 부상을 입었습니다.",
+      "사건 발생 직후 경찰이 긴급 출동하여 현장을 수색하고 목격자와 제보를 공개적으로 요청하고 있습니다.",
+      "주거 및 상업 지역의 야간 치안 불안을 해소하기 위한 경찰의 수사가 본격화되었습니다."
      ],
      "tags": [
-      "치안"
+      "치안",
+      "사건사고",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -1068,27 +1054,7 @@
      ],
      "original_title": "Man injured in late-night aggravated robbery, police appeal in place",
      "published_at": "2026-11-17T23:18+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
-    },
-    {
-     "id": "e4a00fcc346b",
-     "title_ko": "Missing 22-year-old found safe and well, police say",
-     "summary_ko": [
-      "Missing 22-year-old found safe and well, police say"
-     ],
-     "tags": [
-      "치안"
-     ],
-     "importance": 7,
-     "sources": [
-      {
-       "name": "NZ Herald",
-       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNXzlnNjNYc3ZlWGl6QUhvMm91c05PVFZ6VFkycGJ5cEF3ck8yREdDeVhONFpQVUxocXZJNGFOMlIzNFhSTk1ta0pqUmZPalZWeWx4ckhFd2dQSTBsMWNNbDZDQ3hGdHpUV1ZGNDd0emotdlNBOURxTzVuNzF4dm1CWDBhdEc2SVJIb0RBODJocFJzZ1pLN1g4djFUNHIzVTBHdFEzdHlhRGlIajkyX0xvZFVrRGVxX3JuMlVoV2dGVFZ2NktfX3hUVQ?oc=5"
-      }
-     ],
-     "original_title": "Missing 22-year-old found safe and well, police say",
-     "published_at": "2026-11-17T22:13+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 내 심야 범죄 발생으로 학생들의 야간 외출 시 각별한 안전 유의가 요구됩니다."
     },
     {
      "id": "c5d8ce9d3587",
@@ -1109,13 +1075,33 @@
      "original_title": "Trapped in her own home: Woman makes five 111 calls before police remove boarder",
      "published_at": "2026-11-17T19:48+00:00",
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
+    {
+     "id": "596f0c05764e",
+     "title_ko": "'Justice has spoken': Depardieu drops sexual assault appeal, apologises",
+     "summary_ko": [
+      "'Justice has spoken': Depardieu drops sexual assault appeal, apologises"
+     ],
+     "tags": [
+      "치안"
+     ],
+     "importance": 7,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPcDBhZkoxdVlVRHZOS1I2RC1HYVBLSzNmcWFEOUxfTWJvQ0Nrc1N1cWxacVZlUGpOWDMtSzZ6ZzNqSUllZ3FDRGJaLUVTOHVxNnVudzNtVGt4NUZncU9jX1FpdGRlUjU0c2xHS21nV1M2RjFNWjlTaUNMVWxqbk9KN3dsd0M4UGViN0tiampXOUthb0pHS2xfekc5SVZ5UTEtSjd2UFFtTVZkNWltbVhTY3p5dmZJT0ppMmZxaG5sbGNXQUc4WExDQ2NZUlhjUQ?oc=5"
+      }
+     ],
+     "original_title": "'Justice has spoken': Depardieu drops sexual assault appeal, apologises",
+     "published_at": "2026-11-16T15:43+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — no response"
+   "error": "gemini HTTP 429 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/do"
   },
   "akl_life": {
    "label": "생활",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
     {
      "id": "fa5743c7b874",
@@ -1219,11 +1205,11 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — no response"
+   "error": "gemini HTTP 429 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/do"
   },
   "akl_property": {
    "label": "부동산",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
     {
      "id": "26d76a8aaeac",
@@ -1268,11 +1254,11 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — no response"
+   "error": "gemini HTTP 429 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/do"
   },
   "akl_health": {
    "label": "의료",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
     {
      "id": "28c0850e22bb",
@@ -1295,12 +1281,32 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — no response"
+   "error": "gemini HTTP 429 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/do"
   },
   "akl_education": {
    "label": "교육",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
+    {
+     "id": "6449b47a01f7",
+     "title_ko": "News in brief: School artwork helps protect treasured lakes, Northlander's Lotto win",
+     "summary_ko": [
+      "News in brief: School artwork helps protect treasured lakes, Northlander's Lott…"
+     ],
+     "tags": [
+      "교육"
+     ],
+     "importance": 8,
+     "sources": [
+      {
+       "name": "NZ Herald",
+       "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOcUtiTEhaWjg4d1VjWmd2ZzFTaG10THFTYkhiNXp6ai1MTVN5UjBHYldxa2FPQjZvYmdqZjY3eUgyV3p3dk5TdW5PdnZQWTlsUXVqeXoza3ZfdGRVVmc1X3Y0NVM2R1J5dVhfc2F0Sk5sVl9zS181Z0Z4RnpxX1FhZVA0OVVXRzg4Qko4VnZwYUhIYzNYMUpGYlFhMExPbEN2UERKdHRmZF9pdGFPMHEyNlhvMENsaDdPTGN2NmhGeEl5UjdnNjlPTEhhd1JDOVJZYVMtVFdPZ01iNnA4QndKQXpRS1J1WGM0amc?oc=5"
+      }
+     ],
+     "original_title": "News in brief: School artwork helps protect treasured lakes, Northlander's Lotto win",
+     "published_at": "2026-11-18T10:51+00:00",
+     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+    },
     {
      "id": "ec647d0dd7f8",
      "title_ko": "Man denies sexual offending at Dilworth School in High Court appearance",
@@ -1380,11 +1386,11 @@
      "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
     }
    ],
-   "error": "gemini run deadline (900s) reached — no response"
+   "error": "gemini HTTP 429 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/do"
   },
   "nz_immigration": {
    "label": "이민 레이더",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
    "items": [
     {
      "id": "db6354fa0fb8",
@@ -1522,14 +1528,14 @@
      "radar": 5
     }
    ],
-   "error": "gemini run deadline (900s) reached — no response"
+   "error": "gemini HTTP 429 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://aistudio.google.com/do"
   }
  },
  "extras": {
-  "nzd_krw": 731.86,
-  "usd_krw": 1333.41,
-  "jpy100_krw": 836.76,
-  "btc_usd": 62716,
+  "nzd_krw": 731.99,
+  "usd_krw": 1333.85,
+  "jpy100_krw": 836.73,
+  "btc_usd": 62626,
   "auckland_weather": {
    "max": 18,
    "min": 14,
@@ -1664,7 +1670,7 @@
    }
   },
   "processing_times": {
-   "updated_at": "2026-11-18T19:36+00:00",
+   "updated_at": "2026-11-18T19:55+00:00",
    "items": [
     {
      "key": "pswv",
@@ -1830,15 +1836,15 @@
   "mode": "gemini",
   "failed_feeds": [],
   "feeds_total": 49,
-  "stories_after_dedupe": 866,
+  "stories_after_dedupe": 865,
   "usage": {
    "provider": "gemini",
    "requests": 1,
    "models": {
     "gemini-flash-lite-latest": {
      "calls": 1,
-     "input_tokens": 6187,
-     "output_tokens": 4258,
+     "input_tokens": 5515,
+     "output_tokens": 5473,
      "cost_usd": 0.0
     }
    },
@@ -1846,43 +1852,43 @@
   },
   "alerts": [],
   "degraded": true,
-  "degraded_reason": "요약 실패: nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_health, akl_education, nz_immigration; 선별 실패",
-  "retries": 2,
+  "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, akl_safety, akl_life, akl_property, akl_health, akl_education, nz_immigration; 선별 실패",
+  "retries": 3,
   "quality": {
-   "items": 62,
-   "bad": 42,
+   "items": 63,
+   "bad": 35,
    "redone": [],
    "bad_ids": [
-    "55019c2d3c67",
-    "c7d4cc185b85",
-    "353371e00d55",
-    "8339a5ce32ff",
-    "b64de1e33cef",
-    "ae1433ee8841",
-    "82e6a3abf0c3",
-    "35500f22c29d",
-    "900e8f756719",
-    "d60e93f641a9",
-    "71603b166d22",
-    "2092eed87cf2",
-    "0c3596f926d6",
-    "3b8c7d69ca9d",
-    "a827e5fc67d6",
-    "56e8ddaf94c8",
-    "6a477d994389",
-    "82046cad1300",
-    "84710eeb3850",
-    "ad1bcd5dc223",
-    "11bd3b96af97",
-    "bff0a0511ace",
-    "e4a00fcc346b",
+    "35dd504ed8ab",
+    "adf6a910dc80",
+    "30ccb24e812b",
+    "e674882842df",
+    "359fd1da46d5",
+    "2eba5032de62",
+    "ad576223b4e0",
+    "136c98c7ac3e",
+    "233449344e40",
+    "f1c27133e681",
+    "8fc6715ccf53",
+    "1dac5ce28720",
+    "1b1f2c34ee67",
+    "5d8e37634cd3",
     "c5d8ce9d3587",
+    "596f0c05764e",
     "fa5743c7b874",
     "336cc02aa61a",
     "b427fd4a3db5",
     "b2f376a13886",
     "f4b5f712b3ec",
-    "26d76a8aaeac"
+    "26d76a8aaeac",
+    "3977c4e3b6b9",
+    "28c0850e22bb",
+    "6449b47a01f7",
+    "ec647d0dd7f8",
+    "e65fff076f98",
+    "ca1b716b1985",
+    "ac357385d1e6",
+    "db6354fa0fb8"
    ]
   }
  }
