@@ -370,6 +370,7 @@ function sectionBlock(key: SectionKey, showHeading: boolean): HTMLElement | null
   const region = key.startsWith("kr_") ? "kr" : "nz";
   const wrap = h("section", { class: "section", "aria-labelledby": `h-${key}` });
   wrap.append(h("h2", { id: `h-${key}`, class: showHeading ? "sec-title" : "sr-only" }, sec.label));
+  if (sec.error && viewingLatest && brief.meta?.degraded) wrap.append(h("p", { class: "degraded sec-pending", role: "status" }, "⏳ 이 탭의 AI 요약을 다시 만드는 중이에요. 그동안 원문 제목으로 보여요. 완성되면 자동으로 바뀌어요."));
   if (sec.briefing) wrap.append(h("p", { class: "briefing" }, h("span", { class: "briefing-label" }, "오늘의 한 줄"), sec.briefing));
   if (!sec.items.length) wrap.append(h("p", { class: "empty" }, "새 소식이 없습니다."));
   const isEdu = key === "akl_education" || key === "nz_education";
@@ -477,9 +478,9 @@ function degradedBanner(): HTMLElement | null {
   const m = brief?.meta;
   if (!m?.degraded || !viewingLatest) return null;
   const tries = m.retries ?? 0;
-  const msg = tries >= 2
-    ? "오늘은 AI 서버 오류로 요약·번역이 일부 실패했고, 자동 재시도(2회)도 실패했어요. 영어 원문으로 보이는 기사가 있어요."
-    : `오늘은 AI 서버 오류로 요약·번역이 일부 실패해 영어 원문으로 보이는 기사가 있어요. 오클랜드 시간 ${tries === 0 ? "10시·14시쯤" : "14시쯤"} 자동으로 다시 만들어요.`;
+  const msg = tries >= 6
+    ? "오늘은 AI 서버 오류가 길어져 일부 탭이 아직 원문으로 보여요. 오전 중 계속 자동으로 다시 시도하고, 요약이 끝난 탭은 이미 완성돼 있어요."
+    : "AI 서버 오류로 일부 탭의 요약이 아직 안 끝났어요. 실패한 탭만 30분 간격으로 자동 복구 중이고, 나머지 탭은 이미 완성돼 있어요.";
   return h("section", { class: "degraded", role: "status" }, h("strong", {}, "⚠️ AI 요약 일부 실패 "), msg);
 }
 

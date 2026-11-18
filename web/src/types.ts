@@ -26,6 +26,7 @@ export interface Section {
   label: string;
   briefing: string;
   items: Item[];
+  error?: string; // 이 탭의 AI 요약이 실패해 원문으로 표시 중 (자동 복구 대상)
 }
 
 export type SectionKey =

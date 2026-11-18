@@ -91,6 +91,7 @@ def test_summarize_region_single_request_and_postprocess(cfg):
     imm = art(1, "Visa change", section="nz_immigration")  # 같은 기사가 이민 레이더에도 있음
     imm.score = 8
     llm = FakeLLM()
+    cfg = {**cfg, "llm": {**cfg["llm"], "summary_groups": []}}   # 묶음 없음: 지역 전체를 요청 1회로
     chosen = {"nz_national": [a], "nz_auckland": [b], "nz_immigration": [imm]}
     out = summarize_region("nz", ["nz_national", "nz_auckland", "nz_immigration"], chosen, cfg, llm)
     assert len(llm.calls) == 1 and llm.calls[0]["task"] == "summary"
@@ -967,3 +968,20 @@ def test_gemini_run_deadline_stops_waiting(cfg):
     with pytest.raises(LLMError, match="deadline"):
         llm.json_call(task="rank", system="s", user="u", schema={})
     assert calls == [] and sleeps == []
+
+
+def test_summarize_region_by_tab_group_isolates_failure(cfg):
+    """탭 묶음별로 요청: 한 탭이 실패해도 다른 탭은 요약되고, 실패한 탭의 섹션만 error 로 남는다."""
+    cfg = {**cfg, "llm": {**cfg["llm"], "summary_groups": [["kr_society", "kr_politics"], ["kr_economy", "kr_entertainment"]]}}
+    soc, eco = art(1, "사회 기사", section="kr_society"), art(2, "경제 기사", section="kr_economy")
+
+    class Flaky(FakeLLM):
+        def json_call(self, **kw):
+            if "kr_economy" in kw["user"]:
+                raise LLMError("503")
+            return super().json_call(**kw)
+
+    llm = Flaky()
+    out = summarize_region("kr", ["kr_society", "kr_economy", "kr_politics", "kr_entertainment"], {"kr_society": [soc], "kr_economy": [eco]}, cfg, llm)
+    assert not out["kr_society"].get("error") and out["kr_society"]["items"][0]["title_ko"].startswith("번역 제목")
+    assert out["kr_economy"].get("error")
