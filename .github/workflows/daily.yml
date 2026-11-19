@@ -134,6 +134,7 @@ jobs:
           print("fine" if not m.get("degraded") else ("late" if late else "degraded"))
           PY
           }
+          idle=0
           waits=(240 480 720 900 900 900 900 900 900 900 900 900 900 900 900 900)
           for i in "${!waits[@]}"; do
             st=$(state); echo "state: $st"
@@ -143,6 +144,7 @@ jobs:
             git pull -q --rebase origin "${GITHUB_REF_NAME}" || true
             python scripts/main.py --retry-degraded || true
             git add web/public/data
+            if git diff --cached --quiet; then idle=$((idle + 1)); [ "$idle" -ge 4 ] && { echo "no change 4 times in a row — stopping"; break; }; else idle=0; fi
             if ! git diff --cached --quiet; then
               git commit -q -m "brief: repair $((i + 1))"
               for j in 1 2 3; do git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep $((j * 5)); done
