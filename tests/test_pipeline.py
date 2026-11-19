@@ -985,3 +985,16 @@ def test_summarize_region_by_tab_group_isolates_failure(cfg):
     out = summarize_region("kr", ["kr_society", "kr_economy", "kr_politics", "kr_entertainment"], {"kr_society": [soc], "kr_economy": [eco]}, cfg, llm)
     assert not out["kr_society"].get("error") and out["kr_society"]["items"][0]["title_ko"].startswith("번역 제목")
     assert out["kr_economy"].get("error")
+
+
+def test_summarize_all_order_auckland_nz_immigration_korea(cfg):
+    """요약 순서: 오클랜드 → 뉴질랜드 → 이민 → 한국 (config llm.summary_groups 순서)."""
+    chosen = {"kr_society": [art(1, "한국 기사", section="kr_society")], "nz_society": [art(2, "NZ news", section="nz_society")],
+              "akl_life": [art(3, "Auckland news", section="akl_life")], "nz_immigration": [art(4, "Visa", section="nz_immigration")]}
+    llm = FakeLLM()
+    summarize_all(chosen, cfg, llm)
+    firsts = []
+    for c in llm.calls:
+        u = c["user"]
+        firsts.append("akl" if "[섹션] akl_life" in u else "nz" if "[섹션] nz_society" in u else "imm" if "[섹션] nz_immigration" in u else "kr")
+    assert firsts == ["akl", "nz", "imm", "kr"], firsts

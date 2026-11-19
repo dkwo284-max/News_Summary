@@ -57,9 +57,10 @@ def repair(brief: dict, cfg: dict, llm, data_dir, today: str, fetch_bodies: bool
         if fetch_bodies:
             attach_excerpts({k: v for k, v in chosen.items() if k in failed}, cfg)
         by_region: dict[str, list[str]] = {}
-        for k in todo["summary"]:
+        from summarize import group_rank
+        for k in sorted(todo["summary"], key=lambda x: group_rank(x, cfg)):   # 오클랜드 → 뉴질랜드 → 이민 → 한국 순으로 복구
             by_region.setdefault(cfg["sections"][k]["region"], []).append(k)
-        for region, keys in by_region.items():
+        for region, keys in sorted(by_region.items(), key=lambda kv: min(group_rank(k, cfg) for k in kv[1])):
             out = summarize_region(region, keys, chosen, cfg, llm)
             for k in keys:
                 if out.get(k) and not out[k].get("error"):

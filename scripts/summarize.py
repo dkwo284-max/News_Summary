@@ -273,6 +273,18 @@ def summarize_region(region: str, keys: list[str], chosen: dict[str, list[Articl
     return result
 
 
+def group_rank(key: str, cfg: dict) -> int:
+    """summary_groups 에서 이 섹션이 속한 묶음의 순번(앞일수록 먼저 요약). 없으면 맨 뒤."""
+    for i, g in enumerate(cfg.get("llm", {}).get("summary_groups", [])):
+        if key in g:
+            return i
+    return 999
+
+
+def region_rank(region: str, keys: list[str], cfg: dict) -> int:
+    return min((group_rank(k, cfg) for k in keys), default=999)
+
+
 def summarize_all(chosen: dict[str, list[Article]], cfg: dict, llm) -> dict[str, dict]:
     by_region: dict[str, list[str]] = {}
     for k, sec in cfg["sections"].items():
@@ -280,6 +292,6 @@ def summarize_all(chosen: dict[str, list[Article]], cfg: dict, llm) -> dict[str,
             continue
         by_region.setdefault(sec["region"], []).append(k)
     result: dict[str, dict] = {}
-    for region, keys in by_region.items():  # 순차 실행: 무료 등급 분당 한도 보호
+    for region, keys in sorted(by_region.items(), key=lambda kv: region_rank(kv[0], kv[1], cfg)):  # 순차 실행: 무료 등급 분당 한도 보호. 순서는 llm.summary_groups
         result.update(summarize_region(region, keys, chosen, cfg, llm))
     return {k: result[k] for k in cfg["sections"] if k in result}
