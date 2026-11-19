@@ -114,7 +114,7 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
     return 0
 
 
-MAX_RETRIES = 12   # 하루 자동 복구 시도 상한 (04:55 생성 후 09:00까지 30분 간격 복구 + 빠른 복구) (실패한 단계만 고치므로 한 번에 AI 1~3회)
+MAX_RETRIES = 10   # 하루 자동 복구 시도 상한 = 새벽 복구 루프 10회 (실패한 단계만 고치므로 한 번에 AI 1~3회)
 
 
 def repair_only(cfg: dict, data_dir: Path, cur: dict, local_now, retries: int, args) -> int | None:

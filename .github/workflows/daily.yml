@@ -108,7 +108,7 @@ jobs:
         run: gh api -X POST "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/dispatches" -f ref="${GITHUB_REF_NAME}" || echo "deploy dispatch failed (최종 deploy 작업이 다시 배포함)"
 
       # 아침 7시 전 완성 루프: 오늘 브리핑이 AI 오류로 일부 실패(degraded)면, GitHub 예약(자주 늦거나 빠짐)에 기대지 않고
-      # 같은 실행 안에서 실패한 탭만 계속 다시 시도한다. 4·8·12·15·15…분 간격, 뉴질랜드 06:50 까지(또는 성공·재시도 상한까지).
+      # 같은 실행 안에서 실패한 탭만 계속 다시 시도한다. 5·10·15·20·25…분 간격, 최대 10회, 뉴질랜드 06:50 까지(또는 성공·재시도 상한까지).
       # 한 번 고칠 때마다 바로 커밋해 화면에 반영. 브리핑이 멀쩡하면 몇 초 만에 끝남.
       - name: Repair loop until 06:50 NZ
         id: fix
@@ -134,8 +134,7 @@ jobs:
           print("fine" if not m.get("degraded") else ("late" if late else "degraded"))
           PY
           }
-          idle=0
-          waits=(240 480 720 900 900 900 900 900 900 900 900 900 900 900 900 900)
+          waits=(300 600 900 1200 1500 1500 1500 1800 1800 1800)   # 10회, 5·10·15·20·25·25·25·30·30·30분 간격(합 215분: 03:20 시작 → 약 06:55)
           for i in "${!waits[@]}"; do
             st=$(state); echo "state: $st"
             [ "$st" = "degraded" ] || break
@@ -144,7 +143,6 @@ jobs:
             git pull -q --rebase origin "${GITHUB_REF_NAME}" || true
             python scripts/main.py --retry-degraded || true
             git add web/public/data
-            if git diff --cached --quiet; then idle=$((idle + 1)); [ "$idle" -ge 4 ] && { echo "no change 4 times in a row — stopping"; break; }; else idle=0; fi
             if ! git diff --cached --quiet; then
               git commit -q -m "brief: repair $((i + 1))"
               for j in 1 2 3; do git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep $((j * 5)); done
