@@ -1957,7 +1957,7 @@
   ],
   "degraded": true,
   "degraded_reason": "요약 실패: akl_safety, akl_life, akl_property, akl_health",
-  "retries": 3,
+  "retries": 4,
   "quality": {
    "items": 58,
    "bad": 14,
@@ -1980,14 +1980,9 @@
    ]
   },
   "repaired": {
-   "summary": [
-    "nz_society",
-    "nz_education",
-    "nz_economy",
-    "nz_politics"
-   ],
+   "summary": [],
    "insight": false,
-   "requests": 1
+   "requests": 0
   }
  }
 }
