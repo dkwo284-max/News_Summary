@@ -1957,7 +1957,7 @@
   ],
   "degraded": true,
   "degraded_reason": "요약 실패: akl_safety, akl_life, akl_property, akl_health",
-  "retries": 6,
+  "retries": 7,
   "quality": {
    "items": 58,
    "bad": 14,
