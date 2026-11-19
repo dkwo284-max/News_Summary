@@ -52,7 +52,7 @@ concurrency:
 jobs:
   brief:
     runs-on: ubuntu-latest
-    timeout-minutes: 55
+    timeout-minutes: 240   # 복구 루프가 새벽 내내 돌 수 있게 (공개 저장소라 Actions 시간 무료)
     outputs:
       generated: ${{ steps.run.outputs.generated }}
     steps:
@@ -99,38 +99,47 @@ jobs:
           done
           exit 1
 
-      # 빠른 복구: 방금 만든 브리핑이 AI 과부하로 원문 대체(degraded)면, 몇 분 쉬었다가 같은 실행 안에서 실패한 단계만 한 번 더.
-      # (GitHub 예약 복구는 자주 늦거나 빠져서, 예약에 기대지 않고 바로 다시 시도한다. 브리핑이 멀쩡하면 몇 초 만에 끝남)
-      - name: Quick repair if degraded
+      # 아침 7시 전 완성 루프: 오늘 브리핑이 AI 오류로 일부 실패(degraded)면, GitHub 예약(자주 늦거나 빠짐)에 기대지 않고
+      # 같은 실행 안에서 실패한 탭만 계속 다시 시도한다. 4·8·12·15·15…분 간격, 뉴질랜드 06:50 까지(또는 성공·재시도 상한까지).
+      # 한 번 고칠 때마다 바로 커밋해 화면에 반영. 브리핑이 멀쩡하면 몇 초 만에 끝남.
+      - name: Repair loop until 06:50 NZ
         id: fix
-        if: steps.run.outputs.generated == 'true' && !(github.event_name == 'workflow_dispatch' && inputs.processing_only)
+        if: always() && steps.run.outcome == 'success' && !(github.event_name == 'workflow_dispatch' && inputs.processing_only)
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           AI_PROFILE: production
         run: |
-          deg=$(python - <<'PY'
-          import json, glob
-          f = sorted(glob.glob("web/public/data/20??-??-??.json"))[-1]
-          print("yes" if (json.load(open(f, encoding="utf-8")).get("meta") or {}).get("degraded") else "no")
+          git config user.name "daily-brief-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          state() { python - <<'PY'
+          import json, os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo("Pacific/Auckland"))
+          f = f"web/public/data/{now.date().isoformat()}.json"
+          if not os.path.exists(f):
+              print("none"); raise SystemExit
+          m = json.load(open(f, encoding="utf-8")).get("meta") or {}
+          late = now.hour > 6 or (now.hour == 6 and now.minute >= 50)
+          print("fine" if not m.get("degraded") else ("late" if late else "degraded"))
           PY
-          )
-          if [ "$deg" != "yes" ]; then echo "brief is fine"; exit 0; fi
-          echo "degraded — retrying failed steps in 4 minutes"
-          sleep 240
-          python scripts/main.py --retry-degraded || true
-
-      - name: Commit repair
-        if: steps.fix.outcome == 'success'
-        run: |
-          git add web/public/data
-          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
-          git commit -m "brief: quick repair"
-          for i in 1 2 3; do
-            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
-            sleep $((i * 5))
+          }
+          waits=(240 480 720 900 900 900 900 900 900 900 900 900 900 900 900 900)
+          for i in "${!waits[@]}"; do
+            st=$(state); echo "state: $st"
+            [ "$st" = "degraded" ] || break
+            echo "attempt $((i + 1)): waiting ${waits[$i]}s"; sleep "${waits[$i]}"
+            [ "$(state)" = "late" ] && { echo "past 06:50 — leaving it to scheduled repairs"; break; }
+            git pull -q --rebase origin "${GITHUB_REF_NAME}" || true
+            python scripts/main.py --retry-degraded || true
+            git add web/public/data
+            if ! git diff --cached --quiet; then
+              git commit -q -m "brief: repair $((i + 1))"
+              for j in 1 2 3; do git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep $((j * 5)); done
+            fi
           done
-          exit 1
+          echo "final: $(state)"
 
       - name: Open issue on failure
         if: failure()
