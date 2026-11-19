@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "generated_at": "2026-11-20T06:46:40+13:00",
+ "generated_at": "2026-11-20T10:59:19+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -540,6 +540,12 @@
      "figure": {
       "v": "33건",
       "l": "취소된 활성 청구"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "보건 및 교육 분야의 고용 환경과 임금 평등 정책 변화는 향후 취업 시장에 간접적인 영향을 준다.",
+      "actions": [],
+      "watch": "정부의 평등임금법 관련 항소심 진행 상황"
      }
     },
     {
@@ -567,7 +573,15 @@
      ],
      "original_title": "GP urges patients to delay routine blood tests as lab strike begins",
      "published_at": "2026-11-19T13:51+00:00",
-     "why_it_matters": "오클랜드 생활 중 의료 서비스 이용에 차질이 생길 수 있으니 주의하세요."
+     "why_it_matters": "오클랜드 생활 중 의료 서비스 이용에 차질이 생길 수 있으니 주의하세요.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 생활 중 의료 파업으로 정기 검진 등 병원 이용에 차질이 생길 수 있다.",
+      "actions": [
+       "비응급 정기 혈액 검사나 진료 예약이 있다면 파업 기간을 피해 일정을 조정하세요."
+      ],
+      "watch": "임상 실험실 직원 파업 기간 및 보건당국의 대체 진료 안내"
+     }
     },
     {
      "id": "708afcb2a18b",
@@ -602,6 +616,12 @@
      "figure": {
       "v": "135kg",
       "l": "압수 코카인"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "국가 간 마약 밀반입 적발 사건으로 오클랜드 거주 안전과는 직접적 관련성이 낮다.",
+      "actions": [],
+      "watch": "세관 및 국경안전당국의 항만 통관 보안 강화 대책"
      }
     },
     {
@@ -633,6 +653,12 @@
      "figure": {
       "v": "10배",
       "l": "최대 티켓 비용 배상"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "항공편 이용 시 소비자 보상 권리를 파악하는 데 참고가 된다.",
+      "actions": [],
+      "watch": "상업위원회와 에어뉴질랜드 간의 법적 소송 진행 경과"
      }
     },
     {
@@ -660,7 +686,13 @@
      ],
      "original_title": "\"Real consistency\": Commission report upholds allegations of bullying, sexism at Yachting NZ",
      "published_at": "2026-11-17T20:44+00:00",
-     "why_it_matters": "스포츠 조직 내 공정성과 인권 보장 수준을 가늠하는 사례입니다."
+     "why_it_matters": "스포츠 조직 내 공정성과 인권 보장 수준을 가늠하는 사례입니다.",
+     "impact": {
+      "level": "low",
+      "reason": "스포츠 조직 내 인권 및 공정성 이슈로 직접적인 이민 영향은 없다.",
+      "actions": [],
+      "watch": "요팅 뉴질랜드의 조직 문화 개선 보고서 후속 조치"
+     }
     }
    ]
   },
@@ -725,6 +757,12 @@
      "figure": {
       "v": "45,000명",
       "l": "대상 학생 수"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 고등학생들의 학력 평가 일정 변경으로 직접적인 자녀 교육 영향은 제한적이다.",
+      "actions": [],
+      "watch": "12월 4일 예정된 NCEA 레벨 2 영어 재시험 시행 여부"
      }
     },
     {
@@ -756,7 +794,13 @@
      ],
      "original_title": "Schools having to cut back as cost of hiring relief teachers soars - PPTA",
      "published_at": "2026-11-17T05:30+00:00",
-     "why_it_matters": "교육 예산과 학교 운영 여건 변화를 파악할 수 있는 지표입니다."
+     "why_it_matters": "교육 예산과 학교 운영 여건 변화를 파악할 수 있는 지표입니다.",
+     "impact": {
+      "level": "low",
+      "reason": "학교 재정 압박은 공교육 환경에 간접적인 영향을 줄 수 있다.",
+      "actions": [],
+      "watch": "교육부의 학교 운영비 및 대체 교사 지원 예산 조정 발표"
+     }
     },
     {
      "id": "f861238cd319",
@@ -783,6 +827,12 @@
      "figure": {
       "v": "22년",
       "l": "교장 재직 기간"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "개별 학교의 행정 조치로 전반적인 오클랜드 이민 생활에는 영향이 적다.",
+      "actions": [],
+      "watch": "해당 학교 이사회 정상화 및 신임 교장 선임 일정"
      }
     },
     {
@@ -806,7 +856,13 @@
      ],
      "original_title": "Autism expert condemns school over boy allegedly forced to empty clogged toilet bare-handed",
      "published_at": "2026-11-18T06:18+00:00",
-     "why_it_matters": "학교 내 학생 인권 및 안전 관리 체계를 점검하게 만드는 사건입니다."
+     "why_it_matters": "학교 내 학생 인권 및 안전 관리 체계를 점검하게 만드는 사건입니다.",
+     "impact": {
+      "level": "low",
+      "reason": "학교 내 인권 침해 논란으로 오클랜드 학부모 입장에서 교육 시설 안전을 점검하게 만든다.",
+      "actions": [],
+      "watch": "교육부 및 관련 기관의 학교 인권 가이드라인 점검 결과"
+     }
     },
     {
      "id": "91a7b2f78e97",
@@ -829,7 +885,13 @@
      ],
      "original_title": "Wairarapa school attendance rebounds, but senior high schoolers lag behind",
      "published_at": "2026-11-17T04:13+00:00",
-     "why_it_matters": "청소년 교육 참여율과 학업 지속성에 관한 지역별 편차를 보여줍니다."
+     "why_it_matters": "청소년 교육 참여율과 학업 지속성에 관한 지역별 편차를 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "타 지역의 학교 출석률 통계로 오클랜드 거주 가정에 직접적 영향은 없다.",
+      "actions": [],
+      "watch": "지역 교육청의 학생 출석률 개선 프로그램 성과"
+     }
     },
     {
      "id": "20192cef64a0",
@@ -852,7 +914,13 @@
      ],
      "original_title": "More Christchurch schools shrink zones as new residents swell classrooms",
      "published_at": "2026-11-16T15:00+00:00",
-     "why_it_matters": "부동산 지역 선택과 자녀 교육 환경 배치에 직접적인 영향을 줍니다."
+     "why_it_matters": "부동산 지역 선택과 자녀 교육 환경 배치에 직접적인 영향을 줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "크라이스트처치 지역의 이슈로 오클랜드 거주 가족에게는 무관하다.",
+      "actions": [],
+      "watch": "크라이스트처치 교육청의 학군 조정 및 학교 신설 계획"
+     }
     }
    ]
   },
@@ -889,6 +957,12 @@
      "figure": {
       "v": "6,000만 달러",
       "l": "인수 당시 규모"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "소매업계 법정 관리와 일자리 위기는 전반적인 오클랜드 고용 시장과 소비 심리에 간접적인 영향을 미친다.",
+      "actions": [],
+      "watch": "제너럴 팬츠 구조조정 및 매장 운영 유지 여부"
      }
     },
     {
@@ -912,7 +986,15 @@
      ],
      "original_title": "RBNZ Governor concerned higher fuel costs may be feeding into broader economy",
      "published_at": "2026-11-18T23:02+00:00",
-     "why_it_matters": "물가와 금리 경로에 영향을 주어 생활비와 경제 전반에 부담을 줍니다."
+     "why_it_matters": "물가와 금리 경로에 영향을 주어 생활비와 경제 전반에 부담을 줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "유류비 상승은 가계 생활비와 오클랜드 물가 전반에 직접적인 부담을 준다.",
+      "actions": [
+       "가계 예산 편성 시 유류비 및 교통비 지출 비중을 점검하세요."
+      ],
+      "watch": "중앙은행의 기준금리 및 인플레이션 전망 발표"
+     }
     },
     {
      "id": "84253c3c8037",
@@ -939,6 +1021,12 @@
      "figure": {
       "v": "58명",
       "l": "감원 대상 직무"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "미디어 산업 구조조정 소식으로 이민자 개인의 직접적 진로와는 거리가 멀다.",
+      "actions": [],
+      "watch": "RNZ 감원 계획 확정 및 노사 협상 결과"
      }
     },
     {
@@ -966,6 +1054,12 @@
      "figure": {
       "v": "93%",
       "l": "가격을 중요시하는 비율"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 내 아파트 렌트나 향후 주택 구입 시 선호되는 주거 기준과 시장 트렌드를 파악할 수 있다.",
+      "actions": [],
+      "watch": "부동산 시장의 주택 가격 및 거래량 추이"
      }
     },
     {
@@ -993,6 +1087,12 @@
      "figure": {
       "v": "20억 달러",
       "l": "예상 매출"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "주요 수출 기업의 실적 개선은 뉴질랜드 경제 전반의 고용 안정성과 경기 회복에 긍정적이다.",
+      "actions": [],
+      "watch": "a2 Milk의 분기별 실적 및 수출 시장 동향"
      }
     }
    ]
@@ -1023,7 +1123,13 @@
      "original_title": "Coalition Negotiations Delay: Williams On Why Government Talks Could Go Long",
      "published_at": "2026-11-19T02:14+00:00",
      "why_it_matters": "새 정부의 이민·비자 정책 방향 결정 시기를 가늠하는 중요한 정치 일정입니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "high",
+      "reason": "새 정부 구성 지연은 졸업 후 취업비자 및 영주권 관련 주요 이민 정책 발표 일정을 늦출 수 있다.",
+      "actions": [],
+      "watch": "연립 정부 협상 타결 및 새 정부 각료 임명일"
+     }
     },
     {
      "id": "039a0db444ef",
@@ -1047,7 +1153,13 @@
      "original_title": "Saving ourselves: How all New Zealanders can win big from this election",
      "published_at": "2026-11-17T15:00+00:00",
      "why_it_matters": "정치적 변화가 유학생과 이민자의 생활 환경에 미치는 함의를 이해하게 합니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "low",
+      "reason": "총선 결과에 따른 사회적 혜택 분석으로 정책 방향을 가늠하는 데 참고가 된다.",
+      "actions": [],
+      "watch": "새 정부 출범 후 주요 민생 및 경제 정책 입법 일정"
+     }
     },
     {
      "id": "994f01ca796d",
@@ -1074,6 +1186,12 @@
      "figure": {
       "v": "9명",
       "l": "서한 발송 상원의원"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "외교 및 우주 협력 사안으로 유학생의 일상이나 비자에는 영향이 없다.",
+      "actions": [],
+      "watch": "미국과 뉴질랜드 간의 방위 및 우주 기술 협력 후속 조치"
      }
     },
     {
@@ -1101,6 +1219,12 @@
      "figure": {
       "v": "1,180만 달러",
       "l": "RNZ 재정 적자"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "공영방송의 태평양 방송 축소 문제로 직접적인 이민 생활 영향은 낮다.",
+      "actions": [],
+      "watch": "RNZ 재정 정상화 방안 및 태평양 서비스 예산 유지 여부"
      }
     }
    ]
@@ -1113,7 +1237,7 @@
      "id": "bf2007e94f12",
      "title_ko": "오클랜드 위험천만한 도주극 끝에 경찰차 들이받은 남성 체포",
      "summary_ko": [
-      "지역 미공개 가정폭력 사건과 연루된 27세 남성이 오클랜드 도심에서 경찰차를 들이받고 도주했습니다.",
+      "지역 미공개 가정폭력 사건과 연루된 27세 남성이 오클랜드에서 경찰차를 들이받고 도주했습니다.",
       "경찰 헬기와 카메라 추적 끝에 차량이 파쿠랑가와 보태니 로드 부근에서 충돌하며 남성은 인근 사유지로 도망쳤습니다.",
       "경찰은 은신해 있던 용의자를 체포했으며 차량 내에서 마약 흡입 도구를 발견해 추가 혐의로 구속했습니다."
      ],
@@ -1146,6 +1270,22 @@
      "figure": {
       "v": "27세",
       "l": "체포된 용의자 나이"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 도심 및 파쿠랑가 인근에서 발생한 위험한 도주 및 범죄 사건으로 거주 지역 안전에 유의해야 한다.",
+      "actions": [
+       "파쿠랑가 및 보태니 로드 주변 이동 시 치안 상황에 주의하세요."
+      ],
+      "watch": "해당 용의자에 대한 법원 기소 및 구속 재판 결과"
+     },
+     "incident": {
+      "severity": "2",
+      "crime": "경찰차 충돌 및 도주",
+      "location": "",
+      "suburb": "",
+      "region": "",
+      "precision": "none"
      }
     },
     {
@@ -1173,6 +1313,20 @@
      "figure": {
       "v": "85명",
       "l": "피해 여성 수"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 지역에서 발생한 중대 성범죄 사건으로 지역 사회 안전 의식을 높이는 계기가 된다.",
+      "actions": [],
+      "watch": "오클랜드 지방법원의 성범죄 관련 판결 및 형량 집행 추이"
+     },
+     "incident": {
+      "severity": "1",
+      "crime": "불법 촬영 상습범 실형 선고",
+      "location": "",
+      "suburb": "",
+      "region": "",
+      "precision": "none"
      }
     },
     {
@@ -1200,6 +1354,12 @@
      "figure": {
       "v": "3개월",
       "l": "구속 기간"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 고용 관련 분쟁 판례로 현지 취업 시 근로 계약 준수와 성실 의무의 중요성을 보여준다.",
+      "actions": [],
+      "watch": "고용법원의 허위 부상 및 무단 결근 관련 판례 적용 기준"
      }
     },
     {
@@ -1227,6 +1387,12 @@
      "figure": {
       "v": "3명",
       "l": "기소된 경찰관 수"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 현장 경찰의 법적 분쟁으로 지역 공권력 집행 및 치안 환경에 대한 신뢰를 점검하게 된다.",
+      "actions": [],
+      "watch": "기소된 경찰관들에 대한 사법부의 재판 진행 상황"
      }
     }
    ]
@@ -1276,7 +1442,13 @@
      ],
      "original_title": "'Ok, Boomer!' US ambassador's jibe at Auckland mayor over China remark",
      "published_at": "2026-11-19T07:36+00:00",
-     "why_it_matters": "오클랜드 시정부의 대외 관계와 정치적 동향을 파악하는 데 참고가 됩니다."
+     "why_it_matters": "오클랜드 시정부의 대외 관계와 정치적 동향을 파악하는 데 참고가 됩니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 시장의 외교적 해프닝으로 시민의 일상이나 비자에는 무관하다.",
+      "actions": [],
+      "watch": "오클랜드 시정부의 대외 경제 및 외교 정책 기조"
+     }
     },
     {
      "id": "97894afb3a77",
@@ -1303,6 +1475,12 @@
      "figure": {
       "v": "6개",
       "l": "수상 부문 수"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "문화 예술계 시상식 소식으로 일상생활에 직접적인 영향은 없다.",
+      "actions": [],
+      "watch": "뉴질랜드 미디어 및 콘텐츠 산업 발전 동향"
      }
     },
     {
@@ -1326,7 +1504,23 @@
      ],
      "original_title": "‘Doomsday’ funnel cloud looms over Auckland coast before weather flip",
      "published_at": "2026-11-19T09:14+00:00",
-     "why_it_matters": "오클랜드의 일상 생활과 주말 야외활동 계획에 날씨 변화를 고려해야 합니다."
+     "why_it_matters": "오클랜드의 일상 생활과 주말 야외활동 계획에 날씨 변화를 고려해야 합니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 해안 지역의 기상 급변과 특이 구름 현상으로 주말 야외활동 시 날씨를 확인해야 한다.",
+      "actions": [
+       "외출 전 기상청(MetService)의 오클랜드 기상 특보를 확인하세요."
+      ],
+      "watch": "오클랜드 주말 기상 상태 및 기상청 특보 해제 여부"
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "",
+      "location": "Auckland Coast",
+      "suburb": "",
+      "region": "",
+      "precision": "suburb"
+     }
     },
     {
      "id": "ca073bbc9858",
@@ -1353,6 +1547,12 @@
      "figure": {
       "v": "31C",
       "l": "최고 기온"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "북섬 및 오클랜드 지역의 계절별 기후 변화로 일상 생활과 주말 계획에 참고가 된다.",
+      "actions": [],
+      "watch": "기상청의 엘니뇨 기간 북섬 강수량 및 건조 기후 전망"
      }
     },
     {
@@ -1376,7 +1576,15 @@
      ],
      "original_title": "Frustration over trucks parking on South Auckland streets",
      "published_at": "2026-11-19T03:48+00:00",
-     "why_it_matters": "오클랜드 교외 지역 거주 시 주거 환경과 교통 안전 상태를 점검하는 계기가 됩니다."
+     "why_it_matters": "오클랜드 교외 지역 거주 시 주거 환경과 교통 안전 상태를 점검하는 계기가 됩니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "남오클랜드 주거 지역의 불법 주차 문제로 교외 거주 환경과 교통 안전 상태를 점검하게 된다.",
+      "actions": [
+       "오클랜드 카운실(Auckland Council)에 주차 위반 민원 제기 절차를 확인하세요."
+      ],
+      "watch": "오클랜드 시의회의 남오클랜드 상용차 불법 주차 단속 강화 여부"
+     }
     }
    ]
   },
@@ -1390,7 +1598,7 @@
      "summary_ko": [
       "유통 거물들의 소유 부지인 오클랜드 피트스트리트 21번지의 업그레이드 공사가 예정보다 약간 빠르게 진행되고 있습니다.",
       "도심 핵심 지역의 대규모 개발 사업으로 부동산 시장의 관심이 집중되고 있습니다.",
-      "향후 오클랜드 도심 상권과 주거 환경 개선에 기여할 것으로 전망됩니다."
+      "향후 오클랜드 상권과 주거 환경 개선에 기여할 것으로 전망됩니다."
      ],
      "tags": [
       "부동산",
@@ -1409,6 +1617,12 @@
      "figure": {
       "v": "21",
       "l": "피트스트리트 번지"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 도심 부동산 개발 프로젝트로 지역 상권과 주거 환경 변화를 보여준다.",
+      "actions": [],
+      "watch": "오클랜드 피트스트리트 부지 대규모 개발 공사 진행 속도"
      }
     },
     {
@@ -1436,6 +1650,12 @@
      "figure": {
       "v": "$1,420만",
       "l": "하수관 공사 비용"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 기반시설 확충 공사로 거주 지역의 하수 및 환경 위생 안정성에 간접적으로 기여한다.",
+      "actions": [],
+      "watch": "오클랜드 워터케어의 하수관 교체 공사 일정 및 지역별 단수·교통 통제 공지"
      }
     },
     {
@@ -1488,7 +1708,15 @@
      ],
      "original_title": "'Small impact': Health NZ on Starship delaying cancer treatments amid nurse shortage",
      "published_at": "2026-11-18T07:14+00:00",
-     "why_it_matters": "의료 인력 부족 문제는 졸업 후 보건·의료 분야 취업이나 영주권 연계 직종(Green List)을 준비하는 유학생들에게 중요한 시장 지표입니다."
+     "why_it_matters": "의료 인력 부족 문제는 졸업 후 보건·의료 분야 취업이나 영주권 연계 직종(Green List)을 준비하는 유학생들에게 중요한 시장 지표입니다.",
+     "impact": {
+      "level": "high",
+      "reason": "보건 의료 인력 부족 문제는 영주권 직종(Green List)인 간호사 및 의료 직군의 고용 시장과 이민 기회에 직접적인 영향을 준다.",
+      "actions": [
+       "보건의료 분야 취업을 희망한다면 간호사 및 의료 인력 채용 공고를 모니터링하세요."
+      ],
+      "watch": "보건당국의 스타십 병원 인력난 해소 및 암 치료 정상화 대책 발표"
+     }
     },
     {
      "id": "78314b500609",
@@ -1511,7 +1739,13 @@
      ],
      "original_title": "Auckland FC Players Visit Starship Hospital",
      "published_at": "2026-11-18T21:02+00:00",
-     "why_it_matters": "오클랜드 지역 사회의 따뜻한 소식을 통해 현지 분위기를 파악할 수 있습니다."
+     "why_it_matters": "오클랜드 지역 사회의 따뜻한 소식을 통해 현지 분위기를 파악할 수 있습니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 지역 축구단의 병원 방문 미담으로 일상적인 지역 사회 소식이다.",
+      "actions": [],
+      "watch": "오클랜드 FC의 지역 사회 공헌 활동 일정"
+     }
     }
    ]
   },
@@ -1585,7 +1819,30 @@
      "original_title": "'I feel betrayed': Migrants allege fake visa advice cost them thousands",
      "published_at": "2026-11-18T22:30+00:00",
      "why_it_matters": "졸업 후 비자와 영주권을 준비할 때 공인된 이민 자문가를 통해 안전하게 절차를 밟아야 합니다.",
-     "radar": 9
+     "radar": 9,
+     "impact": {
+      "level": "high",
+      "reason": "유학생이 졸업 후 취업비자와 영주권을 준비할 때 공인된 이민 자문가 선임은 금전적 피해와 비자 거절을 막는 핵심 요소다.",
+      "actions": [
+       "뉴질랜드 이민자문국(IAA) 공식 웹사이트에서 공인 자문가 자격 여부를 직접 검색해 확인하세요."
+      ],
+      "watch": "이민성 및 IAA의 불법 이민 브로커 단속 및 처벌 강화 발표"
+     },
+     "timeline": [
+      {
+       "date": "2026-11-17",
+       "title_ko": "가짜 비자 및 영어 시험 위조 불법 브로커 적발",
+       "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQYkhrV0t6M04yUnRDYTJ5dnhvVXFFQnYzSlA5cXFhcTZhNkFKZkluRmZGTUx0YnBweWxzcjI2V2RMNVRPQ3ZTTGJGMU1rdWVKOTBnOUZDYjNoUDBBam5QQkZaYzZISVBVTXpNRERNdEJjNWYwWXNsWEk2RlFpRmVERENsNDVhUkZpcnpTNFpMMmhES2F1T2FUSWM4Vm52WVBjZF9yNlNKTUM2eURLb3V4RmwwcGQ2Smd2UDY2bHpPM3JTal9PN0I2WEpn?oc=5",
+       "id": "9aa61278d417"
+      },
+      {
+       "date": "2026-11-18",
+       "title_ko": "가짜 서류 제출 이민 브로커 적발로 다수 이주민 위기",
+       "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOeFZKWUgtcENHSHJnODVzdmR3Z2VqSVpNcUVBYUNhVHpIdFU0N0dydDJaV3kyalhTbW1hYVZvTFFIQm5iazROQ3h1WE42MTRNeTItVWI2MEkwWWFzQVV2RzFBLWlfeTFTX21JU3haNEJFOFp4ZGRnQnpIWmY1dk1sRFJTenpkUUFhVklWbEI2VlRLOVVZeEVSME9EUDFLUEtyWldDUUVTSE9jeWpBS0VNd1J6RjlhX1BDaFduOTlmUEVvUnc?oc=5",
+       "id": "8ca93936c6a6"
+      }
+     ],
+     "changed": "공인되지 않은 브로커의 허위 조언으로 이민자들이 수천 달러의 직접적인 금전적 피해를 입은 사례가 추가로 고발되었습니다."
     },
     {
      "id": "55a2dc0088f7",
@@ -1609,7 +1866,34 @@
      "original_title": "Parent category November 2026 draw",
      "published_at": "2026-11-18T22:51+00:00",
      "why_it_matters": "향후 가족 초청이나 장기 체류 계획을 세울 때 뉴질랜드 이민성 카테고리 운영 일정을 파악하는 데 참고가 됩니다.",
-     "radar": 9
+     "radar": 9,
+     "impact": {
+      "level": "low",
+      "reason": "부모 초청 이민 추첨은 직접적인 졸업생 비자나 취업에 영향이 없으나 장기적인 가족 정착 계획에 참고가 된다.",
+      "actions": [],
+      "watch": "부모 초청 이민 카테고리 다음 추첨 일정 및 시스템 개선 여부"
+     },
+     "timeline": [
+      {
+       "date": "2026-11-12",
+       "title_ko": "부모 초청 이민 카테고리 11월 추첨에서 기술적 문제 발생",
+       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNaktfR244a2d3YUduTmMwMENtV1l3UW1KQmRxQ1pkNl9rVEV0bVFxZ1NGLXBRVEN1TVpEV1g3LUptXzM2T29uRUczSWpoQ1RFOVRpcE92V1l3WWpZZ0RVR2tCZDY0R0JHb3d1dWpXSjRBMW4temZFREFmNVZNb2UxcE82NGtVbEEyZnE4S3d0VWV6aEZZQ1FEOU5SZGd1OVhueDA1bktDdkNjanIxamc?oc=5",
+       "id": "72933332d7f3"
+      },
+      {
+       "date": "2026-11-13",
+       "title_ko": "부모 영주권 추첨 제도 개편 후 '기술적 오류' 발생",
+       "url": "https://www.rnz.co.nz/news/chinese-english/2553573/glitch-disrupts-parent-resident-visa-selections-under-new-scheme",
+       "id": "b621733eeee8"
+      },
+      {
+       "date": "2026-11-14",
+       "title_ko": "부모 초청 영주비자 선정 과정에서 시스템 결함 발생",
+       "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPTjllUlBtTHFCaDUyTHp2SEEtMk5xd285NnpDNnFRUWsyYWx1NHRJX1E4NXNkUHhMa3J6QUVEOWl1RHpJaFktQ1hfX3M5OG5tSE5PVEdtU0J6YzcwQWdOVzdoVXZwMzJoblRnZlQ2WVZSbDZNMjZOajc0SExzQUpZdk03QTg3ZlZPa3FoUlNzX0hvdTEwVTUtelB0WE00eEJmYTlucTZfRVB6ZHNpbkRMeld6WEotUQ?oc=5",
+       "id": "2766d2ce5db1"
+      }
+     ],
+     "changed": "2026년 11월 부모 초청 이민 카테고리의 실제 추첨 결과와 선정 단계 진입 소식이 발표되었습니다."
     },
     {
      "id": "7eb14e09669f",
@@ -1634,7 +1918,24 @@
      "original_title": "Indians with a New Zealand job offer could face tougher visa checks, lawyer warns",
      "published_at": "2026-11-18T00:25+00:00",
      "why_it_matters": "졸업 후 취업비자와 고용주 인증 비자(AEWV)를 준비할 때 철저한 서류 준비와 고용주 검증이 필수적입니다.",
-     "radar": 9
+     "radar": 9,
+     "impact": {
+      "level": "high",
+      "reason": "향후 취업비자(AEWV)나 고용주 연계 비자 심사 시 고용 조건과 자격 검증이 까다로워져 취업 및 영주권 준비에 직접적 타격이 될 수 있다.",
+      "actions": [
+       "고용주 인증 비자(AEWV) 신청 시 고용 계약서와 직무 요건이 ANZSCO 기준에 부합하는지 철저히 검토하세요."
+      ],
+      "watch": "특정 국적자 및 특정 직군 대상 비자 심사 지침 강화 공식 발표일"
+     },
+     "timeline": [
+      {
+       "date": "2026-10-22",
+       "title_ko": "뉴질랜드, 인도 국적자 대상 신규 취업비자 5,000개 개방",
+       "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQWmlkQU9EMW9POUdMc1NKR01KODZqN0lxSTRHVzRTdldkS2lDZi1pQTRUVU1kdng4bEktNmJOamtFR01ZX0psR3RQb3hjS0tDQXlqSkNHanRWY2lYV1Y0SkV3clJYa3VBMW45UnlMZzdtZnhlUzFlNVo2dDhNb1BLUjZkd3lORF9kUUJhSDhiSUlSdHl2RGRqb2lHMUR2cHgxOUc2dlB2ai1xRHJJRGEwMzVEQm9jSUpMTV9lYQ?oc=5",
+       "id": "e1b5b7ed8f76"
+      }
+     ],
+     "changed": "인도 국적 구직자를 중심으로 뉴질랜드 일자리 제안에 대한 비자 심사 기준이 한층 더 엄격해졌다는 법률가 경고가 제기되었습니다."
     },
     {
      "id": "12d25a0dfd7f",
@@ -1658,7 +1959,15 @@
      "original_title": "Migrant worker to be deported after fruit-picking breached visa conditions",
      "published_at": "2026-11-17T16:15+00:00",
      "why_it_matters": "학생비자나 졸업 후 취업비자의 허용 근로 조건을 어기면 강제 추방 등 심각한 불이익을 받으므로 주의해야 합니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "high",
+      "reason": "학생비자나 졸업 후 취업비자의 근로 조건을 위반할 경우 강제 추방 등 영주권 목표에 치명적인 결과로 이어진다.",
+      "actions": [
+       "현재 소유한 비자의 허용 근로 조건과 주당 가능 근무 시간을 다시 한번 확인하세요."
+      ],
+      "watch": "이민성의 비자 조건 위반자에 대한 무관용 단속 및 추방 집행 건수"
+     }
     },
     {
      "id": "845d28c8bc6f",
@@ -1682,7 +1991,15 @@
      "original_title": "Aotearoa tightens scrutiny of customary adoptions as families face new visa rules",
      "published_at": "2026-11-18T10:40+00:00",
      "why_it_matters": "강화된 비자 규정과 심사 기준 변화는 가족 비자 수속 전반의 처리 기간에 직접적인 영향을 미칩니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "medium",
+      "reason": "가족 비자 규정 및 심사 강화는 자녀와 배우자를 동반한 이민 생활의 비자 수속 기간과 행정 절차에 간접적인 지연을 유발할 수 있다.",
+      "actions": [
+       "가족 비자 연장이나 동반 비자 수속 시 추가 서류 요청에 대비해 여유 있게 일정을 잡으세요."
+      ],
+      "watch": "이민성의 가족 비자 및 관습 입양 관련 지침 적용 세부 가이드라인"
+     }
     },
     {
      "id": "695b3fcdb738",
@@ -1710,7 +2027,48 @@
       "v": "15만 달러",
       "l": "인정 배상금"
      },
-     "radar": 7
+     "radar": 7,
+     "impact": {
+      "level": "high",
+      "reason": "졸업 후 현지 취업 시장에 진입할 때 발생할 수 있는 부당 노동 관행과 임금 체불 위험에 미리 대비하는 데 중요한 참고가 된다.",
+      "actions": [
+       "고용 계약 체결 전 뉴질랜드 고용기준청(Employment New Zealand) 표준 근로기준을 숙지하세요."
+      ],
+      "watch": "고용법원 및 노동청의 이주노동자 착취 고용주 처벌 강화 조치"
+     },
+     "timeline": [
+      {
+       "date": "2026-10-16",
+       "title_ko": "법원, 해외에서 비용 지불 받아도 '일자리 대가 금품 수수' 처벌 판결",
+       "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOVjFKUjlfSE44bEZIeGsxb2V2TDVhQmR2a041eTlFeldiMGxnMnVEQWhzYVc2VGNCdl9telYzVk0tRjBiWXhuM0YwV0Y1cG9seVAzU1lkUGh0b0JHUjFzd1Y2ci1fbjBZdUZ2RnNqTmRZVEJ3c1gzRVBVaWNrNDBaN19KaGhsY3NBc3JvbEpETHp4Q05XWVA4NFRucmZ4QkhVSFhJN25EZEEwVTE2amh3aGJvb3I5N1BTUGpMSUhIYjc?oc=5",
+       "id": "ff884df8c839"
+      },
+      {
+       "date": "2026-10-21",
+       "title_ko": "뉴질랜드 취업 대가 해외 수수료 징수는 불법… 노동법원 판결",
+       "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPbG0zLVZZMjlWeDJHRUgycElXclhHd3ZZTUZsOWVTWjZzRl9BaHREZUplRnI5S2VOMUxHYzhiQmxPYUFaNUpCeEt0WVJUVFd1bVNNaEtoOG1JOUowRkhjdXpwTnl6VzlBVmRrazNBNEFDeXpkSDVDTVl5RWZzMjlNUzlBUWpoVVYxdzRGQVllaFMtVEFNZ3VEQmQ4cVNjVmxwcTA3RjJGLU9nV25GWG1EdWVpa25jUVRsZ0R2V0ctVnlkUmt5MjN4VzBYb2padFBhUmZtZVF5QQ?oc=5",
+       "id": "e88ba9758bae"
+      },
+      {
+       "date": "2026-10-23",
+       "title_ko": "고용법원, 뉴질랜드 일자리 명목 해외 이주민 금전 요구 불법 판결",
+       "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPa3ZnLU83QTNLU1czMXZmbGRPUjBmQUdkRDl0b1N3eHN0R2FCMmhocHJiNG9qZGNYTXlRMm9yRVhmUzZZTVBKTW1RYjl2NGwxQWFJaVMydXhlNG15N3lTdEI2YXlGdGEySHZXbWNkUTlBbUwwU1VaTlkyTEM0WV85VkFYVUI3Yk1MS2NYVkdfbThFWlNUdmk0alJ1aVV1MVdjZ2dXU05JdlFMdENVeWc?oc=5",
+       "id": "cef72e2aebcb"
+      },
+      {
+       "date": "2026-11-06",
+       "title_ko": "고용법원 판결로 해외 채용 수수료 부당징수 제동",
+       "url": "https://www.rnz.co.nz/news/pacific/2354939/employment-court-decision-closes-loophole-exploited-by-migrant-worker-recruiters",
+       "id": "e7163ca70967"
+      },
+      {
+       "date": "2026-11-07",
+       "title_ko": "이주 노동자 수수료 갈취와 임금 체불로 20만 달러 명령받은 노동 고용주",
+       "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNbkJET2FFZFkwdXkwbWdKY0FhS1hGZXk4b1h5eGJkRFhTVGU2VlZFX0RNQUt6UUVPV3FJNDlhTTVWUWppQ1RkQUNFanpTRnVNUnRHNS04c25ubF95MnE0RWNjbFQ5WmJuR3pwSEQycHJRYXAzQUFPLUoxYlBzcnVmamVxcVBFaDJzRXFsT2ZaVm9vVkhXckdIcGQ1SlM2WWRMMHBnWkhtM095bkE?oc=5",
+       "id": "d1a2483f844a"
+      }
+     ],
+     "changed": "판결에서 거액의 배상금을 인정받고도 고용주로부터 터무니없이 적은 금액을 제안받아 투쟁이 지속되는 구체적 사례가 보도되었습니다."
     }
    ]
   }
@@ -2045,9 +2403,9 @@
     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPQ3FpN0FHcU9NeXMzRHZ3aE1HdWNMWElYSGdEcDBhNjlkd0ZsY1RNcW9Yd2VFQTExbFFsb0FqNnI4aU5YRjlPNHhNTDctRnhLdTR5WUl6SVp5emJnQWN6b2cwMU1Tb3RZN21fTGVnUHlCTE9DTTVjUmFHVDZQQW1HR3JhOVE0MVZZSXllNW1naTlfdUZ6OHdWd1BwOURzSGJORXF2SWF6cHNxcHZTcXRJVV9HUkNPbHM2?oc=5"
    }
   ],
-  "degraded": true,
-  "degraded_reason": "영향 분석 실패",
-  "retries": 8,
+  "degraded": false,
+  "degraded_reason": "",
+  "retries": 9,
   "quality": {
    "items": 58,
    "bad": 0,
@@ -2055,13 +2413,8 @@
    "bad_ids": []
   },
   "repaired": {
-   "summary": [
-    "akl_safety",
-    "akl_life",
-    "akl_property",
-    "akl_health"
-   ],
-   "insight": false,
+   "summary": [],
+   "insight": true,
    "requests": 1
   }
  }
