@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "generated_at": "2026-11-20T03:38:04+13:00",
+ "generated_at": "2026-11-20T04:03:17+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -159,17 +159,20 @@
   },
   "kr_economy": {
    "label": "경제",
-   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "대법원 판결과 정치권 공방, 재건축 부담금 및 신약개발 합병 소식이 전해졌습니다.",
    "items": [
     {
      "id": "67f6b6b51ddf",
      "title_ko": "민주당, 조희대 대법원장 탄핵의 강 건넌다",
      "summary_ko": [
-      "더불어민주당이 조희대 대법원장 탄핵을 추진한다.",
-      "김민석 민주당 대표는 19일 국회에서 열린 비상 의원총회가 끝나고 기자들과 만나 “조희대 대법원의 오늘 판결은 내란이 났을 때 한덕수처럼 하라…",
-      "김 대표는 “(오늘 판결은) 내"
+      "더불어민주당이 조희대 대법원장의 탄핵을 본격적으로 추진하고 나섰습니다.",
+      "민주당은 최근 대법원의 판결 내용에 강력하게 반발하며 비상 의원총회를 개최했습니다.",
+      "이번 탄핵 추진은 향후 정국에 큰 파장을 불러올 것으로 전망됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "경제"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -182,11 +185,16 @@
     },
     {
      "id": "59d6278d91df",
-     "title_ko": "황종우 해수장관 \"해광호 수색에 가용 자원 최대한 동원\"",
+     "title_ko": "황종우 해수장관 해광호 수색 가용 자원 동원",
      "summary_ko": [
-      "황종우 해양수산부 장관은 19일 충남 태안군 서격렬비도 북서쪽 22해리 해상에서 연락이 두절된 어선 '해광호'..."
+      "충남 태안군 해상에서 7명이 승선한 어선 해광호가 연락 두절되었습니다.",
+      "황종우 해양수산부 장관은 이틀 연속 관계기관 회의를 주재하고 수색 상황을 점검했습니다.",
+      "정부는 민간 어선과 가용한 모든 수색 자원을 총동원해 구조 작업에 총력을 기울이고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "사건사고",
+      "경제"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -195,15 +203,25 @@
       }
      ],
      "original_title": "황종우 해수장관 \"해광호 수색에 가용 자원 최대한 동원\"",
-     "published_at": "2026-11-19T09:52+00:00"
+     "published_at": "2026-11-19T09:52+00:00",
+     "figure": {
+      "v": "7명",
+      "l": "승선 인원"
+     }
     },
     {
      "id": "d49649ffe87a",
-     "title_ko": "[연합뉴스 이 시각 헤드라인] - 18:00",
+     "title_ko": "한덕수 전 총리 파기환송 및 김건희 여사 징역 4년 확정",
      "summary_ko": [
-      "■ 대법, 한덕수 일부 무죄취지 파기환송…구속 2개월 연장"
+      "대법원이 한덕수 전 국무총리의 징역 15년 2심 판결을 일부 무죄 취지로 파기환송 했습니다.",
+      "또한 도이치모터스 주가조작 등 혐의로 기소된 김건희 여사에게 징역 4년과 벌금 5천만원이 확정되었습니다.",
+      "한편 2027학년도 수능 시험장에서는 전자기기 소지 수험생이 적발되기도 했습니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "사건사고",
+      "교육"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -212,15 +230,24 @@
       }
      ],
      "original_title": "[연합뉴스 이 시각 헤드라인] - 18:00",
-     "published_at": "2026-11-19T09:00+00:00"
+     "published_at": "2026-11-19T09:00+00:00",
+     "figure": {
+      "v": "징역 4년",
+      "l": "김건희 여사 형량"
+     }
     },
     {
      "id": "26fa87475544",
-     "title_ko": "‘반포현대’ 재초환 부담금 연내 부과 확정…주택 시장 영향은?",
+     "title_ko": "반포현대 재초환 부담금 연내 부과 확정",
      "summary_ko": [
-      "서울 서초구(구청장 전성수)는 19일 재건축초과이익환수제의 부담금 부과기한 질의에 대한 국토교통부의 회신과 관..."
+      "서울 서초구가 국토교통부의 회신을 바탕으로 반포현대 재건축초과이익환수제 부담금 부과를 연내 확정했습니다.",
+      "재건축초과이익환수제 부담금 기한에 대한 질의와 검토가 이어져 왔습니다.",
+      "이번 결정이 향후 주택 시장과 재건축 단지들에 미칠 영향에 관심이 모이고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "부동산",
+      "경제"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -237,13 +264,17 @@
     },
     {
      "id": "d9b55f7da975",
-     "title_ko": "HLB, HLB생명과학 흡수합병 재추진…신약개발·상업화 역량 통합",
+     "title_ko": "HLB, HLB생명과학 흡수합병 재추진",
      "summary_ko": [
-      "HLB그룹은 HLB와 HLB생명과학이 합병을 재추진한다고 19일 밝혔다.",
-      "신약개발부터 허가·상업화까지 사업 역량을 통합한다는 계획이다.",
-      "HLB와 HLB생명과학은 이날 각각 이사회를 열고 HLB가 HLB생명과학을 흡수합병하는 안건을 의결했다."
+      "HLB그룹은 HLB가 HLB생명과학을 흡수합병하는 안건을 이사회에서 각각 의결했습니다.",
+      "양사는 합병을 통해 신약개발부터 허가 및 상업화까지의 사업 역량을 하나로 통합할 계획입니다.",
+      "이번 합병 재추진이 향후 신약 개발 경쟁력 강화에 어떤 영향을 줄지 주목됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "경제",
+      "증시",
+      "기술"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -258,22 +289,24 @@
      "original_title": "HLB, HLB생명과학 흡수합병 재추진…신약개발·상업화 역량 통합",
      "published_at": "2026-11-19T09:03+00:00"
     }
-   ],
-   "error": "gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   },
   "kr_entertainment": {
    "label": "연예",
-   "briefing": "일부 기사의 요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "한중 합작영화로 인한 한한령 해빙 기대감과 연예계의 안타까운 소식들이 이어졌습니다.",
    "items": [
     {
      "id": "201a589f4762",
-     "title_ko": "리트 만점 이진우, 마지막은 ‘진짜 나’이길 원했나… 8년전 수험표가 유품된 이유",
+     "title_ko": "리트 만점 이진우 사망, 8년 전 수험표의 사연",
      "summary_ko": [
-      "[스포츠조선 김영록 기자] '리트만점' 이진우가 8년전 수능 수험표를 끝내 버리지 못한 이유는 뭘까.",
-      "이진우는 19일 서울 강동구 천호동의 한 모텔에서 심정지 상태로 발견돼 끝내 사망했다.",
-      "수많은 의혹으로 가득했던 한 사람의 생은 이렇게 비극적인 결말로 멈춰 섰다."
+      "법학적성시험 만점자 출신 이진우가 서울의 한 모텔에서 심정지 상태로 발견되어 사망했습니다.",
+      "고인은 생전 보관하던 8년 전 수능 수험표를 끝내 버리지 못한 사연을 남겼습니다.",
+      "많은 의혹 속에 안타까운 비극적 결말을 맞이한 그의 생은 큰 충격을 주었습니다."
      ],
-     "tags": [],
+     "tags": [
+      "연예",
+      "사건사고"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -282,15 +315,25 @@
       }
      ],
      "original_title": "리트 만점 이진우, 마지막은 ‘진짜 나’이길 원했나… 8년전 수험표가 유품된 이유",
-     "published_at": "2026-11-19T13:15+00:00"
+     "published_at": "2026-11-19T13:15+00:00",
+     "figure": {
+      "v": "8년 전",
+      "l": "수험표 기간"
+     }
     },
     {
      "id": "691d7d56b2d7",
-     "title_ko": "한중 합작영화 '상하이의 별' 주목…한한령 해빙 물꼬 틀까",
+     "title_ko": "한중 합작영화 상하이의 별 한한령 해빙 기대",
      "summary_ko": [
-      "한중 정상회담을 계기로 중국의 한한령(限韓令·한류 제한령) 해제에 대한 기대가 커진 가운데 양국이 공동 제작을..."
+      "한중 정상회담 이후 한한령 해제 기대감이 커진 가운데 합작영화 '상하이의 별'이 주목받고 있습니다.",
+      "이 영화는 1932년 윤봉길 의사의 홍커우공원 의거를 소재로 한 첩보 액션물입니다.",
+      "양국의 문화교류 확대를 통해 한국 콘텐츠의 중국 진출 교두보가 될 것으로 전망됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "연예",
+      "방송",
+      "경제"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -299,15 +342,24 @@
       }
      ],
      "original_title": "한중 합작영화 '상하이의 별' 주목…한한령 해빙 물꼬 틀까",
-     "published_at": "2026-11-19T10:37+00:00"
+     "published_at": "2026-11-19T10:37+00:00",
+     "figure": {
+      "v": "1932년",
+      "l": "배경 연도"
+     }
     },
     {
      "id": "63316414dd51",
-     "title_ko": "아이돌 그룹 '라이즈' 과잉경호 논란...여성 팬 밀쳐 구조물 충돌 [앵커리포트]",
+     "title_ko": "아이돌 그룹 라이즈 과잉경호 논란",
      "summary_ko": [
-      "아이돌 그룹 '라이즈' 과잉경호 논란...여성 팬 밀쳐 구조물 충돌 [앵커리포트]"
+      "아이돌 그룹 라이즈의 현장 경호원들이 여성 팬을 밀쳐 구조물에 충돌하는 사고가 발생했습니다.",
+      "아이돌 그룹의 과잉 경호 문제가 다시 한번 도마 위에 올랐습니다.",
+      "팬 안전을 위협하는 과잉 경호 관행에 대한 비판과 논란이 이어지고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "연예",
+      "사건사고"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -318,8 +370,7 @@
      "original_title": "아이돌 그룹 '라이즈' 과잉경호 논란...여성 팬 밀쳐 구조물 충돌 [앵커리포트]",
      "published_at": "2026-11-19T10:23+00:00"
     }
-   ],
-   "error": "gemini HTTP 503 for gemini-flash-latest: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n"
+   ]
   },
   "kr_politics": {
    "label": "정치",
@@ -1292,16 +1343,19 @@
   },
   "nz_immigration": {
    "label": "이민 레이더",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "이민자 대상 허위 비자 자문 피해와 엄격해진 심사 및 노동 착취 주의보.",
    "items": [
     {
      "id": "db6354fa0fb8",
-     "title_ko": "'I feel betrayed': Migrants allege fake visa advice cost them thousands",
+     "title_ko": "허위 비자 자문으로 수천 달러 피해 본 이민자들",
      "summary_ko": [
-      "'I feel betrayed': Migrants allege fake visa advice cost them thousands"
+      "일부 이민자들이 부정확하거나 허위인 비자 자문 서비스로 인해 수천 달러의 금전적 피해를 입었다고 호소했습니다.",
+      "피해를 주장하는 이들은 잘못된 조언으로 인해 비자 신청 과정에서 큰 차질과 비용 부담을 겪었습니다.",
+      "이번 사례는 향후 비자 수속 시 신뢰할 수 있는 공인된 이민 자문가 선택의 중요성을 시사합니다."
      ],
      "tags": [
-      "이민"
+      "이민",
+      "비자"
      ],
      "importance": 9,
      "sources": [
@@ -1320,16 +1374,21 @@
      ],
      "original_title": "'I feel betrayed': Migrants allege fake visa advice cost them thousands",
      "published_at": "2026-11-18T22:30+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "졸업 후 비자와 영주권을 준비할 때 공인된 이민 자문가를 통해 안전하게 절차를 밟아야 합니다.",
      "radar": 9
     },
     {
      "id": "55a2dc0088f7",
-     "title_ko": "Parent category November 2026 draw",
+     "title_ko": "2026년 11월 부모 초청 이민 카테고리 추첨 결과",
      "summary_ko": [
-      "Parent category November 2026 draw"
+      "이민성은 2026년 11월 부모 초청 이민 카테고리 추첨을 진행하고 결과를 발표했습니다.",
+      "이번 추첨을 통해 조건을 충족한 초청인들이 영주권 신청을 위한 다음 단계로 진입하게 됩니다.",
+      "가족 초청 이민 정책의 지속적인 운영은 뉴질랜드 거주 이민자들의 정착 안정성에 영향을 줍니다."
      ],
-     "tags": [],
+     "tags": [
+      "이민",
+      "영주권"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -1339,17 +1398,21 @@
      ],
      "original_title": "Parent category November 2026 draw",
      "published_at": "2026-11-18T22:51+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "향후 가족 초청이나 장기 체류 계획을 세울 때 뉴질랜드 이민성 카테고리 운영 일정을 파악하는 데 참고가 됩니다.",
      "radar": 9
     },
     {
      "id": "7eb14e09669f",
-     "title_ko": "Indians with a New Zealand job offer could face tougher visa checks, lawyer warns",
+     "title_ko": "뉴질랜드 취업 오퍼 받은 인도 국적자 비자 심사 강화",
      "summary_ko": [
-      "Indians with a New Zealand job offer could face tougher visa checks, lawyer war…"
+      "뉴질랜드 기업으로부터 일자리 제안을 받은 인도 국적 구직자들이 더욱 까다로운 비자 심사에 직면할 수 있다는 변호사의 경고가 나왔습니다.",
+      "당국이 비자 심사 과정에서 고용 조건과 자격 요건 검증을 한층 더 엄격하게 적용하고 있는 추세입니다.",
+      "이러한 강화된 심사 기조는 취업비자를 통해 현지 정착을 노리는 외국인 구직자들에게 더 높은 문턱이 될 수 있습니다."
      ],
      "tags": [
-      "이민"
+      "비자",
+      "이민",
+      "고용"
      ],
      "importance": 8,
      "sources": [
@@ -1360,17 +1423,20 @@
      ],
      "original_title": "Indians with a New Zealand job offer could face tougher visa checks, lawyer warns",
      "published_at": "2026-11-18T00:25+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "졸업 후 취업비자와 고용주 인증 비자(AEWV)를 준비할 때 철저한 서류 준비와 고용주 검증이 필수적입니다.",
      "radar": 9
     },
     {
      "id": "12d25a0dfd7f",
-     "title_ko": "Migrant worker to be deported after fruit-picking breached visa conditions",
+     "title_ko": "비자 조건 위반한 과일 수확 이주노동자 추방 위기",
      "summary_ko": [
-      "Migrant worker to be deported after fruit-picking breached visa conditions"
+      "비자 허용 조건을 위반하여 과일 수확 업무에 종사한 이주노동자가 강풍과 함께 추방될 위기에 처했습니다.",
+      "당국은 정해진 비자 규정을 위반한 외국인 근로자에 대해 무관용 원칙으로 엄정하게 대응하고 있습니다.",
+      "이번 조치는 비자 소지자들에게 현지 노동법과 비자 조건을 철저히 준수해야 한다는 경각심을 높이고 있습니다."
      ],
      "tags": [
-      "이민"
+      "이민",
+      "비자"
      ],
      "importance": 8,
      "sources": [
@@ -1381,17 +1447,20 @@
      ],
      "original_title": "Migrant worker to be deported after fruit-picking breached visa conditions",
      "published_at": "2026-11-17T16:15+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "학생비자나 졸업 후 취업비자의 허용 근로 조건을 어기면 강제 추방 등 심각한 불이익을 받으므로 주의해야 합니다.",
      "radar": 8
     },
     {
      "id": "845d28c8bc6f",
-     "title_ko": "Aotearoa tightens scrutiny of customary adoptions as families face new visa rules",
+     "title_ko": "가족 비자 규정 변경 속 관습적 입양 심사 강화",
      "summary_ko": [
-      "Aotearoa tightens scrutiny of customary adoptions as families face new visa rul…"
+      "새로운 비자 규정이 도입되는 가운데 가족들이 관습적 입양과 관련된 까다로운 심사 절차를 마주하고 있습니다.",
+      "당국은 입양을 통한 비자 신청 건에 대해 적법성과 서류 진위 여부를 더 엄격하게 들여다보고 있습니다.",
+      "이로 인해 관련 비자를 신청하는 가정들은 수속 기간 연장과 추가 서류 제출 부담을 겪고 있습니다."
      ],
      "tags": [
-      "이민"
+      "이민",
+      "비자"
      ],
      "importance": 8,
      "sources": [
@@ -1402,18 +1471,20 @@
      ],
      "original_title": "Aotearoa tightens scrutiny of customary adoptions as families face new visa rules",
      "published_at": "2026-11-18T10:40+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "강화된 비자 규정과 심사 기준 변화는 가족 비자 수속 전반의 처리 기간에 직접적인 영향을 미칩니다.",
      "radar": 8
     },
     {
      "id": "695b3fcdb738",
-     "title_ko": "Exploited migrant won nearly $150,000, was offered $600. She’s still fighting for a dollar",
+     "title_ko": "부당 노동 착취 피해 이주노동자, 배상금 투쟁 지속",
      "summary_ko": [
-      "Exploited migrant won nearly $150,000, was offered $600. She’s still fighting f…"
+      "노동 착취 피해로 판결에서 거의 15만 달러를 인정받은 이주노동자가 고용주로부터 단 600달러만 제안받은 상태입니다.",
+      "피해 노동자는 정당한 배상금을 받아내기 위해 여전히 법적 공방과 투쟁을 이어가고 있습니다.",
+      "이번 사건은 이주노동자가 취업 시장에서 겪을 수 있는 부당 대우와 사후 구제의 어려움을 보여줍니다."
      ],
      "tags": [
-      "이민",
-      "환율"
+      "고용",
+      "사회"
      ],
      "importance": 9,
      "sources": [
@@ -1424,11 +1495,14 @@
      ],
      "original_title": "Exploited migrant won nearly $150,000, was offered $600. She’s still fighting for a dollar",
      "published_at": "2026-11-19T02:51+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "졸업 후 현지 기업에 취업할 때 불공정 노동 관행을 예방하고 노동 권리를 숙지하는 것이 매우 중요합니다.",
+     "figure": {
+      "v": "15만 달러",
+      "l": "인정 배상금"
+     },
      "radar": 7
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   }
  },
  "extras": {
@@ -1747,33 +1821,28 @@
   "alerts": [
    {
     "kind": "radar",
-    "text": "'I feel betrayed': Migrants allege fake visa advice cost them thousands",
+    "text": "허위 비자 자문으로 수천 달러 피해 본 이민자들",
     "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNbDMyb0ppVVNxbmY5RWp6WkVRUjcwZk1fTHFHQ1kzMkVzMWpDQzI0ZUtYdFZQRVVxUUpweVg5VUxYcXQ4Mng5TkxjX2N5cENKNE80VzJzRThpZzhnRmFmUXdvdGJSbkdiUlRJbElKc1U0NXR4UWRXc0JYa0Fwekpjbms1UjRfeU05YkVBUi1sX2M2Q0QxaFJOTXRPdl90T1BkU3JlTllsR1dhRTRaMDFuc0JDb2hEZmNiMVRoVjJ3OXV5dzM4X192anBZYm8xZkt0dXktWXNwOXdBN2FDUng1RlRBM21UUQ?oc=5"
    },
    {
     "kind": "radar",
-    "text": "Parent category November 2026 draw",
+    "text": "2026년 11월 부모 초청 이민 카테고리 추첨 결과",
     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQNm9JN2JrWW9mRG1UQnhpbzVremRzUU5uaUxLVC1idjV1ajFkZUhCYXBuLVVhT3hQRUFfRWpPSndDQ1RLdUFnelBVSnhiOU0wS2tVa1RwYy1qY1YwN0FxV2l3UWR2MTZXRDJzS0xPbmRjZTdTMTJRaDVyemxQMHJmb0QwUjN6aGxlanpLb09kSV9xUQ?oc=5"
    },
    {
     "kind": "radar",
-    "text": "Indians with a New Zealand job offer could face tougher visa checks, lawyer warns",
+    "text": "뉴질랜드 취업 오퍼 받은 인도 국적자 비자 심사 강화",
     "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPQ3FpN0FHcU9NeXMzRHZ3aE1HdWNMWElYSGdEcDBhNjlkd0ZsY1RNcW9Yd2VFQTExbFFsb0FqNnI4aU5YRjlPNHhNTDctRnhLdTR5WUl6SVp5emJnQWN6b2cwMU1Tb3RZN21fTGVnUHlCTE9DTTVjUmFHVDZQQW1HR3JhOVE0MVZZSXllNW1naTlfdUZ6OHdWd1BwOURzSGJORXF2SWF6cHNxcHZTcXRJVV9HUkNPbHM2?oc=5"
    }
   ],
   "degraded": true,
-  "degraded_reason": "요약 실패: kr_economy, kr_entertainment, nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_health, nz_immigration",
-  "retries": 1,
+  "degraded_reason": "요약 실패: nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_health",
+  "retries": 2,
   "quality": {
    "items": 58,
-   "bad": 45,
+   "bad": 34,
    "redone": [],
    "bad_ids": [
-    "59d6278d91df",
-    "d49649ffe87a",
-    "26fa87475544",
-    "691d7d56b2d7",
-    "63316414dd51",
     "2d7903db1017",
     "8bf358671493",
     "708afcb2a18b",
@@ -1798,8 +1867,22 @@
     "2894b9ac4c38",
     "5c8b1576ab66",
     "11bd3b96af97",
-    "829348a45783"
+    "829348a45783",
+    "97894afb3a77",
+    "be351ac9c7f8",
+    "ca073bbc9858",
+    "4b181bb8414f",
+    "8b14fe24f2ec"
    ]
+  },
+  "repaired": {
+   "summary": [
+    "kr_economy",
+    "kr_entertainment",
+    "nz_immigration"
+   ],
+   "insight": false,
+   "requests": 2
   }
  }
 }

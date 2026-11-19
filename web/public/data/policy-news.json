@@ -3,13 +3,14 @@
  "items": [
   {
    "date": "2026-11-19",
-   "title": "2026년 11월 부모 초청 이민 카테고리 추첨 진행",
+   "title": "2026년 11월 부모 초청 이민 카테고리 추첨 결과",
    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQNm9JN2JrWW9mRG1UQnhpbzVremRzUU5uaUxLVC1idjV1ajFkZUhCYXBuLVVhT3hQRUFfRWpPSndDQ1RLdUFnelBVSnhiOU0wS2tVa1RwYy1qY1YwN0FxV2l3UWR2MTZXRDJzS0xPbmRjZTdTMTJRaDVyemxQMHJmb0QwUjN6aGxlanpLb09kSV9xUQ?oc=5",
    "source": "Immigration New Zealand",
    "parties": [
     "gov"
    ],
    "issues": [
+    "pr_path",
     "family"
    ],
    "change": true
