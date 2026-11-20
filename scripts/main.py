@@ -424,6 +424,24 @@ def main(argv: list[str] | None = None) -> int:
         log.error("0 items in brief — not writing")
         return EXIT_EMPTY
 
+    # 다시 만들기(선별 실패로 전체 재생성)가 이전보다 나쁘면 덮어쓰지 않는다:
+    # 예) 03:18 첫 생성에서 오클랜드 탭은 요약됐는데, 재생성 때 오클랜드까지 실패하면 이전 것을 유지
+    if args.retry_degraded and not args.dry_run:
+        try:
+            old = json.loads((out_dir / f"{brief['date']}.json").read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            old = None
+        if old:
+            ok_new = sum(1 for s in sections.values() if not s.get("error"))
+            ok_old = sum(1 for s in (old.get("sections") or {}).values() if not s.get("error"))
+            if ok_new < ok_old:
+                log.warning("retry result is worse (%d < %d sections summarised) — keeping the previous brief", ok_new, ok_old)
+                old.setdefault("meta", {})["retries"] = retries
+                write_brief(old, out_dir)
+                set_output("generated", "true")
+                set_output("date", f"{brief['date']} (retry kept previous)")
+                return 0
+
     path = write_brief(brief, out_dir)
     prune_and_index(out_dir, local_now.date(), cfg["output"]["retention_days"])
     log.info("wrote %s (%d items)", path.relative_to(ROOT), n)
