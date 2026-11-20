@@ -1,6 +1,6 @@
 {
  "date": "2026-11-21",
- "generated_at": "2026-11-21T03:41:16+13:00",
+ "generated_at": "2026-11-21T04:06:21+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -956,15 +956,21 @@
   },
   "akl_safety": {
    "label": "치안",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드 도심 화재와 마누카우 고속도로 전복 사고, 치안 불안이 잇따랐습니다.",
    "items": [
     {
      "id": "01410cdfd6ea",
-     "title_ko": "International student attacked in Auckland now facing deportation",
+     "title_ko": "오클랜드서 흉기 강도당한 유학생, 비자 문제로 추방 위기",
      "summary_ko": [
-      "An international student recovering from a violent robbery is fighting deportat…"
+      "마누카우의 한 주차장에서 흉기 강도를 당해 부상을 입은 20대 유학생이 추방 위기에 놓였습니다.",
+      "해당 학생은 학업 미이수로 비자 연장이 거부된 상태에서 지난달 강도 일당에게 폭행을 당했습니다.",
+      "경찰이 강도 사건을 수사 중인 가운데 이민성은 해당 학생의 비자 재신청을 기각하고 추방 결정을 내렸습니다."
      ],
-     "tags": [],
+     "tags": [
+      "비자",
+      "치안",
+      "사건사고"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -978,17 +984,20 @@
      ],
      "original_title": "International student attacked in Auckland now facing deportation",
      "published_at": "2026-11-20T06:44+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "학업 이수 실패나 출석 미달은 비자 연장 거부 및 추방으로 직결되므로 비자 조건 유지가 필수적입니다.",
      "radar": 3
     },
     {
      "id": "79f753092b69",
-     "title_ko": "Person critically injured as truck rolls on Auckland motorway",
+     "title_ko": "오클랜드 20번 고속도로서 트럭 전복돼 1명 중태",
      "summary_ko": [
-      "Police said it was informed of the single-vehicle crash on the Lambie Dr onramp…"
+      "남부 오클랜드 마누카우 인근 램비 드라이브 고속도로 진입로에서 트럭이 전복되는 사고가 발생했습니다.",
+      "차량에 갇혔던 운전자 한 명이 구조 장비로 구출되어 위중한 상태로 오클랜드 시립병원으로 이송되었습니다.",
+      "사고 여파로 해당 진입로가 장시간 통제되었으며 교통 당국은 우회로 이용을 안내하고 조사를 착수했습니다."
      ],
      "tags": [
-      "치안"
+      "교통",
+      "사건사고"
      ],
      "importance": 7,
      "sources": [
@@ -1011,15 +1020,24 @@
      ],
      "original_title": "Person critically injured as truck rolls on Auckland motorway",
      "published_at": "2026-11-20T02:20+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "남부 오클랜드 주요 통근로가 차단되므로 차량 이동 시 이동 경로와 교통 통제 상황 확인이 필요합니다.",
+     "figure": {
+      "v": "1명",
+      "l": "위중 환자 수"
+     }
     },
     {
      "id": "aaef69fde38d",
-     "title_ko": "Fire alarm fails as smoke spews from central Auckland carpark, explosions heard",
+     "title_ko": "오클랜드 도심 건물 지하 주차장 화재 발생, 경보기 미작동",
      "summary_ko": [
-      "Fire alarm failed as smoke billowed out on the street from the scene of the Cle…"
+      "오클랜드 도심 팬쇼 스트리트의 클리어포인트 빌딩 지하 주차장에서 케이블 및 차량 화재가 일어났습니다.",
+      "화재 당시 비상경보기가 울리지 않았고 도로 공사로 소화전이 덮여 있어 소방대의 진압에 차질을 빚었습니다.",
+      "고압 케이블 단선 위험 속에서 건물이 대피했고 일대에는 대규모 정전이 발생해 관계 기관이 조사에 나섰습니다."
      ],
-     "tags": [],
+     "tags": [
+      "사건사고",
+      "치안"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -1037,16 +1055,24 @@
      ],
      "original_title": "Fire alarm fails as smoke spews from central Auckland carpark, explosions heard",
      "published_at": "2026-11-20T05:08+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "도심 주요 도로 주변의 정전과 통행 제한은 시내 이동과 인근 편의시설 이용에 불편을 줄 수 있습니다.",
+     "figure": {
+      "v": "11,000V",
+      "l": "화재 발생 전압"
+     }
     },
     {
      "id": "e4151f705964",
-     "title_ko": "EV charger cables cut at multiple Auckland sites as scrap copper prices rise 40% on a year ago",
+     "title_ko": "구리 가격 급등에 오클랜드 전역서 전기차 충전 케이블 절도",
      "summary_ko": [
-      "Arrests have been made in Hutt Valley and Christchurch after similar incidents."
+      "오클랜드 북서부를 비롯한 전국 공공 전기차 충전소에서 구리를 노린 케이블 절단 범죄가 급증했습니다.",
+      "글로벌 데이터센터 증설 등으로 고철 구리 시세가 전년 대비 40% 급등하면서 절도 표적이 되었습니다.",
+      "업계는 수리비 부담으로 어려움을 겪고 있으며 경찰은 다른 지역 연쇄 절도범들을 체포해 조사 중입니다."
      ],
      "tags": [
-      "생활비"
+      "치안",
+      "사건사고",
+      "경제"
      ],
      "importance": 7,
      "sources": [
@@ -1061,22 +1087,30 @@
      ],
      "original_title": "EV charger cables cut at multiple Auckland sites as scrap copper prices rise 40% on a year ago",
      "published_at": "2026-11-20T02:03+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "전기차를 이용하거나 렌트하는 경우 공공 급속 충전소 고장으로 충전에 차질을 빚을 수 있습니다.",
+     "figure": {
+      "v": "40%",
+      "l": "구리 가격 상승률"
+     }
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "akl_life": {
    "label": "생활",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드 제2 하버 크로싱 교량 제안과 시장 발언을 둘러싼 논란이 일었습니다.",
    "items": [
     {
      "id": "8a2c7571fd71",
-     "title_ko": "Latest bridge proposal designed to spark public debate over second Auckland harbour crossing",
+     "title_ko": "오클랜드 제2 하버 크로싱, 철도·보행로 갖춘 신규 교량안 제안",
      "summary_ko": [
-      "The bridge would run adjacent to the existing one and could cost as little as $…"
+      "오클랜드 하버를 횡단하는 제2 연결망으로 해저터널 대신 신규 교량을 건설하자는 제안이 발표되었습니다.",
+      "제안된 다리는 기존 하버 브리지 옆에 놓이며 2개 철도 차선과 보행·자전거 전용 도로를 갖춘 형태입니다.",
+      "추진 단체는 기존 터널 계획보다 비용이 저렴하고 경관이 뛰어나다며 대중적 논의 활성화를 기대했습니다."
      ],
-     "tags": [],
+     "tags": [
+      "교통",
+      "사회"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -1102,15 +1136,20 @@
      ],
      "original_title": "Latest bridge proposal designed to spark public debate over second Auckland harbour crossing",
      "published_at": "2026-11-20T07:49+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "향후 오클랜드 남북 간 대중교통 인프라 개선과 출퇴근 편의성에 장기적인 영향을 미치는 계획입니다."
     },
     {
      "id": "ade1b01868b0",
-     "title_ko": "'Beijing's useful idiot': Wayne Brown cops more flak over pro-China comments",
+     "title_ko": "친중 발언 논란 웨인 브라운 오클랜드 시장, 거센 비판 직면",
      "summary_ko": [
-      "'Beijing's useful idiot': Wayne Brown cops more flak over pro-China comments"
+      "웨인 브라운 오클랜드 시장이 최근 친중국 성향의 발언을 잇따라 내놓으면서 거센 정치적 비판을 받고 있습니다.",
+      "일부 정치권과 외교 전문가들은 시장의 발언이 뉴질랜드의 외교적 입장과 동맹 관계를 훼손한다고 지적했습니다.",
+      "논란이 격화되면서 시장의 대외 소통 방식과 시정 운영 적절성을 둘러싼 공방이 가열되고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "사회"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -1120,15 +1159,20 @@
      ],
      "original_title": "'Beijing's useful idiot': Wayne Brown cops more flak over pro-China comments",
      "published_at": "2026-11-18T23:28+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 시정부 수장의 외교적 발언 논란은 시정 운영 신뢰도와 지역 정치 지형에 영향을 줍니다."
     },
     {
      "id": "e61e5ba1f722",
-     "title_ko": "WATCH: US embassy issues a remarkable rebuke against Auckland Mayor",
+     "title_ko": "주뉴질랜드 미국 대사관, 오클랜드 시장 발언에 이례적 질책",
      "summary_ko": [
-      "WATCH: US embassy issues a remarkable rebuke against Auckland Mayor"
+      "주뉴질랜드 미국 대사관이 웨인 브라운 오클랜드 시장의 최근 외교 발언에 대해 강경한 어조로 비판했습니다.",
+      "외교 공관이 주재국의 지방자치단체장 발언에 대해 공개적으로 반박 입장을 낸 것은 매우 이례적입니다.",
+      "미국 측의 공개 질책으로 인해 브라운 시장의 친중 관련 발언을 둘러싼 외교적 파장이 한층 확대되었습니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "사회"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -1138,15 +1182,20 @@
      ],
      "original_title": "WATCH: US embassy issues a remarkable rebuke against Auckland Mayor",
      "published_at": "2026-11-18T17:22+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "주요국 대사관과의 외교적 마찰은 오클랜드의 국제 대외 교류 및 도시 이미지에 영향을 미칠 수 있습니다."
     },
     {
      "id": "c8609662dbba",
-     "title_ko": "Te_Ararata_new_bridge",
+     "title_ko": "오클랜드 하버 크로싱 새 대안 '테 아라라타' 교량 구상",
      "summary_ko": [
-      "Te_Ararata_new_bridge"
+      "도시교통 연구 단체가 오클랜드 제2 하버 연결망 대안으로 '테 아라라타' 교량 상세 구상을 공개했습니다.",
+      "기존 하버 브리지의 도로 교통과 연계하면서 철도 및 활성 이동 수단을 흡수하는 복합 구조로 설계되었습니다.",
+      "비용 효율성과 환경 친화성을 내세우며 막대한 예산이 소요되는 터널안을 대체할 대안으로 제시되었습니다."
      ],
-     "tags": [],
+     "tags": [
+      "교통",
+      "사회"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1156,15 +1205,20 @@
      ],
      "original_title": "Te_Ararata_new_bridge",
      "published_at": "2026-11-20T11:30+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 도시 대중교통망 확충 논의는 향후 도심 접근성과 주거지 선택에 중요한 기준이 됩니다."
     },
     {
      "id": "5a1caa76c055",
-     "title_ko": "WATCH: National MP regrets voting for Wayne Brown amid democracy row",
+     "title_ko": "국민당 의원, 외교 논란 브라운 시장에 \"투표 후회한다\" 질타",
      "summary_ko": [
-      "WATCH: National MP regrets voting for Wayne Brown amid democracy row"
+      "여당인 국민당 소속 국회의원이 웨인 브라운 오클랜드 시장을 찍었던 것을 후회한다고 공개 비판했습니다.",
+      "브라운 시장의 최근 대중국 관련 발언과 민주주의에 대한 인식이 공직자로서 부적절하다는 지적이 제기되었습니다.",
+      "중앙정부 여당 의원까지 시장에 등을 돌리면서 오클랜드 시와 중앙정부 간의 정책 공조에 난항이 예상됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "사회"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -1174,10 +1228,9 @@
      ],
      "original_title": "WATCH: National MP regrets voting for Wayne Brown amid democracy row",
      "published_at": "2026-11-20T05:42+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "중앙정부와 오클랜드 시정부의 갈등은 대형 도시 인프라 예산 집행과 협업을 지연시킬 우려가 있습니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "akl_property": {
    "label": "부동산",
@@ -1323,16 +1376,19 @@
   },
   "akl_education": {
    "label": "교육",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드대학교가 학교 발전을 이끌었던 전임 부총장의 별세 소식에 애도를 표했습니다.",
    "items": [
     {
      "id": "d8ae77dcd3d1",
-     "title_ko": "Auckland University mourns passing of former Vice-Chancellor",
+     "title_ko": "오클랜드대학교, 학교 이끌었던 전임 부총장 별세에 애도",
      "summary_ko": [
-      "Auckland University mourns passing of former Vice-Chancellor"
+      "오클랜드대학교는 대학 발전과 학문적 성과를 이끌었던 전임 부총장의 별세 소식을 전하며 애도를 표했습니다.",
+      "고인은 재임 시절 연구 역량 강화와 캠퍼스 현대화를 주도하며 뉴질랜드 고등교육 발전에 크게 기여했습니다.",
+      "대학 측은 고인의 헌신과 유산을 기리는 공식 추모 메시지를 발표하고 유가족에게 위로를 전했습니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "사회"
      ],
      "importance": 4,
      "sources": [
@@ -1343,10 +1399,9 @@
      ],
      "original_title": "Auckland University mourns passing of former Vice-Chancellor",
      "published_at": "2026-11-20T08:27+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "재학 중인 오클랜드대학교의 주요 역사와 학사 발전에 기여한 인물에 대한 공식 학내 소식입니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "nz_immigration": {
    "label": "이민 레이더",
@@ -1803,11 +1858,11 @@
    }
   ],
   "degraded": true,
-  "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_education, nz_immigration",
-  "retries": 1,
+  "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, nz_immigration",
+  "retries": 2,
   "quality": {
    "items": 56,
-   "bad": 52,
+   "bad": 42,
    "redone": [],
    "bad_ids": [
     "300738e3c8e0",
@@ -1841,6 +1896,15 @@
     "ec36ff58b7ed",
     "4bf3e264e5d7"
    ]
+  },
+  "repaired": {
+   "summary": [
+    "akl_safety",
+    "akl_life",
+    "akl_education"
+   ],
+   "insight": false,
+   "requests": 1
   }
  }
 }
