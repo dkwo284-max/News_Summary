@@ -1859,7 +1859,7 @@
   ],
   "degraded": true,
   "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, nz_immigration",
-  "retries": 3,
+  "retries": 4,
   "quality": {
    "items": 56,
    "bad": 42,
