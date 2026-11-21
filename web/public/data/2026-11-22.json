@@ -1,6 +1,6 @@
 {
  "date": "2026-11-22",
- "generated_at": "2026-11-22T03:16:54+13:00",
+ "generated_at": "2026-11-22T03:36:53+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -464,16 +464,20 @@
   },
   "nz_society": {
    "label": "사회",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "사회 부문에서는 치안 사고, 건강검진 지표, 지진 및 교통사고 소식이 이어졌습니다.",
    "items": [
     {
      "id": "88f1db5bd2bc",
-     "title_ko": "Motorway truck roll leaves one person in critical condition",
+     "title_ko": "고속도로 트럭 전복 사고로 1명 위독",
      "summary_ko": [
-      "Emergency services were called to a fight at a property in Māngere East at arou…"
+      "마누레와 이스트 지역의 한 주택가에서 발생한 사건에 이어 긴급 구조대가 출동했습니다.",
+      "고속도로 트럭 전복 사고로 인해 1명이 위독한 상태에 빠졌습니다.",
+      "정확한 사고 원인 조사가 진행 중이며 교통 흐름에 차질이 예상됩니다."
      ],
      "tags": [
-      "주거"
+      "사건사고",
+      "교통",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -492,15 +496,21 @@
      ],
      "original_title": "Motorway truck roll leaves one person in critical condition",
      "published_at": "2026-11-21T11:41+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "출퇴근 및 오클랜드 생활 동선 점검 시 교통 안전에 유의해야 합니다."
     },
     {
      "id": "70225c2d7de9",
-     "title_ko": "Half of Kiwi adults are skipping the dentist",
+     "title_ko": "뉴질랜드 성인 절반 치과 방문 기피",
      "summary_ko": [
-      "An advocate for free dental care says New Zealand risks billions in lost produc…"
+      "최신 보건 조사에 따르면 성인의 52퍼센트가 정기 치과 검진을 받지 않는 것으로 나타났습니다.",
+      "비용 부담으로 인해 치과 진료를 받지 못하는 성인이 42.6퍼센트에 달합니다.",
+      "구강 건강 악화는 생산성 손실과 보건 체계 부담으로 이어질 우려가 큽니다."
      ],
-     "tags": [],
+     "tags": [
+      "의료",
+      "사회",
+      "물가"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -518,16 +528,23 @@
      ],
      "original_title": "Half of Kiwi adults are skipping the dentist",
      "published_at": "2026-11-21T06:14+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "학생비자 졸업 후 현지 생활 시 의료비 및 치과 보험 항목을 미리 확인하는 것이 좋습니다.",
+     "figure": {
+      "v": "52%",
+      "l": "치과 미방문 성인 비율"
+     }
     },
     {
      "id": "9624661152e4",
-     "title_ko": "Hanmer Springs earthquake: Shallow 4.5 quake strikes at 5km depth",
+     "title_ko": "한머 스프링스 규모 4.5 지진 발생",
      "summary_ko": [
-      "GeoNet had received 186 felt reports by 9.25pm, including one reporting extreme…"
+      "한머 스프링스 북동쪽 20킬로미터 지점에서 규모 4.5의 지진이 발생했습니다.",
+      "지진은 5킬로미터 깊이의 얕은 깊이에서 일어났으며 180건 이상의 진동 신고가 접수되었습니다.",
+      "가벼운 흔들림이 감지되었으나 큰 피해 보고는 아직 없습니다."
      ],
      "tags": [
-      "기상재해"
+      "재난",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -542,16 +559,24 @@
      ],
      "original_title": "Hanmer Springs earthquake: Shallow 4.5 quake strikes at 5km depth",
      "published_at": "2026-11-21T08:39+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "뉴질랜드 전역에서 발생할 수 있는 지진 대비 요령을 숙지해 안전을 도모해야 합니다.",
+     "figure": {
+      "v": "4.5",
+      "l": "지진 규모"
+     }
     },
     {
      "id": "cc752b7f4a1d",
-     "title_ko": "Person dead after crash between car and truck and trailer",
+     "title_ko": "차량과 트럭 충돌 사고로 1명 사망",
      "summary_ko": [
-      "Despite the efforts of emergency services, the driver of the car died at the sc…"
+      "크라이스트처치 인근 국도 1호선에서 승용차와 트럭 트레일러가 충돌했습니다.",
+      "긴급 구조대의 응급 처치에도 불구하고 승용차 운전자가 현장에서 사망했습니다.",
+      "중대사고조사단이 현장을 조사한 이후 해당 도로는 다시 통행이 재개되었습니다."
      ],
      "tags": [
-      "치안"
+      "사건사고",
+      "교통",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -566,16 +591,20 @@
      ],
      "original_title": "Person dead after crash between car and truck and trailer",
      "published_at": "2026-11-20T20:58+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "도로 주행 시 안전 운전과 교통 법규 준수의 중요성을 다시 상기시켜 줍니다."
     },
     {
      "id": "edda3f73216b",
-     "title_ko": "NZ Health Survey: 35.5% obesity is a cost for employers",
+     "title_ko": "비만율 35.5퍼센트와 고용주 비용",
      "summary_ko": [
-      "NZ Health Survey: 35.5% obesity is a cost for employers"
+      "뉴질랜드 보건 조사 결과 성인 비만율이 35.5퍼센트로 집계되었습니다.",
+      "높은 비만율은 기업의 생산성 저하와 경제적 비용 부담으로 작용합니다.",
+      "국민 건강 지표 악화가 노동 시장에 미치는 영향에 대한 우려가 커지고 있습니다."
      ],
      "tags": [
-      "의료"
+      "의료",
+      "고용",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -590,22 +619,31 @@
      ],
      "original_title": "NZ Health Survey: 35.5% obesity is a cost for employers",
      "published_at": "2026-11-19T01:41+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "현지 취업을 준비할 때 직장 내 건강 관리 및 복리후생 제도를 살펴보는 참고가 됩니다.",
+     "figure": {
+      "v": "35.5%",
+      "l": "성인 비만율"
+     }
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "nz_education": {
    "label": "교육",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "교육 부문에서는 NCEA 시험 기술적 문제와 수학 문항 난이도 논란 등이 다뤄졌습니다.",
    "items": [
     {
      "id": "084d0b7389c7",
-     "title_ko": "Watch: NZQA fronts after major technical problems during exams",
+     "title_ko": "시험 중 주요 기술 문제로 NZQA 해명",
      "summary_ko": [
-      "Watch: NZQA fronts after major technical problems during exams"
+      "국가 자격 시험 진행 중 심각한 기술적 문제가 발생하여 NZQA가 대응에 나섰습니다.",
+      "학생들이 온라인 시험 과정에서 불편을 겪으며 공정성 논란이 제기되었습니다.",
+      "교육 당국은 시스템 안정성 확보와 대책 마련을 촉구 받고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "교육",
+      "기술",
+      "방송"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -619,16 +657,19 @@
      ],
      "original_title": "Watch: NZQA fronts after major technical problems during exams",
      "published_at": "2026-11-19T04:05+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "국가 교육 시스템의 신뢰도와 시험 운영 방식의 변화를 파악하는 계기가 됩니다."
     },
     {
      "id": "b3a1ad197d87",
-     "title_ko": "Ōtorohanga Primary School Board dissolved after ministry intervention",
+     "title_ko": "오토로항가 초등학교 이사회 해산",
      "summary_ko": [
-      "Ōtorohanga Primary School Board dissolved after ministry intervention"
+      "교육부의 직접 개입으로 오토로항가 초등학교 이사회가 공식 해산되었습니다.",
+      "학교 운영상의 문제점과 갈등이 지속되면서 정부가 개입하게 되었습니다.",
+      "향후 새로운 관리 체제를 통해 정상화 절차가 진행될 예정입니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "사회"
      ],
      "importance": 8,
      "sources": [
@@ -643,16 +684,19 @@
      ],
      "original_title": "Ōtorohanga Primary School Board dissolved after ministry intervention",
      "published_at": "2026-11-19T03:20+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "뉴질랜드 교육부의 학교 운영 개입 기준과 교육 행정 절차를 이해할 수 있습니다."
     },
     {
      "id": "33094417b610",
-     "title_ko": "High school students mull whether to resit NCEA English exam after tech blip",
+     "title_ko": "기술 결함 이후 영어 시험 재응시 고민",
      "summary_ko": [
-      "High school students mull whether to resit NCEA English exam after tech blip"
+      "NCEA 영어 시험 도중 발생한 기술적 오류로 인해 고등학생들이 혼란을 겪었습니다.",
+      "학생들과 학부모들은 성적 산정에 미칠 영향을 우려하며 재응시 여부를 고심하고 있습니다.",
+      "교육 당국의 미숙한 대응이 수험생들에게 추가적인 부담을 주고 있습니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "기술"
      ],
      "importance": 7,
      "sources": [
@@ -663,16 +707,19 @@
      ],
      "original_title": "High school students mull whether to resit NCEA English exam after tech blip",
      "published_at": "2026-11-19T18:41+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "현지 교육 제도의 평가 방식과 기술적 안정성 문제를 엿볼 수 있습니다."
     },
     {
      "id": "290feaccc2dc",
-     "title_ko": "Maths teachers say NCEA exam question was ‘impossible’ to solve",
+     "title_ko": "수학교사들 NCEA 시험 문항 해결 불가 비판",
      "summary_ko": [
-      "Maths teachers say NCEA exam question was ‘impossible’ to solve"
+      "최근 치러진 NCEA 수학 시험의 특정 문항이 너무 어려워 풀 수 없었다고 교사들이 지적했습니다.",
+      "시험 출제 난이도 조절 실패로 인해 학생들의 정답률과 성적에 큰 타격이 예상됩니다.",
+      "교과 협회와 수험생들 사이에서 시험 검토 절차를 개선해야 한다는 목소리가 커지고 있습니다."
      ],
      "tags": [
-      "교육"
+      "교육",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -683,15 +730,20 @@
      ],
      "original_title": "Maths teachers say NCEA exam question was ‘impossible’ to solve",
      "published_at": "2026-11-20T04:53+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "현지 고등 교육 및 학력평가 시험의 난이도 관리 실태를 보여줍니다."
     },
     {
      "id": "e979f7301389",
-     "title_ko": "Whanganui Collegiate sees off challenges to optional fee of nearly $11,000",
+     "title_ko": "왕가누이 컬리지의 선택적 학비 논란 방어",
      "summary_ko": [
-      "Whanganui Collegiate sees off challenges to optional fee of nearly $11,000"
+      "왕가누이 컬리지가 약 1만 1천 달러에 달하는 선택적 학비 제도를 유지하겠다고 밝혔습니다.",
+      "학교 측은 프로그램 질 유지를 위해 해당 비용이 불가피하다고 설명했습니다.",
+      "높은 학비 부담을 둘러싼 학부모들과의 갈등과 논쟁이 지속되고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "교육",
+      "경제"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -701,15 +753,25 @@
      ],
      "original_title": "Whanganui Collegiate sees off challenges to optional fee of nearly $11,000",
      "published_at": "2026-11-19T17:56+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "사립 및 준사립 학교의 교육 비용 구조와 학비 책정 기준을 보여줍니다.",
+     "figure": {
+      "v": "1만 1천 달러",
+      "l": "선택적 학비"
+     }
     },
     {
      "id": "2cb72611f800",
-     "title_ko": "Erica Stanford ignores plea to pause learning support cuts",
+     "title_ko": "에리카 스탠퍼드, 학습 지원 예산 삭감 중단 거부",
      "summary_ko": [
-      "Erica Stanford ignores plea to pause learning support cuts"
+      "교육부 장관 에리카 스탠퍼드가 학습 지원 예산 삭감 조치를 중단해달라는 요청을 거절했습니다.",
+      "특수 교육 및 학습 지원이 필요한 학생들을 위한 예산 축소로 우려가 제기되고 있습니다.",
+      "교육계와 학부모 단체의 반발 속에서 관련 정책 집행이 계속될 전망입니다."
      ],
-     "tags": [],
+     "tags": [
+      "교육",
+      "정치",
+      "사회"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -719,23 +781,26 @@
      ],
      "original_title": "Erica Stanford ignores plea to pause learning support cuts",
      "published_at": "2026-11-19T16:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "정부의 교육 예산 기조와 공공 부문 지출 조정 방향을 가늠할 수 있습니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "nz_economy": {
    "label": "경제",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "경제 부문에서는 약세인 뉴질랜드 달러 환율과 부유세 및 임금 격차 문제가 쟁점입니다.",
    "items": [
     {
      "id": "282f3cab78f8",
-     "title_ko": "Weak dollar creating 'two-speed' economy, economist says",
+     "title_ko": "약세인 뉴질랜드 달러가 만든 이중 경제",
      "summary_ko": [
-      "Over the past 20 years, the NZD has averaged about 0.70 US dollars, ranging bet…"
+      "미 달러 대비 약세를 보이는 뉴질랜드 달러가 수출업체에는 호재인 반면 해외여행객에게는 부담이 되고 있습니다.",
+      "지난 20년간 평균 0.70 미 달러를 기록했던 환율이 현재 0.55 수준에 머물러 있습니다.",
+      "국가 간 기준금리 차이가 환율 약세의 주요 원인으로 작용하고 있습니다."
      ],
      "tags": [
-      "환율"
+      "경제",
+      "환율",
+      "금리"
      ],
      "importance": 8,
      "sources": [
@@ -746,15 +811,25 @@
      ],
      "original_title": "Weak dollar creating 'two-speed' economy, economist says",
      "published_at": "2026-11-21T10:50+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "환율 변동은 유학생의 생활비와 본국 송금 비용, 취업 시장의 수출 기업 경기에 직접적 영향을 줍니다.",
+     "figure": {
+      "v": "0.55",
+      "l": "미 달러 대비 환율"
+     }
     },
     {
      "id": "f59065c478f8",
-     "title_ko": "NZ wealth tax: What the 8.1% tax rate for the wealthy really means",
+     "title_ko": "녹색당 부유세 제안과 실효세율 논란",
      "summary_ko": [
-      "The controversial numbers driving the argument that the rich pay a lower tax ra…"
+      "녹색당이 발표한 연구 보고서에 따르면 최상위 부유층이 미실현 자본이득을 포함할 때 낮은 세율을 부담한다고 주장했습니다.",
+      "실제 과세 소득 기준으로는 28~29퍼센트이나 경제적 소득을 넓게 보면 8.1퍼센트로 낮아집니다.",
+      "이를 근거로 부유세 도입 필요성이 정치권의 핵심 쟁점으로 떠오르고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "경제",
+      "정치",
+      "부동산"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -764,15 +839,25 @@
      ],
      "original_title": "NZ wealth tax: What the 8.1% tax rate for the wealthy really means",
      "published_at": "2026-11-20T16:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "향후 조세 제도 개편 및 세법 변화가 고소득자와 자산 시장에 미칠 파장을 주시해야 합니다.",
+     "figure": {
+      "v": "8.1%",
+      "l": "광의의 부유층 실효세율"
+     }
     },
     {
      "id": "841139f516fd",
-     "title_ko": "Judge finds pay equity law rewrite discriminates against women: ‘The reason was strictly financial’",
+     "title_ko": "법원, 형평임금법 개정이 여성 차별이라고 판결",
      "summary_ko": [
-      "Judge finds pay equity law rewrite discriminates against women: ‘The reason was…"
+      "형평임금법 개정안이 여성에게 차별적이라는 법원 판결이 내려졌습니다.",
+      "재판부는 개정 추진의 주된 이유가 순전히 재정적인 목적이었다고 밝혔습니다.",
+      "이번 판결은 향후 임금 정책과 노동 권익에 상당한 파장을 불러올 것입니다."
      ],
-     "tags": [],
+     "tags": [
+      "고용",
+      "임금",
+      "정치"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -782,15 +867,21 @@
      ],
      "original_title": "Judge finds pay equity law rewrite discriminates against women: ‘The reason was strictly financial’",
      "published_at": "2026-11-20T03:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "졸업 후 노동시장 진입 시 임금 형평성과 관련 법적 기준에 영향을 미칩니다."
     },
     {
      "id": "2ad9fa3749ef",
-     "title_ko": "NZ salaries aren’t keeping pace with cost-of-living pressures",
+     "title_ko": "생활비 상승 속도를 따라가지 못하는 임금",
      "summary_ko": [
-      "NZ salaries aren’t keeping pace with cost-of-living pressures"
+      "뉴질랜드의 임금 상승률이 치솟는 생활비 압박을 따라가지 못하는 것으로 나타났습니다.",
+      "물가와 주거비용이 가중되면서 가계 실질 소득이 점차 감소하고 있습니다.",
+      "근로자들의 경제적 부담이 커지면서 임금 인상 요구가 거세질 전망입니다."
      ],
-     "tags": [],
+     "tags": [
+      "경제",
+      "임금",
+      "물가"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -800,17 +891,20 @@
      ],
      "original_title": "NZ salaries aren’t keeping pace with cost-of-living pressures",
      "published_at": "2026-11-18T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "졸업 후 취업 시 희망 연봉 협상과 생활비 예산 계획 수립에 중요한 지표가 됩니다."
     },
     {
      "id": "7e6a5172a8f2",
-     "title_ko": "NZ House Prices Fall as Rents Rise: Rent vs Buy",
+     "title_ko": "집값 하락과 렌트비 상승의 주택 시장",
      "summary_ko": [
-      "NZ House Prices Fall as Rents Rise: Rent vs Buy"
+      "뉴질랜드 주택 가격은 하락세를 보이는 반면 렌트비는 오히려 상승하고 있습니다.",
+      "주택 매매 시장과 임대 시장의 흐름이 엇갈리며 주거비 부담 양상이 복잡해졌습니다.",
+      "임차인들의 주거 비용 압박이 계속될 것으로 보입니다."
      ],
      "tags": [
-      "주거",
-      "생활비"
+      "부동산",
+      "렌트",
+      "경제"
      ],
      "importance": 8,
      "sources": [
@@ -821,22 +915,26 @@
      ],
      "original_title": "NZ House Prices Fall as Rents Rise: Rent vs Buy",
      "published_at": "2026-11-20T21:15+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드에서의 렌트비 지출과 향후 주거 안정성에 직접적인 영향을 미칩니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "nz_politics": {
    "label": "정치",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "정치 부문에서는 총선 이후 의원 정수와 투표 제도 개편 논의가 이어지고 있습니다.",
    "items": [
     {
      "id": "5c161e533127",
-     "title_ko": "Election review: We voted for 120 MPs. How did we end up with 131? – Bruce Cotterill",
+     "title_ko": "총선 의원 정수 논란과 MMP 제도 평가",
      "summary_ko": [
-      "OPINION: MMP needs review, but a return to first-past-the-post is not the answe…"
+      "이번 선거 결과 초과 의석 발생으로 국회의원 정수가 120명에서 131명으로 늘어났습니다.",
+      "특별 투표 집계와 연동형 비례대표제(MMP)의 개선 필요성을 두고 토론이 이어지고 있습니다.",
+      "최종 집계 결과에 따라 연립 정부 구성 시기와 향후 정치 지형이 결정될 것입니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "사회"
+     ],
      "importance": 5,
      "sources": [
       {
@@ -846,15 +944,24 @@
      ],
      "original_title": "Election review: We voted for 120 MPs. How did we end up with 131? – Bruce Cotterill",
      "published_at": "2026-11-20T22:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "새 정부의 구성과 이민 정책 방향을 결정하는 정치적 변화를 가늠할 수 있습니다.",
+     "figure": {
+      "v": "131명",
+      "l": "총선 후 늘어난 의원수"
+     }
     },
     {
      "id": "d6feff6b1cf4",
-     "title_ko": "Who made the minors major? Where the minnows flourished in the election",
+     "title_ko": "총선에서 약진한 군소 정당들의 성과",
      "summary_ko": [
-      "Who made the minors major? Where the minnows flourished in the election"
+      "이번 선거에서 주요 정당 외에 군소 정당들이 표심을 얻으며 영향력을 확대했습니다.",
+      "유권자들의 표심 분산과 다양한 정치적 요구가 선거 결과에 반영되었습니다.",
+      "향후 연립 정부 협상 과정에서 이들 소수 정당의 역할이 중요해질 전망입니다."
      ],
-     "tags": [],
+     "tags": [
+      "정치",
+      "사회"
+     ],
      "importance": 5,
      "sources": [
       {
@@ -864,22 +971,27 @@
      ],
      "original_title": "Who made the minors major? Where the minnows flourished in the election",
      "published_at": "2026-11-19T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "새 정부의 이민 및 노동 관련 입법 과정에서 소수 정당의 목소리가 변수가 됩니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "akl_safety": {
    "label": "치안",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드 전역에서 화재 진압 장비 접근 방해와 차량 사고 등 안전 사건이 발생했습니다.",
    "items": [
     {
      "id": "ef9e1515b647",
-     "title_ko": "International student attacked in Auckland now facing deportation",
+     "title_ko": "오클랜드에서 폭행 피해 입은 유학생이 추방 위기에 처함",
      "summary_ko": [
-      "International student attacked in Auckland now facing deportation"
+      "오클랜드에서 폭행 피해를 입은 한 유학생이 현재 추방 위기에 직면해 있습니다.",
+      "관련 사건과 비자 상태 변화에 대한 후속 조치가 진행 중인 상황입니다.",
+      "체류 자격과 비자 유지에 민감한 유학생들에게 직접적인 법적 영향이 예상됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "비자",
+      "이민",
+      "사회"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -889,16 +1001,22 @@
      ],
      "original_title": "International student attacked in Auckland now facing deportation",
      "published_at": "2026-11-20T06:44+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "졸업을 앞둔 유학생의 비자 및 체류 안정성에 중요한 법적 선례가 될 수 있습니다.",
      "radar": 3
     },
     {
      "id": "8191cd9ee078",
-     "title_ko": "Fire hydrants blocked by footpath, bus lane during major Auckland blaze",
+     "title_ko": "오클랜드 대형 화재 현장에서 소화전이 보행자와 버스 전용차로에 가로막혀",
      "summary_ko": [
-      "Fire crews had to break through tarseal to reach a hydrant while battling a dan…"
+      "오클랜드 중심가 팬쇼 스트리트의 대형 건물 화재 진압 중 소화전 접근에 차질이 빚어졌습니다.",
+      "소방 당국은 보행자와 버스 전용차로, 아스팔트로 가려진 소화전을 뚫고 물을 공급해야 했습니다.",
+      "인명 피해를 막았으나 도로 차단과 고층 장비 급수 지연 등 화재 대응 효율성에 과제를 남겼습니다."
      ],
-     "tags": [],
+     "tags": [
+      "치안",
+      "교통",
+      "사건사고"
+     ],
      "importance": 6,
      "sources": [
       {
@@ -916,16 +1034,24 @@
      ],
      "original_title": "Fire hydrants blocked by footpath, bus lane during major Auckland blaze",
      "published_at": "2026-11-21T13:16+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "도심 기반시설 관리 상태는 오클랜드 거주 안전과 직결되므로 주의 깊게 살펴야 합니다.",
+     "figure": {
+      "v": "600-800C",
+      "l": "화재 현장 온도"
+     }
     },
     {
      "id": "e3d29d65ab4f",
-     "title_ko": "Woman seriously injured after being hit by car in Henderson",
+     "title_ko": "오클랜드 헨더슨에서 차량에 치인 여성 중상 입어",
      "summary_ko": [
-      "Police are speaking with the driver after the crash on Lincoln Rd in Henderson…"
+      "지역 미공개 헨더슨의 링컨 로드에서 보행자가 차량에 치이는 사고가 발생했습니다.",
+      "여성 피해자는 심각한 부상을 입고 병원으로 긴급 이송되었습니다.",
+      "경찰은 운전자를 상대로 정확한 사고 경위를 조사하고 있습니다."
      ],
      "tags": [
-      "치안"
+      "치안",
+      "사건사고",
+      "교통"
      ],
      "importance": 5,
      "sources": [
@@ -940,16 +1066,24 @@
      ],
      "original_title": "Woman seriously injured after being hit by car in Henderson",
      "published_at": "2026-11-21T02:54+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 서부 지역의 도로 안전과 보행자 사고 위험을 다시 한번 환기시킵니다.",
+     "figure": {
+      "v": "12시 30분",
+      "l": "사고 접수 시간"
+     }
     },
     {
      "id": "5578ccb95248",
-     "title_ko": "Zack Wilson jailed after dangerous driving, 3D-printed gun and drug charges in Auckland",
+     "title_ko": "오클랜드서 3D 프린터 총기와 마약 소지 등 혐의 남성 징역형",
      "summary_ko": [
-      "Zack Wilson became 'unwell' during the trip, leading to police intervention."
+      "우버 차량 안에서 소란을 피우던 남성의 가방에서 3D 프린터 총기와 마약류가 발견되었습니다.",
+      "법원은 과거 무면허 운전 도주 전력이 있는 피고인에게 실형을 선고했습니다.",
+      "불법 무기 소지와 마약 관련 범죄에 대한 사법부의 엄중한 처벌 기조를 보여줍니다."
      ],
      "tags": [
-      "치안"
+      "치안",
+      "사건사고",
+      "경제"
      ],
      "importance": 5,
      "sources": [
@@ -960,22 +1094,31 @@
      ],
      "original_title": "Zack Wilson jailed after dangerous driving, 3D-printed gun and drug charges in Auckland",
      "published_at": "2026-11-21T05:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "대중교통 이용 중 발생한 중범죄 사건으로 오클랜드 내 치안 수준을 점검하게 합니다.",
+     "figure": {
+      "v": "4명",
+      "l": "피고인의 자녀 수"
+     }
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "akl_life": {
    "label": "생활",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드의 혼잡통행료 도입 논란과 A리그 축구 경기 등 지역 생활 소식이 이어졌습니다.",
    "items": [
     {
      "id": "628e916f9484",
-     "title_ko": "'Just crazy': Auckland motorists question proposed congestion charges",
+     "title_ko": "오클랜드 혼잡통행료 추진에 시민들 생활비 부담 우려 제기",
      "summary_ko": [
-      "Auckland Council is currently consulting on three options that could see driver…"
+      "오클랜드 시의회가 출퇴근 시간대 도심 통행료 부과를 위한 세 가지 방안을 두고 의견을 수렴 중입니다.",
+      "시의회는 교통체증으로 연간 26억 달러의 경제적 손실이 발생한다고 추산했습니다.",
+      "시민들은 대중교통비와 물가가 높은 상황에서 추가 비용 부담에 강한 우려를 표명하고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "교통",
+      "물가",
+      "경제"
+     ],
      "importance": 7,
      "sources": [
       {
@@ -985,15 +1128,24 @@
      ],
      "original_title": "'Just crazy': Auckland motorists question proposed congestion charges",
      "published_at": "2026-11-21T13:31+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "향후 오클랜드 내 출퇴근 비용과 생활비 지출에 직접적인 변화를 줄 수 있습니다.",
+     "figure": {
+      "v": "2~7달러",
+      "l": "예상 통행료"
+     }
     },
     {
      "id": "12883b1f9d08",
-     "title_ko": "Auckland FC end goal drought but can only share A-League point with Melbourne Victory",
+     "title_ko": "오클랜드 FC, 멜버른 빅토리와 무승부 기록",
      "summary_ko": [
-      "The All Whites midfielder scored in the 89th minute to end a four-hour goal dro…"
+      "오클랜드 FC가 경기 종료 직전 극적인 골을 터뜨리며 무승부를 기록했습니다.",
+      "이번 무승부로 팀의 골 가뭄을 해소하며 승점 1점을 나눠 가졌습니다.",
+      "오클랜드를 연고로 하는 스포츠 팀의 선전이 지역 팬들의 관심을 모으고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "스포츠",
+      "사회"
+     ],
      "importance": 5,
      "sources": [
       {
@@ -1023,15 +1175,24 @@
      ],
      "original_title": "Auckland FC end goal drought but can only share A-League point with Melbourne Victory",
      "published_at": "2026-11-21T10:45+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 지역 스포츠 문화와 커뮤니티 활동에 대한 소식을 전달합니다.",
+     "figure": {
+      "v": "89분",
+      "l": "득점 시간"
+     }
     },
     {
      "id": "d9533a86ac55",
-     "title_ko": "The City of Auckland Singers swing into song",
+     "title_ko": "시티 오브 오클랜드 싱어즈의 합창 공연 개최",
      "summary_ko": [
-      "The City of Auckland Singers swing into song"
+      "오클랜드의 합창단 시티 오브 오클랜드 싱어즈가 새로운 공연을 선보였습니다.",
+      "지역 주민들과 음악 애호가들이 모여 문화 예술 활동을 즐겼습니다.",
+      "오클랜드의 활기찬 지역 사회 문화 생활의 단면을 보여줍니다."
      ],
-     "tags": [],
+     "tags": [
+      "사회",
+      "방송"
+     ],
      "importance": 3,
      "sources": [
       {
@@ -1041,15 +1202,20 @@
      ],
      "original_title": "The City of Auckland Singers swing into song",
      "published_at": "2026-11-19T21:46+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드에서의 여가 생활과 문화 활동 정보를 제공합니다."
     },
     {
      "id": "26748d3ff47d",
-     "title_ko": "Eating Auckland with the experts",
+     "title_ko": "전문가들과 함께 즐기는 오클랜드 미식 탐방",
      "summary_ko": [
-      "Eating Auckland with the experts"
+      "전문가들이 소개하는 오클랜드의 다양한 음식 문화를 조명했습니다.",
+      "현지 식문화를 깊이 있게 이해할 수 있는 여러 명소가 다뤄졌습니다.",
+      "오클랜드 생활의 다채로운 매력을 전하고 있습니다."
      ],
-     "tags": [],
+     "tags": [
+      "사회",
+      "물가"
+     ],
      "importance": 3,
      "sources": [
       {
@@ -1059,22 +1225,27 @@
      ],
      "original_title": "Eating Auckland with the experts",
      "published_at": "2026-11-21T00:06+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 거주 시 유용한 지역 생활 및 문화 정보를 제공합니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "akl_property": {
    "label": "부동산",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "오클랜드에서 개인 주차장을 유료 주차 공간으로 활용하는 새로운 사업 방식이 소개되었습니다.",
    "items": [
     {
      "id": "bb41170ec626",
-     "title_ko": "The east Auckland boys helping you turn your driveway into a paid car park",
+     "title_ko": "동오클랜드 청년들이 개발한 개인 주차장 공유 서비스",
      "summary_ko": [
-      "The east Auckland boys helping you turn your driveway into a paid car park"
+      "오클랜드 동부의 청년 창업가들이 개인 집 앞마당을 유료 주차장으로 활용하는 방안을 도입했습니다.",
+      "도심 주차 난 속에서 유휴 공간을 수익 창출 수단으로 바꾸는 새로운 시도입니다.",
+      "공유 경제 모델을 통해 지역 주민들에게 부가 수입 기회를 제공할 것으로 기대됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "경제",
+      "부동산",
+      "주거"
+     ],
      "importance": 5,
      "sources": [
       {
@@ -1084,23 +1255,25 @@
      ],
      "original_title": "The east Auckland boys helping you turn your driveway into a paid car park",
      "published_at": "2026-11-20T00:20+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드의 주차난과 주거 공간 활용에 대한 새로운 경제적 대안을 보여줍니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "akl_health": {
    "label": "의료",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "아와누이 랩 파업으로 인해 오클랜드 의료 현장에서 일반 혈액 검사 연기가 권고되었습니다.",
    "items": [
     {
      "id": "125c929b28f8",
-     "title_ko": "Awanui Labs strike prompts Auckland GP to advise delaying routine blood tests",
+     "title_ko": "아와누이 랩 파업으로 오클랜드 GP가 정기 혈액 검사 연기 권고",
      "summary_ko": [
-      "Awanui Labs strike prompts Auckland GP to advise delaying routine blood tests"
+      "아와누이 랩의 파업 여파로 오클랜드 지역 병의원들이 정기 혈액 검사 연기를 권고하고 나섰습니다.",
+      "의료 시설의 진단 검사 업무에 차질이 빚어지면서 환자들의 주의가 요구됩니다.",
+      "응급하지 않은 의료 서비스 이용에 일시적인 불편이 이어질 전망입니다."
      ],
      "tags": [
-      "의료"
+      "의료",
+      "사회"
      ],
      "importance": 7,
      "sources": [
@@ -1111,10 +1284,9 @@
      ],
      "original_title": "Awanui Labs strike prompts Auckland GP to advise delaying routine blood tests",
      "published_at": "2026-11-20T00:08+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)"
+     "why_it_matters": "오클랜드 거주 중 의료 서비스 이용과 건강 관리 일정에 차질이 생기지 않도록 확인이 필요합니다."
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   },
   "akl_education": {
    "label": "교육",
@@ -1169,15 +1341,20 @@
   },
   "nz_immigration": {
    "label": "이민 레이더",
-   "briefing": "요약 생성에 실패해 원문 정보를 표시합니다.",
+   "briefing": "부모초청 영주권 추첨 일정과 고액 투자 비자 및 세제 개편 논의가 이어지고 있습니다.",
    "items": [
     {
      "id": "55a2dc0088f7",
-     "title_ko": "Parent category November 2026 draw",
+     "title_ko": "2026년 11월 부모초청 비자 추첨 일정 안내",
      "summary_ko": [
-      "Parent category November 2026 draw"
+      "이민성은 2026년 11월 부모초청 카테고리 비자 추첨을 진행할 예정입니다.",
+      "이번 추첨을 통해 부모초청 영주권 신청 대상자를 선정하게 됩니다.",
+      "향후 부모초청 이민을 준비하는 가족들에게 중요한 기준이 됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "이민",
+      "영주권"
+     ],
      "importance": 9,
      "sources": [
       {
@@ -1187,17 +1364,24 @@
      ],
      "original_title": "Parent category November 2026 draw",
      "published_at": "2026-11-18T22:51+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "부모초청 이민 제도는 향후 뉴질랜드 정착 장기 계획에 간접적인 영향을 줍니다.",
+     "figure": {
+      "v": "2026년 11월",
+      "l": "추첨 시기"
+     },
      "radar": 10
     },
     {
      "id": "ca7c96ae6c27",
-     "title_ko": "Immigration Advisers Authority took 6 months on fraud complaint",
+     "title_ko": "이민자문국, 사기 민원 처리에 6개월 소요",
      "summary_ko": [
-      "Immigration Advisers Authority took 6 months on fraud complaint"
+      "뉴질랜드 이민자문국(IAA)이 이민 사기 관련 민원 처리에 6개월이 걸렸습니다.",
+      "접수된 불만 신고와 조사 과정에서 행정 지연 문제가 지적되었습니다.",
+      "이민 관련 자문 이용 시 규제 기관의 처리 속도와 신뢰성에 대한 우려가 커집니다."
      ],
      "tags": [
-      "이민"
+      "이민",
+      "비자"
      ],
      "importance": 8,
      "sources": [
@@ -1208,17 +1392,24 @@
      ],
      "original_title": "Immigration Advisers Authority took 6 months on fraud complaint",
      "published_at": "2026-11-20T01:46+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "향후 비자 신청 과정에서 이민 자문가 선임 시 주의 깊은 검토가 필요합니다.",
+     "figure": {
+      "v": "6개월",
+      "l": "민원 처리 기간"
+     },
      "radar": 9
     },
     {
      "id": "2b5dd78fc62e",
-     "title_ko": "$135m 'golden visa' investment would not be permitted under current rules",
+     "title_ko": "현행 규정상 허용되지 않는 1억 3500만 달러 투자 비자",
      "summary_ko": [
-      "$135m 'golden visa' investment would not be permitted under current rules"
+      "1억 3500만 달러 규모의 골든 비자 투자가 현행 이민 규정에는 부합하지 않습니다.",
+      "해당 투자금은 기존의 고액 투자자 비자 기준과 맞지 않아 거부되었습니다.",
+      "정부의 엄격한 투자 이민 심사 기조가 고액 투자 유치에도 적용되고 있습니다."
      ],
      "tags": [
-      "이민"
+      "이민",
+      "경제"
      ],
      "importance": 8,
      "sources": [
@@ -1229,16 +1420,25 @@
      ],
      "original_title": "$135m 'golden visa' investment would not be permitted under current rules",
      "published_at": "2026-11-19T18:56+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "숙련 기술직 및 일반 취업·영주권 경로 외에 고액 투자 이민 정책의 동향을 보여줍니다.",
+     "figure": {
+      "v": "1억 3500만 달러",
+      "l": "투자 비자 금액"
+     },
      "radar": 9
     },
     {
      "id": "97d148eb2fb3",
-     "title_ko": "Unhelpful tax rules discourage wealthy migrants moving to New Zealand",
+     "title_ko": "부정적인 세제 규정, 부유한 이민자의 유입 방해",
      "summary_ko": [
-      "Unhelpful tax rules discourage wealthy migrants moving to New Zealand"
+      "뉴질랜드의 세제 규정이 고자산가 이민자들의 유입을 저해하고 있다는 분석이 나왔습니다.",
+      "전문가들은 복잡하고 불리한 세금 제도가 해외 자본과 인재 유치를 막는다고 지적합니다.",
+      "이민 정책과 맞물려 세제 개편 목소리가 커질 것으로 예상됩니다."
      ],
-     "tags": [],
+     "tags": [
+      "이민",
+      "경제"
+     ],
      "importance": 8,
      "sources": [
       {
@@ -1248,11 +1448,10 @@
      ],
      "original_title": "Unhelpful tax rules discourage wealthy migrants moving to New Zealand",
      "published_at": "2026-11-19T15:00+00:00",
-     "why_it_matters": "(AI 요약 없이 RSS 원문 설명을 그대로 표시)",
+     "why_it_matters": "전반적인 뉴질랜드 이민 정책의 매력도와 국가 경제 환경 변화를 가늠하는 지표입니다.",
      "radar": 9
     }
-   ],
-   "error": "gemini run deadline (900s) reached — no response"
+   ]
   }
  },
  "extras": {
@@ -1611,31 +1810,31 @@
   "alerts": [
    {
     "kind": "radar",
-    "text": "Parent category November 2026 draw",
+    "text": "2026년 11월 부모초청 비자 추첨 일정 안내",
     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQNm9JN2JrWW9mRG1UQnhpbzVremRzUU5uaUxLVC1idjV1ajFkZUhCYXBuLVVhT3hQRUFfRWpPSndDQ1RLdUFnelBVSnhiOU0wS2tVa1RwYy1qY1YwN0FxV2l3UWR2MTZXRDJzS0xPbmRjZTdTMTJRaDVyemxQMHJmb0QwUjN6aGxlanpLb09kSV9xUQ?oc=5"
    },
    {
     "kind": "radar",
-    "text": "Immigration Advisers Authority took 6 months on fraud complaint",
+    "text": "이민자문국, 사기 민원 처리에 6개월 소요",
     "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPaVBIcWQwZFpiYU5NR3YwYUlVVjNKUWloZUZvTTVvQ1ZFVEszaHdBMzBoU3N6WTJtRlVZZkFZQUx4YjZVRC1wVXZvT2I0dWluajk4YUI4UHQtaTJpVWQ1dmk3SkpvYklJVFBFenIwd2R2QTFfc3U3ZWtRVGkzWFo0QnAyOUdrVzhhNFE3WTNCOFI1ZTFBWHc?oc=5"
    },
    {
     "kind": "radar",
-    "text": "$135m 'golden visa' investment would not be permitted under current rules",
+    "text": "현행 규정상 허용되지 않는 1억 3500만 달러 투자 비자",
     "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxPN0djeUdjcFpHVFFLZUNWTjJ0ak13dlJqSUlpTjNCRTNZZUtMVTN6NFRvQjZBR0g1R2pfbFVKUWVpNjNxd1BsekZKLS0tLTR1cU0tSjZTWGFUR1FCUHRwcFJ4Z1ZYLXBSUXppVUN3Z1ZsS0ZSLW9ESUlHOVNfWl82ZmdwUVhCeE9FY2lvdFdCODZxZUd5T2FGX2htUU1jS180OVR1WnRxb1UtZHk1aFZhZUVkcGhoS1VfNkxCdk1PRjJGbjhBRXVIQUlvdEZ5TmFpU3M2d0tEbHkwS1c4QlVvRmhOb2xJWGNLZ3VUSkpvSWpSZ256OURPb3VCWmZOLXdlb3RMRHB4Nk96ZzQ?oc=5"
    },
    {
     "kind": "radar",
-    "text": "Unhelpful tax rules discourage wealthy migrants moving to New Zealand",
+    "text": "부정적인 세제 규정, 부유한 이민자의 유입 방해",
     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPd2ZjSlVYZV9FaDBBLU91ZE9DaEUyX3NRb2FobjhmVGRpeENyYUFWWlpDLURocWQ1Q3NqdTlvOWlvVV9jS056YjV1RkRBTmF0bHhqblZlUllJVWFMZE5pZXhNZ2NyUjNnd3hyLTBlQXYycGt4RGxQMllPMjZQWmxwUVZRVGIzcjRwQ2d1U0RCZFMwcXpKcUV4TURTMUpoM1VtcThXemZ6SjI4T2hfVjlxUA?oc=5"
    }
   ],
   "degraded": true,
-  "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_health, nz_immigration",
-  "retries": 0,
+  "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics",
+  "retries": 1,
   "quality": {
    "items": 52,
-   "bad": 42,
+   "bad": 10,
    "redone": [],
    "bad_ids": [
     "b2ed00e7b435",
@@ -1647,28 +1846,23 @@
     "1b1792195b88",
     "27c1344a09e1",
     "aa6b7bf6befa",
-    "4719ec2f0154",
-    "88f1db5bd2bc",
-    "70225c2d7de9",
-    "9624661152e4",
-    "cc752b7f4a1d",
-    "edda3f73216b",
-    "084d0b7389c7",
-    "b3a1ad197d87",
-    "33094417b610",
-    "290feaccc2dc",
-    "e979f7301389",
-    "2cb72611f800",
-    "282f3cab78f8",
-    "f59065c478f8",
-    "841139f516fd",
-    "2ad9fa3749ef",
-    "7e6a5172a8f2",
-    "5c161e533127",
-    "d6feff6b1cf4",
-    "ef9e1515b647",
-    "8191cd9ee078"
+    "4719ec2f0154"
    ]
+  },
+  "repaired": {
+   "summary": [
+    "akl_safety",
+    "akl_life",
+    "akl_property",
+    "akl_health",
+    "nz_society",
+    "nz_education",
+    "nz_economy",
+    "nz_politics",
+    "nz_immigration"
+   ],
+   "insight": false,
+   "requests": 3
   }
  }
 }
