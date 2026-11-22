@@ -75,3 +75,12 @@ def test_attach_insights_soft_fail(cfg, tmp_path):
     secs = {"akl_life": {"label": "생활", "items": [_item("a1", "x", "y")]}}
     assert attach_insights(secs, {}, cfg, Boom(), tmp_path, "2026-10-28") == 0
     assert attach_insights(secs, {}, cfg, None, tmp_path, "2026-10-28") == 0
+
+
+def test_pick_targets_follow_menu_order():
+    """영향 분석도 요약과 같은 순서(오클랜드 → 뉴질랜드 → 이민 → 한국)로 모은다."""
+    cfg = {"sections": {k: {"region": "kr" if k.startswith("kr_") else "nz"} for k in ("kr_society", "nz_immigration", "nz_economy", "akl_life")},
+           "llm": {"summary_groups": [["akl_life"], ["nz_economy"], ["nz_immigration"], ["kr_society"]]}}
+    sections = {k: {"label": k, "items": [_item(f"id-{k}", "제목", "Title")]} for k in ("kr_society", "nz_immigration", "nz_economy", "akl_life")}
+    out = pick_targets(sections, cfg, [])
+    assert [k for k, *_ in out] == ["akl_life", "nz_economy", "nz_immigration"]   # 한국은 지난 보도 후보가 없어 제외

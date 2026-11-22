@@ -160,7 +160,8 @@ def pick_targets(sections: dict, cfg: dict, history: list[dict]) -> list[tuple[s
     region = lambda k: cfg["sections"].get(k, {}).get("region", "kr" if k.startswith("kr_") else "nz")
     skip = set(cfg.get("insight", {}).get("skip_sections", []))
     out, seen = [], set()
-    order = sorted(sections.items(), key=lambda kv: kv[0] != "nz_immigration")  # 레이더 먼저
+    from summarize import group_rank
+    order = sorted(sections.items(), key=lambda kv: group_rank(kv[0], cfg))  # 요약과 같은 순서: 오클랜드 → 뉴질랜드 → 이민 레이더 → 한국 (메뉴 순서)
     for k, sec in order:
         if k in skip:
             continue
