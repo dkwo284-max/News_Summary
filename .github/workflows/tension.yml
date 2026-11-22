@@ -25,7 +25,7 @@ jobs:
         with: { ref: main }
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - run: pip install -q httpx
+      - run: pip install -q httpx pyyaml
       - name: Collect
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}   # 대표 기사 한국어 제목·상황 요약용(하루 최대 1요청). 없거나 실패하면 영어 그대로
