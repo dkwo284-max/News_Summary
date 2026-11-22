@@ -24,9 +24,11 @@ export function figureOf(it: Item): { v: string; l: string } | null {
   }
   return null;
 }
+/** 오늘의 숫자는 오클랜드·뉴질랜드(이민 포함) 기사로만 만든다 — 한국 뉴스(kr_*)는 제외 */
+const nzOnly = (x: Row) => !x.key.startsWith("kr_");
 export function numbersCard(h: H, rows: Row[]): HTMLElement | null {
   const picked: { f: { v: string; l: string }; it: Item }[] = [];
-  for (const { it } of [...rows].filter((x) => !x.it.carried_from).sort((x, y) => y.it.importance - x.it.importance)) {
+  for (const { it } of [...rows].filter((x) => !x.it.carried_from && nzOnly(x)).sort((x, y) => y.it.importance - x.it.importance)) {
     const f = figureOf(it);
     if (f && !picked.some((p) => p.f.v === f.v)) picked.push({ f, it });
     if (picked.length === 3) break;
@@ -211,7 +213,7 @@ export function quickRead(h: H, brief: Brief, rows: Row[], top: Row[]): HTMLElem
   })));
   if (high.length) body.append(h("p", { class: "quick-sub" }, "내게 영향 큰 소식"), h("ul", { class: "hm-list" }, ...high.map(({ it }) =>
     h("li", {}, h("strong", {}, it.title_ko), it.impact?.actions?.[0] ? h("small", { class: "muted" }, ` — 👉 ${it.impact.actions[0]}`) : it.impact?.reason ? h("small", { class: "muted" }, ` — ${it.impact.reason}`) : null))));
-  const nums = rows.filter((x) => !x.it.carried_from).sort((x, y) => y.it.importance - x.it.importance).map((x) => figureOf(x.it)).filter((f): f is { v: string; l: string } => !!f && !!f.l).slice(0, 3);
+  const nums = rows.filter((x) => !x.it.carried_from && nzOnly(x)).sort((x, y) => y.it.importance - x.it.importance).map((x) => figureOf(x.it)).filter((f): f is { v: string; l: string } => !!f && !!f.l).slice(0, 3);
   if (nums.length) body.append(h("p", { class: "quick-sub" }, "오늘의 숫자"), h("p", {}, nums.map((f) => `${f.l} ${f.v}`).join("  ·  ")));
   const chars = (body.textContent ?? "").length;
   const mins = Math.max(1, Math.round(chars / 500));
