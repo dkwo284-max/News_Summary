@@ -11,7 +11,7 @@ import { homeView, statusPanel } from "./home";
 import { trackerCard } from "./tracker";
 import { compareCard } from "./hood-compare";
 import type { PolicyData, PolicyNews } from "./policy";
-import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, SectionKey } from "./types";
+import type { Alert, ArchiveIndex, Brief, FuelPrice, Item, ProcessingItem, Section, SectionKey } from "./types";
 
 // ── 탭/카테고리 정의 ───────────────────────────────────────
 interface TabDef {
@@ -599,7 +599,7 @@ function renderMain(): void {
     main.append(slot);
     void loadTension().then((t) => {
       if (!slot.isConnected) return;
-      slot.replaceChildren(t ? worldView(h, t) : h("p", { class: "muted" }, "아직 긴장도 자료가 없어요. 매일 새벽에 GDELT 뉴스 데이터로 갱신됩니다."));
+      slot.replaceChildren(t ? worldView(h, t, briefItemsForTension()) : h("p", { class: "muted" }, "아직 긴장도 자료가 없어요. 매일 새벽에 GDELT 뉴스 데이터로 갱신됩니다."));
     });
     return;
   }
@@ -913,6 +913,21 @@ async function recentBriefs(): Promise<Brief[]> {
 }
 
 const extLink = (url: string, label: string) => h("a", { href: safeUrl(url), target: "_blank", rel: "noopener noreferrer" }, label);
+
+/** 안보 탭에서 지역과 관련된 오늘 브리핑 기사를 찾을 때 쓸 목록 (한국어 제목·요약·원제목을 한 덩어리 글로) */
+function briefItemsForTension(): { label: string; title: string; text: string; url: string }[] {
+  if (!brief) return [];
+  const out: { label: string; title: string; text: string; url: string }[] = [];
+  for (const [key, sec] of Object.entries(brief.sections) as [SectionKey, Section][]) {
+    if (key === "nz_national" || key === "nz_auckland") continue;
+    const region = key.startsWith("kr_") ? "한국" : key.startsWith("akl_") ? "오클랜드" : ["nz_immigration"].includes(key) ? "이민" : "뉴질랜드";
+    for (const it of sec.items ?? []) {
+      const url = it.sources?.[0]?.url;
+      if (url) out.push({ label: `${region} ${sec.label}`.replace(/^이민 이민 레이더$/, "이민 레이더"), title: it.title_ko, text: [it.title_ko, ...(it.summary_ko ?? []), it.original_title ?? "", ...(it.tags ?? [])].join(" "), url });
+    }
+  }
+  return out;
+}
 
 async function renderLeisure(): Promise<void> {
   const holder = h("div", { "aria-busy": "true" }, h("p", { class: "muted" }, "레저 정보를 불러오는 중…"));
