@@ -1,6 +1,7 @@
 name: World military tension (GDELT)
 
-# 매일 한 번: GDELT 뉴스 데이터로 세계 군사 긴장도·한국/뉴질랜드 노출도를 계산해 web/public/data/tension.json 에 저장.
+# 매일 한 번: GDELT 일간 사건 파일(정적 파일, 요청 제한 없음)로 세계 군사 긴장도·한국/뉴질랜드 노출도를 계산해 web/public/data/tension.json 에 저장.
+# 처음엔 최근 90일치를 받아 채우고(수 분), 이후엔 빠진 날만 받는다.
 # 아침 브리핑(뉴질랜드 03:00) 전에 끝나도록 02:37(NZDT) 쯤 실행. AI 호출 없음·키 없음.
 on:
   schedule:
@@ -18,7 +19,7 @@ concurrency:
 jobs:
   tension:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with: { ref: main }
@@ -32,7 +33,7 @@ jobs:
         run: |
           git config user.name "daily-brief-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add web/public/data/tension.json web/public/data/tension-history.json
+          git add web/public/data/tension.json web/public/data/tension-history.json web/public/data/tension-days.json
           if git diff --cached --quiet; then echo "no changes"; exit 0; fi
           git commit -m "data: world military tension"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin HEAD:main && break; sleep 5; done

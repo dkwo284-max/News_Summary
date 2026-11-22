@@ -203,7 +203,7 @@ function mapCard(h: H, t: Tension): HTMLElement {
       }
       const pop = document.createElement("div");
       pop.append(h("strong", {}, `${hs.name} · ${Math.round(hs.score)}점 (${hs.level})`),
-        h("div", { class: "muted" }, `최근 7일 보도량: 3개월 중 상위 ${hs.pct7 != null ? 100 - hs.pct7 : "–"}% · 직전 3주 대비 ${hs.chg7 != null ? (hs.chg7 >= 0 ? "+" : "") + hs.chg7 + "%" : "–"}`),
+        h("div", { class: "muted" }, `최근 7일 군사 사건: 3개월 중 상위 ${hs.pct7 != null ? 100 - hs.pct7 : "–"}% · 직전 3주 대비 ${hs.chg7 != null ? (hs.chg7 >= 0 ? "+" : "") + hs.chg7 + "%" : "–"}`),
         h("ul", { class: "tz-pop" }, ...hs.articles.slice(0, 3).map((a) => h("li", {}, ext(h, a.url, a.title), h("small", { class: "muted" }, ` ${a.domain} ${a.date.slice(5)}`)))));
       L.circleMarker([hs.lat, hs.lon], { radius: 7 + hs.score / 7, color: c, fillColor: c, fillOpacity: 0.45, weight: 2 })
         .bindTooltip(`${hs.name} ${Math.round(hs.score)}`, { permanent: true, direction: "top", className: "tz-tip" }).bindPopup(pop, { maxWidth: 280 }).addTo(layer);
@@ -224,8 +224,8 @@ function mapCard(h: H, t: Tension): HTMLElement {
     return h("li", {}, h("details", {},
       h("summary", {}, h("i", { class: "tz-dot", style: `background:${lv(hs.score).color}` }), h("span", { class: "tz-name" }, hs.name),
         h("b", {}, String(Math.round(hs.score))), badge(h, hs.level), h("small", { class: d != null && d >= 3 ? "up" : d != null && d <= -3 ? "down" : "muted" }, ` ${arrow(d)}`), hs.stale ? h("small", { class: "muted" }, " (지난 값)") : null),
-      h("p", { class: "muted" }, `기본 긴장도 ${hs.base} · 최근 7일 보도량 3개월 중 상위 ${hs.pct7 != null ? 100 - hs.pct7 : "–"}% · 직전 3주 대비 ${hs.chg7 != null ? (hs.chg7 >= 0 ? "+" : "") + hs.chg7 + "%" : "–"}`),
-      hs.articles.length ? h("ul", { class: "tz-arts" }, ...hs.articles.map((a) => h("li", {}, ext(h, a.url, a.title), h("small", { class: "muted" }, ` · ${a.domain} ${a.date.slice(5).replace("-", "/")}`)))) : h("p", { class: "muted" }, "최근 3일 대표 기사 없음")));
+      h("p", { class: "muted" }, `기본 긴장도 ${hs.base} · 최근 7일 군사 사건 3개월 중 상위 ${hs.pct7 != null ? 100 - hs.pct7 : "–"}% · 직전 3주 대비 ${hs.chg7 != null ? (hs.chg7 >= 0 ? "+" : "") + hs.chg7 + "%" : "–"}`),
+      hs.articles.length ? h("ul", { class: "tz-arts" }, ...hs.articles.map((a) => h("li", {}, ext(h, a.url, a.title), h("small", { class: "muted" }, ` · ${a.domain} ${a.date.slice(5).replace("-", "/")}`)))) : h("p", { class: "muted" }, "최근 며칠 대표 기사 없음")));
   }));
   return h("section", { class: "home-card", "aria-labelledby": "tz-map" }, h("h2", { id: "tz-map" }, "🗺 분쟁 지역 지도"), seg, mapEl,
     h("p", { class: "board-note" }, "원 크기·색 = 지역 긴장 점수, 점선 굵기 = 그 지역이 선택한 나라에 주는 영향. 원을 누르면 최근 기사가 나와요."), list);
@@ -266,7 +266,7 @@ export function worldView(h: H, t: Tension): HTMLElement {
     w.series.length > 2 ? svgEl(lineChart(w.series), "tz-line", "세계 긴장도 최근 3개월 추이") : null,
     t.stale ? h("p", { class: "tz-stale" }, `⚠ 최근 수집이 일부 실패해 지난 값이 섞여 있어요${t.last_try ? ` (마지막 시도 ${ago(t.last_try)})` : ""}.`) : null);
   return h("div", { class: "tz-view" }, hero, exposureCard(h, t), mapCard(h, t), prepCard(h, t), heatCard(h, t),
-    h("p", { class: "board-note tz-foot" }, `출처: ${t.source} — 전 세계 온라인 뉴스에서 지역별 무력 충돌 관련 보도 비중을 매일 집계(${ago(t.updated)} 갱신). `,
-      "점수 = 지역별 기본 긴장도(진행 중인 전쟁 여부 등) 50% + 최근 7일 보도량이 3개월 중 얼마나 많은지·늘었는지 50%. ",
+    h("p", { class: "board-note tz-foot" }, `출처: ${t.source} — 전 세계 뉴스에서 뽑은 군사 사건(무력 시위·공격·교전)이 하루 전체 사건에서 차지하는 비율을 지역별로 집계(${(t as Tension & { data_through?: string }).data_through ?? "최근"}까지, ${ago(t.updated)} 갱신). `,
+      "점수 = 지역별 기본 긴장도(진행 중인 전쟁 여부 등) 50% + 최근 7일 군사 사건 비율이 3개월 중 얼마나 높은지·늘었는지 50%. 기사 제목은 기사 주소에서 뽑은 것이라 실제 제목과 다를 수 있어요. ",
       "뉴스 흐름으로 만든 참고 지표이며 정부의 공식 경보가 아니에요. 실제 위험은 ", ext(h, "https://www.safetravel.govt.nz/", "SafeTravel"), "·", ext(h, "https://www.0404.go.kr/", "외교부 해외안전여행"), "을 확인하세요."));
 }
