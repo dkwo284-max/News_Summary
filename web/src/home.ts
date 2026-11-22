@@ -1,6 +1,7 @@
 // 홈 화면: 오늘 핵심 3 · 내게 영향 큰 소식 · 탭별 새 소식 · 추이 그래프 · 최근 7일 정리 · 저장한 기사. AI 없음 (이미 만들어진 브리핑·데이터 파일만 읽는다).
 import { costsCard, numbersCard, pairsCard, quickRead, safetyCard, threadsCard, topicsHeat, weatherCard, monthlyCard, type Monthly, type Topics, type WeekThread } from "./home-extra";
 import { loadSaved, removeSaved } from "./news-tools";
+import { loadTension, tensionHomeCard } from "./tension";
 import { procDays } from "./tracker";
 import type { Brief, Item, SectionKey } from "./types";
 
@@ -96,6 +97,9 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   }
   const nums = numbersCard(h, all);
   if (nums) root.append(nums);
+  const tz = h("div", {});   // 🌐 세계 군사 긴장도 (따로 받는 파일이라 늦게 채움)
+  root.append(tz);
+  void loadTension().then((t) => { if (t && tz.isConnected) tz.replaceWith(tensionHomeCard(h, t, ctx.goTab)); else tz.remove(); });
   const todo = (it: Item) => (it.impact?.actions?.[0] ? h("p", { class: "todo" }, `👉 ${it.impact.actions[0]}`) : null);
   const press = (it: Item) => (it.sources.length >= 2 ? h("span", { class: "press", title: it.sources.map((s) => s.name).join(", ") }, `📰 ${it.sources.length}곳 보도`) : null);
   if (top.length) {

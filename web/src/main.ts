@@ -4,6 +4,7 @@ import { fetchLive, loadLive, type LiveData } from "./live";
 import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
 import { gpSection, loadGP } from "./gpmap";
 import { loadIncidents, safetyAlert, safetySection, placeLabel, vaguePlace } from "./crimemap";
+import { loadTension, worldView } from "./tension";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
 import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, isSaved, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, toggleSaved, unfollow, type SeenIndex } from "./news-tools";
 import { homeView, statusPanel } from "./home";
@@ -27,6 +28,7 @@ const TABS: TabDef[] = [
   { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_society", "nz_education", "nz_economy", "nz_politics", "nz_national"] },
   { id: "imm", icon: "🛂", label: "이민", sections: ["nz_immigration"] },
   { id: "kr", icon: "🇰🇷", label: "한국", sections: ["kr_society", "kr_economy", "kr_entertainment", "kr_politics"] },
+  { id: "world", icon: "🌐", label: "안보", sections: [] },
 ];
 const KR_CHIPS: { key: SectionKey | "all"; label: string }[] = [
   { key: "all", label: "전체" },
@@ -590,6 +592,15 @@ function renderMain(): void {
   }
   if (tab.id === "leisure") {
     void renderLeisure();
+    return;
+  }
+  if (tab.id === "world") {
+    const slot = h("div", {}, h("p", { class: "muted" }, "세계 군사 긴장도를 불러오는 중…"));
+    main.append(slot);
+    void loadTension().then((t) => {
+      if (!slot.isConnected) return;
+      slot.replaceChildren(t ? worldView(h, t) : h("p", { class: "muted" }, "아직 긴장도 자료가 없어요. 매일 새벽에 GDELT 뉴스 데이터로 갱신됩니다."));
+    });
     return;
   }
   if (tab.id === "kr" || tab.id === "nz" || tab.id === "akl") {
