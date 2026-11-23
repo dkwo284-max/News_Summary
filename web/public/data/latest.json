@@ -1758,7 +1758,7 @@
   "alerts": [],
   "degraded": true,
   "degraded_reason": "요약 실패: kr_society, kr_economy, kr_entertainment, kr_politics, nz_society, nz_education, nz_economy, nz_politics, akl_safety, akl_life, akl_property, akl_education, nz_immigration; 선별 실패",
-  "retries": 0,
+  "retries": 1,
   "quality": {
    "items": 59,
    "bad": 49,
