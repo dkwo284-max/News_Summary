@@ -13,9 +13,10 @@ on:
     # 멀쩡하면 몇 초 만에 종료. 두 UTC 대역(14~20시)을 등록해 서머타임/표준시 모두 03:00~09:00 NZ 를 덮는다.
     # (GitHub 예약은 자주 10~30분 늦어지므로 간격을 촘촘히 둔다. 시각 창 밖이면 main.py 가 건너뜀)
     - cron: "25,55 14-20 * * *"
-    # 마지막 안전망: NZDT 10:10 / 14:10 (표준시 09:10 / 13:10) — 실패한 단계만 다시
-    - cron: "10 21 * * *"
-    - cron: "10 1 * * *"
+    # 늦은 안전망: 현지 11:00 / 12:00 / 13:00 / 14:00 매시 정각 (14시에 끝). 오늘 브리핑이 아직 없거나 요약·분석이 실패했을 때만 움직이고,
+    # 제대로 끝났으면 몇 초 만에 종료. 서머타임(NZDT=UTC+13)은 22·23·0·1시 UTC, 표준시(NZST=UTC+12)는 23·0·1·2시 UTC 라
+    # 22~2시 UTC 를 모두 등록하고, 현지 11:00~14:29 밖(서머타임 15시·표준시 10시)은 scripts/main.py 가 건너뜀.
+    - cron: "0 22,23,0,1,2 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -83,7 +84,7 @@ jobs:
           SKIP: ${{ github.event_name == 'workflow_dispatch' && !inputs.overwrite && '--skip-existing' || '' }}  # 수동·외부 호출이 겹쳐도 하루 한 번만 AI 소모
           CAP: ${{ github.event_name == 'workflow_dispatch' && inputs.ignore_cap && '--ignore-cap' || '' }}
           REPAIR: ${{ github.event_name == 'workflow_dispatch' && inputs.repair && '--retry-degraded' || '' }}
-          RETRY: ${{ (github.event.schedule == '25,55 14-20 * * *' || github.event.schedule == '10 21 * * *' || github.event.schedule == '10 1 * * *') && '--retry-degraded' || '' }}
+          RETRY: ${{ github.event.schedule == '25,55 14-20 * * *' && '--retry-degraded' || (github.event.schedule == '0 22,23,0,1,2 * * *' && '--retry-late' || '') }}
         run: python scripts/main.py $FORCE $ONLY $SKIP $CAP $RETRY $REPAIR
 
       - name: Commit data

@@ -42,6 +42,14 @@ def should_run(cfg: dict, local_now: datetime, data_dir: Path) -> tuple[bool, st
     return True, "ok"
 
 
+def late_retry_ok(cfg: dict, local_now: datetime) -> bool:
+    """늦은 안전망 재시도(--retry-late)는 현지 late_retry_hours[0]:00 ~ late_retry_hours[1]:29 사이에만 돈다.
+    (마지막 시도는 [1]:00 예약이고, GitHub 예약이 30분쯤 늦어져도 받아 준다. 서머타임 전환 때문에 UTC 로는 두 시간대를 모두 등록해 두고 여기서 거른다)"""
+    first, last = (list(cfg.get("late_retry_hours") or [11, 14]) + [14])[:2]
+    minutes = local_now.hour * 60 + local_now.minute
+    return first * 60 <= minutes < last * 60 + 30
+
+
 def build_alerts(sections: dict, extras: dict, cfg: dict) -> list[dict]:
     """즉시 알릴 만한 것: 처리 기간 급변, 이민 레이더 관련도 9점 이상 기사."""
     from processing import processing_alerts
@@ -115,6 +123,7 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
 
 
 MAX_RETRIES = 10   # 하루 자동 복구 시도 상한 = 새벽 복구 루프 10회 (실패한 단계만 고치므로 한 번에 AI 1~3회)
+LATE_EXTRA = 4     # 늦은 안전망(현지 11·12·13·14시)이 새벽 시도를 다 쓴 뒤에도 돌 수 있게 더하는 횟수
 
 
 def repair_only(cfg: dict, data_dir: Path, cur: dict, local_now, retries: int, args) -> int | None:
@@ -200,6 +209,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--ignore-cap", action="store_true", help="AI 공용 예산(budget.py) 무시")
     ap.add_argument("--retry-degraded", action="store_true",
                     help="오늘 브리핑이 AI 실패(요약·선별)로 원문·휴리스틱으로 나갔을 때만 다시 생성 (하루 최대 2번, 자동 재시도 예약 실행용)")
+    ap.add_argument("--retry-late", action="store_true",
+                    help="늦은 안전망(현지 late_retry_hours 매시): 오늘 브리핑이 없으면 새로 만들고, 있으면 요약·분석이 실패한 경우에만 다시 (제대로 끝났으면 아무것도 안 함)")
     ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args(argv)
 
@@ -215,6 +226,12 @@ def main(argv: list[str] | None = None) -> int:
     out_dir = ROOT / "out" / "dry-run" if args.dry_run else data_dir
     set_output("generated", "false")
 
+    if args.retry_late:
+        if not late_retry_ok(cfg, local_now):
+            log.info("skip: late retry only runs %s:00–%s:29 local (now %s)", *(list(cfg.get("late_retry_hours") or [11, 14]) + [14])[:2], f"{local_now:%H:%M}")
+            return 0
+        args.retry_degraded = True
+
     if args.update_processing:
         return update_processing_only(cfg, data_dir)
 
@@ -228,13 +245,16 @@ def main(argv: list[str] | None = None) -> int:
             # 오늘 브리핑이 아직 없음(주 실행이 빠졌거나 실패): 복구 시각에도 시각 창(run_hour~catchup_until_hour) 안이면 새로 생성
             log.info("no brief for %s yet — generating if inside the run window (--retry-degraded)", local_now.date())
             args.retry_degraded = False
+            if args.retry_late:   # 늦은 안전망: 아침 내내 못 만들었으면 시각 창과 상관없이 지금 만든다
+                log.info("late retry: generating today's brief now")
+                args.force = True
         else:
             m = cur.get("meta") or {}
             retries = int(m.get("retries", 0))
             if not m.get("degraded"):
                 log.info("skip: today's brief is fine (--retry-degraded)")
                 return 0
-            if retries >= MAX_RETRIES:
+            if retries >= MAX_RETRIES + (LATE_EXTRA if args.retry_late else 0):
                 log.warning("skip: already retried %d times today (--retry-degraded)", retries)
                 return 0
             log.info("retrying degraded brief (%s), attempt %d", m.get("degraded_reason", ""), retries + 1)
