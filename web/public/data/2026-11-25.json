@@ -2418,7 +2418,7 @@
   ],
   "degraded": true,
   "degraded_reason": "선별 실패",
-  "retries": 0,
+  "retries": 1,
   "quality": {
    "items": 63,
    "bad": 0,
