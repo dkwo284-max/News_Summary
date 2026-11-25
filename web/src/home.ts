@@ -1,6 +1,7 @@
 // 홈 화면: 오늘 핵심 3 · 내게 영향 큰 소식 · 탭별 새 소식 · 추이 그래프 · 최근 7일 정리 · 저장한 기사. AI 없음 (이미 만들어진 브리핑·데이터 파일만 읽는다).
 import { costsCard, numbersCard, pairsCard, quickRead, safetyCard, threadsCard, topicsHeat, weatherCard, monthlyCard, type Monthly, type Topics, type WeekThread } from "./home-extra";
 import { loadSaved, removeSaved } from "./news-tools";
+import { canListen, startListening, type Track } from "./listen";
 import { loadTension, tensionHomeCard } from "./tension";
 import { procDays } from "./tracker";
 import type { Brief, Item, SectionKey } from "./types";
@@ -65,6 +66,37 @@ const sectionLabel = (b: Brief, key: SectionKey) => {
 
 let onWeekly: ((w: Weekly) => void) | null = null;
 
+type Row = { it: Item; key: SectionKey; tab: string };
+const ORD = ["첫 번째", "두 번째", "세 번째"];
+/** 듣는 브리핑 재생 목록: 인사·날씨·환율 → 이민 알림 → 오늘 핵심 3 → 내게 영향 큰 소식 → 탭 순서대로 탭별 브리핑 */
+export function listenTracks(ctx: HomeCtx, all: Row[], top: Row[]): Track[] {
+  const b = ctx.brief, out: Track[] = [];
+  const d = new Date(b.date + "T12:00:00");
+  const day = `${d.getMonth() + 1}월 ${d.getDate()}일 ${"일월화수목금토"[d.getDay()]}요일`;
+  const w = b.extras?.auckland_weather;
+  const intro = [w ? `오클랜드 날씨는 ${w.desc}, 최저 ${w.min}도 최고 ${w.max}도${w.rain_chance != null ? `, 비 올 확률 ${w.rain_chance}퍼센트` : ""}입니다.` : "",
+    b.extras?.nzd_krw ? `환율은 뉴질랜드 1달러에 ${Math.round(b.extras.nzd_krw).toLocaleString("ko-KR")}원입니다.` : ""].filter(Boolean).join(" ");
+  out.push({ title: `${day} 데일리 브리프입니다.`, text: intro });
+  const alerts = b.meta?.alerts ?? [];
+  if (alerts.length) out.push({ title: "오늘의 알림", text: alerts.slice(0, 3).map((a) => a.text).join(". ") + "." });
+  top.forEach(({ it, key }, i) => out.push({ title: `오늘 핵심 ${ORD[i]}. ${sectionLabel(b, key)}`,
+    text: [it.title_ko + ".", ...it.summary_ko.slice(0, 3), it.impact?.actions?.[0] ? `할 일: ${it.impact.actions[0]}` : ""].filter(Boolean).join(" ") }));
+  const high = all.filter((x) => x.it.impact?.level === "high" && !top.some((t) => t.it.id === x.it.id)).slice(0, 4);
+  if (high.length) out.push({ title: "내게 영향 큰 소식", text: high.map(({ it }) => `${it.title_ko}. ${it.impact?.reason ?? ""}`).join(" ") });
+  const used = new Set([...top, ...high].map((x) => x.it.id));
+  for (const t of ctx.tabs) {
+    for (const key of ctx.sections(t)) {
+      const sec = b.sections[key];
+      if (!sec || sec.error) continue;
+      const items = sec.items.filter((it) => !it.carried_from && !used.has(it.id) && !ctx.hidden(it, key)).slice(0, 3);
+      if (!sec.briefing && !items.length) continue;
+      items.forEach((it) => used.add(it.id));
+      out.push({ title: `${t.label}. ${sectionLabel(b, key)}`, text: [sec.briefing, items.length ? `주요 기사는 ${items.map((it) => it.title_ko).join(", ")}입니다.` : ""].filter(Boolean).join(" ") });
+    }
+  }
+  return out;
+}
+
 export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   const { brief } = ctx;
   const root = h("div", { class: "home" });
@@ -86,11 +118,17 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   try { quick = localStorage.getItem("daily-brief:quick") === "1"; } catch { /* 무시 */ }
   const qb = h("button", { type: "button", class: "quick-btn", "aria-pressed": String(quick) }, quick ? "📖 전체 보기" : "⚡ 3분 읽기");
   qb.addEventListener("click", () => { try { localStorage.setItem("daily-brief:quick", quick ? "0" : "1"); } catch { /* 무시 */ } ctx.rerender(); });
-  root.append(h("div", { class: "quick-bar" }, qb, h("small", { class: "muted" }, quick ? "핵심만 모은 요약이에요." : "바쁜 날엔 핵심만 3분 안에.")));
+  const qbar = h("div", { class: "quick-bar" }, qb, h("small", { class: "muted" }, quick ? "핵심만 모은 요약이에요." : "바쁜 날엔 핵심만 3분 안에."));
+  root.append(qbar);
 
   // 1) 오늘 핵심 3
   const score = (x: { it: Item }) => x.it.importance * 10 + (x.it.impact?.level === "high" ? 18 : x.it.impact?.level === "medium" ? 6 : 0) + (ctx.fresh(x.it) ? 4 : 0);
   const top = [...all].filter((x) => !x.it.carried_from).sort((a, b) => score(b) - score(a)).slice(0, 3);
+  if (canListen()) {
+    const lb = h("button", { type: "button", class: "quick-btn listen-btn", title: "오늘 핵심 → 내게 영향 큰 소식 → 탭별 브리핑 순서로 읽어 줘요" }, "🎧 듣기");
+    lb.addEventListener("click", () => startListening(listenTracks(ctx, all, top)));
+    qbar.insertBefore(lb, qbar.children[1] ?? null);
+  }
   if (quick) {
     root.append(quickRead(h, brief, all, top));
     return root;

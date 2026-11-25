@@ -928,3 +928,19 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .tz-pop-why { margin: 4px 0; font-size: 12px; }
 .tz-list summary { display: none; }
 .tz-alert-news { display: block; margin-top: 2px; font-size: .82rem; color: var(--text); }
+
+/* 🎧 듣는 브리핑 플레이어 (화면 아래 고정) */
+.listen-btn { border-color: var(--line); background: var(--surface); }
+.lp { position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; background: var(--surface); border-top: 1px solid var(--line); box-shadow: 0 -6px 18px rgba(0, 0, 0, .12); padding-bottom: env(safe-area-inset-bottom); }
+.lp-bar { height: 3px; background: var(--line); }
+.lp-prog { display: block; height: 100%; width: 0; background: var(--accent); transition: width .4s; }
+.lp-row { display: flex; align-items: center; gap: 4px; max-width: 760px; margin: 0 auto; padding: 8px 12px; }
+.lp-ico { font-size: 1.2rem; }
+.lp-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.lp-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: .9rem; }
+.lp-row button { min-width: 44px; min-height: 44px; border: 0; border-radius: 10px; background: transparent; color: var(--text); font-size: 1.1rem; cursor: pointer; }
+.lp-row button:hover { background: var(--accent-soft); }
+.lp-row button:disabled { opacity: .35; cursor: default; }
+.lp-row .lp-play { background: var(--accent); color: var(--surface); }
+.lp-row .lp-rate { font-size: .85rem; font-weight: 700; }
+body.has-player { padding-bottom: 76px; }
