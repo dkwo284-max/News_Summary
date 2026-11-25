@@ -6,7 +6,7 @@ import { gpSection, loadGP } from "./gpmap";
 import { loadIncidents, safetyAlert, safetySection, placeLabel, vaguePlace } from "./crimemap";
 import { loadTension, worldView } from "./tension";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
-import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, isSaved, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, toggleSaved, unfollow, type SeenIndex } from "./news-tools";
+import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, isSaved, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, toggleSaved, unfollow, type SeenIndex, englishPanel } from "./news-tools";
 import { homeView, statusPanel } from "./home";
 import { trackerCard } from "./tracker";
 import { compareCard } from "./hood-compare";
@@ -332,6 +332,7 @@ function card(item: Item, region: "kr" | "nz", sectionLabel?: string): HTMLEleme
   }
   if (item.original_title && item.original_title !== item.title_ko) {
     art.append(h("p", { class: "orig", lang: region === "nz" ? "en" : "ko" }, item.original_title));
+    if (region === "nz" && /[A-Za-z]{3,}/.test(item.original_title)) art.append(englishPanel(item.original_title, item.title_ko));
   }
   const foot = h("div", { class: "card-foot" });
   if (item.tags.length) foot.append(h("ul", { class: "tags", "aria-label": "태그" }, ...item.tags.map((t) => h("li", {}, `#${t}`))));

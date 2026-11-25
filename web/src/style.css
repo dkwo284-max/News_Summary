@@ -944,3 +944,13 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .lp-row .lp-play { background: var(--accent); color: var(--surface); }
 .lp-row .lp-rate { font-size: .85rem; font-weight: 700; }
 body.has-player { padding-bottom: 76px; }
+
+/* 🔤 영어로 익히기 (뉴스 영어 제목 → English Trainer 복습) */
+.eng { margin-top: 6px; font-size: .875rem; }
+.eng > summary { cursor: pointer; color: var(--muted); width: fit-content; }
+.eng-body { margin-top: 6px; display: grid; gap: 6px; }
+.eng-body p { margin: 0; }
+.eng-text, .eng-url { width: 100%; box-sizing: border-box; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--text); font: inherit; }
+.eng-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.eng-url { flex: 1; min-width: 200px; width: auto; }
+.eng-go { text-decoration: none; display: inline-flex; align-items: center; }

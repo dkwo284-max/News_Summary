@@ -172,3 +172,55 @@ export function toggleSaved(item: Item, date: string, section: string): boolean 
   putSaved([{ id: item.id, title: item.title_ko, url: item.sources[0]?.url ?? "", date, section, at: new Date().toISOString() }, ...list]);
   return true;
 }
+
+// ── 🔤 뉴스 영어 표현 → English Trainer 복습: 기사 영어 제목(또는 그 일부)을 영어 앱의 '복습 문장 직접 추가'로 보낸다 ──
+// 영어 앱 주소는 계정마다 달라(…workers.dev) 처음 한 번만 입력받아 이 기기에 저장한다. 서버로 보내는 것 없음.
+const ENG_KEY = "daily-brief:english-url";
+export function englishUrl(): string {
+  try { return localStorage.getItem(ENG_KEY) || ""; } catch { return ""; }
+}
+export function setEnglishUrl(u: string): boolean {
+  const v = u.trim().replace(/\/+$/, "");
+  if (v && !/^https:\/\/[^\s/]+(\/[^\s]*)?$/i.test(v)) return false;
+  try { if (v) localStorage.setItem(ENG_KEY, v); else localStorage.removeItem(ENG_KEY); } catch { /* 무시 */ }
+  return true;
+}
+/** 영어 앱으로 보낼 주소: ?add=문장&from=news&ko=한국어 제목(뜻 참고용) */
+export function englishAddUrl(base: string, text: string, ko = ""): string {
+  const q = new URLSearchParams({ add: text.trim().slice(0, 600), from: "news" });
+  if (ko) q.set("ko", ko.slice(0, 200));
+  return `${base}/?${q.toString()}`;
+}
+export function englishPanel(en: string, ko: string): HTMLElement {
+  const el = <K extends keyof HTMLElementTagNameMap>(tag: K, cls = "", text = ""): HTMLElementTagNameMap[K] => {
+    const x = document.createElement(tag); if (cls) x.className = cls; if (text) x.textContent = text; return x;
+  };
+  const box = el("details", "eng");
+  box.append(el("summary", "", "🔤 영어로 익히기"));
+  const body = el("div", "eng-body");
+  box.append(body);
+  const draw = (): void => {
+    body.replaceChildren();
+    const base = englishUrl();
+    if (!base) {
+      body.append(el("p", "muted", "처음 한 번만: English Trainer 주소를 넣어 주세요 (예: https://english-trainer.<계정>.workers.dev). 이 기기에만 저장돼요."));
+      const inp = el("input", "eng-url"); inp.type = "url"; inp.placeholder = "https://english-trainer.….workers.dev"; inp.setAttribute("aria-label", "English Trainer 주소");
+      const save = el("button", "follow-btn", "저장"); save.type = "button";
+      const msg = el("small", "muted");
+      save.addEventListener("click", () => { if (setEnglishUrl(inp.value) && inp.value.trim()) draw(); else msg.textContent = "https:// 로 시작하는 주소를 넣어 주세요"; });
+      body.append(el("div", "eng-row"), msg); body.querySelector(".eng-row")!.append(inp, save);
+      return;
+    }
+    body.append(el("p", "muted", "익히고 싶은 부분만 남기고 보내세요. 영어 앱이 뜻·문법·원어민이 말로 할 때의 자연스러운 문장을 검토해 복습에 넣어 줘요."));
+    const ta = el("textarea", "eng-text"); ta.rows = 2; ta.value = en; ta.lang = "en"; ta.setAttribute("aria-label", "보낼 영어 문장");
+    const go = el("a", "follow-btn eng-go", "영어 앱 복습에 추가 ↗"); go.target = "_blank"; go.rel = "noopener";
+    const upd = (): void => { go.setAttribute("href", englishAddUrl(base, ta.value || en, ko)); };
+    ta.addEventListener("input", upd); upd();
+    const chg = el("button", "link-btn", "주소 바꾸기"); chg.type = "button";
+    chg.addEventListener("click", () => { setEnglishUrl(""); draw(); });
+    const row = el("div", "eng-row"); row.append(go, chg);
+    body.append(ta, row);
+  };
+  draw();
+  return box;
+}
