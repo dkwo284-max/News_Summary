@@ -88,7 +88,11 @@ button, input, select { font: inherit; color: inherit; }
   display: grid; place-items: center; width: 44px; height: 44px; flex: none;
   border: 1px solid var(--line); border-radius: 12px; background: var(--surface); cursor: pointer;
 }
-.extras { display: flex; flex-wrap: wrap; gap: 6px; max-width: 760px; margin: 6px auto 0; }
+.extras { display: flex; flex-wrap: nowrap; gap: 6px; max-width: 760px; margin: 6px auto 0; overflow-x: auto; scrollbar-width: none; align-items: center; }
+.extras::-webkit-scrollbar { display: none; }
+.extras > * { flex: none; white-space: nowrap; }
+.extras .pill.wxp { background: color-mix(in srgb, var(--accent-soft) 60%, var(--surface)); }
+.stamp.err { color: var(--hot-text); }
 .extras:empty { display: none; }
 .pill { font-size: 0.8125rem; background: var(--accent-soft); border-radius: 999px; padding: 3px 10px; }
 .tools { display: flex; gap: 8px; max-width: 760px; margin: 10px auto 0; }
@@ -97,6 +101,14 @@ button, input, select { font: inherit; color: inherit; }
 }
 .date-select { flex: 0 1 auto; max-width: 48%; }
 .search { flex: 1 1 auto; min-width: 0; }
+.search-btn { display: none; }
+@media (max-width: 600px) {
+  .tools .search { display: none; }
+  .tools .search-btn { display: grid; }
+  .tools.searching .search { display: block; }
+  .tools.searching .date-select, .tools.searching .mode-btn { display: none; }
+  .date-select { flex: 1 1 auto; max-width: none; }
+}
 /* 탭만 상단 고정 — 작은 화면에서 본문 공간 확보 */
 .tabs {
   position: sticky; top: 0; z-index: 10;
@@ -106,8 +118,10 @@ button, input, select { font: inherit; color: inherit; }
   -webkit-backdrop-filter: saturate(1.4) blur(10px);
   border-bottom: 1px solid var(--line);
 }
+.tabs { overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+.tabs::-webkit-scrollbar { display: none; }
 .tab {
-  flex: 1 1 0; min-width: 0; min-height: 52px; padding: 4px 2px; border: 0; background: none; cursor: pointer;
+  flex: 1 0 auto; min-width: 58px; min-height: 52px; padding: 4px 8px; scroll-snap-align: start; border: 0; background: none; cursor: pointer;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
   font-weight: 600; font-size: 0.8125rem; line-height: 1.25; color: var(--muted); border-bottom: 3px solid transparent;
 }
@@ -684,7 +698,12 @@ legend { font-weight: 700; margin-bottom: 6px; }
 /* 홈 · 카드 간단히/자세히 · 추이 · 상태 */
 .home { display: grid; gap: 12px; }
 .home-card { padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
-.home-card h2 { margin: 0 0 8px; font-size: 1.02rem; }
+.home-card h2 { margin: 0 0 8px; font-size: 0.95rem; color: var(--muted); font-weight: 700; }
+/* 카드 위계: '오늘 핵심 3' 하나만 크게 강조하고 나머지는 조용하게 */
+.home-card.hm-primary { border: 2px solid var(--accent); box-shadow: 0 4px 18px color-mix(in srgb, var(--accent) 14%, transparent); }
+.home-card.hm-primary h2 { font-size: 1.12rem; color: var(--text); }
+.alerts { padding: 8px 12px !important; }
+.alerts h2 { font-size: 0.875rem !important; }
 .hm-top { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .hm-top li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 10px; }
 .hm-rank { width: 28px; height: 28px; border-radius: 50%; background: var(--accent, #2563eb); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: .85rem; }

@@ -181,21 +181,21 @@ function renderHeader(): void {
   // 최신 브리핑을 볼 때는 새로고침한 실시간 값이 있으면 그것을, 아니면 브리핑 생성 시점 값을 보여준다
   const useLive = viewingLatest && live != null;
   const fx = useLive && live!.fx != null ? live!.fx : brief.extras?.nzd_krw;
-  if (fx) extras.append(h("span", { class: "pill" }, "💱 1 NZD = ", h("strong", {}, `${fx.toLocaleString("ko-KR")}원`)));
+  if (fx) extras.append(h("span", { class: "pill", title: `1 NZD = ${fx.toLocaleString("ko-KR")}원` }, "NZD ", h("strong", {}, `${fx.toLocaleString("ko-KR", { maximumFractionDigits: 1 })}원`)));
   const usd = useLive && live!.usd != null ? live!.usd : brief.extras?.usd_krw;
-  if (usd) extras.append(h("span", { class: "pill" }, "💵 1 USD = ", h("strong", {}, `${usd.toLocaleString("ko-KR")}원`)));
+  if (usd) extras.append(h("span", { class: "pill", title: `1 USD = ${usd.toLocaleString("ko-KR")}원` }, "USD ", h("strong", {}, `${Math.round(usd).toLocaleString("ko-KR")}원`)));
   const jpy = useLive && live!.jpy != null ? live!.jpy : brief.extras?.jpy100_krw;
-  if (jpy) extras.append(h("span", { class: "pill" }, "💴 100 JPY = ", h("strong", {}, `${jpy.toLocaleString("ko-KR")}원`)));
+  if (jpy) extras.append(h("span", { class: "pill", title: `100 JPY = ${jpy.toLocaleString("ko-KR")}원` }, "JPY100 ", h("strong", {}, `${Math.round(jpy).toLocaleString("ko-KR")}원`)));
   const btc = useLive && live!.btc != null ? live!.btc : brief.extras?.btc_usd;
-  if (btc) extras.append(h("span", { class: "pill" }, "₿ 1 BTC = ", h("strong", {}, `$${btc.toLocaleString("en-US")}`)));
+  if (btc) extras.append(h("span", { class: "pill", title: `1 BTC = $${btc.toLocaleString("en-US")}` }, "BTC ", h("strong", {}, `$${(btc / 1000).toFixed(1)}k`)));
   const lw = useLive ? live!.weather : null;
   const w = brief.extras?.auckland_weather;
   if (lw) {
     const rain = lw.rain != null ? ` · 강수 ${lw.rain}%` : "";
-    extras.append(h("span", { class: "pill" }, "🌤 오클랜드 지금 ", h("strong", {}, `${lw.now}°`), ` (${lw.min}°~${lw.max}°) ${lw.desc}${rain}`));
+    extras.prepend(h("span", { class: "pill wxp", title: `오클랜드 지금 ${lw.now}° (${lw.min}°~${lw.max}°) ${lw.desc}${rain}` }, "🌤 ", h("strong", {}, `${lw.now}°`), ` ${lw.desc}${lw.rain != null ? ` · ☂${lw.rain}%` : ""}`));
   } else if (w) {
     const rain = w.rain_chance != null ? ` · 강수 ${w.rain_chance}%` : "";
-    extras.append(h("span", { class: "pill" }, "🌤 오클랜드 ", h("strong", {}, `${w.min}°~${w.max}°`), ` ${w.desc}${rain}`));
+    extras.prepend(h("span", { class: "pill wxp", title: `오클랜드 ${w.min}°~${w.max}° ${w.desc}${rain}` }, "🌤 ", h("strong", {}, `${w.min}~${w.max}°`), ` ${w.desc}${w.rain_chance != null ? ` · ☂${w.rain_chance}%` : ""}`));
   }
   const vp = headerPill(h);
   if (vp) extras.append(vp);
@@ -208,7 +208,8 @@ function renderHeader(): void {
       : useLive
         ? `${new Date(live!.at).toLocaleTimeString("ko-KR", { hour: "numeric", minute: "2-digit" })} 기준${live!.fxSource ? ` · 환율 ${live!.fxSource}` : ""}`
         : "브리핑 생성 시점 기준";
-    extras.append(h("span", { class: "live-row" }, btn, h("span", { class: "stamp", role: "status" }, stamp)));
+    btn.title = `환율·날씨 새로고침 (${stamp})`;
+    extras.append(h("span", { class: "live-row" }, btn, h("span", { class: `stamp${liveError ? " err" : ""}`, role: "status" }, liveError ? "새로고침 실패" : useLive ? new Date(live!.at).toLocaleTimeString("ko-KR", { hour: "numeric", minute: "2-digit" }) : "")));
   }
 }
 
@@ -1048,6 +1049,16 @@ function initSettings(): void {
 }
 
 // 카드 보기 전환(간단히/자세히) — 도구 줄 맨 뒤 버튼
+// 작은 화면: 검색창은 돋보기를 눌렀을 때만 펼침 (검색어가 있으면 펼친 채로)
+function initSearchToggle(): void {
+  const tools = document.querySelector(".tools"), btn = document.getElementById("search-btn"), inp = document.getElementById("search") as HTMLInputElement | null;
+  if (!tools || !btn || !inp) return;
+  const set = (on: boolean) => { tools.classList.toggle("searching", on); btn.setAttribute("aria-expanded", String(on)); btn.setAttribute("aria-label", on ? "검색 닫기" : "검색 열기"); };
+  btn.addEventListener("click", () => { const on = !tools.classList.contains("searching"); set(on); if (on) inp.focus(); else if (inp.value) { inp.value = ""; inp.dispatchEvent(new Event("input")); } });
+  inp.addEventListener("blur", () => { if (!inp.value) set(false); });
+  if (inp.value) set(true);
+}
+
 function initCardMode(): void {
   const tools = document.querySelector(".tools");
   if (!tools) return;
@@ -1103,6 +1114,7 @@ async function init(): Promise<void> {
   initSettings();
   initOffline();
   initCardMode();
+  initSearchToggle();
   initStatus();
   await loadBrief();
   await initDates();

@@ -133,15 +133,10 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
     root.append(quickRead(h, brief, all, top));
     return root;
   }
-  const nums = numbersCard(h, all);
-  if (nums) root.append(nums);
-  const tz = h("div", {});   // 🌐 세계 군사 긴장도 (따로 받는 파일이라 늦게 채움)
-  root.append(tz);
-  void loadTension().then((t) => { if (t && tz.isConnected) tz.replaceWith(tensionHomeCard(h, t, ctx.goTab)); else tz.remove(); });
   const todo = (it: Item) => (it.impact?.actions?.[0] ? h("p", { class: "todo" }, `👉 ${it.impact.actions[0]}`) : null);
   const press = (it: Item) => (it.sources.length >= 2 ? h("span", { class: "press", title: it.sources.map((s) => s.name).join(", ") }, `📰 ${it.sources.length}곳 보도`) : null);
   if (top.length) {
-    root.append(h("section", { class: "home-card", "aria-labelledby": "hm-top" }, h("h2", { id: "hm-top" }, "⭐ 오늘 핵심 3"),
+    root.append(h("section", { class: "home-card hm-primary", "aria-labelledby": "hm-top" }, h("h2", { id: "hm-top" }, "⭐ 오늘 핵심 3"),
       h("ol", { class: "hm-top" }, ...top.map(({ it, key, tab }, i) => {
         const go = h("button", { type: "button", class: "link-btn" }, "탭에서 보기");
         go.addEventListener("click", () => ctx.goTab(tab));
@@ -159,6 +154,13 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
       h("ul", { class: "hm-list" }, ...high.map(({ it, key }) => h("li", {}, h("span", { class: "sec-label" }, sectionLabel(brief, key)), " ", h("strong", {}, link(it, it.title_ko)),
         it.impact?.reason ? h("small", { class: "muted" }, ` — ${it.impact.reason}`) : null, todo(it))))));
   }
+
+  // 오늘의 숫자·세계 긴장도는 핵심 3·영향 큰 소식 다음(카드 위계: 가장 중요한 것 먼저)
+  const nums = numbersCard(h, all);
+  if (nums) root.append(nums);
+  const tz = h("div", {});   // 🌐 세계 군사 긴장도 (따로 받는 파일이라 늦게 채움)
+  root.append(tz);
+  void loadTension().then((t) => { if (t && tz.isConnected) tz.replaceWith(tensionHomeCard(h, t, ctx.goTab)); else tz.remove(); });
 
   // 2-1) 이어지는 이슈 · 주간 날씨 · 생활비 · 두 나라 같은 주제 · 오늘 치안
   const thrSlot = h("div", { class: "home-slot" });
