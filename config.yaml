@@ -601,6 +601,7 @@ feeds:
     name: "Google News"
     section: nz_immigration
     google_news: true
+    reserve: true      # 한국어 제목은 영어 키워드 1차 추리기에서 밀리므로 후보에 항상 포함(피드당 10건까지)
     lookback_hours: 168
     # 한인 커뮤니티 시각: 한국어 뉴질랜드 이민·비자 기사
     url: "https://news.google.com/rss/search?q=%EB%89%B4%EC%A7%88%EB%9E%9C%EB%93%9C+(%EC%9D%B4%EB%AF%BC+OR+%EB%B9%84%EC%9E%90+OR+%EC%98%81%EC%A3%BC%EA%B6%8C)+when:7d&hl=ko&gl=KR&ceid=KR:ko"
@@ -608,6 +609,8 @@ feeds:
     name: "Google News"
     section: nz_immigration
     google_news: true
+    reserve: true      # 중국어 제목도 후보에 포함(피드당 10건까지)
+    max_items: 15      # 중국 본토 기사가 많아 최근 15건만
     lookback_hours: 168
     # 중국계 커뮤니티 시각: 중국어 뉴질랜드 이민·비자 기사
     url: "https://news.google.com/rss/search?q=%E6%96%B0%E8%A5%BF%E5%85%B0+(%E7%A7%BB%E6%B0%91+OR+%E7%AD%BE%E8%AF%81)+when:7d&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
@@ -738,6 +741,7 @@ feeds:
     name: "Google News"
     section: nz_auckland
     google_news: true
+    reserve: true      # 한국어 기사 후보에 항상 포함
     lookback_hours: 168
     # 오클랜드 한인 커뮤니티 (한국어 기사, 동네 섹션)
     url: "https://news.google.com/rss/search?q=%EC%98%A4%ED%81%B4%EB%9E%9C%EB%93%9C+%ED%95%9C%EC%9D%B8+when:7d&hl=ko&gl=KR&ceid=KR:ko"

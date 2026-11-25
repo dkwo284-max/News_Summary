@@ -116,7 +116,7 @@ def fetch_feed(client: httpx.Client, feed: dict, now: datetime, cfg_fetch: dict)
         try:
             raw = _download(client, url)
             lookback = feed.get("lookback_hours", cfg_fetch["lookback_hours"])  # 피드별 기간 (이민 소식처럼 드문 피드는 길게)
-            items = parse_feed(raw, feed, now, lookback, cfg_fetch["max_items_per_feed"], url)
+            items = parse_feed(raw, feed, now, lookback, int(feed.get("max_items", cfg_fetch["max_items_per_feed"])), url)   # 피드별 상한(max_items)이 있으면 그것
             if items:
                 return items, url, None
             reachable_url = reachable_url or url
