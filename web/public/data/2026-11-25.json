@@ -2416,14 +2416,15 @@
     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPZG5JMUwxQ093cjB6N2x5bi0zTXF1T0YyZEl3LVVoVHVqcS1QTXg1X29QSmdRUTdwdVZiVU41eUR1bmVZcVk3bkM3RlBCNnRJamdaUGJGMzlXNjB1M3pRWG9KLU4zSXJmTVctSkR0LUpIaGVlOUs1TkswdnBFcDFiZXhicU5aY01SNGxNZEgzTzJJWUItZjg0cENpdS1neFRCTG80?oc=5"
    }
   ],
-  "degraded": true,
-  "degraded_reason": "선별 실패",
+  "degraded": false,
+  "degraded_reason": "",
   "retries": 1,
   "quality": {
    "items": 63,
    "bad": 0,
    "redone": [],
    "bad_ids": []
-  }
+  },
+  "rank_fallback": true
  }
 }

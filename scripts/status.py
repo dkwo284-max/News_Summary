@@ -36,7 +36,7 @@ def build_status(data_dir: Path, brief: dict, usage: dict | None = None) -> dict
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "brief": {"date": day, "generated_at": brief.get("generated_at"), "mode": meta.get("mode"), "degraded": bool(meta.get("degraded")),
-                  "degraded_reason": meta.get("degraded_reason", ""), "retries": meta.get("retries", 0), "requests": (meta.get("usage") or {}).get("requests", 0)},
+                  "degraded_reason": meta.get("degraded_reason", ""), "rank_fallback": bool(meta.get("rank_fallback")), "retries": meta.get("retries", 0), "requests": (meta.get("usage") or {}).get("requests", 0)},
         "feeds": {"total": meta.get("feeds_total"), "failed": [{"id": f.get("id"), "name": f.get("name")} for f in meta.get("failed_feeds", [])]},
         "ai": {"today": (ai.get("days", {}).get(day) or {}).get("requests", 0), "cap": ai.get("cap")},
         "files": files,

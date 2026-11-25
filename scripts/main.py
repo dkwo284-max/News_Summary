@@ -127,14 +127,30 @@ LATE_EXTRA = 4     # 늦은 안전망(현지 11·12·13·14시)이 새벽 시도
 
 
 def repair_only(cfg: dict, data_dir: Path, cur: dict, local_now, retries: int, args) -> int | None:
-    """오늘 브리핑의 실패한 단계만 고쳐 저장한다. 전체 재생성이 필요하면(선별 실패) None 을 돌려준다."""
+    """오늘 브리핑의 실패한 단계(요약·영향 분석)만 고쳐 저장한다.
+    AI 선별 실패(규칙 선별로 대체)는 고칠 대상이 아니다: 기사 구성은 그대로 두고 품질 저하 표시만 푼다."""
     import repair
     from llm import LLMError, make_llm
 
     todo = repair.needs(cur, cfg)
-    if todo["rank"] or not (todo["summary"] or todo["insight"]):
-        return None
     today = local_now.date().isoformat()
+    if not (todo["summary"] or todo["insight"]):
+        m = cur.setdefault("meta", {})
+        if todo["rank"]:
+            m["rank_fallback"] = True
+        m.update({"degraded": False, "degraded_reason": ""})
+        body = json.dumps(finite(cur), ensure_ascii=False, indent=1, allow_nan=False)
+        (data_dir / f"{today}.json").write_text(body, encoding="utf-8")
+        (data_dir / "latest.json").write_text(body, encoding="utf-8")
+        try:
+            from status import write_status
+            write_status(data_dir, cur)
+        except Exception as e:  # noqa: BLE001
+            log.warning("status failed: %s", e)
+        set_output("generated", "true")
+        set_output("date", f"{today} (rank fallback kept)")
+        log.info("nothing to repair (selection fell back to rules only) — keeping today's brief as is")
+        return 0
     try:
         llm = make_llm(cfg)
     except LLMError as e:
@@ -404,7 +420,8 @@ def main(argv: list[str] | None = None) -> int:
     failed_secs = [k for k, sec in sections.items() if sec.get("error")]
     import repair as _repair
     insight_missing = llm is not None and _repair.needs({"sections": sections, "meta": {}}, cfg)["insight"]
-    degraded_reason = "; ".join(filter(None, ["요약 실패: " + ", ".join(failed_secs) if failed_secs else "", "선별 실패" if _rank.FAILED else "",
+    # AI 선별 실패는 규칙 선별로 이미 채워졌으므로 품질 저하(=재시도 대상)로 치지 않는다 → rank_fallback 로만 기록
+    degraded_reason = "; ".join(filter(None, ["요약 실패: " + ", ".join(failed_secs) if failed_secs else "",
                                               "영향 분석 실패" if insight_missing and not failed_secs else ""]))
     degraded = llm is not None and bool(degraded_reason)
     usage = llm.log_report() if llm else {"provider": None, "requests": 0, "models": {}, "total_cost_usd": 0}
@@ -427,6 +444,7 @@ def main(argv: list[str] | None = None) -> int:
             "alerts": build_alerts(sections, extras, cfg),
             "degraded": degraded,
             "degraded_reason": degraded_reason,
+            "rank_fallback": bool(llm is not None and _rank.FAILED),
             "retries": retries,
             "quality": {k: qrep[k] for k in ("items", "bad", "redone", "bad_ids")},
         },

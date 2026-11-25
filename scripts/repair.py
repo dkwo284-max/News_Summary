@@ -3,7 +3,8 @@
 - 요약이 실패한 섹션(sec.error): 저장된 기사(원문 제목·RSS 설명·출처)로 그 지역만 다시 요약 (지역당 AI 1회)
 - 영향 분석이 빠진 경우: 인사이트만 다시 (AI 1회)
 수집·중복 제거·선별은 다시 하지 않으므로 기사 구성이 바뀌지 않고, AI 요청은 보통 1~3회로 끝난다(전체 재생성은 4회 이상).
-선별 자체가 실패했던 날(휴리스틱 선별)은 고칠 수 없어 전체 재생성으로 넘긴다.
+AI 선별이 실패해 규칙(휴리스틱)으로 고른 날은 그 구성을 그대로 쓴다(품질 저하로 치지 않음, meta.rank_fallback 로만 표시).
+예전엔 이 경우 매번 전체 재생성(15분·AI 4회+)으로 넘어가서, AI 서버가 바쁜 날엔 쉽게 고칠 수 있는 요약 실패까지 함께 못 고쳤다.
 """
 from __future__ import annotations
 
@@ -21,7 +22,7 @@ def needs(brief: dict, cfg: dict) -> dict:
     no_impact = sum(1 for it in nz_items if not it.get("impact"))
     insight_on = cfg.get("insight", {}).get("enabled", True)
     return {"summary": failed, "insight": bool(insight_on and nz_items and no_impact / len(nz_items) > 0.5),
-            "rank": "선별 실패" in (meta.get("degraded_reason") or "")}
+            "rank": bool(meta.get("rank_fallback")) or "선별 실패" in (meta.get("degraded_reason") or "")}   # 참고용(복구 대상 아님)
 
 
 def to_article(it: dict, section: str) -> Article:

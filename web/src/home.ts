@@ -239,7 +239,7 @@ async function fillWeekly(h: H, box: HTMLElement): Promise<void> {
 
 // ── 데이터 상태 ──
 interface Status {
-  brief: { date: string; generated_at: string; mode: string; degraded: boolean; degraded_reason: string; retries: number; requests: number };
+  brief: { date: string; generated_at: string; mode: string; degraded: boolean; degraded_reason: string; rank_fallback?: boolean; retries: number; requests: number };
   feeds: { total: number | null; failed: { id: string; name?: string }[] };
   ai: { today: number; cap: number | null };
   files: Record<string, string | null>;
@@ -265,7 +265,7 @@ export async function statusPanel(h: H, host: HTMLElement): Promise<void> {
   const dot = (ok: boolean, warn = false) => h("i", { class: `st-dot ${ok ? "ok" : warn ? "warn" : "bad"}`, "aria-hidden": "true" });
   const b = st.brief;
   const rows: HTMLElement[] = [
-    h("li", {}, dot(!b.degraded, b.degraded), h("span", {}, `브리핑 ${b.date}`), h("small", {}, `${ago(b.generated_at)} 생성 · AI 요청 ${b.requests}회${b.degraded ? ` · ⚠️ 요약 일부 실패(${b.retries}회 재시도)` : ""}`)),
+    h("li", {}, dot(!b.degraded, b.degraded), h("span", {}, `브리핑 ${b.date}`), h("small", {}, `${ago(b.generated_at)} 생성 · AI 요청 ${b.requests}회${b.degraded ? ` · ⚠️ 요약 일부 실패(${b.retries}회 재시도)` : ""}${b.rank_fallback ? " · 기사 고르기는 AI 대신 규칙으로" : ""}`)),
     h("li", {}, dot(st.feeds.failed.length === 0, st.feeds.failed.length < 3), h("span", {}, "뉴스 피드"), h("small", {}, `${st.feeds.total ?? "?"}개 중 실패 ${st.feeds.failed.length}${st.feeds.failed.length ? ` (${st.feeds.failed.map((f) => f.name || f.id).slice(0, 3).join(", ")})` : ""}`)),
     h("li", {}, dot(true), h("span", {}, "AI 사용"), h("small", {}, `오늘 ${st.ai.today}회${st.ai.cap ? ` (브리핑 몫 ${st.ai.cap}회)` : ""}`)),
   ];

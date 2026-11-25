@@ -257,6 +257,10 @@ GitHub 예약 실행(schedule)은 부하가 크면 누락될 수 있어서, 외�
    - Advanced → Request method `POST`, 헤더 `Accept: application/vnd.github+json`, `Authorization: Bearer <토큰>`, `X-GitHub-Api-Version: 2022-11-28`, `Content-Type: application/json`
    - Request body: `{"ref":"main","inputs":{"force":"false","processing_only":"false"}}`
    - Test run 결과가 **204** 면 성공 (Actions 탭에 Daily Brief 실행이 생김)
+3. **늦은 안전망(11~14시)도 cron-job.org 로** — GitHub 예약은 몇 시간씩 늦거나 빠지는 날이 있어서(예: 2026-11-25 는 11~14시 예약이 하나도 제시간에 안 돌았음) 같은 방식으로 하나 더 만듭니다.
+   - 위 작업을 복제(Clone)하고 실행 시각만 **매일 11:00, 12:00, 13:00, 14:00** (Pacific/Auckland, '시' 여러 개 선택)
+   - Request body: `{"ref":"main","inputs":{"force":"false","late":"true"}}`
+   - 오늘 브리핑이 멀쩡하면 몇 초 만에 끝나고 AI 를 쓰지 않습니다. 브리핑이 없으면 만들고, 요약이 실패한 탭만 고칩니다.
 
 ## 피드 추가·삭제
 

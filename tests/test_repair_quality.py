@@ -48,6 +48,7 @@ def test_repair_resummarizes_only_failed_sections_and_keeps_the_rest(monkeypatch
     assert s["items"][0]["title_ko"] == "오클랜드 렌트 상승" and s["items"][1]["id"] == "old"   # 이어 온 기사는 그대로
     assert brief["sections"]["kr_society"]["items"][0]["title_ko"] == "한국어 제목입니다"
     assert repair.needs({"meta": {"degraded_reason": "선별 실패"}, "sections": {}}, CFG)["rank"]
+    assert repair.needs({"meta": {"rank_fallback": True}, "sections": {}}, CFG)["rank"]
 
 
 def test_usage_by_kind_and_week_quality(tmp_path, monkeypatch):
