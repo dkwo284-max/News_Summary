@@ -69,6 +69,7 @@ weights:
     - { topic: "의료", keywords: [health, hospital, "Health NZ", "Te Whatu Ora", GP, "emergency department"] }
     - { topic: "치안", keywords: [crime, police, burglary, "ram raid", assault, safety] }
     - { topic: "기상재해", keywords: [flood, flooding, storm, cyclone, earthquake, "state of emergency", MetService, "red warning", "orange warning"] }
+    - { topic: "쇼핑 시즌·소비자 권리", keywords: ["Black Friday", "Boxing Day", "Cyber Monday", "Christmas shopping", "retail spending", "Consumer Guarantees Act", "Fair Trading Act", "Commerce Commission", scam, scams, Netsafe, "trading hours"] }
   low:
     - { topic: "스포츠", keywords: [rugby, "All Blacks", cricket, netball, "Black Caps", match, score, "Super Rugby", NRL, Warriors] }
     - { topic: "연예 가십", keywords: [celebrity, Bachelor, reality, gossip, Kardashian] }
@@ -114,8 +115,21 @@ exclude:
     - "in partnership with"
     - promo code
     - giveaway
-    - "Black Friday"
+    # 블랙프라이데이·박싱데이 소식(동향·사기 주의·소비자 권리)은 싣고, 할인 목록·쿠폰 기사만 뺍니다
     - "deal of the day"
+    - "best deals"
+    - "best Black Friday deals"
+    - "Black Friday deals"
+    - "Boxing Day deals"
+    - "Cyber Monday deals"
+    - "deals we love"
+    - "deals to shop"
+    - "sales to shop"
+    - "early deals"
+    - "discount code"
+    - "coupon"
+    - "coupons"
+    - "% off"
     - "[광고]"
     - "[AD]"
     - "협찬"
@@ -496,6 +510,16 @@ feeds:
     fallbacks:
       - "https://news.google.com/rss/search?q=site:rnz.co.nz/news/national+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
       - "https://news.google.com/rss/search?q=site:rnz.co.nz+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_nz_shopping_season
+    name: "Google News"
+    section: nz_national
+    google_news: true
+    lookback_hours: 48
+    # 쇼핑 시즌(블랙프라이데이·사이버먼데이·박싱데이): 소비 동향·사기 주의·소비자 권리. 할인 목록·쿠폰 기사는 exclude 가 거릅니다.
+    # season: 뉴질랜드 날짜(MM-DD) 범위에서만 수집. 해를 넘는 범위(12-20..01-05)도 됩니다.
+    season: ["11-15..12-05", "12-20..01-05"]
+    url: "https://news.google.com/rss/search?q=(%22Black+Friday%22+OR+%22Boxing+Day%22+OR+%22Cyber+Monday%22+OR+%22Christmas+shopping%22)+(spending+OR+retailers+OR+scam+OR+scams+OR+%22Commerce+Commission%22+OR+%22consumer+rights%22+OR+%22Consumer+NZ%22+OR+refund)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+    enabled: true
   - id: rnz_business
     name: "RNZ"
     section: nz_national

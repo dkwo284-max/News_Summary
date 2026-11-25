@@ -1,0 +1,14 @@
+{
+  "_doc": "학교 방학·오클랜드 행사처럼 규칙으로 계산할 수 없는 일정. 공식 페이지로 확인한 날짜만 넣고 url 에 출처를 적는다. 날짜가 공식 발표 전이면 tentative: true. 공휴일·쇼핑 시즌은 화면 코드(web/src/calendar.ts)가 규칙으로 계산한다.",
+  "checked": "2026-11-25",
+  "events": [
+    { "date": "2026-11-29", "title": "산타 퍼레이드 (Queen St, 오후 1시)", "kind": "event", "note": "비 오면 12/6", "url": "https://www.aucklandnz.com/events/all-events/farmers-santa-parade-auckland" },
+    { "date": "2026-12-12", "title": "크리스마스 인 더 파크 (오클랜드 도메인)", "kind": "event", "note": "무료 · 비 오는 날 대체일 없음", "url": "https://www.aucklandnz.com/events/all-events/coca-cola-christmas-in-the-park" },
+    { "date": "2026-12-19", "end": "2027-01-27", "title": "여름방학 (4학기는 늦어도 12/18 종료)", "kind": "school", "note": "1학기 시작은 학교마다 1/28~2/3", "url": "https://www.education.govt.nz/term-dates-and-holidays" },
+    { "date": "2027-02-18", "end": "2027-02-21", "title": "랜턴 페스티벌 (마누카우)", "kind": "event", "tentative": true, "note": "공식 발표 전", "url": "https://www.aucklandnz.com/lantern" },
+    { "date": "2027-03-13", "end": "2027-03-14", "title": "파시피카 페스티벌 (웨스턴 스프링스)", "kind": "event", "url": "https://www.aucklandnz.com/pasifika" },
+    { "date": "2027-04-10", "end": "2027-04-26", "title": "1학기 방학", "kind": "school", "url": "https://www.education.govt.nz/term-dates-and-holidays" },
+    { "date": "2027-07-03", "end": "2027-07-18", "title": "2학기 방학", "kind": "school", "url": "https://www.education.govt.nz/term-dates-and-holidays" },
+    { "date": "2027-09-25", "end": "2027-10-10", "title": "3학기 방학", "kind": "school", "url": "https://www.education.govt.nz/term-dates-and-holidays" }
+  ]
+}

@@ -1001,3 +1001,22 @@ body.has-player { padding-bottom: 76px; }
 .weekly-card li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; font-size: .875rem; }
 .weekly-card .wn { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft); font-size: .72rem; font-weight: 700; }
 .weekly-card a { color: inherit; }
+
+/* ── 📅 일정 달력 · 🧭 시즌 안내 (홈) ── */
+.cal-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.cal-list li { display: grid; grid-template-columns: 78px minmax(0, 1fr) auto; gap: 8px; align-items: baseline; font-size: .875rem; }
+.cal-d { white-space: nowrap; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.cal-t a { color: inherit; }
+.cal-dd { font-size: .74rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); white-space: nowrap; }
+.cal-holiday .cal-dd { background: color-mix(in srgb, #2e9d5b 16%, var(--surface)); }
+.cal-shopping .cal-dd { background: color-mix(in srgb, #d9822b 18%, var(--surface)); }
+.cal-card .small { font-size: .74rem; margin: 8px 0 0; }
+.guides { display: grid; gap: 8px; margin: 12px 0; }
+.guide-card { border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; background: var(--surface); }
+.guide-card.guide-shopping { border-left-color: #d9822b; }
+.guide-card.guide-holiday { border-left-color: #2e9d5b; }
+.guide-card > summary { cursor: pointer; padding: 10px 12px; font-weight: 700; font-size: .92rem; }
+.guide-card ul { margin: 0; padding: 0 14px 4px 30px; display: grid; gap: 4px; font-size: .86rem; }
+.guide-links { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 6px 12px 10px; font-size: .8rem; }
+.guide-links a { color: var(--accent); }
+@media (max-width: 420px) { .cal-list li { grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; } }

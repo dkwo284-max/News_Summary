@@ -127,11 +127,25 @@ def fetch_feed(client: httpx.Client, feed: dict, now: datetime, cfg_fetch: dict)
     return [], None, " | ".join(errors)
 
 
+def in_season(feed: dict, now: datetime) -> bool:
+    """feed.season(["MM-DD..MM-DD", ...], 뉴질랜드 날짜)이 있으면 그 기간에만 수집. 해를 넘는 범위도 됨."""
+    ranges = feed.get("season")
+    if not ranges:
+        return True
+    from zoneinfo import ZoneInfo
+    md = now.astimezone(ZoneInfo("Pacific/Auckland")).strftime("%m-%d")
+    for r in ranges:
+        start, end = (x.strip() for x in str(r).split(".."))
+        if (start <= md <= end) if start <= end else (md >= start or md <= end):
+            return True
+    return False
+
+
 def fetch_all(cfg: dict, now: datetime | None = None, fixtures_dir: Path | None = None) -> tuple[list[Article], list[dict], list[dict]]:
     """Returns (articles, failures, feed_stats)."""
     now = now or datetime.now(timezone.utc)
     fcfg = cfg["fetch"]
-    feeds = [f for f in cfg["feeds"] if f["enabled"]]
+    feeds = [f for f in cfg["feeds"] if f["enabled"] and in_season(f, now)]
     if fixtures_dir is not None:
         feeds = [
             {**f, "url": f"file://{fixtures_dir / (f['id'] + '.xml')}", "fallbacks": []}

@@ -1,6 +1,7 @@
 // 홈 화면: 오늘 핵심 3 · 내게 영향 큰 소식 · 탭별 새 소식 · 추이 그래프 · 최근 7일 정리 · 저장한 기사. AI 없음 (이미 만들어진 브리핑·데이터 파일만 읽는다).
 import { costsCard, numbersCard, pairsCard, quickRead, safetyCard, threadsCard, topicsHeat, weatherCard, monthlyCard, type Monthly, type Topics, type WeekThread } from "./home-extra";
 import { loadSaved, removeSaved } from "./news-tools";
+import { calendarCard, loadCalendar, seasonGuides } from "./calendar";
 import { canListen, startListening, type Track } from "./listen";
 import { loadTension, tensionHomeCard } from "./tension";
 import { procDays } from "./tracker";
@@ -146,6 +147,16 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
             h("strong", {}, link(it, it.title_ko)), h("p", {}, it.summary_ko[0] ?? ""), todo(it), go));
       }))));
   }
+
+  // 1-1) 🧭 시즌 생활 안내(일정 7일 전~다음 날) · 📅 앞으로 2주 일정 + D-day — 따로 받는 파일이라 늦게 채움
+  const calSlot = h("div", { class: "home-slot" });
+  root.append(calSlot);
+  void loadCalendar().then((ev) => {
+    if (!calSlot.isConnected) return;
+    const g = seasonGuides(h, ev), c = calendarCard(h, ev);
+    calSlot.append(...[g, c].filter((x): x is HTMLElement => !!x));
+    if (!calSlot.childElementCount) calSlot.remove();
+  }).catch(() => calSlot.remove());
 
   // 2) 내게 영향 큰 소식
   const high = all.filter((x) => x.it.impact?.level === "high" && !top.some((t) => t.it.id === x.it.id)).slice(0, 5);
