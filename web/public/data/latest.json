@@ -1,6 +1,6 @@
 {
  "date": "2026-11-26",
- "generated_at": "2026-11-26T11:15:58+13:00",
+ "generated_at": "2026-11-26T12:11:10+13:00",
  "timezone": "Pacific/Auckland",
  "sections": {
   "kr_society": {
@@ -232,7 +232,16 @@
      "figure": {
       "v": "15%",
       "l": "관세 상한선"
-     }
+     },
+     "timeline": [
+      {
+       "date": "2026-11-25",
+       "title_ko": "미국 '과잉생산 관세' 이르면 오늘 발표…외신 한국 15% 유지 예상",
+       "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBVYzFMZEdXRW9XcUdEbklSblNIY1hPZ0pXZzhDaFQ1S0I4eExmdnVoTjlMT1kwUl80aUNPb0RwRnhiT3lYVXVSX2s0VXAtWkVLemt1Z1B1X2htUjg3bjlpTThvU1ppTS1TNTVTTWJSU0JrZ25Q0gF0QVVfeXFMT1ZFaDNQVEJSbjdIZnZnaWl2c2hlSjVfOW82QWRoeDJSWF9uNVlYZGxZSldCR3BzckdiZHhXbUlOUlZsWm8zRWg2Z2VoNnp3WkFmWXdhenBaY251SnVpM0NadHhTMFhqVGVpU3lhR2hiZ1ZiNTM?oc=5",
+       "id": "746c2ef99eb8"
+      }
+     ],
+     "changed": "미 무역대표부가 과잉생산 관세 대상을 14개 경제주체로 공식 예고함"
     },
     {
      "id": "16e6e88584bf",
@@ -556,6 +565,12 @@
      "figure": {
       "v": "72세",
       "l": "실종자 연령"
+     },
+     "impact": {
+      "level": "none",
+      "reason": "캔터베리 지역 노인 실종 구조 소식으로 오클랜드 유학생 가족과 무관합니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -584,6 +599,12 @@
      "figure": {
       "v": "1,160만 달러",
       "l": "압수 자산"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "갱단 불법 범죄 수익 압수 소식으로 오클랜드 전반의 치안 단속 동향입니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -607,7 +628,13 @@
      ],
      "original_title": "Worries about staffing and workload at Dannevirke clinic",
      "published_at": "2026-11-25T05:49+00:00",
-     "why_it_matters": "지역 의료 서비스 접근성과 의료진 부족 문제를 보여주는 사회적 이슈입니다."
+     "why_it_matters": "지역 의료 서비스 접근성과 의료진 부족 문제를 보여주는 사회적 이슈입니다.",
+     "impact": {
+      "level": "none",
+      "reason": "타라루아 단네비르케 농촌 클리닉 의료진 공백 소식으로 무관합니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "2a0f2e4bf5d1",
@@ -643,6 +670,12 @@
      "figure": {
       "v": "13명",
       "l": "체포 인원"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "국제 마약 밀반입 다크웹 단속 뉴스로 치안 동향 참고용입니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -673,6 +706,12 @@
      "figure": {
       "v": "2,500만 달러",
       "l": "이월 상금"
+     },
+     "impact": {
+      "level": "none",
+      "reason": "로또 복권 당첨금 이월 소식으로 이민 및 취업 생활과 무관합니다.",
+      "actions": [],
+      "watch": ""
      }
     }
    ]
@@ -718,6 +757,12 @@
      "figure": {
       "v": "80명",
       "l": "학생 수"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "종교 사립학교 등록 취소 판결로 교육부의 안전 및 등록 규제 엄격화 기조를 보여줍니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -741,7 +786,13 @@
      ],
      "original_title": "Education Ministry has no plans to buy land earmarked for schools in fast-track Selwyn housing developments",
      "published_at": "2026-11-22T15:00+00:00",
-     "why_it_matters": "주택 개발 지역의 교육 시설 인프라 변화를 파악하는 데 참고할 만합니다."
+     "why_it_matters": "주택 개발 지역의 교육 시설 인프라 변화를 파악하는 데 참고할 만합니다.",
+     "impact": {
+      "level": "none",
+      "reason": "남섬 셀윈 신도시 지역 학교 부지 매입 관련 뉴스로 오클랜드 생활과 무관합니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "c8a252128ffe",
@@ -769,6 +820,12 @@
      "figure": {
       "v": "5년",
       "l": "거주 기간"
+     },
+     "impact": {
+      "level": "none",
+      "reason": "크라이스트처치 대학가 길거리 쓰레기 투기 소식으로 오클랜드 생활과 무관합니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -796,7 +853,36 @@
      "figure": {
       "v": "7세",
       "l": "학생 연령"
-     }
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 학교 교사의 물리력 허용 기준 설명으로 자녀 초등학교 입학 시 숙지할 내용입니다.",
+      "actions": [
+       "뉴질랜드 학교 신체 접촉 및 훈육 가이드라인 확인"
+      ],
+      "watch": ""
+     },
+     "timeline": [
+      {
+       "date": "2026-11-24",
+       "title_ko": "학교 내 학생 신체 접촉 한계와 규정 가이드라인 해설",
+       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOMVBTVFM3bzZ2a09XQkY5Sk4wb180RGlSaHdLZmJQbGJrRGUtUWE0RDZzTHdZVWxldmZwVUhCWmdHQVRMeG11ZS1fXzhyelJOTUxXVjhHdmxDS1hIMXVhM3Q1VHJRNG9mYUlhbmlHMXNxM3IwMXlJMWc2WWZNQ1NRYmpiZzdWeno3N2NXVUhYNHdRVzZSS2ZGTVZEYzU5ZnBHVVBvZHp1OW9xRnltdTNmUHJGbWx4Q3VWd0JGX2k3Ul9QT2RaREljdQ?oc=5",
+       "id": "9e66b6857df4"
+      },
+      {
+       "date": "2026-11-24",
+       "title_ko": "오클랜드 학교 내 뺨 때리기 사건으로 논란 가중",
+       "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxPRE01dVRmY1RWQjE2dXdxUVNHVUxzWEdUYzVwVmItN2tfOTVnbEhaeHpnc1ZpN2VWMWl0QlF3cHhhVFk1NzlKbEp1aUpvNEp0cTBUVEQ1NjJab2ktaXF3eTFhQ05kMlhCTWRZMGR2OEM4d2RZeHBUb25CZUhxbDVfaXpCX0R3VmdIYm0wSlhSdC1MRW5ELXh1N2ZzbUhmWDBXZHFERGZwUTNrSjlRZEp1MElrVFBHYTFaemZkY1dSNW9PbDdKUWt6dlUwY0dnTHpURW5NY2pCX1RrVV9QeGxacXdxNjEtSlk0OXN2MENTQUNiZDVZbGVtWWhrRXpZZVVZOEdhTHgzVlYtWkJvN2c?oc=5",
+       "id": "a1571d54a8cd"
+      },
+      {
+       "date": "2026-11-25",
+       "title_ko": "학교 내 신체 접촉 규율 지침 설명",
+       "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPZ3ZTazBaS25QNXJpeHJ5TXdCZ1pHcXRtR3p6dWF2NEZibDhhVFM4YVJOVWcwbE9vMnJ3d2V4akZ5eTMyeENfb3dOM3BQOFhLc2tlV05JQkFBS056Y2l0TkNhZmRHbS1SXzJaQTA2NnB5aV9zMWRMTjR2aldoSzRDX3ZXLXZjM08wclVHVW9PdWF0NzVQZmRMVkZxWkRjbmN6X2dHUjVIdFpreFBRRTJNMVhYNGhha1U?oc=5",
+       "id": "cb3950292a00"
+      }
+     ],
+     "changed": "신체 접촉 사건을 계기로 합법적 물리력 제지와 체벌의 법적 경계를 심층 해설함"
     },
     {
      "id": "366865f1e790",
@@ -818,7 +904,13 @@
      ],
      "original_title": "How well is your school doing? NCEA and UE results for every college revealed",
      "published_at": "2026-11-23T16:11+00:00",
-     "why_it_matters": "국내 교육 기관의 학업 성취도와 교육 질을 가늠해볼 수 있는 지표입니다."
+     "why_it_matters": "국내 교육 기관의 학업 성취도와 교육 질을 가늠해볼 수 있는 지표입니다.",
+     "impact": {
+      "level": "low",
+      "reason": "전국 고교 NCEA 및 대학진학 성적 공개 데이터로 장기 자녀 진학 참고 자료입니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "3ca8034f5022",
@@ -841,7 +933,13 @@
      ],
      "original_title": "In defence of rubbish collectors and wagging Wellington College students",
      "published_at": "2026-11-24T22:32+00:00",
-     "why_it_matters": "청소년 교육 및 지역 사회 구성원들의 역할에 대한 단상을 제공합니다."
+     "why_it_matters": "청소년 교육 및 지역 사회 구성원들의 역할에 대한 단상을 제공합니다.",
+     "impact": {
+      "level": "none",
+      "reason": "웰링턴 고교 학생들의 무단 결석 관련 칼럼으로 직접적 영향이 없습니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
    ]
   },
@@ -875,6 +973,14 @@
      "figure": {
       "v": "2.50달러",
       "l": "과거 휘발유 가격"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "크리스마스 앞두고 유가 하락 전망으로 차량 유지비 및 가족 생활비 부담이 다소 완화됩니다.",
+      "actions": [
+       "주유 앱(Gaspy 등)으로 인근 최저가 주유소 확인"
+      ],
+      "watch": ""
      }
     },
     {
@@ -898,7 +1004,13 @@
      ],
      "original_title": "RBNZ signals strong appetite for revamp of bank-owned payments system",
      "published_at": "2026-11-25T00:18+00:00",
-     "why_it_matters": "금융 인프라 변화는 경제 전반의 효율성과 금융 소비자 편익에 영향을 줍니다."
+     "why_it_matters": "금융 인프라 변화는 경제 전반의 효율성과 금융 소비자 편익에 영향을 줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "중앙은행의 은행 간 결제망 개편 추진으로 장기적 금융 편익에 영향을 미칩니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "52544eef146d",
@@ -926,7 +1038,28 @@
      "figure": {
       "v": "58명",
       "l": "감원 예정 인원"
-     }
+     },
+     "impact": {
+      "level": "low",
+      "reason": "공영방송 RNZ 감원 및 노조 시위 소식으로 미디어 업계 채용 축소 분위기입니다.",
+      "actions": [],
+      "watch": ""
+     },
+     "timeline": [
+      {
+       "date": "2026-11-10",
+       "title_ko": "RNZ, 1180만 달러 적자 충격 속 약 60명 감원 계획 발표",
+       "url": "https://www.nzherald.co.nz/business/media-insider/media-insider-rnz-annual-result-almost-60-jobs-to-be-cut-at-rnz-following-massive-deficit/FFAOSXQSFZFNNH5CUTNZILREBI/",
+       "id": "55df26e62937"
+      },
+      {
+       "date": "2026-11-17",
+       "title_ko": "RNZ 1,180만 달러 적자 여파로 직원들 항의 시위 예고",
+       "url": "https://www.stuff.co.nz/culture/361060146/calls-rnz-chair-stand-down-staff-set-protest-job-cuts",
+       "id": "610247204168"
+      }
+     ],
+     "changed": "적자 감원 계획에 반발해 직원들이 오클랜드와 웰링턴에서 실제 항의 시위와 청원에 돌입함"
     },
     {
      "id": "f38015032c92",
@@ -950,7 +1083,24 @@
      ],
      "original_title": "'Stressed about money and working multiple jobs': The new uni experience",
      "published_at": "2026-11-24T17:12+00:00",
-     "why_it_matters": "유학생 및 대학생들이 직면한 경제적 현실과 생활비 부담을 보여줍니다."
+     "why_it_matters": "유학생 및 대학생들이 직면한 경제적 현실과 생활비 부담을 보여줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "대학생 생활비 스트레스와 N잡 현실로, 유학생의 학업 및 생활비 예산 관리에 유의해야 합니다.",
+      "actions": [
+       "가계 예산 점검 및 비자별 허용 노동 시간 확인"
+      ],
+      "watch": ""
+     },
+     "timeline": [
+      {
+       "date": "2026-11-25",
+       "title_ko": "생활고와 복수 직업에 시달리는 뉴질랜드 대학생들의 현실",
+       "url": "https://www.rnz.co.nz/news/education/2768278/stressed-about-money-and-working-multiple-jobs-the-new-uni-experience",
+       "id": "aeb458cc75ae"
+      }
+     ],
+     "changed": "치솟는 생활비로 복수 알바를 병행하는 대학생들의 구체적 스트레스와 현실 심층 보도"
     },
     {
      "id": "ab3a9d18802e",
@@ -977,6 +1127,14 @@
      "figure": {
       "v": "2.4%",
       "l": "예상 연간 성장률"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "완만한 경기 회복 전망은 졸업 후 취업 시장 및 기업 채용 확대 여부와 직결됩니다.",
+      "actions": [
+       "목표 산업군 채용 동향 및 고용 지표 모니터링"
+      ],
+      "watch": ""
      }
     }
    ]
@@ -1006,7 +1164,13 @@
      ],
      "original_title": "Kilmar Ábrego García, a Salvadoran national mistakenly deported from the US, arrives in Spain",
      "published_at": "2026-11-25T12:59+00:00",
-     "why_it_matters": "해외 이민 행정과 추방 관련 글로벌 이슈로 직접적 관련성은 낮습니다."
+     "why_it_matters": "해외 이민 행정과 추방 관련 글로벌 이슈로 직접적 관련성은 낮습니다.",
+     "impact": {
+      "level": "none",
+      "reason": "미국과 엘살바도르, 스페인 간 추방 오류 사건으로 뉴질랜드와 무관합니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "55da43513435",
@@ -1033,6 +1197,14 @@
      "figure": {
       "v": "39만 명",
       "l": "특수 투표 수"
+     },
+     "impact": {
+      "level": "high",
+      "reason": "선거 결과 및 새 정부 구성에 따라 유학생 취업비자 및 이민 규정 방향이 결정됩니다.",
+      "actions": [
+       "총선 최종 결과 발표 후 연정 협상 내용 확인"
+      ],
+      "watch": "총선 공식 최종 결과 발표"
      }
     },
     {
@@ -1059,6 +1231,12 @@
      "figure": {
       "v": "1만 달러",
       "l": "반환된 후원금"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "국민당의 정치 후원금 반환 뉴스이며 일상생활이나 비자 정책 영향은 미미합니다.",
+      "actions": [],
+      "watch": ""
      }
     },
     {
@@ -1082,7 +1260,15 @@
      ],
      "original_title": "Watch: Peters silent on Michael Laws, working with Opportunity or Labour",
      "published_at": "2026-11-25T04:56+00:00",
-     "why_it_matters": "정치권 연립 정부 협상 결과에 따라 이민 및 노동 정책의 향방이 결정됩니다."
+     "why_it_matters": "정치권 연립 정부 협상 결과에 따라 이민 및 노동 정책의 향방이 결정됩니다.",
+     "impact": {
+      "level": "high",
+      "reason": "NZ퍼스트 피터스 대표의 연정 협상 행보는 차기 정부의 이민 축소 및 비자 정책에 핵심 변수입니다.",
+      "actions": [
+       "NZ퍼스트당 연정 협상 조건 및 이민 공약 확인"
+      ],
+      "watch": "정부 구성 연합 협상 발표"
+     }
     }
    ]
   },
@@ -1092,7 +1278,7 @@
    "items": [
     {
      "id": "f0833ddd8ba5",
-     "title_ko": "오클랜드 남부 고속도로 3중 추돌로 2명 부상·차선 차단",
+     "title_ko": "오클랜드 고속도로 3중 추돌로 2명 부상·차선 차단",
      "summary_ko": [
       "오클랜드 SH1 고속도로 타카니니 인근에서 차량 3대가 충돌했습니다.",
       "1명이 중태에 빠져 병원으로 이송되었고 남행 2개 차선이 통제되었습니다.",
@@ -1131,6 +1317,22 @@
      "figure": {
       "v": "2명",
       "l": "교통사고 부상자 수"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 남부 고속도로 사고로 인한 일시적 교통 정체 뉴스입니다.",
+      "actions": [
+       "남부 고속도로 이동 시 실시간 교통 확인"
+      ],
+      "watch": ""
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "",
+      "location": "",
+      "suburb": "",
+      "region": "",
+      "precision": "none"
      }
     },
     {
@@ -1158,6 +1360,20 @@
      "figure": {
       "v": "40여 년",
       "l": "사건 경과 기간"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "과거 성범죄 사법 처리에 관한 뉴스로 일상에 직접 영향은 없습니다.",
+      "actions": [],
+      "watch": ""
+     },
+     "incident": {
+      "severity": "1",
+      "crime": "성폭행",
+      "location": "",
+      "suburb": "",
+      "region": "",
+      "precision": "none"
      }
     },
     {
@@ -1185,6 +1401,20 @@
      "figure": {
       "v": "2명",
       "l": "기소된 피의자 수"
+     },
+     "impact": {
+      "level": "low",
+      "reason": "인프라 케이블 절도 범죄 단속으로 대중교통 등 간접 지연 가능성이 있습니다.",
+      "actions": [],
+      "watch": ""
+     },
+     "incident": {
+      "severity": "3",
+      "crime": "절도",
+      "location": "",
+      "suburb": "",
+      "region": "",
+      "precision": "none"
      }
     }
    ]
@@ -1214,7 +1444,13 @@
      ],
      "original_title": "Watch: ‘She’s the one’, Robbie Williams serenades a fan at Eden Park concert",
      "published_at": "2026-11-25T02:28+00:00",
-     "why_it_matters": "이든파크 대형 행사 당일에는 주변 대중교통 혼잡과 교통 통제가 발생할 수 있습니다."
+     "why_it_matters": "이든파크 대형 행사 당일에는 주변 대중교통 혼잡과 교통 통제가 발생할 수 있습니다.",
+     "impact": {
+      "level": "low",
+      "reason": "이든파크 대형 콘서트 관련 소식으로 인근 교통 혼잡 외 영향은 없습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "2836a77f8ec7",
@@ -1237,7 +1473,13 @@
      ],
      "original_title": "Botany Library - Christmas Market",
      "published_at": "2026-11-25T07:24+00:00",
-     "why_it_matters": "동부 오클랜드 거주 유학생이 저렴하게 생활용품을 구하거나 현지 문화를 체험하기 좋습니다."
+     "why_it_matters": "동부 오클랜드 거주 유학생이 저렴하게 생활용품을 구하거나 현지 문화를 체험하기 좋습니다.",
+     "impact": {
+      "level": "low",
+      "reason": "지역 도서관 크리스마스 행사로 생활 문화 체험 정보입니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "463899ee9cce",
@@ -1260,7 +1502,15 @@
      ],
      "original_title": "Proposed council cuts to libraries, pools could hurt the 'soul of the city'",
      "published_at": "2026-11-24T21:49+00:00",
-     "why_it_matters": "도서관 등 무료 공공시설 축소는 유학생의 학습 공간과 생활 편의에 직접 영향을 줍니다."
+     "why_it_matters": "도서관 등 무료 공공시설 축소는 유학생의 학습 공간과 생활 편의에 직접 영향을 줍니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "시의회 예산 삭감 시 도서관·수영장 등 가족 이용 공공시설이 축소될 수 있습니다.",
+      "actions": [
+       "거주지 인근 시립 도서관·수영장 운영 변동 확인"
+      ],
+      "watch": "시의회 예산안 확정 여부"
+     }
     },
     {
      "id": "1d8d3975efa3",
@@ -1283,7 +1533,13 @@
      ],
      "original_title": "\"Different scenarios\": Co-ordination key as Auckland Council plans for rising electricity demand",
      "published_at": "2026-11-24T19:14+00:00",
-     "why_it_matters": "인프라 용량 확대와 전력망 안정성은 향후 공공요금 및 거주 환경에 영향을 미칩니다."
+     "why_it_matters": "인프라 용량 확대와 전력망 안정성은 향후 공공요금 및 거주 환경에 영향을 미칩니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 장기 전력 인프라 계획으로 장기 생활환경 관련 소식입니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
    ]
   },
@@ -1316,6 +1572,22 @@
      "figure": {
       "v": "8세",
       "l": "피해 아동 나이"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "오클랜드 해변 모래 속 주삿바늘 사고로 어린 자녀의 야외 안전 주의가 필요합니다.",
+      "actions": [
+       "동부 해변 방문 시 자녀 아쿠아슈즈 착용"
+      ],
+      "watch": ""
+     },
+     "incident": {
+      "severity": "accident",
+      "crime": "",
+      "location": "Kohimarama Beach",
+      "suburb": "Kohimarama",
+      "region": "",
+      "precision": "exact"
      }
     },
     {
@@ -1339,7 +1611,13 @@
      ],
      "original_title": "Health Reporoa seeks funding to save free rural counselling service",
      "published_at": "2026-11-24T23:02+00:00",
-     "why_it_matters": "뉴질랜드 지역사회의 공공 지원 축소로 취약계층 서비스 유지가 어려워지고 있습니다."
+     "why_it_matters": "뉴질랜드 지역사회의 공공 지원 축소로 취약계층 서비스 유지가 어려워지고 있습니다.",
+     "impact": {
+      "level": "none",
+      "reason": "와이카토 지방 농촌 무료 상담소 재정난으로 오클랜드 유학생 가족과 무관합니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "9960928de2d9",
@@ -1366,6 +1644,14 @@
      "figure": {
       "v": "5곳",
       "l": "통합 대상 의원 수"
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "GP 의원 디지털 헬스케어 통합으로 가족의 원격 의료 및 진료 편의에 영향이 있습니다.",
+      "actions": [
+       "이용 중인 GP 병원의 Tend 앱 연동 여부 확인"
+      ],
+      "watch": ""
      }
     },
     {
@@ -1393,6 +1679,15 @@
      "figure": {
       "v": "16만 달러",
       "l": "요구된 일자리 대가"
+     },
+     "impact": {
+      "level": "high",
+      "reason": "취업비자 매매 불법 고용주 처벌 뉴스로, 비자 취득 시 인증 고용주 준법성 확인이 필수입니다.",
+      "actions": [
+       "구직 시 비자 관련 금전 요구 고용주 배제",
+       "이민성 공인 인증 고용주(AEWV) 명단 확인"
+      ],
+      "watch": ""
      }
     },
     {
@@ -1416,7 +1711,13 @@
      ],
      "original_title": "Car park sale concerns east Auckland commuters",
      "published_at": "2026-11-25T12:37+00:00",
-     "why_it_matters": "도심 출퇴근 환승 주차장이 축소될 경우 대중교통 이용 및 차량 통근 비용이 늘어납니다."
+     "why_it_matters": "도심 출퇴근 환승 주차장이 축소될 경우 대중교통 이용 및 차량 통근 비용이 늘어납니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "대중교통 환승 주차장 매각 시 향후 출퇴근 및 차량 통근 비용이 늘어날 수 있습니다.",
+      "actions": [],
+      "watch": "시의회 환승 주차장 매각 승인 여부"
+     }
     }
    ]
   },
@@ -1449,7 +1750,32 @@
      "figure": {
       "v": "2명",
       "l": "흉기 난동 부상자"
-     }
+     },
+     "impact": {
+      "level": "medium",
+      "reason": "에이번데일 흉기·마약 사건 등 치안 이슈로 향후 졸업 후 렌트 주거지 선정에 유의해야 합니다.",
+      "actions": [
+       "렌트 희망 지역 인근 안전도 및 공공주택 현황 확인"
+      ],
+      "watch": ""
+     },
+     "incident": {
+      "severity": "1",
+      "crime": "흉기 난동",
+      "location": "Avondale",
+      "suburb": "Avondale",
+      "region": "",
+      "precision": "suburb"
+     },
+     "timeline": [
+      {
+       "date": "2026-11-25",
+       "title_ko": "사회주택 유입 속 아본데일 지역 마체테 습격 등으로 긴장 고조",
+       "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOWGxmYWhtenJZeUYyRVk5T2h1eWlnckhCdW9mdlpWOUV3THdGOFVUTTdTMjlCRFB6MEl6RHB6UERqbmc4MnEtUmZrUFBvM1FyZjg5ck0wTi16SVdWMVZQNHhXeXRwejd5UmxtbzU0UkdMdlRGUTM0d1BOMUhFN1RfQnZacHN6NGlFYjBtSXR2NGtELUFQWGxPRjcwQ05qWC0zOU5QeS1OQ0ZZd2RhS2c5azlob0w1YmktNjFMWTRJUzd6TlBNaTJfXzI3RDhkMlZZLWdOamw5Y3huS1JzbzVyalE3ajc?oc=5",
+       "id": "5f026cba50d9"
+      }
+     ],
+     "changed": "공공주택 주변 보안 요원 배치 및 지역 주민들의 치안 지원 요구 목소리가 보도됨"
     }
    ]
   },
@@ -1478,7 +1804,13 @@
      ],
      "original_title": "Auckland’s Apex GP Training Facility Affiliates With Motorcycling New Zealand",
      "published_at": "2026-11-25T04:17+00:00",
-     "why_it_matters": "오클랜드 내 공인 스포츠 및 취미 훈련 시설 확충에 관한 지역 정보입니다."
+     "why_it_matters": "오클랜드 내 공인 스포츠 및 취미 훈련 시설 확충에 관한 지역 정보입니다.",
+     "impact": {
+      "level": "none",
+      "reason": "모터사이클 훈련소 제휴 소식으로 유학생 가족과 무관합니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
    ]
   },
@@ -1506,7 +1838,22 @@
      ],
      "original_title": "New St Cuthbert’s principal Thea Kilian reveals priorities as she prepares to take reins",
      "published_at": "2026-11-24T16:00+00:00",
-     "why_it_matters": "오클랜드 명문 학교의 교육 기조와 전반적인 지역 사립 교육계 분위기를 보여줍니다."
+     "why_it_matters": "오클랜드 명문 학교의 교육 기조와 전반적인 지역 사립 교육계 분위기를 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "오클랜드 사립 여학교 교장 취임 인터뷰로 일반 초등 자녀 교육과 간접적입니다.",
+      "actions": [],
+      "watch": ""
+     },
+     "timeline": [
+      {
+       "date": "2026-11-12",
+       "title_ko": "명문 여고 신임 교장 임명",
+       "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOTnNINm84UWRjVjlHNlNkYlVRbWQ4Q09kTDFta3hfSGV0WUJ1M3pUZ3JyNVVCNjBYbjNXQkFZT0JvVmhpM3JjanJ1ZE1qQjRIWFZhUk1VdnpoR2NYV0stUTZaMHZqamxHT0lGakJidDZHck53REdCTEdyUlZpOGxZY3lWdnBuWXFkRzRDV0V5QmU4LW9zZmVVNm1xVVEyNUJVYlZaZWhVNlZmUQ?oc=5",
+       "id": "0c08a15ef434"
+      }
+     ],
+     "changed": "신임 교장이 정식 취임을 앞두고 학업 우수성과 학생 돌봄에 대한 구체적 우선순위를 밝힘"
     },
     {
      "id": "ceb0d687cd34",
@@ -1529,7 +1876,15 @@
      ],
      "original_title": "The little things make for a big first day at school",
      "published_at": "2026-11-24T00:41+00:00",
-     "why_it_matters": "뉴질랜드 조기 공교육 체계와 학교 생활 적응 지원 방식을 파악할 수 있습니다."
+     "why_it_matters": "뉴질랜드 조기 공교육 체계와 학교 생활 적응 지원 방식을 파악할 수 있습니다.",
+     "impact": {
+      "level": "high",
+      "reason": "초등학교 입학 예정 자녀의 뉴질랜드 학교 첫 등교 및 현지 적응에 유용한 가이드입니다.",
+      "actions": [
+       "자녀 초등학교 입학 준비물 및 적응 안내 확인"
+      ],
+      "watch": ""
+     }
     },
     {
      "id": "a1571d54a8cd",
@@ -1552,7 +1907,13 @@
      ],
      "original_title": "'Last resort': Alleged slap that took place at Auckland school sparks debate",
      "published_at": "2026-11-23T05:46+00:00",
-     "why_it_matters": "뉴질랜드 교육 기관 내 폭력 예방 지침과 학생 규율 관리 기준을 엿볼 수 있습니다."
+     "why_it_matters": "뉴질랜드 교육 기관 내 폭력 예방 지침과 학생 규율 관리 기준을 엿볼 수 있습니다.",
+     "impact": {
+      "level": "medium",
+      "reason": "현지 학교 내 체벌 및 신체 훈육 기준 논란으로 자녀 학교 안전과 관련 있습니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "61c13f9d5fc6",
@@ -1575,7 +1936,22 @@
      ],
      "original_title": "Student finds 'dream job' on register at new Mini Woolies school site",
      "published_at": "2026-11-23T01:00+00:00",
-     "why_it_matters": "취약계층 직업 교육과 현지 기업의 사회적 고용 연계 노력을 보여줍니다."
+     "why_it_matters": "취약계층 직업 교육과 현지 기업의 사회적 고용 연계 노력을 보여줍니다.",
+     "impact": {
+      "level": "low",
+      "reason": "특수학교 대상 직업 실습 프로그램 소개 기사입니다.",
+      "actions": [],
+      "watch": ""
+     },
+     "timeline": [
+      {
+       "date": "2026-11-24",
+       "title_ko": "로토루아 특수학교에 미니 울리스(Mini Woolies) 매장 개소",
+       "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQME5LcWZjMzhoS0Y5bU51X2UxUW1LaHNFTkhMeklrNVZDa0FFMzQ0Vmg2T0pnaTlqZUhjdzdMcFU0SThxTnBENnVCNnlUVGlSQzdlQTI5V1hxXzlrUkl6anhPbXZ4cnJ4M3ZHZXlfRkk2QkUxS2lVMzJDcmFpNHFpMDZkQnpJMzlobDZpRjYzTlJuUUJTbnFfekZfdHI3UjlWUHEwdTlpWFBjZFJlVEk0QmVEUjQ4R3hSejkzd3VPZmw4alhh?oc=5",
+       "id": "7d9ee4b428b8"
+      }
+     ],
+     "changed": "특수학교 미니 울리스 매장에서 실제 실습에 참여한 학생의 긍정적인 직업 훈련 경험이 소개됨"
     },
     {
      "id": "3c81aab9146d",
@@ -1598,7 +1974,13 @@
      ],
      "original_title": "Teacher makes a gin made out of carrots, Straight Up",
      "published_at": "2026-11-23T15:00+00:00",
-     "why_it_matters": "뉴질랜드 자원 순환형 창업 사례와 로컬 식음료 산업 트렌드를 보여줍니다."
+     "why_it_matters": "뉴질랜드 자원 순환형 창업 사례와 로컬 식음료 산업 트렌드를 보여줍니다.",
+     "impact": {
+      "level": "none",
+      "reason": "와이카토 지역 교사의 당근 진 개발 소식으로 유학생 가족과 무관합니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
    ]
   },
@@ -1633,7 +2015,16 @@
       "v": "2026년",
       "l": "시행 연도"
      },
-     "radar": 9
+     "radar": 9,
+     "impact": {
+      "level": "high",
+      "reason": "2026년 AEWV 취업비자 신규 규정 도입으로 졸업 후 취업비자에서 영주권 연결에 직접적 영향이 있습니다.",
+      "actions": [
+       "2026년 AEWV 변경 요건 및 고용주 자격 확인",
+       "희망 직종의 Green List 및 SMC 점수표 대조"
+      ],
+      "watch": "2026년 AEWV 세부 시행안 발표"
+     }
     },
     {
      "id": "c9f17aebf86f",
@@ -1658,7 +2049,13 @@
      "original_title": "Migrant nurse welcomed to Aotearoa with a punch — but repays with aroha",
      "published_at": "2026-11-25T05:06+00:00",
      "why_it_matters": "뉴질랜드 사회 적응 과정에서 발생할 수 있는 안전 문제를 인식하고 대처하는 데 도움이 됩니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "low",
+      "reason": "이주 간호사 폭행 피해 및 극복 미담으로 이주민 생활 적응 참고용입니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "370c1b625f17",
@@ -1683,7 +2080,16 @@
      "original_title": "Post-Study and Short-Term Graduate Work Visas now on enhanced Immigration Online",
      "published_at": "2026-11-22T21:43+00:00",
      "why_it_matters": "석사 졸업 후 취업비자를 온라인으로 신청할 때 직접적으로 이용하게 되는 필수 시스템입니다.",
-     "radar": 8
+     "radar": 8,
+     "impact": {
+      "level": "high",
+      "reason": "석사 졸업 후 신청할 Post Study Work Visa 시스템이 온라인 개편되어 직접 이용하게 됩니다.",
+      "actions": [
+       "이민성 강화된 온라인 포털 계정 생성 및 점검",
+       "졸업 후 취업비자 필요 증빙 서류 사전 정리"
+      ],
+      "watch": "개편된 이민 온라인 포털 안정화 추이"
+     }
     },
     {
      "id": "92fc113c393b",
@@ -1707,7 +2113,13 @@
      "original_title": "New Zealand Golden Visa Billions at Risk From Banking Gap",
      "published_at": "2026-11-24T18:20+00:00",
      "why_it_matters": "직접적인 학생비자나 취업비자와는 거리가 있으나 국가 이민 자본 유치 흐름을 보여줍니다.",
-     "radar": 5
+     "radar": 5,
+     "impact": {
+      "level": "none",
+      "reason": "고액 투자자 골든 비자 관련 금융권 규제 이슈로 유학생 영주권 경로와 무관합니다.",
+      "actions": [],
+      "watch": ""
+     }
     },
     {
      "id": "1a0f52b7cf11",
@@ -1736,7 +2148,15 @@
       "v": "5,000만 달러",
       "l": "시스템 실패 비용"
      },
-     "radar": 5
+     "radar": 5,
+     "impact": {
+      "level": "medium",
+      "reason": "이민성 신규 생체인식 시스템 추진으로 향후 비자 심사 절차 및 신원 확인 방식이 변경될 수 있습니다.",
+      "actions": [
+       "향후 비자 신청 시 생체인식 요구사항 공지 확인"
+      ],
+      "watch": "이민성 신규 생체인식 시스템 도입 일정"
+     }
     },
     {
      "id": "73d99c10fbaa",
@@ -1765,7 +2185,13 @@
       "v": "3년",
       "l": "징역형 기간"
      },
-     "radar": 5
+     "radar": 5,
+     "impact": {
+      "level": "low",
+      "reason": "호주 영주권 불법 판매 사기 징역형 뉴스로 공인 비자 절차 준수의 중요성을 시사합니다.",
+      "actions": [],
+      "watch": ""
+     }
     }
    ]
   }
@@ -2140,10 +2566,10 @@
     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPZG5JMUwxQ093cjB6N2x5bi0zTXF1T0YyZEl3LVVoVHVqcS1QTXg1X29QSmdRUTdwdVZiVU41eUR1bmVZcVk3bkM3RlBCNnRJamdaUGJGMzlXNjB1M3pRWG9KLU4zSXJmTVctSkR0LUpIaGVlOUs1TkswdnBFcDFiZXhicU5aY01SNGxNZEgzTzJJWUItZjg0cENpdS1neFRCTG80?oc=5"
    }
   ],
-  "degraded": true,
-  "degraded_reason": "영향 분석 실패",
+  "degraded": false,
+  "degraded_reason": "",
   "rank_fallback": true,
-  "retries": 7,
+  "retries": 8,
   "quality": {
    "items": 64,
    "bad": 0,
@@ -2151,17 +2577,9 @@
    "bad_ids": []
   },
   "repaired": {
-   "summary": [
-    "akl_safety",
-    "akl_local",
-    "akl_life",
-    "akl_property",
-    "akl_health",
-    "akl_education",
-    "nz_immigration"
-   ],
-   "insight": false,
-   "requests": 2
+   "summary": [],
+   "insight": true,
+   "requests": 1
   }
  }
 }
