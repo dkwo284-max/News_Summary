@@ -1,0 +1,77 @@
+name: Daily Brief late retry
+
+# 늦은 안전망(현지 11·12·13·14시): GitHub 예약(cron)은 몇 시간씩 늦거나 빠지는 날이 있어서, 새벽 복구 루프가 끝났는데도
+# 오늘 브리핑이 없거나 요약이 실패한 상태면 daily.yml 이 이 워크플로를 hour=11 로 직접 호출한다(외부 cron 불필요).
+# 정해진 시각(현지)까지 기다렸다가 한 번 재시도하고, 그래도 안 되면 다음 시각(+1시간)으로 자신을 다시 호출 → 14시에 끝.
+# 브리핑이 멀쩡해지면 바로 멈춘다. 대기 시간은 공개 저장소라 Actions 시간 무료.
+on:
+  workflow_dispatch:
+    inputs:
+      hour:
+        description: "현지(Pacific/Auckland) 몇 시에 재시도할지 (11~14)"
+        default: "11"
+
+permissions:
+  contents: write
+  actions: write   # 다음 시각 재호출 + Pages 배포 호출
+
+concurrency:
+  group: daily-brief-late
+  cancel-in-progress: false
+
+jobs:
+  late:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330   # 새벽 07시쯤 호출돼 11시까지 기다리는 경우(약 4시간) + 재시도
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Wait, retry, chain
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AI_PROFILE: production
+          GH_TOKEN: ${{ github.token }}
+          HOUR: ${{ inputs.hour }}
+        run: |
+          set -u
+          git config user.name "daily-brief-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          target=$(( 10#${HOUR:-11} )); [ "$target" -lt 11 ] && target=11
+          [ "$target" -gt 14 ] && { echo "after 14:00 — done"; exit 0; }
+          now=$(date +%s); at=$(TZ=Pacific/Auckland date -d "today ${target}:00" +%s)
+          wait=$(( at - now ))
+          if [ "$wait" -gt 18000 ]; then echo "target is more than 5h away — not waiting"; exit 0; fi
+          if [ "$wait" -gt 0 ]; then echo "waiting ${wait}s until ${target}:00 NZ"; sleep "$wait"; fi
+          state() { python - <<'PY'
+          import json, os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          now = datetime.now(ZoneInfo("Pacific/Auckland"))
+          f = f"web/public/data/{now.date().isoformat()}.json"
+          if not os.path.exists(f):
+              print("none"); raise SystemExit
+          print("degraded" if (json.load(open(f, encoding="utf-8")).get("meta") or {}).get("degraded") else "fine")
+          PY
+          }
+          git pull -q --rebase origin "${GITHUB_REF_NAME}" || true
+          st=$(state); echo "state before: $st"
+          if [ "$st" != "fine" ]; then
+            python scripts/main.py --retry-late || true
+            git add web/public/data
+            if ! git diff --cached --quiet; then
+              git commit -q -m "brief: late retry ${target}:00"
+              for j in 1 2 3; do git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}" && break; sleep $((j * 5)); done
+              gh api -X POST "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/dispatches" -f ref="${GITHUB_REF_NAME}" || echo "deploy dispatch failed"
+            fi
+          fi
+          st=$(state); echo "state after: $st"
+          cur=$(( 10#$(TZ=Pacific/Auckland date +%H) )); next=$(( (cur > target ? cur : target) + 1 ))
+          if [ "$st" != "fine" ] && [ "$next" -le 14 ]; then
+            echo "still $st — scheduling ${next}:00 NZ"
+            gh workflow run late-retry.yml --ref "${GITHUB_REF_NAME}" -f hour="$next" || echo "chain dispatch failed (GitHub 예약 안전망이 남아 있음)"
+          fi

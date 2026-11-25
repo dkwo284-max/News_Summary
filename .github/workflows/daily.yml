@@ -154,7 +154,14 @@ jobs:
               gh api -X POST "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy.yml/dispatches" -f ref="${GITHUB_REF_NAME}" || echo "deploy dispatch failed"   # 고칠 때마다 사이트에 바로 반영
             fi
           done
-          echo "final: $(state)"
+          fin=$(state); echo "final: $fin"
+          # 아침 안에 못 고쳤으면(또는 오늘 브리핑이 아직 없으면) 11시 늦은 재시도를 직접 예약 — GitHub 예약·외부 cron 에 기대지 않음.
+          # 이미 대기 중인 늦은 재시도가 있으면 또 만들지 않는다.
+          hr=$(( 10#$(TZ=Pacific/Auckland date +%H) ))
+          if [ "$fin" != "fine" ] && [ "$hr" -ge 3 ] && [ "$hr" -lt 14 ]; then
+            busy=$(gh run list --workflow late-retry.yml --limit 5 --json status --jq '[.[] | select(.status != "completed")] | length' 2>/dev/null || echo 0)
+            if [ "${busy:-0}" = "0" ]; then gh workflow run late-retry.yml --ref "${GITHUB_REF_NAME}" -f hour=11 && echo "late retry scheduled for 11:00 NZ"; else echo "late retry already pending"; fi
+          fi
 
       - name: Open issue on failure
         if: failure()
