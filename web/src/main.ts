@@ -6,7 +6,7 @@ import { gpSection, loadGP } from "./gpmap";
 import { loadIncidents, safetyAlert, safetySection, placeLabel, vaguePlace } from "./crimemap";
 import { loadTension, worldView } from "./tension";
 import { findHits, importWatchFromHash, loadAreas, loadWatch, mentions, neighbourhoodView, renderWatchEditor, type Hit } from "./areas";
-import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, isSaved, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, toggleSaved, unfollow, type SeenIndex, englishPanel } from "./news-tools";
+import { EDU_OTHER, EDU_TOPICS, buildSeen, eduTopic, followUpdates, isFollowed, isOld, isSaved, loadFollows, loadNewOnly, saveNewOnly, toggleFollow, toggleSaved, unfollow, type SeenIndex, englishPanel, englishUrl, setEnglishUrl } from "./news-tools";
 import { homeView, statusPanel } from "./home";
 import { trackerCard } from "./tracker";
 import { compareCard } from "./hood-compare";
@@ -1010,9 +1010,15 @@ function initSettings(): void {
       if (settings.tab === "imm") renderMain();
     });
     politics.checked = settings.showPolitics;
+    $<HTMLInputElement>("opt-english").value = englishUrl();
     dialog.querySelectorAll<HTMLInputElement>('input[name="font"]').forEach((r) => (r.checked = Number(r.value) === settings.fontScale));
     dialog.querySelectorAll<HTMLInputElement>('input[name="theme"]').forEach((r) => (r.checked = r.value === settings.theme));
     dialog.showModal();
+  });
+  const eng = $<HTMLInputElement>("opt-english");
+  eng.addEventListener("change", () => {
+    const ok = setEnglishUrl(eng.value);
+    $("opt-english-msg").textContent = ok ? (eng.value.trim() ? "저장했어요. 모든 기사에 적용돼요." : "주소를 지웠어요.") : "https:// 로 시작하는 주소를 넣어 주세요";
   });
   politics.addEventListener("change", () => {
     settings.showPolitics = politics.checked;

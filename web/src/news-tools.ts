@@ -183,6 +183,7 @@ export function setEnglishUrl(u: string): boolean {
   const v = u.trim().replace(/\/+$/, "");
   if (v && !/^https:\/\/[^\s/]+(\/[^\s]*)?$/i.test(v)) return false;
   try { if (v) localStorage.setItem(ENG_KEY, v); else localStorage.removeItem(ENG_KEY); } catch { /* 무시 */ }
+  window.dispatchEvent(new CustomEvent("english-url"));   // 화면에 떠 있는 모든 기사 카드에 바로 반영
   return true;
 }
 /** 영어 앱으로 보낼 주소: ?add=문장&from=news&ko=한국어 제목(뜻 참고용) */
@@ -203,7 +204,7 @@ export function englishPanel(en: string, ko: string): HTMLElement {
     body.replaceChildren();
     const base = englishUrl();
     if (!base) {
-      body.append(el("p", "muted", "처음 한 번만: English Trainer 주소를 넣어 주세요 (예: https://english-trainer.<계정>.workers.dev). 이 기기에만 저장돼요."));
+      body.append(el("p", "muted", "처음 한 번만: English Trainer 주소를 넣어 주세요 (예: https://english-trainer.<계정>.workers.dev). 한 번 넣으면 모든 기사에 적용되고, ⚙ 설정에서도 바꿀 수 있어요."));
       const inp = el("input", "eng-url"); inp.type = "url"; inp.placeholder = "https://english-trainer.….workers.dev"; inp.setAttribute("aria-label", "English Trainer 주소");
       const save = el("button", "follow-btn", "저장"); save.type = "button";
       const msg = el("small", "muted");
@@ -216,11 +217,13 @@ export function englishPanel(en: string, ko: string): HTMLElement {
     const go = el("a", "follow-btn eng-go", "영어 앱 복습에 추가 ↗"); go.target = "_blank"; go.rel = "noopener";
     const upd = (): void => { go.setAttribute("href", englishAddUrl(base, ta.value || en, ko)); };
     ta.addEventListener("input", upd); upd();
-    const chg = el("button", "link-btn", "주소 바꾸기"); chg.type = "button";
-    chg.addEventListener("click", () => { setEnglishUrl(""); draw(); });
-    const row = el("div", "eng-row"); row.append(go, chg);
+    const row = el("div", "eng-row"); row.append(go);
     body.append(ta, row);
   };
-  draw();
+  // 펼칠 때 그리고(그때의 저장 주소 사용), 다른 카드·설정에서 주소를 바꾸면 펼쳐 둔 카드도 다시 그림
+  let drawn = false;
+  box.addEventListener("toggle", () => { if (box.open && !drawn) { drawn = true; draw(); } });
+  const onChange = (): void => { if (!box.isConnected) { window.removeEventListener("english-url", onChange); return; } if (drawn) draw(); };
+  window.addEventListener("english-url", onChange);
   return box;
 }
