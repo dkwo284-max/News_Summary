@@ -1944,7 +1944,7 @@
   "degraded": true,
   "degraded_reason": "요약 실패: kr_economy, kr_entertainment, akl_safety, akl_local, akl_life, akl_property, akl_health, akl_education, nz_immigration",
   "rank_fallback": true,
-  "retries": 2,
+  "retries": 3,
   "quality": {
    "items": 64,
    "bad": 31,
@@ -1983,12 +1983,9 @@
    ]
   },
   "repaired": {
-   "summary": [
-    "kr_society",
-    "kr_politics"
-   ],
+   "summary": [],
    "insight": false,
-   "requests": 1
+   "requests": 0
   }
  }
 }
