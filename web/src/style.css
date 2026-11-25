@@ -973,3 +973,31 @@ body.has-player { padding-bottom: 76px; }
 .eng-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .eng-url { flex: 1; min-width: 200px; width: auto; }
 .eng-go { text-decoration: none; display: inline-flex; align-items: center; }
+
+/* ── 오클랜드·이민 다양화 ── */
+.lane-title { margin: 16px 0 6px; font-size: .95rem; }
+.lane-title small { font-weight: 400; font-size: .76rem; }
+.visa-chips { margin: 4px 0 8px; }
+.visa-chips small { color: var(--muted); }
+.num-card, .sched-card, .pins-card { margin: 12px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.num-card .sec-title, .sched-card .sec-title { margin: 0 0 8px; font-size: 1rem; }
+.num-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.num-tile { display: flex; flex-direction: column; gap: 2px; padding: 10px; border-radius: 10px; background: var(--accent-soft); color: inherit; text-decoration: none; min-width: 0; }
+.num-tile b { font-size: 1.15rem; } .num-tile b.down { color: var(--hot-text); }
+.num-tile span { font-size: .82rem; font-weight: 600; }
+.num-tile small { font-size: .72rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sched-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.sched-card li { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 8px; font-size: .875rem; align-items: baseline; }
+.sched-card li small { grid-column: 2; }
+.sched-card .sd { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.sched-card a { color: inherit; }
+.pins-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pins { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pin { font-size: .8rem; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--hot-text) 10%, var(--surface)); }
+.weekly-card { margin: 12px 0; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.weekly-card > summary { cursor: pointer; padding: 12px 14px; font-weight: 700; }
+.weekly-card[open] > summary { border-bottom: 1px solid var(--line); }
+.weekly-card ol { margin: 0; padding: 10px 14px 12px; list-style: none; display: grid; gap: 8px; }
+.weekly-card li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; font-size: .875rem; }
+.weekly-card .wn { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent-soft); font-size: .72rem; font-weight: 700; }
+.weekly-card a { color: inherit; }

@@ -41,6 +41,7 @@ export type SectionKey =
   | "nz_politics"
   | "nz_auckland" // 이전 브리핑(10/27 이전) 호환
   | "akl_life"
+  | "akl_local" // 동네: 시의회·교통 변경·행사·한인 커뮤니티 (2026-11-26~)
   | "akl_health"
   | "akl_education"
   | "akl_safety"

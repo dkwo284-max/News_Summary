@@ -1,4 +1,5 @@
 import "./style.css";
+import { immNumbersCard, incidentPinsCard, laneOf, LANES, scheduleCard, visaChips, visaTags, weeklyCard } from "./diverse";
 import { applySettings, loadSettings, saveSettings, type Settings } from "./settings";
 import { fetchLive, loadLive, type LiveData } from "./live";
 import { headerPill, importFromHash, renderEditor, visaCard } from "./visa";
@@ -23,7 +24,7 @@ interface TabDef {
 
 const TABS: TabDef[] = [
   { id: "home", icon: "🏠", label: "홈", sections: [] },
-  { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["akl_safety", "akl_life", "akl_property", "akl_health", "akl_education", "nz_auckland"] },
+  { id: "akl", icon: "🏙️", label: "오클랜드", sections: ["akl_safety", "akl_local", "akl_life", "akl_property", "akl_health", "akl_education", "nz_auckland"] },
   { id: "nz", icon: "🇳🇿", label: "뉴질랜드", sections: ["nz_society", "nz_education", "nz_economy", "nz_politics", "nz_national"] },
   { id: "leisure", icon: "🏌️", label: "레저", sections: [] },
   { id: "imm", icon: "🛂", label: "이민", sections: ["nz_immigration"] },
@@ -53,6 +54,7 @@ const NZ_CHIPS: Chip[] = [
 const AKL_CHIPS: Chip[] = [
   { key: "all", label: "전체" },
   { key: "akl_safety", label: "치안" },
+  { key: "akl_local", label: "동네" },
   { key: "akl_life", label: "생활" },
   { key: "hood", label: "📍 내 동네" },
   { key: "akl_property", label: "부동산" },
@@ -72,6 +74,9 @@ const AUTO_REFRESH_MIN_AGE_MS = 50 * 1000; // 갱신 직후 타이머가 겹쳐�
 let watch = loadWatch();
 let newOnly = loadNewOnly(); // 새 소식만 보기 (지난 브리핑에 나온 기사·반복 기사·지난 소식 숨김)
 let eduFilter = "all"; // 교육 칩 주제 필터
+let visaFilter = "all"; // 이민 레이더 비자 종류 필터
+let weeklyCache: Promise<unknown> | null = null;
+const loadWeekly = () => (weeklyCache ??= getJSON<unknown>("./data/weekly.json").catch(() => null));
 const HIGHER_KEY = "daily-brief:edu-higher";
 let eduHigher = (() => { try { return localStorage.getItem(HIGHER_KEY) === "1"; } catch { return false; } })(); // 대학·유학생 기사 보기 (기본 숨김)
 const eduHidden = (it: Item, key: SectionKey) => (key === "akl_education" || key === "nz_education") && !eduHigher && eduTopic(it).key === "higher";
@@ -387,7 +392,18 @@ function sectionBlock(key: SectionKey, showHeading: boolean): HTMLElement | null
   const items = key === "nz_immigration"
     ? [...shown].sort((x, y) => (y.published_at ? Date.parse(y.published_at) : -Infinity) - (x.published_at ? Date.parse(x.published_at) : -Infinity))
     : shown;
-  for (const item of items) wrap.append(card(item, region));
+  if (key === "nz_immigration" && items.length) {
+    const chips = visaChips(h, items, visaFilter, (k) => { visaFilter = k; renderMain(); });
+    if (chips) wrap.append(chips);
+    const fit = visaFilter === "all" ? items : items.filter((it) => visaTags(it).includes(visaFilter));
+    if (!fit.length) wrap.append(h("p", { class: "empty" }, "이 비자 종류의 오늘 소식은 없어요."));
+    for (const ln of LANES) {
+      const li = fit.filter((it) => laneOf(it) === ln.key);
+      if (!li.length) continue;
+      wrap.append(h("h3", { class: "lane-title" }, ln.label, h("small", { class: "muted" }, ` ${li.length}건 · ${ln.note}`)));
+      for (const item of li) wrap.append(card(item, region));
+    }
+  } else for (const item of items) wrap.append(card(item, region));
   if (newOnly && hidden && shown.length) wrap.append(h("p", { class: "muted hidden-note" }, `지난 브리핑에 나온 소식 ${hidden}건은 숨겼어요.`));
   return wrap;
 }
@@ -639,6 +655,16 @@ function renderMain(): void {
       });
       return;
     }
+    if (tab.id === "akl" && sel === "all") {
+      const wslot = h("div", {});
+      main.append(wslot);
+      const cur3 = brief;
+      void loadWeekly().then((w) => { const wc = weeklyCard(h, "akl", w as never, null); if (wc && wslot.isConnected && brief === cur3) wslot.replaceWith(wc); });
+      const pins = incidentPinsCard(h, brief, () => { chipState.akl = "akl_safety"; renderMain(); });
+      if (pins) main.append(pins);
+      const sch = scheduleCard(h, brief, visibleSections(tab));
+      if (sch) main.append(sch);
+    }
     if (tab.id === "akl") {
       // 생활비 지표는 부동산에서만, 주제별 안내 링크는 해당 칩에서
       if (sel === "akl_property") {
@@ -702,6 +728,18 @@ function renderMain(): void {
       if (fs) main.append(fs);
       const board = processingBoard();
       if (board) main.append(board);
+      // 이번 주 이민 숫자(최근 7일 기사 속 수치 + 처리 기간 변화) · 주간 규정 변화 요약(일요일엔 펼침)
+      const nslot = h("div", {}), wslot = h("div", {});
+      main.append(nslot, wslot);
+      const cur2 = brief;
+      void Promise.all([recentBriefs().catch(() => [] as Brief[]), loadWeekly(), loadPolicy()]).then(([r, w, pol]) => {
+        if (brief !== cur2) return;
+        const wk = w as { processing?: unknown[] } | null;
+        const nc = immNumbersCard(h, [cur2, ...r.filter((b) => b.date !== cur2.date)], (wk?.processing ?? []) as never);
+        if (nc && nslot.isConnected) nslot.replaceWith(nc);
+        const wc = weeklyCard(h, "imm", w as never, pol[1] as never);
+        if (wc && wslot.isConnected) wslot.replaceWith(wc);
+      }).catch(() => undefined);
       // 정당 이민 정책 추적 (큐레이션 JSON + 자동 모은 기사, AI 없음)
       const pslot = h("div", {});
       main.append(pslot);

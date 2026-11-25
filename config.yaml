@@ -46,7 +46,8 @@ sections:
   # 오클랜드 기사도 nz_auckland 한 묶음으로 선별한 뒤 AI 주제 분류(akl_topic)로 치안·생활·부동산·의료·교육 섹션으로 나눕니다.
   # carry_days: 그날 새 소식이 없으면 최근 N일 브리핑의 같은 섹션 기사를 '지난 소식'으로 이어서 보여줍니다.
   nz_auckland:      { label: "오클랜드", region: nz, pool: true, top_n: 20, candidate_limit: 90 }
-  akl_safety:       { label: "치안",   region: nz, from: nz_auckland, topic: safety,    top_n: 4, carry_days: 2 }
+  akl_safety:       { label: "치안",   region: nz, from: nz_auckland, topic: safety,    top_n: 3, carry_days: 2 }   # 사건사고는 하루 최대 3건
+  akl_local:        { label: "동네",   region: nz, from: nz_auckland, topic: local,     top_n: 4, carry_days: 3 }   # 시의회·교통 변경·행사·한인 커뮤니티
   akl_life:         { label: "생활",   region: nz, from: nz_auckland, topic: life,      top_n: 5 }
   akl_property:     { label: "부동산", region: nz, from: nz_auckland, topic: property,  top_n: 4, carry_days: 3 }
   akl_health:       { label: "의료",   region: nz, from: nz_auckland, topic: health,    top_n: 4, carry_days: 3 }
@@ -71,6 +72,11 @@ weights:
   low:
     - { topic: "스포츠", keywords: [rugby, "All Blacks", cricket, netball, "Black Caps", match, score, "Super Rugby", NRL, Warriors] }
     - { topic: "연예 가십", keywords: [celebrity, Bachelor, reality, gossip, Kardashian] }
+
+# ── 출처 다양성 ──────────────────────────────────────────────
+# 한 섹션에 같은 출처(언론사)는 하루 최대 몇 건까지 (부족하면 그때만 채움)
+diversity:
+  max_per_source: 2
 
 # ── 제외할 기사 ─────────────────────────────────────────────
 # 제목에 아래 단어가 있거나 출처가 아래 목록이면 수집 단계에서 아예 뺍니다 (대소문자 무시, 영어는 단어 단위).
@@ -202,6 +208,7 @@ akl_topics:
   health: [hospital, hospitals, GP, GPs, "Health NZ", "Te Whatu Ora", "emergency department", ED, Starship, Middlemore, "North Shore Hospital", "Auckland City Hospital", nurses, doctors, clinic, measles, vaccination, ambulance, "after-hours", pharmacy]
   education: [school, schools, "primary school", "intermediate school", pupils, students, teacher, teachers, principal, kindergarten, "early childhood", "school zone", enrolment, ERO]
   safety: [police, crime, burglary, "ram raid", robbery, assault, stabbing, shooting, homicide, murder, arrested, arrest, charged, gang, gangs, theft, fire, crash, "serious crash", missing]
+  local: ["Auckland Council", "local board", "Auckland Transport", roadworks, "road closure", "road closures", detour, "bus route", "bus lane", "train line", ferry, "rail network", festival, "night market", concert, exhibition, "Lantern Festival", Diwali, Matariki, "Lunar New Year", Pasifika, library, libraries, "community centre", Korean, "Chinese community", "this weekend", parade]
   property: ["house prices", "house price", "property market", "housing market", rent, rents, rental, rentals, landlord, tenants, housing, "Unitary Plan", rezoning, intensification, QV, REINZ, "building consents", apartments, townhouses, mortgage]
 
 # ── 뉴질랜드 / 오클랜드 탭 나누기 ─────────────────────────────
@@ -233,7 +240,7 @@ llm:
   expected_per_run: 4          # 재실행 여부를 판단할 때 쓰는 한 번 실행의 예상 요청 수
   # 요약은 탭(섹션 묶음)별로 따로 요청: 한 탭이 AI 오류로 실패해도 다른 탭은 완성되고, 복구도 실패한 탭만 다시 한다 (요청 수 = 묶음 수)
   summary_groups:   # 이 순서대로 요약·복구·영향 분석한다(앞에서부터 완성). 메뉴 순서와 같게: 오클랜드 → 뉴질랜드 → 이민 → 한국 (레저·안보 탭은 AI 없음)
-    - [akl_safety, akl_life, akl_property, akl_health, akl_education]
+    - [akl_safety, akl_local, akl_life, akl_property, akl_health, akl_education]
     - [nz_society, nz_education, nz_economy, nz_politics]
     - [nz_immigration]
     - [kr_society, kr_politics]
@@ -590,6 +597,20 @@ feeds:
     url: "https://www.immigration.govt.nz/about-us/media-centre/news-notifications/rss"
     fallbacks:
       - "https://news.google.com/rss/search?q=site:immigration.govt.nz&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_imm_korean
+    name: "Google News"
+    section: nz_immigration
+    google_news: true
+    lookback_hours: 168
+    # 한인 커뮤니티 시각: 한국어 뉴질랜드 이민·비자 기사
+    url: "https://news.google.com/rss/search?q=%EB%89%B4%EC%A7%88%EB%9E%9C%EB%93%9C+(%EC%9D%B4%EB%AF%BC+OR+%EB%B9%84%EC%9E%90+OR+%EC%98%81%EC%A3%BC%EA%B6%8C)+when:7d&hl=ko&gl=KR&ceid=KR:ko"
+  - id: gn_imm_chinese
+    name: "Google News"
+    section: nz_immigration
+    google_news: true
+    lookback_hours: 168
+    # 중국계 커뮤니티 시각: 중국어 뉴질랜드 이민·비자 기사
+    url: "https://news.google.com/rss/search?q=%E6%96%B0%E8%A5%BF%E5%85%B0+(%E7%A7%BB%E6%B0%91+OR+%E7%AD%BE%E8%AF%81)+when:7d&hl=zh-CN&gl=CN&ceid=CN:zh-Hans"
   - id: gn_nz_work_visa
     name: "Google News"
     section: nz_immigration
@@ -696,6 +717,27 @@ feeds:
   - id: auckland_transport
     name: "Auckland Transport"
     section: nz_auckland
-    enabled: false   # 선택: 교통 공지가 필요하면 true
     google_news: true
+    # 교통 변경·도로 공사·노선 (동네 섹션)
     url: "https://news.google.com/rss/search?q=%22Auckland+Transport%22+when:1d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_akl_council
+    name: "Google News"
+    section: nz_auckland
+    google_news: true
+    lookback_hours: 48
+    # 시의회·지역 위원회 결정 (동네 섹션)
+    url: "https://news.google.com/rss/search?q=(%22Auckland+Council%22+OR+%22local+board%22+OR+%22Wayne+Brown%22)+when:2d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_akl_events
+    name: "Google News"
+    section: nz_auckland
+    google_news: true
+    lookback_hours: 72
+    # 행사·축제·공연·전시 (동네 섹션)
+    url: "https://news.google.com/rss/search?q=Auckland+(festival+OR+concert+OR+exhibition+OR+%22night+market%22+OR+parade+OR+%22this+weekend%22)+when:3d&hl=en-NZ&gl=NZ&ceid=NZ:en"
+  - id: gn_akl_korean
+    name: "Google News"
+    section: nz_auckland
+    google_news: true
+    lookback_hours: 168
+    # 오클랜드 한인 커뮤니티 (한국어 기사, 동네 섹션)
+    url: "https://news.google.com/rss/search?q=%EC%98%A4%ED%81%B4%EB%9E%9C%EB%93%9C+%ED%95%9C%EC%9D%B8+when:7d&hl=ko&gl=KR&ceid=KR:ko"

@@ -94,7 +94,10 @@ AKL_TOPIC_RULE = """- akl_topic: auckland 이 true 인 기사의 주제 — "hea
   "education"(교육: 오클랜드 초등·중간학교·학군(school zone)·학교 안전·유치원. 대학 소식도 education),
   "safety"(치안: 범죄·경찰·강도·램레이드·폭행·화재·큰 교통사고·실종 등 사건사고),
   "property"(부동산: 집값·렌트·주택 공급·재개발·용도지역(Unitary Plan)·건축 허가·임대 규정),
-  "life"(그 외 생활: 교통·시의회·날씨·행사·상권·환경 등). auckland 가 false 면 빈 문자열 ""."""
+  "local"(동네: 시의회·지역 위원회(local board) 결정, Auckland Transport 교통 변경·도로 공사·노선 조정, 행사·축제·공연·전시·도서관,
+  한인·이민자 커뮤니티 소식),
+  "life"(그 외 생활: 물가·날씨·상권·환경·일반 사회 등). 스포츠 경기·구단 소식은 health·education 이 아니라 life.
+  auckland 가 false 면 빈 문자열 ""."""
 
 
 NZ_RELATED_RULE = """- nz_related: 뉴질랜드 안의 일이거나 뉴질랜드 정부·주민에게 직접 영향이 있으면 true.
@@ -258,22 +261,30 @@ def heuristic_category(a: Article, cfg: dict) -> str:
     return "society"
 
 
-AKL_TOPICS = ("life", "health", "education", "safety", "property")
+AKL_TOPICS = ("life", "health", "education", "safety", "property", "local")
+# 스포츠 경기·구단 기사가 의료·교육 섹션으로 잘못 들어가는 것 막기 (예: Auckland FC)
+SPORT_KW = ["rugby", "All Blacks", "cricket", "netball", "Black Caps", "Super Rugby", "NRL", "Warriors", "Auckland FC", "football", "soccer",
+            "A-League", "Blues", "Phoenix", "Breakers", "golf", "tennis", "Black Ferns", "Silver Ferns", "match", "fixture", "season opener"]
 
 
 def heuristic_akl_topic(a: Article, cfg: dict) -> str:
     """AI 없이: akl_topics 키워드로 분류 (치안 → 의료 → 교육 → 부동산 순으로 먼저 맞는 것, 없으면 생활)."""
     topics = cfg.get("akl_topics", {})
-    for t in ("safety", "health", "education", "property"):
+    for t in ("safety", "health", "education", "property", "local"):
         if _kw_hits(a.title, topics.get(t, [])):
             return t
     return "life"
 
 
+def fix_sport(a: Article, topic: str) -> str:
+    """스포츠 기사가 의료·교육으로 분류됐으면 생활로."""
+    return "life" if topic in ("health", "education") and _kw_hits(a.title, SPORT_KW) else topic
+
+
 def section_topic(a: Article, pool: str, cfg: dict) -> str:
     """묶음(nz_national / nz_auckland)에서 나눌 때 쓰는 분류. 2차 묶기에서 탭이 바뀌어 분류가 맞지 않으면 키워드로 다시 정한다."""
     if pool == "nz_auckland":
-        return a.akl_topic if a.akl_topic in AKL_TOPICS else heuristic_akl_topic(a, cfg)
+        return fix_sport(a, a.akl_topic if a.akl_topic in AKL_TOPICS else heuristic_akl_topic(a, cfg))
     return a.category if a.category in CATEGORIES else heuristic_category(a, cfg)
 
 
@@ -596,15 +607,38 @@ def refine_nz(by_section: dict[str, list[Article]], radar: list[Article], cfg: d
     return radar
 
 
+MAX_PER_SOURCE = 2   # config diversity.max_per_source 로 바꿈 (select 에서 설정)
+
+
+def _src_key(a: Article) -> str:
+    return (a.source or "").strip().lower()
+
+
+def _diverse(ranked: list[Article], n: int, cap: int | None = None) -> list[Article]:
+    """순위대로 고르되 같은 출처는 cap 건까지. 그래도 n 이 안 차면 그때만 남은 기사로 채운다(빈 섹션 방지)."""
+    cap = cap or MAX_PER_SOURCE
+    out, cnt, rest = [], {}, []
+    for a in ranked:
+        k = _src_key(a)
+        if k and cnt.get(k, 0) >= cap:
+            rest.append(a)
+            continue
+        cnt[k] = cnt.get(k, 0) + 1
+        out.append(a)
+        if len(out) >= n:
+            return out
+    return (out + rest)[:n] if len(out) < min(n, 3) else out
+
+
 def _top(items: list[Article], n: int) -> list[Article]:
     ranked = sorted(items, key=lambda a: (a.score, len(a.sources)), reverse=True)
-    return [a for a in ranked if a.score >= MIN_SCORE][:n]
+    return _diverse([a for a in ranked if a.score >= MIN_SCORE], n)
 
 
 def _top_radar(items: list[Article], n: int, min_radar: int) -> list[Article]:
-    """이민 레이더: 독자 프로필 관련도 우선, 같으면 중요도."""
+    """이민 레이더: 독자 프로필 관련도 우선, 같으면 중요도. 같은 출처는 하루 최대 MAX_PER_SOURCE 건."""
     ranked = sorted(items, key=lambda a: (a.radar_score, a.score, len(a.sources)), reverse=True)
-    return [a for a in ranked if a.radar_score >= min_radar and a.score >= MIN_SCORE and not a.junk][:n]
+    return _diverse([a for a in ranked if a.radar_score >= min_radar and a.score >= MIN_SCORE and not a.junk], n)
 
 
 def _ids(a: Article) -> set[str]:
@@ -612,8 +646,9 @@ def _ids(a: Article) -> set[str]:
 
 
 def select(articles: list[Article], cfg: dict, llm=None, now: datetime | None = None) -> dict[str, list[Article]]:
-    global FAILED
+    global FAILED, MAX_PER_SOURCE
     FAILED = False
+    MAX_PER_SOURCE = int((cfg.get("diversity") or {}).get("max_per_source", 2))
     now = now or datetime.now(timezone.utc)
     sections = cfg["sections"]
     articles = apply_exclusions(articles, cfg)  # 개인 사연·매물·광고성 기사 (키워드·출처)

@@ -68,7 +68,7 @@ class Article:
     radar_score: int = 0        # 이민 레이더 관련도 0~10 (독자 프로필 기준, NZ 기사만)
     junk: bool = False          # 개인 사연·매물·광고성 기사 (AI 판단) → 제외
     category: str = ""          # 뉴질랜드 전국 기사 분류: society | education | economy | politics
-    akl_topic: str = ""         # 오클랜드 기사 주제: life | health | education | safety | property
+    akl_topic: str = ""         # 오클랜드 기사 주제: life | health | education | safety | property | local(동네: 시의회·교통 변경·행사·커뮤니티)
     # transient: article body excerpt used only as summary input, never written out
     excerpt: str = ""
 

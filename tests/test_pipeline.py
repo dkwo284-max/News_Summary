@@ -734,7 +734,7 @@ def test_brief_sections_have_nz_categories_not_pool(cfg, fixtures_dir, monkeypat
     assert "nz_national" not in brief["sections"]
     assert {"nz_society", "nz_education", "nz_economy", "nz_politics"} <= set(brief["sections"])
     assert "nz_auckland" not in brief["sections"]
-    assert {"akl_life", "akl_health", "akl_education", "akl_safety", "akl_property"} <= set(brief["sections"])
+    assert {"akl_life", "akl_local", "akl_health", "akl_education", "akl_safety", "akl_property"} <= set(brief["sections"])
 
 
 def test_gemini_disconnect_moves_to_next_model(cfg):
@@ -837,11 +837,33 @@ def test_auckland_split_by_topic(cfg):
         art("a3", "Auckland house prices fall for third month, QV says", section="nz_auckland"),
         art("a4", "Albany primary school zone to shrink next year", section="nz_auckland"),
         art("a5", "Auckland Transport changes Northern Express timetable", section="nz_auckland"),
+        art("a6", "Auckland petrol prices climb again as winter ends", section="nz_auckland"),
     ]
     chosen = select(items, cfg, None, FIXTURE_NOW)
-    got = {k: [a.id for a in chosen[k]] for k in ("akl_health", "akl_safety", "akl_property", "akl_education", "akl_life")}
-    assert got == {"akl_health": ["a1"], "akl_safety": ["a2"], "akl_property": ["a3"], "akl_education": ["a4"], "akl_life": ["a5"]}
-    assert {a.id for a in chosen["nz_auckland"]} == {"a1", "a2", "a3", "a4", "a5"}
+    got = {k: [a.id for a in chosen[k]] for k in ("akl_health", "akl_safety", "akl_property", "akl_education", "akl_local", "akl_life")}
+    assert got == {"akl_health": ["a1"], "akl_safety": ["a2"], "akl_property": ["a3"], "akl_education": ["a4"], "akl_local": ["a5"], "akl_life": ["a6"]}
+    assert {a.id for a in chosen["nz_auckland"]} == {"a1", "a2", "a3", "a4", "a5", "a6"}
+
+
+def test_sport_never_lands_in_health_or_education(cfg):
+    from rank import fix_sport
+    a = art("s1", "Auckland FC beat Phoenix in season opener", section="nz_auckland")
+    assert fix_sport(a, "health") == "life" and fix_sport(a, "education") == "life" and fix_sport(a, "safety") == "safety"
+    b = art("s2", "Starship hospital opens new ward", section="nz_auckland")
+    assert fix_sport(b, "health") == "health"
+
+
+def test_same_source_capped_per_section():
+    import rank
+    from common import Article
+    mk = lambda i, src, sc: Article(id=i, section="nz_immigration", title=f"t{i}", url="u", source=src, published=None, description="")
+    items = [mk("a", "NZ Herald", 9), mk("b", "NZ Herald", 9), mk("c", "NZ Herald", 9), mk("d", "RNZ", 8), mk("e", "INZ", 7)]
+    for x, sc in zip(items, (9, 9, 9, 8, 7)):
+        x.score = sc
+    rank.MAX_PER_SOURCE = 2
+    got = [a.id for a in rank._top(items, 4)]
+    assert got == ["a", "b", "d", "e"]          # 같은 출처 3번째는 빠짐
+    assert [a.id for a in rank._top(items[:3], 3)] == ["a", "b", "c"]   # 출처가 하나뿐이면 빈 섹션 대신 채움
 
 
 def test_carry_over_fills_empty_topic_from_recent_brief(cfg, tmp_path):
