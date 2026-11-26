@@ -1030,3 +1030,9 @@ body.has-player { padding-bottom: 76px; }
 .lp-chapters button { display: flex; gap: 8px; align-items: baseline; text-align: left; padding: 7px 8px; border: 0; border-radius: 8px; background: transparent; color: inherit; font-size: .86rem; cursor: pointer; }
 .lp-chapters button span { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 1.4em; }
 .lp-chapters button.on { background: var(--accent-soft); font-weight: 700; }
+.lp-next-note { padding: 4px 12px 6px; font-size: .82rem; font-weight: 700; color: var(--accent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lp.lp-flash { animation: lpflash 1.2s ease-out; }
+@keyframes lpflash { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); } 100% { box-shadow: 0 0 0 14px transparent; } }
+.lp-opts { display: grid; gap: 8px; padding: 8px 12px 10px; border-top: 1px solid var(--line); font-size: .86rem; }
+.lp-opts label { display: grid; grid-template-columns: auto 1fr; gap: 2px 8px; align-items: start; }
+.lp-opts small { grid-column: 2; color: var(--muted); font-size: .74rem; line-height: 1.4; }
