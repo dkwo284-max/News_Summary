@@ -121,7 +121,7 @@ function announce(): void {
 /** 폰이 음성을 멈춘 경우(다른 앱·화면 꺼짐·브라우저 버그) 지금 문장부터 다시 읽기 */
 function watchdog(on: boolean): void {
   if (on && watch == null) watch = window.setInterval(() => {
-    const s = synth(); if (!s || !playing || cueing) return;
+    const s = synth(); if (!s || !playing || cueing || queued) return;
     if (document.hidden && !opt(OPT_BG)) return;
     if (!s.speaking && !s.pending && Date.now() - lastAct > 2500) { lastAct = Date.now(); speakChunk(); }
   }, 1000);
@@ -130,24 +130,51 @@ function watchdog(on: boolean): void {
 if (typeof document !== "undefined") document.addEventListener("visibilitychange", () => {
   if (!bar) return;
   if (document.hidden) {
-    if (playing && !opt(OPT_BG)) { pausedByHide = true; pause(); render("돌아오면 이어서 들려 드려요"); }
+    if (!playing) return;
+    if (!opt(OPT_BG)) { pausedByHide = true; pause(); render("돌아오면 이어서 들려 드려요"); }
+    else if (!queued) enqueueRest();   // 최소화·다른 앱에서도 끝까지 읽게 남은 문장을 한꺼번에
   } else {
     if (pausedByHide) { pausedByHide = false; play(); return; }
-    const s = synth(); if (playing && s && !s.speaking && !s.pending && !cueing) { lastAct = Date.now(); speakChunk(); }
+    const s = synth();
+    if (queued) { if (s && !s.speaking && !s.pending) { queued = false; lastAct = Date.now(); speakChunk(); } else render(); return; }   // 대기열이 계속 읽는 중이면 그대로
+    if (playing && s && !s.speaking && !s.pending && !cueing) { lastAct = Date.now(); speakChunk(); }
   }
 });
 
+function trackChunks(i: number, moving: boolean): { list: string[]; cue: boolean } {
+  const t = tracks[i], isSeg = moving && t.seg !== false && i > 0;
+  // 앵커 대본: 소식이 바뀔 때 '다음 소식입니다'(이미 '먼저 …/이어서 …'로 시작하면 생략)
+  const lead = isSeg && t.seg && t.readTitle === false && !/^(먼저|이어서)/.test(t.text.trim()) ? "다음 소식입니다." : "";
+  return { list: [lead, t.readTitle === false ? "" : speakable(t.title), ...splitChunks(t.text)].filter(Boolean), cue: isSeg && !!t.seg };
+}
 function loadTrack(i: number, moving = false): void {
   ti = Math.max(0, Math.min(tracks.length - 1, i));
   ci = 0;
-  const t = tracks[ti], isSeg = moving && t.seg !== false && ti > 0 && ti < tracks.length - (t.seg === undefined ? 0 : 0);
-  // 앵커 대본: 소식이 바뀔 때 '다음 소식입니다'(이미 '먼저 …/이어서 …'로 시작하면 생략)
-  const lead = isSeg && t.seg && t.readTitle === false && !/^(먼저|이어서)/.test(t.text.trim()) ? "다음 소식입니다." : "";
-  chunks = [lead, t.readTitle === false ? "" : speakable(t.title), ...splitChunks(t.text)].filter(Boolean);
-  cuePending = isSeg && !!t.seg;
+  const c = trackChunks(ti, moving);
+  chunks = c.list; cuePending = c.cue;
+}
+/** 화면이 안 보이면(창 최소화·다른 앱·화면 꺼짐) 남은 문장을 음성 엔진 대기열에 한꺼번에 넘김.
+ *  문장마다 화면 코드가 다음 문장을 넘기는 방식은 브라우저가 숨긴 화면의 코드를 멈추면 끊기기 때문.
+ *  읽는 위치는 문장 시작 때마다 기록해 두었다가, 화면으로 돌아와 버튼을 누르면 그 자리부터 평소 방식으로 이어감. */
+let queued = false;
+function enqueueRest(): void {
+  const s = synth(); if (!s || !playing) return;
+  stopSpeech(); queued = true; cueing = false; cuePending = false;
+  const my = gen, v = koVoice(), r = rate();
+  const items: { t: number; c: number; text: string }[] = [];
+  chunks.slice(ci).forEach((text, k) => items.push({ t: ti, c: ci + k, text }));
+  for (let t = ti + 1; t < tracks.length; t++) trackChunks(t, true).list.forEach((text, c) => items.push({ t, c, text }));
+  items.forEach((it, n) => {
+    const u = new SpeechSynthesisUtterance(it.text);
+    u.lang = "ko-KR"; u.rate = r; if (v) u.voice = v;
+    u.onstart = () => { if (my !== gen) return; lastAct = Date.now(); if (it.t !== ti) { ti = it.t; chunks = trackChunks(ti, true).list; } ci = it.c; render(); };
+    u.onend = () => { lastAct = Date.now(); if (my !== gen || n !== items.length - 1) return; queued = false; playing = false; ti = tracks.length - 1; keepAlive(false); watchdog(false); render("끝까지 들었어요 👏"); };
+    s.speak(u);
+  });
+  lastAct = Date.now();
 }
 
-function stopSpeech(): void { gen++; synth()?.cancel(); }
+function stopSpeech(): void { gen++; queued = false; synth()?.cancel(); }
 
 function play(): void { stopSpeech(); playing = true; keepAlive(true); watchdog(true); if (opt(OPT_CHIME) && !actx) { try { actx = new AudioContext(); } catch { /* 무시 */ } } speakChunk(); }
 function pause(): void { playing = false; stopSpeech(); keepAlive(false); watchdog(false); cueing = false; render(); }
