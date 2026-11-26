@@ -66,6 +66,8 @@ export interface Brief {
     btc_usd?: number | null;
     policy_rates?: PolicyRates | null;
   };
+  /** 🎧 오늘의 오클랜드·뉴질랜드 5분 브리핑 대본(1인 앵커). source: ai | template */
+  podcast?: { date: string; title: string; intro: string; segments: { id: string; region: "akl" | "nz"; title: string; text: string }[]; outro: string; source?: string };
   meta?: {
     mode?: string; failed_feeds?: { id: string; name?: string; error: string }[]; alerts?: Alert[];
     degraded?: boolean; degraded_reason?: string; retries?: number; // AI 요약·선별 실패 → 같은 날 자동 재시도

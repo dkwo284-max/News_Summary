@@ -70,6 +70,24 @@ let onWeekly: ((w: Weekly) => void) | null = null;
 type Row = { it: Item; key: SectionKey; tab: string };
 const ORD = ["첫 번째", "두 번째", "세 번째"];
 /** 듣는 브리핑 재생 목록: 인사·날씨·환율 → 이민 알림 → 오늘 핵심 3 → 내게 영향 큰 소식 → 탭 순서대로 탭별 브리핑 */
+/** 팟캐스트 재생 목록: 대본(brief.podcast)이 있으면 그대로, 없으면(옛 브리핑) 오클랜드·뉴질랜드 기사 요약으로 */
+export function podcastTracks(brief: Brief): Track[] {
+  const pc = brief.podcast;
+  if (pc && pc.segments?.length) return [{ title: "오늘의 브리핑 시작", text: pc.intro, readTitle: false },
+    ...pc.segments.map((s) => ({ title: `${s.region === "akl" ? "오클랜드" : "뉴질랜드"} · ${s.title}`, text: s.text, readTitle: false })),
+    { title: "마무리", text: pc.outro, readTitle: false }];
+  const lv: Record<string, number> = { high: 3, medium: 2, low: 1, none: 0 };
+  const pick = (pre: string) => Object.entries(brief.sections).filter(([k]) => k.startsWith(pre) && k !== "nz_immigration" && k !== "nz_national" && k !== "nz_auckland")
+    .flatMap(([, s]) => s.items.filter((it) => !it.carried_from)).sort((a, b) => (b.importance + (lv[b.impact?.level ?? "none"] ?? 0) * 1.5) - (a.importance + (lv[a.impact?.level ?? "none"] ?? 0) * 1.5)).slice(0, 4);
+  const akl = pick("akl_"), nz = pick("nz_").filter((x) => !akl.includes(x));
+  if (!akl.length && !nz.length) return [];
+  const d = new Date(brief.date + "T12:00:00Z");
+  const seg = (it: Item, region: string, first: boolean) => ({ title: `${region} · ${it.title_ko}`, text: `${first ? (region === "오클랜드" ? "먼저 오클랜드 소식입니다. " : "이어서 뉴질랜드 전국 소식입니다. ") : ""}${it.title_ko}. ${(it.summary_ko || []).slice(0, 2).join(" ")}`, readTitle: false });
+  return [{ title: "오늘의 브리핑 시작", text: `${d.getUTCMonth() + 1}월 ${d.getUTCDate()}일, 오늘의 오클랜드와 뉴질랜드 주요 소식입니다.`, readTitle: false },
+    ...akl.map((it, i) => seg(it, "오클랜드", i === 0)), ...nz.map((it, i) => seg(it, "뉴질랜드", i === 0)),
+    { title: "마무리", text: "오늘 브리핑은 여기까지입니다. 좋은 하루 보내세요.", readTitle: false }];
+}
+
 export function listenTracks(ctx: HomeCtx, all: Row[], top: Row[]): Track[] {
   const b = ctx.brief, out: Track[] = [];
   const d = new Date(b.date + "T12:00:00");
@@ -120,6 +138,14 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   const qb = h("button", { type: "button", class: "quick-btn", "aria-pressed": String(quick) }, quick ? "📖 전체 보기" : "⚡ 3분 읽기");
   qb.addEventListener("click", () => { try { localStorage.setItem("daily-brief:quick", quick ? "0" : "1"); } catch { /* 무시 */ } ctx.rerender(); });
   const qbar = h("div", { class: "quick-bar" }, qb, h("small", { class: "muted" }, quick ? "핵심만 모은 요약이에요." : "바쁜 날엔 핵심만 3분 안에."));
+  // 🎧 오늘의 오클랜드·뉴질랜드 5분 브리핑(1인 앵커 대본을 폰 음성으로) — 맨 위 큰 버튼
+  const pod = podcastTracks(brief);
+  if (canListen() && pod.length) {
+    const pb = h("button", { type: "button", class: "pod-btn" }, h("span", { class: "pod-ico", "aria-hidden": "true" }, "🎧"),
+      h("span", {}, h("b", {}, "오늘 오클랜드·뉴질랜드 5분 듣기"), h("small", {}, `소식 ${pod.length - 2}개 · ${brief.podcast?.source === "ai" ? "앵커 브리핑" : "요약 읽기"} · 잠금 화면에서도 조작`)));
+    pb.addEventListener("click", () => startListening(pod, brief.podcast?.title || "오클랜드·뉴질랜드 브리핑"));
+    root.append(pb);
+  }
   root.append(qbar);
 
   // 1) 오늘 핵심 3

@@ -1020,3 +1020,13 @@ body.has-player { padding-bottom: 76px; }
 .guide-links { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 6px 12px 10px; font-size: .8rem; }
 .guide-links a { color: var(--accent); }
 @media (max-width: 420px) { .cal-list li { grid-template-columns: auto minmax(0, 1fr) auto; gap: 8px; } }
+
+/* 🎧 오늘의 오클랜드·뉴질랜드 5분 듣기 */
+.pod-btn { display: flex; align-items: center; gap: 12px; width: 100%; margin: 0 0 10px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--accent); background: var(--accent-soft); color: inherit; text-align: left; cursor: pointer; }
+.pod-btn .pod-ico { font-size: 1.6rem; }
+.pod-btn b { display: block; font-size: 1rem; }
+.pod-btn small { display: block; color: var(--muted); font-size: .78rem; margin-top: 2px; }
+.lp-chapters { max-height: 42vh; overflow-y: auto; display: grid; gap: 2px; padding: 6px 4px 2px; border-top: 1px solid var(--line); }
+.lp-chapters button { display: flex; gap: 8px; align-items: baseline; text-align: left; padding: 7px 8px; border: 0; border-radius: 8px; background: transparent; color: inherit; font-size: .86rem; cursor: pointer; }
+.lp-chapters button span { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 1.4em; }
+.lp-chapters button.on { background: var(--accent-soft); font-weight: 700; }

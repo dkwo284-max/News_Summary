@@ -369,6 +369,14 @@ def main(argv: list[str] | None = None) -> int:
         except Exception as e:  # noqa: BLE001
             log.warning("incidents failed: %s", e)
     carry_over(sections, cfg, data_dir, local_now.date().isoformat())
+    # 🎧 오늘의 오클랜드·뉴질랜드 5분 브리핑 대본 (AI 요청 1회, 실패하면 기사 요약으로)
+    podcast = None
+    try:
+        from podcast import build_podcast
+
+        podcast = build_podcast(sections, cfg, llm, local_now.date().isoformat())
+    except Exception as e:  # noqa: BLE001
+        log.warning("podcast failed: %s", e)
 
     extras = {"nzd_krw": None, "auckland_weather": None}
     if not args.no_extras and args.fixtures is None:
@@ -435,6 +443,7 @@ def main(argv: list[str] | None = None) -> int:
         "timezone": cfg["timezone"],
         "sections": sections,
         "extras": extras,
+        **({"podcast": podcast} if podcast else {}),
         "meta": {
             "mode": "no-llm" if llm is None else llm.provider,
             "failed_feeds": failures,
