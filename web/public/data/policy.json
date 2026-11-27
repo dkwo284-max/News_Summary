@@ -1,13 +1,13 @@
 {
-  "updated": "2026-11-27",
+  "updated": "2026-11-28",
   "note": "정당 공약·정부 정책을 사람이 공식 자료(정당 사이트·INZ·정부 보도자료)와 주요 언론 기사로 확인해 적은 기록입니다. 해석·평가는 넣지 않았고, 확인하지 못한 항목은 비워 두었습니다. 최종 판단은 반드시 원문 링크로 하세요.",
   "election": {
     "date": "2026-11-07",
-    "status": "잠정 개표 결과 발표 — 연정 구성은 아직 확정되지 않았습니다",
-    "detail": "잠정 의석(131석 중): 국민 42 · 노동 36 · 녹색 16 · ACT 13 · 뉴질랜드 퍼스트 12 · 오퍼튜니티 7 · 테 파티 마오리 5. 초과 의석(overhang)이 있고 특별투표 집계가 남아 의석이 바뀔 수 있으며, 공식 결과는 11월 27일 발표 예정입니다. 아래 정당별 내용은 어느 정당이 정부를 맡을지 정해지기 전의 공약 기준이에요.",
+    "status": "공식 개표 결과 발표(11/27) — 어느 진영도 과반이 아니고, 연정 구성은 아직 확인되지 않았습니다",
+    "detail": "공식 의석(130석 중): 국민 40 · 노동 36 · 녹색 17 · ACT 13 · 뉴질랜드 퍼스트 12 · 오퍼튜니티 7 · 테 파티 마오리 5. 현 연립(국민·ACT·뉴질랜드 퍼스트)은 65석으로 과반(66석)에 1석 모자라, 오퍼튜니티 7석이 결정적입니다. 잠정 결과 대비 국민 −2석·녹색 +1석이고 총 의석이 131→130석이 됐습니다. 선거관리위원회 사이트에는 '관보 공고가 정식 선언'이라는 안내가 있어 관보 공지를 확인해야 하고, 세부 의석 배분 자료는 12월 18일까지 나올 예정입니다. 연정·신임공급 합의와 이민부 장관 배정은 아직 확인되지 않았어요. 아래 정당별 내용은 어느 정당이 정부를 맡을지 정해지기 전의 공약 기준입니다.",
     "sources": [
-      "elprelim",
-      "rnz_results",
+      "elofficial",
+      "abc_final",
       "elresults"
     ]
   },
@@ -80,6 +80,26 @@
     "elresults": {
       "label": "공식 개표 결과",
       "url": "https://www.electionresults.govt.nz/",
+      "type": "공식"
+    },
+    "elofficial": {
+      "label": "선거관리위원회 공식 개표 결과 (2026-11-27)",
+      "url": "https://elections.nz/media-and-news/2026/2026-general-election-official-results",
+      "type": "공식"
+    },
+    "abc_final": {
+      "label": "ABC 뉴스: 현 연립 과반 실패 (2026-11-27)",
+      "url": "https://www.abc.net.au/news/2026-11-27/official-results-of-new-zealand-s-national-election-announced/107434326",
+      "type": "언론"
+    },
+    "nzh_talks": {
+      "label": "NZ Herald: 최종 결과 후 연정 협상 전망",
+      "url": "https://www.nzherald.co.nz/nz/politics/election-2026-opportunity-to-choose-between-re-elected-coalition-or-second-election-after-final-results/ZTWOVRCXOBHFDC5NWHGJ5CJERQ/",
+      "type": "언론"
+    },
+    "beehive_imm": {
+      "label": "정부 포털 Beehive: 이민부 장관 (2026-10-06 기준)",
+      "url": "https://www.beehive.govt.nz/portfolio/nationalactnew-zealand-first-coalition-government-2023-2026/immigration",
       "type": "공식"
     },
     "inz_smc": {
@@ -826,19 +846,20 @@
   ],
   "watch": [
     {
-      "when": "2026-11-27",
-      "title": "공식 개표 결과 선언",
-      "why": "의석이 확정되면 연립 구성 가능한 조합이 정리됩니다.",
+      "when": "관보 공고 · 12월 18일까지 세부 자료",
+      "title": "공식 선언(관보)과 상세 의석 배분",
+      "why": "11월 27일 공식 개표 결과는 나왔지만 선거관리위원회는 정식 선언을 관보 공고로 한다고 안내합니다. 세부 의석 배분·특별투표 통계는 12월 18일까지 공개될 예정입니다.",
       "src": [
-        "elections",
-        "elresults"
+        "elofficial"
       ]
     },
     {
       "when": "연정 협상",
-      "title": "이민부 장관 소속 정당",
-      "why": "뉴질랜드 퍼스트는 이민부 장관을 자기 당 의원이 맡아야 한다고 주장했습니다. 누가 맡느냐에 따라 위 공약 중 무엇이 정책이 되는지가 크게 갈립니다.",
+      "title": "연정 구성과 이민부 장관 소속 정당",
+      "why": "공식 결과상 현 연립이 과반에 1석 모자라 오퍼튜니티(7석)와의 합의가 변수입니다. 협상이 끝나지 않으면 재선거 가능성도 거론됩니다(언론 보도). 현재(총선 전 기준) 이민부 장관은 국민당 Erica Stanford이고 선거 후 배정은 확인되지 않았습니다. 뉴질랜드 퍼스트는 이민부 장관을 자기 당 의원이 맡아야 한다고 주장했고, 누가 맡느냐에 따라 위 공약 중 무엇이 정책이 되는지가 크게 갈립니다.",
       "src": [
+        "nzh_talks",
+        "beehive_imm",
         "rnz_stalls"
       ]
     },
