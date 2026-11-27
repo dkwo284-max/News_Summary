@@ -714,6 +714,15 @@ function renderMain(): void {
     if (tab.id === "imm") {
       const alerts = alertBanner(brief.meta?.alerts ?? []);
       if (alerts) main.append(alerts);
+      // 이민 뉴스를 맨 위로: 오늘 한눈에 · 팔로우한 이슈 · 기사 목록 (그 아래에 내 비자·처리 기간·SMC·변경 이력·정책)
+      const ov = overview(visibleSections(tab));
+      if (ov) main.append(ov);
+      const fs = followSection();
+      if (fs) main.append(fs);
+      for (const k of visibleSections(tab)) {
+        const block = sectionBlock(k, false);
+        if (block) main.append(block);
+      }
       main.append(visaCard(h, openSettings));
       // 이민 단계 트래커: 최근 2주 브리핑을 받으면 관련 소식까지 채운다
       const tslot = h("div", {}, trackerCard(h, brief, null, openSettings));
@@ -722,10 +731,6 @@ function renderMain(): void {
       void recentBriefs().then((r) => {
         if (tslot.isConnected && brief === cur) tslot.replaceChildren(trackerCard(h, cur, r.filter((b) => b.date !== cur.date), openSettings));
       }).catch(() => undefined);
-      const ov = overview(visibleSections(tab));
-      if (ov) main.append(ov);
-      const fs = followSection();
-      if (fs) main.append(fs);
       const board = processingBoard();
       if (board) main.append(board);
       // 숙련 이민(SMC) 한눈에: INZ 공식 원문 요건·임금 기준·점수표·변경 기록 (매일 아침 확인, AI 없음)
@@ -760,9 +765,11 @@ function renderMain(): void {
         if (d && pslot.isConnected) void import("./policy").then((m) => { if (pslot.isConnected) pslot.replaceChildren(m.policyPanel(h, d, n)); });
       });
     }
-    for (const k of visibleSections(tab)) {
-      const block = sectionBlock(k, false);
-      if (block) main.append(block);
+    if (tab.id !== "imm") {
+      for (const k of visibleSections(tab)) {
+        const block = sectionBlock(k, false);
+        if (block) main.append(block);
+      }
     }
   }
   const failed = brief.meta?.failed_feeds ?? [];
