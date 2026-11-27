@@ -1,6 +1,6 @@
 {
- "updated": "2026-11-27",
- "checked_at": "2026-11-27T04:19:21+00:00",
+ "updated": "2026-11-28",
+ "checked_at": "2026-11-27T14:08:59+00:00",
  "keep_days": 1095,
  "topics": {
   "smc": "SMC 숙련 이민",
@@ -16,8 +16,8 @@
    "label": "SMC 거주비자 (요건·신청 방법)",
    "url": "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "smc_pay": {
@@ -25,8 +25,8 @@
    "label": "SMC 임금 기준",
    "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/pay-rates-for-the-skilled-migrant-category-resident-visa/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "smc_path": {
@@ -34,8 +34,8 @@
    "label": "SMC 경로 안내",
    "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "smc_lists": {
@@ -43,8 +43,8 @@
    "label": "적색·황색 직종 목록",
    "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/red-and-amber-list-occupations/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "pswv": {
@@ -52,8 +52,8 @@
    "label": "졸업 후 취업비자 (PSWV)",
    "url": "https://www.immigration.govt.nz/visas/post-study-work-visa/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "aewv": {
@@ -61,8 +61,8 @@
    "label": "고용주 인증 취업비자 (AEWV)",
    "url": "https://www.immigration.govt.nz/visas/accredited-employer-work-visa/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "prv": {
@@ -70,8 +70,8 @@
    "label": "영구영주권 (PRV)",
    "url": "https://www.immigration.govt.nz/visas/permanent-resident-visa/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "prv_commit": {
@@ -79,8 +79,8 @@
    "label": "영주권 commitment (체류·세금거주 등)",
    "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/permanent-residence/showing-your-commitment-to-new-zealand-for-permanent-residence/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "greenlist": {
@@ -88,8 +88,8 @@
    "label": "그린리스트 직군",
    "url": "https://www.immigration.govt.nz/work/requirements-for-work-visas/green-list-occupations-qualifications-and-skills/green-list-roles-jobs-we-need-people-for-in-new-zealand/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "wage": {
@@ -97,8 +97,8 @@
    "label": "취업비자 임금 기준",
    "url": "https://www.immigration.govt.nz/work/requirements-for-work-visas/wage-rates-for-work-visas/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
-   "ok_at": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
+   "ok_at": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   },
   "proc": {
@@ -106,10 +106,27 @@
    "label": "비자 처리 기간 (INZ 대기 시간 표)",
    "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/",
    "status": "ok",
-   "checked": "2026-11-27T04:19:21+00:00",
+   "checked": "2026-11-27T14:08:59+00:00",
    "since": "2026-11-27"
   }
  },
- "baseline": true,
- "entries": []
+ "baseline": false,
+ "entries": [
+  {
+   "id": "2026-11-28-proc",
+   "date": "2026-11-28",
+   "page": "proc",
+   "topic": "proc",
+   "label": "비자 처리 기간 (INZ 대기 시간 표)",
+   "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/",
+   "facts": [
+    {
+     "key": "proc.pswv.p90",
+     "name": "졸업 후 취업비자 (PSWV) — 80% 결정까지",
+     "before": "4주",
+     "after": "3주"
+    }
+   ]
+  }
+ ]
 }

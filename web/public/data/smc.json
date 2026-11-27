@@ -1,38 +1,38 @@
 {
- "checked_at": "2026-11-27T03:57:38+00:00",
- "checked_date": "2026-11-27",
+ "checked_at": "2026-11-27T14:08:48+00:00",
+ "checked_date": "2026-11-28",
  "ok": true,
  "pages": {
   "visa": {
    "label": "SMC 거주비자 (요건·신청 방법)",
    "url": "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/",
    "status": "ok",
-   "checked": "2026-11-27T03:57:38+00:00",
-   "ok_at": "2026-11-27T03:57:38+00:00",
+   "checked": "2026-11-27T14:08:48+00:00",
+   "ok_at": "2026-11-27T14:08:48+00:00",
    "lines": 555
   },
   "pay": {
    "label": "SMC 임금 기준",
    "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/pay-rates-for-the-skilled-migrant-category-resident-visa/",
    "status": "ok",
-   "checked": "2026-11-27T03:57:38+00:00",
-   "ok_at": "2026-11-27T03:57:38+00:00",
+   "checked": "2026-11-27T14:08:48+00:00",
+   "ok_at": "2026-11-27T14:08:48+00:00",
    "lines": 177
   },
   "path": {
    "label": "SMC 경로 안내",
    "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/",
    "status": "ok",
-   "checked": "2026-11-27T03:57:38+00:00",
-   "ok_at": "2026-11-27T03:57:38+00:00",
+   "checked": "2026-11-27T14:08:48+00:00",
+   "ok_at": "2026-11-27T14:08:48+00:00",
    "lines": 145
   },
   "lists": {
    "label": "적색·황색 직종 목록",
    "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/red-and-amber-list-occupations/",
    "status": "ok",
-   "checked": "2026-11-27T03:57:38+00:00",
-   "ok_at": "2026-11-27T03:57:38+00:00",
+   "checked": "2026-11-27T14:08:48+00:00",
+   "ok_at": "2026-11-27T14:08:48+00:00",
    "lines": 64
   }
  },
