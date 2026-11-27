@@ -728,6 +728,13 @@ function renderMain(): void {
       if (fs) main.append(fs);
       const board = processingBoard();
       if (board) main.append(board);
+      // 숙련 이민(SMC) 한눈에: INZ 공식 원문 요건·임금 기준·점수표·변경 기록 (매일 아침 확인, AI 없음)
+      const sslot = h("div", {});
+      main.append(sslot);
+      const cur3 = brief;
+      void getJSON<import("./smc").SmcData>("./data/smc.json").then((d) => import("./smc").then((m) => {
+        if (sslot.isConnected && brief === cur3) sslot.replaceChildren(m.smcCard(h, d, cur3.extras?.processing_times as never));
+      })).catch(() => undefined);
       // 이번 주 이민 숫자(최근 7일 기사 속 수치 + 처리 기간 변화) · 주간 규정 변화 요약(일요일엔 펼침)
       const nslot = h("div", {}), wslot = h("div", {});
       main.append(nslot, wslot);
@@ -829,7 +836,7 @@ function alertBanner(alerts: Alert[]): HTMLElement | null {
   return h("section", { class: "alerts", role: "status", "aria-label": "이민 알림" },
     h("h2", {}, `🚨 오늘의 이민 알림 ${alerts.length}건`),
     h("ul", {}, ...alerts.map((a) => h("li", {},
-      h("span", { class: "alert-kind" }, a.kind === "processing" ? "처리 기간" : "중요 뉴스"),
+      h("span", { class: "alert-kind" }, a.kind === "processing" ? "처리 기간" : a.kind === "smc" ? "SMC 규정" : "중요 뉴스"),
       a.url ? h("a", { href: safeUrl(a.url), target: "_blank", rel: "noopener noreferrer" }, a.text) : a.text))));
 }
 

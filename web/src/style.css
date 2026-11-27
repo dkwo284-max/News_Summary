@@ -254,6 +254,59 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .stale { color: #f0b72f; background: #3d2e00; border-radius: 999px; padding: 0 6px; }
 .board-note { margin: 10px 0 0; font-size: 0.75rem; color: #9da7b3; }
 
+/* ── 숙련 이민(SMC) 한눈에 ── */
+.smc { margin: 8px 0 16px; padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); }
+.smc-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.smc-head h2 { margin: 0; font-size: 1rem; }
+.smc-meta { font-size: 0.75rem; color: var(--muted); margin-left: auto; }
+.smc-status { font-size: 0.75rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; }
+.smc-status.ok { background: #dcfce7; color: #166534; }
+.smc-status.warn { background: #fff4d6; color: #6b4b00; }
+:root[data-theme="dark"] .smc-status.ok { background: #12351f; color: #86efac; }
+:root[data-theme="dark"] .smc-status.warn { background: #3b2e05; color: #ffe08a; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .smc-status.ok { background: #12351f; color: #86efac; }
+  :root:not([data-theme="light"]) .smc-status.warn { background: #3b2e05; color: #ffe08a; }
+}
+.smc-tiles { list-style: none; margin: 12px 0 4px; padding: 0; display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 640px) { .smc-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.smc-tile { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 12px; background: var(--accent-soft); min-width: 0; }
+.smc-tname { font-size: 0.75rem; color: var(--muted); font-weight: 700; }
+.smc-tval { font-size: 1.25rem; font-variant-numeric: tabular-nums; line-height: 1.25; }
+.smc-tsub { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+.smc-group h3 { margin: 14px 0 6px; font-size: 0.875rem; }
+.smc-chks { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.smc-chk { display: grid; grid-template-columns: 1.25em minmax(0, 1fr); gap: 2px 6px; font-size: 0.875rem; line-height: 1.5; }
+.smc-chk > details { grid-column: 2; }
+.smc-mark { font-weight: 800; }
+.smc-chk.ok .smc-mark { color: #16a34a; }
+.smc-chk.bad .smc-mark, .smc-chk.unk .smc-mark { color: #d97706; }
+.smc-flag { color: #b45309; }
+:root[data-theme="dark"] .smc-flag { color: #fbbf24; }
+.smc-quote summary, .smc-more summary { cursor: pointer; color: var(--accent); font-size: 0.75rem; min-height: 24px; }
+.smc-more summary { font-size: 0.875rem; font-weight: 700; margin-top: 12px; }
+.smc-quote q { display: block; font-size: 0.75rem; color: var(--muted); quotes: "“" "”"; margin: 2px 0; overflow-wrap: anywhere; }
+.smc-quote a, .smc-links a, .smc-chead a { color: var(--accent); font-size: 0.75rem; }
+.smc-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 0.8125rem; }
+.smc-table caption { text-align: left; font-weight: 700; padding: 4px 0; }
+.smc-table th, .smc-table td { text-align: left; padding: 5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+.smc-table th { font-size: 0.75rem; color: var(--muted); font-weight: 600; }
+.smc-table td.num { font-weight: 700; text-align: center; }
+.smc-changes { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; }
+.smc-chead { font-size: 0.8125rem; margin-bottom: 2px; }
+.smc-add, .smc-del { font-size: 0.75rem; line-height: 1.45; padding: 2px 6px; border-radius: 6px; overflow-wrap: anywhere; }
+.smc-add { background: #dcfce7; color: #14532d; }
+.smc-del { background: #fee2e2; color: #7f1d1d; text-decoration: line-through; }
+:root[data-theme="dark"] .smc-add { background: #12351f; color: #bbf7d0; }
+:root[data-theme="dark"] .smc-del { background: #3f1515; color: #fecaca; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .smc-add { background: #12351f; color: #bbf7d0; }
+  :root:not([data-theme="light"]) .smc-del { background: #3f1515; color: #fecaca; }
+  :root:not([data-theme="light"]) .smc-flag { color: #fbbf24; }
+}
+.smc-links { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.smc-note { margin: 10px 0 0; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
 /* ── 내 비자 일정 ── */
 .visa-pill.urgent { background: var(--hot-bg); color: var(--hot-text); }
 .visa-pill.soon { background: #fff4d6; color: #6b4b00; }

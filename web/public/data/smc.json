@@ -1,0 +1,323 @@
+{
+ "checked_at": "2026-11-27T03:57:38+00:00",
+ "checked_date": "2026-11-27",
+ "ok": true,
+ "pages": {
+  "visa": {
+   "label": "SMC 거주비자 (요건·신청 방법)",
+   "url": "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/",
+   "status": "ok",
+   "checked": "2026-11-27T03:57:38+00:00",
+   "ok_at": "2026-11-27T03:57:38+00:00",
+   "lines": 555
+  },
+  "pay": {
+   "label": "SMC 임금 기준",
+   "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/pay-rates-for-the-skilled-migrant-category-resident-visa/",
+   "status": "ok",
+   "checked": "2026-11-27T03:57:38+00:00",
+   "ok_at": "2026-11-27T03:57:38+00:00",
+   "lines": 177
+  },
+  "path": {
+   "label": "SMC 경로 안내",
+   "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/",
+   "status": "ok",
+   "checked": "2026-11-27T03:57:38+00:00",
+   "ok_at": "2026-11-27T03:57:38+00:00",
+   "lines": 145
+  },
+  "lists": {
+   "label": "적색·황색 직종 목록",
+   "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/red-and-amber-list-occupations/",
+   "status": "ok",
+   "checked": "2026-11-27T03:57:38+00:00",
+   "ok_at": "2026-11-27T03:57:38+00:00",
+   "lines": 64
+  }
+ },
+ "links": [
+  {
+   "label": "SMC 임금 기준 계산 도구",
+   "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/smc-wage-threshold-tool/"
+  },
+  {
+   "label": "인증 고용주 목록",
+   "url": "https://www.immigration.govt.nz/work/requirements-for-work-visas/approved-employers/accredited-employer-list/"
+  },
+  {
+   "label": "ANZSCO 숙련도 찾기",
+   "url": "https://www.immigration.govt.nz/work/requirements-for-work-visas/green-list-occupations-qualifications-and-skills/find-your-anzsco-skill-level/"
+  },
+  {
+   "label": "거주비자 처리 기간",
+   "url": "https://www.immigration.govt.nz/process-to-apply/waiting-for-a-visa/processing-a-visa-application/how-long-it-takes-to-process-an-application/resident-visa-wait-times/"
+  }
+ ],
+ "facts": {
+  "fee_from_nzd": 6450,
+  "age_max": 55,
+  "qual_nz": [
+   {
+    "q": "Level 10 Doctoral Degree",
+    "pts": 6,
+    "bachelor": "No"
+   },
+   {
+    "q": "Level 9 Master's Degree (30 weeks of full-time study)",
+    "pts": 6,
+    "bachelor": "Yes"
+   },
+   {
+    "q": "Level 9 Master's Degree (not full-time study)",
+    "pts": 5,
+    "bachelor": "No"
+   },
+   {
+    "q": "Level 8 Honour's Degree, Postgraduate Diploma or Post-graduate Certificate",
+    "pts": 5,
+    "bachelor": "Yes"
+   },
+   {
+    "q": "Level 7 Bachelor's Degree",
+    "pts": 5,
+    "bachelor": "Not applicable"
+   }
+  ],
+  "qual_intl": [
+   {
+    "q": "Level 10 Doctoral Degree",
+    "pts": 6,
+    "bachelor": "No"
+   },
+   {
+    "q": "Level 9 Master's Degree",
+    "pts": 5,
+    "bachelor": "Yes"
+   },
+   {
+    "q": "Level 8 Honour's Degree, Postgraduate Diploma or Post-graduate Certificate",
+    "pts": 4,
+    "bachelor": "Yes"
+   },
+   {
+    "q": "Level 7 Bachelor's Degree",
+    "pts": 4,
+    "bachelor": "Not applicable"
+   }
+  ],
+  "income_pts": [
+   {
+    "q": "Your job must pay 3 times the SMC wage threshold (currently NZD $105.00 an hour) or more",
+    "pts": 6
+   },
+   {
+    "q": "Your job must pay 2 times the SMC wage threshold an hour or more",
+    "pts": 4
+   },
+   {
+    "q": "Your job must pay 1.5 times the SMC wage threshold an hour or more",
+    "pts": 3
+   }
+  ],
+  "work_pts": [
+   {
+    "q": "2 years",
+    "pts": 3
+   },
+   {
+    "q": "1.5 years",
+    "pts": 2
+   },
+   {
+    "q": "1 year",
+    "pts": 1
+   }
+  ],
+  "threshold": {
+   "base": 35.0,
+   "x15": 52.5,
+   "x2": 70.0,
+   "x3": 105.0,
+   "from": "2026-03-09",
+   "annual_40h": 72800,
+   "cross_check": true
+  },
+  "threshold_history": [
+   {
+    "period": "From 9 March 2026",
+    "from": "2026-03-09",
+    "base": 35.0,
+    "x15": 52.5,
+    "x2": 70.0
+   },
+   {
+    "period": "18 August 2025 to 8 March 2026",
+    "from": "2025-08-18",
+    "base": 33.56,
+    "x15": 50.34,
+    "x2": 67.12
+   },
+   {
+    "period": "28 February 2024 to 17 August 2025",
+    "from": "2024-02-28",
+    "base": 31.61,
+    "x15": 47.41,
+    "x2": 63.22
+   },
+   {
+    "period": "27 February 2023 to 27 February 2024",
+    "from": "2023-02-27",
+    "base": 29.66,
+    "x15": 44.49,
+    "x2": 59.32
+   },
+   {
+    "period": "24 October 2022 to 26 February 2023",
+    "from": "2022-10-24",
+    "base": 27.76,
+    "x15": 41.64,
+    "x2": 55.52
+   },
+   {
+    "period": "19 July 2021 to 23 October 2022",
+    "from": "2021-07-19",
+    "base": 27.0,
+    "x15": 40.5,
+    "x2": 54.0
+   },
+   {
+    "period": "24 February 2020 to 18 July 2021",
+    "from": "2020-02-24",
+    "base": 25.5,
+    "x15": 38.25,
+    "x2": 51.0
+   }
+  ]
+ },
+ "checks": [
+  {
+   "group": "apply",
+   "id": "job_offer",
+   "page": "visa",
+   "ko": "인증 고용주의 일자리 또는 잡오퍼가 있고 SMC 경로 1개를 충족하면 EOI(관심 표명)를 낼 수 있어요. 아직 출근 전이어도 잡오퍼로 됩니다.",
+   "ok": true,
+   "quote": "You can submit an expression of interest (EOI) if you have a job or job offer from an accredited employer, and meet the requirements for one of the Skilled Migrant Category (SMC) pathways."
+  },
+  {
+   "group": "apply",
+   "id": "offshore",
+   "page": "visa",
+   "ko": "한국 등 NZ 밖에서도 신청할 수 있어요. 해외에서 신청했다면 비자 발급일로부터 12개월 안에 NZ에 들어와야 해요.",
+   "ok": true,
+   "quote": "You must come to New Zealand within 12 months of the date your visa is issued, if you applied for your visa outside of New Zealand."
+  },
+  {
+   "group": "apply",
+   "id": "eoi",
+   "page": "visa",
+   "ko": "EOI는 무료이고, 내면 바로 요건 충족 여부를 알려 줘요.",
+   "ok": true,
+   "quote": "Check if you need an International Qualification Assessment … Submit an Expression of Interest … There is no fee to submit an EOI."
+  },
+  {
+   "group": "apply",
+   "id": "ita",
+   "page": "visa",
+   "ko": "초청(ITA)을 받으면 4개월 안에 신청해야 해요. 넘기면 EOI부터 다시.",
+   "ok": true,
+   "quote": "You must submit your visa application within 4 months of receiving your ITA. You must apply under the SMC pathway that you have been invited for."
+  },
+  {
+   "group": "apply",
+   "id": "interim",
+   "page": "visa",
+   "ko": "NZ 안에서 기다리는 동안에는 유효한 비자가 있어야 하고, 새 임시비자를 신청하지 않았다면 SMC 임시비자(Interim)를 줄 수 있어요.",
+   "ok": true,
+   "quote": "If you have not applied for a new temporary visa, we may give you a Skilled Migrant Category Interim Visa."
+  },
+  {
+   "group": "apply",
+   "id": "age",
+   "page": "visa",
+   "ko": "신청할 때 55세 이하.",
+   "ok": true,
+   "quote": "55 years or younger … To apply you must: … be aged 55 or younger when you apply"
+  },
+  {
+   "group": "job",
+   "id": "full_time",
+   "page": "visa",
+   "ko": "일자리는 주 30시간 이상(풀타임).",
+   "ok": true,
+   "quote": "be with an accredited employer … be full-time and (for at least 30 hours a week)"
+  },
+  {
+   "group": "job",
+   "id": "duration",
+   "page": "visa",
+   "ko": "정규직, 12개월 이상 계약직, 또는 계약(연속 계약 포함) 6개월 이상.",
+   "ok": true,
+   "quote": "permanent or fixed-term for at least 12 months, or a contract or continuous contracts for at least 6 months, and"
+  },
+  {
+   "group": "job",
+   "id": "invited_rate",
+   "page": "pay",
+   "ko": "학위로 6점(NZ 경력 불필요)이면 일자리 임금은 '초청받을 때'의 SMC 임금 기준만 넘으면 돼요(보통 EOI 제출일).",
+   "ok": true,
+   "quote": "If you are claiming 6 points under the Points-based pathway and you do not need skilled work experience in New Zealand, your current job or job offer must meet the SMC wage threshold that is in place when you are invited to apply for residence."
+  },
+  {
+   "group": "job",
+   "id": "skill45",
+   "page": "pay",
+   "ko": "ANZSCO 숙련도 4·5단계나 목록에 없는 직무는 기준의 1.5배.",
+   "ok": true,
+   "quote": "1.5 times the SMC wage threshold (ANZSCO skill levels 4, 5 or unlisted jobs)"
+  },
+  {
+   "group": "points",
+   "id": "pathways",
+   "page": "visa",
+   "ko": "경로는 3개: 점수제(6점) · 숙련 경력 · 기술직.",
+   "ok": true,
+   "quote": "You must be eligible for 1 of the 3 SMC pathways. The Points-based pathway, Skilled Work Experience pathway or Trades and Technicians pathway."
+  },
+  {
+   "group": "points",
+   "id": "nz_masters",
+   "page": "visa",
+   "ko": "NZ 석사는 NZ에서 30주 이상 풀타임으로 공부했고 학사가 있으면 6점, 아니면 5점.",
+   "ok": true,
+   "quote": "You can claim 6 points for a New Zealand master's degree if you have completed at least 30 weeks of full-time study in New Zealand and have a bachelor's degree."
+  },
+  {
+   "group": "points",
+   "id": "swe",
+   "page": "visa",
+   "ko": "숙련 경력 경로: 관련 경력 5년 이상(그중 NZ 숙련 경력 2년 이상).",
+   "ok": true,
+   "quote": "To be eligible, you must have at least 5 years of directly relevant work experience, including at least 2 years of skilled work experience in New Zealand."
+  },
+  {
+   "group": "points",
+   "id": "trades",
+   "page": "visa",
+   "ko": "기술직 경로: 관련 자격 + 자격 취득 후 경력 4년 이상(그중 NZ 18개월 이상).",
+   "ok": true,
+   "quote": "To be eligible, you must have a relevant qualification, and at least 4 years of post-qualification work experience, including at least 18 months of skilled work experience in New Zealand."
+  },
+  {
+   "group": "points",
+   "id": "red_list",
+   "page": "visa",
+   "ko": "적색 목록 직종이나 숙련도 4·5단계 직무는 숙련 경력 경로를 쓸 수 없어요(점수제와는 별개).",
+   "ok": true,
+   "quote": "If your current job or job offer is on the Red List, or is an ANZSCO skill level 4 or 5 occupation, you are not eligible for this pathway."
+  }
+ ],
+ "changes": [],
+ "changed_today": [],
+ "baseline": false
+}

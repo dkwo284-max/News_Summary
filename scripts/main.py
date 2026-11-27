@@ -51,10 +51,11 @@ def late_retry_ok(cfg: dict, local_now: datetime) -> bool:
 
 
 def build_alerts(sections: dict, extras: dict, cfg: dict) -> list[dict]:
-    """즉시 알릴 만한 것: 처리 기간 급변, 이민 레이더 관련도 9점 이상 기사."""
+    """즉시 알릴 만한 것: 처리 기간 급변, SMC 공식 페이지 변경, 이민 레이더 관련도 9점 이상 기사."""
     from processing import processing_alerts
+    from smc import smc_alerts
 
-    alerts = processing_alerts(extras.get("processing_times") or {})
+    alerts = processing_alerts(extras.get("processing_times") or {}) + smc_alerts(extras.get("smc_watch"))
     min_radar = int(cfg.get("profile", {}).get("alert_radar_score", 9))
     for it in sections.get("nz_immigration", {}).get("items", []):
         if it.get("radar", 0) >= min_radar:
@@ -113,6 +114,14 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
         log.warning("extras refresh failed: %s", e)
     pt = fetch_processing_times(cfg, None, previous)
     brief.setdefault("extras", {})["processing_times"] = update_history(pt, data_dir, brief["date"])
+    try:
+        from smc import update_smc
+
+        sm = update_smc(cfg, data_dir, brief["date"])
+        if sm:
+            brief["extras"]["smc_watch"] = sm
+    except Exception as e:  # noqa: BLE001
+        log.warning("smc watch failed: %s", e)
     body = json.dumps(finite(brief), ensure_ascii=False, indent=1, allow_nan=False)
     latest.write_text(body, encoding="utf-8")
     (data_dir / f"{brief['date']}.json").write_text(body, encoding="utf-8")
@@ -391,6 +400,14 @@ def main(argv: list[str] | None = None) -> int:
             extras["processing_times"] = update_history(pt, out_dir, local_now.date().isoformat())
         except Exception as e:  # noqa: BLE001 — 전광판 실패가 브리핑 생성을 막지 않게
             log.warning("processing times failed: %s", e)
+        # 숙련 이민(SMC) 공식 규정 감시: INZ 원문 요건 문장·임금 기준·점수표 확인, 바뀐 문장 기록 (AI 없음, smc.json)
+        if not args.dry_run:
+            try:
+                from smc import update_smc
+
+                extras["smc_watch"] = update_smc(cfg, out_dir, local_now.date().isoformat())
+            except Exception as e:  # noqa: BLE001
+                log.warning("smc watch failed: %s", e)
         # 동네 비교: 시세 렌트·평균 집값 (주 1회 갱신, 별도 파일 areas.json)
         if not args.dry_run:
             try:

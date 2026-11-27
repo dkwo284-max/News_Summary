@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09",
+  "updated": "2026-11-27",
   "note": "정당 공약·정부 정책을 사람이 공식 자료(정당 사이트·INZ·정부 보도자료)와 주요 언론 기사로 확인해 적은 기록입니다. 해석·평가는 넣지 않았고, 확인하지 못한 항목은 비워 두었습니다. 최종 판단은 반드시 원문 링크로 하세요.",
   "election": {
     "date": "2026-11-07",
@@ -80,6 +80,16 @@
     "elresults": {
       "label": "공식 개표 결과",
       "url": "https://www.electionresults.govt.nz/",
+      "type": "공식"
+    },
+    "inz_smc": {
+      "label": "INZ SMC 거주비자 (현재 요건)",
+      "url": "https://www.immigration.govt.nz/visas/skilled-migrant-category-resident-visa/",
+      "type": "공식"
+    },
+    "inz_smc_pay": {
+      "label": "INZ SMC 임금 기준",
+      "url": "https://www.immigration.govt.nz/live/resident-visas-to-live-in-new-zealand/skilled-residence-pathways-in-new-zealand/skilled-migrant-category-pathway-to-residence/pay-rates-for-the-skilled-migrant-category-resident-visa/",
       "type": "공식"
     },
     "inz_news": {
@@ -638,8 +648,9 @@
         "residence",
         "work"
       ],
-      "detail": "숙련 경력 경로 (관련 경력 5년 중 NZ 2년 이상, 중위임금 1.1배)와 기술직 경로(Level 4 이상 자격, 관련 경력 4년 중 NZ 18개월 이상, SMC 중위임금). 적색 목록 직종은 제외, 황색 직종은 추가 요건. 접수 시점이 기준입니다.",
+      "detail": "숙련 경력 경로(관련 경력 5년 이상 중 NZ 숙련 경력 2년 이상, ANZSCO 1~3단계 직무, SMC 임금 기준의 1.1배)와 기술직 경로(Level 4 이상 관련 자격, 자격 취득 후 경력 4년 이상 중 NZ 18개월 이상, SMC 임금 기준 이상). 적색 목록 직종·숙련도 4·5단계 직무는 숙련 경력 경로 불가, 황색 직종은 추가 요건. 접수 시점이 기준입니다. (INZ SMC 비자 페이지와 2026-11-27 원문 대조)",
       "src": [
+        "inz_smc",
         "natrel",
         "inz_mar",
         "inz_jun"
@@ -655,8 +666,10 @@
         "residence",
         "work"
       ],
-      "detail": "대부분 신청자는 경력을 쌓기 시작할 때의 임금 기준만 맞추면 됩니다. 학사 3→4점, Level 8·9 점수에는 학사 증빙 필요. 취업→영주권(WTR) 비자도 같은 방식으로 정렬.",
+      "detail": "NZ 경력이 필요한 경로는 경력을 쌓기 시작할 때의 임금 기준을, 학위 등으로 6점이 되어 경력이 필요 없으면 초청받을 때의 기준을 적용합니다(현재 시간당 $35.00, 2026-03-09부터). 해외 학사 3→4점(NZ 학사 5점), Level 8·9 점수에는 학사 학위 필요 — NZ 석사는 NZ에서 30주 이상 풀타임이면 6점. 취업→영주권(WTR) 비자도 같은 방식으로 정렬. (INZ 임금 기준 페이지와 2026-11-27 원문 대조)",
       "src": [
+        "inz_smc_pay",
+        "inz_smc",
         "inz_jun"
       ]
     },
