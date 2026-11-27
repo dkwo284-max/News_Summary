@@ -68,7 +68,7 @@ def test_checks_changes_and_alerts():
     assert ch["page"] == "visa" and any("within 6 months" in a for a in ch["added"]) and any("within 12 months" in r for r in ch["removed"])
     assert not next(c for c in second["checks"] if c["id"] == "offshore")["ok"]
     alerts = smc_alerts({"changed": [{"label": "SMC 거주비자", "url": "u", "n": 2}], "missing": ["해외 신청"]})
-    assert alerts[0]["kind"] == "smc" and len(alerts) == 2
+    assert alerts[0]["kind"] == "smc" and len(alerts) == 1 and "확인 필요" in alerts[0]["text"]
 
 
 def test_update_keeps_previous_on_failure(cfg, tmp_path):

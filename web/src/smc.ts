@@ -68,14 +68,7 @@ export function smcCard(h: H, d: SmcData, proc?: Proc | null): HTMLElement {
     h("p", { class: "smc-note" }, "점수제는 6점이 필요해요. 학위·연봉·직업 등록 중 하나로 점수를 내고, 모자라면 NZ 숙련 경력으로 최대 3점을 더해요."),
     ptsTable("NZ 학위", f.qual_nz, true), ptsTable("해외 학위", f.qual_intl, true), ptsTable("연봉", f.income_pts, false), ptsTable("NZ 숙련 경력 (추가 점수)", f.work_pts, false));
 
-  const recent = (d.changes ?? []).slice(0, 8);
-  const changes = h("details", { class: "smc-more", ...(today.length ? { open: "" } : {}) },
-    h("summary", {}, `원문 변경 기록${recent.length ? ` ${recent.length}건` : ""}`),
-    recent.length ? h("ul", { class: "smc-changes" }, ...recent.map((c) => h("li", {},
-      h("div", { class: "smc-chead" }, h("b", {}, ymd(c.date)), " · ", h("a", { href: safe(c.url), ...ext }, `${c.label} ↗`)),
-      ...c.added.map((x) => h("div", { class: "smc-add", lang: "en" }, `+ ${x}`)),
-      ...c.removed.map((x) => h("div", { class: "smc-del", lang: "en" }, `− ${x}`)))))
-      : h("p", { class: "smc-note" }, `아직 바뀐 문장이 없어요. ${d.baseline ? "오늘 기준 원문을 저장했고, " : ""}매일 아침 공식 페이지와 비교해 문장이 바뀌면 여기와 '오늘의 이민 알림'에 표시해요.`));
+  const changes = h("p", { class: "smc-note" }, "원문이 바뀌면 이전 → 이후가 아래 ", h("a", { href: "#inz-history" }, "🗂 INZ 규정 변경 이력"), "에 쌓이고 '오늘의 이민 알림'에도 떠요.");
 
   const links = h("ul", { class: "smc-links" },
     ...Object.values(d.pages).map((p) => h("li", {}, h("a", { href: safe(p.url), ...ext }, `${p.label} ↗`),

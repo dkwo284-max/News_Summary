@@ -735,6 +735,12 @@ function renderMain(): void {
       void getJSON<import("./smc").SmcData>("./data/smc.json").then((d) => import("./smc").then((m) => {
         if (sslot.isConnected && brief === cur3) sslot.replaceChildren(m.smcCard(h, d, cur3.extras?.processing_times as never));
       })).catch(() => undefined);
+      // INZ 규정 변경 이력: 공식 페이지 숫자·문장을 매일 어제와 비교해 '이전 → 이후'로 누적
+      const islot = h("div", {});
+      main.append(islot);
+      void getJSON<import("./inzlog").InzLog>("./data/inz-changes.json").then((d) => import("./inzlog").then((m) => {
+        if (islot.isConnected && brief === cur3) islot.replaceChildren(m.inzLogCard(h, d));
+      })).catch(() => undefined);
       // 이번 주 이민 숫자(최근 7일 기사 속 수치 + 처리 기간 변화) · 주간 규정 변화 요약(일요일엔 펼침)
       const nslot = h("div", {}), wslot = h("div", {});
       main.append(nslot, wslot);
@@ -836,7 +842,7 @@ function alertBanner(alerts: Alert[]): HTMLElement | null {
   return h("section", { class: "alerts", role: "status", "aria-label": "이민 알림" },
     h("h2", {}, `🚨 오늘의 이민 알림 ${alerts.length}건`),
     h("ul", {}, ...alerts.map((a) => h("li", {},
-      h("span", { class: "alert-kind" }, a.kind === "processing" ? "처리 기간" : a.kind === "smc" ? "SMC 규정" : "중요 뉴스"),
+      h("span", { class: "alert-kind" }, a.kind === "processing" ? "처리 기간" : a.kind === "smc" ? "SMC 규정" : a.kind === "inz" ? "INZ 규정" : "중요 뉴스"),
       a.url ? h("a", { href: safeUrl(a.url), target: "_blank", rel: "noopener noreferrer" }, a.text) : a.text))));
 }
 

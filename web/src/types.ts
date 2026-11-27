@@ -94,7 +94,7 @@ export interface ProcessingItem {
 }
 
 export interface Alert {
-  kind: "processing" | "radar" | "smc";
+  kind: "processing" | "radar" | "smc" | "inz";
   text: string;
   url: string;
 }

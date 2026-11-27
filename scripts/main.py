@@ -51,11 +51,12 @@ def late_retry_ok(cfg: dict, local_now: datetime) -> bool:
 
 
 def build_alerts(sections: dict, extras: dict, cfg: dict) -> list[dict]:
-    """즉시 알릴 만한 것: 처리 기간 급변, SMC 공식 페이지 변경, 이민 레이더 관련도 9점 이상 기사."""
+    """즉시 알릴 만한 것: 처리 기간 급변, INZ 공식 페이지 변경(이전→이후), SMC 요건 원문 확인 필요, 이민 레이더 관련도 9점 이상 기사."""
+    from inz_watch import inz_alerts
     from processing import processing_alerts
     from smc import smc_alerts
 
-    alerts = processing_alerts(extras.get("processing_times") or {}) + smc_alerts(extras.get("smc_watch"))
+    alerts = processing_alerts(extras.get("processing_times") or {}) + inz_alerts(extras.get("inz_watch")) + smc_alerts(extras.get("smc_watch"))
     min_radar = int(cfg.get("profile", {}).get("alert_radar_score", 9))
     for it in sections.get("nz_immigration", {}).get("items", []):
         if it.get("radar", 0) >= min_radar:
@@ -122,6 +123,14 @@ def update_processing_only(cfg: dict, data_dir: Path) -> int:
             brief["extras"]["smc_watch"] = sm
     except Exception as e:  # noqa: BLE001
         log.warning("smc watch failed: %s", e)
+    try:
+        from inz_watch import update_inz_watch
+
+        iw = update_inz_watch(cfg, data_dir, brief["date"], brief["extras"].get("processing_times"))
+        if iw:
+            brief["extras"]["inz_watch"] = iw
+    except Exception as e:  # noqa: BLE001
+        log.warning("inz watch failed: %s", e)
     body = json.dumps(finite(brief), ensure_ascii=False, indent=1, allow_nan=False)
     latest.write_text(body, encoding="utf-8")
     (data_dir / f"{brief['date']}.json").write_text(body, encoding="utf-8")
@@ -408,6 +417,13 @@ def main(argv: list[str] | None = None) -> int:
                 extras["smc_watch"] = update_smc(cfg, out_dir, local_now.date().isoformat())
             except Exception as e:  # noqa: BLE001
                 log.warning("smc watch failed: %s", e)
+            # INZ 규정 변경 이력: 공식 페이지 10곳의 숫자·문장을 어제와 비교해 '이전 → 이후' 누적 (요약만 AI 1회)
+            try:
+                from inz_watch import update_inz_watch
+
+                extras["inz_watch"] = update_inz_watch(cfg, out_dir, local_now.date().isoformat(), extras.get("processing_times"), llm)
+            except Exception as e:  # noqa: BLE001
+                log.warning("inz watch failed: %s", e)
         # 동네 비교: 시세 렌트·평균 집값 (주 1회 갱신, 별도 파일 areas.json)
         if not args.dry_run:
             try:

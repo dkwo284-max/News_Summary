@@ -307,6 +307,50 @@ legend { font-weight: 700; margin-bottom: 6px; }
 .smc-links { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
 .smc-note { margin: 10px 0 0; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
 
+/* ── INZ 규정 변경 이력 ── */
+.il { margin: 8px 0 16px; padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); scroll-margin-top: 72px; }
+.il-headrow { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.il-headrow h2 { margin: 0; font-size: 1rem; }
+.il-meta { font-size: 0.75rem; color: var(--muted); margin-left: auto; }
+.il-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 6px; }
+.il-chip { border: 1px solid var(--line); background: transparent; color: inherit; border-radius: 999px; padding: 4px 10px; font-size: 0.8125rem; min-height: 32px; cursor: pointer; }
+.il-chip.on { background: var(--accent); border-color: var(--accent); color: var(--surface); font-weight: 700; }
+.il-rev { display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--muted); min-height: 32px; }
+.il-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 10px; }
+.il-entry { border-left: 3px solid var(--accent); padding: 4px 0 6px 10px; min-width: 0; }
+.il-entry.rev { border-left-color: var(--line); opacity: 0.75; }
+.il-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; font-size: 0.8125rem; }
+.il-head a { color: var(--accent); }
+.il-topic { font-size: 0.6875rem; font-weight: 700; padding: 0 7px; border-radius: 999px; background: var(--accent-soft); }
+.il-flag { color: var(--muted); }
+.il-facts { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+.il-fact { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; font-size: 0.8125rem; line-height: 1.45; }
+@media (max-width: 560px) { .il-fact { grid-template-columns: minmax(0, 1fr); } }
+.il-fname { overflow-wrap: anywhere; }
+.il-ba { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.il-ba s { color: var(--muted); }
+.il-ba b { color: var(--accent); }
+.il-ai { margin: 6px 0 0; font-size: 0.8125rem; line-height: 1.5; }
+.il-aitag { font-size: 0.6875rem; font-weight: 700; padding: 0 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.il-text summary { cursor: pointer; color: var(--accent); font-size: 0.75rem; min-height: 28px; margin-top: 4px; }
+.il-pair, .il-add, .il-del { font-size: 0.75rem; line-height: 1.55; padding: 4px 6px; margin: 3px 0; border-radius: 6px; background: var(--accent-soft); overflow-wrap: anywhere; }
+.il-pair del { background: #fee2e2; color: #7f1d1d; }
+.il-pair ins { background: #dcfce7; color: #14532d; text-decoration: none; font-weight: 700; }
+.il-tag { font-size: 0.6875rem; font-weight: 700; margin-right: 6px; }
+.il-add { background: #dcfce7; color: #14532d; }
+.il-del { background: #fee2e2; color: #7f1d1d; text-decoration: line-through; }
+:root[data-theme="dark"] .il-pair del, :root[data-theme="dark"] .il-del { background: #3f1515; color: #fecaca; }
+:root[data-theme="dark"] .il-pair ins, :root[data-theme="dark"] .il-add { background: #12351f; color: #bbf7d0; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .il-pair del, :root:not([data-theme="light"]) .il-del { background: #3f1515; color: #fecaca; }
+  :root:not([data-theme="light"]) .il-pair ins, :root:not([data-theme="light"]) .il-add { background: #12351f; color: #bbf7d0; }
+}
+.il-more { margin-top: 8px; border: 1px solid var(--line); background: transparent; color: var(--accent); border-radius: 8px; padding: 6px 12px; min-height: 36px; cursor: pointer; }
+.il-empty, .il-note { margin: 8px 0 0; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.il-pages summary { cursor: pointer; color: var(--accent); font-size: 0.8125rem; font-weight: 700; margin-top: 10px; min-height: 28px; }
+.il-pages ul { margin: 4px 0 0; padding-left: 18px; display: grid; gap: 4px; font-size: 0.8125rem; }
+.il-pages a { color: var(--accent); }
+
 /* ── 내 비자 일정 ── */
 .visa-pill.urgent { background: var(--hot-bg); color: var(--hot-text); }
 .visa-pill.soon { background: #fff4d6; color: #6b4b00; }

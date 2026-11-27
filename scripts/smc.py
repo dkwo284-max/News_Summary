@@ -294,10 +294,10 @@ def summary(out: dict) -> dict:
 
 
 def smc_alerts(sm: dict | None) -> list[dict]:
-    """브리핑 '오늘의 이민 알림'용: 원문이 바뀐 페이지, 근거 문장이 사라진 요건."""
+    """브리핑 '오늘의 이민 알림'용: 근거 문장이 사라진 요건 (페이지 변경 알림은 inz_watch 가 이전→이후로 냄)."""
     if not sm:
         return []
-    out = [{"kind": "smc", "text": f"SMC 공식 페이지 변경: {c['label']} ({c['n']}줄)", "url": c["url"]} for c in sm.get("changed", [])]
+    out = []
     if sm.get("missing"):
         out.append({"kind": "smc", "text": f"SMC 요건 원문 확인 필요 {len(sm['missing'])}건: {sm['missing'][0][:40]}…",
                     "url": PAGES[0]["url"]})
