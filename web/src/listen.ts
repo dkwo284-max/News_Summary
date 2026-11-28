@@ -44,6 +44,67 @@ function keepAlive(on: boolean): void {
   } catch { /* 무시 */ }
 }
 
+// ── 🎧 음성 파일 모드: 배포 때 만든 MP3(audio/podcast.json)가 있으면 진짜 오디오로 재생 → 화면이 꺼져도 음악 앱처럼 계속 ──
+export interface PodAudio { date: string; hash: string; src: string; duration: number; chapters: { title: string; start: number }[] }
+let audio: HTMLAudioElement | null = null, pod: PodAudio | null = null, posSaved = 0;
+const POS_KEY = "daily-brief:pod-pos";
+/** 오늘 브리핑의 음성 파일 정보(없거나 다른 날 것이면 null → 폰 음성으로 읽음) */
+export async function loadPodAudio(date: string): Promise<PodAudio | null> {
+  try {
+    const r = await fetch("./audio/podcast.json", { cache: "no-cache" });
+    if (!r.ok) return null;
+    const m = (await r.json()) as PodAudio;
+    return m && m.date === date && typeof m.src === "string" && /^audio\/[\w.-]+\.mp3$/.test(m.src) && Array.isArray(m.chapters) && m.chapters.length ? m : null;
+  } catch { return null; }
+}
+const chapterAt = (t: number): number => { let i = 0; pod?.chapters.forEach((c, k) => { if (t >= c.start - 0.05) i = k; }); return i; };
+const mmss = (t: number): string => { const s = Math.max(0, Math.floor(t || 0)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
+function savePos(force = false): void {
+  if (!audio || !pod) return;
+  const now = Date.now(); if (!force && now - posSaved < 4000) return; posSaved = now;
+  try { localStorage.setItem(POS_KEY, JSON.stringify({ hash: pod.hash, t: audio.ended ? 0 : Math.floor(audio.currentTime) })); } catch { /* 무시 */ }
+}
+function seek(t: number): void {
+  if (!audio) return;
+  audio.currentTime = Math.max(0, Math.min(t, (audio.duration || pod?.duration || t) - 0.2));
+  ti = chapterAt(audio.currentTime); render();
+}
+function audioPositionState(): void {
+  const ms = (navigator as Navigator & { mediaSession?: MediaSession }).mediaSession;
+  if (!audio || !ms?.setPositionState || !Number.isFinite(audio.duration)) return;
+  try { ms.setPositionState({ duration: audio.duration, playbackRate: audio.playbackRate, position: Math.min(audio.currentTime, audio.duration) }); } catch { /* 무시 */ }
+}
+/** 음성 파일로 듣기 시작. 파일을 못 불러오면 fallback(폰 음성)으로 */
+export function startAudio(p: PodAudio, name: string, fallback: () => void): void {
+  closePlayer();
+  pod = p; album = name; playing = false;
+  tracks = p.chapters.map((c) => ({ title: c.title, text: "" }));
+  ensureBar();
+  bar!.classList.add("lp-file");
+  fillChapters();
+  ti = 0; chunks = []; ci = 0;
+  const a = new Audio(p.src);
+  audio = a; a.preload = "auto"; a.playbackRate = rate();
+  (a as HTMLAudioElement & { preservesPitch?: boolean }).preservesPitch = true;
+  let started = false;
+  try {
+    const sv = JSON.parse(localStorage.getItem(POS_KEY) || "{}") as { hash?: string; t?: number };
+    if (sv.hash === p.hash && (sv.t ?? 0) > 3 && (sv.t ?? 0) < p.duration - 5) a.addEventListener("loadedmetadata", () => { a.currentTime = sv.t!; ti = chapterAt(sv.t!); render(`이어 듣기 · ${mmss(sv.t!)}부터`); }, { once: true });
+  } catch { /* 무시 */ }
+  a.addEventListener("playing", () => { started = true; });
+  a.addEventListener("play", () => { playing = true; render(); });
+  a.addEventListener("pause", () => { if (audio !== a) return; playing = false; savePos(true); render(); });
+  a.addEventListener("timeupdate", () => { if (audio !== a) return; const k = chapterAt(a.currentTime); if (k !== ti) { ti = k; announce(); } savePos(); render(); });
+  a.addEventListener("ratechange", audioPositionState);
+  a.addEventListener("ended", () => { if (audio !== a) return; playing = false; ti = tracks.length - 1; savePos(true); render("끝까지 들었어요 👏"); });
+  a.addEventListener("error", () => {
+    if (audio !== a) return;
+    if (!started) { closePlayer(); fallback(); } else render("음성 파일이 끊겼어요 · ▶로 다시");
+  });
+  play();
+}
+const isFile = (): boolean => !!audio && !!pod;
+
 const synth = (): SpeechSynthesis | null => (typeof window !== "undefined" && "speechSynthesis" in window ? window.speechSynthesis : null);
 export const canListen = (): boolean => !!synth() && typeof SpeechSynthesisUtterance !== "undefined";
 
@@ -129,6 +190,7 @@ function watchdog(on: boolean): void {
 }
 if (typeof document !== "undefined") document.addEventListener("visibilitychange", () => {
   if (!bar) return;
+  if (isFile()) { if (document.hidden) savePos(true); return; }
   if (document.hidden) {
     if (!playing) return;
     if (!opt(OPT_BG)) { pausedByHide = true; pause(); render("돌아오면 이어서 들려 드려요"); }
@@ -176,15 +238,29 @@ function enqueueRest(): void {
 
 function stopSpeech(): void { gen++; queued = false; synth()?.cancel(); }
 
-function play(): void { stopSpeech(); playing = true; keepAlive(true); watchdog(true); if (opt(OPT_CHIME) && !actx) { try { actx = new AudioContext(); } catch { /* 무시 */ } } speakChunk(); }
-function pause(): void { playing = false; stopSpeech(); keepAlive(false); watchdog(false); cueing = false; render(); }
-function goTo(i: number): void { if (i < 0 || i >= tracks.length) return; stopSpeech(); loadTrack(i, true); if (!playing) { playing = true; keepAlive(true); watchdog(true); } speakChunk(); }
+function play(): void {
+  if (audio) { void audio.play().catch(() => { playing = false; render("▶를 눌러 재생하세요"); }); return; }
+  stopSpeech(); playing = true; keepAlive(true); watchdog(true); if (opt(OPT_CHIME) && !actx) { try { actx = new AudioContext(); } catch { /* 무시 */ } } speakChunk(); }
+function pause(): void {
+  if (audio) { audio.pause(); return; }
+  playing = false; stopSpeech(); keepAlive(false); watchdog(false); cueing = false; render(); }
+function goTo(i: number): void {
+  if (i < 0 || i >= tracks.length) return;
+  if (audio && pod) { seek(pod.chapters[i].start); play(); return; } stopSpeech(); loadTrack(i, true); if (!playing) { playing = true; keepAlive(true); watchdog(true); } speakChunk(); }
 function jump(d: number): void {
+  if (audio && pod) {   // 이전: 지금 소식을 3초 넘게 들었으면 그 소식 처음으로
+    const cur = pod.chapters[ti]?.start ?? 0;
+    if (d < 0 && audio.currentTime - cur > 3) seek(cur);
+    else if (ti + d >= 0 && ti + d < pod.chapters.length) seek(pod.chapters[ti + d].start);
+    return;
+  }
   const next = ti + d;
   if (next < 0 || next >= tracks.length) return;
   stopSpeech(); loadTrack(next, true); if (playing) speakChunk(); else { cuePending = false; render(); }
 }
-export function closePlayer(): void { playing = false; stopSpeech(); keepAlive(false); watchdog(false); bar?.remove(); bar = null; document.body.classList.remove("has-player"); }
+export function closePlayer(): void {
+  if (audio) { savePos(true); const a = audio; audio = null; pod = null; a.pause(); a.removeAttribute("src"); a.load(); }
+  playing = false; stopSpeech(); keepAlive(false); watchdog(false); bar?.remove(); bar = null; document.body.classList.remove("has-player"); }
 
 function mediaSession(): void {
   const ms = (navigator as Navigator & { mediaSession?: MediaSession }).mediaSession;
@@ -196,7 +272,15 @@ function mediaSession(): void {
     ms.setActionHandler("pause", pause);
     ms.setActionHandler("nexttrack", () => jump(1));
     ms.setActionHandler("previoustrack", () => jump(-1));
-    try { ms.setActionHandler("seekforward", () => jump(1)); ms.setActionHandler("seekbackward", () => jump(-1)); ms.setActionHandler("stop", closePlayer); } catch { /* 일부 기기 미지원 */ }
+    try {
+      if (audio) {
+        ms.setActionHandler("seekforward", (e) => audio && seek(audio.currentTime + (e.seekOffset || 15)));
+        ms.setActionHandler("seekbackward", (e) => audio && seek(audio.currentTime - (e.seekOffset || 15)));
+        ms.setActionHandler("seekto", (e) => { if (audio && e.seekTime != null) seek(e.seekTime); });
+      } else { ms.setActionHandler("seekforward", () => jump(1)); ms.setActionHandler("seekbackward", () => jump(-1)); try { ms.setActionHandler("seekto", null); } catch { /* 무시 */ } }
+      ms.setActionHandler("stop", closePlayer);
+    } catch { /* 일부 기기 미지원 */ }
+    audioPositionState();
   } catch { /* 지원 안 하는 기기 */ }
 }
 
@@ -205,7 +289,7 @@ function render(note = ""): void {
   const t = tracks[ti];
   const q = (sel: string) => bar!.querySelector(sel) as HTMLElement;
   q(".lp-title").textContent = note || t?.title || "";
-  q(".lp-pos").textContent = `${ti + 1}/${tracks.length}`;
+  q(".lp-pos").textContent = audio ? `${ti + 1}/${tracks.length} · ${mmss(audio.currentTime)}/${mmss(Number.isFinite(audio.duration) ? audio.duration : pod?.duration ?? 0)}` : `${ti + 1}/${tracks.length}`;
   const pp = q(".lp-play");
   pp.textContent = playing ? "⏸" : "▶";
   pp.setAttribute("aria-label", playing ? "일시정지" : "재생");
@@ -215,7 +299,7 @@ function render(note = ""): void {
   (q(".lp-prev") as HTMLButtonElement).disabled = ti === 0;
   (q(".lp-next") as HTMLButtonElement).disabled = ti >= tracks.length - 1;
   const prog = q(".lp-prog");
-  prog.style.width = `${tracks.length ? ((ti + (chunks.length ? ci / chunks.length : 0)) / tracks.length) * 100 : 0}%`;
+  prog.style.width = audio ? `${(audio.currentTime / (Number.isFinite(audio.duration) && audio.duration ? audio.duration : pod?.duration || 1)) * 100}%` : `${tracks.length ? ((ti + (chunks.length ? ci / chunks.length : 0)) / tracks.length) * 100 : 0}%`;
   mediaSession();
 }
 
@@ -231,8 +315,9 @@ function ensureBar(): HTMLElement {
     ${btn("lp-prev", "이전 항목", "⏮")}${btn("lp-play", "재생", "▶")}${btn("lp-next", "다음 항목", "⏭")}${btn("lp-rate", "읽는 속도", "1×")}${btn("lp-list", "소식 목록·설정", "☰")}${btn("lp-close", "닫기", "✕")}</div>
     <div class="lp-next-note" hidden aria-live="polite"></div>
     <div class="lp-opts" hidden>
-      <label><input type="checkbox" class="lp-bg" ${opt(OPT_BG) ? "checked" : ""}> 다른 화면에서도 계속 듣기 <small>다른 앱으로 가거나 화면이 꺼져도 이어서 재생(기기에 따라 멈추면 돌아올 때 그 문장부터 이어 줘요). 끄면 화면을 떠날 때 멈추고 돌아오면 이어서 재생</small></label>
-      <label><input type="checkbox" class="lp-chime" ${opt(OPT_CHIME) ? "checked" : ""}> 다음 소식으로 넘어갈 때 알림음</label>
+      <p class="lp-file-note">🎵 음성 파일로 재생 중이에요. 화면이 꺼지거나 다른 앱으로 가도 음악처럼 계속 나오고, 잠금 화면에서 ⏮ ⏯ ⏭·15초 이동도 돼요. 닫았다 다시 열면 듣던 곳부터 이어져요.</p>
+      <label class="lp-tts-opt"><input type="checkbox" class="lp-bg" ${opt(OPT_BG) ? "checked" : ""}> 다른 화면에서도 계속 듣기 <small>다른 앱으로 가거나 화면이 꺼져도 이어서 재생(기기에 따라 멈추면 돌아올 때 그 문장부터 이어 줘요). 끄면 화면을 떠날 때 멈추고 돌아오면 이어서 재생</small></label>
+      <label class="lp-tts-opt"><input type="checkbox" class="lp-chime" ${opt(OPT_CHIME) ? "checked" : ""}> 다음 소식으로 넘어갈 때 알림음</label>
     </div>
     <div class="lp-chapters" hidden></div>`;
   bar.querySelector(".lp-bg")!.addEventListener("change", (e) => setOpt(OPT_BG, (e.target as HTMLInputElement).checked));
@@ -246,6 +331,7 @@ function ensureBar(): HTMLElement {
   bar.querySelector(".lp-rate")!.addEventListener("click", () => {
     const r = RATES[(RATES.indexOf(rate()) + 1) % RATES.length];
     try { localStorage.setItem(RATE_KEY, String(r)); } catch { /* 무시 */ }
+    if (audio) { audio.playbackRate = r; render(); return; }
     if (playing) { stopSpeech(); speakChunk(); } else render();
   });
   document.body.append(bar);
@@ -258,13 +344,18 @@ export function startListening(list: Track[], name = "데일리 브리프 듣기
   if (!canListen() || !list.length) return;
   tracks = list.filter((t) => t.text || t.title);
   album = name;
+  if (audio) closePlayer();   // 음성 파일 재생 중이었으면 정리
   ensureBar();
-  const ch = bar!.querySelector(".lp-chapters") as HTMLElement;
-  ch.innerHTML = tracks.map((t, i) => `<button type="button" data-ti="${i}"><span>${i + 1}</span>${t.title.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string)}</button>`).join("");
+  bar!.classList.remove("lp-file");
+  fillChapters();
   loadTrack(0);
   // 일부 브라우저는 목소리 목록이 늦게 온다: 한 번 기다렸다가 시작
   if (!(synth()?.getVoices().length)) synth()?.addEventListener?.("voiceschanged", () => undefined, { once: true });
   play();
+}
+function fillChapters(): void {
+  const ch = bar!.querySelector(".lp-chapters") as HTMLElement;
+  ch.innerHTML = tracks.map((t, i) => `<button type="button" data-ti="${i}"><span>${i + 1}</span>${t.title.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string)}</button>`).join("");
 }
 
 export const isListening = (): boolean => !!bar && bar.isConnected;

@@ -1123,6 +1123,11 @@ body.has-player { padding-bottom: 76px; }
 .pod-btn .pod-ico { font-size: 1.6rem; }
 .pod-btn b { display: block; font-size: 1rem; }
 .pod-btn small { display: block; color: var(--muted); font-size: .78rem; margin-top: 2px; }
+.lp-pos { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-variant-numeric: tabular-nums; }
+@media (max-width: 440px) { .lp-ico { display: none; } .lp-row { gap: 2px; padding: 8px 8px; } .lp-row button { min-width: 40px; } }
+.lp-file-note { display: none; margin: 0 0 4px; font-size: .8rem; color: var(--muted); line-height: 1.5; }
+.lp.lp-file .lp-file-note { display: block; }
+.lp.lp-file .lp-tts-opt { display: none; }
 .lp-chapters { max-height: 42vh; overflow-y: auto; display: grid; gap: 2px; padding: 6px 4px 2px; border-top: 1px solid var(--line); }
 .lp-chapters button { display: flex; gap: 8px; align-items: baseline; text-align: left; padding: 7px 8px; border: 0; border-radius: 8px; background: transparent; color: inherit; font-size: .86rem; cursor: pointer; }
 .lp-chapters button span { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 1.4em; }

@@ -3,7 +3,7 @@ name: Deploy Pages
 on:
   push:
     branches: [main]
-    paths: ["web/**", ".github/workflows/deploy.yml"]
+    paths: ["web/**", ".github/workflows/deploy.yml", "scripts/podcast_audio.py"]
   workflow_dispatch:
   workflow_call:
 
@@ -30,6 +30,41 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
+
+      # 🎧 5분 브리핑 음성 파일(MP3): 화면이 꺼져도 음악 앱처럼 계속 재생되게. 대본이 같으면 캐시에서 꺼내고(AI 호출 없음),
+      # 새 대본일 때만 Gemini 음성 합성 1회. 실패하면 파일 없이 배포 → 화면은 예전처럼 폰 음성으로 읽음.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Podcast audio key
+        id: pa
+        continue-on-error: true   # 음성 준비가 실패해도 사이트 배포는 계속
+        run: |
+          pip install -q "httpx>=0.27" "lameenc>=1.7"
+          echo "key=$(python scripts/podcast_audio.py --key)" >> "$GITHUB_OUTPUT"
+      - name: Restore podcast audio
+        id: pa_cache
+        if: steps.pa.outputs.key != 'none' && steps.pa.outputs.key != ''
+        uses: actions/cache/restore@v4
+        with:
+          path: web/public/audio
+          key: podcast-audio-${{ steps.pa.outputs.key }}
+      - name: Make podcast audio
+        id: pa_make
+        if: steps.pa.outputs.key != 'none' && steps.pa.outputs.key != '' && steps.pa_cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        timeout-minutes: 12
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/podcast_audio.py
+          if [ -f web/public/audio/podcast.json ]; then echo "made=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Save podcast audio
+        if: steps.pa_make.outputs.made == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: web/public/audio
+          key: podcast-audio-${{ steps.pa.outputs.key }}
 
       - name: Build
         working-directory: web

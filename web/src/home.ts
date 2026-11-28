@@ -2,7 +2,7 @@
 import { costsCard, numbersCard, pairsCard, quickRead, safetyCard, threadsCard, topicsHeat, weatherCard, monthlyCard, type Monthly, type Topics, type WeekThread } from "./home-extra";
 import { loadSaved, removeSaved } from "./news-tools";
 import { calendarCard, loadCalendar, seasonGuides } from "./calendar";
-import { canListen, startListening, type Track } from "./listen";
+import { canListen, loadPodAudio, startAudio, startListening, type PodAudio, type Track } from "./listen";
 import { loadTension, tensionHomeCard } from "./tension";
 import { procDays } from "./tracker";
 import type { Brief, Item, SectionKey } from "./types";
@@ -139,11 +139,22 @@ export function homeView(h: H, ctx: HomeCtx): HTMLElement {
   qb.addEventListener("click", () => { try { localStorage.setItem("daily-brief:quick", quick ? "0" : "1"); } catch { /* 무시 */ } ctx.rerender(); });
   const qbar = h("div", { class: "quick-bar" }, qb, h("small", { class: "muted" }, quick ? "핵심만 모은 요약이에요." : "바쁜 날엔 핵심만 3분 안에."));
   // 🎧 오늘의 오클랜드·뉴질랜드 5분 브리핑(1인 앵커 대본을 폰 음성으로) — 맨 위 큰 버튼
+  // 배포 때 만든 음성 파일(MP3)이 있으면 그걸로(화면 꺼져도 계속 재생), 없으면 폰 음성으로
   const pod = podcastTracks(brief);
-  if (canListen() && pod.length) {
+  if (pod.length) {
+    const sub = h("small", {}, `소식 ${pod.length - 2}개 · ${brief.podcast?.source === "ai" ? "앵커 브리핑" : "요약 읽기"} · 잠금 화면에서도 조작`);
     const pb = h("button", { type: "button", class: "pod-btn" }, h("span", { class: "pod-ico", "aria-hidden": "true" }, "🎧"),
-      h("span", {}, h("b", {}, "오늘 오클랜드·뉴질랜드 5분 듣기"), h("small", {}, `소식 ${pod.length - 2}개 · ${brief.podcast?.source === "ai" ? "앵커 브리핑" : "요약 읽기"} · 잠금 화면에서도 조작`)));
-    pb.addEventListener("click", () => startListening(pod, brief.podcast?.title || "오클랜드·뉴질랜드 브리핑"));
+      h("span", {}, h("b", {}, "오늘 오클랜드·뉴질랜드 5분 듣기"), sub));
+    let file: PodAudio | null = null;
+    const name = brief.podcast?.title || "오클랜드·뉴질랜드 브리핑";
+    const tts = () => { if (canListen()) startListening(pod, name); };
+    const ready = brief.podcast ? loadPodAudio(brief.date) : Promise.resolve(null);
+    void ready.then((m) => {
+      file = m;
+      if (m) { sub.textContent = `소식 ${m.chapters.length - 2}개 · 앵커 음성 ${Math.round(m.duration / 60) || 1}분 · 화면 꺼져도 계속 재생`; pb.hidden = false; }
+    });
+    pb.hidden = !canListen();
+    pb.addEventListener("click", async () => { const m = file ?? (await ready); if (m) startAudio(m, name, tts); else tts(); });
     root.append(pb);
   }
   root.append(qbar);

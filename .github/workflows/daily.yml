@@ -183,6 +183,7 @@ jobs:
     needs: brief
     if: needs.brief.outputs.generated == 'true'
     uses: ./.github/workflows/deploy.yml
+    secrets: inherit   # 🎧 음성 파일 생성(GEMINI_API_KEY)
     permissions:
       contents: read
       pages: write

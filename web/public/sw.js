@@ -57,6 +57,8 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
 
+  // 🎧 브리핑 음성 파일(MP3·목록): 브라우저가 직접 받게 둔다 — 재생 위치 이동(Range 요청)이 캐시에 막히지 않게
+  if (url.origin === location.origin && url.pathname.includes("/audio/")) return;
   if (req.mode === "navigate") {
     event.respondWith(networkFirst(req, SHELL, new URL("./index.html", scope).href));
     return;
